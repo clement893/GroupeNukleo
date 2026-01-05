@@ -122,7 +122,7 @@ export const contactRouter = router({
         // Send notification to Nukleo team (non-blocking)
         try {
           const emailSent = await sendEmail({
-            to: process.env.SENDGRID_FROM_EMAIL || 'hello@nukleo.digital',
+            to: process.env.SENDGRID_FROM_EMAIL || 'hello@nukleo.com',
             subject: `New AI News Newsletter Subscription: ${input.email}`,
             html: `
               <h2>New AI News Newsletter Subscription</h2>

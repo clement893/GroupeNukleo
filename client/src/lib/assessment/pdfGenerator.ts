@@ -115,7 +115,7 @@ Services:
 • Formation et accompagnement de vos équipes
 • Plateformes MLOps et gouvernance IA
 
-Contact: hello@nukleo.digital
+Contact: hello@nukleo.com
 Site web: www.nukleo.digital
 
 ═══════════════════════════════════════════════════════════════
@@ -300,7 +300,7 @@ Nous offrons:
 • Plateformes MLOps et gouvernance IA
 
 Pour discuter de votre roadmap IA personnalisée, contactez-nous:
-hello@nukleo.digital
+hello@nukleo.com
 www.nukleo.digital`;
 
   pdf.text(aboutText, margin, yPosition, { 

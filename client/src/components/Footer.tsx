@@ -171,11 +171,11 @@ function Footer() {
                 </div>
               </div>
               <a
-                href="mailto:hello@nukleo.digital"
+                href="mailto:hello@nukleo.com"
                 className="flex items-center gap-2 text-violet-400 hover:text-white transition-colors"
               >
                 <Mail className="w-4 h-4" />
-                hello@nukleo.digital
+                hello@nukleo.com
               </a>
             </div>
           </div>

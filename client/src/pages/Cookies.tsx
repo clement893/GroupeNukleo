@@ -109,7 +109,7 @@ export default function Cookies() {
               </p>
               <p>
                 <strong>Nukleo Digital</strong><br />
-                Email: <a href="mailto:hello@nukleo.digital" className="text-purple-600 hover:text-purple-700">hello@nukleo.digital</a><br />
+                Email: <a href="mailto:hello@nukleo.com" className="text-purple-600 hover:text-purple-700">hello@nukleo.com</a><br />
                 Address: 7236 Rue Waverly, Montréal, QC H2R 0C2, Canada
               </p>
             </div>
