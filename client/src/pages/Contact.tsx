@@ -115,7 +115,7 @@ export default function Contact() {
       contactPoint: {
         '@type': 'ContactPoint',
         contactType: 'Business Inquiries',
-        email: 'hello@nukleo.ai',
+        email: 'hello@nukleo.com',
         telephone: '+1-514-777-1234',
         availableLanguage: ['English', 'French'],
       },
@@ -357,10 +357,10 @@ export default function Contact() {
                   <h3 className="text-xl font-bold text-white">{t('contact.emailUs')}</h3>
                 </div>
                 <a
-                  href="mailto:hello@nukleo.ai"
+                  href="mailto:hello@nukleo.com"
                   className="text-white/75 hover:text-accent transition-colors text-lg"
                 >
-                  hello@nukleo.ai
+                  hello@nukleo.com
                 </a>
               </div>
 
