@@ -198,7 +198,7 @@ export default function Resources() {
           <div className="container relative z-10">
             <Breadcrumb items={[{ name: t('nav.resources') || 'Resources', url: '/resources' }]} />
             {/* Title */}
-            <h1 className="text-[5rem] md:text-[6.5rem] lg:text-[8rem] text-white mb-8 leading-[0.85] font-heading font-bold uppercase">
+            <h1 className="text-[3.5rem] sm:text-[4.5rem] md:text-[6.5rem] lg:text-[8rem] text-white mb-8 leading-[0.85] font-heading font-bold uppercase break-words">
               {t('resources.title')}
             </h1>
 
