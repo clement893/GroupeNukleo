@@ -11,7 +11,7 @@ export default function PrivacyPolicyNukleoTime() {
       />
       <div className="min-h-screen">
         {/* Hero */}
-        <section className="relative min-h-[40vh] flex flex-col justify-center pt-32 pb-20">
+        <section className="relative min-h-[40vh] flex flex-col justify-center pt-32 pb-20 bg-black">
           <div className="container">
             <span className="inline-block px-4 py-2 rounded-full bg-purple-500/20 border border-purple-500/30 text-purple-300 text-sm font-mono uppercase tracking-wider mb-8">
               Legal
