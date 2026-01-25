@@ -209,6 +209,7 @@ function Footer() {
               {t('footer.sitemap') || 'Sitemap'}
             </a>
             <Link href={getLocalizedPath('/privacy')} className="active:text-white sm:hover:text-white transition-colors touch-manipulation">{t('footer.links.privacy')}</Link>
+            <Link href={getLocalizedPath('/nukleo-time-privacy')} className="active:text-white sm:hover:text-white transition-colors touch-manipulation">{t('footer.links.nukleoTimePrivacy') || 'Nukleo.TIME Privacy'}</Link>
             <Link href={getLocalizedPath('/terms')} className="active:text-white sm:hover:text-white transition-colors touch-manipulation">{t('footer.links.terms')}</Link>
             <Link href={getLocalizedPath('/cookies')} className="active:text-white sm:hover:text-white transition-colors touch-manipulation">{t('footer.links.cookies')}</Link>
           </div>
