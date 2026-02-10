@@ -24,7 +24,6 @@ function Footer() {
     { label: t('nav.resources'), href: '/resources' },
     { label: t('nav.contact'), href: '/contact' },
     { label: t('footer.nav.media'), href: '/media' },
-    { label: t('footer.nav.agencies'), href: '/agencies' },
   ], [t]);
 
   const allServices = useMemo(() => [

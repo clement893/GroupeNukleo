@@ -16,7 +16,6 @@ const FREQUENT_ROUTES = [
   '/contact',
   '/about',
   '/projects',
-  '/agencies',
 ] as const;
 
 /**
