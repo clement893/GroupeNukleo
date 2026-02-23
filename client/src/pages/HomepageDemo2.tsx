@@ -383,25 +383,25 @@ export default function HomepageDemo2() {
       </nav>
 
       {/* ── CONTENU ─────────────────────────────────────────────────────── */}
-      <div style={{ paddingTop: 80 }}>
+      <div style={{ paddingTop: 80, display: 'flex', flexDirection: 'column', gap: 32 }}>
 
         {/* ════════════════════════════════════════════════════════════════
             LOGO HERO
         ════════════════════════════════════════════════════════════════ */}
-        <div style={{ padding: '24px 40px 0', position: 'relative', zIndex: 1 }}>
+        <div style={{ padding: '32px 40px 0', position: 'relative', zIndex: 1 }}>
           <img src={NUKLEO_LOGO} alt="nukleo." style={{ height: 56, width: 'auto', display: 'block' }} />
         </div>
 
         {/* ════════════════════════════════════════════════════════════════
             RANGÉE 1 — HERO : WIDGETS GAUCHE + MACBOOK DROITE
         ════════════════════════════════════════════════════════════════ */}
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 2fr', gap: 12, padding: '16px 12px 0', position: 'relative', zIndex: 1 }}>
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 2fr', gap: 16, padding: '0 24px', position: 'relative', zIndex: 1 }}>
 
           {/* ── Colonne gauche : widgets ── */}
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
 
             {/* Météo + Date */}
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8 }}>
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
               {/* Météo */}
               <Tile bg="#fff" style={{ padding: '1.2rem 1.4rem' }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
@@ -494,7 +494,7 @@ export default function HomepageDemo2() {
         {/* ════════════════════════════════════════════════════════════════
             RANGÉE 2 — LOGOS MARQUEE
         ════════════════════════════════════════════════════════════════ */}
-        <div style={{ padding: '16px 12px', display: 'flex', flexDirection: 'column', gap: 10 }}>
+        <div style={{ padding: '8px 24px', display: 'flex', flexDirection: 'column', gap: 12 }}>
           <p style={{ textAlign: 'center', color: 'rgba(0,0,0,0.25)', fontSize: 10, letterSpacing: '0.35em', textTransform: 'uppercase', fontWeight: 600, marginBottom: 4 }}>
             Trusted by 60+ organizations
           </p>
@@ -505,7 +505,7 @@ export default function HomepageDemo2() {
         {/* ════════════════════════════════════════════════════════════════
             RANGÉE 3 — STAT 98% + CITATION + STAT 15
         ════════════════════════════════════════════════════════════════ */}
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 2fr 1fr', gap: 12, padding: '0 12px' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 2fr 1fr', gap: 16, padding: '0 24px' }}>
 
           {/* Stat 98% */}
           <Tile bg={DARK} style={{ padding: '2.5rem', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', minHeight: 220 }}>
@@ -543,7 +543,7 @@ export default function HomepageDemo2() {
         {/* ════════════════════════════════════════════════════════════════
             RANGÉE 4 — DÉPARTEMENTS (4 tuiles) + ÉQUIPE
         ════════════════════════════════════════════════════════════════ */}
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12, padding: '12px 12px 0' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16, padding: '0 24px' }}>
 
           {/* Bloc départements */}
           <Tile bg={CREAM} style={{ padding: '2.5rem 2.5rem 2rem' }}>
@@ -559,7 +559,7 @@ export default function HomepageDemo2() {
               </Link>
             </div>
             {/* Grille 2×2 */}
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8 }}>
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
               {[
                 { num: '01', name: 'Bureau',    label: 'Agency',     color: ORANGE, img: DEPT_IMGS.agency     },
                 { num: '02', name: 'Lab',       label: 'Studio',     color: PURPLE, img: DEPT_IMGS.studio     },
@@ -594,14 +594,14 @@ export default function HomepageDemo2() {
         {/* ════════════════════════════════════════════════════════════════
             RANGÉE 5 — TRIPTYQUE PROJETS (plein largeur)
         ════════════════════════════════════════════════════════════════ */}
-        <div style={{ padding: '12px 12px 0' }}>
+        <div style={{ padding: '0 24px' }}>
           <Triptych />
         </div>
 
         {/* ════════════════════════════════════════════════════════════════
             RANGÉE 6 — ROUGE ON BLUE + STAT CLIENTS + CTA
         ════════════════════════════════════════════════════════════════ */}
-        <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr', gap: 12, padding: '12px 12px 0' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr', gap: 16, padding: '0 24px' }}>
 
           {/* Rouge on Blue */}
           <Tile bg={RED} style={{ position: 'relative', overflow: 'hidden', minHeight: 360, padding: '3.5rem' }}>
@@ -642,7 +642,7 @@ export default function HomepageDemo2() {
         {/* ════════════════════════════════════════════════════════════════
             FOOTER
         ════════════════════════════════════════════════════════════════ */}
-        <div style={{ padding: '40px 40px 32px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginTop: 24 }}>
+        <div style={{ padding: '48px 40px 40px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
           <p style={{ color: DARK, fontWeight: 900, fontSize: 22, letterSpacing: '-0.02em' }}>nukleo<span style={{ color: PURPLE }}>.</span></p>
           <p style={{ color: 'rgba(0,0,0,0.25)', fontSize: 12 }}>© 2025 Nukleo Group Inc. — Montreal, Canada</p>
           <div style={{ display: 'flex', gap: 24 }}>
