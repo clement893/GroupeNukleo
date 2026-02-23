@@ -1,7 +1,8 @@
 import { useRef, useEffect, useState } from 'react';
 import { Link } from 'wouter';
 import { useLocalizedPath } from '@/hooks/useLocalizedPath';
-import { TeamScrollCards } from '@/components/demo3';
+import { TeamScrollCards, DepartmentsWidget, DoubleLogoCarousel } from '@/components/demo3';
+import { X, Menu } from 'lucide-react';
 
 const NUKLEO_PURPLE = '#7c3aed';
 const CREAM = '#F5F3EF';
@@ -14,47 +15,6 @@ const WORK1 = '/demo/work1.jpg';
 const WORK2 = '/demo/work2.jpg';
 const WORK3 = '/demo/work3.jpg';
 const ROB_BG = '/demo/rob-bg.jpg';
-
-const LOGOS_ROW1 = [
-  { src: '/demo/logos/MBAM.png', alt: 'MBAM' },
-  { src: '/demo/logos/SummitLaw.png', alt: 'Summit Law' },
-  { src: '/demo/logos/Queertech.png', alt: 'QueerTech' },
-  { src: '/demo/logos/OSM.png', alt: 'OSM' },
-  { src: '/demo/logos/FJL.png', alt: 'FJL' },
-  { src: '/demo/logos/AMQ.png', alt: 'AMQ' },
-  { src: '/demo/logos/CINARS.png', alt: 'CINARS' },
-  { src: '/demo/logos/Novisto.png', alt: 'Novisto' },
-  { src: '/demo/logos/Amerispa.png', alt: 'Amerispa' },
-  { src: '/demo/logos/RoyalLePage.svg', alt: 'Royal LePage' },
-  { src: '/demo/logos/CQDE.png', alt: 'CQDE' },
-  { src: '/demo/logos/Zu.png', alt: 'Zu' },
-  { src: '/demo/logos/Securiglobe.png', alt: 'Securiglobe' },
-  { src: '/demo/logos/EMH.png', alt: 'EMH' },
-];
-
-const LOGOS_ROW2 = [
-  { src: '/demo/logos/Educart.png', alt: 'Educart' },
-  { src: '/demo/logos/CECS.png', alt: 'CECS' },
-  { src: '/demo/logos/EHR.png', alt: 'EHR' },
-  { src: '/demo/logos/Diverso.png', alt: 'Diverso' },
-  { src: '/demo/logos/MP.png', alt: 'MP' },
-  { src: '/demo/logos/TNS.png', alt: 'TNS' },
-  { src: '/demo/logos/PsyEtc.png', alt: 'Psy etc.' },
-  { src: '/demo/logos/LF.png', alt: 'LF' },
-  { src: '/demo/logos/Medicom.svg', alt: 'Medicom' },
-  { src: '/demo/logos/Ecoverdure.png', alt: 'Écoverdure' },
-  { src: '/demo/logos/Techsplo.png', alt: 'Techsplo' },
-  { src: '/demo/logos/GoCoupons.png', alt: 'GoCoupons' },
-  { src: '/demo/logos/AdeleBlais.webp', alt: 'Adèle Blais' },
-  { src: '/demo/logos/Zenya.png', alt: 'Zenya' },
-];
-
-const DEPTS = [
-  { num: '01', name: 'Nukleo.Agency', desc: 'The right people find you — and choose you.', color: '#f97316', href: '/services/agency', img: '/demo/dept-agency.jpg' },
-  { num: '02', name: 'Nukleo.Studio', desc: 'Your brand becomes impossible to ignore.', color: NUKLEO_PURPLE, href: '/services/studio', img: '/demo/dept-studio.jpg' },
-  { num: '03', name: 'Nukleo.Tech', desc: 'Your systems work for you, not the other way around.', color: '#2563eb', href: '/services/tech', img: '/demo/dept-tech.jpg' },
-  { num: '04', name: 'Nukleo.Consulting', desc: 'You move with clarity, not hesitation.', color: '#059669', href: '/services/consulting', img: '/demo/dept-consulting.jpg' },
-];
 
 const PROJECTS = [
   {
@@ -88,6 +48,85 @@ const PROJECTS = [
     color: '#059669',
   },
 ];
+
+// ─── HERO PROJECT SLIDER ────────────────────────────────────────────────────
+function HeroProjectSlider() {
+  const [active, setActive] = useState(0);
+  const getLocalizedPath = useLocalizedPath();
+
+  useEffect(() => {
+    const t = setInterval(() => {
+      setActive((a) => (a + 1) % PROJECTS.length);
+    }, 4000);
+    return () => clearInterval(t);
+  }, []);
+
+  const p = PROJECTS[active];
+  return (
+    <div
+      className="rounded-3xl flex flex-col flex-1 overflow-hidden min-h-[260px] backdrop-blur-xl border border-white/20"
+      style={{ background: 'rgba(0,0,0,0.5)' }}
+    >
+      <p className="text-white/40 text-[10px] font-medium tracking-[0.35em] uppercase px-6 pt-6 pb-2 shrink-0">
+        Selected Work
+      </p>
+      <Link
+        href={getLocalizedPath('/projects')}
+        className="flex-1 relative block min-h-[180px] overflow-hidden"
+      >
+        {PROJECTS.map((proj, i) => (
+          <div
+            key={proj.num}
+            className="absolute inset-0 transition-opacity duration-500"
+            style={{
+              opacity: i === active ? 1 : 0,
+              transitionDuration: '500ms',
+            }}
+          >
+            <img
+              src={proj.img}
+              alt={proj.name}
+              className="absolute inset-0 w-full h-full object-cover"
+              style={{
+                filter: 'brightness(0.6) saturate(0.9)',
+              }}
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+            <div className="absolute bottom-0 left-0 right-0 p-5">
+              <span className="font-heading font-black text-white leading-tight block" style={{ fontSize: 'clamp(1.5rem, 2.5vw, 2.2rem)' }}>
+                {proj.name}
+              </span>
+              <span className="text-white/55 text-xs mt-1 block">{proj.category}</span>
+            </div>
+          </div>
+        ))}
+      </Link>
+      <div className="flex items-center justify-between px-5 py-4 shrink-0">
+        <div className="flex gap-1.5">
+          {PROJECTS.map((_, i) => (
+            <button
+              key={i}
+              type="button"
+              onClick={(e) => { e.preventDefault(); setActive(i); }}
+              className="rounded-full transition-all duration-300"
+              style={{
+                width: i === active ? '20px' : '6px',
+                height: '6px',
+                background: i === active ? p.color : 'rgba(255,255,255,0.25)',
+              }}
+            />
+          ))}
+        </div>
+        <Link
+          href={getLocalizedPath('/projects')}
+          className="text-white/50 text-[10px] font-semibold tracking-widest uppercase hover:text-white transition-colors"
+        >
+          View all →
+        </Link>
+      </div>
+    </div>
+  );
+}
 
 // ─── TEAM STACK SECTION ────────────────────────────────────────────────────
 const TEAM_MEMBERS = [
@@ -256,14 +295,14 @@ function ProjectsCarousel() {
   };
 
   return (
-    <div className="rounded-3xl overflow-hidden" style={{ background: DARK }}>
+    <div className="rounded-3xl overflow-hidden">
       <div className="flex gap-4 lg:gap-5 p-4 lg:p-5" style={{ height: '85vh' }}>
         {PROJECTS.map((project, i) => {
           const isActive = i === active;
           return (
             <div
               key={project.num}
-              className="relative overflow-hidden cursor-pointer flex-shrink-0"
+              className="relative overflow-hidden cursor-pointer flex-shrink-0 bg-black/30"
               style={{
                 width: getWidth(i),
                 transition: 'width 0.65s cubic-bezier(0.77, 0, 0.175, 1)',
@@ -274,11 +313,10 @@ function ProjectsCarousel() {
               <img
                 src={project.img}
                 alt={project.name}
-                className="absolute inset-0 w-full h-full object-cover"
+                className="absolute inset-0 w-full h-full object-contain"
                 style={{
                   filter: isActive ? 'grayscale(0) brightness(0.6)' : 'grayscale(1) brightness(0.35)',
-                  transform: isActive ? 'scale(1.02)' : 'scale(1.08)',
-                  transition: 'filter 0.65s ease, transform 0.65s ease',
+                  transition: 'filter 0.65s ease',
                 }}
               />
               <div
@@ -356,7 +394,7 @@ function ProjectsCarousel() {
             style={{
               width: i === active ? '28px' : '8px',
               height: '4px',
-              background: i === active ? PROJECTS[active].color : 'rgba(255,255,255,0.15)',
+              background: i === active ? PROJECTS[active].color : 'rgba(0,0,0,0.15)',
             }}
           />
         ))}
@@ -368,6 +406,7 @@ function ProjectsCarousel() {
 export default function HomepageDemo4() {
   const getLocalizedPath = useLocalizedPath();
   const videoRef = useRef<HTMLVideoElement>(null);
+  const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
     if (videoRef.current) {
@@ -375,26 +414,65 @@ export default function HomepageDemo4() {
     }
   }, []);
 
+  useEffect(() => {
+    if (menuOpen) document.body.style.overflow = 'hidden';
+    else document.body.style.overflow = '';
+  }, [menuOpen]);
+
   return (
     <div className="font-sans bg-gradient-to-b from-gray-100/80 via-white to-gray-50/60" style={{ color: DARK }}>
 
-      {/* ─── NAVIGATION ─────────────────────────────────────────────────────── */}
-      <nav className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-8 lg:px-12 py-6 backdrop-blur-xl bg-black/20 border-b border-white/10">
-        <Link href={getLocalizedPath('/')} className="font-heading font-black text-white text-xl tracking-tight">
-          Nukleo.
-        </Link>
-        <div className="flex items-center gap-8">
-          <Link href={getLocalizedPath('/services')} className="text-white/60 text-[11px] font-medium tracking-widest uppercase hover:text-white transition-colors hidden lg:block">Services</Link>
-          <Link href={getLocalizedPath('/projects')} className="text-white/60 text-[11px] font-medium tracking-widest uppercase hover:text-white transition-colors hidden lg:block">Work</Link>
-          <Link href={getLocalizedPath('/about')} className="text-white/60 text-[11px] font-medium tracking-widest uppercase hover:text-white transition-colors hidden lg:block">About</Link>
-          <Link
-            href={getLocalizedPath('/start-project')}
-            className="border border-white/60 text-white text-[11px] font-semibold px-5 py-2.5 rounded-full hover:bg-white hover:text-black transition-all duration-300"
+      {/* ─── BOUTON MENU (X en haut à droite) ─────────────────────────────────── */}
+      <button
+        type="button"
+        onClick={() => setMenuOpen(true)}
+        className="fixed top-6 right-6 lg:right-8 z-50 w-10 h-10 rounded-full border border-white/30 flex items-center justify-center text-white/90 hover:bg-white/10 transition-colors backdrop-blur-sm bg-black/20"
+        aria-label="Open menu"
+      >
+        <Menu className="w-5 h-5" />
+      </button>
+
+      {/* ─── MENU CENTRÉ (overlay) ───────────────────────────────────────────── */}
+      {menuOpen && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-md">
+          <button
+            type="button"
+            onClick={() => setMenuOpen(false)}
+            className="absolute top-6 right-6 lg:right-8 w-10 h-10 rounded-full border border-white/30 flex items-center justify-center text-white hover:bg-white/10 transition-colors"
+            aria-label="Close menu"
           >
-            Start a project
-          </Link>
+            <X className="w-5 h-5" />
+          </button>
+          <nav className="flex flex-col items-center gap-6 py-12">
+            <Link href={getLocalizedPath('/')} onClick={() => setMenuOpen(false)} className="flex flex-col items-center gap-1">
+              <img src="/demo/nukleo-logo-rvb.png" alt="Nukleo" className="h-10 w-auto" style={{ mixBlendMode: 'screen' }} />
+              <span className="text-[10px] font-medium tracking-[0.2em] uppercase text-white/60">Choose Intelligence</span>
+            </Link>
+            <div className="h-px w-16 bg-white/20" />
+            {[
+              { label: 'Services', href: '/services' },
+              { label: 'Work', href: '/projects' },
+              { label: 'About', href: '/about' },
+            ].map((item) => (
+              <Link
+                key={item.href}
+                href={getLocalizedPath(item.href)}
+                onClick={() => setMenuOpen(false)}
+                className="text-white/80 hover:text-white text-sm font-medium tracking-widest uppercase transition-colors"
+              >
+                {item.label}
+              </Link>
+            ))}
+            <Link
+              href={getLocalizedPath('/start-project')}
+              onClick={() => setMenuOpen(false)}
+              className="mt-4 border border-white/50 text-white text-xs font-semibold px-6 py-3 rounded-full hover:bg-white hover:text-black transition-all"
+            >
+              Start a project
+            </Link>
+          </nav>
         </div>
-      </nav>
+      )}
 
       {/* ─── WRAPPER GLOBAL ─────────────────────────────────────────────────── */}
       <div className="p-3 lg:p-4 flex flex-col gap-3 lg:gap-4">
@@ -477,61 +555,17 @@ export default function HomepageDemo4() {
               </div>
             </div>
 
-            {/* Module 1C — Stat phare */}
-            <div
-              className="rounded-3xl flex flex-col justify-between p-10 lg:p-12 flex-1 backdrop-blur-xl border border-white/20"
-              style={{ background: `${NUKLEO_PURPLE}99`, minHeight: '260px' }}
-            >
-              <p className="text-white/40 text-[10px] font-medium tracking-[0.35em] uppercase">
-                Organizations served
-              </p>
-              <div>
-                <p
-                  className="font-heading font-black text-white leading-none"
-                  style={{ fontSize: 'clamp(5rem, 7vw, 9rem)' }}
-                >
-                  150+
-                </p>
-                <p className="text-white/50 text-sm mt-3">across Canada & beyond</p>
-              </div>
-            </div>
+            {/* Module 1C — Slider projets / portfolio */}
+            <HeroProjectSlider />
 
           </div>
         </div>
 
         {/* ══════════════════════════════════════════════════════════════════════
-            MODULE 2 — CARROUSEL LOGOS
+            MODULE 2 — CARROUSEL LOGOS (centré comme demo3)
         ══════════════════════════════════════════════════════════════════════ */}
-        <div className="rounded-3xl overflow-hidden py-14 backdrop-blur-md bg-white/60 border border-white/40 shadow-xl shadow-black/5">
-          <p className="text-center text-[10px] font-medium tracking-[0.35em] uppercase mb-10" style={{ color: `${DARK}30` }}>
-            Trusted by ambitious organizations
-          </p>
-          <div className="overflow-hidden mb-5">
-            <div className="flex gap-12 whitespace-nowrap animate-[ticker_40s_linear_infinite]">
-              {[...Array(3)].map((_, rep) => (
-                <div key={rep} className="flex items-center gap-12 shrink-0">
-                  {LOGOS_ROW1.map((logo) => (
-                    <div key={logo.alt} className="flex items-center justify-center w-28 h-10 shrink-0">
-                      <img src={logo.src} alt={logo.alt} className="max-h-8 max-w-[96px] w-auto object-contain opacity-35 hover:opacity-65 transition-opacity duration-300 grayscale" loading="lazy" />
-                    </div>
-                  ))}
-                </div>
-              ))}
-            </div>
-          </div>
-          <div className="overflow-hidden">
-            <div className="flex gap-12 whitespace-nowrap animate-[ticker-reverse_45s_linear_infinite]">
-              {[...Array(3)].map((_, rep) => (
-                <div key={rep} className="flex items-center gap-12 shrink-0">
-                  {LOGOS_ROW2.map((logo) => (
-                    <div key={logo.alt} className="flex items-center justify-center w-28 h-10 shrink-0">
-                      <img src={logo.src} alt={logo.alt} className="max-h-8 max-w-[96px] w-auto object-contain opacity-35 hover:opacity-65 transition-opacity duration-300 grayscale" loading="lazy" />
-                    </div>
-                  ))}
-                </div>
-              ))}
-            </div>
-          </div>
+        <div className="max-w-5xl mx-auto">
+          <DoubleLogoCarousel title="Trusted by ambitious organizations" className="rounded-3xl" />
         </div>
 
         {/* ══════════════════════════════════════════════════════════════════════
@@ -582,38 +616,9 @@ export default function HomepageDemo4() {
             MODULE 4 — DÉPARTEMENTS (2/3) + ÉQUIPE (1/3)
         ══════════════════════════════════════════════════════════════════════ */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-3 lg:gap-4" style={{ minHeight: '520px' }}>
-          {/* 2/3 gauche — 4 services en blocs compacts */}
-          <div className="lg:col-span-2 rounded-3xl p-6 lg:p-8 flex flex-col backdrop-blur-xl bg-black/70 border border-white/10">
-            <div className="flex items-end justify-between mb-6">
-              <div>
-                <p className="text-white/30 text-[10px] font-medium tracking-[0.35em] uppercase mb-2">Our Departments</p>
-                <h2 className="font-heading font-black text-white leading-none tracking-tight" style={{ fontSize: 'clamp(1.5rem, 3vw, 2.5rem)' }}>
-                  Four ways to grow.
-                </h2>
-              </div>
-              <Link href={getLocalizedPath('/services')} className="text-white/40 text-[10px] font-semibold border-b border-white/20 pb-0.5 hover:text-white hover:border-white transition-all hidden lg:block">
-                All →
-              </Link>
-            </div>
-            <div className="grid grid-cols-2 gap-3 flex-1">
-              {DEPTS.map((dept) => (
-                <Link
-                  key={dept.num}
-                  href={getLocalizedPath(dept.href)}
-                  className="group relative rounded-xl overflow-hidden cursor-pointer flex flex-col p-4 min-h-[100px] backdrop-blur-md bg-white/5 border border-white/10 transition-all duration-200 hover:bg-white/15 hover:border-white/20"
-                >
-                  <div className="flex items-center justify-between mb-2">
-                    <span className="font-heading font-black text-white/25 text-xs">{dept.num}</span>
-                    <span className="text-[8px] font-semibold tracking-widest uppercase opacity-0 group-hover:opacity-100 transition-opacity duration-300" style={{ color: dept.color }}>
-                      →
-                    </span>
-                  </div>
-                  <div className="w-4 h-[1px] rounded-full mb-2" style={{ background: dept.color }} />
-                  <p className="font-heading font-bold text-white text-sm leading-tight mb-1">{dept.name}</p>
-                  <p className="text-white/45 text-[11px] leading-snug line-clamp-2">{dept.desc}</p>
-                </Link>
-              ))}
-            </div>
+          {/* 2/3 gauche — 4 départements avec images (comme demo3) */}
+          <div className="lg:col-span-2 rounded-3xl overflow-hidden">
+            <DepartmentsWidget />
           </div>
 
           {/* 1/3 droite — widget équipe (slide vertical type Demo 3) */}
@@ -682,7 +687,16 @@ export default function HomepageDemo4() {
             FOOTER MINIMAL
         ══════════════════════════════════════════════════════════════════════ */}
         <div className="rounded-3xl flex flex-col lg:flex-row items-center justify-between px-10 py-7 gap-5 backdrop-blur-xl bg-white/50 border border-white/40 shadow-lg shadow-black/5">
-          <span className="font-heading font-black text-xl" style={{ color: DARK }}>Nukleo.</span>
+          <Link href={getLocalizedPath('/')} className="flex flex-col items-start gap-0.5">
+            <img
+              src="/demo/nukleo-logo-rvb.png"
+              alt="Nukleo"
+              className="h-8 w-auto object-contain"
+            />
+            <span className="text-[10px] font-medium tracking-[0.2em] uppercase" style={{ color: `${DARK}60` }}>
+              Choose Intelligence
+            </span>
+          </Link>
           <div className="flex items-center gap-8">
             {[
               { label: 'Services', href: '/services' },

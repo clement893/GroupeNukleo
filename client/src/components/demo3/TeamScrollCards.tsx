@@ -31,16 +31,15 @@ export function TeamScrollCards() {
     return () => el.removeEventListener('wheel', handleWheel);
   }, []);
 
-  const CARD_HEIGHT = 200;
-  const CARD_OVERLAP = 40;
-  const VISIBLE_OFFSET = 140;
+  const CARD_HEIGHT = 360; // Portrait 3:4
+  const VISIBLE_OFFSET = 180;
 
   return (
     <div
       ref={scrollRef}
-      className="relative h-full min-h-[420px] flex items-center justify-center overflow-hidden rounded-2xl bg-[#0A0A0A] cursor-n-resize"
+      className="relative h-full min-h-[540px] flex items-center justify-center overflow-hidden rounded-2xl bg-[#0A0A0A] cursor-n-resize"
     >
-      <div className="relative w-full max-w-[300px] h-[400px]">
+      <div className="relative w-full max-w-[270px] h-[520px]">
         {TEAM_MEMBERS.map((member, i) => {
           const offset = i - activeIndex;
           const isActive = i === activeIndex;
