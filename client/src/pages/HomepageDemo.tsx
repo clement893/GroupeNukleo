@@ -1,21 +1,94 @@
-import { useEffect, useRef } from 'react';
+import { useRef, useEffect } from 'react';
 import { Link } from 'wouter';
-import { useLocalizedPath } from '@/hooks/useLocalizedPath';
+import { useLanguage } from '@/hooks/useLanguage';
 
-// Images locales — servies depuis /public/demo/
+// ─── Constantes visuelles ────────────────────────────────────────────────────
+const NUKLEO_PURPLE = '#7c3aed';
+const CREAM = '#F5F3EF';
+const DARK = '#0A0A0A';
+
+// Images locales
+const HERO_VIDEO = '/demo/hero-reel.mp4';
 const HERO_IMAGE = '/demo/hero.jpg';
 const TEAM_IMAGE = '/demo/team.jpg';
-const WORK_IMAGE_1 = '/demo/work1.jpg';
-const WORK_IMAGE_2 = '/demo/work2.jpg';
+const WORK1 = '/demo/work1.jpg';
+const WORK2 = '/demo/work2.jpg';
+const WORK3 = '/demo/work3.jpg';
+const ROB_BG = '/demo/rob-bg.jpg';
 
-// Couleur Nukleo — violet/bleu brand
-const NUKLEO_PURPLE = '#7c3aed';
-const NUKLEO_PURPLE_LIGHT = '#ede9fe';
+// Logos rangée 1
+const LOGOS_ROW1 = [
+  { src: '/demo/logos/MBAM.png', alt: 'MBAM' },
+  { src: '/demo/logos/SummitLaw.png', alt: 'Summit Law' },
+  { src: '/demo/logos/Queertech.png', alt: 'QueerTech' },
+  { src: '/demo/logos/OSM.png', alt: 'OSM' },
+  { src: '/demo/logos/FJL.png', alt: 'FJL' },
+  { src: '/demo/logos/AMQ.png', alt: 'AMQ' },
+  { src: '/demo/logos/CINARS.png', alt: 'CINARS' },
+  { src: '/demo/logos/Novisto.png', alt: 'Novisto' },
+  { src: '/demo/logos/Amerispa.png', alt: 'Amerispa' },
+  { src: '/demo/logos/RoyalLePage.svg', alt: 'Royal LePage' },
+  { src: '/demo/logos/CQDE.png', alt: 'CQDE' },
+  { src: '/demo/logos/Zu.png', alt: 'Zu' },
+  { src: '/demo/logos/Securiglobe.png', alt: 'Securiglobe' },
+  { src: '/demo/logos/EMH.png', alt: 'EMH' },
+];
+
+// Logos rangée 2
+const LOGOS_ROW2 = [
+  { src: '/demo/logos/Educart.png', alt: 'Educart' },
+  { src: '/demo/logos/CECS.png', alt: 'CECS' },
+  { src: '/demo/logos/EHR.png', alt: 'EHR' },
+  { src: '/demo/logos/Diverso.png', alt: 'Diverso' },
+  { src: '/demo/logos/MP.png', alt: 'MP' },
+  { src: '/demo/logos/TNS.png', alt: 'TNS' },
+  { src: '/demo/logos/PsyEtc.png', alt: 'Psy etc.' },
+  { src: '/demo/logos/LF.png', alt: 'LF' },
+  { src: '/demo/logos/Medicom.svg', alt: 'Medicom' },
+  { src: '/demo/logos/Ecoverdure.png', alt: 'Écoverdure' },
+  { src: '/demo/logos/Techsplo.png', alt: 'Techsplo' },
+  { src: '/demo/logos/GoCoupons.png', alt: 'GoCoupons' },
+  { src: '/demo/logos/AdeleBlais.webp', alt: 'Adèle Blais' },
+  { src: '/demo/logos/Zenya.png', alt: 'Zenya' },
+];
+
+// Départements
+const DEPTS = [
+  {
+    num: '01',
+    name: 'Nukleo.Agency',
+    desc: 'The right people find you — and choose you.',
+    color: '#f97316',
+    href: '/services/agency',
+  },
+  {
+    num: '02',
+    name: 'Nukleo.Studio',
+    desc: 'Your brand becomes impossible to ignore.',
+    color: NUKLEO_PURPLE,
+    href: '/services/studio',
+  },
+  {
+    num: '03',
+    name: 'Nukleo.Tech',
+    desc: 'Your systems work for you, not the other way around.',
+    color: '#2563eb',
+    href: '/services/tech',
+  },
+  {
+    num: '04',
+    name: 'Nukleo.Consulting',
+    desc: 'You move with clarity, not hesitation.',
+    color: '#059669',
+    href: '/services/consulting',
+  },
+];
 
 export default function HomepageDemo() {
-  const getLocalizedPath = useLocalizedPath();
+  const { getLocalizedPath } = useLanguage();
   const heroRef = useRef<HTMLDivElement>(null);
 
+  // Parallax léger sur le hero
   useEffect(() => {
     const handleScroll = () => {
       if (heroRef.current) {
@@ -27,77 +100,78 @@ export default function HomepageDemo() {
   }, []);
 
   return (
-    <div className="bg-[#F5F3EF] text-[#0A0A0A] overflow-x-hidden">
+    <div className="bg-white font-sans" style={{ color: DARK }}>
 
-      {/* ─── NAV ─────────────────────────────────────────────────────────── */}
-      <nav className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-8 lg:px-16 py-6 mix-blend-difference">
-        <Link href={getLocalizedPath('/')} className="text-white font-bold text-xl tracking-tight">
-          nukleo.
+      {/* ─── NAVIGATION ─────────────────────────────────────────────────────── */}
+      <nav className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-6 lg:px-10 py-5 mix-blend-difference">
+        <Link href={getLocalizedPath('/')} className="font-heading font-black text-white text-xl tracking-tight">
+          Nukleo.
         </Link>
-        <div className="flex items-center gap-10 text-white text-sm font-medium">
-          <Link href={getLocalizedPath('/services')} className="hover:opacity-50 transition-opacity">Services</Link>
-          <Link href={getLocalizedPath('/projects')} className="hover:opacity-50 transition-opacity">Work</Link>
-          <Link href={getLocalizedPath('/about')} className="hover:opacity-50 transition-opacity">About</Link>
+        <div className="flex items-center gap-6">
+          <Link href={getLocalizedPath('/services')} className="text-white/70 text-xs font-medium tracking-widest uppercase hover:text-white transition-colors hidden lg:block">
+            Services
+          </Link>
+          <Link href={getLocalizedPath('/projects')} className="text-white/70 text-xs font-medium tracking-widest uppercase hover:text-white transition-colors hidden lg:block">
+            Work
+          </Link>
           <Link
             href={getLocalizedPath('/start-project')}
-            className="border border-white px-5 py-2 rounded-full hover:bg-white hover:text-black transition-all duration-200"
+            className="border border-white text-white text-xs font-semibold px-4 py-2 rounded-full hover:bg-white hover:text-black transition-all duration-200"
           >
             Start a project
           </Link>
         </div>
       </nav>
 
-       {/* ─── HERO ───────────────────────────────────────────────────── */}
-      <section className="relative h-screen min-h-[700px] flex flex-col justify-end overflow-hidden">
-        {/* Vidéo de fond — slideshow des projets */}
-        <video
-          autoPlay
-          muted
-          loop
-          playsInline
-          className="absolute inset-0 w-full h-full object-cover scale-105"
-          style={{ filter: 'brightness(0.55) saturate(0.9)' }}
-        >
-          <source src="/demo/hero-reel.mp4" type="video/mp4" />
-          {/* Fallback image si la vidéo ne charge pas */}
-          <div
-            className="absolute inset-0"
-            style={{ backgroundImage: `url(${HERO_IMAGE})`, backgroundSize: 'cover', backgroundPosition: 'center' }}
-          />
-        </video>
-        {/* Overlay gradient pour lisibilité du texte */}
-        <div className="absolute inset-0 bg-gradient-to-t from-[rgba(10,10,10,0.85)] via-[rgba(10,10,10,0.2)] to-[rgba(10,10,10,0.1)]" />
+      {/* ─── MODULE 1 : HERO VIDÉO ──────────────────────────────────────────── */}
+      <section className="relative h-screen min-h-[700px] overflow-hidden bg-black">
+        <div ref={heroRef} className="absolute inset-0 will-change-transform">
+          <video
+            autoPlay muted loop playsInline
+            className="w-full h-full object-cover"
+            style={{ filter: 'brightness(0.5) saturate(0.85)' }}
+          >
+            <source src={HERO_VIDEO} type="video/mp4" />
+            <img src={HERO_IMAGE} alt="Nukleo projects" className="w-full h-full object-cover" />
+          </video>
+        </div>
+        <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-black/70" />
 
-        <div className="relative z-10 px-8 lg:px-16 pb-20 lg:pb-28">
-          <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-10">
+        {/* Contenu hero */}
+        <div className="relative z-10 h-full flex flex-col justify-between px-6 lg:px-12 pt-28 pb-10 lg:pb-14">
 
-            {/* Titre principal */}
-            <div>
-              {/* Label discret */}
-              <p className="text-white/40 text-xs font-medium tracking-widest uppercase mb-6">
-                Digital Performance Agency
-              </p>
-              <h1
-                className="font-heading font-black text-white leading-[0.88] tracking-tight"
-                style={{ fontSize: 'clamp(3.5rem, 10vw, 12rem)' }}
-              >
-                Digital<br />
-                <span style={{ color: NUKLEO_PURPLE }}>Perfor-</span><br />
-                mance.
-              </h1>
-            </div>
+          {/* Label haut */}
+          <div className="flex items-center justify-between">
+            <span className="text-white/40 text-[10px] font-medium tracking-[0.3em] uppercase">
+              Digital Performance Agency · Montréal
+            </span>
+            <span className="text-white/40 text-[10px] font-medium tracking-[0.3em] uppercase hidden lg:block">
+              Est. 2018
+            </span>
+          </div>
 
-            {/* Accroche + CTA — glassmorphisme */}
-            <div className="lg:max-w-xs pb-2 backdrop-blur-md bg-white/5 border border-white/10 rounded-2xl px-6 py-7">
-              <p className="text-white/85 text-xs font-semibold uppercase tracking-widest mb-3">
+          {/* Titre principal */}
+          <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-8">
+            <h1
+              className="font-heading font-black text-white leading-[0.85] tracking-tight"
+              style={{ fontSize: 'clamp(3.8rem, 11vw, 13rem)' }}
+            >
+              Digital<br />
+              <span style={{ color: NUKLEO_PURPLE }}>Perfor-</span><br />
+              mance.
+            </h1>
+
+            {/* Panneau glassmorphisme */}
+            <div className="lg:max-w-[320px] backdrop-blur-md bg-white/8 border border-white/12 rounded-2xl px-6 py-6 shrink-0">
+              <p className="text-white/60 text-[10px] font-semibold uppercase tracking-[0.25em] mb-3">
                 For ambitious organizations — any size.
               </p>
-              <p className="text-white/50 text-base lg:text-lg leading-relaxed mb-8">
-                We build the strategies, technologies, and creative that drive you forward — powered by AI, delivered by humans.
+              <p className="text-white/75 text-sm lg:text-base leading-relaxed mb-6">
+                We co-create the strategies, technologies, and creative that drive you forward — powered by AI.
               </p>
               <Link
                 href={getLocalizedPath('/start-project')}
-                className="inline-flex items-center gap-3 bg-white text-black font-semibold px-7 py-4 rounded-full hover:bg-white/90 transition-all duration-200 text-sm"
+                className="inline-flex items-center gap-2 bg-white text-black font-semibold px-6 py-3 rounded-full hover:bg-white/90 transition-all duration-200 text-sm"
               >
                 Start a project →
               </Link>
@@ -106,75 +180,33 @@ export default function HomepageDemo() {
         </div>
       </section>
 
-       {/* ─── LOGO CAROUSEL ────────────────────────────────────────────── */}
-      <div className="py-10 bg-[#F5F3EF] overflow-hidden border-y border-[#0A0A0A]/6">
-        <p className="text-center text-[10px] font-medium tracking-widest uppercase text-[#0A0A0A]/25 mb-7">
+      {/* ─── MODULE 2 : CARROUSEL LOGOS ─────────────────────────────────────── */}
+      <div className="py-10 overflow-hidden border-b border-black/6" style={{ background: CREAM }}>
+        <p className="text-center text-[10px] font-medium tracking-[0.3em] uppercase mb-7" style={{ color: `${DARK}33` }}>
           Trusted by ambitious organizations
         </p>
-
-        {/* Rangée 1 — défile vers la gauche */}
-        <div className="relative overflow-hidden mb-5">
+        {/* Rangée 1 → gauche */}
+        <div className="overflow-hidden mb-4">
           <div className="flex gap-10 whitespace-nowrap animate-[ticker_40s_linear_infinite]">
             {[...Array(3)].map((_, rep) => (
               <div key={rep} className="flex items-center gap-10 shrink-0">
-                {[
-                  { src: '/demo/logos/MBAM.png', alt: 'MBAM' },
-                  { src: '/demo/logos/SummitLaw.png', alt: 'Summit Law' },
-                  { src: '/demo/logos/Queertech.png', alt: 'QueerTech' },
-                  { src: '/demo/logos/OSM.png', alt: 'OSM' },
-                  { src: '/demo/logos/FJL.png', alt: 'FJL' },
-                  { src: '/demo/logos/AMQ.png', alt: 'AMQ' },
-                  { src: '/demo/logos/CINARS.png', alt: 'CINARS' },
-                  { src: '/demo/logos/Novisto.png', alt: 'Novisto' },
-                  { src: '/demo/logos/Amerispa.png', alt: 'Amerispa' },
-                  { src: '/demo/logos/RoyalLePage.svg', alt: 'Royal LePage' },
-                  { src: '/demo/logos/CQDE.png', alt: 'CQDE' },
-                  { src: '/demo/logos/Zu.png', alt: 'Zu' },
-                  { src: '/demo/logos/Securiglobe.png', alt: 'Securiglobe' },
-                  { src: '/demo/logos/EMH.png', alt: 'EMH' },
-                ].map((logo) => (
-                  <div key={logo.alt} className="flex items-center justify-center w-24 h-10 shrink-0">
-                    <img
-                      src={logo.src}
-                      alt={logo.alt}
-                      className="max-h-8 max-w-[88px] w-auto object-contain opacity-50 hover:opacity-80 transition-opacity duration-200 grayscale"
-                      loading="lazy"
-                    />
+                {LOGOS_ROW1.map((logo) => (
+                  <div key={logo.alt} className="flex items-center justify-center w-24 h-9 shrink-0">
+                    <img src={logo.src} alt={logo.alt} className="max-h-7 max-w-[84px] w-auto object-contain opacity-45 hover:opacity-75 transition-opacity duration-200 grayscale" loading="lazy" />
                   </div>
                 ))}
               </div>
             ))}
           </div>
         </div>
-
-        {/* Rangée 2 — défile vers la droite (sens inverse) */}
-        <div className="relative overflow-hidden">
+        {/* Rangée 2 → droite */}
+        <div className="overflow-hidden">
           <div className="flex gap-10 whitespace-nowrap animate-[ticker-reverse_45s_linear_infinite]">
             {[...Array(3)].map((_, rep) => (
               <div key={rep} className="flex items-center gap-10 shrink-0">
-                {[
-                  { src: '/demo/logos/Educart.png', alt: 'Educart' },
-                  { src: '/demo/logos/CECS.png', alt: 'CECS' },
-                  { src: '/demo/logos/EHR.png', alt: 'EHR' },
-                  { src: '/demo/logos/Diverso.png', alt: 'Diverso' },
-                  { src: '/demo/logos/MP.png', alt: 'MP' },
-                  { src: '/demo/logos/TNS.png', alt: 'TNS' },
-                  { src: '/demo/logos/PsyEtc.png', alt: 'Psy etc.' },
-                  { src: '/demo/logos/LF.png', alt: 'LF' },
-                  { src: '/demo/logos/Medicom.svg', alt: 'Medicom' },
-                  { src: '/demo/logos/Ecoverdure.png', alt: 'Écoverdure' },
-                  { src: '/demo/logos/Techsplo.png', alt: 'Techsplo' },
-                  { src: '/demo/logos/GoCoupons.png', alt: 'GoCoupons' },
-                  { src: '/demo/logos/AdeleBlais.webp', alt: 'Adèle Blais' },
-                  { src: '/demo/logos/Zenya.png', alt: 'Zenya' },
-                ].map((logo) => (
-                  <div key={logo.alt} className="flex items-center justify-center w-24 h-10 shrink-0">
-                    <img
-                      src={logo.src}
-                      alt={logo.alt}
-                      className="max-h-8 max-w-[88px] w-auto object-contain opacity-50 hover:opacity-80 transition-opacity duration-200 grayscale"
-                      loading="lazy"
-                    />
+                {LOGOS_ROW2.map((logo) => (
+                  <div key={logo.alt} className="flex items-center justify-center w-24 h-9 shrink-0">
+                    <img src={logo.src} alt={logo.alt} className="max-h-7 max-w-[84px] w-auto object-contain opacity-45 hover:opacity-75 transition-opacity duration-200 grayscale" loading="lazy" />
                   </div>
                 ))}
               </div>
@@ -183,174 +215,145 @@ export default function HomepageDemo() {
         </div>
       </div>
 
-      {/* ─── WHO WE ARE ───────────────────────────────────────────────────── */}
-      <section className="py-32 lg:py-44 px-8 lg:px-16">
-        <div className="max-w-screen-xl mx-auto">
-          <div className="grid lg:grid-cols-2 gap-16 lg:gap-28 items-center">
+      {/* ─── MODULE 3 : GRILLE MODULAIRE PRINCIPALE ─────────────────────────── */}
+      {/* 
+        Grille asymétrique inspirée de deuxhuithuit.com :
+        - Colonne gauche large : module "Who We Are" + module Dept
+        - Colonne droite étroite : modules empilés (stat, projet, CTA)
+      */}
+      <section className="px-4 lg:px-6 py-6 bg-white">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 max-w-[1600px] mx-auto">
 
-            {/* Image */}
-            <div className="relative aspect-[4/5] overflow-hidden rounded-xl order-2 lg:order-1">
-              <img
-                src={TEAM_IMAGE}
-                alt="Nukleo team"
-                className="w-full h-full object-cover object-center grayscale hover:grayscale-0 transition-all duration-700"
-                loading="lazy"
-              />
-            </div>
-
-            {/* Texte */}
-            <div className="order-1 lg:order-2">
-              <p className="text-xs font-medium tracking-widest uppercase text-[rgba(10,10,10,0.4)] mb-8">
-                Who We Are
-              </p>
+          {/* MODULE A — Who We Are (col 1-7, 2 rangées) */}
+          <div
+            className="lg:col-span-7 lg:row-span-2 relative overflow-hidden rounded-2xl group"
+            style={{ minHeight: '580px' }}
+          >
+            <img
+              src={TEAM_IMAGE}
+              alt="Nukleo team"
+              className="absolute inset-0 w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 scale-105 group-hover:scale-100"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+            <div className="absolute bottom-0 left-0 right-0 p-8 lg:p-10">
+              <p className="text-white/40 text-[10px] font-medium tracking-[0.3em] uppercase mb-4">Who We Are</p>
               <h2
-                className="font-heading font-black text-[#0A0A0A] leading-[0.92] tracking-tight mb-10"
-                style={{ fontSize: 'clamp(2.2rem, 4.5vw, 5rem)' }}
+                className="font-heading font-black text-white leading-[0.9] tracking-tight mb-5"
+                style={{ fontSize: 'clamp(2rem, 4vw, 4rem)' }}
               >
-                We make digital performance tangible.
+                We make digital<br />performance tangible.
               </h2>
-              <p className="text-[rgba(10,10,10,0.55)] text-base lg:text-lg leading-relaxed mb-5">
-                Nukleo is a digital performance agency. We co-create the strategies, technologies, and creative that help ambitious organizations grow — with clarity, precision, and measurable results.
-              </p>
-              <p className="text-[rgba(10,10,10,0.55)] text-base lg:text-lg leading-relaxed mb-12">
-                Our approach combines human expertise with AI-powered execution, so you get more impact, faster, and at a cost that reflects real value.
+              <p className="text-white/60 text-sm leading-relaxed max-w-md mb-6">
+                A digital performance agency co-creating strategies, technologies, and creative for ambitious organizations — with AI-powered precision.
               </p>
               <Link
                 href={getLocalizedPath('/about')}
-                className="inline-flex items-center gap-3 font-semibold text-sm border-b-2 border-[#0A0A0A] pb-1 hover:gap-5 transition-all duration-200"
+                className="inline-flex items-center gap-2 text-white text-xs font-semibold border-b border-white/40 pb-0.5 hover:border-white transition-colors"
               >
                 Our story →
               </Link>
             </div>
           </div>
-        </div>
-      </section>
 
-      {/* ─── WHAT WE DO ───────────────────────────────────────────────────── */}
-      <section className="py-32 lg:py-44 bg-[#0A0A0A] text-white px-8 lg:px-16">
-        <div className="max-w-screen-xl mx-auto">
-
-          {/* Header */}
-          <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between mb-20 pb-8 border-b border-white/10">
-            <h2
-              className="font-heading font-black leading-[0.92] tracking-tight"
-              style={{ fontSize: 'clamp(2.5rem, 6vw, 7rem)' }}
-            >
-              Four departments.<br />
-              <span style={{ color: NUKLEO_PURPLE }}>One goal.</span>
-            </h2>
-            <p className="text-white/35 text-base max-w-xs mt-8 lg:mt-0 pb-2">
-              Four specialized teams, built around a single mission: your digital performance.
-            </p>
-          </div>
-
-          {/* Départements — liste éditoriale */}
-          <div className="divide-y divide-white/10">
-            {[
-              {
-                number: '01',
-                name: 'Nukleo.Consulting',
-                tagline: 'Strategy & Transformation',
-                description: 'Digital audits, AI strategy, and change management — from vision to execution.',
-                link: '/services/consulting',
-              },
-              {
-                number: '02',
-                name: 'Nukleo.Tech',
-                tagline: 'Development & AI',
-                description: 'Web, mobile, AI integrations, and custom agent development.',
-                link: '/services/tech',
-              },
-              {
-                number: '03',
-                name: 'Nukleo.Studio',
-                tagline: 'Design & Creation',
-                description: 'Branding, UX/UI, art direction, and creative production.',
-                link: '/services/studio',
-              },
-              {
-                number: '04',
-                name: 'Nukleo.Agency',
-                tagline: 'Marketing & Communication',
-                description: 'SEO, paid media, and AI-powered campaigns that build lasting visibility.',
-                link: '/services/agency',
-              },
-            ].map((dept) => (
-              <Link
-                key={dept.number}
-                href={getLocalizedPath(dept.link)}
-                className="group flex flex-col lg:flex-row lg:items-center gap-4 lg:gap-12 py-9 lg:py-12 hover:pl-3 hover:bg-white/5 hover:backdrop-blur-sm rounded-xl transition-all duration-300 cursor-pointer px-4 -mx-4"
-              >
-                <span className="text-white/20 text-xs font-mono tracking-widest shrink-0 w-6">
-                  {dept.number}
-                </span>
-                <h3
-                  className="font-heading font-black text-white leading-none tracking-tight group-hover:text-white/60 transition-colors duration-200"
-                  style={{ fontSize: 'clamp(1.8rem, 3.5vw, 4rem)' }}
-                >
-                  {dept.name}
-                </h3>
-                <div className="lg:ml-auto lg:max-w-sm">
-                  <p className="text-white/40 text-xs uppercase tracking-widest mb-1">{dept.tagline}</p>
-                  <p className="text-white/35 text-sm leading-relaxed">{dept.description}</p>
-                </div>
-                <span className="text-white/20 text-xl group-hover:text-white group-hover:translate-x-2 transition-all duration-200 shrink-0">
-                  →
-                </span>
-              </Link>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ─── OUR WORK ─────────────────────────────────────────────────────── */}
-      <section className="py-32 lg:py-44 px-8 lg:px-16">
-        <div className="max-w-screen-xl mx-auto">
-
-          <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between mb-16">
+          {/* MODULE B — Stat 1 (col 8-10) */}
+          <div
+            className="lg:col-span-3 rounded-2xl flex flex-col justify-between p-7"
+            style={{ background: NUKLEO_PURPLE, minHeight: '180px' }}
+          >
+            <p className="text-white/50 text-[10px] font-medium tracking-[0.3em] uppercase">Organizations served</p>
             <div>
-              <p className="text-xs font-medium tracking-widest uppercase text-[rgba(10,10,10,0.4)] mb-5">Selected Work</p>
-              <h2
-                className="font-heading font-black text-[#0A0A0A] leading-[0.92] tracking-tight"
-                style={{ fontSize: 'clamp(2.2rem, 4.5vw, 5.5rem)' }}
-              >
-                Results that speak.
-              </h2>
+              <p className="font-heading font-black text-white leading-none" style={{ fontSize: 'clamp(3rem, 5vw, 5.5rem)' }}>150+</p>
+              <p className="text-white/60 text-xs mt-1">across Canada & beyond</p>
             </div>
-            <Link
-              href={getLocalizedPath('/projects')}
-              className="inline-flex items-center gap-3 font-semibold text-sm border-b-2 border-[#0A0A0A] pb-1 hover:gap-5 transition-all duration-200 mt-8 lg:mt-0 self-end"
+          </div>
+
+          {/* MODULE C — Stat 2 (col 11-12) */}
+          <div
+            className="lg:col-span-2 rounded-2xl flex flex-col justify-between p-7"
+            style={{ background: CREAM, minHeight: '180px' }}
+          >
+            <p className="text-[10px] font-medium tracking-[0.3em] uppercase" style={{ color: `${DARK}55` }}>Years</p>
+            <div>
+              <p className="font-heading font-black leading-none" style={{ fontSize: 'clamp(3rem, 5vw, 5.5rem)', color: DARK }}>7+</p>
+              <p className="text-xs mt-1" style={{ color: `${DARK}55` }}>of digital excellence</p>
+            </div>
+          </div>
+
+          {/* MODULE D — Projet featured (col 8-12) */}
+          <div className="lg:col-span-5 relative overflow-hidden rounded-2xl group cursor-pointer" style={{ minHeight: '380px' }}>
+            <img
+              src={WORK1}
+              alt="Featured project"
+              className="absolute inset-0 w-full h-full object-cover scale-105 group-hover:scale-100 transition-transform duration-700"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/10 to-transparent" />
+            <div className="absolute top-5 left-5">
+              <span className="text-[10px] font-semibold tracking-widest uppercase text-white/60 bg-white/10 backdrop-blur-sm px-3 py-1.5 rounded-full border border-white/15">
+                Strategy & Tech
+              </span>
+            </div>
+            <div className="absolute bottom-0 left-0 right-0 p-6">
+              <p className="font-heading font-bold text-white text-xl leading-tight mb-2">MBAM — Digital Transformation</p>
+              <p className="text-white/55 text-xs">+340% digital engagement · 2024</p>
+            </div>
+            <div className="absolute bottom-5 right-5 w-9 h-9 rounded-full bg-white/15 backdrop-blur-sm flex items-center justify-center border border-white/20 group-hover:bg-white group-hover:text-black transition-all duration-200">
+              <span className="text-white text-xs group-hover:text-black">↗</span>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      {/* ─── MODULE 4 : DÉPARTEMENTS EN GRILLE ──────────────────────────────── */}
+      <section className="px-4 lg:px-6 pb-6 bg-white">
+        <div className="max-w-[1600px] mx-auto">
+
+          {/* Titre de section */}
+          <div className="flex items-end justify-between mb-4 px-1">
+            <h2
+              className="font-heading font-black leading-none tracking-tight"
+              style={{ fontSize: 'clamp(1.8rem, 3.5vw, 3.5rem)', color: DARK }}
             >
-              View all work →
+              Our Departments
+            </h2>
+            <Link
+              href={getLocalizedPath('/services')}
+              className="text-xs font-semibold border-b-2 pb-0.5 hover:gap-3 transition-all hidden lg:flex items-center gap-2"
+              style={{ borderColor: DARK, color: DARK }}
+            >
+              All services →
             </Link>
           </div>
 
-          {/* Grille 3 projets — glassmorphisme sur les légendes */}
-          <div className="grid lg:grid-cols-3 gap-6 lg:gap-8">
-            {[
-              { img: '/demo/project-1.jpg', category: 'Studio & Agency', title: 'Brand Relaunch', result: '−50% cost per acquisition', client: 'Mid-size retailer' },
-              { img: '/demo/project-2.jpg', category: 'Tech & Consulting', title: 'Digital Transformation', result: '+200% organic growth in 6 months', client: 'Professional services firm' },
-              { img: '/demo/project-3.jpg', category: 'Agency & Studio', title: 'Market Entry Campaign', result: '3× pipeline in 90 days', client: 'B2B SaaS startup' },
-            ].map((project, i) => (
-              <Link key={i} href={getLocalizedPath('/projects')} className="group block">
-                <div className="relative aspect-[4/3] overflow-hidden rounded-xl mb-0 bg-[rgba(10,10,10,0.05)]">
-                  <img
-                    src={project.img}
-                    alt={project.title}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-                    loading="lazy"
-                  />
-                  {/* Légende glassmorphisme sur l'image */}
-                  <div className="absolute bottom-0 left-0 right-0 p-5 backdrop-blur-md bg-white/10 border-t border-white/15">
-                    <div className="flex items-start justify-between">
-                      <div>
-                        <p className="text-white/60 text-xs font-medium uppercase tracking-widest mb-1">{project.category}</p>
-                        <h3 className="font-heading font-bold text-base text-white mb-0.5">{project.title}</h3>
-                        <p className="text-white/70 text-xs">{project.result}</p>
-                      </div>
-                      <span className="text-white/40 text-lg group-hover:text-white group-hover:translate-x-1 group-hover:-translate-y-1 transition-all duration-200 mt-0.5 shrink-0">↗</span>
-                    </div>
-                  </div>
+          {/* Grille 2×2 des départements */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            {DEPTS.map((dept) => (
+              <Link
+                key={dept.num}
+                href={getLocalizedPath(dept.href)}
+                className="group relative rounded-2xl overflow-hidden flex flex-col justify-between p-7 cursor-pointer transition-transform duration-300 hover:-translate-y-1"
+                style={{ background: DARK, minHeight: '240px' }}
+              >
+                {/* Numéro typographique en fond */}
+                <span
+                  className="absolute top-3 right-4 font-heading font-black leading-none select-none pointer-events-none"
+                  style={{ fontSize: '6rem', color: 'rgba(255,255,255,0.04)' }}
+                >
+                  {dept.num}
+                </span>
+
+                {/* Accent couleur */}
+                <div className="w-8 h-1 rounded-full mb-auto" style={{ background: dept.color }} />
+
+                <div>
+                  <p className="font-heading font-bold text-white text-lg leading-tight mb-2">{dept.name}</p>
+                  <p className="text-white/45 text-sm leading-relaxed mb-5">{dept.desc}</p>
+                  <span
+                    className="inline-flex items-center gap-1.5 text-[10px] font-semibold tracking-widest uppercase transition-colors"
+                    style={{ color: dept.color }}
+                  >
+                    Explore →
+                  </span>
                 </div>
               </Link>
             ))}
@@ -358,202 +361,244 @@ export default function HomepageDemo() {
         </div>
       </section>
 
-      {/* ─── THE TEAM ────────────────────────────────────────────────────── */}
-      <section className="py-32 lg:py-44 px-8 lg:px-16 bg-[#F0EDE8]">
-        <div className="max-w-screen-xl mx-auto">
-          <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between mb-16">
-            <div>
-              <p className="text-xs font-medium tracking-widest uppercase text-[rgba(10,10,10,0.4)] mb-5">The Team</p>
-              <h2
-                className="font-heading font-black text-[#0A0A0A] leading-[0.92] tracking-tight"
-                style={{ fontSize: 'clamp(2.2rem, 4.5vw, 5.5rem)' }}
-              >
-                People who deliver.
-              </h2>
-            </div>
-            <p className="text-[rgba(10,10,10,0.4)] text-base max-w-xs mt-8 lg:mt-0 pb-2">
-              Strategists, engineers, designers, and marketers — united by one standard: excellence.
-            </p>
+      {/* ─── MODULE 5 : PROJETS SÉLECTIONNÉS ────────────────────────────────── */}
+      <section className="px-4 lg:px-6 pb-6 bg-white">
+        <div className="max-w-[1600px] mx-auto">
+
+          <div className="flex items-end justify-between mb-4 px-1">
+            <h2
+              className="font-heading font-black leading-none tracking-tight"
+              style={{ fontSize: 'clamp(1.8rem, 3.5vw, 3.5rem)', color: DARK }}
+            >
+              Selected Work
+            </h2>
+            <Link
+              href={getLocalizedPath('/projects')}
+              className="text-xs font-semibold border-b-2 pb-0.5 hidden lg:flex items-center gap-2"
+              style={{ borderColor: DARK, color: DARK }}
+            >
+              All projects →
+            </Link>
           </div>
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-5 lg:gap-8">
-            {[
-              { img: '/demo/team-1.jpg', name: 'Sarah M.', role: 'Strategy & Consulting' },
-              { img: '/demo/team-2.jpg', name: 'Marc D.', role: 'Tech & AI' },
-              { img: '/demo/team-3.jpg', name: 'Julie L.', role: 'Creative & Studio' },
-              { img: '/demo/team-4.jpg', name: 'Alex P.', role: 'Agency & Marketing' },
-            ].map((member) => (
-              <div key={member.name} className="group">
-                <div className="aspect-[3/4] overflow-hidden rounded-xl mb-4 bg-[rgba(10,10,10,0.05)]">
-                  <img
-                    src={member.img}
-                    alt={member.name}
-                    className="w-full h-full object-cover object-top grayscale group-hover:grayscale-0 transition-all duration-500"
-                    loading="lazy"
-                  />
+
+          {/* Grille asymétrique : 1 grand + 2 petits */}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-4">
+
+            {/* Grand projet */}
+            <div className="lg:col-span-7 relative overflow-hidden rounded-2xl group cursor-pointer" style={{ minHeight: '460px' }}>
+              <img src={WORK2} alt="Project" className="absolute inset-0 w-full h-full object-cover scale-105 group-hover:scale-100 transition-transform duration-700" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/15 to-transparent" />
+              <div className="absolute top-5 left-5">
+                <span className="text-[10px] font-semibold tracking-widest uppercase text-white/60 bg-white/10 backdrop-blur-sm px-3 py-1.5 rounded-full border border-white/15">
+                  Brand & Creative
+                </span>
+              </div>
+              <div className="absolute bottom-0 left-0 right-0 p-8">
+                <p className="font-heading font-bold text-white text-2xl leading-tight mb-2">SummitLaw — Brand Relaunch</p>
+                <p className="text-white/55 text-sm">+180% qualified leads · 2024</p>
+              </div>
+              <div className="absolute bottom-7 right-7 w-10 h-10 rounded-full bg-white/15 backdrop-blur-sm flex items-center justify-center border border-white/20 group-hover:bg-white transition-all duration-200">
+                <span className="text-white text-sm group-hover:text-black">↗</span>
+              </div>
+            </div>
+
+            {/* 2 petits projets empilés */}
+            <div className="lg:col-span-5 flex flex-col gap-4">
+              <div className="relative overflow-hidden rounded-2xl group cursor-pointer flex-1" style={{ minHeight: '218px' }}>
+                <img src={WORK3} alt="Project" className="absolute inset-0 w-full h-full object-cover scale-105 group-hover:scale-100 transition-transform duration-700" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/10 to-transparent" />
+                <div className="absolute top-4 left-4">
+                  <span className="text-[10px] font-semibold tracking-widest uppercase text-white/60 bg-white/10 backdrop-blur-sm px-3 py-1.5 rounded-full border border-white/15">
+                    AI & Tech
+                  </span>
                 </div>
-                <p className="font-heading font-bold text-[#0A0A0A] text-base mb-0.5">{member.name}</p>
-                <p className="text-[rgba(10,10,10,0.4)] text-xs font-medium uppercase tracking-widest">{member.role}</p>
+                <div className="absolute bottom-0 left-0 right-0 p-5">
+                  <p className="font-heading font-bold text-white text-base leading-tight mb-1">QueerTech — Platform</p>
+                  <p className="text-white/50 text-xs">+220% member engagement</p>
+                </div>
+                <div className="absolute bottom-4 right-4 w-8 h-8 rounded-full bg-white/15 backdrop-blur-sm flex items-center justify-center border border-white/20 group-hover:bg-white transition-all duration-200">
+                  <span className="text-white text-xs group-hover:text-black">↗</span>
+                </div>
+              </div>
+
+              {/* Module CTA "Start a project" */}
+              <div
+                className="rounded-2xl flex flex-col justify-between p-7 flex-1"
+                style={{ background: CREAM, minHeight: '218px' }}
+              >
+                <p className="text-[10px] font-medium tracking-[0.3em] uppercase" style={{ color: `${DARK}40` }}>
+                  Ready to grow?
+                </p>
+                <div>
+                  <p
+                    className="font-heading font-black leading-tight mb-5"
+                    style={{ fontSize: 'clamp(1.5rem, 2.5vw, 2.2rem)', color: DARK }}
+                  >
+                    Let's build your digital performance.
+                  </p>
+                  <Link
+                    href={getLocalizedPath('/start-project')}
+                    className="inline-flex items-center gap-2 font-semibold text-sm px-6 py-3 rounded-full text-white transition-all duration-200 hover:opacity-90"
+                    style={{ background: DARK }}
+                  >
+                    Start a project →
+                  </Link>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ─── MODULE 6 : ÉQUIPE ───────────────────────────────────────────────── */}
+      <section className="px-4 lg:px-6 pb-6 bg-white">
+        <div className="max-w-[1600px] mx-auto">
+          <div className="flex items-end justify-between mb-4 px-1">
+            <h2
+              className="font-heading font-black leading-none tracking-tight"
+              style={{ fontSize: 'clamp(1.8rem, 3.5vw, 3.5rem)', color: DARK }}
+            >
+              The Team
+            </h2>
+          </div>
+
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+            {[
+              { name: 'Clément Laberge', role: 'Founder & CEO', img: TEAM_IMAGE },
+              { name: 'Marie-Ève Tremblay', role: 'Creative Director', img: WORK1 },
+              { name: 'Alexandre Côté', role: 'Head of Tech', img: WORK2 },
+              { name: 'Sophie Nguyen', role: 'Strategy Lead', img: WORK3 },
+            ].map((member) => (
+              <div key={member.name} className="group relative overflow-hidden rounded-2xl" style={{ minHeight: '320px' }}>
+                <img
+                  src={member.img}
+                  alt={member.name}
+                  className="absolute inset-0 w-full h-full object-cover grayscale group-hover:grayscale-0 scale-105 group-hover:scale-100 transition-all duration-700"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
+                <div className="absolute bottom-0 left-0 right-0 p-5">
+                  <p className="font-heading font-bold text-white text-base leading-tight">{member.name}</p>
+                  <p className="text-white/50 text-xs mt-0.5">{member.role}</p>
+                </div>
               </div>
             ))}
           </div>
-          <div className="mt-14 pt-10 border-t border-[rgba(10,10,10,0.1)] flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-            <p className="text-[rgba(10,10,10,0.4)] text-sm">A growing team of 15+ specialists across Montréal and beyond.</p>
-            <Link href={getLocalizedPath('/about')} className="inline-flex items-center gap-2 font-semibold text-sm border-b-2 border-[#0A0A0A] pb-1 hover:gap-4 transition-all duration-200">
-              Meet the full team →
-            </Link>
-          </div>
         </div>
       </section>
 
-      {/* ─── STATS ────────────────────────────────────────────────────── */}
-      <section className="py-20 border-t border-b border-[rgba(10,10,10,0.08)] px-8 lg:px-16">
-        <div className="max-w-screen-xl mx-auto grid grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-6">
-          {[
-            { value: '15+', label: 'Years of combined expertise' },
-            { value: '200+', label: 'Projects delivered' },
-            { value: '4', label: 'Specialized departments' },
-            { value: '98%', label: 'Client retention rate' },
-          ].map((stat) => (
-            <div key={stat.value} className="text-center lg:text-left">
-              <p
-                className="font-heading font-black text-[#0A0A0A] leading-none tracking-tight mb-2"
-                style={{ fontSize: 'clamp(2.5rem, 4vw, 4.5rem)', color: NUKLEO_PURPLE }}
-              >
-                {stat.value}
-              </p>
-              <p className="text-[rgba(10,10,10,0.45)] text-sm leading-relaxed">{stat.label}</p>
-            </div>
-          ))}
-        </div>
-      </section>
+      {/* ─── MODULE 7 : ROUGE ON BLUE ────────────────────────────────────────── */}
+      <section className="px-4 lg:px-6 pb-6 bg-white">
+        <div className="max-w-[1600px] mx-auto">
+          <div
+            className="relative overflow-hidden rounded-2xl"
+            style={{ background: '#C8102E', minHeight: '400px' }}
+          >
+            {/* Image de fond */}
+            <img
+              src={ROB_BG}
+              alt="Rouge on Blue"
+              className="absolute inset-0 w-full h-full object-cover opacity-20 mix-blend-luminosity"
+            />
 
-      {/* ─── ROUGE ON BLUE ────────────────────────────────────────────────── */}
-      <section className="relative overflow-hidden bg-[#C8102E] text-white">
-
-        {/* Image de fond plein écran */}
-        <div className="absolute inset-0">
-          <img
-            src="/demo/rob-bg.jpg"
-            alt="Rouge on Blue"
-            className="w-full h-full object-cover object-center opacity-20 mix-blend-luminosity"
-            loading="lazy"
-          />
-          <div className="absolute inset-0 bg-gradient-to-b from-[rgba(200,16,46,0.6)] via-[rgba(200,16,46,0.8)] to-[#C8102E]" />
-        </div>
-
-        <div className="relative z-10 px-8 lg:px-16 pt-32 lg:pt-44 pb-32 lg:pb-44">
-          <div className="max-w-screen-xl mx-auto">
-
-            {/* Label */}
-            <p className="text-white/40 text-xs font-medium tracking-widest uppercase mb-10">
-              A sister agency
-            </p>
-
-            {/* Titre massif */}
-            <h2
-              className="font-heading font-black leading-[0.88] tracking-tight mb-14"
-              style={{ fontSize: 'clamp(3.5rem, 9vw, 11rem)' }}
-            >
-              Rouge<br />on Blue.
-            </h2>
-
-            {/* Layout deux colonnes */}
-            <div className="grid lg:grid-cols-2 gap-16 lg:gap-28 items-end">
-
-              {/* Manifeste */}
-              <div>
-                <p className="text-white/70 text-lg lg:text-xl leading-relaxed mb-4">
-                  For brands that refuse to blend in.
+            <div className="relative z-10 flex flex-col lg:flex-row items-start lg:items-end justify-between h-full p-10 lg:p-14 gap-10" style={{ minHeight: '400px' }}>
+              <div className="flex-1">
+                <p className="text-white/50 text-[10px] font-medium tracking-[0.3em] uppercase mb-6">
+                  A Nukleo Group company
                 </p>
-                <p className="text-white/45 text-base leading-relaxed mb-12">
-                  Creative direction, brand identity, and storytelling — built for organizations that understand that being exceptional is not a risk, it's a strategy.
+                <h2
+                  className="font-heading font-black text-white leading-[0.85] tracking-tight mb-6"
+                  style={{ fontSize: 'clamp(3rem, 7vw, 8rem)' }}
+                >
+                  Rouge<br />on Blue.
+                </h2>
+                <p className="text-white/65 text-base lg:text-lg leading-relaxed max-w-md mb-8">
+                  For brands that refuse to blend in. Creative agency for those who believe being exceptional is not a risk — it's a strategy.
                 </p>
                 <a
                   href="https://rougeonblue.com"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-3 bg-white text-[#C8102E] font-bold px-8 py-4 rounded-full hover:bg-white/90 transition-all duration-200 text-sm group"
+                  className="inline-flex items-center gap-3 bg-white text-[#C8102E] font-bold px-7 py-4 rounded-full hover:bg-white/90 transition-all duration-200 text-sm"
                 >
-                  Oser l'Exception
-                  <span className="group-hover:translate-x-1 transition-transform duration-200">↗</span>
+                  Oser l'Exception ↗
                 </a>
               </div>
 
-              {/* Image éditoriale */}
-              <div className="relative aspect-[3/4] lg:aspect-[4/5] overflow-hidden rounded-2xl">
-                <img
-                  src="/demo/rob-creative.jpg"
-                  alt="Rouge on Blue creative work"
-                  className="w-full h-full object-cover object-center"
-                  loading="lazy"
-                />
-                {/* Overlay rouge subtil */}
-                <div className="absolute inset-0 bg-[rgba(200,16,46,0.1)]" />
+              {/* Badge */}
+              <div className="shrink-0 w-32 h-32 lg:w-40 lg:h-40 rounded-full border-2 border-white/25 flex items-center justify-center text-center p-4">
+                <div>
+                  <p className="text-white font-black text-lg leading-tight">Rouge</p>
+                  <p className="text-white/60 text-xs">on Blue</p>
+                  <p className="text-white/40 text-[9px] mt-1 tracking-widest uppercase">Creative</p>
+                </div>
               </div>
             </div>
-
-            {/* Tagline bas de page */}
-            <div className="mt-20 pt-10 border-t border-white/15 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-              <p className="text-white/30 text-sm tracking-wide">
-                rougeonblue.com
-              </p>
-              <p className="text-white/20 text-xs font-medium uppercase tracking-widest">
-                Creative & Branding Agency — Montréal
-              </p>
-            </div>
-
           </div>
         </div>
       </section>
 
-      {/* ─── CTA FINAL ────────────────────────────────────────────────────── */}
-      <section className="py-40 lg:py-52 px-8 lg:px-16 bg-[#0A0A0A] text-white text-center">
-        <div className="max-w-screen-xl mx-auto">
-          <p className="text-white/30 text-xs font-medium tracking-widest uppercase mb-10">
-            Ready to take the lead?
-          </p>
-          <h2
-            className="font-heading font-black leading-[0.88] tracking-tight mb-14 mx-auto"
-            style={{ fontSize: 'clamp(3rem, 8vw, 10rem)', maxWidth: '16ch' }}
+      {/* ─── MODULE 8 : CTA FINAL ────────────────────────────────────────────── */}
+      <section className="px-4 lg:px-6 pb-6 bg-white">
+        <div className="max-w-[1600px] mx-auto">
+          <div
+            className="rounded-2xl flex flex-col lg:flex-row items-center justify-between px-10 lg:px-16 py-16 gap-8"
+            style={{ background: DARK }}
           >
-            Let's build your digital performance.
-          </h2>
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-5">
-            <Link
-              href={getLocalizedPath('/start-project')}
-              className="inline-flex items-center gap-3 font-semibold px-9 py-4 rounded-full transition-all duration-200 text-sm text-black"
-              style={{ backgroundColor: 'white' }}
+            <h2
+              className="font-heading font-black text-white leading-[0.88] tracking-tight"
+              style={{ fontSize: 'clamp(2.5rem, 5vw, 6rem)' }}
             >
-              Start a project →
-            </Link>
-            <a
-              href="mailto:hello@nukleo.com"
-              className="inline-flex items-center gap-3 border border-white/25 text-white/70 font-semibold px-9 py-4 rounded-full hover:border-white/60 hover:text-white transition-all duration-200 text-sm"
-            >
-              hello@nukleo.com
-            </a>
+              Ready to<br />
+              <span style={{ color: NUKLEO_PURPLE }}>perform?</span>
+            </h2>
+            <div className="flex flex-col sm:flex-row gap-4 shrink-0">
+              <Link
+                href={getLocalizedPath('/start-project')}
+                className="inline-flex items-center gap-2 bg-white text-black font-bold px-8 py-4 rounded-full hover:bg-white/90 transition-all duration-200 text-sm"
+              >
+                Start a project →
+              </Link>
+              <Link
+                href={getLocalizedPath('/about')}
+                className="inline-flex items-center gap-2 border border-white/25 text-white font-semibold px-8 py-4 rounded-full hover:border-white/50 transition-all duration-200 text-sm"
+              >
+                Learn about us
+              </Link>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* ─── FOOTER MINIMAL ───────────────────────────────────────────────── */}
-      <footer className="bg-[#0A0A0A] border-t border-white/8 px-8 lg:px-16 py-8">
-        <div className="max-w-screen-xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
-          <span className="text-white font-bold text-lg tracking-tight">nukleo.</span>
-          <p className="text-white/25 text-xs">© 2025 Nukleo. All rights reserved.</p>
-          <div className="flex items-center gap-6 text-white/25 text-xs">
-            <Link href={getLocalizedPath('/privacy-policy')} className="hover:text-white/50 transition-colors">Privacy</Link>
-            <Link href={getLocalizedPath('/terms-of-service')} className="hover:text-white/50 transition-colors">Terms</Link>
+      {/* ─── FOOTER MINIMAL ──────────────────────────────────────────────────── */}
+      <footer className="px-4 lg:px-6 pb-6 bg-white">
+        <div className="max-w-[1600px] mx-auto">
+          <div
+            className="rounded-2xl flex flex-col lg:flex-row items-center justify-between px-8 py-6 gap-4"
+            style={{ background: CREAM }}
+          >
+            <span className="font-heading font-black text-lg" style={{ color: DARK }}>Nukleo.</span>
+            <div className="flex items-center gap-6">
+              {[
+                { label: 'Services', href: '/services' },
+                { label: 'Work', href: '/projects' },
+                { label: 'About', href: '/about' },
+                { label: 'Contact', href: '/contact' },
+              ].map((item) => (
+                <Link
+                  key={item.label}
+                  href={getLocalizedPath(item.href)}
+                  className="text-xs font-medium hover:opacity-100 transition-opacity"
+                  style={{ color: `${DARK}60` }}
+                >
+                  {item.label}
+                </Link>
+              ))}
+            </div>
+            <p className="text-[10px]" style={{ color: `${DARK}35` }}>© 2025 Nukleo. All rights reserved.</p>
           </div>
         </div>
       </footer>
 
-      <style>{`
-        @keyframes ticker {
-          from { transform: translateX(0); }
-          to { transform: translateX(-50%); }
-        }
-      `}</style>
     </div>
   );
 }
