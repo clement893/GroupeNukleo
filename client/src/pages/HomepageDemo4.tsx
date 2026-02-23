@@ -300,7 +300,7 @@ function ProjectsCarousel() {
   const getWidth = (i: number) => {
     if (PROJECTS.length === 1) return '100%';
     const others = PROJECTS.length - 1;
-    return i === active ? '70%' : `${30 / others}%`;
+    return i === active ? '80%' : `${20 / others}%`;
   };
 
   return (
