@@ -44,8 +44,8 @@ export function DepartmentsWidget() {
   const getLocalizedPath = useLocalizedPath();
 
   return (
-    <div className="h-full min-h-[400px] rounded-2xl bg-[#0A0A0A] p-6 lg:p-8 flex flex-col justify-between">
-      <p className="text-[10px] font-medium tracking-[0.35em] uppercase text-white/50 mb-6">
+    <div className="h-full min-h-[400px] rounded-2xl p-6 lg:p-8 flex flex-col justify-between">
+      <p className="text-[10px] font-medium tracking-[0.35em] uppercase text-black/60 mb-6">
         Nos départements
       </p>
       <div className="grid grid-cols-2 gap-3 flex-1">
@@ -73,10 +73,10 @@ export function DepartmentsWidget() {
       </div>
       <Link
         href={getLocalizedPath('/services')}
-        className="mt-6 text-sm font-semibold text-white/70 hover:text-white transition-colors inline-flex items-center gap-2"
+        className="mt-6 text-sm font-semibold text-black/70 hover:text-black transition-colors inline-flex items-center gap-2"
       >
         Voir tous les services
-        <ArrowRight className="w-4 h-4" />
+        <ArrowRight className="w-4 h-4" stroke="currentColor" />
       </Link>
     </div>
   );

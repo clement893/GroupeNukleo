@@ -55,14 +55,14 @@ export function TeamScrollCards() {
   return (
     <div
       ref={scrollRef}
-      className="relative h-full min-h-[540px] flex flex-col overflow-hidden rounded-2xl bg-[#0A0A0A] cursor-n-resize"
+      className="relative h-full min-h-[540px] flex flex-col overflow-hidden rounded-2xl cursor-n-resize"
     >
-      <p className="text-white/60 text-[10px] font-medium tracking-[0.35em] uppercase px-6 pt-6 pb-2 shrink-0">
+      <p className="text-black/60 text-[10px] font-medium tracking-[0.35em] uppercase px-6 pt-6 pb-2 shrink-0">
         Notre équipe
       </p>
       <div className="flex-1 flex items-center justify-center min-h-0 overflow-hidden px-4">
         <div className="flex items-center justify-center gap-4 lg:gap-8 w-full max-w-[400px]">
-          <p className="font-heading font-bold text-white text-sm text-right shrink-0 min-w-[100px] lg:min-w-[120px]">
+          <p className="font-heading font-bold text-black text-sm text-right shrink-0 min-w-[100px] lg:min-w-[120px]">
             {TEAM_MEMBERS[activeIndex].name}
           </p>
           <div className="relative w-full max-w-[270px] h-[520px] shrink-0">
@@ -107,15 +107,15 @@ export function TeamScrollCards() {
           );
         })}
           </div>
-          <p className="text-white/70 text-xs text-left shrink-0 min-w-[100px] lg:min-w-[120px]">
+          <p className="text-black/70 text-xs text-left shrink-0 min-w-[100px] lg:min-w-[120px]">
             {TEAM_MEMBERS[activeIndex].role}
           </p>
         </div>
       </div>
       {/* Indicateur scroll */}
-      <div className="absolute bottom-4 left-1/2 -translate-x-1/2 w-12 h-1.5 rounded-full bg-white/10">
+      <div className="absolute bottom-4 left-1/2 -translate-x-1/2 w-12 h-1.5 rounded-full bg-black/10">
         <div
-          className="h-full rounded-full bg-white/50 transition-all duration-300"
+          className="h-full rounded-full bg-black/50 transition-all duration-300"
           style={{
             width: `${(100 / TEAM_MEMBERS.length) * (activeIndex + 1)}%`,
           }}

@@ -490,20 +490,6 @@ export default function HomepageDemo4() {
         </div>
       )}
 
-      {/* ─── LOGO BORD À BORD (sans fond) ────────────────────────────────────── */}
-      <div className="relative z-10 flex flex-col justify-center w-full py-12 lg:py-16 px-2 sm:px-4">
-        <p className="text-gray-600 text-xs font-medium tracking-[0.25em] uppercase mb-6">
-          Choisissez l'intelligence.
-        </p>
-        <Link href={getLocalizedPath('/')} className="block w-full">
-          <img
-            src="/demo/nukleo-logo-rvb.svg"
-            alt="Nukleo"
-            className="w-full h-auto object-contain object-center"
-          />
-        </Link>
-      </div>
-
       {/* ─── WRAPPER GLOBAL ─────────────────────────────────────────────────── */}
       <div className="relative z-10 p-3 lg:p-4 flex flex-col gap-3 lg:gap-4">
 
