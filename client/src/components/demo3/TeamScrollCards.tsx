@@ -55,9 +55,17 @@ export function TeamScrollCards() {
   return (
     <div
       ref={scrollRef}
-      className="relative h-full min-h-[540px] flex items-center justify-center overflow-hidden rounded-2xl bg-[#0A0A0A] cursor-n-resize"
+      className="relative h-full min-h-[540px] flex flex-col overflow-hidden rounded-2xl bg-[#0A0A0A] cursor-n-resize"
     >
-      <div className="relative w-full max-w-[270px] h-[520px]">
+      <p className="text-white/60 text-[10px] font-medium tracking-[0.35em] uppercase px-6 pt-6 pb-2 shrink-0">
+        Notre équipe
+      </p>
+      <div className="flex-1 flex items-center justify-center min-h-0 overflow-hidden px-4">
+        <div className="flex items-center justify-center gap-4 lg:gap-8 w-full max-w-[400px]">
+          <p className="font-heading font-bold text-white text-sm text-right shrink-0 min-w-[100px] lg:min-w-[120px]">
+            {TEAM_MEMBERS[activeIndex].name}
+          </p>
+          <div className="relative w-full max-w-[270px] h-[520px] shrink-0">
         {TEAM_MEMBERS.map((member, i) => {
           const offset = i - activeIndex;
           const isActive = i === activeIndex;
@@ -94,18 +102,15 @@ export function TeamScrollCards() {
                     filter: isActive ? 'brightness(0.85)' : 'brightness(0.5) grayscale(0.3)',
                   }}
                 />
-                <div
-                  className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent"
-                  style={{ opacity: isActive ? 1 : 0.7 }}
-                />
-                <div className="absolute bottom-0 left-0 right-0 p-4 text-white">
-                  <p className="font-heading font-bold text-sm">{member.name}</p>
-                  <p className="text-xs text-white/70">{member.role}</p>
-                </div>
               </div>
             </div>
           );
         })}
+          </div>
+          <p className="text-white/70 text-xs text-left shrink-0 min-w-[100px] lg:min-w-[120px]">
+            {TEAM_MEMBERS[activeIndex].role}
+          </p>
+        </div>
       </div>
       {/* Indicateur scroll */}
       <div className="absolute bottom-4 left-1/2 -translate-x-1/2 w-12 h-1.5 rounded-full bg-white/10">
