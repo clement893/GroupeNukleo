@@ -37,17 +37,37 @@ const LOGOS = [
 
 // ─── MARQUEE ───────────────────────────────────────────────────────────────
 function Marquee({ items, speed = 40, reverse = false }: { items: string[]; speed?: number; reverse?: boolean }) {
+  const [hovered, setHovered] = React.useState<number | null>(null);
   return (
-    <div className="overflow-hidden" style={{ maskImage: 'linear-gradient(to right, transparent, black 10%, black 90%, transparent)' }}>
+    <div
+      className="overflow-hidden"
+      style={{ maskImage: 'linear-gradient(to right, transparent, black 10%, black 90%, transparent)', padding: '6px 0' }}
+    >
       <div
-        className="flex gap-10 items-center"
+        className="flex items-center"
         style={{
           animation: `marquee${reverse ? 'Rev' : ''} ${speed}s linear infinite`,
           width: 'max-content',
+          gap: 40,
         }}
       >
         {[...items, ...items].map((src, i) => (
-          <img key={i} src={src} alt="" style={{ height: 18, width: 'auto', opacity: 0.3, filter: 'grayscale(1)', objectFit: 'contain' }} />
+          <img
+            key={i}
+            src={src}
+            alt=""
+            onMouseEnter={() => setHovered(i)}
+            onMouseLeave={() => setHovered(null)}
+            style={{
+              height: hovered === i ? 26 : 18,
+              width: 'auto',
+              opacity: hovered === i ? 1 : 0.28,
+              filter: hovered === i ? 'none' : 'grayscale(1)',
+              objectFit: 'contain',
+              transition: 'height 0.25s ease, opacity 0.25s ease, filter 0.25s ease',
+              cursor: 'pointer',
+            }}
+          />
         ))}
       </div>
       <style>{`
