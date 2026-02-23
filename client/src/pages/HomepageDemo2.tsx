@@ -47,7 +47,7 @@ function Marquee({ items, speed = 40, reverse = false }: { items: string[]; spee
         }}
       >
         {[...items, ...items].map((src, i) => (
-          <img key={i} src={src} alt="" className="h-7 w-auto opacity-30 grayscale object-contain" />
+          <img key={i} src={src} alt="" style={{ height: 18, width: 'auto', opacity: 0.3, filter: 'grayscale(1)', objectFit: 'contain' }} />
         ))}
       </div>
       <style>{`
@@ -319,7 +319,7 @@ export default function HomepageDemo2() {
         {/* ════════════════════════════════════════════════════════════════
             RANGÉE 2 — LOGOS MARQUEE
         ════════════════════════════════════════════════════════════════ */}
-        <div style={{ padding: '24px 12px', display: 'flex', flexDirection: 'column', gap: 14 }}>
+        <div style={{ padding: '16px 12px', display: 'flex', flexDirection: 'column', gap: 10 }}>
           <p style={{ textAlign: 'center', color: 'rgba(0,0,0,0.25)', fontSize: 10, letterSpacing: '0.35em', textTransform: 'uppercase', fontWeight: 600, marginBottom: 4 }}>
             Trusted by 60+ organizations
           </p>
