@@ -549,4 +549,15 @@
   body.page-transitioning .shimmer {
     animation: fadeInUp 0.6s ease-out;
   }
+
+  /* Carrousel logos — deux rangées en sens opposés */
+  @keyframes ticker {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-33.333%); }
+  }
+
+  @keyframes ticker-reverse {
+    0% { transform: translateX(-33.333%); }
+    100% { transform: translateX(0); }
+  }
 }
