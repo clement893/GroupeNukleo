@@ -1,4 +1,4 @@
-import { useRef, useEffect } from 'react';
+import { useRef, useEffect, useState } from 'react';
 import { Link } from 'wouter';
 import { useLanguage } from '@/hooks/useLanguage';
 
@@ -54,6 +54,181 @@ const DEPTS = [
   { num: '03', name: 'Nukleo.Tech', desc: 'Your systems work for you, not the other way around.', color: '#2563eb', href: '/services/tech' },
   { num: '04', name: 'Nukleo.Consulting', desc: 'You move with clarity, not hesitation.', color: '#059669', href: '/services/consulting' },
 ];
+
+// ─── TEAM STACK SECTION ────────────────────────────────────────────────────
+const TEAM_MEMBERS = [
+  { name: 'Clément Laberge', role: 'Founder & CEO', img: '/demo/team.jpg', color: '#7c3aed' },
+  { name: 'Marie-Ève Tremblay', role: 'Creative Director', img: '/demo/work1.jpg', color: '#f97316' },
+  { name: 'Alexandre Côté', role: 'Head of Tech', img: '/demo/work2.jpg', color: '#2563eb' },
+  { name: 'Sophie Nguyen', role: 'Strategy Lead', img: '/demo/work3.jpg', color: '#059669' },
+];
+
+function TeamStackSection() {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [activeIndex, setActiveIndex] = useState(0);
+
+  useEffect(() => {
+    const container = containerRef.current;
+    if (!container) return;
+
+    const handleScroll = () => {
+      const { scrollTop, scrollHeight, clientHeight } = container;
+      const scrollable = scrollHeight - clientHeight;
+      if (scrollable <= 0) return;
+      const progress = scrollTop / scrollable;
+      const idx = Math.min(
+        TEAM_MEMBERS.length - 1,
+        Math.floor(progress * TEAM_MEMBERS.length)
+      );
+      setActiveIndex(idx);
+    };
+
+    container.addEventListener('scroll', handleScroll, { passive: true });
+    return () => container.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  return (
+    <div className="rounded-3xl overflow-hidden" style={{ background: '#0A0A0A', minHeight: '600px' }}>
+      <div className="flex flex-col lg:flex-row h-full" style={{ minHeight: '600px' }}>
+
+        {/* Colonne gauche — titre + navigation dots */}
+        <div className="lg:w-2/5 flex flex-col justify-between p-12 lg:p-16">
+          <div>
+            <p className="text-white/30 text-[10px] font-medium tracking-[0.35em] uppercase mb-6">The Team</p>
+            <h2
+              className="font-heading font-black text-white leading-none tracking-tight"
+              style={{ fontSize: 'clamp(2.5rem, 4vw, 5rem)' }}
+            >
+              People<br />
+              <span style={{ color: '#7c3aed' }}>behind<br />the work.</span>
+            </h2>
+          </div>
+
+          {/* Info membre actif */}
+          <div className="mt-auto">
+            {TEAM_MEMBERS.map((member, i) => (
+              <div
+                key={member.name}
+                className="transition-all duration-500"
+                style={{
+                  opacity: i === activeIndex ? 1 : 0,
+                  position: i === activeIndex ? 'relative' : 'absolute',
+                  pointerEvents: i === activeIndex ? 'auto' : 'none',
+                }}
+              >
+                <p
+                  className="font-heading font-bold text-white text-2xl lg:text-3xl leading-tight mb-2"
+                >
+                  {member.name}
+                </p>
+                <p className="text-sm" style={{ color: member.color }}>{member.role}</p>
+              </div>
+            ))}
+
+            {/* Dots de navigation */}
+            <div className="flex items-center gap-3 mt-8">
+              {TEAM_MEMBERS.map((_, i) => (
+                <button
+                  key={i}
+                  onClick={() => {
+                    const container = containerRef.current;
+                    if (!container) return;
+                    const scrollable = container.scrollHeight - container.clientHeight;
+                    container.scrollTo({ top: (i / (TEAM_MEMBERS.length - 1)) * scrollable, behavior: 'smooth' });
+                  }}
+                  className="transition-all duration-300 rounded-full"
+                  style={{
+                    width: i === activeIndex ? '28px' : '8px',
+                    height: '8px',
+                    background: i === activeIndex ? TEAM_MEMBERS[i].color : 'rgba(255,255,255,0.2)',
+                  }}
+                />
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* Colonne droite — stack de cartes scrollable */}
+        <div className="lg:w-3/5 relative" style={{ minHeight: '600px' }}>
+          {/* Zone de scroll invisible pour capturer le scroll */}
+          <div
+            ref={containerRef}
+            className="absolute inset-0 overflow-y-scroll"
+            style={{ scrollbarWidth: 'none' }}
+          >
+            {/* Hauteur scrollable = nb de membres × hauteur viewport */}
+            <div style={{ height: `${TEAM_MEMBERS.length * 100}%` }} />
+          </div>
+
+          {/* Stack de cartes — positionnées en perspective */}
+          <div
+            className="absolute inset-0 flex items-center justify-center"
+            style={{ perspective: '1200px', perspectiveOrigin: '50% 50%' }}
+          >
+            <div className="relative" style={{ width: '75%', aspectRatio: '3/4' }}>
+              {TEAM_MEMBERS.map((member, i) => {
+                const offset = i - activeIndex;
+                const isActive = i === activeIndex;
+                const isBehind = offset > 0;
+                const isGone = offset < 0;
+
+                // Carte active : pleine taille, au premier plan
+                // Cartes derrière : légèrement plus petites, décalées vers le bas, en perspective
+                // Cartes passées : sorties vers le haut
+
+                const scale = isActive ? 1 : isBehind ? Math.max(0.82, 1 - offset * 0.06) : 1;
+                const translateY = isActive ? '0%'
+                  : isBehind ? `${offset * 18}px`
+                  : '-110%';
+                const translateZ = isActive ? '0px'
+                  : isBehind ? `${-offset * 60}px`
+                  : '0px';
+                const opacity = isGone ? 0 : isBehind ? Math.max(0, 1 - offset * 0.25) : 1;
+                const zIndex = isActive ? TEAM_MEMBERS.length
+                  : isBehind ? TEAM_MEMBERS.length - offset
+                  : 0;
+
+                return (
+                  <div
+                    key={member.name}
+                    className="absolute inset-0 rounded-2xl overflow-hidden"
+                    style={{
+                      transform: `translateY(${translateY}) translateZ(${translateZ}) scale(${scale})`,
+                      opacity,
+                      zIndex,
+                      transition: 'transform 0.55s cubic-bezier(0.25, 0.46, 0.45, 0.94), opacity 0.45s ease',
+                      transformStyle: 'preserve-3d',
+                      boxShadow: isActive
+                        ? '0 40px 80px rgba(0,0,0,0.6), 0 0 0 1px rgba(255,255,255,0.06)'
+                        : '0 20px 40px rgba(0,0,0,0.4)',
+                    }}
+                  >
+                    <img
+                      src={member.img}
+                      alt={member.name}
+                      className="w-full h-full object-cover"
+                      style={{ filter: isActive ? 'grayscale(0)' : 'grayscale(0.4)' }}
+                    />
+                    {/* Overlay gradient bas */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+                    {/* Badge couleur en bas */}
+                    <div
+                      className="absolute bottom-5 left-5 px-4 py-2 rounded-full text-white text-xs font-semibold"
+                      style={{ background: member.color, opacity: isActive ? 1 : 0, transition: 'opacity 0.3s ease' }}
+                    >
+                      {member.role}
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  );
+}
 
 export default function HomepageDemo() {
   const { getLocalizedPath } = useLanguage();
@@ -393,39 +568,9 @@ export default function HomepageDemo() {
         </div>
 
         {/* ══════════════════════════════════════════════════════════════════════
-            MODULE 6 — ÉQUIPE
+            MODULE 6 — ÉQUIPE (stack scroll vertical)
         ══════════════════════════════════════════════════════════════════════ */}
-        <div>
-          <div className="flex items-end justify-between mb-4 px-1">
-            <h2
-              className="font-heading font-black leading-none tracking-tight"
-              style={{ fontSize: 'clamp(2rem, 4vw, 4.5rem)', color: DARK }}
-            >
-              The Team
-            </h2>
-          </div>
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 lg:gap-4">
-            {[
-              { name: 'Clément Laberge', role: 'Founder & CEO', img: TEAM_IMAGE },
-              { name: 'Marie-Ève Tremblay', role: 'Creative Director', img: WORK1 },
-              { name: 'Alexandre Côté', role: 'Head of Tech', img: WORK2 },
-              { name: 'Sophie Nguyen', role: 'Strategy Lead', img: WORK3 },
-            ].map((member) => (
-              <div key={member.name} className="group relative overflow-hidden rounded-3xl" style={{ minHeight: '360px' }}>
-                <img
-                  src={member.img}
-                  alt={member.name}
-                  className="absolute inset-0 w-full h-full object-cover grayscale group-hover:grayscale-0 scale-[1.04] group-hover:scale-100 transition-all duration-700"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/65 via-transparent to-transparent" />
-                <div className="absolute bottom-0 left-0 right-0 p-7">
-                  <p className="font-heading font-bold text-white text-base leading-tight">{member.name}</p>
-                  <p className="text-white/45 text-xs mt-1">{member.role}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
+        <TeamStackSection />
 
         {/* ══════════════════════════════════════════════════════════════════════
             MODULE 7 — ROUGE ON BLUE
