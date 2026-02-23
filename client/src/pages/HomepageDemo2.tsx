@@ -163,73 +163,165 @@ function TeamStack() {
 
 // ─── PROJECTS TRIPTYCH ─────────────────────────────────────────────────────
 const PROJECTS = [
-  { num: '01', name: 'MBAM',       cat: 'Brand & Digital',  tagline: 'Redefining cultural engagement online.',       result: '+240% reach',          img: WORK1, color: BLUE   },
-  { num: '02', name: 'SummitLaw',  cat: 'Brand & Creative', tagline: 'A law firm that finally looks like its ambition.', result: '+180% leads',       img: WORK2, color: PURPLE },
-  { num: '03', name: 'QueerTech',  cat: 'AI & Platform',    tagline: 'Technology built for belonging.',              result: '+220% engagement',     img: WORK3, color: GREEN  },
+  { num: '01', name: 'MBAM',       cat: 'Brand & Digital',  tagline: 'Redefining cultural engagement online.',          result: '+240% reach',      img: WORK1, color: BLUE   },
+  { num: '02', name: 'SummitLaw',  cat: 'Brand & Creative', tagline: 'A law firm that finally looks like its ambition.', result: '+180% leads',      img: WORK2, color: PURPLE },
+  { num: '03', name: 'QueerTech',  cat: 'AI & Platform',    tagline: 'Technology built for belonging.',                  result: '+220% engagement', img: WORK3, color: GREEN  },
 ];
+
+// Image de rue en fond (on réutilise ROB_BG ou TEAM_IMAGE selon dispo)
+const STREET_BG = '/demo/work1.jpg'; // remplacé par une vraie photo de rue si dispo
 
 function Triptych() {
   const [active, setActive] = useState(0);
+
+  // Largeurs des panneaux : actif = large, inactifs = étroits
   const getW = (i: number) => i === active ? '68%' : '16%';
 
   return (
-    <div style={{ display: 'flex', height: '82vh', gap: 3, borderRadius: 24, overflow: 'hidden' }}>
-      {PROJECTS.map((p, i) => {
-        const isActive = i === active;
-        return (
-          <div
-            key={p.num}
-            onClick={() => setActive(i)}
-            style={{
-              position: 'relative',
-              width: getW(i),
-              transition: 'width 0.6s cubic-bezier(0.77,0,0.175,1)',
-              cursor: isActive ? 'default' : 'pointer',
-              flexShrink: 0,
-              borderRadius: i === 0 ? '24px 0 0 24px' : i === 2 ? '0 24px 24px 0' : 0,
-              overflow: 'hidden',
-            }}
-          >
-            <img
-              src={p.img}
-              alt={p.name}
-              style={{
-                position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover',
-                filter: isActive ? 'brightness(0.55)' : 'grayscale(1) brightness(0.3)',
-                transform: isActive ? 'scale(1.02)' : 'scale(1.07)',
-                transition: 'filter 0.6s, transform 0.6s',
-              }}
-            />
-            <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(0,0,0,0.85) 0%, transparent 55%)', opacity: isActive ? 1 : 0.5, transition: 'opacity 0.5s' }} />
+    <div style={{ position: 'relative', height: '88vh', borderRadius: 20, overflow: 'hidden' }}>
 
-            {isActive && (
-              <div style={{ position: 'absolute', inset: 0, display: 'flex', flexDirection: 'column', justifyContent: 'space-between', padding: '3rem 3.5rem', zIndex: 10 }}>
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
-                  <span style={{ color: 'rgba(255,255,255,0.25)', fontSize: 10, letterSpacing: '0.35em', textTransform: 'uppercase', fontWeight: 600 }}>Selected Work</span>
-                  <span style={{ color: 'rgba(255,255,255,0.35)', fontSize: 10, letterSpacing: '0.3em', textTransform: 'uppercase' }}>{p.cat}</span>
-                </div>
-                <div>
-                  <h2 style={{ color: '#fff', fontWeight: 900, fontSize: 'clamp(2.8rem,5vw,6rem)', lineHeight: 0.88, letterSpacing: '-0.02em', marginBottom: '1rem' }}>{p.name}</h2>
-                  <p style={{ color: 'rgba(255,255,255,0.5)', fontSize: 15, lineHeight: 1.6, maxWidth: 480, marginBottom: '1.5rem' }}>{p.tagline}</p>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: 20 }}>
-                    <span style={{ background: p.color, color: '#fff', fontSize: 11, fontWeight: 700, padding: '6px 16px', borderRadius: 999 }}>{p.result}</span>
-                    <Link href="/projects" style={{ color: 'rgba(255,255,255,0.4)', fontSize: 11, fontWeight: 600, borderBottom: '1px solid rgba(255,255,255,0.2)', paddingBottom: 2 }}>
-                      View case study ↗
-                    </Link>
+      {/* ── Fond photo de rue plein cadre ── */}
+      <img
+        src={ROB_BG}
+        alt=""
+        style={{
+          position: 'absolute', inset: 0, width: '100%', height: '100%',
+          objectFit: 'cover',
+          filter: 'brightness(0.82) saturate(0.9)',
+        }}
+      />
+      {/* Léger overlay pour assombrir les bords */}
+      <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to bottom, rgba(0,0,0,0.08) 0%, rgba(0,0,0,0.22) 100%)' }} />
+
+      {/* ── Présentoir : centré verticalement, 3 panneaux ── */}
+      <div
+        style={{
+          position: 'absolute',
+          inset: 0,
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          padding: '0 6%',
+        }}
+      >
+        {/* Socle gris du présentoir */}
+        <div
+          style={{
+            position: 'relative',
+            width: '100%',
+            maxWidth: 900,
+            background: 'rgba(90,90,90,0.55)',
+            backdropFilter: 'blur(4px)',
+            borderRadius: 12,
+            padding: '24px 20px 48px',
+            display: 'flex',
+            gap: 10,
+            boxShadow: '0 32px 80px rgba(0,0,0,0.45)',
+          }}
+        >
+          {PROJECTS.map((p, i) => {
+            const isActive = i === active;
+            return (
+              <div
+                key={p.num}
+                onClick={() => setActive(i)}
+                style={{
+                  position: 'relative',
+                  width: getW(i),
+                  transition: 'width 0.65s cubic-bezier(0.77,0,0.175,1)',
+                  cursor: isActive ? 'default' : 'pointer',
+                  flexShrink: 0,
+                  borderRadius: 8,
+                  overflow: 'hidden',
+                  aspectRatio: '3/4',
+                  background: '#111',
+                }}
+              >
+                {/* Image affiche */}
+                <img
+                  src={p.img}
+                  alt={p.name}
+                  style={{
+                    position: 'absolute', inset: 0, width: '100%', height: '100%',
+                    objectFit: 'cover',
+                    filter: isActive ? 'brightness(0.75)' : 'brightness(0.45) saturate(0.6)',
+                    transform: isActive ? 'scale(1.02)' : 'scale(1.06)',
+                    transition: 'filter 0.6s, transform 0.6s',
+                  }}
+                />
+
+                {/* Overlay gradient bas */}
+                <div style={{
+                  position: 'absolute', inset: 0,
+                  background: 'linear-gradient(to top, rgba(0,0,0,0.75) 0%, transparent 50%)',
+                  opacity: isActive ? 1 : 0.6,
+                  transition: 'opacity 0.5s',
+                }} />
+
+                {/* Numéro en bas à droite — toujours visible */}
+                <span style={{
+                  position: 'absolute', bottom: 14, right: 16,
+                  fontWeight: 900, fontSize: isActive ? 48 : 28,
+                  color: isActive ? PURPLE : 'rgba(255,255,255,0.35)',
+                  letterSpacing: '-0.02em', lineHeight: 1,
+                  transition: 'font-size 0.5s, color 0.5s',
+                  fontVariantNumeric: 'tabular-nums',
+                }}>{p.num}</span>
+
+                {/* Contenu panneau actif */}
+                {isActive && (
+                  <div style={{
+                    position: 'absolute', inset: 0,
+                    display: 'flex', flexDirection: 'column', justifyContent: 'space-between',
+                    padding: '1.4rem 1.6rem 4rem',
+                    zIndex: 10,
+                  }}>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
+                      <span style={{ color: 'rgba(255,255,255,0.35)', fontSize: 9, letterSpacing: '0.35em', textTransform: 'uppercase', fontWeight: 700 }}>Selected Work</span>
+                      <span style={{ color: 'rgba(255,255,255,0.35)', fontSize: 9, letterSpacing: '0.25em', textTransform: 'uppercase' }}>{p.cat}</span>
+                    </div>
+                    <div>
+                      <h2 style={{ color: '#fff', fontWeight: 900, fontSize: 'clamp(1.8rem,3.5vw,3.2rem)', lineHeight: 0.9, letterSpacing: '-0.02em', marginBottom: '0.7rem' }}>{p.name}</h2>
+                      <p style={{ color: 'rgba(255,255,255,0.5)', fontSize: 12, lineHeight: 1.55, maxWidth: 340, marginBottom: '1rem' }}>{p.tagline}</p>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: 14 }}>
+                        <span style={{ background: p.color, color: '#fff', fontSize: 10, fontWeight: 700, padding: '5px 14px', borderRadius: 999 }}>{p.result}</span>
+                        <Link href="/projects" style={{ color: 'rgba(255,255,255,0.4)', fontSize: 10, fontWeight: 600, borderBottom: '1px solid rgba(255,255,255,0.2)', paddingBottom: 1, textDecoration: 'none' }}>
+                          View case ↗
+                        </Link>
+                      </div>
+                    </div>
                   </div>
-                </div>
-              </div>
-            )}
+                )}
 
-            {!isActive && (
-              <div style={{ position: 'absolute', inset: 0, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 16, zIndex: 10 }}>
-                <span style={{ color: 'rgba(255,255,255,0.4)', fontWeight: 800, fontSize: 10, letterSpacing: '0.25em', textTransform: 'uppercase', writingMode: 'vertical-rl', transform: 'rotate(180deg)' }}>{p.name}</span>
-                <div style={{ width: 2, height: 32, borderRadius: 1, background: p.color, opacity: 0.6 }} />
+                {/* Panneau inactif : nom vertical */}
+                {!isActive && (
+                  <div style={{
+                    position: 'absolute', inset: 0,
+                    display: 'flex', flexDirection: 'column',
+                    alignItems: 'center', justifyContent: 'center',
+                    gap: 12, zIndex: 10,
+                  }}>
+                    <span style={{
+                      color: 'rgba(255,255,255,0.5)', fontWeight: 800, fontSize: 9,
+                      letterSpacing: '0.2em', textTransform: 'uppercase',
+                      writingMode: 'vertical-rl', transform: 'rotate(180deg)',
+                    }}>{p.name}</span>
+                    <div style={{ width: 2, height: 24, borderRadius: 1, background: p.color, opacity: 0.7 }} />
+                  </div>
+                )}
               </div>
-            )}
-          </div>
-        );
-      })}
+            );
+          })}
+
+          {/* Barre basse du présentoir (tablette grise) */}
+          <div style={{
+            position: 'absolute', bottom: 0, left: 0, right: 0,
+            height: 36, borderRadius: '0 0 12px 12px',
+            background: 'rgba(60,60,60,0.7)',
+            backdropFilter: 'blur(4px)',
+          }} />
+        </div>
+      </div>
     </div>
   );
 }
