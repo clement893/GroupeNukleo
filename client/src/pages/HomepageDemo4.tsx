@@ -299,8 +299,9 @@ function ProjectsCarousel() {
 
   const getWidth = (i: number) => {
     if (PROJECTS.length === 1) return '100%';
-    const others = PROJECTS.length - 1;
-    return i === active ? '80%' : `${20 / others}%`;
+    const inactiveCount = PROJECTS.length - 1;
+    const inactiveWidth = 8;
+    return i === active ? `${100 - inactiveCount * inactiveWidth}%` : `${inactiveWidth}%`;
   };
 
   return (
@@ -492,7 +493,7 @@ export default function HomepageDemo4() {
       )}
 
       {/* ─── WRAPPER GLOBAL ─────────────────────────────────────────────────── */}
-      <div className="relative z-10 p-3 lg:p-4 flex flex-col gap-3 lg:gap-4">
+      <div className="relative z-10 p-3 lg:p-4 flex flex-col gap-[13px] lg:gap-[18px]">
 
         {/* ══════════════════════════════════════════════════════════════════════
             MODULE 1 — HERO EN 3 MODULES DISTINCTS
