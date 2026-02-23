@@ -81,8 +81,11 @@ export default function HomepageDemo() {
 
             {/* Accroche + CTA */}
             <div className="lg:max-w-xs pb-2">
-              <p className="text-white/60 text-base lg:text-lg leading-relaxed mb-8">
-                We build the strategies, technologies, and creative that drive ambitious organizations forward — powered by AI.
+              <p className="text-white/85 text-xs font-semibold uppercase tracking-widest mb-3">
+                For ambitious organizations — any size.
+              </p>
+              <p className="text-white/50 text-base lg:text-lg leading-relaxed mb-8">
+                We build the strategies, technologies, and creative that drive you forward — powered by AI, delivered by humans.
               </p>
               <Link
                 href={getLocalizedPath('/start-project')}
@@ -255,53 +258,85 @@ export default function HomepageDemo() {
             </Link>
           </div>
 
-          <div className="grid lg:grid-cols-2 gap-8">
-            <Link href={getLocalizedPath('/projects')} className="group block">
-              <div className="aspect-[4/3] overflow-hidden rounded-xl mb-5 bg-[#0A0A0A]/5">
-                <img
-                  src={WORK_IMAGE_1}
-                  alt="Project"
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-                  loading="lazy"
-                />
-              </div>
-              <div className="flex items-start justify-between">
-                <div>
-                  <p className="text-[#0A0A0A]/35 text-xs font-medium uppercase tracking-widest mb-2">Strategy & Tech</p>
-                  <h3 className="font-heading font-bold text-xl text-[#0A0A0A] group-hover:text-[#0A0A0A]/50 transition-colors">
-                    Digital Transformation
-                  </h3>
-                  <p className="text-[#0A0A0A]/40 text-sm mt-1">+200% organic growth in 6 months</p>
+          {/* Grille 3 projets */}
+          <div className="grid lg:grid-cols-3 gap-6 lg:gap-8">
+            {[
+              { img: '/demo/project-1.jpg', category: 'Studio & Agency', title: 'Brand Relaunch', result: '−50% cost per acquisition', client: 'Mid-size retailer' },
+              { img: '/demo/project-2.jpg', category: 'Tech & Consulting', title: 'Digital Transformation', result: '+200% organic growth in 6 months', client: 'Professional services firm' },
+              { img: '/demo/project-3.jpg', category: 'Agency & Studio', title: 'Market Entry Campaign', result: '3× pipeline in 90 days', client: 'B2B SaaS startup' },
+            ].map((project, i) => (
+              <Link key={i} href={getLocalizedPath('/projects')} className="group block">
+                <div className="aspect-[4/3] overflow-hidden rounded-xl mb-5 bg-[#0A0A0A]/5">
+                  <img
+                    src={project.img}
+                    alt={project.title}
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                    loading="lazy"
+                  />
                 </div>
-                <span className="text-[#0A0A0A]/20 text-xl group-hover:text-[#0A0A0A] group-hover:translate-x-1 group-hover:-translate-y-1 transition-all duration-200 mt-1">↗</span>
-              </div>
-            </Link>
+                <div className="flex items-start justify-between">
+                  <div>
+                    <p className="text-[#0A0A0A]/35 text-xs font-medium uppercase tracking-widest mb-2">{project.category}</p>
+                    <h3 className="font-heading font-bold text-lg text-[#0A0A0A] group-hover:text-[#0A0A0A]/50 transition-colors mb-1">{project.title}</h3>
+                    <p className="text-[#0A0A0A]/40 text-sm">{project.result}</p>
+                    <p className="text-[#0A0A0A]/25 text-xs mt-1">{project.client}</p>
+                  </div>
+                  <span className="text-[#0A0A0A]/20 text-xl group-hover:text-[#0A0A0A] group-hover:translate-x-1 group-hover:-translate-y-1 transition-all duration-200 mt-1 shrink-0">↗</span>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
 
-            <Link href={getLocalizedPath('/projects')} className="group block lg:mt-14">
-              <div className="aspect-[4/3] overflow-hidden rounded-xl mb-5 bg-[#0A0A0A]/5">
-                <img
-                  src={WORK_IMAGE_2}
-                  alt="Project"
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-                  loading="lazy"
-                />
-              </div>
-              <div className="flex items-start justify-between">
-                <div>
-                  <p className="text-[#0A0A0A]/35 text-xs font-medium uppercase tracking-widest mb-2">Marketing & Studio</p>
-                  <h3 className="font-heading font-bold text-xl text-[#0A0A0A] group-hover:text-[#0A0A0A]/50 transition-colors">
-                    Brand Relaunch
-                  </h3>
-                  <p className="text-[#0A0A0A]/40 text-sm mt-1">−50% cost per acquisition</p>
+      {/* ─── THE TEAM ────────────────────────────────────────────────────── */}
+      <section className="py-32 lg:py-44 px-8 lg:px-16 bg-[#F0EDE8]">
+        <div className="max-w-screen-xl mx-auto">
+          <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between mb-16">
+            <div>
+              <p className="text-xs font-medium tracking-widest uppercase text-[#0A0A0A]/40 mb-5">The Team</p>
+              <h2
+                className="font-heading font-black text-[#0A0A0A] leading-[0.92] tracking-tight"
+                style={{ fontSize: 'clamp(2.2rem, 4.5vw, 5.5rem)' }}
+              >
+                People who deliver.
+              </h2>
+            </div>
+            <p className="text-[#0A0A0A]/40 text-base max-w-xs mt-8 lg:mt-0 pb-2">
+              Strategists, engineers, designers, and marketers — united by one standard: excellence.
+            </p>
+          </div>
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-5 lg:gap-8">
+            {[
+              { img: '/demo/team-1.jpg', name: 'Sarah M.', role: 'Strategy & Consulting' },
+              { img: '/demo/team-2.jpg', name: 'Marc D.', role: 'Tech & AI' },
+              { img: '/demo/team-3.jpg', name: 'Julie L.', role: 'Creative & Studio' },
+              { img: '/demo/team-4.jpg', name: 'Alex P.', role: 'Agency & Marketing' },
+            ].map((member) => (
+              <div key={member.name} className="group">
+                <div className="aspect-[3/4] overflow-hidden rounded-xl mb-4 bg-[#0A0A0A]/5">
+                  <img
+                    src={member.img}
+                    alt={member.name}
+                    className="w-full h-full object-cover object-top grayscale group-hover:grayscale-0 transition-all duration-500"
+                    loading="lazy"
+                  />
                 </div>
-                <span className="text-[#0A0A0A]/20 text-xl group-hover:text-[#0A0A0A] group-hover:translate-x-1 group-hover:-translate-y-1 transition-all duration-200 mt-1">↗</span>
+                <p className="font-heading font-bold text-[#0A0A0A] text-base mb-0.5">{member.name}</p>
+                <p className="text-[#0A0A0A]/40 text-xs font-medium uppercase tracking-widest">{member.role}</p>
               </div>
+            ))}
+          </div>
+          <div className="mt-14 pt-10 border-t border-[#0A0A0A]/10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+            <p className="text-[#0A0A0A]/40 text-sm">A growing team of 15+ specialists across Montréal and beyond.</p>
+            <Link href={getLocalizedPath('/about')} className="inline-flex items-center gap-2 font-semibold text-sm border-b-2 border-[#0A0A0A] pb-1 hover:gap-4 transition-all duration-200">
+              Meet the full team →
             </Link>
           </div>
         </div>
       </section>
 
-      {/* ─── STATS ────────────────────────────────────────────────────────── */}
+      {/* ─── STATS ────────────────────────────────────────────────────── */ */}
       <section className="py-20 border-t border-b border-[#0A0A0A]/8 px-8 lg:px-16">
         <div className="max-w-screen-xl mx-auto grid grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-6">
           {[
