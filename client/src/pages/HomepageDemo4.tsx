@@ -1,7 +1,7 @@
 import { useRef, useEffect, useState } from 'react';
 import { Link } from 'wouter';
 import { useLocalizedPath } from '@/hooks/useLocalizedPath';
-import { TeamScrollCards, DepartmentsWidget, DoubleLogoCarousel, AboutUsWidget, ContactWidget } from '@/components/demo3';
+import { TeamScrollCards, DepartmentsWidget, DoubleLogoCarousel, ContactWidget } from '@/components/demo3';
 import { X, Menu } from 'lucide-react';
 
 const NUKLEO_PURPLE = '#7c3aed';
@@ -505,6 +505,18 @@ export default function HomepageDemo4() {
             <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-black/70" />
 
             <div className="relative z-10 h-full flex flex-col justify-between px-10 lg:px-14 pt-32 pb-12" style={{ minHeight: '92vh' }}>
+              {/* Logo au-dessus du bloc Digital Performance Agency */}
+              <Link href={getLocalizedPath('/')} className="flex flex-col gap-0.5 w-fit">
+                <img
+                  src="/demo/nukleo-logo-rvb.png"
+                  alt="Nukleo"
+                  className="h-5 w-auto object-contain"
+                  style={{ mixBlendMode: 'screen' }}
+                />
+                <span className="text-[10px] font-medium tracking-[0.2em] uppercase text-white/70">
+                  Choose Intelligence
+                </span>
+              </Link>
               {/* Label haut */}
               <div className="flex items-center justify-between">
                 <span className="text-white/30 text-[10px] font-medium tracking-[0.35em] uppercase">
@@ -575,13 +587,6 @@ export default function HomepageDemo4() {
         ══════════════════════════════════════════════════════════════════════ */}
         <div className="max-w-5xl mx-auto">
           <DoubleLogoCarousel title="Trusted by ambitious organizations" className="rounded-3xl" />
-        </div>
-
-        {/* ══════════════════════════════════════════════════════════════════════
-            MODULE 2b — ABOUT US (historique + lien à propos)
-        ══════════════════════════════════════════════════════════════════════ */}
-        <div className="max-w-4xl mx-auto">
-          <AboutUsWidget />
         </div>
 
         {/* ══════════════════════════════════════════════════════════════════════
