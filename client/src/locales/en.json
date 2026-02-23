@@ -110,7 +110,7 @@
   },
   "capabilities": {
     "sectionLabel": "Capabilities",
-    "title": "Digital Excellence<br /><span class=\"text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-500\">Powered by AI</span>",
+    "title": "Digital Excellence<br /><span class=\"text-white/70\">Powered by AI</span>",
     "description": "We don't just build websites or applications. We create performance ecosystems where every digital lever is orchestrated and powered by AI to deliver measurable results.",
     "aiWebsites": {
       "title": "AI-Base Websites",
@@ -134,7 +134,7 @@
     "seoDescription": "Nukleo manifesto: AI transformation vision beyond pilots. Production-ready, scalable solutions. Strategic approach to AI success for businesses.",
     "seoKeywords": "AI transformation manifesto, AI vision, AI philosophy, AI approach, scaling AI solutions",
     "sectionLabel": "Our Vision",
-    "title": "Take the Lead<br /><span class=\"text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-500\">in the Digital Economy.</span>",
+    "title": "Take the Lead<br /><span class=\"text-white/70\">in the Digital Economy.</span>",
     "description": "The gap is widening. While some hesitate, ambitious organizations are taking the lead in the digital and AI economy. Nukleo is their partner.",
     "readMore": "Read the full manifesto",
     "card1": {
@@ -350,7 +350,7 @@
   },
   "whoWeServe": {
     "subtitle": "Partner for Ambitious Organizations",
-    "title": "Who We <span class=\"text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-500\">Serve</span>",
+    "title": "Who We <span class=\"text-white/70\">Serve</span>",
     "description": "Because every ambitious organization deserves a digital partner at the height of their ambitions. We democratize digital excellence for SMBs, non-profits, and organizations that want to take the lead in the digital and AI economy.",
     "startups": {
       "title": "Startups & Scale-ups",
@@ -975,7 +975,7 @@
     "message": "Message",
     "send": "Send",
     "success": "Message sent successfully!",
-    "heroTitle": "Let's Start<br /><span class=\"text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-500\">Your Transformation</span>",
+    "heroTitle": "Let's Start<br /><span class=\"text-white/70\">Your Transformation</span>",
     "heroSubtitle": "",
     "heroDescription": "Ready to become an AI-native leader? Get in touch and let's discuss how we can help you thrive in the age of artificial intelligence.",
     "sendMessage": "Send us a message",

@@ -110,7 +110,7 @@
   },
   "capabilities": {
     "sectionLabel": "Capacités",
-    "title": "L'excellence numérique<br /><span class=\"text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-500\">augmentée par l'IA</span>",
+    "title": "L'excellence numérique<br /><span class=\"text-white/70\">augmentée par l'IA</span>",
     "description": "Nous ne construisons pas seulement des sites web ou des applications. Nous créons des écosystèmes de performance où chaque levier numérique est orchestré et augmenté par l'IA pour livrer des résultats mesurables.",
     "aiWebsites": {
       "title": "Sites web basés sur l'IA",
@@ -134,7 +134,7 @@
     "seoDescription": "Manifeste Nukleo : vision transformation IA au-delà des pilotes. Solutions production-ready, évolutives. Approche stratégique succès IA pour entreprises.",
     "seoKeywords": "manifeste transformation IA, vision IA, philosophie IA, approche IA, mise à l'échelle solutions IA",
     "sectionLabel": "Notre vision",
-    "title": "Prendre le lead<br /><span class=\"text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-500\">dans l'économie numérique.</span>",
+    "title": "Prendre le lead<br /><span class=\"text-white/70\">dans l'économie numérique.</span>",
     "description": "L'écart se creuse. Pendant que certains hésitent, les organisations ambitieuses prennent le lead dans l'économie numérique et IA. Nukleo est leur partenaire.",
     "readMore": "Lire le manifeste complet",
     "card1": {
@@ -239,12 +239,12 @@
     "seoTitle": "Témoignages clients | Nukleo Digital",
     "seoDescription": "Témoignages clients transformation IA. Leaders industrie partagent leur succès transformation digitale avec Nukleo Digital. Expertise reconnue.",
     "seoKeywords": "témoignages clients IA, avis Nukleo Digital, études de cas IA, succès clients transformation numérique",
-    "title": "Ce que nos<br /><span class=\"text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-500\">clients disent</span>",
+    "title": "Ce que nos<br /><span class=\"text-white/70\">clients disent</span>",
     "description": "Nous sommes fiers de nous associer à des organisations visionnaires pour repousser les limites de ce qui est possible avec l'IA."
   },
   "whoWeServe": {
     "sectionLabel": "Partenaire des organisations ambitieuses",
-    "title": "Qui nous<br /><span class=\"text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-500\">servons</span>",
+    "title": "Qui nous<br /><span class=\"text-white/70\">servons</span>",
     "description": "Parce que chaque organisation ambitieuse mérite un partenaire numérique à la hauteur de ses ambitions. Nous démocratisons l'excellence numérique pour les PME, les OBNL et les organisations qui veulent prendre le lead dans l'économie numérique et IA.",
     "startups": {
       "title": "Startups & Scale-ups",
@@ -274,7 +274,7 @@
     "seoDescription": "Découvrez les entreprises visionnaires qui nous font confiance pour leur transformation IA. Des startups aux grandes entreprises, nous sommes fiers de nos partenariats.",
     "seoKeywords": "clients Nukleo Digital, partenaires IA, études de cas clients, portfolio IA",
     "trustedBy": "Approuvé par les leaders de l'industrie",
-    "title": "Nos<br /><span class=\"text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-500\">clients</span>",
+    "title": "Nos<br /><span class=\"text-white/70\">clients</span>",
     "description": "Des musées aux startups technologiques, nous avons aidé des organisations de divers secteurs à transformer leurs opérations avec des solutions alimentées par l'IA. Voici quelques-unes des entreprises incroyables avec lesquelles nous avons eu le privilège de travailler.",
     "trustedClients": "Clients de confiance",
     "industriesServed": "Secteurs desservis",
@@ -1138,7 +1138,7 @@
     "seoTitle": "Contactez-nous | Démarrons votre projet IA",
     "seoDescription": "Contactez nos experts transformation IA à Montréal et Halifax. Consultation gratuite pour votre projet. Formulaire contact ou appel direct.",
     "seoKeywords": "contacter Nukleo Digital, contact agence IA, consultation IA Montréal, projet IA Halifax",
-    "heroTitle": "Commençons<br /><span class=\"text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-500\">une conversation</span>",
+    "heroTitle": "Commençons<br /><span class=\"text-white/70\">une conversation</span>",
     "heroDescription": "Que vous ayez une idée précise ou simplement une question, nous sommes là pour vous aider. Remplissez le formulaire ci-dessous ou contactez-nous directement.",
     "formTitle": "Envoyez-nous un message",
     "form": {
@@ -1176,7 +1176,7 @@
     "seoTitle": "Démarrer un projet | Nukleo Digital",
     "seoDescription": "Lancez votre projet transformation IA. Formulaire détaillé pour partager vos besoins. Consultation gratuite avec nos experts IA.",
     "seoKeywords": "démarrer projet IA, soumettre projet IA, consultation transformation IA, devis projet IA",
-    "title": "Donnons vie<br /><span class=\"text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-500\">à votre projet</span>",
+    "title": "Donnons vie<br /><span class=\"text-white/70\">à votre projet</span>",
     "description": "Ce formulaire nous aide à comprendre votre vision. Plus vous nous donnez de détails, mieux nous pourrons vous aider. Remplissez-le et nous vous contacterons pour planifier une première consultation.",
     "backToHome": "Retour à l'accueil",
     "pageTitle": "Démarrez votre parcours IA",
@@ -1365,7 +1365,7 @@
     "seoTitle": "FAQ | Questions fréquentes sur la transformation IA",
     "seoDescription": "FAQ transformation IA : réponses sur services, processus, tarifs Nukleo Digital. Questions fréquentes sur agence transformation IA.",
     "seoKeywords": "FAQ IA, questions transformation IA, processus agence IA, tarifs IA",
-    "title": "Questions<br /><span class=\"text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-500\">fréquentes</span>",
+    "title": "Questions<br /><span class=\"text-white/70\">fréquentes</span>",
     "description": "Nous avons rassemblé les questions les plus courantes que nous recevons pour vous aider à mieux comprendre ce que nous faisons et comment nous pouvons vous aider.",
     "categories": {
       "general": "Général",
@@ -1378,7 +1378,7 @@
     "seoTitle": "IA pour les arts et la culture | Nukleo Digital",
     "seoDescription": "Découvrez comment l'IA transforme le secteur des arts et de la culture. De la création augmentée à l'engagement du public, explorez nos solutions pour les institutions culturelles.",
     "seoKeywords": "IA arts et culture, IA musées, création artistique IA, engagement public IA",
-    "heroTitle": "L'IA au service<br /><span class=\"text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-500\">de la culture</span>",
+    "heroTitle": "L'IA au service<br /><span class=\"text-white/70\">de la culture</span>",
     "heroDescription": "Nous croyons que l'intelligence artificielle a le pouvoir d'enrichir et de démocratiser l'accès à la culture. Nous collaborons avec des musées, des galeries et des institutions culturelles pour créer des expériences immersives, personnalisées et inoubliables.",
     "challengeTitle": "Le défi : connecter avec une nouvelle génération",
     "challengeDescription": "Les institutions culturelles font face à un défi majeur : comment engager un public habitué à des expériences numériques interactives et personnalisées ? Comment rester pertinent à l'ère de l'économie de l'attention ?",
