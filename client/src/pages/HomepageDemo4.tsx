@@ -11,6 +11,7 @@ const DARK = '#0A0A0A';
 const HERO_VIDEO = '/demo/hero-reel.mp4';
 const HERO_IMAGE = '/demo/hero.jpg';
 const TEAM_IMAGE = '/demo/team.jpg';
+const TEAM_IMGS = ['/demo/team-1.jpg', '/demo/team-2.jpg', '/demo/team-3.jpg', '/demo/team-4.jpg'];
 const WORK1 = '/demo/work1.jpg';
 const WORK2 = '/demo/work2.jpg';
 const WORK3 = '/demo/work3.jpg';
@@ -138,10 +139,10 @@ function HeroProjectSlider() {
 
 // ─── TEAM STACK SECTION ────────────────────────────────────────────────────
 const TEAM_MEMBERS = [
-  { name: 'Clément Laberge', role: 'Founder & CEO', img: TEAM_IMAGE, color: '#7c3aed' },
-  { name: 'Marie-Ève Tremblay', role: 'Creative Director', img: WORK1, color: '#f97316' },
-  { name: 'Alexandre Côté', role: 'Head of Tech', img: WORK2, color: '#2563eb' },
-  { name: 'Sophie Nguyen', role: 'Strategy Lead', img: WORK3, color: '#059669' },
+  { name: 'Clément Laberge', role: 'Founder & CEO', img: TEAM_IMGS[0], color: '#7c3aed' },
+  { name: 'Marie-Ève Tremblay', role: 'Creative Director', img: TEAM_IMGS[1], color: '#f97316' },
+  { name: 'Alexandre Côté', role: 'Head of Tech', img: TEAM_IMGS[2], color: '#2563eb' },
+  { name: 'Sophie Nguyen', role: 'Strategy Lead', img: TEAM_IMGS[3], color: '#059669' },
 ];
 
 function TeamStackSection({ compact = false }: { compact?: boolean }) {
@@ -496,52 +497,9 @@ export default function HomepageDemo4() {
         {/* ══════════════════════════════════════════════════════════════════════
             MODULE 1 — HERO EN 3 MODULES DISTINCTS
         ══════════════════════════════════════════════════════════════════════ */}
-        <div className="grid grid-cols-1 lg:grid-cols-[35fr_65fr] gap-3 lg:gap-4" style={{ minHeight: '92vh' }}>
+        <div className="grid grid-cols-1 lg:grid-cols-[65fr_35fr] gap-3 lg:gap-4" style={{ minHeight: '92vh' }}>
 
-          {/* Colonne gauche (35%) — Widgets Météo + Date + Slider projets */}
-          <div className="flex flex-col gap-3 lg:gap-4">
-
-            {/* Module 1B — Widgets Météo + Date (néomorphique, côte à côte) */}
-            <div className="flex flex-row gap-3 lg:gap-4 flex-1">
-              <div
-                className="rounded-3xl flex flex-col items-center justify-center p-4 lg:p-5 flex-1 min-h-[100px] min-w-0"
-                style={{
-                  background: 'linear-gradient(145deg, rgba(255,255,255,0.9) 0%, rgba(245,243,239,0.95) 100%)',
-                  boxShadow: '6px 6px 12px rgba(0,0,0,0.08), -6px -6px 12px rgba(255,255,255,0.8), inset 1px 1px 0 rgba(255,255,255,0.5)',
-                }}
-              >
-                <Sun className="w-8 h-8 mb-2 text-gray-700" strokeWidth={1.5} />
-                <span className="font-heading font-black text-4xl lg:text-5xl text-gray-800 leading-none">
-                  24<span className="text-xl font-bold align-top ml-0.5">°C</span>
-                </span>
-                <span className="text-gray-500 text-sm mt-2">Montréal, Québec</span>
-              </div>
-              <div
-                className="rounded-3xl flex flex-col justify-center p-4 lg:p-5 flex-1 min-h-[100px] min-w-0"
-                style={{
-                  background: 'linear-gradient(145deg, rgba(255,255,255,0.9) 0%, rgba(245,243,239,0.95) 100%)',
-                  boxShadow: '6px 6px 12px rgba(0,0,0,0.08), -6px -6px 12px rgba(255,255,255,0.8), inset 1px 1px 0 rgba(255,255,255,0.5)',
-                }}
-              >
-                <p className="text-gray-600 text-sm mb-1">Bon lundi <span className="text-purple-500">♥</span></p>
-                <span className="font-heading font-black text-4xl lg:text-5xl text-gray-800 leading-none">23</span>
-                <span className="text-gray-500 text-sm mt-2">février 2026</span>
-              </div>
-            </div>
-
-            {/* Module 1C — Slider projets / portfolio */}
-            <HeroProjectSlider />
-
-            <Link
-              href={getLocalizedPath('/contact')}
-              className="text-center text-black/70 text-xs font-semibold tracking-widest uppercase hover:text-black transition-colors py-2"
-            >
-              Contactez-nous
-            </Link>
-
-          </div>
-
-          {/* Colonne droite (65%) — Vidéo + Titre principal */}
+          {/* Colonne gauche (65%) — Vidéo + Titre principal */}
           <div className="relative overflow-hidden rounded-3xl bg-black" style={{ minHeight: '92vh' }}>
             <video
               ref={videoRef}
@@ -580,6 +538,47 @@ export default function HomepageDemo4() {
                 </p>
               </div>
             </div>
+          </div>
+
+          {/* Colonne droite (35%) — Widgets Météo + Date + Slider projets */}
+          <div className="flex flex-col gap-3 lg:gap-4">
+            {/* Module 1B — Widgets Météo + Date (néomorphique, côte à côte) */}
+            <div className="flex flex-row gap-3 lg:gap-4 flex-1">
+              <div
+                className="rounded-3xl flex flex-col items-center justify-center p-4 lg:p-5 flex-1 min-h-[100px] min-w-0"
+                style={{
+                  background: 'linear-gradient(145deg, rgba(255,255,255,0.9) 0%, rgba(245,243,239,0.95) 100%)',
+                  boxShadow: '6px 6px 12px rgba(0,0,0,0.08), -6px -6px 12px rgba(255,255,255,0.8), inset 1px 1px 0 rgba(255,255,255,0.5)',
+                }}
+              >
+                <Sun className="w-8 h-8 mb-2 text-gray-700" strokeWidth={1.5} />
+                <span className="font-heading font-black text-4xl lg:text-5xl text-gray-800 leading-none">
+                  24<span className="text-xl font-bold align-top ml-0.5">°C</span>
+                </span>
+                <span className="text-gray-500 text-sm mt-2">Montréal, Québec</span>
+              </div>
+              <div
+                className="rounded-3xl flex flex-col justify-center p-4 lg:p-5 flex-1 min-h-[100px] min-w-0"
+                style={{
+                  background: 'linear-gradient(145deg, rgba(255,255,255,0.9) 0%, rgba(245,243,239,0.95) 100%)',
+                  boxShadow: '6px 6px 12px rgba(0,0,0,0.08), -6px -6px 12px rgba(255,255,255,0.8), inset 1px 1px 0 rgba(255,255,255,0.5)',
+                }}
+              >
+                <p className="text-gray-600 text-sm mb-1">Bon lundi <span className="text-purple-500">♥</span></p>
+                <span className="font-heading font-black text-4xl lg:text-5xl text-gray-800 leading-none">23</span>
+                <span className="text-gray-500 text-sm mt-2">février 2026</span>
+              </div>
+            </div>
+
+            {/* Module 1C — Slider projets / portfolio */}
+            <HeroProjectSlider />
+
+            <Link
+              href={getLocalizedPath('/contact')}
+              className="text-center text-black/70 text-xs font-semibold tracking-widest uppercase hover:text-black transition-colors py-2"
+            >
+              Contactez-nous
+            </Link>
           </div>
         </div>
 
@@ -637,14 +636,14 @@ export default function HomepageDemo4() {
         {/* ══════════════════════════════════════════════════════════════════════
             MODULE 4 — DÉPARTEMENTS (2/3) + ÉQUIPE (1/3)
         ══════════════════════════════════════════════════════════════════════ */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-3 lg:gap-4" style={{ minHeight: '520px' }}>
-          {/* 1/3 gauche — widget équipe (slide vertical type Demo 3) */}
+        <div className="grid grid-cols-1 lg:grid-cols-[40fr_60fr] gap-3 lg:gap-4" style={{ minHeight: '520px' }}>
+          {/* 40% — widget équipe */}
           <div className="rounded-3xl overflow-hidden min-h-[420px] lg:min-h-0">
             <TeamScrollCards />
           </div>
 
-          {/* 2/3 droite — 4 départements avec images (comme demo3) */}
-          <div className="lg:col-span-2 rounded-3xl overflow-hidden">
+          {/* 60% — départements */}
+          <div className="rounded-3xl overflow-hidden">
             <DepartmentsWidget />
           </div>
         </div>
