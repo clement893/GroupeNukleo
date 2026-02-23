@@ -57,34 +57,34 @@ const DEPTS = [
 
 const PROJECTS = [
   {
-    num: '00-1',
+    num: '01',
     name: 'MBAM',
     category: 'Brand & Digital',
     tagline: 'Redefining cultural engagement online.',
     result: '+240% digital reach · 2024',
+    date: '2024',
     img: WORK1,
     color: '#2563eb',
-    word: 'CULTURE',
   },
   {
-    num: '00-2',
+    num: '02',
     name: 'SummitLaw',
     category: 'Brand & Creative',
     tagline: 'A law firm that finally looks like its ambition.',
     result: '+180% qualified leads · 2024',
+    date: '2024',
     img: WORK2,
     color: NUKLEO_PURPLE,
-    word: 'BRAND',
   },
   {
-    num: '00-3',
+    num: '03',
     name: 'QueerTech',
     category: 'AI & Platform',
     tagline: 'Technology built for belonging.',
     result: '+220% member engagement · 2023',
+    date: '2023',
     img: WORK3,
     color: '#059669',
-    word: 'TECH',
   },
 ];
 
@@ -104,36 +104,78 @@ function TeamStackSection({ compact = false }: { compact?: boolean }) {
   const next = () => setActiveIndex((a) => Math.min(TEAM_MEMBERS.length - 1, a + 1));
 
   const handleWheel = (e: React.WheelEvent) => {
-    e.preventDefault();
-    if (e.deltaY > 0) next();
-    else prev();
+    if (!compact) {
+      e.preventDefault();
+      if (e.deltaY > 0) next();
+      else prev();
+    }
   };
 
-  const CARD_W = compact ? 180 : 220;
-  const CARD_H = compact ? 240 : 300;
-  const STACK_OVERFLOW = compact ? 28 : 36;
+  const CARD_W = 220;
+  const CARD_H = 300;
+  const STACK_OVERFLOW = 36;
 
+  // Mode compact : cartes individuelles (photo centre, nom gauche, titre droite)
+  if (compact) {
+    return (
+      <div
+        className="rounded-3xl overflow-hidden h-full min-h-0 flex flex-col"
+        style={{ background: DARK }}
+      >
+        <div className="px-4 py-5 shrink-0">
+          <p className="text-white/30 text-[10px] font-medium tracking-[0.35em] uppercase mb-1">The Team</p>
+          <h2 className="font-heading font-black text-white leading-tight tracking-tight" style={{ fontSize: 'clamp(1rem, 2vw, 1.4rem)' }}>
+            People behind the work.
+          </h2>
+        </div>
+        <div className="flex-1 flex flex-col gap-3 px-4 pb-5 overflow-y-auto min-h-0">
+          {TEAM_MEMBERS.map((member) => (
+            <div
+              key={member.name}
+              className="flex items-center gap-3 p-3.5 rounded-xl bg-white/[0.04] hover:bg-white/[0.08] transition-all duration-200 border border-white/[0.06] shrink-0 group"
+              style={{ borderLeft: `3px solid ${member.color}` }}
+            >
+              {/* Nom — gauche */}
+              <span className="font-heading font-bold text-white text-[11px] lg:text-xs leading-tight min-w-0 flex-1 text-left truncate" title={member.name}>
+                {member.name}
+              </span>
+              {/* Photo — centre */}
+              <div className="relative w-12 h-12 lg:w-14 lg:h-14 rounded-full overflow-hidden shrink-0 ring-2 ring-white/10 group-hover:ring-white/25 transition-all">
+                <img
+                  src={member.img}
+                  alt={member.name}
+                  className="w-full h-full object-cover"
+                />
+                <div
+                  className="absolute -bottom-0.5 -right-0.5 w-2.5 h-2.5 rounded-full border-2 border-[#0A0A0A]"
+                  style={{ background: member.color }}
+                />
+              </div>
+              {/* Titre — droite */}
+              <span className="text-white/55 text-[10px] lg:text-[11px] font-medium text-right min-w-0 flex-1 leading-tight truncate" title={member.role}>
+                {member.role}
+              </span>
+            </div>
+          ))}
+        </div>
+      </div>
+    );
+  }
+
+  // Mode full : stack vertical classique
   return (
     <div
       className="rounded-3xl overflow-hidden h-full min-h-0 flex flex-col"
       style={{ background: DARK }}
       onWheel={handleWheel}
     >
-      {/* Colonne unique centrée */}
-      <div className={`flex flex-col items-center gap-7 flex-1 ${compact ? 'px-5 py-6' : 'px-8 py-10'}`}>
-
-        {/* En-tête */}
+      <div className="flex flex-col items-center gap-7 flex-1 px-8 py-10">
         <div className="text-center shrink-0">
           <p className="text-white/30 text-[10px] font-medium tracking-[0.35em] uppercase mb-2">The Team</p>
-          <h2
-            className="font-heading font-black text-white leading-[0.9] tracking-tight"
-            style={{ fontSize: compact ? 'clamp(1.2rem, 2vw, 1.8rem)' : 'clamp(1.8rem, 3vw, 3rem)' }}
-          >
+          <h2 className="font-heading font-black text-white leading-[0.9] tracking-tight" style={{ fontSize: 'clamp(1.8rem, 3vw, 3rem)' }}>
             People behind the work.
           </h2>
         </div>
-
-        {/* Stack de cartes */}
         <div
           style={{
             perspective: '1200px',
@@ -147,19 +189,8 @@ function TeamStackSection({ compact = false }: { compact?: boolean }) {
             const isActive = i === activeIndex;
             const isBelow = offset > 0;
             const isAbove = offset < 0;
-
-            const translateY = isActive
-              ? '0px'
-              : isBelow
-              ? `${offset * 16}px`
-              : `${offset * 160}px`;
-
-            const translateZ = isActive
-              ? '0px'
-              : isBelow
-              ? `${-offset * 50}px`
-              : '0px';
-
+            const translateY = isActive ? '0px' : isBelow ? `${offset * 16}px` : `${offset * 160}px`;
+            const translateZ = isActive ? '0px' : isBelow ? `${-offset * 50}px` : '0px';
             const scale = isActive ? 1 : isBelow ? Math.max(0.78, 1 - offset * 0.07) : 0.95;
             const opacity = isAbove ? 0 : isBelow ? Math.max(0.1, 1 - offset * 0.32) : 1;
             const zIndex = isActive ? 50 : isBelow ? 50 - offset : 0;
@@ -179,209 +210,155 @@ function TeamStackSection({ compact = false }: { compact?: boolean }) {
                   zIndex,
                   transition: 'transform 0.55s cubic-bezier(0.25, 0.46, 0.45, 0.94), opacity 0.45s ease',
                   transformStyle: 'preserve-3d',
-                  boxShadow: isActive
-                    ? '0 40px 80px rgba(0,0,0,0.7), 0 0 0 1px rgba(255,255,255,0.08)'
-                    : '0 12px 30px rgba(0,0,0,0.5)',
+                  boxShadow: isActive ? '0 40px 80px rgba(0,0,0,0.7), 0 0 0 1px rgba(255,255,255,0.08)' : '0 12px 30px rgba(0,0,0,0.5)',
                 }}
               >
-                <img
-                  src={member.img}
-                  alt={member.name}
-                  className="w-full h-full object-cover"
-                  style={{ filter: isActive ? 'grayscale(0)' : 'grayscale(0.7) brightness(0.65)' }}
-                />
+                <img src={member.img} alt={member.name} className="w-full h-full object-cover" style={{ filter: isActive ? 'grayscale(0)' : 'grayscale(0.7) brightness(0.65)' }} />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
                 {isBelow && offset <= 2 && (
-                  <div className="absolute top-4 right-4 text-white/25 font-heading font-black text-sm">
-                    0{i + 1}
-                  </div>
+                  <div className="absolute top-4 right-4 text-white/25 font-heading font-black text-sm">0{i + 1}</div>
                 )}
               </div>
             );
           })}
         </div>
-
-        {/* Infos membre + navigation */}
         <div className="flex flex-col items-center gap-2 text-center shrink-0">
-          <div style={{ minHeight: compact ? '40px' : '52px' }}>
-            <p
-              className={`font-heading font-bold text-white leading-tight ${compact ? 'text-base' : 'text-xl'}`}
-              key={activeIndex}
-              style={{ animation: 'fadeUp 0.4s ease forwards' }}
-            >
+          <div style={{ minHeight: '52px' }}>
+            <p className="font-heading font-bold text-white text-xl leading-tight" key={activeIndex} style={{ animation: 'fadeUp 0.4s ease forwards' }}>
               {TEAM_MEMBERS[activeIndex].name}
             </p>
-            <p className={`text-white/40 mt-1 ${compact ? 'text-xs' : 'text-sm'}`}>{TEAM_MEMBERS[activeIndex].role}</p>
+            <p className="text-white/40 text-sm mt-1">{TEAM_MEMBERS[activeIndex].role}</p>
           </div>
-          {/* Dots */}
           <div className="flex gap-2">
             {TEAM_MEMBERS.map((_, i) => (
-              <button
-                key={i}
-                onClick={() => goTo(i)}
-                className="h-[2px] rounded-full transition-all duration-300"
-                style={{
-                  width: i === activeIndex ? (compact ? '20px' : '28px') : (compact ? '6px' : '10px'),
-                  background: i === activeIndex ? TEAM_MEMBERS[activeIndex].color : 'rgba(255,255,255,0.2)',
-                }}
-              />
+              <button key={i} onClick={() => goTo(i)} className="h-[2px] rounded-full transition-all duration-300" style={{ width: i === activeIndex ? '28px' : '10px', background: i === activeIndex ? TEAM_MEMBERS[activeIndex].color : 'rgba(255,255,255,0.2)' }} />
             ))}
           </div>
-          {/* Flèches */}
           <div className="flex gap-2">
-            <button
-              onClick={prev}
-              disabled={activeIndex === 0}
-              className={`rounded-full border border-white/15 flex items-center justify-center text-white/50 hover:text-white hover:border-white/40 transition-all disabled:opacity-20 ${compact ? 'w-6 h-6 text-xs' : 'w-8 h-8 text-sm'}`}
-            >
-              ↑
-            </button>
-            <button
-              onClick={next}
-              disabled={activeIndex === TEAM_MEMBERS.length - 1}
-              className={`rounded-full border border-white/15 flex items-center justify-center text-white/50 hover:text-white hover:border-white/40 transition-all disabled:opacity-20 ${compact ? 'w-6 h-6 text-xs' : 'w-8 h-8 text-sm'}`}
-            >
-              ↓
-            </button>
+            <button onClick={prev} disabled={activeIndex === 0} className="w-8 h-8 rounded-full border border-white/15 flex items-center justify-center text-white/50 hover:text-white hover:border-white/40 transition-all disabled:opacity-20 text-sm">↑</button>
+            <button onClick={next} disabled={activeIndex === TEAM_MEMBERS.length - 1} className="w-8 h-8 rounded-full border border-white/15 flex items-center justify-center text-white/50 hover:text-white hover:border-white/40 transition-all disabled:opacity-20 text-sm">↓</button>
           </div>
         </div>
-
       </div>
     </div>
   );
 }
 
-// ─── PROJECTS TRIPTYCH ─────────────────────────────────────────────────────
+// ─── SELECTED WORK — billboards + vertical stack (inspiration design urbain) ─
 function ProjectsCarousel() {
   const [active, setActive] = useState(0);
-
-  // Largeurs : panneau actif = 70%, les 2 autres se partagent 30% (15% chacun)
-  const getWidth = (i: number) => {
-    if (PROJECTS.length === 1) return '100%';
-    const others = PROJECTS.length - 1;
-    return i === active ? '70%' : `${30 / others}%`;
-  };
+  const getLocalizedPath = useLocalizedPath();
 
   return (
     <div className="rounded-3xl overflow-hidden" style={{ background: DARK }}>
-
-      {/* Triptyque plein cadre */}
-      <div
-        className="flex"
-        style={{ height: '85vh', gap: '3px' }}
-      >
-        {PROJECTS.map((project, i) => {
-          const isActive = i === active;
-          return (
-            <div
-              key={project.num}
-              className="relative overflow-hidden cursor-pointer flex-shrink-0"
-              style={{
-                width: getWidth(i),
-                transition: 'width 0.65s cubic-bezier(0.77, 0, 0.175, 1)',
-                borderRadius: i === 0 ? '1.5rem 0 0 1.5rem' : i === PROJECTS.length - 1 ? '0 1.5rem 1.5rem 0' : '0',
-              }}
-              onClick={() => !isActive && setActive(i)}
-            >
-              {/* Image */}
-              <img
-                src={project.img}
-                alt={project.name}
-                className="absolute inset-0 w-full h-full object-cover"
+      <div className="flex flex-col lg:flex-row gap-4 lg:gap-0" style={{ minHeight: '75vh' }}>
+        {/* Partie gauche — 3 billboards côte à côte */}
+        <div className="flex-1 flex gap-[6px] p-4 lg:p-6 min-h-[60vh] lg:min-h-[75vh] overflow-x-auto">
+          {PROJECTS.map((project, i) => {
+            const isActive = i === active;
+            return (
+              <button
+                key={project.num}
+                type="button"
+                onClick={() => setActive(i)}
+                className="flex-1 relative overflow-hidden rounded-lg flex-shrink-0 group cursor-pointer border-2 transition-all duration-300 min-w-[140px] lg:min-w-0"
                 style={{
-                  filter: isActive ? 'grayscale(0) brightness(0.6)' : 'grayscale(1) brightness(0.35)',
-                  transform: isActive ? 'scale(1.02)' : 'scale(1.08)',
-                  transition: 'filter 0.65s ease, transform 0.65s ease',
+                  borderColor: isActive ? 'rgba(255,255,255,0.2)' : 'rgba(255,255,255,0.08)',
                 }}
-              />
-
-              {/* Gradient bas — uniquement sur le panneau actif */}
-              <div
-                className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/15 to-transparent"
-                style={{ opacity: isActive ? 1 : 0.6, transition: 'opacity 0.5s ease' }}
-              />
-
-              {/* — PANNEAU ACTIF : contenu plein */}
-              {isActive && (
-                <div className="absolute inset-0 flex flex-col justify-between p-10 lg:p-14 z-10">
-                  {/* Haut */}
-                  <div className="flex items-start justify-between">
-                    <div>
-                      <p className="text-white/30 text-[10px] font-medium tracking-[0.35em] uppercase mb-2">Selected Work</p>
-                      <span className="font-heading font-black text-white/15 leading-none" style={{ fontSize: '5rem' }}>
-                        {project.num}
-                      </span>
-                    </div>
-                    <span className="text-white/40 text-[10px] font-medium tracking-[0.3em] uppercase mt-2">
-                      {project.category}
-                    </span>
-                  </div>
-                  {/* Bas */}
-                  <div>
-                    <h2
-                      className="font-heading font-black text-white leading-[0.88] tracking-tight mb-4"
-                      style={{ fontSize: 'clamp(2.5rem, 4.5vw, 5.5rem)' }}
-                    >
-                      {project.name}
-                    </h2>
-                    <p className="text-white/55 text-sm lg:text-base leading-relaxed max-w-lg mb-6">
-                      {project.tagline}
-                    </p>
-                    <div className="flex items-center gap-5">
-                      <span
-                        className="text-xs font-semibold px-4 py-2 rounded-full text-white"
-                        style={{ background: project.color }}
-                      >
-                        {project.result}
-                      </span>
-                      <Link
-                        href="/projects"
-                        className="text-white/50 text-xs font-semibold border-b border-white/25 pb-0.5 hover:text-white hover:border-white transition-all"
-                      >
-                        View case study →
-                      </Link>
-                    </div>
-                  </div>
-                </div>
-              )}
-
-              {/* — OREILLE : nom vertical + indicateur */}
-              {!isActive && (
-                <div className="absolute inset-0 flex flex-col items-center justify-center gap-4 z-10">
-                  <span
-                    className="text-white/30 font-heading font-black text-xs tracking-widest uppercase"
-                    style={{
-                      writingMode: 'vertical-rl',
-                      textOrientation: 'mixed',
-                      transform: 'rotate(180deg)',
-                    }}
+              >
+                {/* Cadre type billboard — bordure sombre */}
+                <div className="absolute inset-0 rounded-[6px] border border-[#2a2a2a]/80 z-20 pointer-events-none" />
+                {/* Image */}
+                <img
+                  src={project.img}
+                  alt={project.name}
+                  className="absolute inset-0 w-full h-full object-cover transition-all duration-500"
+                  style={{
+                    filter: isActive ? 'grayscale(0) brightness(0.75)' : 'grayscale(0.9) brightness(0.5)',
+                    transform: isActive ? 'scale(1.02)' : 'scale(1)',
+                  }}
+                />
+                {/* Gradient bas — overlay type affichage urbain */}
+                <div
+                  className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/30 to-transparent opacity-90"
+                  style={{ opacity: isActive ? 1 : 0.85 }}
+                />
+                {/* Overlay texte en bas — style panneau lumineux */}
+                <div className="absolute bottom-0 left-0 right-0 p-4 lg:p-5 flex flex-col items-start text-left">
+                  <h3
+                    className="font-heading font-black text-white leading-tight mb-1"
+                    style={{ fontSize: 'clamp(0.95rem, 1.8vw, 1.25rem)' }}
                   >
                     {project.name}
-                  </span>
-                  <div className="w-[2px] h-8 rounded-full" style={{ background: project.color, opacity: 0.6 }} />
+                  </h3>
+                  <p className="text-white/70 text-[10px] lg:text-xs font-medium tracking-wider uppercase mb-2">
+                    {project.category}
+                  </p>
+                  <p className="text-white/80 text-[11px] lg:text-xs">{project.date} — {project.result.split(' · ')[0]}</p>
                 </div>
-              )}
-            </div>
-          );
-        })}
+                {/* Panneau actif — léger accent */}
+                {isActive && (
+                  <div
+                    className="absolute top-3 right-3 w-1 h-8 rounded-full"
+                    style={{ background: project.color }}
+                  />
+                )}
+              </button>
+            );
+          })}
+        </div>
+
+        {/* Partie droite — pile de cartes verticales (grayscale, indicateurs 01/02/03) */}
+        <div className="lg:w-44 xl:w-52 shrink-0 flex flex-col items-center justify-center py-6 lg:py-8 lg:border-l border-white/10 relative">
+          <div className="relative h-[180px] lg:h-[220px] w-28 lg:w-32">
+            {PROJECTS.map((project, i) => {
+              const isActive = i === active;
+              const stackOffset = (i - active) * 18;
+              return (
+                <button
+                  key={project.num}
+                  type="button"
+                  onClick={() => setActive(i)}
+                  className="absolute left-1/2 -translate-x-1/2 w-full h-[100px] lg:h-[120px] rounded-lg overflow-hidden cursor-pointer transition-all duration-300"
+                  style={{
+                    top: `50%`,
+                    transform: `translate(-50%, calc(-50% + ${stackOffset}px))`,
+                    zIndex: isActive ? 10 : 5 - Math.abs(i - active),
+                    boxShadow: isActive ? '0 12px 40px rgba(0,0,0,0.5)' : '0 4px 16px rgba(0,0,0,0.4)',
+                  }}
+                >
+                <img
+                  src={project.img}
+                  alt={project.name}
+                  className="absolute inset-0 w-full h-full object-cover"
+                  style={{
+                    filter: isActive ? 'grayscale(0.3) brightness(0.7)' : 'grayscale(1) brightness(0.4)',
+                  }}
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+                {/* Indicateur numérique type 01, 02, 03 */}
+                <div
+                  className="absolute bottom-2 right-2 w-8 h-8 rounded-lg flex items-center justify-center font-heading font-black text-white text-sm"
+                  style={{ background: isActive ? project.color : 'rgba(124, 58, 237, 0.7)' }}
+                >
+                  {project.num}
+                </div>
+              </button>
+            );
+          })}
+        </div>
       </div>
 
-      {/* Dots navigation */}
-      <div className="flex items-center justify-center gap-2 py-5">
-        {PROJECTS.map((p, i) => (
-          <button
-            key={i}
-            onClick={() => setActive(i)}
-            className="rounded-full transition-all duration-300"
-            style={{
-              width: i === active ? '28px' : '8px',
-              height: '4px',
-              background: i === active ? PROJECTS[active].color : 'rgba(255,255,255,0.15)',
-            }}
-          />
-        ))}
+      {/* Lien case study — sous les billboards */}
+      <div className="px-6 py-4 border-t border-white/10 flex items-center justify-between">
+        <p className="text-white/40 text-[10px] font-medium tracking-[0.35em] uppercase">Selected Work</p>
+        <Link
+          href={getLocalizedPath('/projects')}
+          className="text-white/60 text-xs font-semibold border-b border-white/25 pb-0.5 hover:text-white hover:border-white transition-all"
+        >
+          View case study →
+        </Link>
       </div>
-
     </div>
   );
 }
@@ -600,11 +577,11 @@ export default function HomepageDemo4() {
         </div>
 
         {/* ══════════════════════════════════════════════════════════════════════
-            MODULE 4 — DÉPARTEMENTS + ÉQUIPE (50/50)
+            MODULE 4 — DÉPARTEMENTS (2/3) + ÉQUIPE (1/3)
         ══════════════════════════════════════════════════════════════════════ */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-3 lg:gap-4" style={{ minHeight: '520px' }}>
-          {/* Moitié gauche — 4 services en blocs compacts */}
-          <div className="rounded-3xl p-6 lg:p-8 flex flex-col" style={{ background: DARK }}>
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-3 lg:gap-4" style={{ minHeight: '520px' }}>
+          {/* 2/3 gauche — 4 services en blocs compacts */}
+          <div className="lg:col-span-2 rounded-3xl p-6 lg:p-8 flex flex-col" style={{ background: DARK }}>
             <div className="flex items-end justify-between mb-6">
               <div>
                 <p className="text-white/30 text-[10px] font-medium tracking-[0.35em] uppercase mb-2">Our Departments</p>
@@ -637,7 +614,7 @@ export default function HomepageDemo4() {
             </div>
           </div>
 
-          {/* Moitié droite — widget équipe */}
+          {/* 1/3 droite — widget équipe (cartes employés) */}
           <div className="rounded-3xl overflow-hidden min-h-[400px] lg:min-h-0">
             <TeamStackSection compact />
           </div>
