@@ -1,4 +1,3 @@
-import { useState, useEffect } from 'react';
 import { Link } from 'wouter';
 import { useLocalizedPath } from '@/hooks/useLocalizedPath';
 import { Sun, Cloud, ArrowRight, TrendingUp, Package, Square } from 'lucide-react';
@@ -9,10 +8,11 @@ import {
   ProgressWidget,
   FeatureCard,
   StatBlock,
-  ScrollIndicator,
   LaptopVisual,
   BureauIcon,
   StudioIcon,
+  TriptychSelectedWork,
+  type TriptychProject,
 } from '@/components/demo3';
 
 const NUKLEO_RED = '#8C3141';
@@ -28,20 +28,84 @@ const AVATAR_PLACEHOLDERS = [
   '/demo/logos/Novisto.png',
 ];
 
-const BILLBOARD_IMAGES = [
-  { src: '/demo/project-1.jpg', title: '20-21 SEPT', subtitle: '12-21H' },
-  { src: '/demo/project-2.jpg', title: 'IN SITU', subtitle: 'MUSEUM' },
-  { src: '/demo/project-3.jpg', title: 'Rene Magritte', subtitle: 'The Treachery of Images' },
+/** 3 sets of 3 projects - triptych "Selected Work" carousel */
+const TRIPTYCH_SETS: TriptychProject[][] = [
+  [
+    {
+      img: '/demo/project-1.jpg',
+      title: 'CONTRE JOUR ART AFTER DARK',
+      subtitle: '12 - SEPT.',
+      date: '12 - SEPT.',
+      time: '18H - 21H',
+      category: 'Brand & Digital',
+    },
+    {
+      img: '/demo/project-2.jpg',
+      title: 'SOIRÉE IN SITU NIGHT',
+      subtitle: 'Klimt · The Kiss',
+      date: '5 septembre 2024',
+      time: '18:00 - 21:00',
+      category: 'Brand & Creative',
+    },
+    {
+      img: '/demo/project-3.jpg',
+      title: 'Perspectives',
+      subtitle: 'René Magritte · The Son of Man',
+      date: 'Du 26 septembre',
+      time: 'de 16h à 21h',
+      category: 'AI & Platform',
+    },
+  ],
+  [
+    {
+      img: '/demo/work1.jpg',
+      title: 'MBAM',
+      subtitle: 'Redefining cultural engagement',
+      date: '2024',
+      category: 'Culture',
+    },
+    {
+      img: '/demo/work2.jpg',
+      title: 'SummitLaw',
+      subtitle: 'A law firm that looks like its ambition',
+      date: '2024',
+      category: 'Brand',
+    },
+    {
+      img: '/demo/work3.jpg',
+      title: 'QueerTech',
+      subtitle: 'Technology built for belonging',
+      date: '2023',
+      category: 'Tech',
+    },
+  ],
+  [
+    {
+      img: '/demo/dept-agency.jpg',
+      title: 'Nukleo.Agency',
+      subtitle: 'Marketing & Communication',
+      date: 'Ongoing',
+      category: 'Agency',
+    },
+    {
+      img: '/demo/dept-studio.jpg',
+      title: 'Nukleo.Studio',
+      subtitle: 'Design & Creation',
+      date: 'Ongoing',
+      category: 'Studio',
+    },
+    {
+      img: '/demo/dept-tech.jpg',
+      title: 'Nukleo.Tech',
+      subtitle: 'Development & AI',
+      date: 'Ongoing',
+      category: 'Tech',
+    },
+  ],
 ];
 
 export default function HomepageDemo3() {
   const getLocalizedPath = useLocalizedPath();
-  const [billboardIndex, setBillboardIndex] = useState(0);
-
-  useEffect(() => {
-    const t = setInterval(() => setBillboardIndex((i) => (i + 1) % BILLBOARD_IMAGES.length), 5000);
-    return () => clearInterval(t);
-  }, []);
 
   return (
     <div className="min-h-screen text-[#0A0A0A] font-sans">
@@ -166,39 +230,8 @@ export default function HomepageDemo3() {
         </div>
       </section>
 
-      {/* ─── BILLBOARDS (full-width street image + vertical blocks) ─────────── */}
-      <section className="py-20 bg-[#F5F3EF]">
-        <div className="max-w-6xl mx-auto px-8 lg:px-16 flex gap-6 items-center">
-          <div className="flex-1 rounded-2xl overflow-hidden shadow-2xl relative aspect-[21/9] min-h-[280px]">
-            <img
-              src={BILLBOARD_IMAGES[billboardIndex].src}
-              alt="Street billboards"
-              className="w-full h-full object-cover"
-            />
-            <div className="absolute bottom-4 left-4 text-white drop-shadow-lg">
-              <p className="text-sm font-semibold">{BILLBOARD_IMAGES[billboardIndex].title}</p>
-              <p className="text-xs opacity-90">{BILLBOARD_IMAGES[billboardIndex].subtitle}</p>
-            </div>
-          </div>
-          {/* Vertical block indicator - maquette style */}
-          <div className="shrink-0">
-            <ScrollIndicator current={billboardIndex + 1} total={3} />
-          </div>
-        </div>
-        <div className="flex justify-center gap-2 mt-4">
-          {BILLBOARD_IMAGES.map((_, i) => (
-            <button
-              key={i}
-              type="button"
-              onClick={() => setBillboardIndex(i)}
-              className={`w-2 h-2 rounded-full transition-colors ${
-                i === billboardIndex ? 'bg-amber-400' : 'bg-gray-300'
-              }`}
-              aria-label={`Slide ${i + 1}`}
-            />
-          ))}
-        </div>
-      </section>
+      {/* ─── TRIPTYCH SELECTED WORK ─────────────────────────────────────────── */}
+      <TriptychSelectedWork sets={TRIPTYCH_SETS} />
 
       {/* ─── FOOTER ───────────────────────────────────────────────────────── */}
       <footer className="py-8 px-8 lg:px-16 border-t border-gray-200 bg-white">

@@ -9,3 +9,4 @@ export { ScrollIndicator } from './ScrollIndicator';
 export { LaptopVisual } from './LaptopVisual';
 export { BureauIcon } from './BureauIcon';
 export { StudioIcon } from './StudioIcon';
+export { TriptychSelectedWork, type TriptychProject } from './TriptychSelectedWork';
