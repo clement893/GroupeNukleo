@@ -346,9 +346,9 @@ export default function HomepageDemo2() {
           top: 0,
           left: 0,
           right: 0,
-          height: '520px',
-          background: 'linear-gradient(160deg, #c4b5fd 0%, #93c5fd 30%, rgba(245,242,236,0) 70%)',
-          opacity: 0.45,
+          height: '680px',
+          background: 'radial-gradient(ellipse 80% 60% at 30% 0%, #c4b5fd 0%, #a78bfa 15%, #93c5fd 35%, rgba(245,242,236,0) 70%)',
+          opacity: 0.65,
           pointerEvents: 'none',
           zIndex: 0,
         }}
@@ -373,67 +373,82 @@ export default function HomepageDemo2() {
       <div style={{ paddingTop: 80, display: 'flex', flexDirection: 'column', gap: 32 }}>
 
         {/* ════════════════════════════════════════════════════════════════
-            LOGO HERO
+            LOGO HERO — texte CSS dégradé, débordant
         ════════════════════════════════════════════════════════════════ */}
-        <div style={{ padding: '32px 40px 0', position: 'relative', zIndex: 1 }}>
-          <img src={NUKLEO_LOGO} alt="nukleo." style={{ height: 56, width: 'auto', display: 'block' }} />
+        <div style={{ padding: '24px 32px 0', position: 'relative', zIndex: 1, overflow: 'visible' }}>
+          <h1
+            style={{
+              fontWeight: 900,
+              fontSize: 'clamp(5rem, 13vw, 11rem)',
+              lineHeight: 0.88,
+              letterSpacing: '-0.04em',
+              margin: 0,
+              background: 'linear-gradient(110deg, #7b1f3a 0%, #6b21a8 40%, #7c3aed 70%, #6d28d9 100%)',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+              backgroundClip: 'text',
+              marginLeft: '-0.04em', // débordement léger à gauche
+            }}
+          >
+            nukleo<span style={{ color: 'inherit' }}>.</span>
+          </h1>
         </div>
 
         {/* ════════════════════════════════════════════════════════════════
             RANGÉE 1 — HERO : WIDGETS GAUCHE + MACBOOK DROITE
         ════════════════════════════════════════════════════════════════ */}
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 2fr', gap: 16, padding: '0 24px', position: 'relative', zIndex: 1 }}>
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 3fr', gap: 12, padding: '0 16px', position: 'relative', zIndex: 1 }}>
 
           {/* ── Colonne gauche : widgets ── */}
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 7 }}>
 
             {/* Météo + Date */}
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 7 }}>
               {/* Météo */}
-              <Tile bg="#fff" style={{ padding: '1.2rem 1.4rem' }}>
+              <Tile bg="#fff" style={{ padding: '0.9rem 1rem' }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
-                  <span style={{ fontSize: 20 }}>☀️</span>
-                  <span style={{ color: 'rgba(0,0,0,0.3)', fontSize: 10 }}>°C</span>
+                  <span style={{ fontSize: 16 }}>☀️</span>
+                  <span style={{ color: 'rgba(0,0,0,0.3)', fontSize: 9 }}>°C</span>
                 </div>
-                <p style={{ fontWeight: 900, fontSize: 42, lineHeight: 1, color: DARK, letterSpacing: '-0.03em', margin: '4px 0 2px' }}>24</p>
-                <p style={{ color: 'rgba(0,0,0,0.35)', fontSize: 10 }}>Montréal, Québec</p>
+                <p style={{ fontWeight: 900, fontSize: 34, lineHeight: 1, color: DARK, letterSpacing: '-0.03em', margin: '3px 0 2px' }}>24</p>
+                <p style={{ color: 'rgba(0,0,0,0.35)', fontSize: 9 }}>Montréal, Québec</p>
               </Tile>
               {/* Date */}
-              <Tile bg="#fff" style={{ padding: '1.2rem 1.4rem' }}>
-                <p style={{ color: 'rgba(0,0,0,0.45)', fontSize: 11, marginBottom: 4 }}>Bon lundi 💜</p>
-                <p style={{ fontWeight: 900, fontSize: 42, lineHeight: 1, color: DARK, letterSpacing: '-0.03em', margin: '4px 0 2px' }}>23</p>
-                <p style={{ color: 'rgba(0,0,0,0.35)', fontSize: 10 }}>février 2026</p>
+              <Tile bg="#fff" style={{ padding: '0.9rem 1rem' }}>
+                <p style={{ color: 'rgba(0,0,0,0.45)', fontSize: 10, marginBottom: 3 }}>Bon lundi 💜</p>
+                <p style={{ fontWeight: 900, fontSize: 34, lineHeight: 1, color: DARK, letterSpacing: '-0.03em', margin: '3px 0 2px' }}>23</p>
+                <p style={{ color: 'rgba(0,0,0,0.35)', fontSize: 9 }}>février 2026</p>
               </Tile>
             </div>
 
             {/* Résultat campagne */}
-            <Tile bg="#fff" style={{ padding: '1.2rem 1.4rem', display: 'flex', gap: 12, alignItems: 'center' }}>
-              <div style={{ width: 80, height: 80, borderRadius: 12, overflow: 'hidden', flexShrink: 0, position: 'relative' }}>
+            <Tile bg="#fff" style={{ padding: '0.9rem 1rem', display: 'flex', gap: 10, alignItems: 'center' }}>
+              <div style={{ width: 64, height: 64, borderRadius: 10, overflow: 'hidden', flexShrink: 0, position: 'relative' }}>
                 <img src={WORK1} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
                 <div style={{ position: 'absolute', top: 6, right: 6, width: 20, height: 20, borderRadius: '50%', background: DARK, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                   <span style={{ color: '#fff', fontSize: 9 }}>↗</span>
                 </div>
               </div>
               <div>
-                <p style={{ fontWeight: 900, fontSize: 28, color: DARK, letterSpacing: '-0.02em', lineHeight: 1 }}>749k$</p>
-                <p style={{ color: 'rgba(0,0,0,0.4)', fontSize: 11, marginTop: 4, lineHeight: 1.4 }}>amassés lors de notre<br />dernière campagne</p>
+                <p style={{ fontWeight: 900, fontSize: 22, color: DARK, letterSpacing: '-0.02em', lineHeight: 1 }}>749k$</p>
+                <p style={{ color: 'rgba(0,0,0,0.4)', fontSize: 10, marginTop: 3, lineHeight: 1.4 }}>amassés lors de notre<br />dernière campagne</p>
               </div>
             </Tile>
 
             {/* Téléphone */}
-            <div style={{ display: 'flex', gap: 8 }}>
-              <a href="tel:4385431987" style={{ flex: 1, background: PURPLE, color: '#fff', fontWeight: 700, fontSize: 14, padding: '14px 20px', borderRadius: 999, textDecoration: 'none', display: 'flex', alignItems: 'center', gap: 10 }}>
-                <span style={{ fontSize: 16 }}>📞</span> 438 543 1987
+            <div style={{ display: 'flex', gap: 7 }}>
+              <a href="tel:4385431987" style={{ flex: 1, background: PURPLE, color: '#fff', fontWeight: 700, fontSize: 12, padding: '11px 16px', borderRadius: 999, textDecoration: 'none', display: 'flex', alignItems: 'center', gap: 8 }}>
+                <span style={{ fontSize: 14 }}>📞</span> 438 543 1987
               </a>
-              <Tile bg="#fff" style={{ width: 48, height: 48, display: 'flex', alignItems: 'center', justifyContent: 'center', borderRadius: 999, flexShrink: 0 }}>
-                <span style={{ fontSize: 18 }}>✉️</span>
+              <Tile bg="#fff" style={{ width: 40, height: 40, display: 'flex', alignItems: 'center', justifyContent: 'center', borderRadius: 999, flexShrink: 0 }}>
+                <span style={{ fontSize: 15 }}>✉️</span>
               </Tile>
             </div>
 
             {/* Texte + CTA */}
-            <Tile bg="#fff" style={{ padding: '1.2rem 1.4rem' }}>
+            <Tile bg="#fff" style={{ padding: '0.9rem 1rem' }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 10 }}>
-                <p style={{ fontWeight: 700, fontSize: 13, color: DARK }}>Choisissez l'intelligence.</p>
+                <p style={{ fontWeight: 700, fontSize: 11, color: DARK }}>Choisissez l'intelligence.</p>
                 <div style={{ width: 24, height: 24, borderRadius: '50%', background: DARK, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
                   <span style={{ color: '#fff', fontSize: 10 }}>↗</span>
                 </div>
@@ -442,13 +457,13 @@ export default function HomepageDemo2() {
                 <div style={{ width: 24, height: 24, borderRadius: '50%', background: CREAM }} />
                 <div style={{ width: 24, height: 24, borderRadius: '50%', background: '#e0e7ff' }} />
               </div>
-              <p style={{ color: 'rgba(0,0,0,0.4)', fontSize: 11, lineHeight: 1.6 }}>
+              <p style={{ color: 'rgba(0,0,0,0.4)', fontSize: 10, lineHeight: 1.55 }}>
                 At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium.
               </p>
             </Tile>
 
             {/* Barre croissance */}
-            <Tile bg="#fff" style={{ padding: '1rem 1.4rem' }}>
+            <Tile bg="#fff" style={{ padding: '0.8rem 1rem' }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 8 }}>
                 <p style={{ color: 'rgba(0,0,0,0.5)', fontSize: 11 }}>Croissance actuelle</p>
                 <p style={{ color: PURPLE, fontWeight: 700, fontSize: 11 }}>+4%</p>
@@ -460,7 +475,7 @@ export default function HomepageDemo2() {
           </div>
 
           {/* ── Colonne droite : MacBook ── */}
-          <Tile bg="" style={{ position: 'relative', minHeight: 520, overflow: 'hidden', background: 'linear-gradient(135deg, #ddd6fe 0%, #bfdbfe 50%, #e0e7ff 100%)' }}>
+          <Tile bg="" style={{ position: 'relative', minHeight: 480, overflow: 'hidden', background: 'linear-gradient(160deg, #f8f6ff 0%, #f0f4ff 40%, #fafaf8 100%)' }}>
             <div style={{ position: 'absolute', inset: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '2rem' }}>
               <img
                 src={HERO_IMAGE}
