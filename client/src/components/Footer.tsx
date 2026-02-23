@@ -16,23 +16,21 @@ function Footer() {
   const isMobile = useIsMobile(MOBILE_BREAKPOINT);
   
   const allNavigation = useMemo(() => [
-    { label: t('footer.nav.manifesto'), href: '/manifesto' },
     { label: t('nav.services'), href: '/services' },
     { label: t('nav.projects'), href: '/projects' },
     { label: t('nav.about'), href: '/about' },
-    { label: t('footer.nav.clients'), href: '/clients' },
+    { label: t('nav.approche'), href: '/approche' },
     { label: t('nav.resources'), href: '/resources' },
+    { label: t('nav.faq'), href: '/faq' },
     { label: t('nav.contact'), href: '/contact' },
-    { label: t('footer.nav.media'), href: '/media' },
+    { label: t('nav.talkToLeo'), href: '/leo' },
   ], [t]);
 
   const allServices = useMemo(() => [
-    { label: t('footer.services.agenticAI'), href: '/services/agentic-ai' },
-    { label: t('footer.services.aiNative'), href: '/services/digital-platforms' },
-    { label: t('footer.services.aiStrategyMarketing'), href: '/services/ai-strategy-marketing' },
-    { label: t('footer.services.digitalTransformation'), href: '/services/digital-transformation' },
-    { label: t('footer.services.creativeStudio'), href: '/services/creative-studio' },
-    { label: t('footer.services.aiConsulting'), href: '/services/intelligent-operations' },
+    { label: 'Nukleo.Tech', href: '/services/tech' },
+    { label: 'Nukleo.Consulting', href: '/services/consulting' },
+    { label: 'Nukleo.Studio', href: '/services/studio' },
+    { label: 'Nukleo.Agency', href: '/services/agency' },
   ], [t]);
 
   // Fetch all page visibilities at once

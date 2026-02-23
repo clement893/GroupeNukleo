@@ -69,8 +69,7 @@ export default function Home() {
           <TrinitySection />
           <TestimonialsCarousel />
           <CTASection />
-          {/* ClientLogos temporarily hidden */}
-          {/* <ClientLogos /> */}
+          <ClientLogos />
         </Suspense>
         
         {/* Team Carousel - Before Footer */}
