@@ -47,18 +47,26 @@ export default function HomepageDemo() {
         </div>
       </nav>
 
-      {/* ─── HERO ─────────────────────────────────────────────────────────── */}
+       {/* ─── HERO ───────────────────────────────────────────────────── */}
       <section className="relative h-screen min-h-[700px] flex flex-col justify-end overflow-hidden">
-        <div
-          ref={heroRef}
-          className="absolute inset-0 scale-110"
-          style={{
-            backgroundImage: `url(${HERO_IMAGE})`,
-            backgroundSize: 'cover',
-            backgroundPosition: 'center 30%',
-          }}
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0A]/90 via-[#0A0A0A]/30 to-transparent" />
+        {/* Vidéo de fond — slideshow des projets */}
+        <video
+          autoPlay
+          muted
+          loop
+          playsInline
+          className="absolute inset-0 w-full h-full object-cover scale-105"
+          style={{ filter: 'brightness(0.55) saturate(0.9)' }}
+        >
+          <source src="/demo/hero-reel.mp4" type="video/mp4" />
+          {/* Fallback image si la vidéo ne charge pas */}
+          <div
+            className="absolute inset-0"
+            style={{ backgroundImage: `url(${HERO_IMAGE})`, backgroundSize: 'cover', backgroundPosition: 'center' }}
+          />
+        </video>
+        {/* Overlay gradient pour lisibilité du texte */}
+        <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0A]/85 via-[#0A0A0A]/20 to-[#0A0A0A]/10" />
 
         <div className="relative z-10 px-8 lg:px-16 pb-20 lg:pb-28">
           <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-10">
