@@ -32,11 +32,11 @@ const TEAM_MEMBERS = [
  * Style: pile de cartes arrondies, une centrale mise en avant
  */
 export function TeamScrollCards() {
-  const scrollRef = useRef<HTMLDivElement>(null);
+  const imagesRef = useRef<HTMLDivElement>(null);
   const [activeIndex, setActiveIndex] = useState(0);
 
   useEffect(() => {
-    const el = scrollRef.current;
+    const el = imagesRef.current;
     if (!el) return;
     const handleWheel = (e: WheelEvent) => {
       e.preventDefault();
@@ -55,13 +55,10 @@ export function TeamScrollCards() {
 
   const activeMember = TEAM_MEMBERS[activeIndex];
   return (
-    <div
-      ref={scrollRef}
-      className="relative h-full min-h-[540px] flex flex-col overflow-hidden rounded-2xl cursor-n-resize"
-    >
+    <div className="relative h-full min-h-[540px] flex flex-col overflow-hidden rounded-2xl">
       <div className="flex-1 flex items-center justify-center min-h-0 overflow-hidden px-4 lg:px-8">
         <div className="flex items-center justify-center gap-6 lg:gap-10 w-full max-w-5xl">
-          {/* Gauche — titre + nom */}
+          {/* Gauche — titre + nom (scroll page hors images) */}
           <div className="text-left shrink-0 w-[140px] lg:w-[180px]">
             <p className="text-black/60 text-[10px] font-medium tracking-[0.35em] uppercase mb-2">
               Notre équipe
@@ -73,7 +70,11 @@ export function TeamScrollCards() {
               {activeMember.role}
             </p>
           </div>
-          <div className="relative w-full max-w-[270px] h-[520px] shrink-0">
+          {/* Images — scroll équipe uniquement quand survol */}
+          <div
+            ref={imagesRef}
+            className="relative w-full max-w-[270px] h-[520px] shrink-0 cursor-n-resize"
+          >
         {TEAM_MEMBERS.map((member, i) => {
           const offset = i - activeIndex;
           const isActive = i === activeIndex;
@@ -115,7 +116,7 @@ export function TeamScrollCards() {
           );
         })}
           </div>
-          {/* Droite — description / bio */}
+          {/* Droite — description / bio (scroll page hors images) */}
           <p className="text-black/70 text-xs lg:text-sm leading-relaxed shrink-0 min-w-[140px] lg:min-w-[220px] max-w-[260px]">
             {activeMember.bio}
           </p>

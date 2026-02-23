@@ -7,6 +7,7 @@ const DEPARTMENTS = [
     num: '01',
     name: 'Nukleo.Agency',
     tagline: 'Marketing & Communication',
+    description: 'Stratégie, contenus et campagnes qui génèrent de la performance mesurable.',
     href: '/services/agency',
     color: '#f97316',
     img: '/demo/dept-agency.jpg',
@@ -15,6 +16,7 @@ const DEPARTMENTS = [
     num: '02',
     name: 'Nukleo.Studio',
     tagline: 'Design & Creation',
+    description: 'Identités de marque, UX/UI et expériences visuelles qui convertissent.',
     href: '/services/studio',
     color: '#7c3aed',
     img: '/demo/dept-studio.jpg',
@@ -23,6 +25,7 @@ const DEPARTMENTS = [
     num: '03',
     name: 'Nukleo.Tech',
     tagline: 'Development & AI',
+    description: 'Applications, plateformes et solutions IA sur mesure pour votre croissance.',
     href: '/services/tech',
     color: '#2563eb',
     img: '/demo/dept-tech.jpg',
@@ -31,6 +34,7 @@ const DEPARTMENTS = [
     num: '04',
     name: 'Nukleo.Consulting',
     tagline: 'Strategy & Transformation',
+    description: 'Accompagnement stratégique et transformation digitale pilotés par les données.',
     href: '/services/consulting',
     color: '#059669',
     img: '/demo/dept-consulting.jpg',
@@ -48,12 +52,12 @@ export function DepartmentsWidget() {
       <p className="text-[10px] font-medium tracking-[0.35em] uppercase text-black/60 mb-6">
         Nos départements
       </p>
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 flex-1">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 lg:gap-5 flex-1">
         {DEPARTMENTS.map((dept) => (
           <Link
             key={dept.num}
             href={getLocalizedPath(dept.href)}
-            className="group relative rounded-xl overflow-hidden min-h-[100px] flex flex-col justify-end p-4 transition-transform hover:scale-[1.02]"
+            className="group relative rounded-xl overflow-hidden min-h-[140px] flex flex-col justify-end p-5 transition-transform hover:scale-[1.02]"
             style={{ backgroundColor: dept.color }}
           >
             <img
@@ -61,12 +65,15 @@ export function DepartmentsWidget() {
               alt=""
               className="absolute inset-0 w-full h-full object-cover opacity-30 group-hover:opacity-40 transition-opacity"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/40 to-transparent" />
             <span className="relative text-[10px] font-mono text-white/70">{dept.num}</span>
             <span className="relative font-heading font-black text-white text-lg leading-tight">
               {dept.name.split('.')[1]}
             </span>
-            <p className="relative text-[10px] text-white/70 mt-0.5">{dept.tagline}</p>
+            <p className="relative text-[10px] text-white/80 mt-0.5">{dept.tagline}</p>
+            <p className="relative text-[11px] text-white/70 mt-2 leading-snug line-clamp-2">
+              {dept.description}
+            </p>
             <ArrowRight className="absolute bottom-4 right-4 w-4 h-4 text-white/60 group-hover:text-white group-hover:translate-x-1 transition-all" />
           </Link>
         ))}

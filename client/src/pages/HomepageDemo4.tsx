@@ -570,21 +570,6 @@ export default function HomepageDemo4() {
       <div className="relative z-10 p-3 lg:p-4 flex flex-col gap-[16px] lg:gap-[22px]">
 
         {/* ══════════════════════════════════════════════════════════════════════
-            NOUVEAU HÉRO — TITRE PRINCIPAL
-        ══════════════════════════════════════════════════════════════════════ */}
-        <div className="px-2 sm:px-4 pt-4 lg:pt-8 pb-6 lg:pb-10">
-          <h1
-            className="font-heading font-black leading-[0.9] tracking-tight text-left"
-            style={{
-              fontSize: 'clamp(2.5rem, 8vw, 6.5rem)',
-              color: DARK,
-            }}
-          >
-            Augmenter votre <span style={{ color: NUKLEO_PURPLE }}>Performance</span> par L&apos;<span style={{ color: NUKLEO_PURPLE }}>Excellence</span> numérique
-          </h1>
-        </div>
-
-        {/* ══════════════════════════════════════════════════════════════════════
             MODULE 1 — HERO EN 3 MODULES DISTINCTS
         ══════════════════════════════════════════════════════════════════════ */}
         <div className="grid grid-cols-1 lg:grid-cols-[65fr_35fr] gap-3 lg:gap-4 pt-4 lg:pt-6" style={{ minHeight: '92vh' }}>
@@ -620,50 +605,6 @@ export default function HomepageDemo4() {
         ══════════════════════════════════════════════════════════════════════ */}
         <div className="-mx-3 lg:-mx-4">
           <DoubleLogoCarousel title="Trusted by ambitious organizations" />
-        </div>
-
-        {/* ══════════════════════════════════════════════════════════════════════
-            MODULE 3 — WHO WE ARE + STATS
-        ══════════════════════════════════════════════════════════════════════ */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-3 lg:gap-4">
-
-          <div className="lg:col-span-8 relative overflow-hidden rounded-3xl group" style={{ minHeight: '580px' }}>
-            <img
-              src={TEAM_IMAGE}
-              alt="Nukleo team"
-              className="absolute inset-0 w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 scale-[1.04] group-hover:scale-100"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/15 to-transparent" />
-            <div className="absolute bottom-0 left-0 right-0 p-10 lg:p-14 bg-black/30">
-              <p className="text-white/35 text-[10px] font-medium tracking-[0.35em] uppercase mb-5">Who We Are</p>
-              <h2 className="font-heading font-black text-white leading-[0.88] tracking-tight mb-6" style={{ fontSize: 'clamp(2.2rem, 4.5vw, 5rem)' }}>
-                We make digital<br />performance tangible.
-              </h2>
-              <p className="text-white/55 text-[15px] leading-relaxed max-w-lg mb-8">
-                A digital performance agency co-creating strategies, technologies, and creative for ambitious organizations — with AI-powered precision.
-              </p>
-              <Link href={getLocalizedPath('/about')} className="inline-flex items-center gap-2 text-white text-xs font-semibold border-b border-white/35 pb-1 hover:border-white transition-colors">
-                Our story →
-              </Link>
-            </div>
-          </div>
-
-          <div className="lg:col-span-4 flex flex-col gap-3 lg:gap-4">
-            <div className="rounded-3xl flex flex-col justify-between p-10 flex-1 bg-white/50 border border-white/60 min-h-[270px]">
-              <p className="text-[10px] font-medium tracking-[0.35em] uppercase" style={{ color: `${DARK}40` }}>Years of excellence</p>
-              <div>
-                <p className="font-heading font-black leading-none" style={{ fontSize: 'clamp(4rem, 6vw, 7rem)', color: DARK }}>7+</p>
-                <p className="text-sm mt-2" style={{ color: `${DARK}50` }}>of digital performance</p>
-              </div>
-            </div>
-            <div className="rounded-3xl flex flex-col justify-between p-10 flex-1 bg-black/60 border border-white/10 min-h-[270px]">
-              <p className="text-white/30 text-[10px] font-medium tracking-[0.35em] uppercase">Projects delivered</p>
-              <div>
-                <p className="font-heading font-black text-white leading-none" style={{ fontSize: 'clamp(4rem, 6vw, 7rem)' }}>300+</p>
-                <p className="text-white/40 text-sm mt-2">across all departments</p>
-              </div>
-            </div>
-          </div>
         </div>
 
         {/* ══════════════════════════════════════════════════════════════════════
