@@ -4,20 +4,18 @@ interface ScrollIndicatorProps {
 }
 
 export function ScrollIndicator({ current, total }: ScrollIndicatorProps) {
-  const percent = (current / total) * 100;
-
   return (
     <div className="flex flex-col items-center gap-2">
-      <span className="text-xs text-gray-400 uppercase tracking-widest">en</span>
-      <div className="w-1 h-24 bg-gray-200 rounded-full overflow-hidden relative">
+      {Array.from({ length: total }, (_, i) => i + 1).map((n) => (
         <div
-          className="absolute bottom-0 left-0 w-full bg-amber-400 transition-all duration-300"
-          style={{ height: `${percent}%` }}
-        />
-      </div>
-      <span className="font-mono text-2xl font-bold text-gray-400">
-        {String(current).padStart(2, '0')}
-      </span>
+          key={n}
+          className={`w-12 h-10 flex items-center justify-center rounded-md font-mono text-sm font-bold transition-colors ${
+            n === current ? 'bg-amber-400 text-gray-900' : 'bg-gray-200 text-gray-500'
+          }`}
+        >
+          {String(n).padStart(2, '0')}
+        </div>
+      ))}
     </div>
   );
 }

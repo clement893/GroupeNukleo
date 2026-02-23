@@ -9,7 +9,8 @@ export function CardWidget({ children, className }: CardWidgetProps) {
   return (
     <div
       className={cn(
-        'rounded-xl bg-white/90 border border-gray-200/80 shadow-sm overflow-hidden',
+        'rounded-xl overflow-hidden',
+        'bg-[#EDE9E4] border border-[#E5E0DA]',
         className
       )}
     >

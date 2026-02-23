@@ -6,3 +6,6 @@ export { ProgressWidget } from './ProgressWidget';
 export { FeatureCard } from './FeatureCard';
 export { StatBlock } from './StatBlock';
 export { ScrollIndicator } from './ScrollIndicator';
+export { LaptopVisual } from './LaptopVisual';
+export { BureauIcon } from './BureauIcon';
+export { StudioIcon } from './StudioIcon';

@@ -1,27 +1,25 @@
 import { Link } from 'wouter';
-import { ArrowRight, LucideIcon } from 'lucide-react';
-import { cn } from '@/lib/utils';
+import { ArrowRight } from 'lucide-react';
 
 interface FeatureCardProps {
   title: string;
-  color: string; // bg class or hex
-  icon: LucideIcon;
+  color: string;
+  icon: React.ReactNode;
   href: string;
 }
 
-export function FeatureCard({ title, color, icon: Icon, href }: FeatureCardProps) {
+export function FeatureCard({ title, color, icon, href }: FeatureCardProps) {
   return (
     <Link
       href={href}
-      className={cn(
-        'group relative flex flex-col justify-end p-8 rounded-2xl min-h-[200px] overflow-hidden transition-all duration-300 hover:scale-[1.02]',
-        'text-white'
-      )}
+      className="group relative flex flex-col justify-end p-8 rounded-2xl min-h-[220px] overflow-hidden transition-all duration-300 hover:scale-[1.02] text-white"
       style={{ backgroundColor: color }}
     >
-      <Icon className="w-10 h-10 mb-4 opacity-90" />
-      <span className="font-heading font-black text-2xl">{title}</span>
-      <ArrowRight className="absolute bottom-8 right-8 w-6 h-6 group-hover:translate-x-1 transition-transform" />
+      <div className="mb-4 text-white [&>svg]:w-12 [&>svg]:h-12 [&_.flex]:opacity-90 [&_svg]:text-white">{icon}</div>
+      <span className="font-heading font-black text-3xl">{title}</span>
+      <div className="absolute bottom-6 right-6 w-10 h-10 rounded-lg bg-white/10 flex items-center justify-center">
+        <ArrowRight className="w-5 h-5" />
+      </div>
     </Link>
   );
 }
