@@ -48,7 +48,7 @@ export function DepartmentsWidget() {
       <p className="text-[10px] font-medium tracking-[0.35em] uppercase text-black/60 mb-6">
         Nos départements
       </p>
-      <div className="grid grid-cols-2 gap-3 flex-1">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 flex-1">
         {DEPARTMENTS.map((dept) => (
           <Link
             key={dept.num}

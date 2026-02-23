@@ -493,7 +493,7 @@ export default function HomepageDemo4() {
       )}
 
       {/* ─── WRAPPER GLOBAL ─────────────────────────────────────────────────── */}
-      <div className="relative z-10 p-3 lg:p-4 flex flex-col gap-[13px] lg:gap-[18px]">
+      <div className="relative z-10 p-3 lg:p-4 flex flex-col gap-[16px] lg:gap-[22px]">
 
         {/* ══════════════════════════════════════════════════════════════════════
             MODULE 1 — HERO EN 3 MODULES DISTINCTS
@@ -527,12 +527,11 @@ export default function HomepageDemo4() {
               {/* Titre massif */}
               <div>
                 <h1
-                  className="font-heading font-black text-white leading-[0.82] tracking-tight"
+                  className="font-heading font-black text-white leading-[0.92] tracking-tight"
                   style={{ fontSize: 'clamp(4.5rem, 11vw, 13rem)' }}
                 >
-                  Digital<br />
-                  <span style={{ color: NUKLEO_PURPLE }}>Perfor-</span><br />
-                  mance.
+                  Augmenter votre<br />
+                  <span style={{ color: NUKLEO_PURPLE }}>performance</span>
                 </h1>
                 <p className="text-white/40 text-sm lg:text-base mt-6 max-w-md leading-relaxed">
                   For ambitious organizations — any size.
@@ -635,17 +634,17 @@ export default function HomepageDemo4() {
         </div>
 
         {/* ══════════════════════════════════════════════════════════════════════
-            MODULE 4 — DÉPARTEMENTS (2/3) + ÉQUIPE (1/3)
+            MODULE 4 — DÉPARTEMENTS (100%) + ÉQUIPE (100%)
         ══════════════════════════════════════════════════════════════════════ */}
-        <div className="grid grid-cols-1 lg:grid-cols-[40fr_60fr] gap-3 lg:gap-4" style={{ minHeight: '520px' }}>
-          {/* 40% — widget équipe */}
-          <div className="rounded-3xl overflow-hidden min-h-[420px] lg:min-h-0">
-            <TeamScrollCards />
-          </div>
-
-          {/* 60% — départements */}
+        <div className="flex flex-col gap-[16px] lg:gap-[22px]">
+          {/* 100% — 4 départements en ligne */}
           <div className="rounded-3xl overflow-hidden">
             <DepartmentsWidget />
+          </div>
+
+          {/* 100% — widget équipe */}
+          <div className="rounded-3xl overflow-hidden min-h-[420px]">
+            <TeamScrollCards />
           </div>
         </div>
 

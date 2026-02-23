@@ -5,26 +5,26 @@ const TEAM_IMGS = ['/demo/team-1.jpg', '/demo/team-2.jpg', '/demo/team-3.jpg', '
 const TEAM_COLORS = ['#7c3aed', '#f97316', '#2563eb', '#059669', '#7c3aed', '#dc2626', '#0891b2', '#4f46e5'];
 
 const TEAM_MEMBERS = [
-  { name: 'Clément Laberge', role: 'Founder & CEO', img: TEAM_IMGS[0], color: TEAM_COLORS[0] },
-  { name: 'Marie-Ève Tremblay', role: 'Creative Director', img: TEAM_IMGS[1], color: TEAM_COLORS[1] },
-  { name: 'Alexandre Côté', role: 'Head of Tech', img: TEAM_IMGS[2], color: TEAM_COLORS[2] },
-  { name: 'Sophie Nguyen', role: 'Strategy Lead', img: TEAM_IMGS[3], color: TEAM_COLORS[3] },
-  { name: 'Jean-Pierre Martin', role: 'Lead Developer', img: TEAM_IMGS[0], color: TEAM_COLORS[4] },
-  { name: 'Émilie Bouchard', role: 'Senior UX Designer', img: TEAM_IMGS[1], color: TEAM_COLORS[5] },
-  { name: 'Thomas Fortin', role: 'AI Solutions Architect', img: TEAM_IMGS[2], color: TEAM_COLORS[6] },
-  { name: 'Camille Dubois', role: 'Content Strategist', img: TEAM_IMGS[3], color: TEAM_COLORS[7] },
-  { name: 'Lucas Moreau', role: 'Full-Stack Developer', img: TEAM_IMGS[0], color: TEAM_COLORS[0] },
-  { name: 'Léa Gagnon', role: 'Brand Manager', img: TEAM_IMGS[1], color: TEAM_COLORS[1] },
-  { name: 'Hugo Lavoie', role: 'Digital Marketing Lead', img: TEAM_IMGS[2], color: TEAM_COLORS[2] },
-  { name: 'Emma Leblanc', role: 'Project Manager', img: TEAM_IMGS[3], color: TEAM_COLORS[3] },
-  { name: 'Nathan Roy', role: 'Data Engineer', img: TEAM_IMGS[0], color: TEAM_COLORS[4] },
-  { name: 'Chloé Bergeron', role: 'Creative Producer', img: TEAM_IMGS[1], color: TEAM_COLORS[5] },
-  { name: 'Félix Champagne', role: 'Frontend Developer', img: TEAM_IMGS[2], color: TEAM_COLORS[6] },
-  { name: 'Zoé Mercier', role: 'Growth Strategist', img: TEAM_IMGS[3], color: TEAM_COLORS[7] },
-  { name: 'Raphaël Beaudoin', role: 'Backend Developer', img: TEAM_IMGS[0], color: TEAM_COLORS[0] },
-  { name: 'Manon Pelletier', role: 'Visual Designer', img: TEAM_IMGS[1], color: TEAM_COLORS[1] },
-  { name: 'Olivier Turgeon', role: 'Technical Lead', img: TEAM_IMGS[2], color: TEAM_COLORS[2] },
-  { name: 'Isabelle Paquette', role: 'Client Success Director', img: TEAM_IMGS[3], color: TEAM_COLORS[3] },
+  { name: 'Clément Laberge', role: 'Founder & CEO', img: TEAM_IMGS[0], color: TEAM_COLORS[0], bio: 'Fondateur de Nukleo, passionné par la transformation numérique et l\'IA appliquée. 15 ans d\'expérience en stratégie digitale.' },
+  { name: 'Marie-Ève Tremblay', role: 'Creative Director', img: TEAM_IMGS[1], color: TEAM_COLORS[1], bio: 'Directrice créative, elle donne vie aux marques à travers des expériences visuelles mémorables.' },
+  { name: 'Alexandre Côté', role: 'Head of Tech', img: TEAM_IMGS[2], color: TEAM_COLORS[2], bio: 'Architecte technique, il pilote les solutions digitales et intègre l\'IA au cœur des produits.' },
+  { name: 'Sophie Nguyen', role: 'Strategy Lead', img: TEAM_IMGS[3], color: TEAM_COLORS[3], bio: 'Stratège digitale, elle accompagne les organisations dans leur transformation numérique.' },
+  { name: 'Jean-Pierre Martin', role: 'Lead Developer', img: TEAM_IMGS[0], color: TEAM_COLORS[4], bio: 'Lead développeur, expert en architectures évolutives et livraison de produits digitaux.' },
+  { name: 'Émilie Bouchard', role: 'Senior UX Designer', img: TEAM_IMGS[1], color: TEAM_COLORS[5], bio: 'Designer UX senior, elle crée des parcours utilisateur intuitifs et des interfaces qui convertissent.' },
+  { name: 'Thomas Fortin', role: 'AI Solutions Architect', img: TEAM_IMGS[2], color: TEAM_COLORS[6], bio: 'Spécialiste IA, il conçoit des solutions agentiques pour automatiser et optimiser.' },
+  { name: 'Camille Dubois', role: 'Content Strategist', img: TEAM_IMGS[3], color: TEAM_COLORS[7], bio: 'Stratège de contenu, elle structure les récits de marque et les stratégies éditoriales.' },
+  { name: 'Lucas Moreau', role: 'Full-Stack Developer', img: TEAM_IMGS[0], color: TEAM_COLORS[0], bio: 'Développeur full-stack, il construit des applications web performantes et des APIs robustes.' },
+  { name: 'Léa Gagnon', role: 'Brand Manager', img: TEAM_IMGS[1], color: TEAM_COLORS[1], bio: 'Brand manager, elle assure la cohérence des marques et pilote les lancements stratégiques.' },
+  { name: 'Hugo Lavoie', role: 'Digital Marketing Lead', img: TEAM_IMGS[2], color: TEAM_COLORS[2], bio: 'Expert marketing digital, il orchestre les campagnes et optimise les canaux pour le ROI.' },
+  { name: 'Emma Leblanc', role: 'Project Manager', img: TEAM_IMGS[3], color: TEAM_COLORS[3], bio: 'Chef de projet, elle assure la livraison à temps et la satisfaction des clients.' },
+  { name: 'Nathan Roy', role: 'Data Engineer', img: TEAM_IMGS[0], color: TEAM_COLORS[4], bio: 'Ingénieur données, il conçoit les pipelines pour des analyses et modèles IA à grande échelle.' },
+  { name: 'Chloé Bergeron', role: 'Creative Producer', img: TEAM_IMGS[1], color: TEAM_COLORS[5], bio: 'Productrice créative, elle coordonne les projets visuels de A à Z.' },
+  { name: 'Félix Champagne', role: 'Frontend Developer', img: TEAM_IMGS[2], color: TEAM_COLORS[6], bio: 'Développeur frontend, passionné par les interfaces modernes et expériences fluides.' },
+  { name: 'Zoé Mercier', role: 'Growth Strategist', img: TEAM_IMGS[3], color: TEAM_COLORS[7], bio: 'Stratège growth, elle conçoit des funnel d\'acquisition basés sur les données.' },
+  { name: 'Raphaël Beaudoin', role: 'Backend Developer', img: TEAM_IMGS[0], color: TEAM_COLORS[0], bio: 'Développeur backend, il conçoit les systèmes serveur et les APIs scalables.' },
+  { name: 'Manon Pelletier', role: 'Visual Designer', img: TEAM_IMGS[1], color: TEAM_COLORS[1], bio: 'Designer visuelle, elle crée des identités fortes et des visuels qui marquent.' },
+  { name: 'Olivier Turgeon', role: 'Technical Lead', img: TEAM_IMGS[2], color: TEAM_COLORS[2], bio: 'Lead technique, il définit les standards de code et accompagne l\'excellence.' },
+  { name: 'Isabelle Paquette', role: 'Client Success Director', img: TEAM_IMGS[3], color: TEAM_COLORS[3], bio: 'Directrice succès client, elle assure la satisfaction et la croissance des comptes.' },
 ];
 
 /**
@@ -53,19 +53,26 @@ export function TeamScrollCards() {
   const CARD_HEIGHT = 360; // Portrait 3:4
   const VISIBLE_OFFSET = 180;
 
+  const activeMember = TEAM_MEMBERS[activeIndex];
   return (
     <div
       ref={scrollRef}
       className="relative h-full min-h-[540px] flex flex-col overflow-hidden rounded-2xl cursor-n-resize"
     >
-      <p className="text-black/60 text-[10px] font-medium tracking-[0.35em] uppercase px-6 pt-6 pb-2 shrink-0">
-        Notre équipe
-      </p>
-      <div className="flex-1 flex items-center justify-center min-h-0 overflow-hidden px-4">
-        <div className="flex items-center justify-center gap-4 lg:gap-8 w-full max-w-[400px]">
-          <p className="font-heading font-bold text-black text-sm text-right shrink-0 min-w-[100px] lg:min-w-[120px]">
-            {TEAM_MEMBERS[activeIndex].name}
-          </p>
+      <div className="flex-1 flex items-center justify-center min-h-0 overflow-hidden px-4 lg:px-8">
+        <div className="flex items-center justify-center gap-6 lg:gap-10 w-full max-w-5xl">
+          {/* Gauche — titre + nom */}
+          <div className="text-left shrink-0 w-[140px] lg:w-[180px]">
+            <p className="text-black/60 text-[10px] font-medium tracking-[0.35em] uppercase mb-2">
+              Notre équipe
+            </p>
+            <p className="font-heading font-bold text-black text-sm lg:text-base">
+              {activeMember.name}
+            </p>
+            <p className="text-black/60 text-xs mt-1">
+              {activeMember.role}
+            </p>
+          </div>
           <div className="relative w-full max-w-[270px] h-[520px] shrink-0">
         {TEAM_MEMBERS.map((member, i) => {
           const offset = i - activeIndex;
@@ -108,8 +115,9 @@ export function TeamScrollCards() {
           );
         })}
           </div>
-          <p className="text-black/70 text-xs text-left shrink-0 min-w-[100px] lg:min-w-[120px]">
-            {TEAM_MEMBERS[activeIndex].role}
+          {/* Droite — description / bio */}
+          <p className="text-black/70 text-xs lg:text-sm leading-relaxed shrink-0 min-w-[140px] lg:min-w-[220px] max-w-[260px]">
+            {activeMember.bio}
           </p>
         </div>
       </div>
