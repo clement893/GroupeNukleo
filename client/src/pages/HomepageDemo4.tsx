@@ -96,7 +96,7 @@ const TEAM_MEMBERS = [
   { name: 'Sophie Nguyen', role: 'Strategy Lead', img: WORK3, color: '#059669' },
 ];
 
-function TeamStackSection() {
+function TeamStackSection({ compact = false }: { compact?: boolean }) {
   const [activeIndex, setActiveIndex] = useState(0);
 
   const goTo = (i: number) => setActiveIndex(i);
@@ -109,25 +109,25 @@ function TeamStackSection() {
     else prev();
   };
 
-  const CARD_W = 220;
-  const CARD_H = 300;
-  const STACK_OVERFLOW = 36;
+  const CARD_W = compact ? 180 : 220;
+  const CARD_H = compact ? 240 : 300;
+  const STACK_OVERFLOW = compact ? 28 : 36;
 
   return (
     <div
-      className="rounded-3xl overflow-hidden"
+      className="rounded-3xl overflow-hidden h-full min-h-0 flex flex-col"
       style={{ background: DARK }}
       onWheel={handleWheel}
     >
       {/* Colonne unique centrée */}
-      <div className="flex flex-col items-center px-8 py-10 gap-7">
+      <div className={`flex flex-col items-center gap-7 flex-1 ${compact ? 'px-5 py-6' : 'px-8 py-10'}`}>
 
         {/* En-tête */}
-        <div className="text-center">
-          <p className="text-white/30 text-[10px] font-medium tracking-[0.35em] uppercase mb-3">The Team</p>
+        <div className="text-center shrink-0">
+          <p className="text-white/30 text-[10px] font-medium tracking-[0.35em] uppercase mb-2">The Team</p>
           <h2
             className="font-heading font-black text-white leading-[0.9] tracking-tight"
-            style={{ fontSize: 'clamp(1.8rem, 3vw, 3rem)' }}
+            style={{ fontSize: compact ? 'clamp(1.2rem, 2vw, 1.8rem)' : 'clamp(1.8rem, 3vw, 3rem)' }}
           >
             People behind the work.
           </h2>
@@ -202,16 +202,16 @@ function TeamStackSection() {
         </div>
 
         {/* Infos membre + navigation */}
-        <div className="flex flex-col items-center gap-3 text-center">
-          <div style={{ minHeight: '52px' }}>
+        <div className="flex flex-col items-center gap-2 text-center shrink-0">
+          <div style={{ minHeight: compact ? '40px' : '52px' }}>
             <p
-              className="font-heading font-bold text-white text-xl leading-tight"
+              className={`font-heading font-bold text-white leading-tight ${compact ? 'text-base' : 'text-xl'}`}
               key={activeIndex}
               style={{ animation: 'fadeUp 0.4s ease forwards' }}
             >
               {TEAM_MEMBERS[activeIndex].name}
             </p>
-            <p className="text-white/40 text-sm mt-1">{TEAM_MEMBERS[activeIndex].role}</p>
+            <p className={`text-white/40 mt-1 ${compact ? 'text-xs' : 'text-sm'}`}>{TEAM_MEMBERS[activeIndex].role}</p>
           </div>
           {/* Dots */}
           <div className="flex gap-2">
@@ -219,9 +219,9 @@ function TeamStackSection() {
               <button
                 key={i}
                 onClick={() => goTo(i)}
-                className="h-[3px] rounded-full transition-all duration-300"
+                className="h-[2px] rounded-full transition-all duration-300"
                 style={{
-                  width: i === activeIndex ? '28px' : '10px',
+                  width: i === activeIndex ? (compact ? '20px' : '28px') : (compact ? '6px' : '10px'),
                   background: i === activeIndex ? TEAM_MEMBERS[activeIndex].color : 'rgba(255,255,255,0.2)',
                 }}
               />
@@ -232,14 +232,14 @@ function TeamStackSection() {
             <button
               onClick={prev}
               disabled={activeIndex === 0}
-              className="w-8 h-8 rounded-full border border-white/15 flex items-center justify-center text-white/50 hover:text-white hover:border-white/40 transition-all disabled:opacity-20 text-sm"
+              className={`rounded-full border border-white/15 flex items-center justify-center text-white/50 hover:text-white hover:border-white/40 transition-all disabled:opacity-20 ${compact ? 'w-6 h-6 text-xs' : 'w-8 h-8 text-sm'}`}
             >
               ↑
             </button>
             <button
               onClick={next}
               disabled={activeIndex === TEAM_MEMBERS.length - 1}
-              className="w-8 h-8 rounded-full border border-white/15 flex items-center justify-center text-white/50 hover:text-white hover:border-white/40 transition-all disabled:opacity-20 text-sm"
+              className={`rounded-full border border-white/15 flex items-center justify-center text-white/50 hover:text-white hover:border-white/40 transition-all disabled:opacity-20 ${compact ? 'w-6 h-6 text-xs' : 'w-8 h-8 text-sm'}`}
             >
               ↓
             </button>
@@ -600,69 +600,46 @@ export default function HomepageDemo4() {
         </div>
 
         {/* ══════════════════════════════════════════════════════════════════════
-            MODULE 4 — DÉPARTEMENTS
+            MODULE 4 — DÉPARTEMENTS + ÉQUIPE (50/50)
         ══════════════════════════════════════════════════════════════════════ */}
-        <div className="rounded-3xl p-10 lg:p-16" style={{ background: DARK }}>
-          <div className="flex items-end justify-between mb-12">
-            <div>
-              <p className="text-white/30 text-[10px] font-medium tracking-[0.35em] uppercase mb-4">Our Departments</p>
-              <h2 className="font-heading font-black text-white leading-none tracking-tight" style={{ fontSize: 'clamp(2rem, 4vw, 4.5rem)' }}>
-                Four ways to<br />grow.
-              </h2>
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-3 lg:gap-4" style={{ minHeight: '520px' }}>
+          {/* Moitié gauche — 4 services en blocs compacts */}
+          <div className="rounded-3xl p-6 lg:p-8 flex flex-col" style={{ background: DARK }}>
+            <div className="flex items-end justify-between mb-6">
+              <div>
+                <p className="text-white/30 text-[10px] font-medium tracking-[0.35em] uppercase mb-2">Our Departments</p>
+                <h2 className="font-heading font-black text-white leading-none tracking-tight" style={{ fontSize: 'clamp(1.5rem, 3vw, 2.5rem)' }}>
+                  Four ways to grow.
+                </h2>
+              </div>
+              <Link href={getLocalizedPath('/services')} className="text-white/40 text-[10px] font-semibold border-b border-white/20 pb-0.5 hover:text-white hover:border-white transition-all hidden lg:block">
+                All →
+              </Link>
             </div>
-            <Link href={getLocalizedPath('/services')} className="text-white/40 text-xs font-semibold border-b border-white/20 pb-1 hover:text-white hover:border-white transition-all hidden lg:block">
-              All services →
-            </Link>
-          </div>
-          {/* Grille 2×2 — cartes avec image */}
-          <div className="grid grid-cols-2 gap-4">
-            {DEPTS.map((dept) => (
-              <Link
-                key={dept.num}
-                href={getLocalizedPath(dept.href)}
-                className="group relative rounded-2xl overflow-hidden cursor-pointer"
-                style={{ aspectRatio: '4 / 3' }}
-              >
-                {/* Image de fond */}
-                <img
-                  src={dept.img}
-                  alt={dept.name}
-                  className="absolute inset-0 w-full h-full object-cover transition-all duration-700"
-                  style={{
-                    filter: 'grayscale(0.4) brightness(0.45)',
-                    transform: 'scale(1)',
-                  }}
-                />
-                {/* Overlay couleur au hover */}
-                <div
-                  className="absolute inset-0 transition-opacity duration-500 opacity-0 group-hover:opacity-100"
-                  style={{ background: `linear-gradient(135deg, ${dept.color}55 0%, transparent 60%)` }}
-                />
-                {/* Gradient bas permanent */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
-                {/* Contenu */}
-                <div className="relative z-10 flex flex-col justify-between h-full p-6 lg:p-8">
-                  {/* Numéro + explore */}
-                  <div className="flex items-center justify-between">
-                    <span className="font-heading font-black text-white/20 text-sm">{dept.num}</span>
-                    <span
-                      className="text-[9px] font-semibold tracking-widest uppercase opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                      style={{ color: dept.color }}
-                    >
-                      Explore →
+            <div className="grid grid-cols-2 gap-3 flex-1">
+              {DEPTS.map((dept) => (
+                <Link
+                  key={dept.num}
+                  href={getLocalizedPath(dept.href)}
+                  className="group relative rounded-xl overflow-hidden cursor-pointer flex flex-col p-4 min-h-[100px] bg-white/[0.03] transition-colors duration-200 hover:bg-white/[0.07]"
+                >
+                  <div className="flex items-center justify-between mb-2">
+                    <span className="font-heading font-black text-white/25 text-xs">{dept.num}</span>
+                    <span className="text-[8px] font-semibold tracking-widest uppercase opacity-0 group-hover:opacity-100 transition-opacity duration-300" style={{ color: dept.color }}>
+                      →
                     </span>
                   </div>
-                  {/* Nom + description */}
-                  <div>
-                    <div className="w-6 h-[2px] rounded-full mb-3" style={{ background: dept.color }} />
-                    <p className="font-heading font-black text-white leading-tight mb-2" style={{ fontSize: 'clamp(1rem, 1.8vw, 1.4rem)' }}>
-                      {dept.name}
-                    </p>
-                    <p className="text-white/50 text-xs leading-relaxed">{dept.desc}</p>
-                  </div>
-                </div>
-              </Link>
-            ))}
+                  <div className="w-4 h-[1px] rounded-full mb-2" style={{ background: dept.color }} />
+                  <p className="font-heading font-bold text-white text-sm leading-tight mb-1">{dept.name}</p>
+                  <p className="text-white/45 text-[11px] leading-snug line-clamp-2">{dept.desc}</p>
+                </Link>
+              ))}
+            </div>
+          </div>
+
+          {/* Moitié droite — widget équipe */}
+          <div className="rounded-3xl overflow-hidden min-h-[400px] lg:min-h-0">
+            <TeamStackSection compact />
           </div>
         </div>
 
@@ -670,11 +647,6 @@ export default function HomepageDemo4() {
             MODULE 5 — CARROUSEL PROJETS PLEIN ÉCRAN
         ══════════════════════════════════════════════════════════════════════ */}
         <ProjectsCarousel />
-
-        {/* ══════════════════════════════════════════════════════════════════════
-            MODULE 6 — ÉQUIPE (stack scroll vertical)
-        ══════════════════════════════════════════════════════════════════════ */}
-        <TeamStackSection />
 
         {/* ══════════════════════════════════════════════════════════════════════
             MODULE 7 — ROUGE ON BLUE
