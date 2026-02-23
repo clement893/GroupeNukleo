@@ -12,6 +12,7 @@ const RED    = '#C8102E';
 
 // ─── ASSETS ────────────────────────────────────────────────────────────────
 const HERO_IMAGE    = '/demo/hero.jpg';
+const NUKLEO_LOGO   = '/demo/nukleo-logo.png';
 const WORK1         = '/demo/work1.jpg';
 const WORK2         = '/demo/work2.jpg';
 const WORK3         = '/demo/work3.jpg';
@@ -283,9 +284,11 @@ export default function HomepageDemo2() {
               Choisissez l'intelligence.
             </p>
             <div>
-              <h1 style={{ fontWeight: 900, fontSize: 'clamp(4rem, 7vw, 8rem)', lineHeight: 0.88, letterSpacing: '-0.03em', color: DARK, marginBottom: '1.5rem' }}>
-                nukleo<span style={{ color: PURPLE }}>.</span>
-              </h1>
+              <img
+                src={NUKLEO_LOGO}
+                alt="nukleo."
+                style={{ width: '100%', maxWidth: 420, height: 'auto', marginBottom: '1.5rem', display: 'block' }}
+              />
               <p style={{ color: 'rgba(0,0,0,0.45)', fontSize: 16, lineHeight: 1.65, maxWidth: 400 }}>
                 We build brands, platforms, and strategies that compound. Not agencies. Not vendors. A growth partner.
               </p>
