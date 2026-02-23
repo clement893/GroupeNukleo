@@ -109,150 +109,141 @@ function TeamStackSection() {
     else prev();
   };
 
+  // Hauteur de la carte + débordement visible des cartes en dessous
+  const CARD_W = 300;
+  const CARD_H = 420;
+  const STACK_OVERFLOW = 48; // px visibles des cartes en dessous
+
   return (
     <div
       className="rounded-3xl overflow-hidden"
-      style={{ background: DARK, minHeight: '50vh' }}
+      style={{ background: DARK }}
       onWheel={handleWheel}
     >
-      {/* Layout : 2 colonnes — gauche info, droite stack */}
-      <div className="flex flex-col lg:flex-row" style={{ minHeight: '50vh' }}>
+      {/* Colonne unique centrée */}
+      <div className="flex flex-col items-center px-8 py-14 gap-10">
 
-        {/* Colonne gauche — titre + info membre */}
-        <div className="flex flex-col justify-between p-12 lg:p-16 lg:w-2/5">
-          <div>
-            <p className="text-white/30 text-[10px] font-medium tracking-[0.35em] uppercase mb-12">The Team</p>
-            <h2
-              className="font-heading font-black text-white leading-[0.88] tracking-tight mb-10"
-              style={{ fontSize: 'clamp(2.5rem, 4vw, 5rem)' }}
-            >
-              People<br />behind<br />the work.
-            </h2>
-          </div>
-          <div>
-            <div style={{ minHeight: '90px' }}>
-              <p
-                className="font-heading font-bold text-white text-2xl lg:text-3xl leading-tight"
-                key={activeIndex}
-                style={{ animation: 'fadeUp 0.4s ease forwards' }}
-              >
-                {TEAM_MEMBERS[activeIndex].name}
-              </p>
-              <p className="text-white/40 text-sm mt-2">{TEAM_MEMBERS[activeIndex].role}</p>
-            </div>
-            {/* Dots navigation */}
-            <div className="flex gap-2 mt-8">
-              {TEAM_MEMBERS.map((_, i) => (
-                <button
-                  key={i}
-                  onClick={() => goTo(i)}
-                  className="h-[3px] rounded-full transition-all duration-300"
-                  style={{
-                    width: i === activeIndex ? '32px' : '12px',
-                    background: i === activeIndex ? TEAM_MEMBERS[activeIndex].color : 'rgba(255,255,255,0.2)',
-                  }}
-                />
-              ))}
-            </div>
-            {/* Flèches */}
-            <div className="flex gap-3 mt-6">
-              <button
-                onClick={prev}
-                disabled={activeIndex === 0}
-                className="w-10 h-10 rounded-full border border-white/15 flex items-center justify-center text-white/50 hover:text-white hover:border-white/40 transition-all disabled:opacity-20"
-              >
-                ↑
-              </button>
-              <button
-                onClick={next}
-                disabled={activeIndex === TEAM_MEMBERS.length - 1}
-                className="w-10 h-10 rounded-full border border-white/15 flex items-center justify-center text-white/50 hover:text-white hover:border-white/40 transition-all disabled:opacity-20"
-              >
-                ↓
-              </button>
-            </div>
-          </div>
+        {/* En-tête */}
+        <div className="text-center">
+          <p className="text-white/30 text-[10px] font-medium tracking-[0.35em] uppercase mb-5">The Team</p>
+          <h2
+            className="font-heading font-black text-white leading-[0.88] tracking-tight"
+            style={{ fontSize: 'clamp(2.2rem, 4vw, 4rem)' }}
+          >
+            People behind the work.
+          </h2>
         </div>
 
-        {/* Colonne droite — stack vertical centré, prend toute la hauteur */}
+        {/* Stack de cartes */}
         <div
-          className="flex-1 flex items-center justify-center py-16 px-8"
-          style={{ perspective: '1400px', minHeight: '50vh' }}
+          style={{
+            perspective: '1200px',
+            width: `${CARD_W}px`,
+            height: `${CARD_H + STACK_OVERFLOW}px`,
+            position: 'relative',
+          }}
         >
-          {/* Conteneur du stack — format portrait, grande taille */}
-          <div
-            className="relative"
-            style={{
-              width: 'min(340px, 55vw)',
-              height: 'min(500px, 75vh)',
-              transformStyle: 'preserve-3d',
-            }}
-          >
-            {TEAM_MEMBERS.map((member, i) => {
-              const offset = i - activeIndex;
-              const isActive = i === activeIndex;
-              const isBelow = offset > 0;
-              const isAbove = offset < 0;
+          {TEAM_MEMBERS.map((member, i) => {
+            const offset = i - activeIndex;
+            const isActive = i === activeIndex;
+            const isBelow = offset > 0;
+            const isAbove = offset < 0;
 
-              const translateY = isActive
-                ? '0px'
-                : isBelow
-                ? `${offset * 28}px`
-                : `${offset * 140}px`;
+            const translateY = isActive
+              ? '0px'
+              : isBelow
+              ? `${offset * 16}px`
+              : `${offset * 160}px`;
 
-              const translateZ = isActive
-                ? '0px'
-                : isBelow
-                ? `${-offset * 65}px`
-                : '0px';
+            const translateZ = isActive
+              ? '0px'
+              : isBelow
+              ? `${-offset * 50}px`
+              : '0px';
 
-              const scale = isActive ? 1 : isBelow ? Math.max(0.76, 1 - offset * 0.08) : 0.95;
-              const opacity = isAbove ? 0 : isBelow ? Math.max(0.12, 1 - offset * 0.3) : 1;
-              const zIndex = isActive ? 50 : isBelow ? 50 - offset : 0;
+            const scale = isActive ? 1 : isBelow ? Math.max(0.78, 1 - offset * 0.07) : 0.95;
+            const opacity = isAbove ? 0 : isBelow ? Math.max(0.1, 1 - offset * 0.32) : 1;
+            const zIndex = isActive ? 50 : isBelow ? 50 - offset : 0;
 
-              return (
-                <div
-                  key={member.name}
-                  className="absolute inset-0 rounded-2xl overflow-hidden cursor-pointer"
-                  onClick={() => isBelow && goTo(i)}
-                  style={{
-                    transform: `translateY(${translateY}) translateZ(${translateZ}) scale(${scale})`,
-                    opacity,
-                    zIndex,
-                    transition: 'transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94), opacity 0.5s ease',
-                    transformStyle: 'preserve-3d',
-                    boxShadow: isActive
-                      ? '0 50px 100px rgba(0,0,0,0.7), 0 0 0 1px rgba(255,255,255,0.08)'
-                      : '0 15px 35px rgba(0,0,0,0.5)',
-                  }}
-                >
-                  <img
-                    src={member.img}
-                    alt={member.name}
-                    className="w-full h-full object-cover"
-                    style={{ filter: isActive ? 'grayscale(0)' : 'grayscale(0.6) brightness(0.7)' }}
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
-                  {/* Badge rôle — visible uniquement sur la carte active */}
-                  <div
-                    className="absolute bottom-6 left-6 px-4 py-2 rounded-full text-white text-xs font-semibold"
-                    style={{
-                      background: member.color,
-                      opacity: isActive ? 1 : 0,
-                      transition: 'opacity 0.35s ease',
-                    }}
-                  >
-                    {member.role}
+            return (
+              <div
+                key={member.name}
+                className="absolute rounded-2xl overflow-hidden cursor-pointer"
+                onClick={() => isBelow && goTo(i)}
+                style={{
+                  width: `${CARD_W}px`,
+                  height: `${CARD_H}px`,
+                  top: 0,
+                  left: 0,
+                  transform: `translateY(${translateY}) translateZ(${translateZ}) scale(${scale})`,
+                  opacity,
+                  zIndex,
+                  transition: 'transform 0.55s cubic-bezier(0.25, 0.46, 0.45, 0.94), opacity 0.45s ease',
+                  transformStyle: 'preserve-3d',
+                  boxShadow: isActive
+                    ? '0 40px 80px rgba(0,0,0,0.7), 0 0 0 1px rgba(255,255,255,0.08)'
+                    : '0 12px 30px rgba(0,0,0,0.5)',
+                }}
+              >
+                <img
+                  src={member.img}
+                  alt={member.name}
+                  className="w-full h-full object-cover"
+                  style={{ filter: isActive ? 'grayscale(0)' : 'grayscale(0.7) brightness(0.65)' }}
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
+                {isBelow && offset <= 2 && (
+                  <div className="absolute top-4 right-4 text-white/25 font-heading font-black text-sm">
+                    0{i + 1}
                   </div>
-                  {/* Numéro de position sur les cartes en dessous */}
-                  {isBelow && offset <= 2 && (
-                    <div className="absolute top-4 right-4 text-white/30 font-heading font-black text-sm">
-                      0{i + 1}
-                    </div>
-                  )}
-                </div>
-              );
-            })}
+                )}
+              </div>
+            );
+          })}
+        </div>
+
+        {/* Infos membre + navigation */}
+        <div className="flex flex-col items-center gap-5 text-center">
+          <div style={{ minHeight: '64px' }}>
+            <p
+              className="font-heading font-bold text-white text-2xl leading-tight"
+              key={activeIndex}
+              style={{ animation: 'fadeUp 0.4s ease forwards' }}
+            >
+              {TEAM_MEMBERS[activeIndex].name}
+            </p>
+            <p className="text-white/40 text-sm mt-1">{TEAM_MEMBERS[activeIndex].role}</p>
+          </div>
+          {/* Dots */}
+          <div className="flex gap-2">
+            {TEAM_MEMBERS.map((_, i) => (
+              <button
+                key={i}
+                onClick={() => goTo(i)}
+                className="h-[3px] rounded-full transition-all duration-300"
+                style={{
+                  width: i === activeIndex ? '28px' : '10px',
+                  background: i === activeIndex ? TEAM_MEMBERS[activeIndex].color : 'rgba(255,255,255,0.2)',
+                }}
+              />
+            ))}
+          </div>
+          {/* Flèches */}
+          <div className="flex gap-3">
+            <button
+              onClick={prev}
+              disabled={activeIndex === 0}
+              className="w-10 h-10 rounded-full border border-white/15 flex items-center justify-center text-white/50 hover:text-white hover:border-white/40 transition-all disabled:opacity-20"
+            >
+              ↑
+            </button>
+            <button
+              onClick={next}
+              disabled={activeIndex === TEAM_MEMBERS.length - 1}
+              className="w-10 h-10 rounded-full border border-white/15 flex items-center justify-center text-white/50 hover:text-white hover:border-white/40 transition-all disabled:opacity-20"
+            >
+              ↓
+            </button>
           </div>
         </div>
 
