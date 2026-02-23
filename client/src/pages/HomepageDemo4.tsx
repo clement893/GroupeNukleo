@@ -74,7 +74,6 @@ function HeroProjectSlider() {
   return (
     <div
       className="rounded-3xl flex flex-col flex-1 overflow-hidden min-h-[260px] border border-white/20"
-      style={{ background: 'rgba(0,0,0,0.5)' }}
     >
       <p className="text-white/40 text-[10px] font-medium tracking-[0.35em] uppercase px-6 pt-6 pb-2 shrink-0">
         Nos derniers projets
@@ -491,14 +490,9 @@ export default function HomepageDemo4() {
         </div>
       )}
 
-      {/* ─── LOGO BORD À BORD (gradient, pas de fond noir) ────────────────────── */}
-      <div
-        className="relative z-10 flex flex-col justify-center w-full py-12 lg:py-16 px-2 sm:px-4"
-        style={{
-          background: 'linear-gradient(135deg, rgba(167,139,250,0.6) 0%, rgba(196,181,253,0.5) 35%, rgba(224,231,255,0.7) 65%, rgba(147,197,253,0.5) 100%)',
-        }}
-      >
-        <p className="text-white/90 text-xs font-medium tracking-[0.25em] uppercase mb-6">
+      {/* ─── LOGO BORD À BORD (sans fond) ────────────────────────────────────── */}
+      <div className="relative z-10 flex flex-col justify-center w-full py-12 lg:py-16 px-2 sm:px-4">
+        <p className="text-gray-600 text-xs font-medium tracking-[0.25em] uppercase mb-6">
           Choisissez l'intelligence.
         </p>
         <Link href={getLocalizedPath('/')} className="block w-full">
@@ -518,7 +512,43 @@ export default function HomepageDemo4() {
         ══════════════════════════════════════════════════════════════════════ */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-3 lg:gap-4" style={{ minHeight: '92vh' }}>
 
-          {/* Module 1A — Vidéo + Titre principal (grand) */}
+          {/* Colonne gauche (1/3) — Widgets Météo + Date + Slider projets */}
+          <div className="lg:col-span-4 flex flex-col gap-3 lg:gap-4">
+
+            {/* Module 1B — Widgets Météo + Date (néomorphique, côte à côte) */}
+            <div className="flex flex-row gap-3 lg:gap-4 flex-1">
+              <div
+                className="rounded-3xl flex flex-col items-center justify-center p-6 lg:p-8 flex-1 min-h-[140px] min-w-0"
+                style={{
+                  background: 'linear-gradient(145deg, rgba(255,255,255,0.9) 0%, rgba(245,243,239,0.95) 100%)',
+                  boxShadow: '6px 6px 12px rgba(0,0,0,0.08), -6px -6px 12px rgba(255,255,255,0.8), inset 1px 1px 0 rgba(255,255,255,0.5)',
+                }}
+              >
+                <Sun className="w-8 h-8 mb-2 text-gray-700" strokeWidth={1.5} />
+                <span className="font-heading font-black text-4xl lg:text-5xl text-gray-800 leading-none">
+                  24<span className="text-xl font-bold align-top ml-0.5">°C</span>
+                </span>
+                <span className="text-gray-500 text-sm mt-2">Montréal, Québec</span>
+              </div>
+              <div
+                className="rounded-3xl flex flex-col justify-center p-6 lg:p-8 flex-1 min-h-[140px] min-w-0"
+                style={{
+                  background: 'linear-gradient(145deg, rgba(255,255,255,0.9) 0%, rgba(245,243,239,0.95) 100%)',
+                  boxShadow: '6px 6px 12px rgba(0,0,0,0.08), -6px -6px 12px rgba(255,255,255,0.8), inset 1px 1px 0 rgba(255,255,255,0.5)',
+                }}
+              >
+                <p className="text-gray-600 text-sm mb-1">Bon lundi <span className="text-purple-500">♥</span></p>
+                <span className="font-heading font-black text-4xl lg:text-5xl text-gray-800 leading-none">23</span>
+                <span className="text-gray-500 text-sm mt-2">février 2026</span>
+              </div>
+            </div>
+
+            {/* Module 1C — Slider projets / portfolio */}
+            <HeroProjectSlider />
+
+          </div>
+
+          {/* Colonne droite (2/3) — Vidéo + Titre principal */}
           <div className="lg:col-span-8 relative overflow-hidden rounded-3xl bg-black" style={{ minHeight: '92vh' }}>
             <video
               ref={videoRef}
@@ -558,49 +588,13 @@ export default function HomepageDemo4() {
               </div>
             </div>
           </div>
-
-          {/* Colonne droite — 2 modules empilés */}
-          <div className="lg:col-span-4 flex flex-col gap-3 lg:gap-4">
-
-            {/* Module 1B — Widgets Météo + Date (néomorphique) */}
-            <div className="flex flex-col gap-3 lg:gap-4 flex-1">
-              <div
-                className="rounded-3xl flex flex-col items-center justify-center p-6 lg:p-8 flex-1 min-h-[140px]"
-                style={{
-                  background: 'linear-gradient(145deg, rgba(255,255,255,0.9) 0%, rgba(245,243,239,0.95) 100%)',
-                  boxShadow: '6px 6px 12px rgba(0,0,0,0.08), -6px -6px 12px rgba(255,255,255,0.8), inset 1px 1px 0 rgba(255,255,255,0.5)',
-                }}
-              >
-                <Sun className="w-8 h-8 mb-2 text-gray-700" strokeWidth={1.5} />
-                <span className="font-heading font-black text-4xl lg:text-5xl text-gray-800 leading-none">
-                  24<span className="text-xl font-bold align-top ml-0.5">°C</span>
-                </span>
-                <span className="text-gray-500 text-sm mt-2">Montréal, Québec</span>
-              </div>
-              <div
-                className="rounded-3xl flex flex-col justify-center p-6 lg:p-8 flex-1 min-h-[140px]"
-                style={{
-                  background: 'linear-gradient(145deg, rgba(255,255,255,0.9) 0%, rgba(245,243,239,0.95) 100%)',
-                  boxShadow: '6px 6px 12px rgba(0,0,0,0.08), -6px -6px 12px rgba(255,255,255,0.8), inset 1px 1px 0 rgba(255,255,255,0.5)',
-                }}
-              >
-                <p className="text-gray-600 text-sm mb-1">Bon lundi <span className="text-purple-500">♥</span></p>
-                <span className="font-heading font-black text-4xl lg:text-5xl text-gray-800 leading-none">23</span>
-                <span className="text-gray-500 text-sm mt-2">février 2026</span>
-              </div>
-            </div>
-
-            {/* Module 1C — Slider projets / portfolio */}
-            <HeroProjectSlider />
-
-          </div>
         </div>
 
         {/* ══════════════════════════════════════════════════════════════════════
-            MODULE 2 — CARROUSEL LOGOS (centré comme demo3)
+            MODULE 2 — CARROUSEL LOGOS (bord à bord)
         ══════════════════════════════════════════════════════════════════════ */}
-        <div className="max-w-5xl mx-auto">
-          <DoubleLogoCarousel title="Trusted by ambitious organizations" className="rounded-3xl" />
+        <div className="-mx-3 lg:-mx-4">
+          <DoubleLogoCarousel title="Trusted by ambitious organizations" />
         </div>
 
         {/* ══════════════════════════════════════════════════════════════════════
