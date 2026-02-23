@@ -41,6 +41,15 @@
 /* NON-CRITICAL FONTS - Loaded on demand via lazy CSS */
 /* Medium, XBold, Black, and italic variants are loaded dynamically when needed */
 
+/* Hide scrollbar while allowing scroll */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
 /* Glass Dark Effect for Header */
 .glass-dark {
   background: rgba(0, 0, 0, 0.2);
