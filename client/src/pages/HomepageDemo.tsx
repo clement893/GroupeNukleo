@@ -97,32 +97,29 @@ const TEAM_MEMBERS = [
 ];
 
 function TeamStackSection() {
-  const containerRef = useRef<HTMLDivElement>(null);
   const [activeIndex, setActiveIndex] = useState(0);
 
-  useEffect(() => {
-    const container = containerRef.current;
-    if (!container) return;
-    const handleScroll = () => {
-      const { scrollTop, scrollHeight, clientHeight } = container;
-      const scrollable = scrollHeight - clientHeight;
-      const progress = scrollTop / scrollable;
-      const idx = Math.min(
-        TEAM_MEMBERS.length - 1,
-        Math.floor(progress * TEAM_MEMBERS.length)
-      );
-      setActiveIndex(idx);
-    };
-    container.addEventListener('scroll', handleScroll);
-    return () => container.removeEventListener('scroll', handleScroll);
-  }, []);
+  const goTo = (i: number) => setActiveIndex(i);
+  const prev = () => setActiveIndex((a) => Math.max(0, a - 1));
+  const next = () => setActiveIndex((a) => Math.min(TEAM_MEMBERS.length - 1, a + 1));
+
+  // Wheel handler pour naviguer avec la molette
+  const handleWheel = (e: React.WheelEvent) => {
+    e.preventDefault();
+    if (e.deltaY > 0) next();
+    else prev();
+  };
 
   return (
-    <div className="rounded-3xl overflow-hidden" style={{ background: DARK, minHeight: '600px' }}>
-      <div className="grid grid-cols-1 lg:grid-cols-2 h-full" style={{ minHeight: '600px' }}>
+    <div
+      className="rounded-3xl overflow-hidden"
+      style={{ background: DARK, minHeight: '700px' }}
+      onWheel={handleWheel}
+    >
+      <div className="flex flex-col lg:flex-row h-full" style={{ minHeight: '700px' }}>
 
-        {/* Colonne gauche — info membre */}
-        <div className="flex flex-col justify-between p-12 lg:p-16">
+        {/* Colonne gauche — titre + info membre */}
+        <div className="flex flex-col justify-between p-12 lg:p-16 lg:w-2/5">
           <div>
             <p className="text-white/30 text-[10px] font-medium tracking-[0.35em] uppercase mb-12">The Team</p>
             <h2
@@ -133,82 +130,129 @@ function TeamStackSection() {
             </h2>
           </div>
           <div>
-            <div style={{ minHeight: '80px' }}>
+            <div style={{ minHeight: '90px' }}>
               <p
-                className="font-heading font-bold text-white text-2xl lg:text-3xl leading-tight transition-all duration-400"
+                className="font-heading font-bold text-white text-2xl lg:text-3xl leading-tight"
                 key={activeIndex}
+                style={{ animation: 'fadeUp 0.4s ease forwards' }}
               >
                 {TEAM_MEMBERS[activeIndex].name}
               </p>
               <p className="text-white/40 text-sm mt-2">{TEAM_MEMBERS[activeIndex].role}</p>
             </div>
+            {/* Dots navigation */}
             <div className="flex gap-2 mt-8">
-              {TEAM_MEMBERS.map((m, i) => (
+              {TEAM_MEMBERS.map((_, i) => (
                 <button
                   key={i}
-                  onClick={() => {
-                    const container = containerRef.current;
-                    if (!container) return;
-                    const scrollable = container.scrollHeight - container.clientHeight;
-                    container.scrollTo({ top: (i / (TEAM_MEMBERS.length - 1)) * scrollable, behavior: 'smooth' });
-                  }}
+                  onClick={() => goTo(i)}
                   className="h-[3px] rounded-full transition-all duration-300"
                   style={{
                     width: i === activeIndex ? '32px' : '12px',
-                    background: i === activeIndex ? TEAM_MEMBERS[i].color : 'rgba(255,255,255,0.2)',
+                    background: i === activeIndex ? TEAM_MEMBERS[activeIndex].color : 'rgba(255,255,255,0.2)',
                   }}
                 />
               ))}
             </div>
+            {/* Flèches */}
+            <div className="flex gap-3 mt-6">
+              <button
+                onClick={prev}
+                disabled={activeIndex === 0}
+                className="w-10 h-10 rounded-full border border-white/15 flex items-center justify-center text-white/50 hover:text-white hover:border-white/40 transition-all disabled:opacity-20"
+              >
+                ↑
+              </button>
+              <button
+                onClick={next}
+                disabled={activeIndex === TEAM_MEMBERS.length - 1}
+                className="w-10 h-10 rounded-full border border-white/15 flex items-center justify-center text-white/50 hover:text-white hover:border-white/40 transition-all disabled:opacity-20"
+              >
+                ↓
+              </button>
+            </div>
           </div>
         </div>
 
-        {/* Colonne droite — stack scroll */}
-        <div
-          ref={containerRef}
-          className="relative overflow-y-auto"
-          style={{ perspective: '1200px', height: '600px' }}
-        >
-          <div style={{ height: `${TEAM_MEMBERS.length * 100}%` }} />
-          <div className="sticky top-0 h-full flex items-center justify-center p-8" style={{ perspective: '1200px' }}>
-            <div className="relative w-full" style={{ height: '480px', transformStyle: 'preserve-3d' }}>
-              {TEAM_MEMBERS.map((member, i) => {
-                const offset = i - activeIndex;
-                const isActive = i === activeIndex;
-                const isBehind = offset > 0;
-                const isGone = offset < 0;
-                const scale = isActive ? 1 : isBehind ? Math.max(0.82, 1 - offset * 0.06) : 1;
-                const translateY = isActive ? '0%' : isBehind ? `${offset * 18}px` : '-110%';
-                const translateZ = isActive ? '0px' : isBehind ? `${-offset * 60}px` : '0px';
-                const opacity = isGone ? 0 : isBehind ? Math.max(0, 1 - offset * 0.25) : 1;
-                const zIndex = isActive ? TEAM_MEMBERS.length : isBehind ? TEAM_MEMBERS.length - offset : 0;
-                return (
+        {/* Colonne droite — stack vertical centré */}
+        <div className="flex-1 flex items-center justify-center p-8 lg:p-12" style={{ perspective: '1400px' }}>
+          {/* Conteneur du stack — format portrait centré */}
+          <div
+            className="relative"
+            style={{
+              width: '280px',
+              height: '420px',
+              transformStyle: 'preserve-3d',
+            }}
+          >
+            {TEAM_MEMBERS.map((member, i) => {
+              const offset = i - activeIndex;
+              const isActive = i === activeIndex;
+              const isBelow = offset > 0;  // cartes qui attendent en bas
+              const isAbove = offset < 0;  // cartes déjà passées (sortent vers le haut)
+
+              // Carte active : au centre, pleine taille
+              // Cartes en dessous : légèrement décalées vers le bas + réduites + en retrait Z
+              // Cartes au-dessus : sortent vers le haut (translateY négatif)
+              const translateY = isActive
+                ? '0px'
+                : isBelow
+                ? `${offset * 22}px`
+                : `${offset * 120}px`; // sort vers le haut
+
+              const translateZ = isActive
+                ? '0px'
+                : isBelow
+                ? `${-offset * 55}px`
+                : '0px';
+
+              const scale = isActive ? 1 : isBelow ? Math.max(0.78, 1 - offset * 0.07) : 0.95;
+              const opacity = isAbove ? 0 : isBelow ? Math.max(0.15, 1 - offset * 0.28) : 1;
+              const zIndex = isActive ? 50 : isBelow ? 50 - offset : 0;
+
+              return (
+                <div
+                  key={member.name}
+                  className="absolute inset-0 rounded-2xl overflow-hidden cursor-pointer"
+                  onClick={() => isBelow && goTo(i)}
+                  style={{
+                    transform: `translateY(${translateY}) translateZ(${translateZ}) scale(${scale})`,
+                    opacity,
+                    zIndex,
+                    transition: 'transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94), opacity 0.5s ease',
+                    transformStyle: 'preserve-3d',
+                    boxShadow: isActive
+                      ? '0 50px 100px rgba(0,0,0,0.7), 0 0 0 1px rgba(255,255,255,0.08)'
+                      : '0 15px 35px rgba(0,0,0,0.5)',
+                  }}
+                >
+                  <img
+                    src={member.img}
+                    alt={member.name}
+                    className="w-full h-full object-cover"
+                    style={{ filter: isActive ? 'grayscale(0)' : 'grayscale(0.6) brightness(0.7)' }}
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
+                  {/* Badge rôle — visible uniquement sur la carte active */}
                   <div
-                    key={member.name}
-                    className="absolute inset-0 rounded-2xl overflow-hidden"
+                    className="absolute bottom-5 left-5 px-4 py-2 rounded-full text-white text-xs font-semibold"
                     style={{
-                      transform: `translateY(${translateY}) translateZ(${translateZ}) scale(${scale})`,
-                      opacity,
-                      zIndex,
-                      transition: 'transform 0.55s cubic-bezier(0.25, 0.46, 0.45, 0.94), opacity 0.45s ease',
-                      transformStyle: 'preserve-3d',
-                      boxShadow: isActive
-                        ? '0 40px 80px rgba(0,0,0,0.6), 0 0 0 1px rgba(255,255,255,0.06)'
-                        : '0 20px 40px rgba(0,0,0,0.4)',
+                      background: member.color,
+                      opacity: isActive ? 1 : 0,
+                      transition: 'opacity 0.35s ease',
                     }}
                   >
-                    <img src={member.img} alt={member.name} className="w-full h-full object-cover" style={{ filter: isActive ? 'grayscale(0)' : 'grayscale(0.4)' }} />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
-                    <div
-                      className="absolute bottom-5 left-5 px-4 py-2 rounded-full text-white text-xs font-semibold"
-                      style={{ background: member.color, opacity: isActive ? 1 : 0, transition: 'opacity 0.3s ease' }}
-                    >
-                      {member.role}
-                    </div>
+                    {member.role}
                   </div>
-                );
-              })}
-            </div>
+                  {/* Numéro de position sur les cartes en dessous */}
+                  {isBelow && offset <= 2 && (
+                    <div className="absolute top-4 right-4 text-white/30 font-heading font-black text-sm">
+                      0{i + 1}
+                    </div>
+                  )}
+                </div>
+              );
+            })}
           </div>
         </div>
 
