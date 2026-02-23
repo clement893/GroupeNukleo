@@ -181,6 +181,97 @@ function TeamStack() {
   );
 }
 
+// ─── MACBOOK MOCKUP ───────────────────────────────────────────────────────────
+const PROJECTS_DATA = [
+  { name: 'MBAM',      cat: 'Brand & Digital',  img: WORK1, color: BLUE   },
+  { name: 'SummitLaw', cat: 'Brand & Creative', img: WORK2, color: PURPLE },
+  { name: 'QueerTech', cat: 'AI & Platform',    img: WORK3, color: GREEN  },
+];
+
+function MacbookMockup() {
+  const [current, setCurrent] = useState(0);
+
+  useEffect(() => {
+    const t = setInterval(() => setCurrent(i => (i + 1) % PROJECTS_DATA.length), 3000);
+    return () => clearInterval(t);
+  }, []);
+
+  return (
+    <div style={{
+      width: '88%', maxWidth: 560,
+      transform: 'perspective(1400px) rotateX(4deg)',
+      filter: 'drop-shadow(0 40px 70px rgba(80,40,180,0.18))',
+    }}>
+      {/* Chassis MacBook */}
+      <div style={{
+        background: 'linear-gradient(180deg, #d0d0d0 0%, #b8b8b8 100%)',
+        borderRadius: '16px 16px 0 0',
+        padding: '10px 10px 0',
+        boxShadow: 'inset 0 1px 0 rgba(255,255,255,0.6)',
+      }}>
+        {/* Écran */}
+        <div style={{
+          background: '#000',
+          borderRadius: '8px 8px 0 0',
+          overflow: 'hidden',
+          aspectRatio: '16/10',
+          position: 'relative',
+        }}>
+          {/* Contenu de l'écran — projet actif */}
+          {PROJECTS_DATA.map((proj, i) => (
+            <div
+              key={proj.name}
+              style={{
+                position: 'absolute', inset: 0,
+                opacity: i === current ? 1 : 0,
+                transition: 'opacity 0.7s ease',
+              }}
+            >
+              <img src={proj.img} alt={proj.name} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+              <div style={{
+                position: 'absolute', inset: 0,
+                background: 'linear-gradient(to top, rgba(0,0,0,0.72) 0%, transparent 55%)',
+              }} />
+              {/* Barre nav simulée */}
+              <div style={{
+                position: 'absolute', top: 0, left: 0, right: 0,
+                height: 28, background: 'rgba(255,255,255,0.92)',
+                display: 'flex', alignItems: 'center', gap: 6, padding: '0 10px',
+              }}>
+                <div style={{ width: 8, height: 8, borderRadius: '50%', background: '#ff5f57' }} />
+                <div style={{ width: 8, height: 8, borderRadius: '50%', background: '#febc2e' }} />
+                <div style={{ width: 8, height: 8, borderRadius: '50%', background: '#28c840' }} />
+                <div style={{ flex: 1, height: 16, borderRadius: 4, background: '#e8e8e8', margin: '0 8px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                  <span style={{ fontSize: 8, color: '#999' }}>nukleo.digital/{proj.name.toLowerCase()}</span>
+                </div>
+              </div>
+              {/* Infos projet en bas */}
+              <div style={{ position: 'absolute', bottom: 14, left: 14, right: 14 }}>
+                <span style={{ fontSize: 9, color: 'rgba(255,255,255,0.5)', letterSpacing: '0.2em', textTransform: 'uppercase' }}>{proj.cat}</span>
+                <p style={{ color: '#fff', fontWeight: 800, fontSize: 18, lineHeight: 1.1, margin: '3px 0 6px', letterSpacing: '-0.02em' }}>{proj.name}</p>
+                <div style={{ display: 'flex', gap: 6 }}>
+                  {PROJECTS_DATA.map((_, j) => (
+                    <div key={j} style={{ width: j === current ? 16 : 5, height: 3, borderRadius: 2, background: j === current ? proj.color : 'rgba(255,255,255,0.3)', transition: 'all 0.4s' }} />
+                  ))}
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+      {/* Base MacBook */}
+      <div style={{
+        background: 'linear-gradient(180deg, #c0c0c0 0%, #a8a8a8 100%)',
+        height: 14, borderRadius: '0 0 4px 4px',
+        boxShadow: '0 4px 12px rgba(0,0,0,0.2)',
+        display: 'flex', alignItems: 'center', justifyContent: 'center',
+      }}>
+        <div style={{ width: 60, height: 4, borderRadius: 2, background: 'rgba(0,0,0,0.15)' }} />
+      </div>
+    </div>
+  );
+}
+
 // ─── PROJECTS TRIPTYCH ─────────────────────────────────────────────────────
 const PROJECTS = [
   { num: '01', name: 'MBAM',       cat: 'Brand & Digital',  tagline: 'Redefining cultural engagement online.',          result: '+240% reach',      img: WORK1, color: BLUE   },
@@ -474,22 +565,9 @@ export default function HomepageDemo2() {
             </Tile>
           </div>
 
-          {/* ── Colonne droite : MacBook ── */}
-          <Tile bg="" style={{ position: 'relative', minHeight: 480, overflow: 'hidden', background: 'linear-gradient(160deg, #f8f6ff 0%, #f0f4ff 40%, #fafaf8 100%)' }}>
-            <div style={{ position: 'absolute', inset: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '2rem' }}>
-              <img
-                src={HERO_IMAGE}
-                alt="Nukleo work"
-                style={{
-                  width: '90%',
-                  maxWidth: 600,
-                  height: 'auto',
-                  objectFit: 'contain',
-                  filter: 'drop-shadow(0 40px 60px rgba(0,0,0,0.25))',
-                  transform: 'perspective(1200px) rotateX(4deg)',
-                }}
-              />
-            </div>
+          {/* ── Colonne droite : MacBook avec projets animés ── */}
+          <Tile bg="" style={{ position: 'relative', minHeight: 480, overflow: 'hidden', background: 'linear-gradient(160deg, #f8f6ff 0%, #f0f4ff 40%, #fafaf8 100%)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            <MacbookMockup />          
           </Tile>
         </div>
 
