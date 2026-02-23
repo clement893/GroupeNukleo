@@ -496,6 +496,21 @@ export default function HomepageDemo4() {
       <div className="relative z-10 p-3 lg:p-4 flex flex-col gap-[16px] lg:gap-[22px]">
 
         {/* ══════════════════════════════════════════════════════════════════════
+            NOUVEAU HÉRO — TITRE PRINCIPAL
+        ══════════════════════════════════════════════════════════════════════ */}
+        <div className="px-2 sm:px-4 pt-4 lg:pt-8">
+          <h1
+            className="font-heading font-black leading-[0.9] tracking-tight text-center"
+            style={{
+              fontSize: 'clamp(2.5rem, 8vw, 6.5rem)',
+              color: DARK,
+            }}
+          >
+            Augmenter votre <span style={{ color: NUKLEO_PURPLE }}>Performance</span> par L&apos;<span style={{ color: NUKLEO_PURPLE }}>Excellence</span> numérique
+          </h1>
+        </div>
+
+        {/* ══════════════════════════════════════════════════════════════════════
             MODULE 1 — HERO EN 3 MODULES DISTINCTS
         ══════════════════════════════════════════════════════════════════════ */}
         <div className="grid grid-cols-1 lg:grid-cols-[65fr_35fr] gap-3 lg:gap-4" style={{ minHeight: '92vh' }}>
@@ -524,16 +539,9 @@ export default function HomepageDemo4() {
                 </span>
               </div>
 
-              {/* Titre massif */}
+              {/* Sous-titre */}
               <div>
-                <h1
-                  className="font-heading font-black text-white leading-[0.92] tracking-tight"
-                  style={{ fontSize: 'clamp(4.5rem, 11vw, 13rem)' }}
-                >
-                  Augmenter votre<br />
-                  <span style={{ color: NUKLEO_PURPLE }}>performance</span>
-                </h1>
-                <p className="text-white/40 text-sm lg:text-base mt-6 max-w-md leading-relaxed">
+                <p className="text-white/40 text-sm lg:text-base max-w-md leading-relaxed">
                   For ambitious organizations — any size.
                 </p>
               </div>
