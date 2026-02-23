@@ -55,12 +55,45 @@ const DEPTS = [
   { num: '04', name: 'Nukleo.Consulting', desc: 'You move with clarity, not hesitation.', color: '#059669', href: '/services/consulting' },
 ];
 
+const PROJECTS = [
+  {
+    num: '00-1',
+    name: 'MBAM',
+    category: 'Brand & Digital',
+    tagline: 'Redefining cultural engagement online.',
+    result: '+240% digital reach · 2024',
+    img: WORK1,
+    color: '#2563eb',
+    word: 'CULTURE',
+  },
+  {
+    num: '00-2',
+    name: 'SummitLaw',
+    category: 'Brand & Creative',
+    tagline: 'A law firm that finally looks like its ambition.',
+    result: '+180% qualified leads · 2024',
+    img: WORK2,
+    color: NUKLEO_PURPLE,
+    word: 'BRAND',
+  },
+  {
+    num: '00-3',
+    name: 'QueerTech',
+    category: 'AI & Platform',
+    tagline: 'Technology built for belonging.',
+    result: '+220% member engagement · 2023',
+    img: WORK3,
+    color: '#059669',
+    word: 'TECH',
+  },
+];
+
 // ─── TEAM STACK SECTION ────────────────────────────────────────────────────
 const TEAM_MEMBERS = [
-  { name: 'Clément Laberge', role: 'Founder & CEO', img: '/demo/team.jpg', color: '#7c3aed' },
-  { name: 'Marie-Ève Tremblay', role: 'Creative Director', img: '/demo/work1.jpg', color: '#f97316' },
-  { name: 'Alexandre Côté', role: 'Head of Tech', img: '/demo/work2.jpg', color: '#2563eb' },
-  { name: 'Sophie Nguyen', role: 'Strategy Lead', img: '/demo/work3.jpg', color: '#059669' },
+  { name: 'Clément Laberge', role: 'Founder & CEO', img: TEAM_IMAGE, color: '#7c3aed' },
+  { name: 'Marie-Ève Tremblay', role: 'Creative Director', img: WORK1, color: '#f97316' },
+  { name: 'Alexandre Côté', role: 'Head of Tech', img: WORK2, color: '#2563eb' },
+  { name: 'Sophie Nguyen', role: 'Strategy Lead', img: WORK3, color: '#059669' },
 ];
 
 function TeamStackSection() {
@@ -70,11 +103,9 @@ function TeamStackSection() {
   useEffect(() => {
     const container = containerRef.current;
     if (!container) return;
-
     const handleScroll = () => {
       const { scrollTop, scrollHeight, clientHeight } = container;
       const scrollable = scrollHeight - clientHeight;
-      if (scrollable <= 0) return;
       const progress = scrollTop / scrollable;
       const idx = Math.min(
         TEAM_MEMBERS.length - 1,
@@ -82,52 +113,37 @@ function TeamStackSection() {
       );
       setActiveIndex(idx);
     };
-
-    container.addEventListener('scroll', handleScroll, { passive: true });
+    container.addEventListener('scroll', handleScroll);
     return () => container.removeEventListener('scroll', handleScroll);
   }, []);
 
   return (
-    <div className="rounded-3xl overflow-hidden" style={{ background: '#0A0A0A', minHeight: '600px' }}>
-      <div className="flex flex-col lg:flex-row h-full" style={{ minHeight: '600px' }}>
+    <div className="rounded-3xl overflow-hidden" style={{ background: DARK, minHeight: '600px' }}>
+      <div className="grid grid-cols-1 lg:grid-cols-2 h-full" style={{ minHeight: '600px' }}>
 
-        {/* Colonne gauche — titre + navigation dots */}
-        <div className="lg:w-2/5 flex flex-col justify-between p-12 lg:p-16">
+        {/* Colonne gauche — info membre */}
+        <div className="flex flex-col justify-between p-12 lg:p-16">
           <div>
-            <p className="text-white/30 text-[10px] font-medium tracking-[0.35em] uppercase mb-6">The Team</p>
+            <p className="text-white/30 text-[10px] font-medium tracking-[0.35em] uppercase mb-12">The Team</p>
             <h2
-              className="font-heading font-black text-white leading-none tracking-tight"
+              className="font-heading font-black text-white leading-[0.88] tracking-tight mb-10"
               style={{ fontSize: 'clamp(2.5rem, 4vw, 5rem)' }}
             >
-              People<br />
-              <span style={{ color: '#7c3aed' }}>behind<br />the work.</span>
+              People<br />behind<br />the work.
             </h2>
           </div>
-
-          {/* Info membre actif */}
-          <div className="mt-auto">
-            {TEAM_MEMBERS.map((member, i) => (
-              <div
-                key={member.name}
-                className="transition-all duration-500"
-                style={{
-                  opacity: i === activeIndex ? 1 : 0,
-                  position: i === activeIndex ? 'relative' : 'absolute',
-                  pointerEvents: i === activeIndex ? 'auto' : 'none',
-                }}
+          <div>
+            <div style={{ minHeight: '80px' }}>
+              <p
+                className="font-heading font-bold text-white text-2xl lg:text-3xl leading-tight transition-all duration-400"
+                key={activeIndex}
               >
-                <p
-                  className="font-heading font-bold text-white text-2xl lg:text-3xl leading-tight mb-2"
-                >
-                  {member.name}
-                </p>
-                <p className="text-sm" style={{ color: member.color }}>{member.role}</p>
-              </div>
-            ))}
-
-            {/* Dots de navigation */}
-            <div className="flex items-center gap-3 mt-8">
-              {TEAM_MEMBERS.map((_, i) => (
+                {TEAM_MEMBERS[activeIndex].name}
+              </p>
+              <p className="text-white/40 text-sm mt-2">{TEAM_MEMBERS[activeIndex].role}</p>
+            </div>
+            <div className="flex gap-2 mt-8">
+              {TEAM_MEMBERS.map((m, i) => (
                 <button
                   key={i}
                   onClick={() => {
@@ -136,10 +152,9 @@ function TeamStackSection() {
                     const scrollable = container.scrollHeight - container.clientHeight;
                     container.scrollTo({ top: (i / (TEAM_MEMBERS.length - 1)) * scrollable, behavior: 'smooth' });
                   }}
-                  className="transition-all duration-300 rounded-full"
+                  className="h-[3px] rounded-full transition-all duration-300"
                   style={{
-                    width: i === activeIndex ? '28px' : '8px',
-                    height: '8px',
+                    width: i === activeIndex ? '32px' : '12px',
                     background: i === activeIndex ? TEAM_MEMBERS[i].color : 'rgba(255,255,255,0.2)',
                   }}
                 />
@@ -148,46 +163,25 @@ function TeamStackSection() {
           </div>
         </div>
 
-        {/* Colonne droite — stack de cartes scrollable */}
-        <div className="lg:w-3/5 relative" style={{ minHeight: '600px' }}>
-          {/* Zone de scroll invisible pour capturer le scroll */}
-          <div
-            ref={containerRef}
-            className="absolute inset-0 overflow-y-scroll"
-            style={{ scrollbarWidth: 'none' }}
-          >
-            {/* Hauteur scrollable = nb de membres × hauteur viewport */}
-            <div style={{ height: `${TEAM_MEMBERS.length * 100}%` }} />
-          </div>
-
-          {/* Stack de cartes — positionnées en perspective */}
-          <div
-            className="absolute inset-0 flex items-center justify-center"
-            style={{ perspective: '1200px', perspectiveOrigin: '50% 50%' }}
-          >
-            <div className="relative" style={{ width: '75%', aspectRatio: '3/4' }}>
+        {/* Colonne droite — stack scroll */}
+        <div
+          ref={containerRef}
+          className="relative overflow-y-auto"
+          style={{ perspective: '1200px', height: '600px' }}
+        >
+          <div style={{ height: `${TEAM_MEMBERS.length * 100}%` }} />
+          <div className="sticky top-0 h-full flex items-center justify-center p-8" style={{ perspective: '1200px' }}>
+            <div className="relative w-full" style={{ height: '480px', transformStyle: 'preserve-3d' }}>
               {TEAM_MEMBERS.map((member, i) => {
                 const offset = i - activeIndex;
                 const isActive = i === activeIndex;
                 const isBehind = offset > 0;
                 const isGone = offset < 0;
-
-                // Carte active : pleine taille, au premier plan
-                // Cartes derrière : légèrement plus petites, décalées vers le bas, en perspective
-                // Cartes passées : sorties vers le haut
-
                 const scale = isActive ? 1 : isBehind ? Math.max(0.82, 1 - offset * 0.06) : 1;
-                const translateY = isActive ? '0%'
-                  : isBehind ? `${offset * 18}px`
-                  : '-110%';
-                const translateZ = isActive ? '0px'
-                  : isBehind ? `${-offset * 60}px`
-                  : '0px';
+                const translateY = isActive ? '0%' : isBehind ? `${offset * 18}px` : '-110%';
+                const translateZ = isActive ? '0px' : isBehind ? `${-offset * 60}px` : '0px';
                 const opacity = isGone ? 0 : isBehind ? Math.max(0, 1 - offset * 0.25) : 1;
-                const zIndex = isActive ? TEAM_MEMBERS.length
-                  : isBehind ? TEAM_MEMBERS.length - offset
-                  : 0;
-
+                const zIndex = isActive ? TEAM_MEMBERS.length : isBehind ? TEAM_MEMBERS.length - offset : 0;
                 return (
                   <div
                     key={member.name}
@@ -203,15 +197,8 @@ function TeamStackSection() {
                         : '0 20px 40px rgba(0,0,0,0.4)',
                     }}
                   >
-                    <img
-                      src={member.img}
-                      alt={member.name}
-                      className="w-full h-full object-cover"
-                      style={{ filter: isActive ? 'grayscale(0)' : 'grayscale(0.4)' }}
-                    />
-                    {/* Overlay gradient bas */}
+                    <img src={member.img} alt={member.name} className="w-full h-full object-cover" style={{ filter: isActive ? 'grayscale(0)' : 'grayscale(0.4)' }} />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
-                    {/* Badge couleur en bas */}
                     <div
                       className="absolute bottom-5 left-5 px-4 py-2 rounded-full text-white text-xs font-semibold"
                       style={{ background: member.color, opacity: isActive ? 1 : 0, transition: 'opacity 0.3s ease' }}
@@ -230,6 +217,153 @@ function TeamStackSection() {
   );
 }
 
+// ─── PROJECTS CAROUSEL ─────────────────────────────────────────────────────
+function ProjectsCarousel() {
+  const [active, setActive] = useState(1); // 0, 1, 2
+
+  const prev = () => setActive((a) => Math.max(0, a - 1));
+  const next = () => setActive((a) => Math.min(PROJECTS.length - 1, a + 1));
+
+  return (
+    <div className="rounded-3xl overflow-hidden relative" style={{ background: DARK, minHeight: '85vh' }}>
+
+      {/* Grand mot typographique en fond */}
+      <div
+        className="absolute inset-0 flex items-end justify-center pb-8 pointer-events-none select-none"
+        style={{ zIndex: 1 }}
+      >
+        <span
+          className="font-heading font-black text-white leading-none tracking-tight transition-all duration-500"
+          style={{ fontSize: 'clamp(8rem, 22vw, 22rem)', opacity: 0.04 }}
+        >
+          {PROJECTS[active].word}
+        </span>
+      </div>
+
+      {/* Numéro actif */}
+      <div className="absolute top-10 left-10 z-10">
+        <span className="font-heading font-black text-white leading-none" style={{ fontSize: 'clamp(2.5rem, 5vw, 5rem)', opacity: 0.9 }}>
+          {PROJECTS[active].num}
+        </span>
+      </div>
+
+      {/* Catégorie */}
+      <div className="absolute top-10 right-10 z-10">
+        <span className="text-white/40 text-[10px] font-medium tracking-[0.35em] uppercase">
+          {PROJECTS[active].category}
+        </span>
+      </div>
+
+      {/* Panneaux latéraux — projet précédent */}
+      {active > 0 && (
+        <button
+          onClick={prev}
+          className="absolute left-0 top-0 bottom-0 z-20 flex flex-col justify-end items-start p-8 lg:p-12 cursor-pointer group"
+          style={{ width: '12%' }}
+        >
+          <div className="absolute inset-0" style={{ background: 'rgba(0,0,0,0.55)' }} />
+          <div className="relative z-10">
+            <span className="font-heading font-bold text-white/40 group-hover:text-white/80 transition-colors text-sm leading-none block mb-1">
+              {PROJECTS[active - 1].num}
+            </span>
+            <span className="text-white/25 group-hover:text-white/50 transition-colors text-[10px] font-medium tracking-widest uppercase writing-mode-vertical">
+              {PROJECTS[active - 1].name}
+            </span>
+          </div>
+        </button>
+      )}
+
+      {/* Panneau central — image principale */}
+      <div
+        className="absolute top-0 bottom-0 z-10 overflow-hidden transition-all duration-500"
+        style={{
+          left: active > 0 ? '12%' : '0%',
+          right: active < PROJECTS.length - 1 ? '12%' : '0%',
+        }}
+      >
+        <img
+          src={PROJECTS[active].img}
+          alt={PROJECTS[active].name}
+          className="absolute inset-0 w-full h-full object-cover transition-all duration-700"
+          style={{ filter: 'brightness(0.6) saturate(0.85)' }}
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-transparent" />
+
+        {/* Contenu central */}
+        <div className="absolute bottom-0 left-0 right-0 p-10 lg:p-16 z-10">
+          <p className="text-white/45 text-[10px] font-medium tracking-[0.35em] uppercase mb-4">
+            {PROJECTS[active].category}
+          </p>
+          <h2
+            className="font-heading font-black text-white leading-[0.88] tracking-tight mb-4"
+            style={{ fontSize: 'clamp(2.5rem, 5vw, 6rem)' }}
+          >
+            {PROJECTS[active].name}
+          </h2>
+          <p className="text-white/60 text-base lg:text-lg leading-relaxed max-w-xl mb-8">
+            {PROJECTS[active].tagline}
+          </p>
+          <div className="flex items-center gap-6">
+            <span
+              className="inline-block px-5 py-2 rounded-full text-white text-xs font-semibold"
+              style={{ background: PROJECTS[active].color }}
+            >
+              {PROJECTS[active].result}
+            </span>
+            <Link
+              href="/projects"
+              className="text-white/50 text-xs font-semibold border-b border-white/25 pb-0.5 hover:text-white hover:border-white transition-all"
+            >
+              View case study →
+            </Link>
+          </div>
+        </div>
+      </div>
+
+      {/* Panneaux latéraux — projet suivant */}
+      {active < PROJECTS.length - 1 && (
+        <button
+          onClick={next}
+          className="absolute right-0 top-0 bottom-0 z-20 flex flex-col justify-end items-end p-8 lg:p-12 cursor-pointer group"
+          style={{ width: '12%' }}
+        >
+          <div className="absolute inset-0" style={{ background: 'rgba(0,0,0,0.55)' }} />
+          <div className="relative z-10 text-right">
+            <span className="font-heading font-bold text-white/40 group-hover:text-white/80 transition-colors text-sm leading-none block mb-1">
+              {PROJECTS[active + 1].num}
+            </span>
+            <span className="text-white/25 group-hover:text-white/50 transition-colors text-[10px] font-medium tracking-widest uppercase">
+              {PROJECTS[active + 1].name}
+            </span>
+          </div>
+        </button>
+      )}
+
+      {/* Dots navigation */}
+      <div className="absolute bottom-10 right-10 z-30 flex gap-2">
+        {PROJECTS.map((_, i) => (
+          <button
+            key={i}
+            onClick={() => setActive(i)}
+            className="rounded-full transition-all duration-300"
+            style={{
+              width: i === active ? '28px' : '8px',
+              height: '8px',
+              background: i === active ? 'white' : 'rgba(255,255,255,0.25)',
+            }}
+          />
+        ))}
+      </div>
+
+      {/* Titre section */}
+      <div className="absolute top-10 left-1/2 -translate-x-1/2 z-30">
+        <p className="text-white/30 text-[10px] font-medium tracking-[0.35em] uppercase">Selected Work</p>
+      </div>
+
+    </div>
+  );
+}
+
 export default function HomepageDemo() {
   const getLocalizedPath = useLocalizedPath();
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -241,7 +375,6 @@ export default function HomepageDemo() {
   }, []);
 
   return (
-    // Fond blanc, padding généreux autour de tous les modules
     <div className="bg-white font-sans" style={{ color: DARK }}>
 
       {/* ─── NAVIGATION ─────────────────────────────────────────────────────── */}
@@ -250,15 +383,9 @@ export default function HomepageDemo() {
           Nukleo.
         </Link>
         <div className="flex items-center gap-8">
-          <Link href={getLocalizedPath('/services')} className="text-white/60 text-[11px] font-medium tracking-widest uppercase hover:text-white transition-colors hidden lg:block">
-            Services
-          </Link>
-          <Link href={getLocalizedPath('/projects')} className="text-white/60 text-[11px] font-medium tracking-widest uppercase hover:text-white transition-colors hidden lg:block">
-            Work
-          </Link>
-          <Link href={getLocalizedPath('/about')} className="text-white/60 text-[11px] font-medium tracking-widest uppercase hover:text-white transition-colors hidden lg:block">
-            About
-          </Link>
+          <Link href={getLocalizedPath('/services')} className="text-white/60 text-[11px] font-medium tracking-widest uppercase hover:text-white transition-colors hidden lg:block">Services</Link>
+          <Link href={getLocalizedPath('/projects')} className="text-white/60 text-[11px] font-medium tracking-widest uppercase hover:text-white transition-colors hidden lg:block">Work</Link>
+          <Link href={getLocalizedPath('/about')} className="text-white/60 text-[11px] font-medium tracking-widest uppercase hover:text-white transition-colors hidden lg:block">About</Link>
           <Link
             href={getLocalizedPath('/start-project')}
             className="border border-white/60 text-white text-[11px] font-semibold px-5 py-2.5 rounded-full hover:bg-white hover:text-black transition-all duration-300"
@@ -268,72 +395,113 @@ export default function HomepageDemo() {
         </div>
       </nav>
 
-      {/* ─── WRAPPER GLOBAL : padding 16px autour de tout ───────────────────── */}
+      {/* ─── WRAPPER GLOBAL ─────────────────────────────────────────────────── */}
       <div className="p-3 lg:p-4 flex flex-col gap-3 lg:gap-4">
 
         {/* ══════════════════════════════════════════════════════════════════════
-            MODULE 1 — HERO (arrondi comme tous les autres modules)
+            MODULE 1 — HERO EN 3 MODULES DISTINCTS
         ══════════════════════════════════════════════════════════════════════ */}
-        <div className="relative overflow-hidden rounded-3xl bg-black" style={{ minHeight: '95vh' }}>
-          {/* Vidéo de fond */}
-          <video
-            ref={videoRef}
-            autoPlay muted loop playsInline
-            className="absolute inset-0 w-full h-full object-cover"
-            style={{ filter: 'brightness(0.45) saturate(0.8)' }}
-          >
-            <source src={HERO_VIDEO} type="video/mp4" />
-            <img src={HERO_IMAGE} alt="Nukleo projects" className="w-full h-full object-cover" />
-          </video>
-          <div className="absolute inset-0 bg-gradient-to-b from-black/10 via-transparent to-black/60" />
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-3 lg:gap-4" style={{ minHeight: '92vh' }}>
 
-          {/* Contenu */}
-          <div className="relative z-10 h-full flex flex-col justify-between px-8 lg:px-14 pt-32 pb-12 lg:pb-16" style={{ minHeight: '95vh' }}>
+          {/* Module 1A — Vidéo + Titre principal (grand) */}
+          <div className="lg:col-span-8 relative overflow-hidden rounded-3xl bg-black" style={{ minHeight: '92vh' }}>
+            <video
+              ref={videoRef}
+              autoPlay muted loop playsInline
+              className="absolute inset-0 w-full h-full object-cover"
+              style={{ filter: 'brightness(0.45) saturate(0.8)' }}
+            >
+              <source src={HERO_VIDEO} type="video/mp4" />
+              <img src={HERO_IMAGE} alt="Nukleo projects" className="w-full h-full object-cover" />
+            </video>
+            <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-black/70" />
 
-            {/* Label haut */}
-            <div className="flex items-center justify-between">
-              <span className="text-white/35 text-[10px] font-medium tracking-[0.35em] uppercase">
-                Digital Performance Agency · Montréal
-              </span>
-              <span className="text-white/35 text-[10px] font-medium tracking-[0.35em] uppercase hidden lg:block">
-                Est. 2018
-              </span>
-            </div>
+            <div className="relative z-10 h-full flex flex-col justify-between px-10 lg:px-14 pt-32 pb-12" style={{ minHeight: '92vh' }}>
+              {/* Label haut */}
+              <div className="flex items-center justify-between">
+                <span className="text-white/30 text-[10px] font-medium tracking-[0.35em] uppercase">
+                  Digital Performance Agency · Montréal
+                </span>
+                <span className="text-white/30 text-[10px] font-medium tracking-[0.35em] uppercase hidden lg:block">
+                  Est. 2018
+                </span>
+              </div>
 
-            {/* Titre + panneau */}
-            <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-10">
-              <h1
-                className="font-heading font-black text-white leading-[0.82] tracking-tight"
-                style={{ fontSize: 'clamp(4rem, 12vw, 14rem)' }}
-              >
-                Digital<br />
-                <span style={{ color: NUKLEO_PURPLE }}>Perfor-</span><br />
-                mance.
-              </h1>
-
-              {/* Panneau glassmorphisme */}
-              <div className="lg:max-w-[340px] shrink-0 backdrop-blur-md bg-white/6 border border-white/10 rounded-2xl px-8 py-8">
-                <p className="text-white/45 text-[10px] font-semibold uppercase tracking-[0.3em] mb-4">
+              {/* Titre massif */}
+              <div>
+                <h1
+                  className="font-heading font-black text-white leading-[0.82] tracking-tight"
+                  style={{ fontSize: 'clamp(4.5rem, 11vw, 13rem)' }}
+                >
+                  Digital<br />
+                  <span style={{ color: NUKLEO_PURPLE }}>Perfor-</span><br />
+                  mance.
+                </h1>
+                <p className="text-white/40 text-sm lg:text-base mt-6 max-w-md leading-relaxed">
                   For ambitious organizations — any size.
                 </p>
-                <p className="text-white/70 text-sm lg:text-[15px] leading-relaxed mb-8">
-                  We co-create the strategies, technologies, and creative that drive you forward — powered by AI.
+              </div>
+            </div>
+          </div>
+
+          {/* Colonne droite — 2 modules empilés */}
+          <div className="lg:col-span-4 flex flex-col gap-3 lg:gap-4">
+
+            {/* Module 1B — CTA + description */}
+            <div
+              className="rounded-3xl flex flex-col justify-between p-10 lg:p-12 flex-1"
+              style={{ background: DARK, minHeight: '300px' }}
+            >
+              <div>
+                <p className="text-white/30 text-[10px] font-medium tracking-[0.35em] uppercase mb-6">
+                  Who we are
                 </p>
+                <p className="text-white/75 text-base lg:text-lg leading-relaxed">
+                  We co-create strategies, technologies, and creative that drive ambitious organizations forward — powered by AI.
+                </p>
+              </div>
+              <div className="flex flex-col gap-3 mt-8">
                 <Link
                   href={getLocalizedPath('/start-project')}
-                  className="inline-flex items-center gap-2 bg-white text-black font-bold px-7 py-3.5 rounded-full hover:bg-white/90 transition-all duration-200 text-sm"
+                  className="inline-flex items-center justify-center gap-2 bg-white text-black font-bold px-7 py-4 rounded-full hover:bg-white/90 transition-all duration-200 text-sm"
                 >
                   Start a project →
                 </Link>
+                <Link
+                  href={getLocalizedPath('/about')}
+                  className="inline-flex items-center justify-center gap-2 border border-white/15 text-white/60 font-semibold px-7 py-4 rounded-full hover:border-white/35 hover:text-white transition-all duration-200 text-sm"
+                >
+                  Learn about us
+                </Link>
               </div>
             </div>
+
+            {/* Module 1C — Stat phare */}
+            <div
+              className="rounded-3xl flex flex-col justify-between p-10 lg:p-12 flex-1"
+              style={{ background: NUKLEO_PURPLE, minHeight: '260px' }}
+            >
+              <p className="text-white/40 text-[10px] font-medium tracking-[0.35em] uppercase">
+                Organizations served
+              </p>
+              <div>
+                <p
+                  className="font-heading font-black text-white leading-none"
+                  style={{ fontSize: 'clamp(5rem, 7vw, 9rem)' }}
+                >
+                  150+
+                </p>
+                <p className="text-white/50 text-sm mt-3">across Canada & beyond</p>
+              </div>
+            </div>
+
           </div>
         </div>
 
         {/* ══════════════════════════════════════════════════════════════════════
             MODULE 2 — CARROUSEL LOGOS
         ══════════════════════════════════════════════════════════════════════ */}
-        <div className="rounded-3xl overflow-hidden py-12" style={{ background: CREAM }}>
+        <div className="rounded-3xl overflow-hidden py-14" style={{ background: CREAM }}>
           <p className="text-center text-[10px] font-medium tracking-[0.35em] uppercase mb-10" style={{ color: `${DARK}30` }}>
             Trusted by ambitious organizations
           </p>
@@ -366,12 +534,11 @@ export default function HomepageDemo() {
         </div>
 
         {/* ══════════════════════════════════════════════════════════════════════
-            MODULE 3 — GRILLE WHO WE ARE + STATS
+            MODULE 3 — WHO WE ARE + STATS
         ══════════════════════════════════════════════════════════════════════ */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-3 lg:gap-4">
 
-          {/* Who We Are — grand module photo */}
-          <div className="lg:col-span-8 relative overflow-hidden rounded-3xl group" style={{ minHeight: '600px' }}>
+          <div className="lg:col-span-8 relative overflow-hidden rounded-3xl group" style={{ minHeight: '580px' }}>
             <img
               src={TEAM_IMAGE}
               alt="Nukleo team"
@@ -380,98 +547,64 @@ export default function HomepageDemo() {
             <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/15 to-transparent" />
             <div className="absolute bottom-0 left-0 right-0 p-10 lg:p-14">
               <p className="text-white/35 text-[10px] font-medium tracking-[0.35em] uppercase mb-5">Who We Are</p>
-              <h2
-                className="font-heading font-black text-white leading-[0.88] tracking-tight mb-6"
-                style={{ fontSize: 'clamp(2.2rem, 4.5vw, 5rem)' }}
-              >
+              <h2 className="font-heading font-black text-white leading-[0.88] tracking-tight mb-6" style={{ fontSize: 'clamp(2.2rem, 4.5vw, 5rem)' }}>
                 We make digital<br />performance tangible.
               </h2>
               <p className="text-white/55 text-[15px] leading-relaxed max-w-lg mb-8">
                 A digital performance agency co-creating strategies, technologies, and creative for ambitious organizations — with AI-powered precision.
               </p>
-              <Link
-                href={getLocalizedPath('/about')}
-                className="inline-flex items-center gap-2 text-white text-xs font-semibold border-b border-white/35 pb-1 hover:border-white transition-colors"
-              >
+              <Link href={getLocalizedPath('/about')} className="inline-flex items-center gap-2 text-white text-xs font-semibold border-b border-white/35 pb-1 hover:border-white transition-colors">
                 Our story →
               </Link>
             </div>
           </div>
 
-          {/* Colonne stats */}
           <div className="lg:col-span-4 flex flex-col gap-3 lg:gap-4">
-
-            {/* Stat 1 */}
-            <div
-              className="rounded-3xl flex flex-col justify-between p-10 flex-1"
-              style={{ background: NUKLEO_PURPLE, minHeight: '280px' }}
-            >
-              <p className="text-white/40 text-[10px] font-medium tracking-[0.35em] uppercase">Organizations served</p>
-              <div>
-                <p className="font-heading font-black text-white leading-none" style={{ fontSize: 'clamp(4rem, 6vw, 7rem)' }}>150+</p>
-                <p className="text-white/50 text-sm mt-2">across Canada & beyond</p>
-              </div>
-            </div>
-
-            {/* Stat 2 */}
-            <div
-              className="rounded-3xl flex flex-col justify-between p-10 flex-1"
-              style={{ background: CREAM, minHeight: '280px' }}
-            >
+            <div className="rounded-3xl flex flex-col justify-between p-10 flex-1" style={{ background: CREAM, minHeight: '270px' }}>
               <p className="text-[10px] font-medium tracking-[0.35em] uppercase" style={{ color: `${DARK}40` }}>Years of excellence</p>
               <div>
                 <p className="font-heading font-black leading-none" style={{ fontSize: 'clamp(4rem, 6vw, 7rem)', color: DARK }}>7+</p>
                 <p className="text-sm mt-2" style={{ color: `${DARK}50` }}>of digital performance</p>
               </div>
             </div>
-
+            <div className="rounded-3xl flex flex-col justify-between p-10 flex-1" style={{ background: DARK, minHeight: '270px' }}>
+              <p className="text-white/30 text-[10px] font-medium tracking-[0.35em] uppercase">Projects delivered</p>
+              <div>
+                <p className="font-heading font-black text-white leading-none" style={{ fontSize: 'clamp(4rem, 6vw, 7rem)' }}>300+</p>
+                <p className="text-white/40 text-sm mt-2">across all departments</p>
+              </div>
+            </div>
           </div>
         </div>
 
         {/* ══════════════════════════════════════════════════════════════════════
             MODULE 4 — DÉPARTEMENTS
         ══════════════════════════════════════════════════════════════════════ */}
-        <div className="rounded-3xl p-10 lg:p-14" style={{ background: DARK }}>
-          <div className="flex items-end justify-between mb-12">
-            <h2
-              className="font-heading font-black text-white leading-none tracking-tight"
-              style={{ fontSize: 'clamp(2rem, 4vw, 4.5rem)' }}
-            >
+        <div className="rounded-3xl p-10 lg:p-16" style={{ background: DARK }}>
+          <div className="flex items-end justify-between mb-14">
+            <h2 className="font-heading font-black text-white leading-none tracking-tight" style={{ fontSize: 'clamp(2rem, 4vw, 4.5rem)' }}>
               Our Departments
             </h2>
-            <Link
-              href={getLocalizedPath('/services')}
-              className="text-white/40 text-xs font-semibold border-b border-white/20 pb-1 hover:text-white hover:border-white transition-all hidden lg:block"
-            >
+            <Link href={getLocalizedPath('/services')} className="text-white/40 text-xs font-semibold border-b border-white/20 pb-1 hover:text-white hover:border-white transition-all hidden lg:block">
               All services →
             </Link>
           </div>
-
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {DEPTS.map((dept) => (
               <Link
                 key={dept.num}
                 href={getLocalizedPath(dept.href)}
-                className="group relative flex flex-col justify-between p-8 rounded-2xl border border-white/6 hover:border-white/12 transition-all duration-300 hover:-translate-y-1 cursor-pointer"
-                style={{ minHeight: '260px' }}
+                className="group relative flex flex-col justify-between p-8 rounded-2xl border border-white/6 hover:border-white/14 transition-all duration-300 hover:-translate-y-1 cursor-pointer"
+                style={{ minHeight: '280px' }}
               >
-                {/* Numéro en fond */}
-                <span
-                  className="absolute top-4 right-5 font-heading font-black leading-none select-none pointer-events-none"
-                  style={{ fontSize: '5.5rem', color: 'rgba(255,255,255,0.03)' }}
-                >
+                <span className="absolute top-4 right-5 font-heading font-black leading-none select-none pointer-events-none" style={{ fontSize: '5.5rem', color: 'rgba(255,255,255,0.03)' }}>
                   {dept.num}
                 </span>
-
-                {/* Accent */}
                 <div className="w-10 h-[3px] rounded-full" style={{ background: dept.color }} />
-
                 <div className="mt-auto">
                   <p className="font-heading font-bold text-white text-lg leading-tight mb-3">{dept.name}</p>
                   <p className="text-white/40 text-sm leading-relaxed mb-6">{dept.desc}</p>
-                  <span className="text-[10px] font-semibold tracking-widest uppercase transition-colors" style={{ color: dept.color }}>
-                    Explore →
-                  </span>
+                  <span className="text-[10px] font-semibold tracking-widest uppercase transition-colors" style={{ color: dept.color }}>Explore →</span>
                 </div>
               </Link>
             ))}
@@ -479,93 +612,9 @@ export default function HomepageDemo() {
         </div>
 
         {/* ══════════════════════════════════════════════════════════════════════
-            MODULE 5 — PROJETS SÉLECTIONNÉS
+            MODULE 5 — CARROUSEL PROJETS PLEIN ÉCRAN
         ══════════════════════════════════════════════════════════════════════ */}
-        <div>
-          <div className="flex items-end justify-between mb-4 px-1">
-            <h2
-              className="font-heading font-black leading-none tracking-tight"
-              style={{ fontSize: 'clamp(2rem, 4vw, 4.5rem)', color: DARK }}
-            >
-              Selected Work
-            </h2>
-            <Link
-              href={getLocalizedPath('/projects')}
-              className="text-xs font-semibold border-b-2 pb-1 hidden lg:flex items-center gap-2 hover:opacity-60 transition-opacity"
-              style={{ borderColor: DARK, color: DARK }}
-            >
-              All projects →
-            </Link>
-          </div>
-
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-3 lg:gap-4">
-
-            {/* Grand projet */}
-            <div className="lg:col-span-7 relative overflow-hidden rounded-3xl group cursor-pointer" style={{ minHeight: '520px' }}>
-              <img src={WORK2} alt="Project" className="absolute inset-0 w-full h-full object-cover scale-[1.04] group-hover:scale-100 transition-transform duration-700" />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-transparent" />
-              <div className="absolute top-7 left-7">
-                <span className="text-[10px] font-semibold tracking-widest uppercase text-white/55 bg-white/8 backdrop-blur-sm px-4 py-2 rounded-full border border-white/12">
-                  Brand & Creative
-                </span>
-              </div>
-              <div className="absolute bottom-0 left-0 right-0 p-10">
-                <p className="font-heading font-bold text-white text-2xl lg:text-3xl leading-tight mb-2">SummitLaw — Brand Relaunch</p>
-                <p className="text-white/50 text-sm">+180% qualified leads · 2024</p>
-              </div>
-              <div className="absolute bottom-9 right-9 w-11 h-11 rounded-full bg-white/12 backdrop-blur-sm flex items-center justify-center border border-white/18 group-hover:bg-white transition-all duration-300">
-                <span className="text-white text-sm group-hover:text-black">↗</span>
-              </div>
-            </div>
-
-            {/* Colonne droite */}
-            <div className="lg:col-span-5 flex flex-col gap-3 lg:gap-4">
-
-              {/* Petit projet */}
-              <div className="relative overflow-hidden rounded-3xl group cursor-pointer flex-1" style={{ minHeight: '250px' }}>
-                <img src={WORK3} alt="Project" className="absolute inset-0 w-full h-full object-cover scale-[1.04] group-hover:scale-100 transition-transform duration-700" />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/10 to-transparent" />
-                <div className="absolute top-6 left-6">
-                  <span className="text-[10px] font-semibold tracking-widest uppercase text-white/55 bg-white/8 backdrop-blur-sm px-3 py-1.5 rounded-full border border-white/12">
-                    AI & Tech
-                  </span>
-                </div>
-                <div className="absolute bottom-0 left-0 right-0 p-7">
-                  <p className="font-heading font-bold text-white text-lg leading-tight mb-1">QueerTech — Platform</p>
-                  <p className="text-white/45 text-xs">+220% member engagement</p>
-                </div>
-                <div className="absolute bottom-6 right-6 w-9 h-9 rounded-full bg-white/12 backdrop-blur-sm flex items-center justify-center border border-white/18 group-hover:bg-white transition-all duration-300">
-                  <span className="text-white text-xs group-hover:text-black">↗</span>
-                </div>
-              </div>
-
-              {/* Module CTA */}
-              <div
-                className="rounded-3xl flex flex-col justify-between p-10 flex-1"
-                style={{ background: CREAM, minHeight: '250px' }}
-              >
-                <p className="text-[10px] font-medium tracking-[0.35em] uppercase" style={{ color: `${DARK}35` }}>
-                  Ready to grow?
-                </p>
-                <div>
-                  <p
-                    className="font-heading font-black leading-tight mb-7"
-                    style={{ fontSize: 'clamp(1.6rem, 2.5vw, 2.4rem)', color: DARK }}
-                  >
-                    Let's build your digital performance.
-                  </p>
-                  <Link
-                    href={getLocalizedPath('/start-project')}
-                    className="inline-flex items-center gap-2 font-semibold text-sm px-7 py-3.5 rounded-full text-white transition-all duration-200 hover:opacity-85"
-                    style={{ background: DARK }}
-                  >
-                    Start a project →
-                  </Link>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+        <ProjectsCarousel />
 
         {/* ══════════════════════════════════════════════════════════════════════
             MODULE 6 — ÉQUIPE (stack scroll vertical)
@@ -575,24 +624,12 @@ export default function HomepageDemo() {
         {/* ══════════════════════════════════════════════════════════════════════
             MODULE 7 — ROUGE ON BLUE
         ══════════════════════════════════════════════════════════════════════ */}
-        <div
-          className="relative overflow-hidden rounded-3xl"
-          style={{ background: '#C8102E', minHeight: '480px' }}
-        >
-          <img
-            src={ROB_BG}
-            alt="Rouge on Blue"
-            className="absolute inset-0 w-full h-full object-cover opacity-15 mix-blend-luminosity"
-          />
-          <div className="relative z-10 flex flex-col lg:flex-row items-start lg:items-end justify-between p-12 lg:p-16 gap-12" style={{ minHeight: '480px' }}>
+        <div className="relative overflow-hidden rounded-3xl" style={{ background: '#C8102E', minHeight: '500px' }}>
+          <img src={ROB_BG} alt="Rouge on Blue" className="absolute inset-0 w-full h-full object-cover opacity-15 mix-blend-luminosity" />
+          <div className="relative z-10 flex flex-col lg:flex-row items-start lg:items-end justify-between p-12 lg:p-20 gap-12" style={{ minHeight: '500px' }}>
             <div className="flex-1">
-              <p className="text-white/40 text-[10px] font-medium tracking-[0.35em] uppercase mb-8">
-                A Nukleo Group company
-              </p>
-              <h2
-                className="font-heading font-black text-white leading-[0.82] tracking-tight mb-8"
-                style={{ fontSize: 'clamp(3.5rem, 8vw, 10rem)' }}
-              >
+              <p className="text-white/40 text-[10px] font-medium tracking-[0.35em] uppercase mb-10">A Nukleo Group company</p>
+              <h2 className="font-heading font-black text-white leading-[0.82] tracking-tight mb-8" style={{ fontSize: 'clamp(3.5rem, 8vw, 10rem)' }}>
                 Rouge<br />on Blue.
               </h2>
               <p className="text-white/60 text-base lg:text-lg leading-relaxed max-w-lg mb-10">
@@ -620,28 +657,16 @@ export default function HomepageDemo() {
         {/* ══════════════════════════════════════════════════════════════════════
             MODULE 8 — CTA FINAL
         ══════════════════════════════════════════════════════════════════════ */}
-        <div
-          className="rounded-3xl flex flex-col lg:flex-row items-center justify-between px-12 lg:px-20 py-20 gap-10"
-          style={{ background: DARK }}
-        >
-          <h2
-            className="font-heading font-black text-white leading-[0.85] tracking-tight"
-            style={{ fontSize: 'clamp(3rem, 6vw, 7.5rem)' }}
-          >
+        <div className="rounded-3xl flex flex-col lg:flex-row items-center justify-between px-12 lg:px-20 py-20 gap-10" style={{ background: DARK }}>
+          <h2 className="font-heading font-black text-white leading-[0.85] tracking-tight" style={{ fontSize: 'clamp(3rem, 6vw, 7.5rem)' }}>
             Ready to<br />
             <span style={{ color: NUKLEO_PURPLE }}>perform?</span>
           </h2>
           <div className="flex flex-col sm:flex-row gap-4 shrink-0">
-            <Link
-              href={getLocalizedPath('/start-project')}
-              className="inline-flex items-center gap-2 bg-white text-black font-bold px-9 py-4 rounded-full hover:bg-white/90 transition-all duration-200 text-sm"
-            >
+            <Link href={getLocalizedPath('/start-project')} className="inline-flex items-center gap-2 bg-white text-black font-bold px-9 py-4 rounded-full hover:bg-white/90 transition-all duration-200 text-sm">
               Start a project →
             </Link>
-            <Link
-              href={getLocalizedPath('/about')}
-              className="inline-flex items-center gap-2 border border-white/20 text-white font-semibold px-9 py-4 rounded-full hover:border-white/45 transition-all duration-200 text-sm"
-            >
+            <Link href={getLocalizedPath('/about')} className="inline-flex items-center gap-2 border border-white/20 text-white font-semibold px-9 py-4 rounded-full hover:border-white/45 transition-all duration-200 text-sm">
               Learn about us
             </Link>
           </div>
@@ -650,10 +675,7 @@ export default function HomepageDemo() {
         {/* ══════════════════════════════════════════════════════════════════════
             FOOTER MINIMAL
         ══════════════════════════════════════════════════════════════════════ */}
-        <div
-          className="rounded-3xl flex flex-col lg:flex-row items-center justify-between px-10 py-7 gap-5"
-          style={{ background: CREAM }}
-        >
+        <div className="rounded-3xl flex flex-col lg:flex-row items-center justify-between px-10 py-7 gap-5" style={{ background: CREAM }}>
           <span className="font-heading font-black text-xl" style={{ color: DARK }}>Nukleo.</span>
           <div className="flex items-center gap-8">
             {[
@@ -662,12 +684,7 @@ export default function HomepageDemo() {
               { label: 'About', href: '/about' },
               { label: 'Contact', href: '/contact' },
             ].map((item) => (
-              <Link
-                key={item.label}
-                href={getLocalizedPath(item.href)}
-                className="text-xs font-medium hover:opacity-80 transition-opacity"
-                style={{ color: `${DARK}55` }}
-              >
+              <Link key={item.label} href={getLocalizedPath(item.href)} className="text-xs font-medium hover:opacity-80 transition-opacity" style={{ color: `${DARK}55` }}>
                 {item.label}
               </Link>
             ))}
@@ -675,7 +692,7 @@ export default function HomepageDemo() {
           <p className="text-[10px]" style={{ color: `${DARK}30` }}>© 2025 Nukleo. All rights reserved.</p>
         </div>
 
-      </div>{/* fin wrapper global */}
+      </div>
     </div>
   );
 }
