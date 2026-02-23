@@ -2,7 +2,7 @@ import { useRef, useEffect, useState } from 'react';
 import { Link } from 'wouter';
 import { useLocalizedPath } from '@/hooks/useLocalizedPath';
 import { TeamScrollCards, DepartmentsWidget, DoubleLogoCarousel, ContactWidget } from '@/components/demo3';
-import { X, Menu } from 'lucide-react';
+import { X, Menu, Sun } from 'lucide-react';
 
 const NUKLEO_PURPLE = '#7c3aed';
 const CREAM = '#F5F3EF';
@@ -491,18 +491,24 @@ export default function HomepageDemo4() {
         </div>
       )}
 
-      {/* ─── LOGO PLEINE PAGE (100vh, fond noir) ─────────────────────────────── */}
-      <Link
-        href={getLocalizedPath('/')}
-        className="relative z-10 flex items-center justify-center w-full min-h-screen bg-black"
+      {/* ─── LOGO BORD À BORD (gradient, pas de fond noir) ────────────────────── */}
+      <div
+        className="relative z-10 flex flex-col justify-center w-full py-12 lg:py-16 px-2 sm:px-4"
+        style={{
+          background: 'linear-gradient(135deg, rgba(167,139,250,0.6) 0%, rgba(196,181,253,0.5) 35%, rgba(224,231,255,0.7) 65%, rgba(147,197,253,0.5) 100%)',
+        }}
       >
-        <img
-          src="/demo/nukleo-logo-rvb.png"
-          alt="Nukleo"
-          className="w-[90vw] max-w-6xl object-contain object-center"
-          style={{ maxHeight: '75vh' }}
-        />
-      </Link>
+        <p className="text-white/90 text-xs font-medium tracking-[0.25em] uppercase mb-6">
+          Choisissez l'intelligence.
+        </p>
+        <Link href={getLocalizedPath('/')} className="block w-full">
+          <img
+            src="/demo/nukleo-logo-rvb.svg"
+            alt="Nukleo"
+            className="w-full h-auto object-contain object-center"
+          />
+        </Link>
+      </div>
 
       {/* ─── WRAPPER GLOBAL ─────────────────────────────────────────────────── */}
       <div className="relative z-10 p-3 lg:p-4 flex flex-col gap-3 lg:gap-4">
@@ -556,32 +562,31 @@ export default function HomepageDemo4() {
           {/* Colonne droite — 2 modules empilés */}
           <div className="lg:col-span-4 flex flex-col gap-3 lg:gap-4">
 
-            {/* Module 1B — CTA + description */}
-            <div
-              className="rounded-3xl flex flex-col justify-between p-10 lg:p-12 flex-1 bg-black/50 border border-white/10"
-              style={{ minHeight: '300px' }}
-            >
-              <div>
-                <p className="text-white/30 text-[10px] font-medium tracking-[0.35em] uppercase mb-6">
-                  Who we are
-                </p>
-                <p className="text-white/75 text-base lg:text-lg leading-relaxed">
-                  We co-create strategies, technologies, and creative that drive ambitious organizations forward — powered by AI.
-                </p>
+            {/* Module 1B — Widgets Météo + Date (néomorphique) */}
+            <div className="flex flex-col gap-3 lg:gap-4 flex-1">
+              <div
+                className="rounded-3xl flex flex-col items-center justify-center p-6 lg:p-8 flex-1 min-h-[140px]"
+                style={{
+                  background: 'linear-gradient(145deg, rgba(255,255,255,0.9) 0%, rgba(245,243,239,0.95) 100%)',
+                  boxShadow: '6px 6px 12px rgba(0,0,0,0.08), -6px -6px 12px rgba(255,255,255,0.8), inset 1px 1px 0 rgba(255,255,255,0.5)',
+                }}
+              >
+                <Sun className="w-8 h-8 mb-2 text-gray-700" strokeWidth={1.5} />
+                <span className="font-heading font-black text-4xl lg:text-5xl text-gray-800 leading-none">
+                  24<span className="text-xl font-bold align-top ml-0.5">°C</span>
+                </span>
+                <span className="text-gray-500 text-sm mt-2">Montréal, Québec</span>
               </div>
-              <div className="flex flex-col gap-3 mt-8">
-                <Link
-                  href={getLocalizedPath('/start-project')}
-                  className="inline-flex items-center justify-center gap-2 bg-white text-black font-bold px-7 py-4 rounded-full hover:bg-white/90 transition-all duration-200 text-sm backdrop-blur-md"
-                >
-                  Start a project →
-                </Link>
-                <Link
-                  href={getLocalizedPath('/about')}
-                  className="inline-flex items-center justify-center gap-2 border border-white/15 text-white/60 font-semibold px-7 py-4 rounded-full hover:border-white/35 hover:text-white transition-all duration-200 text-sm backdrop-blur-md"
-                >
-                  Learn about us
-                </Link>
+              <div
+                className="rounded-3xl flex flex-col justify-center p-6 lg:p-8 flex-1 min-h-[140px]"
+                style={{
+                  background: 'linear-gradient(145deg, rgba(255,255,255,0.9) 0%, rgba(245,243,239,0.95) 100%)',
+                  boxShadow: '6px 6px 12px rgba(0,0,0,0.08), -6px -6px 12px rgba(255,255,255,0.8), inset 1px 1px 0 rgba(255,255,255,0.5)',
+                }}
+              >
+                <p className="text-gray-600 text-sm mb-1">Bon lundi <span className="text-purple-500">♥</span></p>
+                <span className="font-heading font-black text-4xl lg:text-5xl text-gray-800 leading-none">23</span>
+                <span className="text-gray-500 text-sm mt-2">février 2026</span>
               </div>
             </div>
 
