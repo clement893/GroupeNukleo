@@ -175,6 +175,36 @@ export default function About() {
           </div>
         </section>
 
+        {/* Ecosystem Section — Nukleo.Group & Rouge on Blue */}
+        <section className="container mx-auto px-4 py-20">
+          <p className="text-violet-300 uppercase tracking-widest text-sm mb-4 text-center">
+            {t('about.groupSection.title') || "L'écosystème Nukleo"}
+          </p>
+          <p className="text-gray-300 text-center mb-12 max-w-2xl mx-auto">
+            {t('about.groupSection.description') || 'Nukleo est la marque phare d\'un écosystème plus large.'}
+          </p>
+          
+          <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+            <div className="bg-white/5 backdrop-blur-lg border border-white/10 rounded-2xl p-8">
+              <h3 className="text-2xl font-bold text-fuchsia-400 mb-4">
+                {t('about.groupSection.nukleoGroup.name') || 'Nukleo.Group'}
+              </h3>
+              <p className="text-gray-300 leading-relaxed">
+                {t('about.groupSection.nukleoGroup.description') || 'La holding stratégique qui pilote les acquisitions et la croissance du groupe.'}
+              </p>
+            </div>
+
+            <div className="bg-white/5 backdrop-blur-lg border border-white/10 rounded-2xl p-8">
+              <h3 className="text-2xl font-bold text-fuchsia-400 mb-4">
+                {t('about.groupSection.rougeOnBlue.name') || 'Rouge on Blue'}
+              </h3>
+              <p className="text-gray-300 leading-relaxed">
+                {t('about.groupSection.rougeOnBlue.description') || 'Pour les transformations d\'envergure qui requièrent le plus haut niveau de stratégie et de créativité.'}
+              </p>
+            </div>
+          </div>
+        </section>
+
         {/* Values Section */}
         <section className="container mx-auto px-4 py-20">
           <p className="text-violet-300 uppercase tracking-widest text-sm mb-4 text-center">{t('about.valuesTitle')}</p>

@@ -43,26 +43,27 @@
     "iconCreativeStudio": "The Creative Studio Icon"
   },
   "hero": {
-    "title": "Start your ",
-    "titleHighlight": "transformation",
-    "subtitle": "We build complete Digital & AI ecosystems.",
-    "cta": "Let's Build",
+    "title": "Performance through ",
+    "titleHighlight": "digital excellence.",
+    "subtitle": "Your 360 partner to take the lead in the digital and AI economy.",
+    "cta": "Choose intelligence.",
     "services": [
-      "AI Strategy",
-      "Digital Platforms",
-      "Marketing",
-      "Mobile Apps",
+      "Nukleo.Agency",
+      "Nukleo.Studio",
+      "Nukleo.Tech",
+      "Nukleo.Consulting",
+      "Digital Marketing",
+      "Digital Transformation",
+      "AI Development",
+      "Design & UX/UI",
       "Communication",
-      "CRM Solutions",
-      "Portals",
-      "Operations",
-      "Security",
-      "Analytics",
-      "Cloud Solutions"
+      "Digital Strategy",
+      "Media Buying",
+      "Web Development"
     ]
   },
   "footer": {
-    "description": "Transform your business with AI-powered solutions.",
+    "description": "Performance through digital excellence. Choose intelligence.",
     "links": {
       "about": "About",
       "services": "Services",
@@ -73,14 +74,19 @@
       "terms": "Terms",
       "cookies": "Cookies"
     },
-    "copyright": "© {{year}} Nukleo Digital. All rights reserved.",
+    "copyright": "© {{year}} Nukleo. All rights reserved.",
     "backToTop": "Back to top",
     "sitemap": "Sitemap",
     "navigation": "Navigation",
-    "services": "Services",
+    "services": {
+      "agency": "Nukleo.Agency — Marketing & Communication",
+      "studio": "Nukleo.Studio — Design & Creation",
+      "tech": "Nukleo.Tech — Development & AI",
+      "consulting": "Nukleo.Consulting — Digital Transformation"
+    },
     "servicesLabel": "Services",
     "contact": "Contact",
-    "newsletterTitle": "Stay Ahead of the AI Curve",
+    "newsletterTitle": "Stay Ahead of the Digital Curve",
     "newsletterDescription": "Subscribe to receive our latest insights, technical guides, and industry analysis.",
     "newsletterPlaceholder": "Enter your email",
     "newsletterButton": "Subscribe",
@@ -89,19 +95,11 @@
       "clients": "Clients",
       "media": "Media",
       "agencies": "Agencies"
-    },
-    "services": {
-      "agenticAI": "Agentic AI Systems",
-      "aiNative": "AI-Native Platforms",
-      "aiStrategyMarketing": "AI Strategy & Marketing",
-      "digitalTransformation": "Digital Transformation",
-      "creativeStudio": "Creative Studio",
-      "aiConsulting": "AI Consulting"
     }
   },
   "home": {
-    "beyondAI": "Beyond AI",
-    "beyondAIDescription": "We craft complete digital ecosystems from strategy and platforms to creative content and intelligent automation.",
+    "beyondAI": "Beyond Digital",
+    "beyondAIDescription": "We create complete performance ecosystems. From strategy to execution, design to technology, communication to digital transformation — all orchestrated and powered by AI.",
     "team": {
       "sectionLabel": "OUR TEAM",
       "title": "Meet Our Team",
@@ -111,8 +109,8 @@
   },
   "capabilities": {
     "sectionLabel": "Capabilities",
-    "title": "AI-Native<br />Infrastructure",
-    "description": "We don't just build websites or apps. We engineer intelligent ecosystems where every digital touchpoint is powered by autonomous agents.",
+    "title": "Digital Excellence<br /><span class=\"text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-500\">Powered by AI</span>",
+    "description": "We don't just build websites or applications. We create performance ecosystems where every digital lever is orchestrated and powered by AI to deliver measurable results.",
     "aiWebsites": {
       "title": "AI-Base Websites",
       "description": "Self-optimizing web experiences that adapt content and layout in real-time based on user behavior and intent."
@@ -134,17 +132,17 @@
     "seoTitle": "Our Manifesto | Move From Pilot to Scale",
     "seoDescription": "Nukleo manifesto: AI transformation vision beyond pilots. Production-ready, scalable solutions. Strategic approach to AI success for businesses.",
     "seoKeywords": "AI transformation manifesto, AI vision, AI philosophy, AI approach, scaling AI solutions",
-    "sectionLabel": "Manifesto",
-    "title": "Move From Pilot<br /><span class=\"text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-500\">to Scale.</span>",
-    "description": "The gap is widening. While some experiment, leaders are rearchitecting their entire operations around agentic AI.",
+    "sectionLabel": "Our Vision",
+    "title": "Take the Lead<br /><span class=\"text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-500\">in the Digital Economy.</span>",
+    "description": "The gap is widening. While some hesitate, ambitious organizations are taking the lead in the digital and AI economy. Nukleo is their partner.",
     "readMore": "Read the full manifesto",
     "card1": {
-      "title": "Leader, Not Follower",
-      "description": "Integrate agentic AI capabilities that can triple your ROI, speed, and output volume."
+      "title": "Co-Creators of Performance",
+      "description": "We don't deliver services. We co-create your digital performance, committed to your results."
     },
     "card2": {
-      "title": "Operations Reinvented",
-      "description": "Re-architect workflows around intelligent agents that automate and optimize continuously."
+      "title": "Excellence, Powered by AI",
+      "description": "AI is our operational DNA. It allows us to deliver more, faster, at a fair cost — without ever sacrificing quality."
     },
     "page": {
       "eraOver": {
@@ -172,8 +170,8 @@
       },
       "vision": {
         "title": "Our Vision",
-        "paragraph1": "At Nukleo Digital, we believe every organization can become an AI leader. Our mission is to guide you through this transformation, step by step, from experimentation to industrialization.",
-        "paragraph2": "We don't simply build websites or applications. We create intelligent ecosystems where every digital touchpoint is powered by autonomous agents that optimize, learn, and adapt in real-time."
+        "paragraph1": "At Nukleo, we believe every ambitious organization deserves a digital partner at the height of their ambitions. Our mission: democratize digital excellence for SMBs and non-profits worldwide.",
+        "paragraph2": "We don't just build websites or applications. We create performance ecosystems where every digital lever — strategy, technology, design, communication — is orchestrated and powered by AI to deliver measurable results."
       },
       "principles": {
         "title": "Our Principles",
@@ -200,36 +198,41 @@
         "button": "Start Your Transformation"
       },
       "quote": {
-        "text": "\"The future belongs to those who build tomorrow's systems today.\"",
-        "author": "The Nukleo Digital Team"
+        "text": "\"Performance through digital excellence. Choose intelligence.\"",
+        "author": "The Nukleo Team"
       }
     }
   },
   "trinity": {
     "sectionLabel": "Our Departments",
     "title": "Our<br />Departments",
-    "description": "Three specialized divisions acting as the pillars of your transformation.",
+    "description": "Four specialized departments, one single goal: your digital performance.",
     "lab": {
-      "title": "The AI Lab",
-      "subtitle": "Technology Foundation",
-      "description": "Building the robust and flexible technological foundation for AI integration. From intelligent data platforms to custom AI agents and intelligent process automation."
+      "title": "Nukleo.Tech",
+      "subtitle": "Development & Artificial Intelligence",
+      "description": "We design and build the digital tools that drive your performance. Web development, mobile applications, AI integrations, automation, and custom AI agent development."
     },
     "bureau": {
-      "title": "The Strategic Bureau",
-      "subtitle": "Transformation Orchestration",
-      "description": "Defining strategy, driving transformation, and measuring AI impact. From maturity audits to agentic transformation strategy and AI governance."
+      "title": "Nukleo.Consulting",
+      "subtitle": "Digital Transformation & Consulting",
+      "description": "We guide your organization through its digital transformation. Audit, strategy, AI consulting, change management, and training — from vision to execution."
     },
     "studio": {
-      "title": "The Creative Studio",
-      "subtitle": "Augmented Content & Experiences",
-      "description": "Using AI to create brand experiences and content at unparalleled scale and relevance. From augmented content creation to agentic marketing campaigns."
+      "title": "Nukleo.Studio",
+      "subtitle": "Design & Creation",
+      "description": "We create visual and creative experiences that make your performance visible and desirable. Graphic design, UX/UI, branding, art direction, and creative production."
     },
-    "explore": "Explore"
+    "explore": "Explore",
+    "agency": {
+      "title": "Nukleo.Agency",
+      "subtitle": "Marketing & 360 Communication",
+      "description": "We activate and amplify your digital presence. Digital marketing, social media management, media buying, content strategy, newsletters, and performance campaigns — powered by AI."
+    }
   },
   "cta": {
-    "title": "Ready to Transform?",
-    "description": "The era of Agentic Marketing is here. Define your roadmap to becoming an AI-native leader.",
-    "button": "Start Your Transformation"
+    "title": "Ready to take the lead?",
+    "description": "Choose intelligence. Let's get started.",
+    "button": "Let's get started"
   },
   "testimonials": {
     "seoTitle": "Client Testimonials | Nukleo Digital",
@@ -345,12 +348,12 @@
     }
   },
   "whoWeServe": {
-    "subtitle": "Champions of Smaller Organizations",
+    "subtitle": "Partner for Ambitious Organizations",
     "title": "Who We <span class=\"text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-500\">Serve</span>",
-    "description": "We're here to help <strong>EVERYONE</strong> transform. Large enterprises are already using AI, now it's your turn. We bring enterprise-grade AI to startups, SMBs, and non-profits who refuse to be left behind.",
+    "description": "Because every ambitious organization deserves a digital partner at the height of their ambitions. We democratize digital excellence for SMBs, non-profits, and organizations that want to take the lead in the digital and AI economy.",
     "startups": {
       "title": "Startups & Scale-ups",
-      "description": "Launch faster and scale smarter with AI-powered automation, intelligent features, and data-driven insights that give you a competitive edge from day one.",
+      "description": "Accelerate your growth with a complete digital ecosystem, powered by AI. From strategy to launch, we build the foundations of your competitive advantage.",
       "highlights": [
         "Rapid MVP development",
         "Scalable AI architecture",
@@ -358,8 +361,8 @@
       ]
     },
     "smbs": {
-      "title": "SMBs",
-      "description": "Transform your business with practical, cost-effective AI solutions that deliver real ROI from automating repetitive tasks to unlocking customer insights.",
+      "title": "SMBs & Growing Businesses",
+      "description": "Access digital excellence without enterprise budgets. Our AI-powered model lets you perform like the leaders in your industry, at a fair cost.",
       "highlights": [
         "Affordable AI solutions",
         "Quick wins & fast ROI",
@@ -367,8 +370,8 @@
       ]
     },
     "nonProfits": {
-      "title": "Non-Profits",
-      "description": "Amplify your impact with AI tools that help you serve more people, operate more efficiently, and tell your story more powerfully without breaking the budget.",
+      "title": "Non-Profits & Mission-Driven Organizations",
+      "description": "Amplify your impact with digital tools that help you serve more people, mobilize your community, and tell your mission with power.",
       "highlights": [
         "Mission-driven AI",
         "Donor engagement tools",
@@ -376,982 +379,9 @@
       ]
     },
     "cta": {
-      "title": "Ready to Transform?",
-      "subtitle": "Start Your Project",
-      "button": "Start Your Project"
-    }
-  },
-  "services": {
-    "title": "Services",
-    "subtitle": "We are by your side to help you grow.",
-    "description": "Comprehensive AI services: Strategy & Marketing, Digital Platforms, Intelligent Operations."
-  },
-  "contact": {
-    "title": "Contact Us",
-    "subtitle": "Ready to transform your business with AI?",
-    "firstName": "First Name",
-    "lastName": "Last Name",
-    "email": "Email",
-    "company": "Company",
-    "message": "Message",
-    "send": "Send",
-    "success": "Message sent successfully!"
-  },
-  "about": {
-    "title": "About",
-    "subtitle": "Our Team",
-    "description": "Meet the experts behind Nukleo Digital",
-    "aboutUs": "ABOUT US",
-    "heroTitle1": "Strategy.",
-    "heroTitle2": "Creativity.",
-    "heroTitle3": "Technology.",
-    "manifesto": "MANIFESTO",
-    "nukleoSpirit": "Nukleo Spirit",
-    "nukleoSpiritText": "At <strong>Nukleo</strong>, we believe technology should drive growth, not slow it down. We turn digital tools into real performance powerhouses that are smart, human, and results-focused.",
-    "ourApproach": "Our Approach",
-    "ourApproachText": "We're a passionate, curious team that loves solving problems creatively. From strategy to design, from development to launch, we bring together all the right skills to move your project forward and make it shine.",
-    "whatSetsUsApart": "What Sets Us Apart",
-    "whatSetsUsApartText": "No jargon. No chaos. Just true partners who listen, guide, and deliver. We don't just take on a project, we build lasting collaborations that make a real impact.",
-    "valuesTitle": "Our Values",
-    "valuesSubtitle": "The values we stand for to deliver quality work",
-    "values": {
-      "authenticity": {
-        "title": "Authenticity",
-        "description": "Being authentic means saying things as they are—but also being yourself. A team works better when everyone can express who they are, with transparency, trust, and kindness. This honesty, towards oneself and others, is essential for building strong relationships and generating lasting momentum."
-      },
-      "excellence": {
-        "title": "Excellence",
-        "description": "We aim for more than satisfaction: we seek performance, rigor, and consistency at every step. To create digital ecosystems that accelerate growth, we must aim high—together, and always with high standards."
-      },
-      "ownership": {
-        "title": "Ownership",
-        "description": "We act as if every project belongs to us. Responsibility, autonomy, and commitment are at the heart of our culture. Creating and maintaining momentum means fully engaging, with intention and conviction."
-      }
-    },
-    "ourTeam": "OUR TEAM",
-    "team": {
-      "clement": { "role": "Founder & CEO" },
-      "alexei": { "role": "Co-founder & CTO" },
-      "antoine": { "role": "Full-Stack Developer" },
-      "margaux": { "role": "UX/UI Designer" },
-      "camille": { "role": "Marketing Strategist" },
-      "timothe": { "role": "AI Developer" },
-      "sarah": { "role": "Project Manager" },
-      "severine": { "role": "Graphic Designer" },
-      "maxime": { "role": "Backend Developer" },
-      "meriem": { "role": "Data Analyst" },
-      "jeanFrancois": { "role": "Senior Developer" },
-      "hind": { "role": "Digital Strategist" },
-      "omar": { "role": "Solutions Architect" },
-      "ricardo": { "role": "AI Expert" },
-      "marieClaire": { "role": "Transformation Consultant" }
-    },
-    "teamTitle": "Meet the team",
-    "teamDescription": "A unique fusion of creative, strategic, and technical talent.",
-    "ourOffices": "OUR OFFICES",
-    "montreal": "MONTRÉAL",
-    "montrealDescription": "In the heart of Little Italy, we'd be delighted to meet at Jean Talon Market to discuss!",
-    "halifax": "HALIFAX",
-    "halifaxDescription": "In the heart of downtown Halifax, we'd be happy to meet by the waterfront to discuss!",
-    "remote": "REMOTE",
-    "remoteDescription": "Our team works remotely across North America. We're always available for virtual meetings and consultations.",
-    "remoteLocation": "Available worldwide via video conference",
-    "letsTalk": "Let's talk"
-  },
-  "services": {
-    "title": "Services",
-    "subtitle": "We are by your side to help you grow.",
-    "description": "Comprehensive AI services: Strategy & Marketing, Digital Platforms, Intelligent Operations.",
-    "ourServices": "Our Services",
-    "heroTitle": "Three expertises,",
-    "heroSubtitle": "one vision.",
-    "heroSubtitleGradient": "Lab · Studio · Bureau",
-    "heroDescription": "Development, creation, strategy — three complementary teams to support your digital transformation from A to Z. Choose the expertise you need, or combine them for a complete project.",
-    "lab": {
-      "category": "The Lab",
-      "number": "01",
-      "tagline": "Development & Technology",
-      "description": "Our team of developers builds the digital solutions that power your business. Mobile applications, web platforms, integrations, automation.",
-      "services": {
-        "mobileApps": {
-          "title": "Mobile Applications",
-          "description": "iOS, Android, and cross-platform apps with exceptional UX"
-        },
-        "webApps": {
-          "title": "Web Applications",
-          "description": "Robust and scalable custom web platforms"
-        },
-        "integrations": {
-          "title": "Integrations & APIs",
-          "description": "Connect your tools for a seamless ecosystem"
-        },
-        "automation": {
-          "title": "Automation",
-          "description": "Automate repetitive tasks to save time"
-        }
-      },
-      "cta": "Explore the Lab →"
-    },
-    "studio": {
-      "category": "The Studio",
-      "number": "02",
-      "tagline": "Design & Creation",
-      "description": "Our creatives bring your ideas to life. Branding, UX/UI, art direction, visual campaigns — brand experiences that leave a lasting impression.",
-      "services": {
-        "branding": {
-          "title": "Branding & Identity",
-          "description": "Memorable logos, brand guidelines, and brand universes"
-        },
-        "uiuxDesign": {
-          "title": "UX/UI Design",
-          "description": "Intuitive interfaces that turn visitors into customers"
-        },
-        "artDirection": {
-          "title": "Art Direction",
-          "description": "Creative concepts and visual consistency across all your media"
-        },
-        "campaigns": {
-          "title": "Campaigns & Motion",
-          "description": "Campaign visuals and animations that capture attention"
-        }
-      },
-      "cta": "Explore the Studio →"
-    },
-    "bureau": {
-      "category": "The Bureau",
-      "number": "03",
-      "tagline": "Strategy & Marketing",
-      "description": "Our strategists drive your transformation and orchestrate your communication. Digital strategy, marketing, communication — from vision to execution.",
-      "services": {
-        "digitalStrategy": {
-          "title": "Digital Strategy",
-          "description": "Clear vision and actionable roadmap"
-        },
-        "transformation": {
-          "title": "Transformation",
-          "description": "Change support and tool adoption"
-        },
-        "digitalMarketing": {
-          "title": "Digital Marketing",
-          "description": "Acquisition, SEO, SEA, Social Ads, and analytics"
-        },
-        "communication": {
-          "title": "Communication",
-          "description": "Editorial strategy, content, and community management"
-        }
-      },
-      "cta": "Explore the Bureau →"
-    },
-    "howItWorks": {
-      "title": "An integrated approach",
-      "description": "Our three teams work hand in hand. Depending on your project, you can call on a single entity or combine them for a complete solution.",
-      "combinations": {
-        "brandLaunch": {
-          "project": "Brand Launch",
-          "teams": "Studio + Bureau",
-          "deliverables": "Visual identity + launch strategy + campaign"
-        },
-        "mobileApp": {
-          "project": "Mobile Application",
-          "teams": "Lab + Studio",
-          "deliverables": "Development + UX/UI design"
-        },
-        "digitalOverhaul": {
-          "project": "Complete Digital Overhaul",
-          "teams": "Lab + Studio + Bureau",
-          "deliverables": "New platform + new branding + marketing strategy"
-        },
-        "marketingCampaign": {
-          "project": "Marketing Campaign",
-          "teams": "Studio + Bureau",
-          "deliverables": "Visuals + strategy + deployment"
-        }
-      }
-    },
-    "cta": {
-      "title": "Not sure what you need?",
-      "description": "Let's discuss your project. We'll point you to the right team — or the right combination.",
-      "buttonPrimary": "Talk to an expert",
-      "buttonSecondary": "See our work"
-    }
-  },
-  "startProject": {
-    "seoTitle": "Start Your AI Project | Transform Your Business with AI",
-    "seoDescription": "Start your AI transformation project with Nukleo Digital. Expert guidance strategy to implementation. Free consultation and custom AI roadmap.",
-    "seoKeywords": "start AI project, AI consultation, AI implementation, AI strategy, AI transformation, AI project planning, AI roadmap, AI business transformation",
-    "backToHome": "Back to Home",
-    "pageTitle": "Start Your AI Journey",
-    "pageDescription": "Tell us about your project and let's build something extraordinary together.",
-    "form": {
-      "fullName": "Full Name",
-      "fullNamePlaceholder": "John Doe",
-      "emailAddress": "Email Address",
-      "emailPlaceholder": "john@company.com",
-      "companyName": "Company Name",
-      "companyPlaceholder": "Your Company",
-      "projectType": "Project Type",
-      "projectTypePlaceholder": "Select a project type",
-      "projectTypes": {
-        "aiStrategy": "AI Strategy & Consulting",
-        "agenticAI": "Agentic AI Development",
-        "aiIntegration": "AI Integration",
-        "aiTraining": "AI Training & Workshops",
-        "other": "Other"
-      },
-      "estimatedBudget": "Estimated Budget",
-      "budgetPlaceholder": "Select a budget range",
-      "budgetRanges": {
-        "10k25k": "$10k - $25k",
-        "25k50k": "$25k - $50k",
-        "50k100k": "$50k - $100k",
-        "100kPlus": "$100k+",
-        "notSure": "Not sure yet"
-      },
-      "projectDescription": "Project Description",
-      "projectDescriptionPlaceholder": "Tell us about your project, goals, and challenges...",
-      "sending": "Sending...",
-      "submit": "Submit Project Request",
-      "thankYou": "Thank You!",
-      "successMessage": "We've received your project request. Our team will get back to you within 24 hours.",
-      "privacyNotice": "By submitting this form, you agree to our privacy policy and terms of service."
-    }
-  },
-  "contact": {
-    "title": "Contact Us",
-    "subtitle": "Ready to transform your business with AI?",
-    "firstName": "First Name",
-    "lastName": "Last Name",
-    "email": "Email",
-    "company": "Company",
-    "message": "Message",
-    "send": "Send",
-    "success": "Message sent successfully!",
-    "heroTitle": "Let's Start<br /><span class=\"text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-500\">Your Transformation</span>",
-    "heroSubtitle": "",
-    "heroDescription": "Ready to become an AI-native leader? Get in touch and let's discuss how we can help you thrive in the age of artificial intelligence.",
-    "sendMessage": "Send us a message",
-    "successMessage": "✓ Message sent successfully! We'll get back to you within 24 hours.",
-    "errorMessage": "✗ Failed to send message. Please try again.",
-    "firstNamePlaceholder": "John",
-    "lastNamePlaceholder": "Doe",
-    "emailPlaceholder": "john@company.com",
-    "companyPlaceholder": "Your company",
-    "messagePlaceholder": "Tell us about your project...",
-    "getInTouch": "Get in Touch",
-    "contactDescription": "Ready to transform your business with AI? Contact us for expert consultation.",
-    "montreal": "Montréal",
-    "halifax": "Halifax",
-    "emailUs": "Email us",
-    "phone": "Phone",
-    "ourOffices": "Our Offices"
-  },
-  "projects": {
-    "title": "Projects",
-    "heroTitle": "Our Work",
-    "heroSubtitle": "that Resonate",
-    "description": "A selection of our recent projects across branding, web, digital, and creative campaigns.",
-    "tryMe": "Try Me",
-    "loadingImages": "Loading images...",
-    "errorLoading": "Error loading images from server.",
-    "errorRefresh": "Please try refreshing the page.",
-    "noImages": "No images found.",
-    "noImagesAdmin": "Upload images via the admin panel to see them here.",
-    "ctaTitle": "Ready to Start",
-    "ctaSubtitle": "Your Project?",
-    "ctaDescription": "Let's discuss how we can bring your vision to life.",
-    "ctaButton": "Start Your Project",
-    "filterAll": "All",
-    "noProjects": "No projects found",
-    "filters": {
-      "all": "All",
-      "aiPlatforms": "AI Platforms",
-      "marketing": "Marketing",
-      "webApps": "Web Apps",
-      "strategy": "Strategy"
-    },
-    "items": {
-      "autonomousMarketing": {
-        "title": "Autonomous Marketing Platform",
-        "category": "AI Platforms",
-        "description": "End-to-end campaign management powered by AI agents, from content generation to performance optimization."
-      },
-      "intelligentEcommerce": {
-        "title": "Intelligent E-Commerce Ecosystem",
-        "category": "Web Apps",
-        "description": "Self-optimizing shopping experience with AI-driven personalization and predictive inventory management."
-      },
-      "enterpriseTransformation": {
-        "title": "Enterprise AI Transformation",
-        "category": "Strategy",
-        "description": "Complete operational overhaul integrating agentic AI across all departments and workflows."
-      },
-      "contentGeneration": {
-        "title": "Content Generation Engine",
-        "category": "Marketing",
-        "description": "Automated content creation system producing personalized, multi-channel campaigns at scale."
-      }
-    }
-  },
-  "expertise": {
-    "seo": {
-      "title": "Our AI Expertise | Agentic AI Systems, Platforms & Strategy",
-      "description": "From strategy to production, we create complete AI ecosystems that integrate your web, communications, and internal systems for sustainable transformation.",
-      "keywords": "AI ecosystems, AI expertise, AI strategy, internal systems AI, communication AI"
-    },
-    "heroTitle": "Architects of Your",
-    "heroSubtitle": "AI Ecosystem",
-    "description": "At Nukleo, we go beyond point solutions. We design, build, and manage complete artificial intelligence ecosystems that unify your web presence, communications, and internal systems. Our holistic approach ensures coherent, sustainable transformation aligned with your business objectives.",
-    "areas": {
-      "agenticAI": {
-        "title": "Agentic AI Systems",
-        "description": "We develop autonomous AI agents that automate your processes, from customer relationship management to internal operations optimization, creating an intelligent backbone for your organization.",
-        "capabilities": [
-          "Business Process Automation (BPA)",
-          "CRM and ERP Integration",
-          "Supply Chain Optimization",
-          "Autonomous Customer Support"
-        ]
-      },
-      "aiNative": {
-        "title": "Intelligent Web Platforms",
-        "description": "Your website becomes a conversion agent. We create platforms that personalize user experience in real-time, anticipate needs, and actively guide visitors toward their goals.",
-        "capabilities": [
-          "Self-optimizing websites (CRO)",
-          "Real-time content personalization",
-          "Semantic search engines",
-          "Predictive user behavior analytics"
-        ]
-      },
-      "transformation": {
-        "title": "Augmented Communication & Marketing",
-        "description": "We unify your message across all channels. Our AI systems generate relevant content, manage your advertising campaigns, and analyze performance for maximum impact and consistent brand voice.",
-        "capabilities": [
-          "Multi-channel content generation",
-          "Autonomous advertising campaign management",
-          "Sentiment analysis and brand monitoring",
-          "Social media engagement optimization"
-        ]
-      },
-      "creativeStudio": {
-        "title": "Creative Studio",
-        "description": "Our creative studio uses AI to produce brand experiences and content at unparalleled scale and relevance. From augmented content creation to agentic marketing campaigns.",
-        "capabilities": [
-          "Augmented content creation",
-          "Agentic marketing campaigns",
-          "Dynamic brand identity",
-          "AI-assisted video production"
-        ]
-      },
-      "dataPlatforms": {
-        "title": "Intelligent Data Platforms",
-        "description": "We build the robust and flexible data foundation for AI integration. From intelligent data platforms to custom AI agents and intelligent process automation.",
-        "capabilities": [
-          "Data pipeline architecture",
-          "Vector databases and RAG",
-          "Real-time stream processing",
-          "Data governance and quality"
-        ]
-      },
-      "aiConsulting": {
-        "title": "AI Consulting",
-        "description": "We define strategy, drive transformation, and measure AI impact. From AI maturity audits to agentic transformation strategy and AI governance.",
-        "capabilities": [
-          "AI maturity audit",
-          "AI transformation roadmap",
-          "AI governance and ethics",
-          "AI ROI analysis"
-        ]
-      }
-    },
-    "process": {
-      "title": "Our Transformation Approach",
-      "description": "We follow a four-step process to ensure your transformation success, from discovery to scale.",
-      "steps": {
-        "discover": {
-          "title": "Discovery",
-          "description": "We dive into your organization to understand your challenges, objectives, and opportunities."
-        },
-        "design": {
-          "title": "Design",
-          "description": "We design a strategic roadmap and technical architecture for your AI ecosystem."
-        },
-        "develop": {
-          "title": "Development",
-          "description": "We build, test, and integrate each component of your ecosystem with rigorous agility."
-        },
-        "deploy": {
-          "title": "Deployment & Evolution",
-          "description": "We deploy the solution and ensure its continuous evolution to maximize your return on investment."
-        }
-      }
-    },
-    "cta": {
-      "title": "Ready to Build Your Ecosystem?",
-      "description": "Let's discuss how an integrated AI approach can unify and transform your business.",
-      "viewServices": "View Our Services",
-      "getInTouch": "Get In Touch"
-    }
-  },
-  "resources": {
-    "seoTitle": "Resources | AI Insights, Guides & Research",
-    "seoDescription": "Insights, guides, and research from the frontlines of AI transformation. Stay ahead with expert analysis, practical frameworks, and interactive tools.",
-    "seoKeywords": "AI resources, AI guides, AI research, AI insights, AI tools, AI readiness assessment, AI trend radar, AI glossary, ROI calculator, AI transformation",
-    "badge": "Knowledge Base",
-    "title": "Resources",
-    "description": "Insights, guides, and research from the frontlines of AI transformation. Stay ahead with expert analysis and practical frameworks.",
-    "tools": {
-      "sectionLabel": "Interactive Tools",
-      "title": "Explore Our AI Tools",
-      "description": "Free diagnostic and research tools to accelerate your AI transformation journey",
-      "aiReadiness": {
-        "badge": "Diagnostic Tool",
-        "title": "AI Readiness Assessment",
-        "description": "Discover where you stand in your AI transformation journey. Get personalized insights across 6 key dimensions with instant results.",
-        "tags": ["20 Questions", "5 Maturity Levels", "Instant Results"],
-        "buttonText": "Start Assessment"
-      },
-      "radar": {
-        "badge": "Research Tool",
-        "title": "AI Trend Radar",
-        "description": "Explore our interactive radar of emerging and established AI technologies. Monthly updates to guide your investment decisions.",
-        "tags": ["10+ Technologies", "Monthly Updates", "Interactive Map"],
-        "buttonText": "Explore Radar"
-      },
-      "aiGlossary": {
-        "badge": "Knowledge Base",
-        "title": "AI Glossary",
-        "description": "Complete guide to AI terminology with essential definitions, categories, and importance levels. Perfect for understanding key AI concepts.",
-        "tags": ["Essential terms", "By category", "Searchable"],
-        "buttonText": "Browse Glossary"
-      },
-      "glossary": {
-        "badge": "Knowledge Base",
-        "title": "AI Glossary",
-        "description": "Your complete guide to AI terminology. 100+ terms with real-world examples, from beginner to advanced concepts.",
-        "tags": ["100+ Terms", "Real Examples", "Searchable"],
-        "buttonText": "Browse Glossary"
-      },
-      "aiGlossaryPage": {
-        "badge": "AI Glossary",
-        "title": "AI GLOSSARY",
-        "subtitle": "Your complete guide to AI terminology",
-        "description": "Comprehensive AI terminology glossary covering essential AI terms, definitions, and concepts.",
-        "seoTitle": "AI Glossary | Complete Guide to AI Terminology | Nukleo",
-        "seoDescription": "Comprehensive AI terminology glossary covering essential AI terms, definitions, and concepts. From fundamentals to advanced topics.",
-        "seoKeywords": "AI glossary, artificial intelligence terms, AI terminology, AI definitions, AI dictionary, machine learning glossary, AI knowledge base",
-        "terms": "Terms",
-        "categories": "Categories",
-        "searchable": "Searchable",
-        "searchPlaceholder": "Search terms... (e.g., machine learning, NLP, GPT)",
-        "category": "Category",
-        "importance": "Importance",
-        "all": "All",
-        "showing": "Showing",
-        "of": "of",
-        "noTerms": "No terms found",
-        "adjustFilters": "Try adjusting your search or filters",
-        "ctaTitle": "READY TO TRANSFORM<br />WITH AI?",
-        "ctaDescription": "Now that you understand the terminology, let's discuss how AI can drive growth for your organization.",
-        "ctaButton1": "Take AI Readiness Assessment",
-        "ctaButton2": "Discuss Your Project"
-      }
-    },
-    "filter": {
-      "label": "Filter by:",
-      "all": "All",
-      "industryInsights": "Industry Insights",
-      "technicalGuide": "Technical Guide",
-      "strategy": "Strategy",
-      "caseStudy": "Case Study"
-    },
-    "articles": {
-      "agenticPlaybook": {
-        "category": "Technical Guide",
-        "title": "The Complete Guide to Agentic AI: From Architecture to Deployment",
-        "description": "Discover how to implement autonomous AI agents in your organization with our comprehensive guide. From architecture to production deployment, master agentic AI.",
-        "readTime": "15 min",
-        "content": "<p>Agentic artificial intelligence is redefining the boundaries of automation and system intelligence. Unlike traditional AI models that require precise instructions for each task, AI agents can plan, execute, and adapt autonomously to achieve complex objectives. This comprehensive guide provides you with a practical framework for implementing agentic AI solutions within your organization, from architecture design to production deployment.</p><h2>What is Agentic AI and Why is it a Revolution?</h2><p>Agentic AI, or Agentic AI, represents a significant advancement over conventional AI. These systems don't just respond to queries; they are capable of breaking down complex problems into subtasks, making strategic decisions, and iterating until their objectives are achieved. This autonomy is made possible by the combination of several cutting-edge technologies:</p><ul><li><strong>Large Language Models (LLMs)</strong>: for natural language understanding and generation.</li><li><strong>Reasoning capabilities</strong>: for planning and problem-solving.</li><li><strong>Tool use</strong>: to interact with external systems and APIs.</li><li><strong>Memory systems</strong>: to learn from their experiences and continuously improve.</li></ul><p>This unique combination enables AI agents to handle complex tasks that were previously beyond the reach of automation, opening the door to unprecedented efficiency gains and innovation.</p><h2>The Four-Phase Agentic AI Implementation Framework</h2><p>To ensure the success of agentic AI deployment, we have developed a four-phase approach designed to guide you at each step of the process:</p><h3>1. Discovery Phase</h3><p>The first step is to assess your organization's AI maturity and identify the most relevant use cases for implementing AI agents. This phase is crucial for aligning your AI strategy with your business objectives.</p><h3>2. Design Phase</h3><p>Once use cases are identified, the design phase focuses on system architecture. This includes choosing LLM models, designing agent workflows, and integrating with your existing systems.</p><h3>3. Development Phase</h3><p>This is where AI agents are built and tested. Using frameworks like LangChain, we develop robust and reliable agents capable of meeting your use case requirements.</p><h3>4. Deployment Phase</h3><p>The final phase involves deploying AI agents at scale and continuously optimizing their performance. This includes implementing monitoring and maintenance infrastructure to ensure agent reliability and efficiency over time.</p><h2>Key Success Factors for Your Agentic AI Project</h2><p>The success of agentic AI implementation depends not only on technology. Several organizational and strategic factors are equally important:</p><ul><li><strong>Data quality</strong>: AI agents are only as good as the data they are trained on. It is therefore essential to ensure the quality, relevance, and freshness of your data.</li><li><strong>Governance</strong>: Establishing a solid governance framework is essential to ensure ethical and responsible use of agentic AI. This includes defining clear policies on security, privacy, and compliance.</li><li><strong>Change management</strong>: The introduction of agentic AI can have a significant impact on your processes and teams. An effective change management strategy is therefore necessary to support your employees and ensure successful adoption.</li><li><strong>Success measurement</strong>: It is essential to define clear key performance indicators (KPIs) to measure the impact of agentic AI on your organization. This will allow you to demonstrate the value of your investments and continuously optimize your strategies.</li></ul><h2>Ready to Take Action?</h2><p>Agentic AI offers unprecedented opportunities to transform your business. To learn more about how we can help you implement agentic AI solutions, contact us today for a free consultation.</p>"
-      },
-      "pilotToScale": {
-        "category": "Strategy",
-        "title": "From Proof of Concept to Scale: Your Complete AI Transformation Roadmap",
-        "description": "Discover our strategic framework for moving from experimentation to enterprise-wide AI adoption. A complete guide for successful and measurable AI transformation.",
-        "readTime": "20 min",
-        "content": "<p>Many organizations successfully conduct AI pilot projects but struggle to deploy them at enterprise scale. The transition from a controlled environment to large-scale production presents unique challenges that, if not properly managed, can lead to the failure of promising projects. This guide presents a proven strategic framework for overcoming these obstacles and ensuring a successful transition from proof of concept (PoC) to widespread AI adoption, with measurable results.</p><h2>The AI Scaling Challenge: Why Do Pilots Fail in Production?</h2><p>AI pilot projects often benefit from ideal conditions: dedicated teams, limited datasets, and well-defined objectives. However, when scaling, new challenges emerge:</p><ul><li><strong>Technical infrastructure limitations</strong>: Systems designed for pilots are often not robust enough to support large-scale workloads.</li><li><strong>Organizational resistance</strong>: Change can be difficult for employees to accept, especially if they are not involved from the beginning of the process.</li><li><strong>Lack of clarity on return on investment (ROI)</strong>: Without a clear measure of added value, it is difficult to justify the investments needed for scaling.</li></ul><p>Our framework was designed to systematically address these challenges and ensure a smooth transition to enterprise-wide AI.</p><h2>The Four Pillars of Successful AI Scaling</h2><p>To successfully scale your AI initiatives, it is essential to rely on four fundamental pillars:</p><h3>1. Technical Infrastructure</h3><p>You must have a scalable architecture capable of supporting large workloads and adapting to your evolving needs. This includes robust data platforms, MLOps tools, and flexible cloud infrastructure.</p><h3>2. Organizational Readiness</h3><p>The success of your AI transformation depends on your teams' buy-in. It is therefore crucial to implement a change management strategy to train, support, and involve your employees at all levels of the organization.</p><h3>3. Governance</h3><p>A clear governance framework is essential to ensure ethical, secure, and compliant use of AI. This includes data management policies, model policies, and validation processes.</p><h3>4. Measurement</h3><p>To justify your investments and optimize your strategies, you must be able to track and measure the impact of AI on your business. This involves defining relevant key performance indicators (KPIs) and tracking the return on investment (ROI) of each initiative.</p><h2>12-Month Roadmap for Successful AI Transformation</h2><p>We have developed a 12-month roadmap to guide you at each stage of your AI transformation, from your pilot project's success to enterprise-wide adoption. This roadmap is marked by clear steps and success criteria to help you stay on track.</p><ul><li><strong>Months 1-3</strong>: Consolidate the pilot and plan for scaling.</li><li><strong>Months 4-6</strong>: Develop infrastructure and train teams.</li><li><strong>Months 7-9</strong>: Progressive deployment and iteration.</li><li><strong>Months 10-12</strong>: Optimization and large-scale adoption.</li></ul><h2>Ready to Scale Up?</h2><p>Scaling AI is a complex challenge, but with the right framework and approach, it is possible to transform your organization and generate significant business value. To learn more about our framework and how we can help you succeed in your AI transformation, schedule a strategic consultation with our experts.</p>"
-      },
-      "agenticMarketing": {
-        "category": "Industry Insights",
-        "title": "The Future of Marketing: How Agentic AI is Redefining Strategies",
-        "description": "Discover how AI agents are transforming marketing, from campaign automation to personalized customer experiences. Explore the future of agentic marketing.",
-        "readTime": "12 min",
-        "content": "<p>Agentic artificial intelligence is causing a true revolution in the world of marketing. By enabling autonomous campaign management, personalized content generation, and real-time optimization at an unprecedented scale, agentic AI is redefining marketing operations and customer experience. This article explores how this cutting-edge technology is shaping the future of marketing and how businesses can leverage it to gain sustainable competitive advantage.</p><h2>The Agentic Marketing Revolution: Beyond Traditional Automation</h2><p>Traditional marketing automation, based on predefined rules, has long been the norm. However, agentic AI goes far beyond that. Rather than following rigid scenarios, agentic marketing systems can adapt their strategies in real-time based on performance data, customer behavior, and market conditions. This dynamic adaptation capability enables unparalleled personalization and efficiency.</p><h2>Concrete Applications of Agentic AI in Marketing</h2><p>The applications of agentic AI in marketing are numerous and varied. Here are some concrete examples that illustrate how this technology is transforming marketing operations:</p><ul><li><strong>Large-scale content generation</strong>: AI agents can create thousands of variants of advertising copy, emails, and social media posts, personalized for each audience segment.</li><li><strong>Real-time campaign optimization</strong>: Agents can continuously analyze campaign performance and automatically adjust bids, targeting, and creative to maximize ROI.</li><li><strong>Advanced customer segmentation</strong>: By analyzing complex datasets, AI agents can identify micro-customer segments and deliver ultra-personalized experiences.</li><li><strong>Predictive analytics</strong>: Agents can anticipate market trends, predict customer behavior, and recommend proactive actions to improve results.</li></ul><h2>Unprecedented Return on Investment (ROI)</h2><p>Organizations that have adopted agentic marketing are seeing spectacular improvements in their performance. On average, we observe:</p><ul><li><strong>A 340% increase in return on investment (ROI)</strong> of their marketing campaigns.</li><li><strong>A 75% reduction in time-to-market</strong> for new campaigns.</li><li><strong>A 10x multiplication in campaign output</strong>.</li></ul><p>These figures testify to the power of agentic AI to transform the marketing function and generate significant business growth.</p><h2>Prepare for the Future of Marketing</h2><p>Agentic AI is not a passing trend; it is the future of marketing. Companies that can adopt it quickly and effectively will be tomorrow's leaders. To discover how agentic AI can transform your marketing strategy, request a personalized demonstration of our solutions.</p>"
-      },
-      "buildingAgentic": {
-        "category": "Technical Guide",
-        "title": "Building Agentic Systems: The Complete Technical Guide",
-        "description": "A detailed technical guide for designing, building, and deploying autonomous AI agent systems at scale. Master the architecture, tools, and best practices.",
-        "readTime": "18 min",
-        "content": "<p>Building robust and scalable agentic artificial intelligence systems is a complex technical challenge. This guide aims to provide software engineers and architects with the knowledge and tools necessary to design, develop, and deploy autonomous AI agent systems ready for production. We will address in detail the architecture, essential tools, and best practices to ensure the success of your agentic AI projects.</p><h2>The Architecture of an Agentic System: Key Components</h2><p>A well-designed agentic system architecture is the key to performance and reliability. It consists of several interdependent layers:</p><ul><li><strong>Large Language Models (LLMs)</strong>: The heart of the system, responsible for natural language understanding and response generation.</li><li><strong>Vector databases</strong>: They serve as long-term memory for agents, allowing them to store and retrieve relevant information.</li><li><strong>Tool interfaces</strong>: They enable agents to interact with external systems, APIs, and databases to execute tasks.</li><li><strong>Orchestration layer</strong>: It manages agent workflows, task decomposition, and coordination between different components.</li></ul><h2>The Development Stack for Agentic Systems</h2><p>Choosing the right tools and frameworks is essential for accelerating development and ensuring the quality of your agentic systems. Here is our selection of essential tools:</p><ul><li><strong>LangChain</strong>: A powerful orchestration framework for building LLM-based applications, including complex agentic systems.</li><li><strong>Vector databases</strong>: Solutions like Pinecone, Weaviate, or Chroma are essential for managing agent memory.</li><li><strong>API integrations</strong>: The ability to connect to a multitude of APIs is crucial for extending the capabilities of your agents.</li><li><strong>Monitoring systems</strong>: Tools like LangSmith or Arize AI are essential for observability, debugging, and continuous improvement of your agents.</li></ul><h2>Best Practices for Developing Agentic Systems</h2><p>To ensure the robustness and reliability of your agentic systems, it is important to follow a number of best practices:</p><ul><li><strong>Prompt engineering</strong>: The quality of the prompts you provide to your agents has a direct impact on their performance. It is therefore essential to dedicate time to designing clear, precise, and effective prompts.</li><li><strong>Error handling</strong>: Agentic systems can sometimes fail. It is therefore important to implement robust error handling mechanisms to ensure the resilience of your systems.</li><li><strong>Security guardrails</strong>: To prevent undesirable behavior, it is crucial to implement security guardrails to limit your agents' actions and ensure ethical use.</li><li><strong>Performance optimization</strong>: The performance of agentic systems is a major concern. It is therefore important to continuously optimize the speed, accuracy, and cost of your agents.</li></ul><h2>Deployment Strategies for Agentic Systems</h2><p>Moving from a prototype to large-scale production requires careful planning. Here are some lessons learned from our real-world deployments:</p><ul><li><strong>Infrastructure</strong>: Choose scalable and flexible cloud infrastructure to support your agents' workload.</li><li><strong>Scaling</strong>: Plan a progressive scaling strategy to ensure a smooth transition.</li><li><strong>Monitoring</strong>: Implement a comprehensive monitoring system to track your agents' performance in real-time.</li><li><strong>Cost management</strong>: Continuously optimize the costs of your agentic systems by choosing the right models and optimizing your prompts.</li></ul><h2>Move to the Next Level with Agentic AI</h2><p>Building agentic systems is a fascinating and rapidly evolving field. With the right tools, the right architecture, and the right practices, you can create autonomous AI systems that will transform your business. To discuss your agentic system project with our experts, contact us for a technical consultation.</p>"
-      },
-      "roiInvestment": {
-        "category": "Strategy",
-        "title": "Measuring AI ROI: The Complete Guide to Evaluating Your Investments",
-        "description": "Discover how to measure the return on investment (ROI) of your AI projects with our comprehensive guide. A practical framework for evaluating the value of your AI investments.",
-        "readTime": "10 min",
-        "content": "<p>Measuring the return on investment (ROI) of artificial intelligence is a major challenge for many organizations. Unlike traditional investments, the value of AI is not limited to productivity gains or cost reductions. It also encompasses more difficult-to-quantify strategic benefits, such as improved customer experience, accelerated innovation, and strengthened competitive positioning. This guide presents a comprehensive framework for measuring AI ROI, capturing both the quantitative and qualitative benefits of your initiatives.</p><h2>The Challenge of Measuring AI ROI: Beyond Traditional Calculations</h2><p>Traditional ROI calculation methods often prove insufficient for evaluating the real impact of AI. They tend to neglect long-term strategic value and focus only on immediate financial gains. To overcome this challenge, we propose a multidimensional framework that takes into account all the benefits of AI.</p><h2>The Six Key Dimensions for Measuring AI ROI</h2><p>Our framework is built around six key dimensions for a comprehensive evaluation of AI ROI:</p><ul><li><strong>Operational Efficiency</strong>: Measurement of productivity gains, task automation, and process optimization.</li><li><strong>Revenue Impact</strong>: Evaluation of sales increases, lead generation, and customer value.</li><li><strong>Cost Reduction</strong>: Quantification of savings achieved through resource optimization and error reduction.</li><li><strong>Quality Improvement</strong>: Measurement of improvements in product quality, services, and customer experience.</li><li><strong>Strategic Positioning</strong>: Evaluation of competitive advantage, market share, and brand reputation.</li><li><strong>Innovation Capacity</strong>: Measurement of the ability to develop new products, services, and business models.</li></ul><h2>The AI ROI Calculation Framework</h2><p>For each dimension, we provide practical formulas and tools to calculate the ROI of your AI investments. This includes establishing baselines, defining measurement intervals, and using attribution methods to isolate the impact of AI.</p><h2>Real Case Studies: 200-450% ROI</h2><p>Our real-world case studies demonstrate how organizations have achieved returns on investment of 200-450% on their AI projects. We present in detail how these returns were measured and achieved, with concrete examples across different industries.</p><h2>Make Informed Investment Decisions</h2><p>By adopting a multidimensional approach to measuring AI ROI, you will be able to make more informed investment decisions, justify your projects to your management, and maximize the value of AI for your business. To learn more about our AI ROI measurement framework and how we can help you evaluate your investments, contact our experts for a personalized consultation.</p>"
-      }
-    },
-    "newsletter": {
-      "title": "STAY AHEAD OF<br />THE AI CURVE",
-      "description": "Subscribe to receive our latest insights, technical guides, and industry analysis directly in your inbox.",
-      "placeholder": "Enter your email address",
-      "subscribe": "Subscribe",
-      "subscribing": "Subscribing...",
-      "success": "✓ Successfully subscribed! Check your email for confirmation.",
-      "error": "✗ Failed to subscribe. Please try again."
-    },
-    "articleNotFound": "Article Not Found",
-    "backToResources": "Back to Resources"
-  },
-  "agencies": {
-    "seoTitle": "Your AI & Digital Team on Demand | Nukleo Digital",
-    "seoDescription": "Scale your agency with Nukleo's expert AI & digital team. 40% cost savings, zero hiring hassle, premium quality guaranteed.",
-    "seoKeywords": "agency partnership AI, digital team on demand, development outsourcing, augmented agency",
-    "heroBadge": "Trusted by 32+ European Agencies",
-    "heroTitle": "Your",
-    "heroTitleHighlight": "AI & Digital Team",
-    "heroSubtitle": "Without the Overhead",
-    "heroDescription": "Scale your agency instantly with our expert team. Deliver more projects, increase margins, keep clients happy all without hiring headaches.",
-    "ctaButton1": "Start Your First Project",
-    "ctaButton2": "Book a Strategy Call",
-    "stats": {
-      "costSavings": "Cost Savings",
-      "teamReady": "Team Ready",
-      "onTimeDelivery": "On-Time Delivery",
-      "insuredProjects": "Insured Projects"
-    },
-    "problemTitle": "Agencies Are Stuck Between",
-    "problemTitleHighlight": "Growth & Capacity",
-    "problemSubtitle": "Sound familiar? You're not alone.",
-    "problems": {
-      "hiring": {
-        "title": "Hiring is Slow & Expensive",
-        "description": "3-6 months to hire, €60K+ salaries, high turnover risk. You lose projects while recruiting."
-      },
-      "demand": {
-        "title": "Clients Want More, Faster",
-        "description": "AI, automation, custom platforms demands are exploding but your team is maxed out."
-      },
-      "margins": {
-        "title": "Margins Are Shrinking",
-        "description": "Local dev costs eat profits. You need premium quality at nearshore prices."
-      }
-    },
-    "solutionBadge": "The Nukleo Solution",
-    "solutionTitle": "Your Instant",
-    "solutionTitleHighlight": "AI & Digital Powerhouse",
-    "solutionDescription": "We become your technical backbone seamlessly integrated, instantly scalable, transparently priced.",
-    "benefits": {
-      "deploy": {
-        "title": "Deploy in 48 Hours",
-        "description": "No recruitment, no onboarding delays. Senior team ready to start Monday.",
-        "highlight": "vs. 3-6 months hiring"
-      },
-      "save": {
-        "title": "Save 40% on Dev Costs",
-        "description": "Premium Canadian talent at nearshore prices. Better margins, same quality.",
-        "highlight": "€60K → €36K per dev/year"
-      },
-      "scale": {
-        "title": "Scale Up or Down Instantly",
-        "description": "Need 3 devs this month, 8 next month? No problem. Zero HR overhead.",
-        "highlight": "Total flexibility"
-      },
-      "insurance": {
-        "title": "€1M Project Insurance",
-        "description": "Every project covered. 98% on-time delivery. 95% client satisfaction guaranteed.",
-        "highlight": "Risk-free partnership"
-      },
-      "experts": {
-        "title": "AI & Automation Experts",
-        "description": "Not just coders strategic AI partners who understand business transformation.",
-        "highlight": "5+ years avg. experience"
-      },
-      "hours": {
-        "title": "European Hours, Canadian Base",
-        "description": "Bilingual team (French/English) aligned with your timezone and culture.",
-        "highlight": "Real-time collaboration"
-      }
-    },
-    "ctaHelp": "See How We Can Help Your Agency",
-    "howItWorksTitle": "From Handshake to",
-    "howItWorksTitleHighlight": "Delivery in 3 Steps",
-    "howItWorksSubtitle": "No complexity. No bureaucracy. Just results.",
-    "steps": {
-      "discovery": {
-        "step": "01",
-        "title": "Discovery Call",
-        "description": "30-min strategy session. We understand your needs, tech stack, and project pipeline.",
-        "timeline": "Day 1"
-      },
-      "assembly": {
-        "step": "02",
-        "title": "Team Assembly",
-        "description": "We match senior devs to your project. Meet your team, review profiles, approve lineup.",
-        "timeline": "Day 2-3"
-      },
-      "kickoff": {
-        "step": "03",
-        "title": "Project Kickoff",
-        "description": "Team integrated into your workflow. Slack, GitHub, daily standups seamless collaboration.",
-        "timeline": "Day 4+"
-      }
-    },
-    "servicesTitle": "Full-Stack",
-    "servicesTitleHighlight": "AI & Digital Services",
-    "servicesSubtitle": "From strategy to deployment, we handle the entire technical journey.",
-    "serviceCategories": {
-      "ai": {
-        "title": "AI & Machine Learning",
-        "services": ["Custom AI models", "NLP & chatbots", "Predictive analytics", "Computer vision", "AI strategy consulting"]
-      },
-      "web": {
-        "title": "Web & Mobile Apps",
-        "services": ["React, Vue, Next.js", "iOS & Android native", "Progressive Web Apps", "E-commerce platforms", "SaaS products"]
-      },
-      "cloud": {
-        "title": "Cloud & DevOps",
-        "services": ["AWS, Azure, GCP", "CI/CD pipelines", "Kubernetes & Docker", "Infrastructure as Code", "Security & compliance"]
-      },
-      "data": {
-        "title": "Data & Automation",
-        "services": ["Data pipelines", "Business intelligence", "Process automation", "API integrations", "ETL workflows"]
-      }
-    },
-    "pricingTitle": "Transparent",
-    "pricingTitleHighlight": "Pricing",
-    "pricingSubtitle": "No hidden fees. No surprises. Just honest, competitive rates.",
-    "pricingPlans": {
-      "project": {
-        "name": "Project-Based",
-        "price": "Fixed Quote",
-        "description": "Perfect for defined scope projects",
-        "features": ["Clear deliverables", "Fixed timeline", "Milestone payments", "Full project management"],
-        "cta": "Get a Quote"
-      },
-      "extension": {
-        "name": "Team Extension",
-        "price": "€3,500/mo",
-        "description": "Per senior developer",
-        "features": ["Dedicated team members", "Flexible scaling", "Your project management", "Monthly billing"],
-        "cta": "Build Your Team",
-        "popular": true
-      },
-      "retainer": {
-        "name": "Retainer",
-        "price": "Custom",
-        "description": "Ongoing partnership",
-        "features": ["Priority support", "Reserved capacity", "Strategic consulting", "Volume discounts"],
-        "cta": "Discuss Retainer"
-      }
-    },
-    "pricingNote": "💰 Export Canada Financing: CAD $75,000 available to support your growth",
-    "testimonialsTitle": "Agencies",
-    "testimonialsTitleHighlight": "Love Working With Us",
-    "testimonials": {
-      "sophie": {
-        "quote": "Nukleo became our AI team overnight. We went from turning down AI projects to leading with them.",
-        "author": "Sophie Laurent",
-        "role": "CEO, Digital Pulse Paris",
-        "metric": "3x project capacity"
-      },
-      "marc": {
-        "quote": "40% cost savings without compromising quality. Our margins improved while client satisfaction went up.",
-        "author": "Marc Dubois",
-        "role": "COO, TechFlow Brussels",
-        "metric": "40% margin increase"
-      },
-      "elena": {
-        "quote": "No more hiring stress. We scale up for big projects, scale down when quiet. Total flexibility.",
-        "author": "Elena Rodriguez",
-        "role": "Founder, Innovate Madrid",
-        "metric": "Zero turnover risk"
-      }
-    },
-    "finalCtaBadge": "Ready to Scale?",
-    "finalCtaTitle": "Let's Build Something",
-    "finalCtaTitleHighlight": "Extraordinary",
-    "finalCtaDescription": "Join 32+ agencies who've transformed their business with Nukleo. Book a free strategy call today no commitment, just insights.",
-    "finalCtaButton1": "Book Your Strategy Call",
-    "finalCtaButton2": "Start a Project",
-    "finalCtaFeatures": {
-      "free": "Free consultation",
-      "noObligation": "No obligation",
-      "response": "Response in 24h"
-    }
-  },
-  "bureau": {
-    "title": "The Strategic Bureau",
-    "subtitle": "Transformation Orchestration",
-    "heroDescription": "We define the strategy, drive the transformation, and measure the impact of AI across your organization. From vision to execution, we orchestrate your journey from AI-curious to AI-native.",
-    "mission": "Our Mission",
-    "missionText": "To guide your organization through the complex journey of <strong>AI transformation</strong>. We don't just create strategies we orchestrate change, align stakeholders, and ensure your AI initiatives deliver measurable business value at every stage.",
-    "services": {
-      "title": "Strategic Services",
-      "aiMaturity": {
-        "title": "AI Maturity Audit & Roadmap",
-        "description": "Assessing your current position in the AI landscape and charting a clear path to AI leadership. We evaluate your capabilities, identify gaps, and create a 9-to-12-month transformation roadmap."
-      },
-      "transformationStrategy": {
-        "title": "Agentic Transformation Strategy",
-        "description": "Redefining your operating model with AI at its center. We help you transition from experimentation to enterprise-wide transformation, embedding agentic AI as the foundation for growth."
-      },
-      "governance": {
-        "title": "AI Governance & Ethics",
-        "description": "Implementing the guardrails for responsible and high-performing AI. We establish frameworks for ethical AI use, compliance, risk management, and transparent decision-making."
-      },
-      "performanceAnalysis": {
-        "title": "Performance Analysis & ROI",
-        "description": "Measuring the tangible impact of AI on your business goals. We track KPIs, analyze outcomes, and continuously optimize your AI investments to maximize return and strategic value."
-      }
-    },
-    "journey": {
-      "title": "The Transformation Journey",
-      "discovery": {
-        "title": "Discovery & Assessment",
-        "description": "We conduct a comprehensive AI maturity audit, evaluating your current capabilities, data readiness, organizational culture, and competitive positioning. This baseline assessment identifies opportunities and constraints."
-      },
-      "strategy": {
-        "title": "Strategy & Roadmap",
-        "description": "We design your agentic transformation strategy, defining clear objectives, prioritizing use cases, and creating a phased roadmap. This includes governance frameworks, resource planning, and change management strategies."
-      },
-      "execution": {
-        "title": "Execution & Optimization",
-        "description": "We orchestrate implementation across your organization, coordinating with The Lab and The Studio. We continuously measure performance, track ROI, and adjust the strategy to maximize business impact."
-      },
-      "scale": {
-        "title": "Scale & Leadership",
-        "description": "We help you scale successful pilots enterprise-wide and position your organization as an AI leader in your industry. This includes thought leadership, innovation programs, and continuous capability building."
-      }
-    },
-    "impact": {
-      "title": "Expected Impact",
-      "roi": "ROI on AI investments within 12 months",
-      "timeToMarket": "Reduction in time-to-market for new initiatives",
-      "efficiency": "Increase in operational efficiency"
-    },
-    "cta": {
-      "title": "Ready to Lead Your Transformation?",
-      "description": "Let's discuss how The Strategic Bureau can orchestrate your journey from AI experimentation to enterprise-wide transformation.",
-      "button": "Begin Your Journey"
-    }
-  },
-  "seo": {
-    "home": {
-      "title": "AI Transformation Agency | Agentic AI Solutions",
-      "description": "Transform your business with AI-powered solutions. We help startups, SMBs, enterprises, and governments unlock the power of artificial intelligence."
-    },
-    "manifesto": {
-      "title": "Our Manifesto | Move From Pilot to Scale",
-      "description": "Discover the Nukleo manifesto: our vision for AI transformation that moves beyond pilots to production-ready, scalable solutions. Read our approach to AI success."
-    },
-    "about": {
-      "title": "About Nukleo Digital | AI Transformation Experts",
-      "description": "Meet the Nukleo Digital team: 15+ AI experts transforming businesses across Canada. Based in Montréal & Halifax. Expertise in strategy, platforms, and intelligent operations."
-    },
-    "expertise": {
-      "title": "Our AI Expertise | Agentic AI Systems, Platforms & Strategy",
-      "description": "Discover our AI expertise: Agentic AI systems, AI-native platforms, transformation strategy, creative studio & intelligent data. Proven 4-phase methodology for success."
-    },
-    "clients": {
-      "title": "Our Clients | Trusted by Industry Leaders",
-      "description": "Trusted by 12+ industry leaders: MBAM, Summit Law, Affilia, GoCoupons & more. See how we transformed operations across 8+ industries with AI."
-    },
-    "resources": {
-      "title": "Resources | AI Insights, Guides & Research",
-      "description": "Insights, guides, and research from the frontlines of AI transformation. Stay ahead with expert analysis, practical frameworks, and interactive tools."
-    },
-    "services": {
-      "title": "AI Services | Strategy, Platforms & Intelligent Operations",
-      "description": "Comprehensive AI services: Strategy & Marketing, Digital Platforms, Intelligent Operations. 12 specialized solutions to accelerate your AI transformation."
-    },
-    "contact": {
-      "title": "Contact Nukleo Digital | Start Your AI Transformation",
-      "description": "Ready to transform with AI? Contact Nukleo Digital for expert consultation. Offices in Montréal & Halifax. Let's discuss your AI transformation project."
-    }
-  },
-  "lab": {
-    "title": "The AI Lab",
-    "subtitle": "Technology Foundation",
-    "heroDescription": "We build the robust and flexible technological foundation that powers your AI transformation. From intelligent data platforms to custom AI agents, we create the infrastructure that makes AI-native operations possible.",
-    "mission": "Our Mission",
-    "missionText": "To build the technological backbone that enables your organization to operate as an <strong>AI-native company</strong>. We don't just implement tools we architect systems that learn, adapt, and scale with your ambitions.",
-    "capabilities": {
-      "title": "Core Capabilities",
-      "dataPlatforms": {
-        "title": "Intelligent Data Platforms",
-        "description": "Unifying and preparing your data ecosystem for AI. We build robust data architectures that serve as the foundation for intelligent systems, ensuring data quality, accessibility, and governance."
-      },
-      "customAgents": {
-        "title": "Custom AI Agent Development",
-        "description": "Creating autonomous agents tailored to your specific business needs. From customer service bots to intelligent process assistants, we develop AI agents that learn, adapt, and deliver value continuously."
-      },
-      "integration": {
-        "title": "Third-Party AI Integration",
-        "description": "Orchestrating the best AI models and services on the market. We integrate leading solutions from OpenAI, Anthropic, Mistral, and others to create a powerful AI stack customized for your operations."
-      },
-      "automation": {
-        "title": "Intelligent Process Automation (IPA)",
-        "description": "Moving beyond simple RPA with adaptive workflows. We implement intelligent automation that understands context, makes decisions, and continuously optimizes itself based on outcomes."
-      }
-    },
-    "approach": {
-      "title": "Our Approach",
-      "assess": {
-        "title": "Assess & Design",
-        "description": "We start by understanding your current infrastructure, data landscape, and business objectives. Then we design an AI architecture that aligns with your strategic goals."
-      },
-      "build": {
-        "title": "Build & Integrate",
-        "description": "We develop custom AI solutions and integrate best-in-class third-party services, creating a cohesive ecosystem that works seamlessly with your existing systems."
-      },
-      "optimize": {
-        "title": "Optimize & Scale",
-        "description": "We continuously monitor, refine, and enhance your AI infrastructure, ensuring it evolves with your needs and delivers measurable ROI at every stage."
-      }
-    },
-    "cta": {
-      "title": "Ready to Build Your AI Foundation?",
-      "description": "Let's discuss how The AI Lab can architect the technological infrastructure that powers your transformation.",
-      "button": "Start the Conversation"
-    }
-  },
-  "studio": {
-    "title": "The Creative Studio",
-    "subtitle": "Augmented Content & Experiences",
-    "heroDescription": "We use AI to create brand experiences and content at unparalleled scale and relevance. From generative content to autonomous marketing campaigns, we help you connect with audiences in ways that were previously impossible.",
-    "mission": "Our Mission",
-    "missionText": "To harness the creative power of AI to deliver <strong>hyper-personalized experiences at scale</strong>. We don't replace human creativity we amplify it, enabling your brand to create meaningful connections with every customer, in every moment.",
-    "capabilities": {
-      "title": "Creative Capabilities",
-      "contentCreation": {
-        "title": "Augmented Content Creation",
-        "description": "Producing content (text, image, video) at unprecedented scale, personalized in real-time. We leverage generative AI to create brand-aligned content that resonates with each audience segment."
-      },
-      "personalizedExperiences": {
-        "title": "AI-Personalized Customer Experiences",
-        "description": "Creating unique and dynamic customer journeys powered by AI. From personalized recommendations to adaptive interfaces, we design experiences that evolve with each interaction."
-      },
-      "agenticMarketing": {
-        "title": "Agentic Marketing Campaigns",
-        "description": "Deploying autonomous campaigns that continuously optimize themselves. Our AI agents test, learn, and adapt in real-time, maximizing engagement and conversion across all channels."
-      },
-      "brandIdentity": {
-        "title": "Brand Identity in the AI Era",
-        "description": "Defining how your brand interacts and is perceived in a world of AI assistants and agents. We help you establish a distinctive voice and presence in AI-mediated experiences."
-      }
-    },
-    "revolution": {
-      "title": "The Agentic Marketing Revolution",
-      "description": "We're entering the era of <strong>Agentic Marketing</strong> where autonomous AI systems don't just execute campaigns, they learn, decide, and act independently to achieve your business objectives.",
-      "traditional": {
-        "title": "Traditional Marketing",
-        "items": [
-          "Manual campaign setup",
-          "Periodic optimization",
-          "One-size-fits-all messaging",
-          "Delayed insights",
-          "Limited personalization"
-        ]
-      },
-      "agentic": {
-        "title": "Agentic Marketing",
-        "items": [
-          "Autonomous campaign orchestration",
-          "Real-time continuous optimization",
-          "Hyper-personalized at scale",
-          "Instant insights and actions",
-          "Adaptive to each customer"
-        ]
-      }
-    },
-    "useCases": {
-      "title": "Use Cases",
-      "dynamicContent": {
-        "title": "Dynamic Content Generation",
-        "description": "Generate thousands of unique product descriptions, blog posts, and social media content tailored to different audience segments all while maintaining brand voice and quality standards."
-      },
-      "personalizedJourneys": {
-        "title": "Personalized Customer Journeys",
-        "description": "Create unique experiences for each visitor based on their behavior, preferences, and context. AI agents adapt content, recommendations, and interfaces in real-time to maximize engagement and conversion."
-      },
-      "autonomousOptimization": {
-        "title": "Autonomous Campaign Optimization",
-        "description": "Deploy marketing campaigns that continuously test, learn, and optimize themselves across channels. AI agents adjust messaging, timing, targeting, and budget allocation to maximize ROI without manual intervention."
-      }
-    },
-    "cta": {
-      "title": "Ready to Amplify Your Creativity?",
-      "description": "Let's explore how The Creative Studio can help you create experiences and content that captivate audiences at unprecedented scale.",
-      "button": "Let's Create Together"
-    }
-  },
-  "clients": {
-    "seoTitle": "Our Clients | Trusted by Industry Leaders",
-    "seoDescription": "Trusted by 12+ industry leaders: MBAM, Summit Law, Affilia, GoCoupons & more. See how we transformed operations across 8+ industries with AI. View case studies.",
-    "seoKeywords": "AI clients, AI case studies, industry leaders AI, AI transformation success stories, AI portfolio",
-    "badge": "Trusted by Industry Leaders",
-    "title": "Our",
-    "titleHighlight": "Clients",
-    "description": "From museums to tech startups, we've helped organizations across diverse industries transform their operations with AI-powered solutions. Here are some of the amazing companies we've had the privilege to work with.",
-    "stats": {
-      "clients": "Trusted Clients",
-      "industries": "Industries Served",
-      "roi": "Average ROI Increase"
-    },
-    "labels": {
-      "servicesProvided": "Services Provided",
-      "keyResults": "Key Results"
-    },
-    "cta": {
-      "title": "Ready to Join Them?",
-      "description": "Let's discuss how our AI services can transform your business and accelerate your growth.",
-      "button": "Start Your Transformation",
-      "buttonSecondary": "Start a Project"
-    }
-  },
-  "seo": {
-    "home": {
-      "title": "AI Transformation Agency | Nukleo Digital",
-      "description": "Transform your business with agentic AI solutions. Strategy, platform, and intelligent automation."
-    },
-    "manifesto": {
-      "title": "Manifesto | AI Transformation | Nukleo Digital",
-      "description": "Discover our manifesto on AI transformation. Move from experimentation to scale with AI agents."
-    },
-    "about": {
-      "title": "About | Nukleo Digital Team",
-      "description": "Meet the Nukleo Digital team. AI transformation experts with offices in Montréal and Halifax."
-    },
-    "expertise": {
-      "title": "AI Expertise | Nukleo Digital Services",
-      "description": "Our services: AI strategy, intelligent platforms, mobile applications, automated marketing."
-    },
-    "clients": {
-      "title": "Clients | Nukleo Digital",
-      "description": "Discover the clients who trust us for their AI transformation."
-    },
-    "resources": {
-      "title": "AI Resources | Guides and Tools | Nukleo Digital",
-      "description": "Guides, whitepapers and resources on AI transformation."
-    },
-    "services": {
-      "title": "AI Services | Strategy, Platforms & Intelligent Operations - Nukleo",
-      "description": "Complete AI services: Strategy & Marketing, Digital Platforms, Intelligent Operations. 12 specialized solutions to accelerate your AI transformation."
-    },
-    "contact": {
-      "title": "Contact | Nukleo Digital",
-      "description": "Contact Nukleo Digital to discuss your AI transformation project."
+      "title": "Ready to take the lead?",
+      "subtitle": "Let's get started",
+      "button": "Let's get started"
     }
   },
   "services": {
@@ -1760,6 +790,1081 @@
       "ctaDescription": "Let's discuss how we can guide your digital transformation journey and help you build a competitive advantage in the AI age.",
       "ctaButton1": "Schedule a Consultation",
       "ctaButton2": "Explore Our Services"
+    },
+    "heroTitle": "Four areas of expertise,",
+    "heroSubtitle": "one performance.",
+    "heroSubtitleGradient": "Agency · Studio · Tech · Consulting",
+    "heroDescription": "Marketing, design, development, and digital transformation — four complementary departments, powered by AI, to take the lead in the digital economy.",
+    "ourServices": "Our Departments",
+    "lab": {
+      "number": "03",
+      "category": "Nukleo.Tech",
+      "tagline": "Development & Artificial Intelligence",
+      "description": "We design and build the digital tools that drive your performance. Web development, mobile applications, AI integrations, automation, and custom AI agents.",
+      "services": {
+        "mobileApps": {
+          "title": "Mobile Applications",
+          "description": "iOS, Android, and cross-platform apps with exceptional UX"
+        },
+        "webApps": {
+          "title": "Web Development",
+          "description": "Websites, platforms, and robust, scalable web applications"
+        },
+        "integrations": {
+          "title": "Integrations & APIs",
+          "description": "Connect your tools for a seamless digital ecosystem"
+        },
+        "automation": {
+          "title": "AI & Automation",
+          "description": "Custom AI agents and business process automation"
+        }
+      },
+      "cta": "Explore Nukleo.Tech"
+    },
+    "studio": {
+      "number": "02",
+      "category": "Nukleo.Studio",
+      "tagline": "Design & Creation",
+      "description": "We create visual and creative experiences that make your performance visible and desirable. Graphic design, UX/UI, branding, art direction, and creative production.",
+      "services": {
+        "branding": {
+          "title": "Branding & Identity",
+          "description": "Logos, brand guidelines, and memorable brand universes"
+        },
+        "uiuxDesign": {
+          "title": "UX/UI Design",
+          "description": "Intuitive interfaces that turn visitors into customers"
+        },
+        "artDirection": {
+          "title": "Art Direction",
+          "description": "Creative concepts and visual consistency across all touchpoints"
+        },
+        "campaigns": {
+          "title": "Creative Production",
+          "description": "Campaign visuals, motion design, and creative assets"
+        }
+      },
+      "cta": "Explore Nukleo.Studio"
+    },
+    "bureau": {
+      "number": "04",
+      "category": "Nukleo.Consulting",
+      "tagline": "Digital Transformation & Consulting",
+      "description": "We guide your organization through its digital transformation. Audit, strategy, AI consulting, change management, and training — from vision to execution.",
+      "services": {
+        "digitalStrategy": {
+          "title": "Digital Strategy",
+          "description": "Clear vision, actionable roadmap, and AI consulting"
+        },
+        "transformation": {
+          "title": "Digital Transformation",
+          "description": "Change management and digital tools adoption"
+        },
+        "digitalMarketing": {
+          "title": "Training & Coaching",
+          "description": "Upskilling your teams on digital and AI"
+        },
+        "communication": {
+          "title": "Audit & Diagnosis",
+          "description": "Assess your digital maturity and get recommendations"
+        }
+      },
+      "cta": "Explore Nukleo.Consulting"
+    },
+    "agency": {
+      "number": "01",
+      "category": "Nukleo.Agency",
+      "tagline": "Marketing & 360 Communication",
+      "description": "We activate and amplify your digital presence. Digital marketing, social media management, media buying, content strategy, newsletters, and performance campaigns — powered by AI.",
+      "services": {
+        "socialMedia": {
+          "title": "Social Media",
+          "description": "Community management, content creation, and social media strategy"
+        },
+        "seoSea": {
+          "title": "SEO & Digital Advertising",
+          "description": "Organic search, Google Ads, Meta Ads, and media buying"
+        },
+        "contentStrategy": {
+          "title": "Content Strategy",
+          "description": "Newsletters, blog, copywriting, and editorial strategy"
+        },
+        "analytics": {
+          "title": "Analytics & Performance",
+          "description": "Dashboards, KPI tracking, and continuous optimization"
+        }
+      },
+      "cta": "Explore Nukleo.Agency"
+    },
+    "howItWorks": {
+      "title": "An integrated approach",
+      "description": "Our four departments work hand in hand. Depending on your project, engage one department or combine them for a complete 360 solution.",
+      "combinations": {
+        "brandLaunch": {
+          "project": "Brand Launch",
+          "teams": "Agency + Studio",
+          "deliverables": "Visual identity + launch strategy + campaign"
+        },
+        "mobileApp": {
+          "project": "Mobile Application",
+          "teams": "Tech + Studio",
+          "deliverables": "Development + UX/UI design"
+        },
+        "digitalOverhaul": {
+          "project": "Complete Digital Transformation",
+          "teams": "Agency + Studio + Tech + Consulting",
+          "deliverables": "New platform + branding + strategy + support"
+        },
+        "marketingCampaign": {
+          "project": "Marketing Campaign",
+          "teams": "Agency + Studio",
+          "deliverables": "Visuals + strategy + deployment"
+        }
+      }
+    },
+    "serviceLevels": {
+      "sectionLabel": "Our Service Levels",
+      "title": "Three ways to work together",
+      "description": "Whatever your project, budget, or digital maturity level, we have a model adapted to your needs.",
+      "alaCarte": {
+        "name": "À la carte",
+        "tagline": "Maximum flexibility",
+        "description": "Order exactly what you need, when you need it. Ideal for one-time projects, specific mandates, or organizations that want to test our approach.",
+        "highlights": [
+          "One-time projects",
+          "Specific mandates",
+          "No commitment"
+        ]
+      },
+      "enContinu": {
+        "name": "Ongoing",
+        "tagline": "Monthly partnership",
+        "description": "A monthly partnership for consistent digital presence and continuous improvement. Your dedicated digital team, at a predictable cost.",
+        "highlights": [
+          "Dedicated team",
+          "Predictable cost",
+          "Continuous improvement"
+        ]
+      },
+      "cocreation": {
+        "name": "Co-creation",
+        "tagline": "Deep transformation",
+        "description": "For organizations seeking deep digital transformation. We become your integrated strategic partner, committed to your long-term results.",
+        "highlights": [
+          "Strategic partnership",
+          "Committed to results",
+          "Deep transformation"
+        ]
+      }
+    },
+    "cta": {
+      "title": "Not sure what you need?",
+      "description": "Let's talk about your project. We'll guide you to the right department — or the right combination.",
+      "buttonPrimary": "Talk to an expert",
+      "buttonSecondary": "View our work"
+    }
+  },
+  "contact": {
+    "title": "Contact Us",
+    "subtitle": "Ready to transform your business with AI?",
+    "firstName": "First Name",
+    "lastName": "Last Name",
+    "email": "Email",
+    "company": "Company",
+    "message": "Message",
+    "send": "Send",
+    "success": "Message sent successfully!",
+    "heroTitle": "Let's Start<br /><span class=\"text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-500\">Your Transformation</span>",
+    "heroSubtitle": "",
+    "heroDescription": "Ready to become an AI-native leader? Get in touch and let's discuss how we can help you thrive in the age of artificial intelligence.",
+    "sendMessage": "Send us a message",
+    "successMessage": "✓ Message sent successfully! We'll get back to you within 24 hours.",
+    "errorMessage": "✗ Failed to send message. Please try again.",
+    "firstNamePlaceholder": "John",
+    "lastNamePlaceholder": "Doe",
+    "emailPlaceholder": "john@company.com",
+    "companyPlaceholder": "Your company",
+    "messagePlaceholder": "Tell us about your project...",
+    "getInTouch": "Get in Touch",
+    "contactDescription": "Ready to transform your business with AI? Contact us for expert consultation.",
+    "montreal": "Montréal",
+    "halifax": "Halifax",
+    "emailUs": "Email us",
+    "phone": "Phone",
+    "ourOffices": "Our Offices"
+  },
+  "about": {
+    "title": "About",
+    "subtitle": "Our Team",
+    "description": "Meet the experts behind Nukleo Digital",
+    "aboutUs": "ABOUT US",
+    "heroTitle1": "Strategy.",
+    "heroTitle2": "Creativity.",
+    "heroTitle3": "Technology.",
+    "manifesto": "MANIFESTO",
+    "nukleoSpirit": "The Nukleo Spirit",
+    "nukleoSpiritText": "At <strong>Nukleo</strong>, we believe every ambitious organization deserves a digital partner at the height of their ambitions. Our mission: democratize digital excellence for SMBs and non-profits worldwide — making accessible what was once reserved for large enterprises.",
+    "ourApproach": "Our Approach",
+    "ourApproachText": "We don't deliver services. We co-create your digital performance, committed to your results. From strategy to execution, design to technology, communication to digital transformation — all orchestrated and powered by AI to deliver more, faster, at a fair cost.",
+    "whatSetsUsApart": "What Sets Us Apart",
+    "whatSetsUsApartText": "AI is our operational DNA. It allows us to deliver digital excellence at a democratized cost, without ever sacrificing quality. Our four departments — Nukleo.Agency, Nukleo.Studio, Nukleo.Tech, and Nukleo.Consulting — work hand in hand to offer you a complete performance ecosystem.",
+    "valuesTitle": "Our Values",
+    "valuesSubtitle": "The values we stand for to deliver quality work",
+    "values": {
+      "authenticity": {
+        "title": "Authenticity",
+        "description": "We tell it like it is. Total transparency, radical honesty, and authenticity in every interaction. With our clients, our partners, and among ourselves."
+      },
+      "excellence": {
+        "title": "Excellence",
+        "description": "We don't settle for 'good enough'. We aim for excellence in every deliverable, every strategy, every line of code. Excellence is not a luxury — it's our standard."
+      },
+      "ownership": {
+        "title": "Ownership",
+        "description": "We take ownership of every project as if it were our own. We are committed to your results, not just delivery. Your success is our success."
+      }
+    },
+    "ourTeam": "OUR TEAM",
+    "team": {
+      "clement": {
+        "role": "Founder & CEO"
+      },
+      "alexei": {
+        "role": "Co-founder & CTO"
+      },
+      "antoine": {
+        "role": "Full-Stack Developer"
+      },
+      "margaux": {
+        "role": "UX/UI Designer"
+      },
+      "camille": {
+        "role": "Marketing Strategist"
+      },
+      "timothe": {
+        "role": "AI Developer"
+      },
+      "sarah": {
+        "role": "Project Manager"
+      },
+      "severine": {
+        "role": "Graphic Designer"
+      },
+      "maxime": {
+        "role": "Backend Developer"
+      },
+      "meriem": {
+        "role": "Data Analyst"
+      },
+      "jeanFrancois": {
+        "role": "Senior Developer"
+      },
+      "hind": {
+        "role": "Digital Strategist"
+      },
+      "omar": {
+        "role": "Solutions Architect"
+      },
+      "ricardo": {
+        "role": "AI Expert"
+      },
+      "marieClaire": {
+        "role": "Transformation Consultant"
+      }
+    },
+    "teamTitle": "Meet the team",
+    "teamDescription": "A unique fusion of creative, strategic, and technical talent.",
+    "ourOffices": "OUR OFFICES",
+    "montreal": "MONTRÉAL",
+    "montrealDescription": "In the heart of Little Italy, we'd be delighted to meet at Jean Talon Market to discuss!",
+    "halifax": "HALIFAX",
+    "halifaxDescription": "In the heart of downtown Halifax, we'd be happy to meet by the waterfront to discuss!",
+    "remote": "REMOTE",
+    "remoteDescription": "Our team works remotely across North America. We're always available for virtual meetings and consultations.",
+    "remoteLocation": "Available worldwide via video conference",
+    "letsTalk": "Let's talk",
+    "groupSection": {
+      "title": "The Nukleo Ecosystem",
+      "description": "Nukleo is the flagship brand of a broader ecosystem.",
+      "nukleoGroup": {
+        "name": "Nukleo.Group",
+        "description": "The strategic holding that drives acquisitions and group growth. Nukleo.Group is the institutional framework that allows Nukleo and its partner brands to grow together."
+      },
+      "rougeOnBlue": {
+        "name": "Rouge on Blue",
+        "description": "For large-scale transformations requiring the highest level of strategy and creativity. Rouge on Blue is the group's brand for major transformation mandates, driven by a bold vision."
+      }
+    }
+  },
+  "startProject": {
+    "seoTitle": "Start Your AI Project | Transform Your Business with AI",
+    "seoDescription": "Start your AI transformation project with Nukleo Digital. Expert guidance strategy to implementation. Free consultation and custom AI roadmap.",
+    "seoKeywords": "start AI project, AI consultation, AI implementation, AI strategy, AI transformation, AI project planning, AI roadmap, AI business transformation",
+    "backToHome": "Back to Home",
+    "pageTitle": "Start Your AI Journey",
+    "pageDescription": "Tell us about your project and let's build something extraordinary together.",
+    "form": {
+      "fullName": "Full Name",
+      "fullNamePlaceholder": "John Doe",
+      "emailAddress": "Email Address",
+      "emailPlaceholder": "john@company.com",
+      "companyName": "Company Name",
+      "companyPlaceholder": "Your Company",
+      "projectType": "Project Type",
+      "projectTypePlaceholder": "Select a project type",
+      "projectTypes": {
+        "aiStrategy": "AI Strategy & Consulting",
+        "agenticAI": "Agentic AI Development",
+        "aiIntegration": "AI Integration",
+        "aiTraining": "AI Training & Workshops",
+        "other": "Other"
+      },
+      "estimatedBudget": "Estimated Budget",
+      "budgetPlaceholder": "Select a budget range",
+      "budgetRanges": {
+        "10k25k": "$10k - $25k",
+        "25k50k": "$25k - $50k",
+        "50k100k": "$50k - $100k",
+        "100kPlus": "$100k+",
+        "notSure": "Not sure yet"
+      },
+      "projectDescription": "Project Description",
+      "projectDescriptionPlaceholder": "Tell us about your project, goals, and challenges...",
+      "sending": "Sending...",
+      "submit": "Submit Project Request",
+      "thankYou": "Thank You!",
+      "successMessage": "We've received your project request. Our team will get back to you within 24 hours.",
+      "privacyNotice": "By submitting this form, you agree to our privacy policy and terms of service."
+    }
+  },
+  "projects": {
+    "title": "Projects",
+    "heroTitle": "Our Work",
+    "heroSubtitle": "that Resonate",
+    "description": "A selection of our recent projects across branding, web, digital, and creative campaigns.",
+    "tryMe": "Try Me",
+    "loadingImages": "Loading images...",
+    "errorLoading": "Error loading images from server.",
+    "errorRefresh": "Please try refreshing the page.",
+    "noImages": "No images found.",
+    "noImagesAdmin": "Upload images via the admin panel to see them here.",
+    "ctaTitle": "Ready to Start",
+    "ctaSubtitle": "Your Project?",
+    "ctaDescription": "Let's discuss how we can bring your vision to life.",
+    "ctaButton": "Start Your Project",
+    "filterAll": "All",
+    "noProjects": "No projects found",
+    "filters": {
+      "all": "All",
+      "aiPlatforms": "AI Platforms",
+      "marketing": "Marketing",
+      "webApps": "Web Apps",
+      "strategy": "Strategy"
+    },
+    "items": {
+      "autonomousMarketing": {
+        "title": "Autonomous Marketing Platform",
+        "category": "AI Platforms",
+        "description": "End-to-end campaign management powered by AI agents, from content generation to performance optimization."
+      },
+      "intelligentEcommerce": {
+        "title": "Intelligent E-Commerce Ecosystem",
+        "category": "Web Apps",
+        "description": "Self-optimizing shopping experience with AI-driven personalization and predictive inventory management."
+      },
+      "enterpriseTransformation": {
+        "title": "Enterprise AI Transformation",
+        "category": "Strategy",
+        "description": "Complete operational overhaul integrating agentic AI across all departments and workflows."
+      },
+      "contentGeneration": {
+        "title": "Content Generation Engine",
+        "category": "Marketing",
+        "description": "Automated content creation system producing personalized, multi-channel campaigns at scale."
+      }
+    }
+  },
+  "expertise": {
+    "seo": {
+      "title": "Our AI Expertise | Agentic AI Systems, Platforms & Strategy",
+      "description": "From strategy to production, we create complete AI ecosystems that integrate your web, communications, and internal systems for sustainable transformation.",
+      "keywords": "AI ecosystems, AI expertise, AI strategy, internal systems AI, communication AI"
+    },
+    "heroTitle": "Architects of Your",
+    "heroSubtitle": "AI Ecosystem",
+    "description": "At Nukleo, we go beyond point solutions. We design, build, and manage complete artificial intelligence ecosystems that unify your web presence, communications, and internal systems. Our holistic approach ensures coherent, sustainable transformation aligned with your business objectives.",
+    "areas": {
+      "agenticAI": {
+        "title": "Agentic AI Systems",
+        "description": "We develop autonomous AI agents that automate your processes, from customer relationship management to internal operations optimization, creating an intelligent backbone for your organization.",
+        "capabilities": [
+          "Business Process Automation (BPA)",
+          "CRM and ERP Integration",
+          "Supply Chain Optimization",
+          "Autonomous Customer Support"
+        ]
+      },
+      "aiNative": {
+        "title": "Intelligent Web Platforms",
+        "description": "Your website becomes a conversion agent. We create platforms that personalize user experience in real-time, anticipate needs, and actively guide visitors toward their goals.",
+        "capabilities": [
+          "Self-optimizing websites (CRO)",
+          "Real-time content personalization",
+          "Semantic search engines",
+          "Predictive user behavior analytics"
+        ]
+      },
+      "transformation": {
+        "title": "Augmented Communication & Marketing",
+        "description": "We unify your message across all channels. Our AI systems generate relevant content, manage your advertising campaigns, and analyze performance for maximum impact and consistent brand voice.",
+        "capabilities": [
+          "Multi-channel content generation",
+          "Autonomous advertising campaign management",
+          "Sentiment analysis and brand monitoring",
+          "Social media engagement optimization"
+        ]
+      },
+      "creativeStudio": {
+        "title": "Creative Studio",
+        "description": "Our creative studio uses AI to produce brand experiences and content at unparalleled scale and relevance. From augmented content creation to agentic marketing campaigns.",
+        "capabilities": [
+          "Augmented content creation",
+          "Agentic marketing campaigns",
+          "Dynamic brand identity",
+          "AI-assisted video production"
+        ]
+      },
+      "dataPlatforms": {
+        "title": "Intelligent Data Platforms",
+        "description": "We build the robust and flexible data foundation for AI integration. From intelligent data platforms to custom AI agents and intelligent process automation.",
+        "capabilities": [
+          "Data pipeline architecture",
+          "Vector databases and RAG",
+          "Real-time stream processing",
+          "Data governance and quality"
+        ]
+      },
+      "aiConsulting": {
+        "title": "AI Consulting",
+        "description": "We define strategy, drive transformation, and measure AI impact. From AI maturity audits to agentic transformation strategy and AI governance.",
+        "capabilities": [
+          "AI maturity audit",
+          "AI transformation roadmap",
+          "AI governance and ethics",
+          "AI ROI analysis"
+        ]
+      }
+    },
+    "process": {
+      "title": "Our Transformation Approach",
+      "description": "We follow a four-step process to ensure your transformation success, from discovery to scale.",
+      "steps": {
+        "discover": {
+          "title": "Discovery",
+          "description": "We dive into your organization to understand your challenges, objectives, and opportunities."
+        },
+        "design": {
+          "title": "Design",
+          "description": "We design a strategic roadmap and technical architecture for your AI ecosystem."
+        },
+        "develop": {
+          "title": "Development",
+          "description": "We build, test, and integrate each component of your ecosystem with rigorous agility."
+        },
+        "deploy": {
+          "title": "Deployment & Evolution",
+          "description": "We deploy the solution and ensure its continuous evolution to maximize your return on investment."
+        }
+      }
+    },
+    "cta": {
+      "title": "Ready to Build Your Ecosystem?",
+      "description": "Let's discuss how an integrated AI approach can unify and transform your business.",
+      "viewServices": "View Our Services",
+      "getInTouch": "Get In Touch"
+    }
+  },
+  "resources": {
+    "seoTitle": "Resources | AI Insights, Guides & Research",
+    "seoDescription": "Insights, guides, and research from the frontlines of AI transformation. Stay ahead with expert analysis, practical frameworks, and interactive tools.",
+    "seoKeywords": "AI resources, AI guides, AI research, AI insights, AI tools, AI readiness assessment, AI trend radar, AI glossary, ROI calculator, AI transformation",
+    "badge": "Knowledge Base",
+    "title": "Resources",
+    "description": "Insights, guides, and research from the frontlines of AI transformation. Stay ahead with expert analysis and practical frameworks.",
+    "tools": {
+      "sectionLabel": "Interactive Tools",
+      "title": "Explore Our AI Tools",
+      "description": "Free diagnostic and research tools to accelerate your AI transformation journey",
+      "aiReadiness": {
+        "badge": "Diagnostic Tool",
+        "title": "AI Readiness Assessment",
+        "description": "Discover where you stand in your AI transformation journey. Get personalized insights across 6 key dimensions with instant results.",
+        "tags": [
+          "20 Questions",
+          "5 Maturity Levels",
+          "Instant Results"
+        ],
+        "buttonText": "Start Assessment"
+      },
+      "radar": {
+        "badge": "Research Tool",
+        "title": "AI Trend Radar",
+        "description": "Explore our interactive radar of emerging and established AI technologies. Monthly updates to guide your investment decisions.",
+        "tags": [
+          "10+ Technologies",
+          "Monthly Updates",
+          "Interactive Map"
+        ],
+        "buttonText": "Explore Radar"
+      },
+      "aiGlossary": {
+        "badge": "Knowledge Base",
+        "title": "AI Glossary",
+        "description": "Complete guide to AI terminology with essential definitions, categories, and importance levels. Perfect for understanding key AI concepts.",
+        "tags": [
+          "Essential terms",
+          "By category",
+          "Searchable"
+        ],
+        "buttonText": "Browse Glossary"
+      },
+      "glossary": {
+        "badge": "Knowledge Base",
+        "title": "AI Glossary",
+        "description": "Your complete guide to AI terminology. 100+ terms with real-world examples, from beginner to advanced concepts.",
+        "tags": [
+          "100+ Terms",
+          "Real Examples",
+          "Searchable"
+        ],
+        "buttonText": "Browse Glossary"
+      },
+      "aiGlossaryPage": {
+        "badge": "AI Glossary",
+        "title": "AI GLOSSARY",
+        "subtitle": "Your complete guide to AI terminology",
+        "description": "Comprehensive AI terminology glossary covering essential AI terms, definitions, and concepts.",
+        "seoTitle": "AI Glossary | Complete Guide to AI Terminology | Nukleo",
+        "seoDescription": "Comprehensive AI terminology glossary covering essential AI terms, definitions, and concepts. From fundamentals to advanced topics.",
+        "seoKeywords": "AI glossary, artificial intelligence terms, AI terminology, AI definitions, AI dictionary, machine learning glossary, AI knowledge base",
+        "terms": "Terms",
+        "categories": "Categories",
+        "searchable": "Searchable",
+        "searchPlaceholder": "Search terms... (e.g., machine learning, NLP, GPT)",
+        "category": "Category",
+        "importance": "Importance",
+        "all": "All",
+        "showing": "Showing",
+        "of": "of",
+        "noTerms": "No terms found",
+        "adjustFilters": "Try adjusting your search or filters",
+        "ctaTitle": "READY TO TRANSFORM<br />WITH AI?",
+        "ctaDescription": "Now that you understand the terminology, let's discuss how AI can drive growth for your organization.",
+        "ctaButton1": "Take AI Readiness Assessment",
+        "ctaButton2": "Discuss Your Project"
+      }
+    },
+    "filter": {
+      "label": "Filter by:",
+      "all": "All",
+      "industryInsights": "Industry Insights",
+      "technicalGuide": "Technical Guide",
+      "strategy": "Strategy",
+      "caseStudy": "Case Study"
+    },
+    "articles": {
+      "agenticPlaybook": {
+        "category": "Technical Guide",
+        "title": "The Complete Guide to Agentic AI: From Architecture to Deployment",
+        "description": "Discover how to implement autonomous AI agents in your organization with our comprehensive guide. From architecture to production deployment, master agentic AI.",
+        "readTime": "15 min",
+        "content": "<p>Agentic artificial intelligence is redefining the boundaries of automation and system intelligence. Unlike traditional AI models that require precise instructions for each task, AI agents can plan, execute, and adapt autonomously to achieve complex objectives. This comprehensive guide provides you with a practical framework for implementing agentic AI solutions within your organization, from architecture design to production deployment.</p><h2>What is Agentic AI and Why is it a Revolution?</h2><p>Agentic AI, or Agentic AI, represents a significant advancement over conventional AI. These systems don't just respond to queries; they are capable of breaking down complex problems into subtasks, making strategic decisions, and iterating until their objectives are achieved. This autonomy is made possible by the combination of several cutting-edge technologies:</p><ul><li><strong>Large Language Models (LLMs)</strong>: for natural language understanding and generation.</li><li><strong>Reasoning capabilities</strong>: for planning and problem-solving.</li><li><strong>Tool use</strong>: to interact with external systems and APIs.</li><li><strong>Memory systems</strong>: to learn from their experiences and continuously improve.</li></ul><p>This unique combination enables AI agents to handle complex tasks that were previously beyond the reach of automation, opening the door to unprecedented efficiency gains and innovation.</p><h2>The Four-Phase Agentic AI Implementation Framework</h2><p>To ensure the success of agentic AI deployment, we have developed a four-phase approach designed to guide you at each step of the process:</p><h3>1. Discovery Phase</h3><p>The first step is to assess your organization's AI maturity and identify the most relevant use cases for implementing AI agents. This phase is crucial for aligning your AI strategy with your business objectives.</p><h3>2. Design Phase</h3><p>Once use cases are identified, the design phase focuses on system architecture. This includes choosing LLM models, designing agent workflows, and integrating with your existing systems.</p><h3>3. Development Phase</h3><p>This is where AI agents are built and tested. Using frameworks like LangChain, we develop robust and reliable agents capable of meeting your use case requirements.</p><h3>4. Deployment Phase</h3><p>The final phase involves deploying AI agents at scale and continuously optimizing their performance. This includes implementing monitoring and maintenance infrastructure to ensure agent reliability and efficiency over time.</p><h2>Key Success Factors for Your Agentic AI Project</h2><p>The success of agentic AI implementation depends not only on technology. Several organizational and strategic factors are equally important:</p><ul><li><strong>Data quality</strong>: AI agents are only as good as the data they are trained on. It is therefore essential to ensure the quality, relevance, and freshness of your data.</li><li><strong>Governance</strong>: Establishing a solid governance framework is essential to ensure ethical and responsible use of agentic AI. This includes defining clear policies on security, privacy, and compliance.</li><li><strong>Change management</strong>: The introduction of agentic AI can have a significant impact on your processes and teams. An effective change management strategy is therefore necessary to support your employees and ensure successful adoption.</li><li><strong>Success measurement</strong>: It is essential to define clear key performance indicators (KPIs) to measure the impact of agentic AI on your organization. This will allow you to demonstrate the value of your investments and continuously optimize your strategies.</li></ul><h2>Ready to Take Action?</h2><p>Agentic AI offers unprecedented opportunities to transform your business. To learn more about how we can help you implement agentic AI solutions, contact us today for a free consultation.</p>"
+      },
+      "pilotToScale": {
+        "category": "Strategy",
+        "title": "From Proof of Concept to Scale: Your Complete AI Transformation Roadmap",
+        "description": "Discover our strategic framework for moving from experimentation to enterprise-wide AI adoption. A complete guide for successful and measurable AI transformation.",
+        "readTime": "20 min",
+        "content": "<p>Many organizations successfully conduct AI pilot projects but struggle to deploy them at enterprise scale. The transition from a controlled environment to large-scale production presents unique challenges that, if not properly managed, can lead to the failure of promising projects. This guide presents a proven strategic framework for overcoming these obstacles and ensuring a successful transition from proof of concept (PoC) to widespread AI adoption, with measurable results.</p><h2>The AI Scaling Challenge: Why Do Pilots Fail in Production?</h2><p>AI pilot projects often benefit from ideal conditions: dedicated teams, limited datasets, and well-defined objectives. However, when scaling, new challenges emerge:</p><ul><li><strong>Technical infrastructure limitations</strong>: Systems designed for pilots are often not robust enough to support large-scale workloads.</li><li><strong>Organizational resistance</strong>: Change can be difficult for employees to accept, especially if they are not involved from the beginning of the process.</li><li><strong>Lack of clarity on return on investment (ROI)</strong>: Without a clear measure of added value, it is difficult to justify the investments needed for scaling.</li></ul><p>Our framework was designed to systematically address these challenges and ensure a smooth transition to enterprise-wide AI.</p><h2>The Four Pillars of Successful AI Scaling</h2><p>To successfully scale your AI initiatives, it is essential to rely on four fundamental pillars:</p><h3>1. Technical Infrastructure</h3><p>You must have a scalable architecture capable of supporting large workloads and adapting to your evolving needs. This includes robust data platforms, MLOps tools, and flexible cloud infrastructure.</p><h3>2. Organizational Readiness</h3><p>The success of your AI transformation depends on your teams' buy-in. It is therefore crucial to implement a change management strategy to train, support, and involve your employees at all levels of the organization.</p><h3>3. Governance</h3><p>A clear governance framework is essential to ensure ethical, secure, and compliant use of AI. This includes data management policies, model policies, and validation processes.</p><h3>4. Measurement</h3><p>To justify your investments and optimize your strategies, you must be able to track and measure the impact of AI on your business. This involves defining relevant key performance indicators (KPIs) and tracking the return on investment (ROI) of each initiative.</p><h2>12-Month Roadmap for Successful AI Transformation</h2><p>We have developed a 12-month roadmap to guide you at each stage of your AI transformation, from your pilot project's success to enterprise-wide adoption. This roadmap is marked by clear steps and success criteria to help you stay on track.</p><ul><li><strong>Months 1-3</strong>: Consolidate the pilot and plan for scaling.</li><li><strong>Months 4-6</strong>: Develop infrastructure and train teams.</li><li><strong>Months 7-9</strong>: Progressive deployment and iteration.</li><li><strong>Months 10-12</strong>: Optimization and large-scale adoption.</li></ul><h2>Ready to Scale Up?</h2><p>Scaling AI is a complex challenge, but with the right framework and approach, it is possible to transform your organization and generate significant business value. To learn more about our framework and how we can help you succeed in your AI transformation, schedule a strategic consultation with our experts.</p>"
+      },
+      "agenticMarketing": {
+        "category": "Industry Insights",
+        "title": "The Future of Marketing: How Agentic AI is Redefining Strategies",
+        "description": "Discover how AI agents are transforming marketing, from campaign automation to personalized customer experiences. Explore the future of agentic marketing.",
+        "readTime": "12 min",
+        "content": "<p>Agentic artificial intelligence is causing a true revolution in the world of marketing. By enabling autonomous campaign management, personalized content generation, and real-time optimization at an unprecedented scale, agentic AI is redefining marketing operations and customer experience. This article explores how this cutting-edge technology is shaping the future of marketing and how businesses can leverage it to gain sustainable competitive advantage.</p><h2>The Agentic Marketing Revolution: Beyond Traditional Automation</h2><p>Traditional marketing automation, based on predefined rules, has long been the norm. However, agentic AI goes far beyond that. Rather than following rigid scenarios, agentic marketing systems can adapt their strategies in real-time based on performance data, customer behavior, and market conditions. This dynamic adaptation capability enables unparalleled personalization and efficiency.</p><h2>Concrete Applications of Agentic AI in Marketing</h2><p>The applications of agentic AI in marketing are numerous and varied. Here are some concrete examples that illustrate how this technology is transforming marketing operations:</p><ul><li><strong>Large-scale content generation</strong>: AI agents can create thousands of variants of advertising copy, emails, and social media posts, personalized for each audience segment.</li><li><strong>Real-time campaign optimization</strong>: Agents can continuously analyze campaign performance and automatically adjust bids, targeting, and creative to maximize ROI.</li><li><strong>Advanced customer segmentation</strong>: By analyzing complex datasets, AI agents can identify micro-customer segments and deliver ultra-personalized experiences.</li><li><strong>Predictive analytics</strong>: Agents can anticipate market trends, predict customer behavior, and recommend proactive actions to improve results.</li></ul><h2>Unprecedented Return on Investment (ROI)</h2><p>Organizations that have adopted agentic marketing are seeing spectacular improvements in their performance. On average, we observe:</p><ul><li><strong>A 340% increase in return on investment (ROI)</strong> of their marketing campaigns.</li><li><strong>A 75% reduction in time-to-market</strong> for new campaigns.</li><li><strong>A 10x multiplication in campaign output</strong>.</li></ul><p>These figures testify to the power of agentic AI to transform the marketing function and generate significant business growth.</p><h2>Prepare for the Future of Marketing</h2><p>Agentic AI is not a passing trend; it is the future of marketing. Companies that can adopt it quickly and effectively will be tomorrow's leaders. To discover how agentic AI can transform your marketing strategy, request a personalized demonstration of our solutions.</p>"
+      },
+      "buildingAgentic": {
+        "category": "Technical Guide",
+        "title": "Building Agentic Systems: The Complete Technical Guide",
+        "description": "A detailed technical guide for designing, building, and deploying autonomous AI agent systems at scale. Master the architecture, tools, and best practices.",
+        "readTime": "18 min",
+        "content": "<p>Building robust and scalable agentic artificial intelligence systems is a complex technical challenge. This guide aims to provide software engineers and architects with the knowledge and tools necessary to design, develop, and deploy autonomous AI agent systems ready for production. We will address in detail the architecture, essential tools, and best practices to ensure the success of your agentic AI projects.</p><h2>The Architecture of an Agentic System: Key Components</h2><p>A well-designed agentic system architecture is the key to performance and reliability. It consists of several interdependent layers:</p><ul><li><strong>Large Language Models (LLMs)</strong>: The heart of the system, responsible for natural language understanding and response generation.</li><li><strong>Vector databases</strong>: They serve as long-term memory for agents, allowing them to store and retrieve relevant information.</li><li><strong>Tool interfaces</strong>: They enable agents to interact with external systems, APIs, and databases to execute tasks.</li><li><strong>Orchestration layer</strong>: It manages agent workflows, task decomposition, and coordination between different components.</li></ul><h2>The Development Stack for Agentic Systems</h2><p>Choosing the right tools and frameworks is essential for accelerating development and ensuring the quality of your agentic systems. Here is our selection of essential tools:</p><ul><li><strong>LangChain</strong>: A powerful orchestration framework for building LLM-based applications, including complex agentic systems.</li><li><strong>Vector databases</strong>: Solutions like Pinecone, Weaviate, or Chroma are essential for managing agent memory.</li><li><strong>API integrations</strong>: The ability to connect to a multitude of APIs is crucial for extending the capabilities of your agents.</li><li><strong>Monitoring systems</strong>: Tools like LangSmith or Arize AI are essential for observability, debugging, and continuous improvement of your agents.</li></ul><h2>Best Practices for Developing Agentic Systems</h2><p>To ensure the robustness and reliability of your agentic systems, it is important to follow a number of best practices:</p><ul><li><strong>Prompt engineering</strong>: The quality of the prompts you provide to your agents has a direct impact on their performance. It is therefore essential to dedicate time to designing clear, precise, and effective prompts.</li><li><strong>Error handling</strong>: Agentic systems can sometimes fail. It is therefore important to implement robust error handling mechanisms to ensure the resilience of your systems.</li><li><strong>Security guardrails</strong>: To prevent undesirable behavior, it is crucial to implement security guardrails to limit your agents' actions and ensure ethical use.</li><li><strong>Performance optimization</strong>: The performance of agentic systems is a major concern. It is therefore important to continuously optimize the speed, accuracy, and cost of your agents.</li></ul><h2>Deployment Strategies for Agentic Systems</h2><p>Moving from a prototype to large-scale production requires careful planning. Here are some lessons learned from our real-world deployments:</p><ul><li><strong>Infrastructure</strong>: Choose scalable and flexible cloud infrastructure to support your agents' workload.</li><li><strong>Scaling</strong>: Plan a progressive scaling strategy to ensure a smooth transition.</li><li><strong>Monitoring</strong>: Implement a comprehensive monitoring system to track your agents' performance in real-time.</li><li><strong>Cost management</strong>: Continuously optimize the costs of your agentic systems by choosing the right models and optimizing your prompts.</li></ul><h2>Move to the Next Level with Agentic AI</h2><p>Building agentic systems is a fascinating and rapidly evolving field. With the right tools, the right architecture, and the right practices, you can create autonomous AI systems that will transform your business. To discuss your agentic system project with our experts, contact us for a technical consultation.</p>"
+      },
+      "roiInvestment": {
+        "category": "Strategy",
+        "title": "Measuring AI ROI: The Complete Guide to Evaluating Your Investments",
+        "description": "Discover how to measure the return on investment (ROI) of your AI projects with our comprehensive guide. A practical framework for evaluating the value of your AI investments.",
+        "readTime": "10 min",
+        "content": "<p>Measuring the return on investment (ROI) of artificial intelligence is a major challenge for many organizations. Unlike traditional investments, the value of AI is not limited to productivity gains or cost reductions. It also encompasses more difficult-to-quantify strategic benefits, such as improved customer experience, accelerated innovation, and strengthened competitive positioning. This guide presents a comprehensive framework for measuring AI ROI, capturing both the quantitative and qualitative benefits of your initiatives.</p><h2>The Challenge of Measuring AI ROI: Beyond Traditional Calculations</h2><p>Traditional ROI calculation methods often prove insufficient for evaluating the real impact of AI. They tend to neglect long-term strategic value and focus only on immediate financial gains. To overcome this challenge, we propose a multidimensional framework that takes into account all the benefits of AI.</p><h2>The Six Key Dimensions for Measuring AI ROI</h2><p>Our framework is built around six key dimensions for a comprehensive evaluation of AI ROI:</p><ul><li><strong>Operational Efficiency</strong>: Measurement of productivity gains, task automation, and process optimization.</li><li><strong>Revenue Impact</strong>: Evaluation of sales increases, lead generation, and customer value.</li><li><strong>Cost Reduction</strong>: Quantification of savings achieved through resource optimization and error reduction.</li><li><strong>Quality Improvement</strong>: Measurement of improvements in product quality, services, and customer experience.</li><li><strong>Strategic Positioning</strong>: Evaluation of competitive advantage, market share, and brand reputation.</li><li><strong>Innovation Capacity</strong>: Measurement of the ability to develop new products, services, and business models.</li></ul><h2>The AI ROI Calculation Framework</h2><p>For each dimension, we provide practical formulas and tools to calculate the ROI of your AI investments. This includes establishing baselines, defining measurement intervals, and using attribution methods to isolate the impact of AI.</p><h2>Real Case Studies: 200-450% ROI</h2><p>Our real-world case studies demonstrate how organizations have achieved returns on investment of 200-450% on their AI projects. We present in detail how these returns were measured and achieved, with concrete examples across different industries.</p><h2>Make Informed Investment Decisions</h2><p>By adopting a multidimensional approach to measuring AI ROI, you will be able to make more informed investment decisions, justify your projects to your management, and maximize the value of AI for your business. To learn more about our AI ROI measurement framework and how we can help you evaluate your investments, contact our experts for a personalized consultation.</p>"
+      }
+    },
+    "newsletter": {
+      "title": "STAY AHEAD OF<br />THE AI CURVE",
+      "description": "Subscribe to receive our latest insights, technical guides, and industry analysis directly in your inbox.",
+      "placeholder": "Enter your email address",
+      "subscribe": "Subscribe",
+      "subscribing": "Subscribing...",
+      "success": "✓ Successfully subscribed! Check your email for confirmation.",
+      "error": "✗ Failed to subscribe. Please try again."
+    },
+    "articleNotFound": "Article Not Found",
+    "backToResources": "Back to Resources"
+  },
+  "agencies": {
+    "seoTitle": "Your AI & Digital Team on Demand | Nukleo Digital",
+    "seoDescription": "Scale your agency with Nukleo's expert AI & digital team. 40% cost savings, zero hiring hassle, premium quality guaranteed.",
+    "seoKeywords": "agency partnership AI, digital team on demand, development outsourcing, augmented agency",
+    "heroBadge": "Trusted by 32+ European Agencies",
+    "heroTitle": "Your",
+    "heroTitleHighlight": "AI & Digital Team",
+    "heroSubtitle": "Without the Overhead",
+    "heroDescription": "Scale your agency instantly with our expert team. Deliver more projects, increase margins, keep clients happy all without hiring headaches.",
+    "ctaButton1": "Start Your First Project",
+    "ctaButton2": "Book a Strategy Call",
+    "stats": {
+      "costSavings": "Cost Savings",
+      "teamReady": "Team Ready",
+      "onTimeDelivery": "On-Time Delivery",
+      "insuredProjects": "Insured Projects"
+    },
+    "problemTitle": "Agencies Are Stuck Between",
+    "problemTitleHighlight": "Growth & Capacity",
+    "problemSubtitle": "Sound familiar? You're not alone.",
+    "problems": {
+      "hiring": {
+        "title": "Hiring is Slow & Expensive",
+        "description": "3-6 months to hire, €60K+ salaries, high turnover risk. You lose projects while recruiting."
+      },
+      "demand": {
+        "title": "Clients Want More, Faster",
+        "description": "AI, automation, custom platforms demands are exploding but your team is maxed out."
+      },
+      "margins": {
+        "title": "Margins Are Shrinking",
+        "description": "Local dev costs eat profits. You need premium quality at nearshore prices."
+      }
+    },
+    "solutionBadge": "The Nukleo Solution",
+    "solutionTitle": "Your Instant",
+    "solutionTitleHighlight": "AI & Digital Powerhouse",
+    "solutionDescription": "We become your technical backbone seamlessly integrated, instantly scalable, transparently priced.",
+    "benefits": {
+      "deploy": {
+        "title": "Deploy in 48 Hours",
+        "description": "No recruitment, no onboarding delays. Senior team ready to start Monday.",
+        "highlight": "vs. 3-6 months hiring"
+      },
+      "save": {
+        "title": "Save 40% on Dev Costs",
+        "description": "Premium Canadian talent at nearshore prices. Better margins, same quality.",
+        "highlight": "€60K → €36K per dev/year"
+      },
+      "scale": {
+        "title": "Scale Up or Down Instantly",
+        "description": "Need 3 devs this month, 8 next month? No problem. Zero HR overhead.",
+        "highlight": "Total flexibility"
+      },
+      "insurance": {
+        "title": "€1M Project Insurance",
+        "description": "Every project covered. 98% on-time delivery. 95% client satisfaction guaranteed.",
+        "highlight": "Risk-free partnership"
+      },
+      "experts": {
+        "title": "AI & Automation Experts",
+        "description": "Not just coders strategic AI partners who understand business transformation.",
+        "highlight": "5+ years avg. experience"
+      },
+      "hours": {
+        "title": "European Hours, Canadian Base",
+        "description": "Bilingual team (French/English) aligned with your timezone and culture.",
+        "highlight": "Real-time collaboration"
+      }
+    },
+    "ctaHelp": "See How We Can Help Your Agency",
+    "howItWorksTitle": "From Handshake to",
+    "howItWorksTitleHighlight": "Delivery in 3 Steps",
+    "howItWorksSubtitle": "No complexity. No bureaucracy. Just results.",
+    "steps": {
+      "discovery": {
+        "step": "01",
+        "title": "Discovery Call",
+        "description": "30-min strategy session. We understand your needs, tech stack, and project pipeline.",
+        "timeline": "Day 1"
+      },
+      "assembly": {
+        "step": "02",
+        "title": "Team Assembly",
+        "description": "We match senior devs to your project. Meet your team, review profiles, approve lineup.",
+        "timeline": "Day 2-3"
+      },
+      "kickoff": {
+        "step": "03",
+        "title": "Project Kickoff",
+        "description": "Team integrated into your workflow. Slack, GitHub, daily standups seamless collaboration.",
+        "timeline": "Day 4+"
+      }
+    },
+    "servicesTitle": "Full-Stack",
+    "servicesTitleHighlight": "AI & Digital Services",
+    "servicesSubtitle": "From strategy to deployment, we handle the entire technical journey.",
+    "serviceCategories": {
+      "ai": {
+        "title": "AI & Machine Learning",
+        "services": [
+          "Custom AI models",
+          "NLP & chatbots",
+          "Predictive analytics",
+          "Computer vision",
+          "AI strategy consulting"
+        ]
+      },
+      "web": {
+        "title": "Web & Mobile Apps",
+        "services": [
+          "React, Vue, Next.js",
+          "iOS & Android native",
+          "Progressive Web Apps",
+          "E-commerce platforms",
+          "SaaS products"
+        ]
+      },
+      "cloud": {
+        "title": "Cloud & DevOps",
+        "services": [
+          "AWS, Azure, GCP",
+          "CI/CD pipelines",
+          "Kubernetes & Docker",
+          "Infrastructure as Code",
+          "Security & compliance"
+        ]
+      },
+      "data": {
+        "title": "Data & Automation",
+        "services": [
+          "Data pipelines",
+          "Business intelligence",
+          "Process automation",
+          "API integrations",
+          "ETL workflows"
+        ]
+      }
+    },
+    "pricingTitle": "Transparent",
+    "pricingTitleHighlight": "Pricing",
+    "pricingSubtitle": "No hidden fees. No surprises. Just honest, competitive rates.",
+    "pricingPlans": {
+      "project": {
+        "name": "Project-Based",
+        "price": "Fixed Quote",
+        "description": "Perfect for defined scope projects",
+        "features": [
+          "Clear deliverables",
+          "Fixed timeline",
+          "Milestone payments",
+          "Full project management"
+        ],
+        "cta": "Get a Quote"
+      },
+      "extension": {
+        "name": "Team Extension",
+        "price": "€3,500/mo",
+        "description": "Per senior developer",
+        "features": [
+          "Dedicated team members",
+          "Flexible scaling",
+          "Your project management",
+          "Monthly billing"
+        ],
+        "cta": "Build Your Team",
+        "popular": true
+      },
+      "retainer": {
+        "name": "Retainer",
+        "price": "Custom",
+        "description": "Ongoing partnership",
+        "features": [
+          "Priority support",
+          "Reserved capacity",
+          "Strategic consulting",
+          "Volume discounts"
+        ],
+        "cta": "Discuss Retainer"
+      }
+    },
+    "pricingNote": "💰 Export Canada Financing: CAD $75,000 available to support your growth",
+    "testimonialsTitle": "Agencies",
+    "testimonialsTitleHighlight": "Love Working With Us",
+    "testimonials": {
+      "sophie": {
+        "quote": "Nukleo became our AI team overnight. We went from turning down AI projects to leading with them.",
+        "author": "Sophie Laurent",
+        "role": "CEO, Digital Pulse Paris",
+        "metric": "3x project capacity"
+      },
+      "marc": {
+        "quote": "40% cost savings without compromising quality. Our margins improved while client satisfaction went up.",
+        "author": "Marc Dubois",
+        "role": "COO, TechFlow Brussels",
+        "metric": "40% margin increase"
+      },
+      "elena": {
+        "quote": "No more hiring stress. We scale up for big projects, scale down when quiet. Total flexibility.",
+        "author": "Elena Rodriguez",
+        "role": "Founder, Innovate Madrid",
+        "metric": "Zero turnover risk"
+      }
+    },
+    "finalCtaBadge": "Ready to Scale?",
+    "finalCtaTitle": "Let's Build Something",
+    "finalCtaTitleHighlight": "Extraordinary",
+    "finalCtaDescription": "Join 32+ agencies who've transformed their business with Nukleo. Book a free strategy call today no commitment, just insights.",
+    "finalCtaButton1": "Book Your Strategy Call",
+    "finalCtaButton2": "Start a Project",
+    "finalCtaFeatures": {
+      "free": "Free consultation",
+      "noObligation": "No obligation",
+      "response": "Response in 24h"
+    }
+  },
+  "bureau": {
+    "title": "The Strategic Bureau",
+    "subtitle": "Transformation Orchestration",
+    "heroDescription": "We define the strategy, drive the transformation, and measure the impact of AI across your organization. From vision to execution, we orchestrate your journey from AI-curious to AI-native.",
+    "mission": "Our Mission",
+    "missionText": "To guide your organization through the complex journey of <strong>AI transformation</strong>. We don't just create strategies we orchestrate change, align stakeholders, and ensure your AI initiatives deliver measurable business value at every stage.",
+    "services": {
+      "title": "Strategic Services",
+      "aiMaturity": {
+        "title": "AI Maturity Audit & Roadmap",
+        "description": "Assessing your current position in the AI landscape and charting a clear path to AI leadership. We evaluate your capabilities, identify gaps, and create a 9-to-12-month transformation roadmap."
+      },
+      "transformationStrategy": {
+        "title": "Agentic Transformation Strategy",
+        "description": "Redefining your operating model with AI at its center. We help you transition from experimentation to enterprise-wide transformation, embedding agentic AI as the foundation for growth."
+      },
+      "governance": {
+        "title": "AI Governance & Ethics",
+        "description": "Implementing the guardrails for responsible and high-performing AI. We establish frameworks for ethical AI use, compliance, risk management, and transparent decision-making."
+      },
+      "performanceAnalysis": {
+        "title": "Performance Analysis & ROI",
+        "description": "Measuring the tangible impact of AI on your business goals. We track KPIs, analyze outcomes, and continuously optimize your AI investments to maximize return and strategic value."
+      }
+    },
+    "journey": {
+      "title": "The Transformation Journey",
+      "discovery": {
+        "title": "Discovery & Assessment",
+        "description": "We conduct a comprehensive AI maturity audit, evaluating your current capabilities, data readiness, organizational culture, and competitive positioning. This baseline assessment identifies opportunities and constraints."
+      },
+      "strategy": {
+        "title": "Strategy & Roadmap",
+        "description": "We design your agentic transformation strategy, defining clear objectives, prioritizing use cases, and creating a phased roadmap. This includes governance frameworks, resource planning, and change management strategies."
+      },
+      "execution": {
+        "title": "Execution & Optimization",
+        "description": "We orchestrate implementation across your organization, coordinating with The Lab and The Studio. We continuously measure performance, track ROI, and adjust the strategy to maximize business impact."
+      },
+      "scale": {
+        "title": "Scale & Leadership",
+        "description": "We help you scale successful pilots enterprise-wide and position your organization as an AI leader in your industry. This includes thought leadership, innovation programs, and continuous capability building."
+      }
+    },
+    "impact": {
+      "title": "Expected Impact",
+      "roi": "ROI on AI investments within 12 months",
+      "timeToMarket": "Reduction in time-to-market for new initiatives",
+      "efficiency": "Increase in operational efficiency"
+    },
+    "cta": {
+      "title": "Ready to Lead Your Transformation?",
+      "description": "Let's discuss how The Strategic Bureau can orchestrate your journey from AI experimentation to enterprise-wide transformation.",
+      "button": "Begin Your Journey"
+    }
+  },
+  "seo": {
+    "home": {
+      "title": "Performance through Digital Excellence — Nukleo",
+      "description": "Nukleo is your 360 partner to take the lead in the digital and AI economy. Marketing, design, development, and digital transformation — powered by AI. Montreal & international."
+    },
+    "manifesto": {
+      "title": "Manifesto | AI Transformation | Nukleo Digital",
+      "description": "Discover our manifesto on AI transformation. Move from experimentation to scale with AI agents."
+    },
+    "about": {
+      "title": "About | Nukleo Digital Team",
+      "description": "Meet the Nukleo Digital team. AI transformation experts with offices in Montréal and Halifax."
+    },
+    "expertise": {
+      "title": "AI Expertise | Nukleo Digital Services",
+      "description": "Our services: AI strategy, intelligent platforms, mobile applications, automated marketing."
+    },
+    "clients": {
+      "title": "Clients | Nukleo Digital",
+      "description": "Discover the clients who trust us for their AI transformation."
+    },
+    "resources": {
+      "title": "AI Resources | Guides and Tools | Nukleo Digital",
+      "description": "Guides, whitepapers and resources on AI transformation."
+    },
+    "services": {
+      "title": "Our Services — Nukleo.Agency, Studio, Tech, Consulting",
+      "description": "Discover Nukleo's complete offering: digital marketing, design, web and AI development, digital transformation. A 360 ecosystem powered by AI."
+    },
+    "contact": {
+      "title": "Contact | Nukleo Digital",
+      "description": "Contact Nukleo Digital to discuss your AI transformation project."
+    }
+  },
+  "lab": {
+    "title": "The AI Lab",
+    "subtitle": "Technology Foundation",
+    "heroDescription": "We build the robust and flexible technological foundation that powers your AI transformation. From intelligent data platforms to custom AI agents, we create the infrastructure that makes AI-native operations possible.",
+    "mission": "Our Mission",
+    "missionText": "To build the technological backbone that enables your organization to operate as an <strong>AI-native company</strong>. We don't just implement tools we architect systems that learn, adapt, and scale with your ambitions.",
+    "capabilities": {
+      "title": "Core Capabilities",
+      "dataPlatforms": {
+        "title": "Intelligent Data Platforms",
+        "description": "Unifying and preparing your data ecosystem for AI. We build robust data architectures that serve as the foundation for intelligent systems, ensuring data quality, accessibility, and governance."
+      },
+      "customAgents": {
+        "title": "Custom AI Agent Development",
+        "description": "Creating autonomous agents tailored to your specific business needs. From customer service bots to intelligent process assistants, we develop AI agents that learn, adapt, and deliver value continuously."
+      },
+      "integration": {
+        "title": "Third-Party AI Integration",
+        "description": "Orchestrating the best AI models and services on the market. We integrate leading solutions from OpenAI, Anthropic, Mistral, and others to create a powerful AI stack customized for your operations."
+      },
+      "automation": {
+        "title": "Intelligent Process Automation (IPA)",
+        "description": "Moving beyond simple RPA with adaptive workflows. We implement intelligent automation that understands context, makes decisions, and continuously optimizes itself based on outcomes."
+      }
+    },
+    "approach": {
+      "title": "Our Approach",
+      "assess": {
+        "title": "Assess & Design",
+        "description": "We start by understanding your current infrastructure, data landscape, and business objectives. Then we design an AI architecture that aligns with your strategic goals."
+      },
+      "build": {
+        "title": "Build & Integrate",
+        "description": "We develop custom AI solutions and integrate best-in-class third-party services, creating a cohesive ecosystem that works seamlessly with your existing systems."
+      },
+      "optimize": {
+        "title": "Optimize & Scale",
+        "description": "We continuously monitor, refine, and enhance your AI infrastructure, ensuring it evolves with your needs and delivers measurable ROI at every stage."
+      }
+    },
+    "cta": {
+      "title": "Ready to Build Your AI Foundation?",
+      "description": "Let's discuss how The AI Lab can architect the technological infrastructure that powers your transformation.",
+      "button": "Start the Conversation"
+    }
+  },
+  "studio": {
+    "title": "The Creative Studio",
+    "subtitle": "Augmented Content & Experiences",
+    "heroDescription": "We use AI to create brand experiences and content at unparalleled scale and relevance. From generative content to autonomous marketing campaigns, we help you connect with audiences in ways that were previously impossible.",
+    "mission": "Our Mission",
+    "missionText": "To harness the creative power of AI to deliver <strong>hyper-personalized experiences at scale</strong>. We don't replace human creativity we amplify it, enabling your brand to create meaningful connections with every customer, in every moment.",
+    "capabilities": {
+      "title": "Creative Capabilities",
+      "contentCreation": {
+        "title": "Augmented Content Creation",
+        "description": "Producing content (text, image, video) at unprecedented scale, personalized in real-time. We leverage generative AI to create brand-aligned content that resonates with each audience segment."
+      },
+      "personalizedExperiences": {
+        "title": "AI-Personalized Customer Experiences",
+        "description": "Creating unique and dynamic customer journeys powered by AI. From personalized recommendations to adaptive interfaces, we design experiences that evolve with each interaction."
+      },
+      "agenticMarketing": {
+        "title": "Agentic Marketing Campaigns",
+        "description": "Deploying autonomous campaigns that continuously optimize themselves. Our AI agents test, learn, and adapt in real-time, maximizing engagement and conversion across all channels."
+      },
+      "brandIdentity": {
+        "title": "Brand Identity in the AI Era",
+        "description": "Defining how your brand interacts and is perceived in a world of AI assistants and agents. We help you establish a distinctive voice and presence in AI-mediated experiences."
+      }
+    },
+    "revolution": {
+      "title": "The Agentic Marketing Revolution",
+      "description": "We're entering the era of <strong>Agentic Marketing</strong> where autonomous AI systems don't just execute campaigns, they learn, decide, and act independently to achieve your business objectives.",
+      "traditional": {
+        "title": "Traditional Marketing",
+        "items": [
+          "Manual campaign setup",
+          "Periodic optimization",
+          "One-size-fits-all messaging",
+          "Delayed insights",
+          "Limited personalization"
+        ]
+      },
+      "agentic": {
+        "title": "Agentic Marketing",
+        "items": [
+          "Autonomous campaign orchestration",
+          "Real-time continuous optimization",
+          "Hyper-personalized at scale",
+          "Instant insights and actions",
+          "Adaptive to each customer"
+        ]
+      }
+    },
+    "useCases": {
+      "title": "Use Cases",
+      "dynamicContent": {
+        "title": "Dynamic Content Generation",
+        "description": "Generate thousands of unique product descriptions, blog posts, and social media content tailored to different audience segments all while maintaining brand voice and quality standards."
+      },
+      "personalizedJourneys": {
+        "title": "Personalized Customer Journeys",
+        "description": "Create unique experiences for each visitor based on their behavior, preferences, and context. AI agents adapt content, recommendations, and interfaces in real-time to maximize engagement and conversion."
+      },
+      "autonomousOptimization": {
+        "title": "Autonomous Campaign Optimization",
+        "description": "Deploy marketing campaigns that continuously test, learn, and optimize themselves across channels. AI agents adjust messaging, timing, targeting, and budget allocation to maximize ROI without manual intervention."
+      }
+    },
+    "cta": {
+      "title": "Ready to Amplify Your Creativity?",
+      "description": "Let's explore how The Creative Studio can help you create experiences and content that captivate audiences at unprecedented scale.",
+      "button": "Let's Create Together"
+    }
+  },
+  "clients": {
+    "seoTitle": "Our Clients | Trusted by Industry Leaders",
+    "seoDescription": "Trusted by 12+ industry leaders: MBAM, Summit Law, Affilia, GoCoupons & more. See how we transformed operations across 8+ industries with AI. View case studies.",
+    "seoKeywords": "AI clients, AI case studies, industry leaders AI, AI transformation success stories, AI portfolio",
+    "badge": "Trusted by Industry Leaders",
+    "title": "Our",
+    "titleHighlight": "Clients",
+    "description": "From museums to tech startups, we've helped organizations across diverse industries transform their operations with AI-powered solutions. Here are some of the amazing companies we've had the privilege to work with.",
+    "stats": {
+      "clients": "Trusted Clients",
+      "industries": "Industries Served",
+      "roi": "Average ROI Increase"
+    },
+    "labels": {
+      "servicesProvided": "Services Provided",
+      "keyResults": "Key Results"
+    },
+    "cta": {
+      "title": "Ready to Join Them?",
+      "description": "Let's discuss how our AI services can transform your business and accelerate your growth.",
+      "button": "Start Your Transformation",
+      "buttonSecondary": "Start a Project"
     }
   },
   "artsCultureCommitment": {
