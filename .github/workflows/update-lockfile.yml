@@ -28,5 +28,4 @@ jobs:
       - run: git config --local user.email "action@github.com"
       - run: git config --local user.name "GitHub Action"
       - run: git add pnpm-lock.yaml
-      - run: git diff --staged --quiet || git commit -m "chore: update pnpm-lock.yaml"
-      - run: git push
+      - run: git diff --staged --quiet || (git commit -m "chore: update pnpm-lock.yaml" && git push)
