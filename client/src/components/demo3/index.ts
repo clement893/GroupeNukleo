@@ -10,3 +10,6 @@ export { LaptopVisual } from './LaptopVisual';
 export { BureauIcon } from './BureauIcon';
 export { StudioIcon } from './StudioIcon';
 export { TriptychSelectedWork, type TriptychProject } from './TriptychSelectedWork';
+export { DoubleLogoCarousel } from './DoubleLogoCarousel';
+export { TeamScrollCards } from './TeamScrollCards';
+export { DepartmentsWidget } from './DepartmentsWidget';

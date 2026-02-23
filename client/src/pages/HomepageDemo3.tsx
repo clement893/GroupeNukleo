@@ -12,6 +12,9 @@ import {
   BureauIcon,
   StudioIcon,
   TriptychSelectedWork,
+  DoubleLogoCarousel,
+  TeamScrollCards,
+  DepartmentsWidget,
   type TriptychProject,
 } from '@/components/demo3';
 
@@ -211,6 +214,21 @@ export default function HomepageDemo3() {
             icon={<StudioIcon />}
             href={getLocalizedPath('/services/studio')}
           />
+        </div>
+      </section>
+
+      {/* ─── ÉQUIPE + DÉPARTEMENTS (50/50) ─────────────────────────────────── */}
+      <section className="px-8 lg:px-16 py-20 bg-[#0A0A0A]">
+        <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-6">
+          <TeamScrollCards />
+          <DepartmentsWidget />
+        </div>
+      </section>
+
+      {/* ─── DOUBLE CAROUSEL LOGOS ─────────────────────────────────────────── */}
+      <section className="px-8 lg:px-16 py-12 bg-[#F5F3EF]">
+        <div className="max-w-5xl mx-auto">
+          <DoubleLogoCarousel title="Ils nous font confiance" />
         </div>
       </section>
 
