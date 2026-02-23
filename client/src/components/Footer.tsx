@@ -24,7 +24,6 @@ function Footer() {
     { label: t('nav.resources'), href: '/resources' },
     { label: t('nav.contact'), href: '/contact' },
     { label: t('footer.nav.media'), href: '/media' },
-    { label: t('footer.nav.agencies'), href: '/agencies' },
   ], [t]);
 
   const allServices = useMemo(() => [
@@ -171,11 +170,11 @@ function Footer() {
                 </div>
               </div>
               <a
-                href="mailto:hello@nukleo.digital"
+                href="mailto:hello@nukleo.com"
                 className="flex items-center gap-2 text-violet-400 hover:text-white transition-colors"
               >
                 <Mail className="w-4 h-4" />
-                hello@nukleo.digital
+                hello@nukleo.com
               </a>
             </div>
           </div>
@@ -209,6 +208,7 @@ function Footer() {
               {t('footer.sitemap') || 'Sitemap'}
             </a>
             <Link href={getLocalizedPath('/privacy')} className="active:text-white sm:hover:text-white transition-colors touch-manipulation">{t('footer.links.privacy')}</Link>
+            <Link href={getLocalizedPath('/nukleo-time-privacy')} className="active:text-white sm:hover:text-white transition-colors touch-manipulation">{t('footer.links.nukleoTimePrivacy') || 'Nukleo.TIME Privacy'}</Link>
             <Link href={getLocalizedPath('/terms')} className="active:text-white sm:hover:text-white transition-colors touch-manipulation">{t('footer.links.terms')}</Link>
             <Link href={getLocalizedPath('/cookies')} className="active:text-white sm:hover:text-white transition-colors touch-manipulation">{t('footer.links.cookies')}</Link>
           </div>

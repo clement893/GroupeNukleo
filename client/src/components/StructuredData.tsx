@@ -63,14 +63,14 @@ export const organizationSchema = {
     {
       '@type': 'ContactPoint',
       contactType: 'Customer Service',
-      email: 'hello@nukleo.digital',
+      email: 'hello@nukleo.com',
       availableLanguage: ['English', 'French'],
       areaServed: 'Worldwide',
     },
     {
       '@type': 'ContactPoint',
       contactType: 'Sales',
-      email: 'hello@nukleo.digital',
+      email: 'hello@nukleo.com',
       availableLanguage: ['English', 'French'],
     },
   ],
@@ -316,7 +316,7 @@ export function createLocalBusinessSchema(location: {
       addressCountry: location.addressCountry,
     },
     telephone: location.telephone,
-    email: location.email || 'hello@nukleo.digital',
+    email: location.email || 'hello@nukleo.com',
     url: location.url || 'https://nukleo.digital',
     priceRange: '$$',
     openingHoursSpecification: {
@@ -370,7 +370,7 @@ export const montrealOfficeSchema = createLocalBusinessSchema({
   addressRegion: 'QC',
   postalCode: 'H2R 0C2',
   addressCountry: 'CA',
-  email: 'hello@nukleo.digital',
+  email: 'hello@nukleo.com',
   url: 'https://nukleo.digital',
 });
 
@@ -381,7 +381,7 @@ export const halifaxOfficeSchema = createLocalBusinessSchema({
   addressRegion: 'NS',
   postalCode: 'B3J 3N8',
   addressCountry: 'CA',
-  email: 'hello@nukleo.digital',
+  email: 'hello@nukleo.com',
   url: 'https://nukleo.digital',
 });
 

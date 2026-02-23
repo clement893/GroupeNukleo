@@ -60,7 +60,6 @@ router.get('/sitemap.xml', (req, res) => {
     { url: '/fr/clients', priority: '0.7', changefreq: 'monthly' },
     { url: '/fr/testimonials', priority: '0.7', changefreq: 'monthly' },
     { url: '/fr/faq', priority: '0.6', changefreq: 'monthly' },
-    { url: '/fr/agencies', priority: '0.8', changefreq: 'monthly' },
     { url: '/fr/leo', priority: '0.7', changefreq: 'monthly' },
   ];
 

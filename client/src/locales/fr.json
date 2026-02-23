@@ -69,6 +69,7 @@
       "projects": "Projets",
       "contact": "Contact",
       "privacy": "Confidentialité",
+      "nukleoTimePrivacy": "Confidentialité Nukleo.TIME",
       "terms": "Conditions",
       "cookies": "Cookies"
     },
@@ -652,9 +653,11 @@
     "halifax": "Halifax",
     "addressMontreal": "7236 Rue Waverly, Montréal, QC H2R 0C2",
     "addressHalifax": "1800 Argyle St Unit 801, Halifax, NS B3J 3N8",
-    "email": "hello@nukleo.digital",
+    "email": "hello@nukleo.com",
     "emailUs": "Envoyez-nous un email",
-    "phone": "Téléphone"
+    "phone": "Téléphone",
+    "send": "Envoyer",
+    "ourOffices": "Nos bureaux"
   },
   "startProject": {
     "seoTitle": "Démarrer un projet | Nukleo Digital",

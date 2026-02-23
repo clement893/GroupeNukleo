@@ -69,6 +69,7 @@
       "projects": "Projects",
       "contact": "Contact",
       "privacy": "Privacy",
+      "nukleoTimePrivacy": "Nukleo.TIME Privacy",
       "terms": "Terms",
       "cookies": "Cookies"
     },
@@ -641,7 +642,8 @@
     "montreal": "Montréal",
     "halifax": "Halifax",
     "emailUs": "Email us",
-    "phone": "Phone"
+    "phone": "Phone",
+    "ourOffices": "Our Offices"
   },
   "projects": {
     "title": "Projects",

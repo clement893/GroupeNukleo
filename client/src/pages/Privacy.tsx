@@ -78,7 +78,7 @@ export default function Privacy() {
                 <li><strong>Right to Lodge a Complaint:</strong> File a complaint with a supervisory authority</li>
               </ul>
               <p>
-                To exercise any of these rights, please contact us at <a href="mailto:hello@nukleo.digital" className="text-purple-600 hover:text-purple-700">hello@nukleo.digital</a>. 
+                To exercise any of these rights, please contact us at <a href="mailto:hello@nukleo.com" className="text-purple-600 hover:text-purple-700">hello@nukleo.com</a>. 
                 We will respond to your request within 30 days.
               </p>
 
@@ -108,7 +108,7 @@ export default function Privacy() {
               </p>
               <p>
                 <strong>Nukleo Digital</strong><br />
-                Email: <a href="mailto:hello@nukleo.digital" className="text-purple-600 hover:text-purple-700">hello@nukleo.digital</a><br />
+                Email: <a href="mailto:hello@nukleo.com" className="text-purple-600 hover:text-purple-700">hello@nukleo.com</a><br />
                 Address: 7236 Rue Waverly, Montréal, QC H2R 0C2, Canada
               </p>
             </div>

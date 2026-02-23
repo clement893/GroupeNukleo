@@ -91,6 +91,7 @@ const Clients = lazyWithRetry(() => import("./pages/Clients"));
 const StartProject = lazyWithRetry(() => import("./pages/StartProject"));
 const MediaCenter = lazyWithRetry(() => import("./pages/MediaCenter"));
 const PrivacyPolicy = lazyWithRetry(() => import("./pages/PrivacyPolicy"));
+const PrivacyPolicyNukleoTime = lazyWithRetry(() => import("./pages/PrivacyPolicyNukleoTime"));
 const TermsOfService = lazyWithRetry(() => import("./pages/TermsOfService"));
 const CookiePolicy = lazyWithRetry(() => import("./pages/CookiePolicy"));
 const FAQ = lazyWithRetry(() => import("./pages/FAQ"));
@@ -184,6 +185,7 @@ function App() {
               <Route path="/fr/media-center" component={withPageVisibility(MediaCenter, "/fr/media-center")} />
               <Route path="/fr/media" component={withPageVisibility(Media, "/fr/media")} />
               <Route path="/fr/privacy-policy" component={withPageVisibility(PrivacyPolicy, "/fr/privacy-policy")} />
+              <Route path="/fr/nukleo-time-privacy" component={withPageVisibility(PrivacyPolicyNukleoTime, "/fr/nukleo-time-privacy")} />
               <Route path="/fr/terms-of-service" component={withPageVisibility(TermsOfService, "/fr/terms-of-service")} />
               <Route path="/fr/cookie-policy" component={withPageVisibility(CookiePolicy, "/fr/cookie-policy")} />
               <Route path="/fr/faq" component={withPageVisibility(FAQ, "/fr/faq")} />
@@ -226,6 +228,7 @@ function App() {
             <Route path="/media-center" component={withPageVisibility(MediaCenter, "/media-center")} />
             <Route path="/media" component={withPageVisibility(Media, "/media")} />
             <Route path="/privacy-policy" component={withPageVisibility(PrivacyPolicy, "/privacy-policy")} />
+            <Route path="/nukleo-time-privacy" component={withPageVisibility(PrivacyPolicyNukleoTime, "/nukleo-time-privacy")} />
             <Route path="/terms-of-service" component={withPageVisibility(TermsOfService, "/terms-of-service")} />
             <Route path="/cookie-policy" component={withPageVisibility(CookiePolicy, "/cookie-policy")} />
             <Route path="/faq" component={withPageVisibility(FAQ, "/faq")} />
