@@ -79,6 +79,9 @@ const TermsOfService = lazyWithRetry(() => import("./pages/TermsOfService"));
 const CookiePolicy = lazyWithRetry(() => import("./pages/CookiePolicy"));
 const FAQ = lazyWithRetry(() => import("./pages/FAQ"));
 
+// Demo page — grand agence design
+const HomepageDemo = lazyWithRetry(() => import('./pages/HomepageDemo'));
+
 // New department pages
 const NukleoTech = lazyWithRetry(() => import("./pages/services/NukleoTech"));
 const NukleoConsulting = lazyWithRetry(() => import("./pages/services/NukleoConsulting"));
@@ -155,6 +158,7 @@ function App() {
               <Route path="/fr/faq" component={withPageVisibility(FAQ, "/fr/faq")} />
 
               {/* ===== ROUTES ANGLAISES (défaut) ===== */}
+              <Route path="/demo" component={HomepageDemo} />
               <Route path="/" component={Home} />
               <Route path="/projects" component={withPageVisibility(Projects, "/projects")} />
               <Route path="/about" component={withPageVisibility(About, "/about")} />
