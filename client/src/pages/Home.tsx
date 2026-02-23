@@ -15,6 +15,7 @@ const CTASection = lazy(() => import('@/components/CTASection'));
 const TestimonialsCarousel = lazy(() => import('@/components/TestimonialsCarousel'));
 const TeamCarousel = lazy(() => import('@/components/TeamCarousel'));
 const ClientLogos = lazy(() => import('@/components/ClientLogos'));
+const NukleoGroupSection = lazy(() => import('@/components/NukleoGroupSection'));
 
 export default function Home() {
   const { t } = useLanguage();
@@ -67,6 +68,7 @@ export default function Home() {
         
         <Suspense fallback={<div style={{ minHeight: '2400px', contentVisibility: 'auto', containIntrinsicSize: '0 2400px' }} />}>
           <TrinitySection />
+          <NukleoGroupSection />
           <TestimonialsCarousel />
           <CTASection />
           <ClientLogos />

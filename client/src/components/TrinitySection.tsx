@@ -1,4 +1,4 @@
-import { Cpu, Compass, Sparkles } from 'lucide-react';
+import { Cpu, Compass, Sparkles, Megaphone } from 'lucide-react';
 import { Link } from 'wouter';
 import SafeHTML from '@/components/SafeHTML';
 import { useLanguage } from '@/contexts/LanguageContext';
@@ -7,33 +7,51 @@ import { useLocalizedPath } from '@/hooks/useLocalizedPath';
 export default function TrinitySection() {
   const { t } = useLanguage();
   const getLocalizedPath = useLocalizedPath();
+
   const departments = [
     {
       number: '01',
-      icon: Cpu,
-      name: 'Lab',
-      title: t('trinity.lab.title'),
-      subtitle: t('trinity.lab.subtitle'),
-      description: t('trinity.lab.description'),
-      link: '/services/ai-lab',
+      icon: Megaphone,
+      name: 'Agency',
+      fullName: 'Nukleo.Agency',
+      subtitle: 'Marketing & Communication',
+      description: 'We build your presence, amplify your message and turn your visibility into real, measurable growth. SEO, paid media, automation, and AI-powered campaigns.',
+      link: '/services/agency',
+      color: 'text-orange-400',
+      borderHover: 'hover:border-orange-500/30',
     },
     {
       number: '02',
-      icon: Compass,
-      name: 'Bureau',
-      title: t('trinity.bureau.title'),
-      subtitle: t('trinity.bureau.subtitle'),
-      description: t('trinity.bureau.description'),
-      link: '/services/strategic-bureau',
+      icon: Sparkles,
+      name: 'Studio',
+      fullName: 'Nukleo.Studio',
+      subtitle: 'Design & Creation',
+      description: 'We create visual and creative experiences that make your performance visible and desirable. Branding, UX/UI, art direction, and AI-augmented creative production.',
+      link: '/services/studio',
+      color: 'text-pink-400',
+      borderHover: 'hover:border-pink-500/30',
     },
     {
       number: '03',
-      icon: Sparkles,
-      name: 'Studio',
-      title: t('trinity.studio.title'),
-      subtitle: t('trinity.studio.subtitle'),
-      description: t('trinity.studio.description'),
-      link: '/services/creative-studio',
+      icon: Cpu,
+      name: 'Tech',
+      fullName: 'Nukleo.Tech',
+      subtitle: 'Development & Artificial Intelligence',
+      description: 'We design and build the digital tools that drive your performance. Web development, mobile apps, AI integrations, automation, and custom AI agent development.',
+      link: '/services/tech',
+      color: 'text-blue-400',
+      borderHover: 'hover:border-blue-500/30',
+    },
+    {
+      number: '04',
+      icon: Compass,
+      name: 'Consulting',
+      fullName: 'Nukleo.Consulting',
+      subtitle: 'Transformation & Strategic Consulting',
+      description: 'We guide your organization through its digital transformation. Audit, strategy, AI consulting, change management, and training — from vision to execution.',
+      link: '/services/consulting',
+      color: 'text-emerald-400',
+      borderHover: 'hover:border-emerald-500/30',
     },
   ];
 
@@ -52,14 +70,14 @@ export default function TrinitySection() {
           </p>
         </div>
 
-        {/* Departments Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 border-l border-black/10">
+        {/* Departments Grid — 2×2 */}
+        <div className="grid grid-cols-1 md:grid-cols-2 border-l border-black/10">
           {departments.map((dept, index) => {
             const Icon = dept.icon;
             return (
               <div
                 key={index}
-                className="border-r border-b border-black/10 p-8 sm:p-10 lg:p-16 group hover:border-accent transition-all duration-500 h-full flex flex-col justify-between min-h-[500px] sm:min-h-[600px] relative breathe depth-layer-1 overflow-hidden hover:scale-[1.009] hover:shadow-xl hover:shadow-purple-500/10"
+                className={`border-r border-b border-black/10 p-8 sm:p-10 lg:p-16 group ${dept.borderHover} hover:border-opacity-100 transition-all duration-500 h-full flex flex-col justify-between min-h-[480px] sm:min-h-[520px] relative breathe depth-layer-1 overflow-hidden hover:scale-[1.009] hover:shadow-xl hover:shadow-purple-500/10`}
               >
                 {/* Glassmorphism overlay on hover */}
                 <div className="absolute inset-0 bg-gradient-to-br from-white/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
@@ -75,23 +93,18 @@ export default function TrinitySection() {
                     <span className="font-mono text-sm opacity-50">
                       {dept.number}
                     </span>
-                    <span className="text-sm font-bold tracking-wider opacity-50">
-                      {dept.name.toUpperCase()}
+                    <span className={`text-sm font-bold tracking-wider ${dept.color}`}>
+                      {dept.fullName}
                     </span>
                   </div>
 
                   {/* Icon Badge */}
                   <div className="w-16 h-16 border border-black/20 group-hover:border-white/20 rounded-full flex items-center justify-center mb-12 transition-colors">
-                    <Icon className="w-8 h-8 opacity-100 group-hover:text-accent transition-colors" />
+                    <Icon className={`w-8 h-8 ${dept.color} opacity-80 group-hover:opacity-100 transition-colors`} />
                   </div>
 
-                  {/* Title */}
-                  <h3 className="text-4xl font-heading font-bold mb-2 text-white">
-                    {dept.title}
-                  </h3>
-                  
                   {/* Subtitle */}
-                  <p className="text-lg font-medium mb-6 text-accent">
+                  <p className={`text-lg font-medium mb-4 ${dept.color}`}>
                     {dept.subtitle}
                   </p>
 
@@ -106,7 +119,7 @@ export default function TrinitySection() {
                   href={getLocalizedPath(dept.link)}
                   className="inline-flex items-center font-bold text-lg group-hover:translate-x-2 transition-transform relative z-10"
                 >
-                  {t('trinity.explore')} {dept.name}
+                  {t('trinity.explore')} {dept.name} →
                 </Link>
               </div>
             );
