@@ -49,10 +49,10 @@ const LOGOS_ROW2 = [
 ];
 
 const DEPTS = [
-  { num: '01', name: 'Nukleo.Agency', desc: 'The right people find you — and choose you.', color: '#f97316', href: '/services/agency' },
-  { num: '02', name: 'Nukleo.Studio', desc: 'Your brand becomes impossible to ignore.', color: NUKLEO_PURPLE, href: '/services/studio' },
-  { num: '03', name: 'Nukleo.Tech', desc: 'Your systems work for you, not the other way around.', color: '#2563eb', href: '/services/tech' },
-  { num: '04', name: 'Nukleo.Consulting', desc: 'You move with clarity, not hesitation.', color: '#059669', href: '/services/consulting' },
+  { num: '01', name: 'Nukleo.Agency', desc: 'The right people find you — and choose you.', color: '#f97316', href: '/services/agency', img: '/demo/dept-agency.jpg' },
+  { num: '02', name: 'Nukleo.Studio', desc: 'Your brand becomes impossible to ignore.', color: NUKLEO_PURPLE, href: '/services/studio', img: '/demo/dept-studio.jpg' },
+  { num: '03', name: 'Nukleo.Tech', desc: 'Your systems work for you, not the other way around.', color: '#2563eb', href: '/services/tech', img: '/demo/dept-tech.jpg' },
+  { num: '04', name: 'Nukleo.Consulting', desc: 'You move with clarity, not hesitation.', color: '#059669', href: '/services/consulting', img: '/demo/dept-consulting.jpg' },
 ];
 
 const PROJECTS = [
@@ -614,7 +614,7 @@ export default function HomepageDemo() {
               All services →
             </Link>
           </div>
-          {/* Grille 2×2 — cartes carrées */}
+          {/* Grille 2×2 — cartes avec image */}
           <div className="grid grid-cols-2 gap-4">
             {DEPTS.map((dept) => (
               <Link
@@ -623,27 +623,30 @@ export default function HomepageDemo() {
                 className="group relative rounded-2xl overflow-hidden cursor-pointer"
                 style={{ aspectRatio: '4 / 3' }}
               >
-                {/* Fond coloré subtil au hover */}
-                <div
-                  className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
-                  style={{ background: `radial-gradient(ellipse at bottom left, ${dept.color}22 0%, transparent 70%)` }}
+                {/* Image de fond */}
+                <img
+                  src={dept.img}
+                  alt={dept.name}
+                  className="absolute inset-0 w-full h-full object-cover transition-all duration-700"
+                  style={{
+                    filter: 'grayscale(0.4) brightness(0.45)',
+                    transform: 'scale(1)',
+                  }}
                 />
-                {/* Bordure */}
-                <div className="absolute inset-0 rounded-2xl border border-white/8 group-hover:border-white/16 transition-colors duration-300" />
-                {/* Numéro en filigrane */}
-                <span
-                  className="absolute bottom-0 right-0 font-heading font-black leading-none select-none pointer-events-none"
-                  style={{ fontSize: 'clamp(5rem, 10vw, 9rem)', color: 'rgba(255,255,255,0.04)', lineHeight: 1, paddingRight: '0.1em', paddingBottom: '0em' }}
-                >
-                  {dept.num}
-                </span>
+                {/* Overlay couleur au hover */}
+                <div
+                  className="absolute inset-0 transition-opacity duration-500 opacity-0 group-hover:opacity-100"
+                  style={{ background: `linear-gradient(135deg, ${dept.color}55 0%, transparent 60%)` }}
+                />
+                {/* Gradient bas permanent */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
                 {/* Contenu */}
-                <div className="relative z-10 flex flex-col justify-between h-full p-8 lg:p-10">
-                  {/* Barre couleur en haut */}
+                <div className="relative z-10 flex flex-col justify-between h-full p-6 lg:p-8">
+                  {/* Numéro + explore */}
                   <div className="flex items-center justify-between">
-                    <div className="w-8 h-[3px] rounded-full" style={{ background: dept.color }} />
+                    <span className="font-heading font-black text-white/20 text-sm">{dept.num}</span>
                     <span
-                      className="text-[10px] font-semibold tracking-widest uppercase opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                      className="text-[9px] font-semibold tracking-widest uppercase opacity-0 group-hover:opacity-100 transition-opacity duration-300"
                       style={{ color: dept.color }}
                     >
                       Explore →
@@ -651,10 +654,11 @@ export default function HomepageDemo() {
                   </div>
                   {/* Nom + description */}
                   <div>
-                    <p className="font-heading font-black text-white leading-tight mb-3" style={{ fontSize: 'clamp(1.2rem, 2.2vw, 1.8rem)' }}>
+                    <div className="w-6 h-[2px] rounded-full mb-3" style={{ background: dept.color }} />
+                    <p className="font-heading font-black text-white leading-tight mb-2" style={{ fontSize: 'clamp(1rem, 1.8vw, 1.4rem)' }}>
                       {dept.name}
                     </p>
-                    <p className="text-white/40 text-sm leading-relaxed">{dept.desc}</p>
+                    <p className="text-white/50 text-xs leading-relaxed">{dept.desc}</p>
                   </div>
                 </div>
               </Link>
