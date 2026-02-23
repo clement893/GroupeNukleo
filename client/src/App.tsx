@@ -81,6 +81,8 @@ const FAQ = lazyWithRetry(() => import("./pages/FAQ"));
 
 // Demo page — grand agence design
 const HomepageDemo = lazyWithRetry(() => import('./pages/HomepageDemo'));
+// Demo2 — nouvelle direction design modulaire
+const HomepageDemo2 = lazyWithRetry(() => import('./pages/HomepageDemo2'));
 
 // New department pages
 const NukleoTech = lazyWithRetry(() => import("./pages/services/NukleoTech"));
@@ -159,6 +161,7 @@ function App() {
 
               {/* ===== ROUTES ANGLAISES (défaut) ===== */}
               <Route path="/demo" component={HomepageDemo} />
+              <Route path="/demo2" component={HomepageDemo2} />
               <Route path="/" component={Home} />
               <Route path="/projects" component={withPageVisibility(Projects, "/projects")} />
               <Route path="/about" component={withPageVisibility(About, "/about")} />
