@@ -75,7 +75,7 @@ function HeroProjectSlider() {
     <div
       className="rounded-3xl flex flex-col flex-1 overflow-hidden min-h-[260px] border border-white/20"
     >
-      <p className="text-white/40 text-[10px] font-medium tracking-[0.35em] uppercase px-6 pt-6 pb-2 shrink-0">
+      <p className="text-black/60 text-[10px] font-medium tracking-[0.35em] uppercase px-6 pt-6 pb-2 shrink-0">
         Nos derniers projets
       </p>
       <Link
@@ -99,12 +99,12 @@ function HeroProjectSlider() {
                 filter: 'brightness(0.6) saturate(0.9)',
               }}
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-t from-white/80 via-white/20 to-transparent" />
             <div className="absolute bottom-0 left-0 right-0 p-5">
-              <span className="font-heading font-black text-white leading-tight block" style={{ fontSize: 'clamp(1.5rem, 2.5vw, 2.2rem)' }}>
+              <span className="font-heading font-black text-black leading-tight block" style={{ fontSize: 'clamp(1.5rem, 2.5vw, 2.2rem)' }}>
                 {proj.name}
               </span>
-              <span className="text-white/55 text-xs mt-1 block">{proj.category}</span>
+              <span className="text-black/70 text-xs mt-1 block">{proj.category}</span>
             </div>
           </div>
         ))}
@@ -120,14 +120,14 @@ function HeroProjectSlider() {
               style={{
                 width: i === active ? '20px' : '6px',
                 height: '6px',
-                background: i === active ? p.color : 'rgba(255,255,255,0.25)',
+                background: i === active ? p.color : 'rgba(0,0,0,0.25)',
               }}
             />
           ))}
         </div>
         <Link
           href={getLocalizedPath('/projects')}
-          className="text-white/50 text-[10px] font-semibold tracking-widest uppercase hover:text-white transition-colors backdrop-blur-md px-3 py-2 rounded-full"
+          className="text-black/70 text-[10px] font-semibold tracking-widest uppercase hover:text-black transition-colors backdrop-blur-md px-3 py-2 rounded-full"
         >
           Voir tous les projets →
         </Link>
@@ -510,10 +510,10 @@ export default function HomepageDemo4() {
         {/* ══════════════════════════════════════════════════════════════════════
             MODULE 1 — HERO EN 3 MODULES DISTINCTS
         ══════════════════════════════════════════════════════════════════════ */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-3 lg:gap-4" style={{ minHeight: '92vh' }}>
+        <div className="grid grid-cols-1 lg:grid-cols-[35fr_65fr] gap-3 lg:gap-4" style={{ minHeight: '92vh' }}>
 
-          {/* Colonne gauche (1/3) — Widgets Météo + Date + Slider projets */}
-          <div className="lg:col-span-4 flex flex-col gap-3 lg:gap-4">
+          {/* Colonne gauche (35%) — Widgets Météo + Date + Slider projets */}
+          <div className="flex flex-col gap-3 lg:gap-4">
 
             {/* Module 1B — Widgets Météo + Date (néomorphique, côte à côte) */}
             <div className="flex flex-row gap-3 lg:gap-4 flex-1">
@@ -548,8 +548,8 @@ export default function HomepageDemo4() {
 
           </div>
 
-          {/* Colonne droite (2/3) — Vidéo + Titre principal */}
-          <div className="lg:col-span-8 relative overflow-hidden rounded-3xl bg-black" style={{ minHeight: '92vh' }}>
+          {/* Colonne droite (65%) — Vidéo + Titre principal */}
+          <div className="relative overflow-hidden rounded-3xl bg-black" style={{ minHeight: '92vh' }}>
             <video
               ref={videoRef}
               autoPlay muted loop playsInline
