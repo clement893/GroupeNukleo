@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { Link } from 'wouter';
 import { useLocalizedPath } from '@/hooks/useLocalizedPath';
 import { TeamScrollCards, DepartmentsWidget, DoubleLogoCarousel, ContactWidget } from '@/components/demo3';
-import { X, Menu } from 'lucide-react';
+import { X, Menu, Sun } from 'lucide-react';
 
 const NUKLEO_PURPLE = '#7c3aed';
 const CREAM = '#F5F3EF';
@@ -510,15 +510,49 @@ export default function HomepageDemo4() {
         }}
       />
 
-      {/* ─── BOUTON MENU (X en haut à droite) ─────────────────────────────────── */}
-      <button
-        type="button"
-        onClick={() => setMenuOpen(true)}
-          className="fixed top-6 right-6 lg:right-8 z-50 w-10 h-10 rounded-full border border-white/30 flex items-center justify-center text-white/90 hover:bg-white/10 transition-colors backdrop-blur-md bg-black/20"
-        aria-label="Open menu"
-      >
-        <Menu className="w-5 h-5" />
-      </button>
+      {/* ─── HEADER / MENU EN HAUT (logo gauche, nav droite) ─────────────────── */}
+      <header className="fixed top-0 left-0 right-0 z-50 px-4 lg:px-8 py-4 lg:py-5 flex items-center justify-between bg-white/80 backdrop-blur-md border-b border-black/5">
+        <Link href={getLocalizedPath('/')} className="flex items-center gap-2 shrink-0">
+          <img
+            src="/demo/nukleo-logo-rvb.svg"
+            alt="Nukleo Digital"
+            className="h-7 lg:h-8 w-auto"
+          />
+        </Link>
+        <nav className="hidden md:flex items-center gap-6 lg:gap-8">
+          {[
+            { label: 'Services', href: '/services' },
+            { label: 'Work', href: '/projects' },
+            { label: 'About', href: '/about' },
+            { label: 'Contact', href: '/contact' },
+          ].map((item) => (
+            <Link
+              key={item.href}
+              href={getLocalizedPath(item.href)}
+              className="text-xs font-medium tracking-[0.15em] uppercase hover:opacity-70 transition-opacity"
+              style={{ color: `${DARK}80` }}
+            >
+              {item.label}
+            </Link>
+          ))}
+          <Link
+            href={getLocalizedPath('/start-project')}
+            className="text-xs font-semibold tracking-[0.15em] uppercase px-4 py-2 rounded-full transition-colors"
+            style={{ color: 'white', backgroundColor: DARK }}
+          >
+            Start a project
+          </Link>
+        </nav>
+        <button
+          type="button"
+          onClick={() => setMenuOpen(true)}
+          className="md:hidden w-10 h-10 rounded-full flex items-center justify-center hover:opacity-70 transition-opacity"
+          style={{ color: DARK }}
+          aria-label="Open menu"
+        >
+          <Menu className="w-5 h-5" />
+        </button>
+      </header>
 
       {/* ─── MENU CENTRÉ (overlay) ───────────────────────────────────────────── */}
       {menuOpen && (
@@ -567,35 +601,82 @@ export default function HomepageDemo4() {
       )}
 
       {/* ─── WRAPPER GLOBAL ─────────────────────────────────────────────────── */}
-      <div className="relative z-10 p-3 lg:p-4 flex flex-col gap-[16px] lg:gap-[22px]">
+      <div className="relative z-10 pt-20 lg:pt-24 p-3 lg:p-4 flex flex-col gap-[16px] lg:gap-[22px]">
 
         {/* ══════════════════════════════════════════════════════════════════════
-            MODULE 1 — HERO EN 3 MODULES DISTINCTS
+            HÉRO — TITRE PRINCIPAL
         ══════════════════════════════════════════════════════════════════════ */}
-        <div className="grid grid-cols-1 lg:grid-cols-[65fr_35fr] gap-3 lg:gap-4 pt-4 lg:pt-6" style={{ minHeight: '92vh' }}>
+        <div className="px-2 sm:px-4 pt-4 lg:pt-8 pb-6 lg:pb-10">
+          <h1
+            className="font-heading font-black leading-[0.9] tracking-tight text-left"
+            style={{
+              fontSize: 'clamp(2.5rem, 8vw, 6.5rem)',
+              color: DARK,
+            }}
+          >
+            Augmenter votre <span style={{ color: NUKLEO_PURPLE }}>Performance</span><br />
+            par L&apos;<span style={{ color: NUKLEO_PURPLE }}>Excellence</span> numérique
+          </h1>
+        </div>
 
-          {/* Colonne gauche (65%) — Nos derniers projets (grand widget) */}
+        {/* ══════════════════════════════════════════════════════════════════════
+            MODULE 1 — WIDGETS (projets, météo, date, who we are)
+        ══════════════════════════════════════════════════════════════════════ */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-3 lg:gap-4" style={{ minHeight: '92vh' }}>
+
+          {/* Colonne gauche (50%) — Nos derniers projets */}
           <HeroProjectSliderLarge />
 
-          {/* Colonne droite (35%) — Who We Are */}
-          <div className="relative overflow-hidden rounded-3xl group" style={{ minHeight: '92vh' }}>
-            <img
-              src={TEAM_IMAGE}
-              alt="Nukleo team"
-              className="absolute inset-0 w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 scale-[1.04] group-hover:scale-100"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/15 to-transparent" />
-            <div className="absolute bottom-0 left-0 right-0 p-8 lg:p-10 bg-black/30">
-              <p className="text-white/35 text-[10px] font-medium tracking-[0.35em] uppercase mb-4">Who We Are</p>
-              <h2 className="font-heading font-black text-white leading-[0.88] tracking-tight mb-5" style={{ fontSize: 'clamp(1.8rem, 3vw, 3.5rem)' }}>
-                We make digital<br />performance tangible.
-              </h2>
-              <p className="text-white/55 text-sm leading-relaxed max-w-md mb-6">
-                A digital performance agency co-creating strategies, technologies, and creative for ambitious organizations — with AI-powered precision.
-              </p>
-              <Link href={getLocalizedPath('/about')} className="inline-flex items-center gap-2 text-white text-xs font-semibold border-b border-white/35 pb-1 hover:border-white transition-colors">
-                Our story →
-              </Link>
+          {/* Colonne droite (50%) — Météo + Date en haut, Who We Are en dessous */}
+          <div className="flex flex-col gap-3 lg:gap-4">
+            {/* Météo + Date */}
+            <div className="flex flex-row gap-3 lg:gap-4 flex-shrink-0">
+              <div
+                className="rounded-3xl flex flex-col items-center justify-center p-4 lg:p-5 flex-1 min-h-[100px] min-w-0"
+                style={{
+                  background: 'linear-gradient(145deg, rgba(255,255,255,0.9) 0%, rgba(245,243,239,0.95) 100%)',
+                  boxShadow: '6px 6px 12px rgba(0,0,0,0.08), -6px -6px 12px rgba(255,255,255,0.8), inset 1px 1px 0 rgba(255,255,255,0.5)',
+                }}
+              >
+                <Sun className="w-8 h-8 mb-2 text-gray-700" strokeWidth={1.5} />
+                <span className="font-heading font-black text-4xl lg:text-5xl text-gray-800 leading-none">
+                  24<span className="text-xl font-bold align-top ml-0.5">°C</span>
+                </span>
+                <span className="text-gray-500 text-sm mt-2">Montréal, Québec</span>
+              </div>
+              <div
+                className="rounded-3xl flex flex-col justify-center p-4 lg:p-5 flex-1 min-h-[100px] min-w-0"
+                style={{
+                  background: 'linear-gradient(145deg, rgba(255,255,255,0.9) 0%, rgba(245,243,239,0.95) 100%)',
+                  boxShadow: '6px 6px 12px rgba(0,0,0,0.08), -6px -6px 12px rgba(255,255,255,0.8), inset 1px 1px 0 rgba(255,255,255,0.5)',
+                }}
+              >
+                <p className="text-gray-600 text-sm mb-1">Bon lundi <span className="text-purple-500">♥</span></p>
+                <span className="font-heading font-black text-4xl lg:text-5xl text-gray-800 leading-none">23</span>
+                <span className="text-gray-500 text-sm mt-2">février 2026</span>
+              </div>
+            </div>
+
+            {/* Who We Are — en dessous */}
+            <div className="relative overflow-hidden rounded-3xl group flex-1 min-h-[350px]">
+              <img
+                src={TEAM_IMAGE}
+                alt="Nukleo team"
+                className="absolute inset-0 w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 scale-[1.04] group-hover:scale-100"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/15 to-transparent" />
+              <div className="absolute bottom-0 left-0 right-0 p-6 lg:p-8 bg-black/30">
+                <p className="text-white/35 text-[10px] font-medium tracking-[0.35em] uppercase mb-3">Who We Are</p>
+                <h2 className="font-heading font-black text-white leading-[0.88] tracking-tight mb-4" style={{ fontSize: 'clamp(1.4rem, 2.5vw, 2.8rem)' }}>
+                  We make digital<br />performance tangible.
+                </h2>
+                <p className="text-white/55 text-xs lg:text-sm leading-relaxed max-w-md mb-4">
+                  A digital performance agency co-creating strategies, technologies, and creative for ambitious organizations — with AI-powered precision.
+                </p>
+                <Link href={getLocalizedPath('/about')} className="inline-flex items-center gap-2 text-white text-xs font-semibold border-b border-white/35 pb-1 hover:border-white transition-colors">
+                  Our story →
+                </Link>
+              </div>
             </div>
           </div>
         </div>
