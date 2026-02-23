@@ -2,11 +2,11 @@ import { useEffect, useRef } from 'react';
 import { Link } from 'wouter';
 import { useLocalizedPath } from '@/hooks/useLocalizedPath';
 
-// Unsplash — images libres de droits, haute qualité
-const HERO_IMAGE = 'https://images.unsplash.com/photo-1497366216548-37526070297c?w=2400&q=85&auto=format&fit=crop';
-const TEAM_IMAGE = 'https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=1600&q=85&auto=format&fit=crop';
-const WORK_IMAGE_1 = 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1200&q=85&auto=format&fit=crop';
-const WORK_IMAGE_2 = 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1200&q=85&auto=format&fit=crop';
+// Images locales — servies depuis /public/demo/
+const HERO_IMAGE = '/demo/hero.jpg';
+const TEAM_IMAGE = '/demo/team.jpg';
+const WORK_IMAGE_1 = '/demo/work1.jpg';
+const WORK_IMAGE_2 = '/demo/work2.jpg';
 
 // Couleur Nukleo — violet/bleu brand
 const NUKLEO_PURPLE = '#7c3aed';
@@ -329,7 +329,7 @@ export default function HomepageDemo() {
         {/* Image de fond plein écran */}
         <div className="absolute inset-0">
           <img
-            src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=2400&q=85&auto=format&fit=crop"
+            src="/demo/rob-bg.jpg"
             alt="Rouge on Blue"
             className="w-full h-full object-cover object-center opacity-20 mix-blend-luminosity"
             loading="lazy"
@@ -378,7 +378,7 @@ export default function HomepageDemo() {
               {/* Image éditoriale */}
               <div className="relative aspect-[3/4] lg:aspect-[4/5] overflow-hidden rounded-2xl">
                 <img
-                  src="https://images.unsplash.com/photo-1561070791-2526d30994b5?w=1200&q=85&auto=format&fit=crop"
+                  src="/demo/rob-creative.jpg"
                   alt="Rouge on Blue creative work"
                   className="w-full h-full object-cover object-center"
                   loading="lazy"
