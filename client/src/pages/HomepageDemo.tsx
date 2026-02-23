@@ -1,6 +1,6 @@
 import { useRef, useEffect, useState } from 'react';
 import { Link } from 'wouter';
-import { useLanguage } from '@/hooks/useLanguage';
+import { useLocalizedPath } from '@/hooks/useLocalizedPath';
 
 const NUKLEO_PURPLE = '#7c3aed';
 const CREAM = '#F5F3EF';
@@ -231,7 +231,7 @@ function TeamStackSection() {
 }
 
 export default function HomepageDemo() {
-  const { getLocalizedPath } = useLanguage();
+  const getLocalizedPath = useLocalizedPath();
   const videoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
