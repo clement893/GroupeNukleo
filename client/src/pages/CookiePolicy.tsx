@@ -13,7 +13,7 @@ export default function CookiePolicy() {
       <div className="min-h-screen bg-gradient-to-br from-violet-950 via-fuchsia-950 to-rose-950">
         <div className="container mx-auto px-4 py-32 max-w-4xl">
           <h1 className="text-5xl md:text-6xl font-bold text-white mb-8">
-            Cookie <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-purple-500">Policy</span>
+            Cookie Policy
           </h1>
           
           <p className="text-white/70 mb-12">

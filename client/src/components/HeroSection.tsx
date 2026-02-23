@@ -121,7 +121,7 @@ function HeroSection() {
               {t('hero.title')}
               <br />
               <span 
-                className="bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-500 bg-clip-text text-transparent pr-2 sm:pr-4 md:pr-6 lg:pr-8 xl:pr-10 inline-block"
+                className="text-white pr-2 sm:pr-4 md:pr-6 lg:pr-8 xl:pr-10 inline-block"
               >
                 {t('hero.titleHighlight')}
               </span>

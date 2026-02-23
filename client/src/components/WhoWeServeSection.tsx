@@ -105,7 +105,7 @@ export default function WhoWeServeSection() {
         <div className="text-center mt-16 lg:mt-20">
           <p className="text-white text-xl sm:text-2xl lg:text-3xl font-bold mb-8 leading-tight max-w-3xl mx-auto">
             {t('whoWeServe.cta.title')}<br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-500">
+            <span className="text-white/70">
               {t('whoWeServe.cta.subtitle')}
             </span>
           </p>

@@ -93,7 +93,7 @@ export default function StartProject() {
 
         {/* Header */}
         <div className="max-w-3xl mx-auto text-center mb-16">
-          <h1 className="text-4xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-white via-purple-200 to-pink-200 bg-clip-text text-transparent">
+          <h1 className="text-4xl md:text-6xl font-bold mb-6 text-white">
             {t('startProject.pageTitle')}
           </h1>
           <p className="text-lg md:text-xl text-white/70">

@@ -234,7 +234,7 @@ export default function Services() {
             <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold text-white mb-6 leading-tight">
               {heroTitle}
               <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-500">
+              <span className="text-white">
                 {heroSubtitle}
               </span>
             </h1>

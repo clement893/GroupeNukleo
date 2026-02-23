@@ -146,7 +146,7 @@ export default function About() {
             <h1 className="text-6xl md:text-8xl font-bold mb-8">
               <span className="text-white">{t('about.heroTitle1')}</span>
               <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-violet-400 to-fuchsia-400">{t('about.heroTitle2')}</span>
+              <span className="text-white">{t('about.heroTitle2')}</span>
               <br />
               <span className="text-white">{t('about.heroTitle3')}</span>
             </h1>

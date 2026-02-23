@@ -238,11 +238,11 @@ export default function FAQ() {
             <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-white mb-6 leading-tight">
               {language === 'fr' ? (
                 <>
-                  Questions <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-purple-400 to-purple-500">Fréquentes</span>
+                  Questions Fréquentes
                 </>
               ) : (
                 <>
-                  Frequently Asked <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-purple-400 to-purple-500">Questions</span>
+                  Frequently Asked Questions
                 </>
               )}
             </h1>

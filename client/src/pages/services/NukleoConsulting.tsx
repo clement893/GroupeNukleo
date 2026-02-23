@@ -75,7 +75,7 @@ export default function NukleoConsulting() {
             <div className="absolute inset-0" style={{ background: 'linear-gradient(135deg, oklch(0.10 0.04 160) 0%, oklch(0.08 0.02 200) 50%, oklch(0.10 0.03 240) 100%)' }} />
             <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-emerald-600/8 rounded-full blur-[120px]" />
             <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-teal-600/6 rounded-full blur-[100px]" />
-            <div className="absolute inset-0 opacity-5" style={{ backgroundImage: 'linear-gradient(rgba(16,185,129,0.4) 1px, transparent 1px), linear-gradient(90deg, rgba(16,185,129,0.4) 1px, transparent 1px)', backgroundSize: '60px 60px' }} />
+
           </div>
 
           <div className="container relative z-10 max-w-6xl mx-auto px-6">
@@ -86,7 +86,7 @@ export default function NukleoConsulting() {
 
             <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold text-white mb-6 leading-[0.9]">
               Transformation &<br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-teal-400">
+              <span className="text-white">
                 Conseil stratégique
               </span>
             </h1>
