@@ -323,80 +323,82 @@ export default function HomepageDemo() {
         </div>
       </section>
 
-      {/* ─── NUKLEO GROUP ─────────────────────────────────────────────────── */}
-      <section className="py-32 lg:py-44 px-8 lg:px-16" style={{ backgroundColor: NUKLEO_PURPLE_LIGHT }}>
-        <div className="max-w-screen-xl mx-auto">
+      {/* ─── ROUGE ON BLUE ────────────────────────────────────────────────── */}
+      <section className="relative overflow-hidden bg-[#C8102E] text-white">
 
-          <div className="mb-16">
-            <p className="text-xs font-medium tracking-widest uppercase text-[#0A0A0A]/40 mb-5">
-              The Nukleo Group
+        {/* Image de fond plein écran */}
+        <div className="absolute inset-0">
+          <img
+            src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=2400&q=85&auto=format&fit=crop"
+            alt="Rouge on Blue"
+            className="w-full h-full object-cover object-center opacity-20 mix-blend-luminosity"
+            loading="lazy"
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-[#C8102E]/60 via-[#C8102E]/80 to-[#C8102E]" />
+        </div>
+
+        <div className="relative z-10 px-8 lg:px-16 pt-32 lg:pt-44 pb-32 lg:pb-44">
+          <div className="max-w-screen-xl mx-auto">
+
+            {/* Label */}
+            <p className="text-white/40 text-xs font-medium tracking-widest uppercase mb-10">
+              A sister agency
             </p>
+
+            {/* Titre massif */}
             <h2
-              className="font-heading font-black text-[#0A0A0A] leading-[0.92] tracking-tight"
-              style={{ fontSize: 'clamp(2.2rem, 4.5vw, 5rem)' }}
+              className="font-heading font-black leading-[0.88] tracking-tight mb-14"
+              style={{ fontSize: 'clamp(3.5rem, 9vw, 11rem)' }}
             >
-              Two agencies.<br />One vision.
+              Rouge<br />on Blue.
             </h2>
-          </div>
 
-          <div className="grid lg:grid-cols-2 gap-6">
+            {/* Layout deux colonnes */}
+            <div className="grid lg:grid-cols-2 gap-16 lg:gap-28 items-end">
 
-            {/* Nukleo */}
-            <div className="bg-white rounded-2xl p-10 lg:p-12">
-              <div className="flex items-start justify-between mb-8">
-                <div>
-                  <p className="font-heading font-black text-2xl text-[#0A0A0A] mb-1">Nukleo</p>
-                  <p className="text-[#0A0A0A]/40 text-xs font-medium uppercase tracking-widest">Digital Performance</p>
-                </div>
-                <span
-                  className="text-xs font-medium px-3 py-1.5 rounded-full"
-                  style={{ backgroundColor: NUKLEO_PURPLE_LIGHT, color: NUKLEO_PURPLE }}
+              {/* Manifeste */}
+              <div>
+                <p className="text-white/70 text-lg lg:text-xl leading-relaxed mb-4">
+                  For brands that refuse to blend in.
+                </p>
+                <p className="text-white/45 text-base leading-relaxed mb-12">
+                  Creative direction, brand identity, and storytelling — built for organizations that understand that being exceptional is not a risk, it's a strategy.
+                </p>
+                <a
+                  href="https://rougeonblue.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-3 bg-white text-[#C8102E] font-bold px-8 py-4 rounded-full hover:bg-white/90 transition-all duration-200 text-sm group"
                 >
-                  You are here
-                </span>
+                  Oser l'Exception
+                  <span className="group-hover:translate-x-1 transition-transform duration-200">↗</span>
+                </a>
               </div>
-              <p className="text-[#0A0A0A]/55 text-base leading-relaxed mb-8">
-                Strategy, technology, design, and marketing — four departments working together to drive your digital performance.
-              </p>
-              <Link
-                href={getLocalizedPath('/services')}
-                className="inline-flex items-center gap-2 font-semibold text-sm border-b-2 pb-1 hover:gap-4 transition-all duration-200"
-                style={{ borderColor: NUKLEO_PURPLE, color: NUKLEO_PURPLE }}
-              >
-                Explore our services →
-              </Link>
+
+              {/* Image éditoriale */}
+              <div className="relative aspect-[3/4] lg:aspect-[4/5] overflow-hidden rounded-2xl">
+                <img
+                  src="https://images.unsplash.com/photo-1561070791-2526d30994b5?w=1200&q=85&auto=format&fit=crop"
+                  alt="Rouge on Blue creative work"
+                  className="w-full h-full object-cover object-center"
+                  loading="lazy"
+                />
+                {/* Overlay rouge subtil */}
+                <div className="absolute inset-0 bg-[#C8102E]/10" />
+              </div>
             </div>
 
-            {/* Rouge on Blue */}
-            <a
-              href="https://rougeonblue.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group bg-[#0A0A0A] rounded-2xl p-10 lg:p-12 block hover:bg-[#1a1a1a] transition-colors duration-300"
-            >
-              <div className="flex items-start justify-between mb-8">
-                <div>
-                  <p className="font-heading font-black text-2xl text-white mb-1">Rouge on Blue</p>
-                  <p className="text-white/30 text-xs font-medium uppercase tracking-widest">Creative & Branding Agency</p>
-                </div>
-                <span className="text-white/20 text-xl group-hover:text-white group-hover:translate-x-1 group-hover:-translate-y-1 transition-all duration-200">
-                  ↗
-                </span>
-              </div>
-              <p className="text-white/45 text-base leading-relaxed mb-8">
-                Our sister agency specializing in brand identity, creative direction, and storytelling for organizations that want to be remembered.
+            {/* Tagline bas de page */}
+            <div className="mt-20 pt-10 border-t border-white/15 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+              <p className="text-white/30 text-sm tracking-wide">
+                rougeonblue.com
               </p>
-              <span className="inline-flex items-center gap-2 font-semibold text-sm text-white/40 group-hover:text-white transition-colors duration-200 border-b border-white/20 group-hover:border-white pb-1">
-                Visit rougeonblue.com →
-              </span>
-            </a>
+              <p className="text-white/20 text-xs font-medium uppercase tracking-widest">
+                Creative & Branding Agency — Montréal
+              </p>
+            </div>
 
           </div>
-
-          {/* Tagline groupe */}
-          <p className="text-center text-[#0A0A0A]/35 text-sm mt-12 tracking-wide">
-            Excellence at every touchpoint.
-          </p>
         </div>
       </section>
 
