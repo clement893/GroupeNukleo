@@ -109,10 +109,9 @@ function TeamStackSection() {
     else prev();
   };
 
-  // Hauteur de la carte + débordement visible des cartes en dessous
-  const CARD_W = 300;
-  const CARD_H = 420;
-  const STACK_OVERFLOW = 48; // px visibles des cartes en dessous
+  const CARD_W = 220;
+  const CARD_H = 300;
+  const STACK_OVERFLOW = 36;
 
   return (
     <div
@@ -121,14 +120,14 @@ function TeamStackSection() {
       onWheel={handleWheel}
     >
       {/* Colonne unique centrée */}
-      <div className="flex flex-col items-center px-8 py-14 gap-10">
+      <div className="flex flex-col items-center px-8 py-10 gap-7">
 
         {/* En-tête */}
         <div className="text-center">
-          <p className="text-white/30 text-[10px] font-medium tracking-[0.35em] uppercase mb-5">The Team</p>
+          <p className="text-white/30 text-[10px] font-medium tracking-[0.35em] uppercase mb-3">The Team</p>
           <h2
-            className="font-heading font-black text-white leading-[0.88] tracking-tight"
-            style={{ fontSize: 'clamp(2.2rem, 4vw, 4rem)' }}
+            className="font-heading font-black text-white leading-[0.9] tracking-tight"
+            style={{ fontSize: 'clamp(1.8rem, 3vw, 3rem)' }}
           >
             People behind the work.
           </h2>
@@ -203,10 +202,10 @@ function TeamStackSection() {
         </div>
 
         {/* Infos membre + navigation */}
-        <div className="flex flex-col items-center gap-5 text-center">
-          <div style={{ minHeight: '64px' }}>
+        <div className="flex flex-col items-center gap-3 text-center">
+          <div style={{ minHeight: '52px' }}>
             <p
-              className="font-heading font-bold text-white text-2xl leading-tight"
+              className="font-heading font-bold text-white text-xl leading-tight"
               key={activeIndex}
               style={{ animation: 'fadeUp 0.4s ease forwards' }}
             >
@@ -229,18 +228,18 @@ function TeamStackSection() {
             ))}
           </div>
           {/* Flèches */}
-          <div className="flex gap-3">
+          <div className="flex gap-2">
             <button
               onClick={prev}
               disabled={activeIndex === 0}
-              className="w-10 h-10 rounded-full border border-white/15 flex items-center justify-center text-white/50 hover:text-white hover:border-white/40 transition-all disabled:opacity-20"
+              className="w-8 h-8 rounded-full border border-white/15 flex items-center justify-center text-white/50 hover:text-white hover:border-white/40 transition-all disabled:opacity-20 text-sm"
             >
               ↑
             </button>
             <button
               onClick={next}
               disabled={activeIndex === TEAM_MEMBERS.length - 1}
-              className="w-10 h-10 rounded-full border border-white/15 flex items-center justify-center text-white/50 hover:text-white hover:border-white/40 transition-all disabled:opacity-20"
+              className="w-8 h-8 rounded-full border border-white/15 flex items-center justify-center text-white/50 hover:text-white hover:border-white/40 transition-all disabled:opacity-20 text-sm"
             >
               ↓
             </button>
@@ -634,7 +633,7 @@ export default function HomepageDemo() {
                 key={dept.num}
                 href={getLocalizedPath(dept.href)}
                 className="group relative rounded-2xl overflow-hidden cursor-pointer"
-                style={{ aspectRatio: '1 / 1' }}
+                style={{ aspectRatio: '4 / 3' }}
               >
                 {/* Fond coloré subtil au hover */}
                 <div
