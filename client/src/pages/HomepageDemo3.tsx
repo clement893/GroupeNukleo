@@ -133,12 +133,13 @@ export default function HomepageDemo3() {
           <Square className="w-4 h-4" />
         </button>
 
-        {/* Brand logo - nukleo RVB */}
-        <div className="absolute top-24 left-8 lg:left-16 z-10">
+        {/* Brand logo - nukleo RVB (mix-blend: screen pour fond noir transparent sur dégradé) */}
+        <div className="absolute top-24 left-8 lg:left-16 z-10 flex items-center">
           <img
             src="/demo/nukleo-logo-rvb.png"
             alt="nukleo"
-            className="h-16 lg:h-24 w-auto object-contain"
+            className="h-14 lg:h-20 w-auto object-contain object-left"
+            style={{ mixBlendMode: 'screen' }}
           />
         </div>
 
@@ -254,11 +255,12 @@ export default function HomepageDemo3() {
       {/* ─── FOOTER ───────────────────────────────────────────────────────── */}
       <footer className="py-8 px-8 lg:px-16 border-t border-gray-200 bg-white">
         <div className="max-w-5xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
-          <Link href={getLocalizedPath('/')} className="inline-block">
+          <Link href={getLocalizedPath('/')} className="inline-flex items-center p-2 -m-2 rounded-lg bg-gray-900 hover:bg-gray-800 transition-colors">
             <img
               src="/demo/nukleo-logo-rvb.png"
               alt="nukleo"
-              className="h-8 w-auto object-contain"
+              className="h-7 w-auto object-contain"
+              style={{ mixBlendMode: 'screen' }}
             />
           </Link>
           <div className="flex gap-6 text-sm text-gray-500">
@@ -267,6 +269,9 @@ export default function HomepageDemo3() {
             </Link>
             <Link href={getLocalizedPath('/demo2')} className="hover:text-gray-800">
               Démo 2
+            </Link>
+            <Link href={getLocalizedPath('/demo3')} className="hover:text-gray-800">
+              Démo 3
             </Link>
             <Link href={getLocalizedPath('/start-project')} className="hover:text-gray-800">
               Start a project
