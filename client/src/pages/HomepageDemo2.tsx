@@ -198,30 +198,17 @@ function Triptych() {
   const getW = (i: number) => i === active ? '68%' : '16%';
 
   return (
-    <div style={{ position: 'relative', height: '88vh', borderRadius: 20, overflow: 'hidden' }}>
-
-      {/* ── Fond photo de rue plein cadre ── */}
-      <img
-        src={ROB_BG}
-        alt=""
-        style={{
-          position: 'absolute', inset: 0, width: '100%', height: '100%',
-          objectFit: 'cover',
-          filter: 'brightness(0.82) saturate(0.9)',
-        }}
-      />
-      {/* Léger overlay pour assombrir les bords */}
-      <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to bottom, rgba(0,0,0,0.08) 0%, rgba(0,0,0,0.22) 100%)' }} />
+    <div style={{ position: 'relative', height: '88vh', overflow: 'hidden', display: 'flex', alignItems: 'center', justifyContent: 'center', background: '#0a0a0a' }}>
 
       {/* ── Présentoir : centré verticalement, 3 panneaux ── */}
       <div
         style={{
-          position: 'absolute',
-          inset: 0,
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          padding: '0 6%',
+          width: '100%',
+          height: '100%',
+          padding: '40px 40px',
         }}
       >
         {/* Socle gris du présentoir */}
@@ -594,7 +581,7 @@ export default function HomepageDemo2() {
         {/* ════════════════════════════════════════════════════════════════
             RANGÉE 5 — TRIPTYQUE PROJETS (plein largeur)
         ════════════════════════════════════════════════════════════════ */}
-        <div style={{ padding: '0 24px' }}>
+        <div style={{ padding: '0' }}>
           <Triptych />
         </div>
 
