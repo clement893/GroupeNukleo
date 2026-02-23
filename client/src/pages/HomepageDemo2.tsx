@@ -236,7 +236,23 @@ function Triptych() {
 // ─── PAGE ──────────────────────────────────────────────────────────────────
 export default function HomepageDemo2() {
   return (
-    <div style={{ background: '#FAFAF8', minHeight: '100vh', fontFamily: 'inherit' }}>
+    <div style={{ background: '#FAFAF8', minHeight: '100vh', fontFamily: 'inherit', position: 'relative' }}>
+
+      {/* ── DÉGRADÉ HAUT DE PAGE ─────────────────────────────────────── */}
+      <div
+        aria-hidden
+        style={{
+          position: 'fixed',
+          top: 0,
+          left: 0,
+          right: 0,
+          height: '520px',
+          background: 'linear-gradient(160deg, #c4b5fd 0%, #93c5fd 30%, rgba(245,242,236,0) 70%)',
+          opacity: 0.45,
+          pointerEvents: 'none',
+          zIndex: 0,
+        }}
+      />
 
       {/* ── NAV ─────────────────────────────────────────────────────────── */}
       <nav style={{ position: 'fixed', top: 0, left: 0, right: 0, zIndex: 100, padding: '20px 40px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', background: 'rgba(250,250,248,0.85)', backdropFilter: 'blur(12px)' }}>
