@@ -1,7 +1,7 @@
 import { useRef, useEffect, useState } from 'react';
 import { Link } from 'wouter';
 import { useLocalizedPath } from '@/hooks/useLocalizedPath';
-import { TeamScrollCards, DepartmentsWidget, DoubleLogoCarousel } from '@/components/demo3';
+import { TeamScrollCards, DepartmentsWidget, DoubleLogoCarousel, AboutUsWidget, ContactWidget } from '@/components/demo3';
 import { X, Menu } from 'lucide-react';
 
 const NUKLEO_PURPLE = '#7c3aed';
@@ -15,6 +15,15 @@ const WORK1 = '/demo/work1.jpg';
 const WORK2 = '/demo/work2.jpg';
 const WORK3 = '/demo/work3.jpg';
 const ROB_BG = '/demo/rob-bg.jpg';
+
+/** Nos derniers projets — différents de Selected Work (MBAM, SummitLaw, QueerTech) */
+const LATEST_PROJECTS = [
+  { name: 'Contre Jour Art After Dark', category: 'Brand & Digital', img: '/demo/project-1.jpg', color: '#2563eb' },
+  { name: 'Soirée In Situ Night', category: 'Brand & Creative', img: '/demo/project-2.jpg', color: NUKLEO_PURPLE },
+  { name: 'Perspectives', category: 'AI & Platform', img: '/demo/project-3.jpg', color: '#059669' },
+  { name: 'Novisto', category: 'Sustainability Tech', img: '/demo/dept-consulting.jpg', color: '#0891b2' },
+  { name: 'Rouge on Blue', category: 'Creative Agency', img: '/demo/rob-creative.jpg', color: '#dc2626' },
+];
 
 const PROJECTS = [
   {
@@ -49,34 +58,34 @@ const PROJECTS = [
   },
 ];
 
-// ─── HERO PROJECT SLIDER ────────────────────────────────────────────────────
+// ─── HERO PROJECT SLIDER (nos derniers projets) ──────────────────────────────
 function HeroProjectSlider() {
   const [active, setActive] = useState(0);
   const getLocalizedPath = useLocalizedPath();
 
   useEffect(() => {
     const t = setInterval(() => {
-      setActive((a) => (a + 1) % PROJECTS.length);
+      setActive((a) => (a + 1) % LATEST_PROJECTS.length);
     }, 4000);
     return () => clearInterval(t);
   }, []);
 
-  const p = PROJECTS[active];
+  const p = LATEST_PROJECTS[active];
   return (
     <div
-      className="rounded-3xl flex flex-col flex-1 overflow-hidden min-h-[260px] backdrop-blur-xl border border-white/20"
+      className="rounded-3xl flex flex-col flex-1 overflow-hidden min-h-[260px] border border-white/20"
       style={{ background: 'rgba(0,0,0,0.5)' }}
     >
       <p className="text-white/40 text-[10px] font-medium tracking-[0.35em] uppercase px-6 pt-6 pb-2 shrink-0">
-        Selected Work
+        Nos derniers projets
       </p>
       <Link
         href={getLocalizedPath('/projects')}
         className="flex-1 relative block min-h-[180px] overflow-hidden"
       >
-        {PROJECTS.map((proj, i) => (
+        {LATEST_PROJECTS.map((proj, i) => (
           <div
-            key={proj.num}
+            key={proj.name}
             className="absolute inset-0 transition-opacity duration-500"
             style={{
               opacity: i === active ? 1 : 0,
@@ -103,7 +112,7 @@ function HeroProjectSlider() {
       </Link>
       <div className="flex items-center justify-between px-5 py-4 shrink-0">
         <div className="flex gap-1.5">
-          {PROJECTS.map((_, i) => (
+          {LATEST_PROJECTS.map((_, i) => (
             <button
               key={i}
               type="button"
@@ -119,9 +128,9 @@ function HeroProjectSlider() {
         </div>
         <Link
           href={getLocalizedPath('/projects')}
-          className="text-white/50 text-[10px] font-semibold tracking-widest uppercase hover:text-white transition-colors"
+          className="text-white/50 text-[10px] font-semibold tracking-widest uppercase hover:text-white transition-colors backdrop-blur-md px-3 py-2 rounded-full"
         >
-          View all →
+          Voir tous les projets →
         </Link>
       </div>
     </div>
@@ -159,7 +168,7 @@ function TeamStackSection({ compact = false }: { compact?: boolean }) {
   if (compact) {
     return (
       <div
-        className="rounded-3xl overflow-hidden h-full min-h-0 flex flex-col backdrop-blur-xl bg-black/70 border border-white/10"
+        className="rounded-3xl overflow-hidden h-full min-h-0 flex flex-col bg-black/70 border border-white/10"
       >
         <div className="px-4 py-5 shrink-0">
           <p className="text-white/30 text-[10px] font-medium tracking-[0.35em] uppercase mb-1">The Team</p>
@@ -171,7 +180,7 @@ function TeamStackSection({ compact = false }: { compact?: boolean }) {
           {TEAM_MEMBERS.map((member) => (
             <div
               key={member.name}
-              className="flex items-center gap-3 p-3.5 rounded-xl backdrop-blur-md bg-white/5 hover:bg-white/15 transition-all duration-200 border border-white/10 shrink-0 group"
+              className="flex items-center gap-3 p-3.5 rounded-xl bg-white/5 hover:bg-white/15 transition-all duration-200 border border-white/10 shrink-0 group"
               style={{ borderLeft: `3px solid ${member.color}` }}
             >
               {/* Nom — gauche */}
@@ -426,7 +435,7 @@ export default function HomepageDemo4() {
       <button
         type="button"
         onClick={() => setMenuOpen(true)}
-        className="fixed top-6 right-6 lg:right-8 z-50 w-10 h-10 rounded-full border border-white/30 flex items-center justify-center text-white/90 hover:bg-white/10 transition-colors backdrop-blur-sm bg-black/20"
+          className="fixed top-6 right-6 lg:right-8 z-50 w-10 h-10 rounded-full border border-white/30 flex items-center justify-center text-white/90 hover:bg-white/10 transition-colors backdrop-blur-md bg-black/20"
         aria-label="Open menu"
       >
         <Menu className="w-5 h-5" />
@@ -434,11 +443,11 @@ export default function HomepageDemo4() {
 
       {/* ─── MENU CENTRÉ (overlay) ───────────────────────────────────────────── */}
       {menuOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-md">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80">
           <button
             type="button"
             onClick={() => setMenuOpen(false)}
-            className="absolute top-6 right-6 lg:right-8 w-10 h-10 rounded-full border border-white/30 flex items-center justify-center text-white hover:bg-white/10 transition-colors"
+            className="absolute top-6 right-6 lg:right-8 w-10 h-10 rounded-full border border-white/30 flex items-center justify-center text-white hover:bg-white/10 transition-colors backdrop-blur-md"
             aria-label="Close menu"
           >
             <X className="w-5 h-5" />
@@ -466,7 +475,7 @@ export default function HomepageDemo4() {
             <Link
               href={getLocalizedPath('/start-project')}
               onClick={() => setMenuOpen(false)}
-              className="mt-4 border border-white/50 text-white text-xs font-semibold px-6 py-3 rounded-full hover:bg-white hover:text-black transition-all"
+              className="mt-4 border border-white/50 text-white text-xs font-semibold px-6 py-3 rounded-full hover:bg-white hover:text-black transition-all backdrop-blur-md"
             >
               Start a project
             </Link>
@@ -528,7 +537,7 @@ export default function HomepageDemo4() {
 
             {/* Module 1B — CTA + description */}
             <div
-              className="rounded-3xl flex flex-col justify-between p-10 lg:p-12 flex-1 backdrop-blur-xl bg-black/50 border border-white/10"
+              className="rounded-3xl flex flex-col justify-between p-10 lg:p-12 flex-1 bg-black/50 border border-white/10"
               style={{ minHeight: '300px' }}
             >
               <div>
@@ -542,13 +551,13 @@ export default function HomepageDemo4() {
               <div className="flex flex-col gap-3 mt-8">
                 <Link
                   href={getLocalizedPath('/start-project')}
-                  className="inline-flex items-center justify-center gap-2 bg-white text-black font-bold px-7 py-4 rounded-full hover:bg-white/90 transition-all duration-200 text-sm"
+                  className="inline-flex items-center justify-center gap-2 bg-white text-black font-bold px-7 py-4 rounded-full hover:bg-white/90 transition-all duration-200 text-sm backdrop-blur-md"
                 >
                   Start a project →
                 </Link>
                 <Link
                   href={getLocalizedPath('/about')}
-                  className="inline-flex items-center justify-center gap-2 border border-white/15 text-white/60 font-semibold px-7 py-4 rounded-full hover:border-white/35 hover:text-white transition-all duration-200 text-sm"
+                  className="inline-flex items-center justify-center gap-2 border border-white/15 text-white/60 font-semibold px-7 py-4 rounded-full hover:border-white/35 hover:text-white transition-all duration-200 text-sm backdrop-blur-md"
                 >
                   Learn about us
                 </Link>
@@ -569,6 +578,13 @@ export default function HomepageDemo4() {
         </div>
 
         {/* ══════════════════════════════════════════════════════════════════════
+            MODULE 2b — ABOUT US (historique + lien à propos)
+        ══════════════════════════════════════════════════════════════════════ */}
+        <div className="max-w-4xl mx-auto">
+          <AboutUsWidget />
+        </div>
+
+        {/* ══════════════════════════════════════════════════════════════════════
             MODULE 3 — WHO WE ARE + STATS
         ══════════════════════════════════════════════════════════════════════ */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-3 lg:gap-4">
@@ -580,7 +596,7 @@ export default function HomepageDemo4() {
               className="absolute inset-0 w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 scale-[1.04] group-hover:scale-100"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/15 to-transparent" />
-            <div className="absolute bottom-0 left-0 right-0 p-10 lg:p-14 backdrop-blur-md bg-black/30">
+            <div className="absolute bottom-0 left-0 right-0 p-10 lg:p-14 bg-black/30">
               <p className="text-white/35 text-[10px] font-medium tracking-[0.35em] uppercase mb-5">Who We Are</p>
               <h2 className="font-heading font-black text-white leading-[0.88] tracking-tight mb-6" style={{ fontSize: 'clamp(2.2rem, 4.5vw, 5rem)' }}>
                 We make digital<br />performance tangible.
@@ -595,14 +611,14 @@ export default function HomepageDemo4() {
           </div>
 
           <div className="lg:col-span-4 flex flex-col gap-3 lg:gap-4">
-            <div className="rounded-3xl flex flex-col justify-between p-10 flex-1 backdrop-blur-xl bg-white/50 border border-white/60 min-h-[270px]">
+            <div className="rounded-3xl flex flex-col justify-between p-10 flex-1 bg-white/50 border border-white/60 min-h-[270px]">
               <p className="text-[10px] font-medium tracking-[0.35em] uppercase" style={{ color: `${DARK}40` }}>Years of excellence</p>
               <div>
                 <p className="font-heading font-black leading-none" style={{ fontSize: 'clamp(4rem, 6vw, 7rem)', color: DARK }}>7+</p>
                 <p className="text-sm mt-2" style={{ color: `${DARK}50` }}>of digital performance</p>
               </div>
             </div>
-            <div className="rounded-3xl flex flex-col justify-between p-10 flex-1 backdrop-blur-xl bg-black/60 border border-white/10 min-h-[270px]">
+            <div className="rounded-3xl flex flex-col justify-between p-10 flex-1 bg-black/60 border border-white/10 min-h-[270px]">
               <p className="text-white/30 text-[10px] font-medium tracking-[0.35em] uppercase">Projects delivered</p>
               <div>
                 <p className="font-heading font-black text-white leading-none" style={{ fontSize: 'clamp(4rem, 6vw, 7rem)' }}>300+</p>
@@ -616,14 +632,14 @@ export default function HomepageDemo4() {
             MODULE 4 — DÉPARTEMENTS (2/3) + ÉQUIPE (1/3)
         ══════════════════════════════════════════════════════════════════════ */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-3 lg:gap-4" style={{ minHeight: '520px' }}>
-          {/* 2/3 gauche — 4 départements avec images (comme demo3) */}
-          <div className="lg:col-span-2 rounded-3xl overflow-hidden">
-            <DepartmentsWidget />
+          {/* 2/3 gauche — widget équipe (slide vertical type Demo 3) */}
+          <div className="lg:col-span-2 rounded-3xl overflow-hidden min-h-[420px] lg:min-h-0">
+            <TeamScrollCards />
           </div>
 
-          {/* 1/3 droite — widget équipe (slide vertical type Demo 3) */}
-          <div className="rounded-3xl overflow-hidden min-h-[420px] lg:min-h-0">
-            <TeamScrollCards />
+          {/* 1/3 droite — 4 départements avec images (comme demo3) */}
+          <div className="rounded-3xl overflow-hidden">
+            <DepartmentsWidget />
           </div>
         </div>
 
@@ -635,7 +651,7 @@ export default function HomepageDemo4() {
         {/* ══════════════════════════════════════════════════════════════════════
             MODULE 7 — ROUGE ON BLUE
         ══════════════════════════════════════════════════════════════════════ */}
-        <div className="relative overflow-hidden rounded-3xl backdrop-blur-sm border border-white/10" style={{ background: 'rgba(200,16,46,0.9)', minHeight: '500px' }}>
+        <div className="relative overflow-hidden rounded-3xl border border-white/10" style={{ background: 'rgba(200,16,46,0.9)', minHeight: '500px' }}>
           <img src={ROB_BG} alt="Rouge on Blue" className="absolute inset-0 w-full h-full object-cover opacity-15 mix-blend-luminosity" />
           <div className="relative z-10 flex flex-col lg:flex-row items-start lg:items-end justify-between p-12 lg:p-20 gap-12" style={{ minHeight: '500px' }}>
             <div className="flex-1">
@@ -650,7 +666,7 @@ export default function HomepageDemo4() {
                 href="https://rougeonblue.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-3 bg-white text-[#C8102E] font-bold px-8 py-4 rounded-full hover:bg-white/90 transition-all duration-200 text-sm"
+                className="inline-flex items-center gap-3 bg-white text-[#C8102E] font-bold px-8 py-4 rounded-full hover:bg-white/90 transition-all duration-200 text-sm backdrop-blur-md"
               >
                 Oser l'Exception ↗
               </a>
@@ -668,30 +684,35 @@ export default function HomepageDemo4() {
         {/* ══════════════════════════════════════════════════════════════════════
             MODULE 8 — CTA FINAL
         ══════════════════════════════════════════════════════════════════════ */}
-        <div className="rounded-3xl flex flex-col lg:flex-row items-center justify-between px-12 lg:px-20 py-20 gap-10 backdrop-blur-xl bg-black/70 border border-white/10">
+        <div className="rounded-3xl flex flex-col lg:flex-row items-center justify-between px-12 lg:px-20 py-20 gap-10 bg-black/70 border border-white/10">
           <h2 className="font-heading font-black text-white leading-[0.85] tracking-tight" style={{ fontSize: 'clamp(3rem, 6vw, 7.5rem)' }}>
             Ready to<br />
             <span style={{ color: NUKLEO_PURPLE }}>perform?</span>
           </h2>
           <div className="flex flex-col sm:flex-row gap-4 shrink-0">
-            <Link href={getLocalizedPath('/start-project')} className="inline-flex items-center gap-2 bg-white text-black font-bold px-9 py-4 rounded-full hover:bg-white/90 transition-all duration-200 text-sm">
+            <Link href={getLocalizedPath('/start-project')} className="inline-flex items-center gap-2 bg-white text-black font-bold px-9 py-4 rounded-full hover:bg-white/90 transition-all duration-200 text-sm backdrop-blur-md">
               Start a project →
             </Link>
-            <Link href={getLocalizedPath('/about')} className="inline-flex items-center gap-2 border border-white/20 text-white font-semibold px-9 py-4 rounded-full hover:border-white/45 transition-all duration-200 text-sm">
+            <Link href={getLocalizedPath('/about')} className="inline-flex items-center gap-2 border border-white/20 text-white font-semibold px-9 py-4 rounded-full hover:border-white/45 transition-all duration-200 text-sm backdrop-blur-md">
               Learn about us
             </Link>
           </div>
         </div>
 
         {/* ══════════════════════════════════════════════════════════════════════
+            MODULE 9 — WIDGET CONTACT
+        ══════════════════════════════════════════════════════════════════════ */}
+        <ContactWidget />
+
+        {/* ══════════════════════════════════════════════════════════════════════
             FOOTER MINIMAL
         ══════════════════════════════════════════════════════════════════════ */}
-        <div className="rounded-3xl flex flex-col lg:flex-row items-center justify-between px-10 py-7 gap-5 backdrop-blur-xl bg-white/50 border border-white/40 shadow-lg shadow-black/5">
+        <div className="rounded-3xl flex flex-col lg:flex-row items-center justify-between px-10 py-7 gap-5 bg-white/50 border border-white/40 shadow-lg shadow-black/5">
           <Link href={getLocalizedPath('/')} className="flex flex-col items-start gap-0.5">
             <img
-              src="/demo/nukleo-logo-rvb.png"
+              src="/demo/nukleo-logo.png"
               alt="Nukleo"
-              className="h-8 w-auto object-contain"
+              className="h-5 w-auto object-contain"
             />
             <span className="text-[10px] font-medium tracking-[0.2em] uppercase" style={{ color: `${DARK}60` }}>
               Choose Intelligence

@@ -44,20 +44,20 @@ interface DoubleLogoCarouselProps {
 
 export function DoubleLogoCarousel({ title = 'Trusted by ambitious organizations', className = '' }: DoubleLogoCarouselProps) {
   return (
-    <div className={`rounded-2xl overflow-hidden py-12 bg-[#EDE9E4] ${className}`}>
-      <p className="text-center text-[10px] font-medium tracking-[0.35em] uppercase mb-8 text-gray-500">
+    <div className={`rounded-2xl overflow-hidden py-[3.75rem] bg-[#EDE9E4] ${className}`}>
+      <p className="text-center text-xs font-medium tracking-[0.35em] uppercase mb-10 text-gray-500">
         {title}
       </p>
-      <div className="overflow-hidden mb-4">
-        <div className="flex gap-12 whitespace-nowrap animate-[ticker_40s_linear_infinite]">
+      <div className="overflow-hidden mb-5">
+        <div className="flex gap-[3.75rem] whitespace-nowrap animate-[ticker_40s_linear_infinite]">
           {[...Array(3)].map((_, rep) => (
-            <div key={`r1-${rep}`} className="flex items-center gap-12 shrink-0">
+            <div key={`r1-${rep}`} className="flex items-center gap-[3.75rem] shrink-0">
               {LOGOS_ROW1.map((logo) => (
-                <div key={logo.alt} className="flex items-center justify-center w-28 h-10 shrink-0">
+                <div key={logo.alt} className="flex items-center justify-center w-[140px] h-[50px] shrink-0">
                   <img
                     src={logo.src}
                     alt={logo.alt}
-                    className="max-h-8 max-w-[96px] w-auto object-contain opacity-40 hover:opacity-70 transition-opacity duration-300 grayscale hover:grayscale-0"
+                    className="max-h-10 max-w-[120px] w-auto object-contain opacity-40 hover:opacity-70 transition-opacity duration-300 grayscale hover:grayscale-0"
                     loading="lazy"
                   />
                 </div>
@@ -67,15 +67,15 @@ export function DoubleLogoCarousel({ title = 'Trusted by ambitious organizations
         </div>
       </div>
       <div className="overflow-hidden">
-        <div className="flex gap-12 whitespace-nowrap animate-[ticker-reverse_45s_linear_infinite]">
+        <div className="flex gap-[3.75rem] whitespace-nowrap animate-[ticker-reverse_45s_linear_infinite]">
           {[...Array(3)].map((_, rep) => (
-            <div key={`r2-${rep}`} className="flex items-center gap-12 shrink-0">
+            <div key={`r2-${rep}`} className="flex items-center gap-[3.75rem] shrink-0">
               {LOGOS_ROW2.map((logo) => (
-                <div key={logo.alt} className="flex items-center justify-center w-28 h-10 shrink-0">
+                <div key={logo.alt} className="flex items-center justify-center w-[140px] h-[50px] shrink-0">
                   <img
                     src={logo.src}
                     alt={logo.alt}
-                    className="max-h-8 max-w-[96px] w-auto object-contain opacity-40 hover:opacity-70 transition-opacity duration-300 grayscale hover:grayscale-0"
+                    className="max-h-10 max-w-[120px] w-auto object-contain opacity-40 hover:opacity-70 transition-opacity duration-300 grayscale hover:grayscale-0"
                     loading="lazy"
                   />
                 </div>

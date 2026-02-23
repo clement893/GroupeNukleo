@@ -13,3 +13,5 @@ export { TriptychSelectedWork, type TriptychProject } from './TriptychSelectedWo
 export { DoubleLogoCarousel } from './DoubleLogoCarousel';
 export { TeamScrollCards } from './TeamScrollCards';
 export { DepartmentsWidget } from './DepartmentsWidget';
+export { AboutUsWidget } from './AboutUsWidget';
+export { ContactWidget } from './ContactWidget';
