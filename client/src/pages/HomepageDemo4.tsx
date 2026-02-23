@@ -57,6 +57,74 @@ const PROJECTS = [
   },
 ];
 
+// ─── HERO TYPEWRITER ────────────────────────────────────────────────────────
+const HERO_TEXT = [
+  { text: "Augmenter votre ", purple: false },
+  { text: "Performance", purple: true },
+  { text: "\npar L'", purple: false },
+  { text: "Excellence", purple: true },
+  { text: " numérique", purple: false },
+];
+
+function HeroTypewriter() {
+  const [visibleLength, setVisibleLength] = useState(0);
+  const fullText = HERO_TEXT.map((s) => s.text).join('');
+  const totalLength = fullText.length;
+
+  useEffect(() => {
+    if (visibleLength >= totalLength) return;
+    const t = setTimeout(() => setVisibleLength((n) => n + 1), 50);
+    return () => clearTimeout(t);
+  }, [visibleLength, totalLength]);
+
+  let charIndex = 0;
+  const segments = HERO_TEXT.map((seg) => {
+    const start = charIndex;
+    const end = charIndex + seg.text.length;
+    charIndex = end;
+    const take = Math.max(0, Math.min(seg.text.length, visibleLength - start));
+    const visiblePart = seg.text.slice(0, take);
+    return { ...seg, visiblePart };
+  });
+
+  return (
+    <h1
+      className="font-heading font-black leading-[0.9] tracking-tight text-left"
+      style={{
+        fontSize: 'clamp(2.5rem, 8vw, 6.5rem)',
+        color: DARK,
+      }}
+    >
+      {segments.map((seg, i) =>
+        seg.visiblePart ? (
+          seg.purple ? (
+            <span key={i} style={{ color: NUKLEO_PURPLE }}>
+              {seg.visiblePart.replace(/\n/g, '')}
+              {seg.text.startsWith('\n') && seg.visiblePart && <br />}
+            </span>
+          ) : (
+            <span key={i}>
+              {seg.visiblePart.split('\n').map((line, j) => (
+                <span key={j}>
+                  {line}
+                  {j < seg.visiblePart!.split('\n').length - 1 && <br />}
+                </span>
+              ))}
+            </span>
+          )
+        ) : null
+      )}
+      {visibleLength < totalLength && (
+        <span
+          className="inline-block w-[0.08em] h-[0.9em] ml-[0.02em] bg-current align-middle"
+          style={{ color: DARK, animation: 'typewriter-blink 0.8s step-end infinite' }}
+          aria-hidden
+        />
+      )}
+    </h1>
+  );
+}
+
 // ─── HERO PROJECT SLIDER (nos derniers projets) ──────────────────────────────
 function HeroProjectSlider() {
   const [active, setActive] = useState(0);
@@ -606,17 +674,8 @@ export default function HomepageDemo4() {
         {/* ══════════════════════════════════════════════════════════════════════
             HÉRO — TITRE PRINCIPAL
         ══════════════════════════════════════════════════════════════════════ */}
-        <div className="pt-4 lg:pt-8 pb-6 lg:pb-10">
-          <h1
-            className="font-heading font-black leading-[0.9] tracking-tight text-left"
-            style={{
-              fontSize: 'clamp(2.5rem, 8vw, 6.5rem)',
-              color: DARK,
-            }}
-          >
-            Augmenter votre <span style={{ color: NUKLEO_PURPLE }}>Performance</span><br />
-            par L&apos;<span style={{ color: NUKLEO_PURPLE }}>Excellence</span> numérique
-          </h1>
+        <div className="pt-7 lg:pt-14 pb-[2.625rem] lg:pb-[4.375rem]">
+          <HeroTypewriter />
         </div>
 
         {/* ══════════════════════════════════════════════════════════════════════
