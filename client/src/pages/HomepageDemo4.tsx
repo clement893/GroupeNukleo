@@ -684,38 +684,33 @@ export default function HomepageDemo4() {
         <ContactWidget />
 
         {/* ══════════════════════════════════════════════════════════════════════
-            FOOTER MINIMAL
+            FOOTER — CLEAN & MINIMAL
         ══════════════════════════════════════════════════════════════════════ */}
-        <div className="rounded-3xl flex flex-col lg:flex-row items-center justify-between px-10 py-7 gap-5 bg-white/50 border border-white/40 shadow-lg shadow-black/5">
-          <Link href={getLocalizedPath('/')} className="flex flex-col items-start gap-0.5">
-            <img
-              src="/demo/nukleo-logo.png"
-              alt="Nukleo"
-              className="h-5 w-auto object-contain"
-            />
-            <span className="text-[10px] font-medium tracking-[0.2em] uppercase" style={{ color: `${DARK}60` }}>
-              Choose Intelligence
-            </span>
-          </Link>
-          <div className="flex items-center gap-8">
-            {[
-              { label: 'Services', href: '/services' },
-              { label: 'Work', href: '/projects' },
-              { label: 'About', href: '/about' },
-              { label: 'Contact', href: '/contact' },
-            ].map((item) => (
-              <Link key={item.label} href={getLocalizedPath(item.href)} className="text-xs font-medium hover:opacity-80 transition-opacity" style={{ color: `${DARK}55` }}>
-                {item.label}
-              </Link>
-            ))}
-            <span className="text-xs" style={{ color: `${DARK}40` }}>|</span>
-            <Link href={getLocalizedPath('/demo')} className="text-xs font-medium hover:opacity-80 transition-opacity" style={{ color: `${DARK}55` }}>Démo 1</Link>
-            <Link href={getLocalizedPath('/demo2')} className="text-xs font-medium hover:opacity-80 transition-opacity" style={{ color: `${DARK}55` }}>Démo 2</Link>
-            <Link href={getLocalizedPath('/demo3')} className="text-xs font-medium hover:opacity-80 transition-opacity" style={{ color: `${DARK}55` }}>Démo 3</Link>
-            <Link href={getLocalizedPath('/demo4')} className="text-xs font-semibold hover:opacity-80 transition-opacity" style={{ color: DARK }}>Démo 4</Link>
+        <footer className="py-12 lg:py-16">
+          <div className="h-px mb-10" style={{ background: `linear-gradient(90deg, transparent, ${DARK}15, transparent)` }} />
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-8">
+            <nav className="flex items-center gap-6 lg:gap-10">
+              {[
+                { label: 'Services', href: '/services' },
+                { label: 'Work', href: '/projects' },
+                { label: 'About', href: '/about' },
+                { label: 'Contact', href: '/contact' },
+              ].map((item) => (
+                <Link
+                  key={item.label}
+                  href={getLocalizedPath(item.href)}
+                  className="text-xs font-medium tracking-[0.15em] uppercase hover:opacity-70 transition-opacity"
+                  style={{ color: `${DARK}70` }}
+                >
+                  {item.label}
+                </Link>
+              ))}
+            </nav>
+            <p className="text-[11px] tracking-wider" style={{ color: `${DARK}35` }}>
+              © 2025 · Montréal
+            </p>
           </div>
-          <p className="text-[10px]" style={{ color: `${DARK}30` }}>© 2025 Nukleo. All rights reserved.</p>
-        </div>
+        </footer>
 
       </div>
     </div>
