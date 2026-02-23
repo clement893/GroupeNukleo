@@ -511,7 +511,7 @@ export default function HomepageDemo4() {
       />
 
       {/* ─── HEADER / MENU EN HAUT (logo gauche, nav droite) ─────────────────── */}
-      <header className="fixed top-0 left-0 right-0 z-50 px-4 lg:px-8 py-4 lg:py-5 flex items-center justify-between bg-white/80 backdrop-blur-md border-b border-black/5">
+      <header className="fixed top-0 left-0 right-0 z-50 px-[15%] py-4 lg:py-5 flex items-center justify-between bg-white/80 backdrop-blur-md border-b border-black/5">
         <Link href={getLocalizedPath('/')} className="flex items-center gap-2 shrink-0">
           <img
             src="/demo/nukleo-logo-rvb.svg"
@@ -601,12 +601,12 @@ export default function HomepageDemo4() {
       )}
 
       {/* ─── WRAPPER GLOBAL ─────────────────────────────────────────────────── */}
-      <div className="relative z-10 pt-20 lg:pt-24 p-3 lg:p-4 flex flex-col gap-[16px] lg:gap-[22px]">
+      <div className="relative z-10 pt-20 lg:pt-24 px-[15%] py-3 lg:py-4 flex flex-col gap-[16px] lg:gap-[22px]">
 
         {/* ══════════════════════════════════════════════════════════════════════
             HÉRO — TITRE PRINCIPAL
         ══════════════════════════════════════════════════════════════════════ */}
-        <div className="px-2 sm:px-4 pt-4 lg:pt-8 pb-6 lg:pb-10">
+        <div className="pt-4 lg:pt-8 pb-6 lg:pb-10">
           <h1
             className="font-heading font-black leading-[0.9] tracking-tight text-left"
             style={{
@@ -684,7 +684,7 @@ export default function HomepageDemo4() {
         {/* ══════════════════════════════════════════════════════════════════════
             MODULE 2 — CARROUSEL LOGOS (bord à bord)
         ══════════════════════════════════════════════════════════════════════ */}
-        <div className="-mx-3 lg:-mx-4">
+        <div>
           <DoubleLogoCarousel title="Trusted by ambitious organizations" />
         </div>
 
