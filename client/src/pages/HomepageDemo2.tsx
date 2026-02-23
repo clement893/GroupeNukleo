@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'wouter';
 
 // ─── TOKENS ────────────────────────────────────────────────────────────────
@@ -37,7 +37,7 @@ const LOGOS = [
 
 // ─── MARQUEE ───────────────────────────────────────────────────────────────
 function Marquee({ items, speed = 40, reverse = false }: { items: string[]; speed?: number; reverse?: boolean }) {
-  const [hovered, setHovered] = React.useState<number | null>(null);
+  const [hovered, setHovered] = useState<number | null>(null);
   return (
     <div
       className="overflow-hidden"
