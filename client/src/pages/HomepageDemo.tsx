@@ -1,6 +1,6 @@
 import { useRef, useEffect } from 'react';
 import { Link } from 'wouter';
-import { useLanguage } from '@/hooks/useLanguage';
+import { useLocalizedPath } from '@/hooks/useLocalizedPath';
 
 // ─── Constantes visuelles ────────────────────────────────────────────────────
 const NUKLEO_PURPLE = '#7c3aed';
@@ -85,7 +85,7 @@ const DEPTS = [
 ];
 
 export default function HomepageDemo() {
-  const { getLocalizedPath } = useLanguage();
+  const getLocalizedPath = useLocalizedPath();
   const heroRef = useRef<HTMLDivElement>(null);
 
   // Parallax léger sur le hero
