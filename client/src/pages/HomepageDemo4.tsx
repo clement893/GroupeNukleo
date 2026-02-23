@@ -348,6 +348,7 @@ function ProjectsCarousel() {
           })}
         </div>
       </div>
+      </div>
 
       {/* Lien case study — sous les billboards */}
       <div className="px-6 py-4 border-t border-white/10 flex items-center justify-between">
