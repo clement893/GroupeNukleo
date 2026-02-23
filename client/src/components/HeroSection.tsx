@@ -106,8 +106,8 @@ function HeroSection() {
             <h1 
               className={`
                 ${language === 'fr' 
-                  ? 'text-[2rem] sm:text-[3.5rem] md:text-[5rem] lg:text-[7rem] xl:text-[8rem]' 
-                  : 'text-[2.25rem] sm:text-[4rem] md:text-[6rem] lg:text-[9rem] xl:text-[10rem]'
+                  ? 'text-[2rem] sm:text-[3rem] md:text-[4rem] lg:text-[5.5rem] xl:text-[6.5rem]' 
+                  : 'text-[2rem] sm:text-[3rem] md:text-[4.5rem] lg:text-[6rem] xl:text-[7rem]'
                 }
                 font-bold leading-[1.05] sm:leading-[1.1] tracking-tighter text-white mb-4 sm:mb-6 md:mb-8 italic pr-4 sm:pr-10 md:pr-16 lg:pr-20 xl:pr-24 2xl:pr-28
               `}
