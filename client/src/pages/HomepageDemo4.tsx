@@ -453,6 +453,15 @@ export default function HomepageDemo4() {
       {/* ─── MENU CENTRÉ (overlay) ───────────────────────────────────────────── */}
       {menuOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80">
+          {/* Logo + slogan en haut à gauche */}
+          <Link
+            href={getLocalizedPath('/')}
+            onClick={() => setMenuOpen(false)}
+            className="absolute top-6 left-6 lg:left-8 flex flex-col gap-1 z-10"
+          >
+            <img src="/demo/nukleo-logo-rvb.png" alt="Nukleo" className="h-8 lg:h-10 w-auto" style={{ mixBlendMode: 'screen' }} />
+            <span className="text-[10px] font-medium tracking-[0.2em] uppercase text-white/60">Choisissez l&apos;intelligence</span>
+          </Link>
           <button
             type="button"
             onClick={() => setMenuOpen(false)}
@@ -462,11 +471,6 @@ export default function HomepageDemo4() {
             <X className="w-5 h-5" />
           </button>
           <nav className="flex flex-col items-center gap-6 py-12">
-            <Link href={getLocalizedPath('/')} onClick={() => setMenuOpen(false)} className="flex flex-col items-center gap-1">
-              <img src="/demo/nukleo-logo-rvb.png" alt="Nukleo" className="h-10 w-auto" style={{ mixBlendMode: 'screen' }} />
-              <span className="text-[10px] font-medium tracking-[0.2em] uppercase text-white/60">Choose Intelligence</span>
-            </Link>
-            <div className="h-px w-16 bg-white/20" />
             {[
               { label: 'Services', href: '/services' },
               { label: 'Work', href: '/projects' },
@@ -498,9 +502,9 @@ export default function HomepageDemo4() {
         {/* ══════════════════════════════════════════════════════════════════════
             NOUVEAU HÉRO — TITRE PRINCIPAL
         ══════════════════════════════════════════════════════════════════════ */}
-        <div className="px-2 sm:px-4 pt-4 lg:pt-8">
+        <div className="px-2 sm:px-4 pt-4 lg:pt-8 pb-6 lg:pb-10">
           <h1
-            className="font-heading font-black leading-[0.9] tracking-tight text-center"
+            className="font-heading font-black leading-[0.9] tracking-tight text-left"
             style={{
               fontSize: 'clamp(2.5rem, 8vw, 6.5rem)',
               color: DARK,
@@ -513,7 +517,7 @@ export default function HomepageDemo4() {
         {/* ══════════════════════════════════════════════════════════════════════
             MODULE 1 — HERO EN 3 MODULES DISTINCTS
         ══════════════════════════════════════════════════════════════════════ */}
-        <div className="grid grid-cols-1 lg:grid-cols-[65fr_35fr] gap-3 lg:gap-4" style={{ minHeight: '92vh' }}>
+        <div className="grid grid-cols-1 lg:grid-cols-[65fr_35fr] gap-3 lg:gap-4 pt-4 lg:pt-6" style={{ minHeight: '92vh' }}>
 
           {/* Colonne gauche (65%) — Vidéo + Titre principal */}
           <div className="relative overflow-hidden rounded-3xl bg-black" style={{ minHeight: '92vh' }}>
