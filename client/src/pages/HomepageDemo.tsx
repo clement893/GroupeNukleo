@@ -103,7 +103,6 @@ function TeamStackSection() {
   const prev = () => setActiveIndex((a) => Math.max(0, a - 1));
   const next = () => setActiveIndex((a) => Math.min(TEAM_MEMBERS.length - 1, a + 1));
 
-  // Wheel handler pour naviguer avec la molette
   const handleWheel = (e: React.WheelEvent) => {
     e.preventDefault();
     if (e.deltaY > 0) next();
@@ -113,10 +112,11 @@ function TeamStackSection() {
   return (
     <div
       className="rounded-3xl overflow-hidden"
-      style={{ background: DARK, minHeight: '700px' }}
+      style={{ background: DARK, minHeight: '50vh' }}
       onWheel={handleWheel}
     >
-      <div className="flex flex-col lg:flex-row h-full" style={{ minHeight: '700px' }}>
+      {/* Layout : 2 colonnes — gauche info, droite stack */}
+      <div className="flex flex-col lg:flex-row" style={{ minHeight: '50vh' }}>
 
         {/* Colonne gauche — titre + info membre */}
         <div className="flex flex-col justify-between p-12 lg:p-16 lg:w-2/5">
@@ -174,40 +174,40 @@ function TeamStackSection() {
           </div>
         </div>
 
-        {/* Colonne droite — stack vertical centré */}
-        <div className="flex-1 flex items-center justify-center p-8 lg:p-12" style={{ perspective: '1400px' }}>
-          {/* Conteneur du stack — format portrait centré */}
+        {/* Colonne droite — stack vertical centré, prend toute la hauteur */}
+        <div
+          className="flex-1 flex items-center justify-center py-16 px-8"
+          style={{ perspective: '1400px', minHeight: '50vh' }}
+        >
+          {/* Conteneur du stack — format portrait, grande taille */}
           <div
             className="relative"
             style={{
-              width: '280px',
-              height: '420px',
+              width: 'min(340px, 55vw)',
+              height: 'min(500px, 75vh)',
               transformStyle: 'preserve-3d',
             }}
           >
             {TEAM_MEMBERS.map((member, i) => {
               const offset = i - activeIndex;
               const isActive = i === activeIndex;
-              const isBelow = offset > 0;  // cartes qui attendent en bas
-              const isAbove = offset < 0;  // cartes déjà passées (sortent vers le haut)
+              const isBelow = offset > 0;
+              const isAbove = offset < 0;
 
-              // Carte active : au centre, pleine taille
-              // Cartes en dessous : légèrement décalées vers le bas + réduites + en retrait Z
-              // Cartes au-dessus : sortent vers le haut (translateY négatif)
               const translateY = isActive
                 ? '0px'
                 : isBelow
-                ? `${offset * 22}px`
-                : `${offset * 120}px`; // sort vers le haut
+                ? `${offset * 28}px`
+                : `${offset * 140}px`;
 
               const translateZ = isActive
                 ? '0px'
                 : isBelow
-                ? `${-offset * 55}px`
+                ? `${-offset * 65}px`
                 : '0px';
 
-              const scale = isActive ? 1 : isBelow ? Math.max(0.78, 1 - offset * 0.07) : 0.95;
-              const opacity = isAbove ? 0 : isBelow ? Math.max(0.15, 1 - offset * 0.28) : 1;
+              const scale = isActive ? 1 : isBelow ? Math.max(0.76, 1 - offset * 0.08) : 0.95;
+              const opacity = isAbove ? 0 : isBelow ? Math.max(0.12, 1 - offset * 0.3) : 1;
               const zIndex = isActive ? 50 : isBelow ? 50 - offset : 0;
 
               return (
@@ -235,7 +235,7 @@ function TeamStackSection() {
                   <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
                   {/* Badge rôle — visible uniquement sur la carte active */}
                   <div
-                    className="absolute bottom-5 left-5 px-4 py-2 rounded-full text-white text-xs font-semibold"
+                    className="absolute bottom-6 left-6 px-4 py-2 rounded-full text-white text-xs font-semibold"
                     style={{
                       background: member.color,
                       opacity: isActive ? 1 : 0,
