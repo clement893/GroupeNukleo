@@ -2,9 +2,13 @@ name: Update Lockfile
 
 on:
   workflow_dispatch:
+    branches:
+      - main
+      - staging
   push:
     branches:
       - main
+      - staging
     paths:
       - 'package.json'
 
