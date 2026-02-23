@@ -274,44 +274,107 @@ export default function HomepageDemo2() {
       <div style={{ paddingTop: 80 }}>
 
         {/* ════════════════════════════════════════════════════════════════
-            RANGÉE 1 — HERO TITRE + HERO IMAGE
+            LOGO HERO
         ════════════════════════════════════════════════════════════════ */}
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12, padding: '12px 12px 0' }}>
+        <div style={{ padding: '24px 40px 0', position: 'relative', zIndex: 1 }}>
+          <img src={NUKLEO_LOGO} alt="nukleo." style={{ height: 56, width: 'auto', display: 'block' }} />
+        </div>
 
-          {/* Tuile titre */}
-          <Tile bg={CREAM} style={{ padding: '4rem 3.5rem 3.5rem', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', minHeight: 480 }}>
-            <p style={{ color: DARK, opacity: 0.3, fontSize: 10, letterSpacing: '0.35em', textTransform: 'uppercase', fontWeight: 600 }}>
-              Choisissez l'intelligence.
-            </p>
-            <div>
+        {/* ════════════════════════════════════════════════════════════════
+            RANGÉE 1 — HERO : WIDGETS GAUCHE + MACBOOK DROITE
+        ════════════════════════════════════════════════════════════════ */}
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 2fr', gap: 12, padding: '16px 12px 0', position: 'relative', zIndex: 1 }}>
+
+          {/* ── Colonne gauche : widgets ── */}
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+
+            {/* Météo + Date */}
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8 }}>
+              {/* Météo */}
+              <Tile bg="#fff" style={{ padding: '1.2rem 1.4rem' }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
+                  <span style={{ fontSize: 20 }}>☀️</span>
+                  <span style={{ color: 'rgba(0,0,0,0.3)', fontSize: 10 }}>°C</span>
+                </div>
+                <p style={{ fontWeight: 900, fontSize: 42, lineHeight: 1, color: DARK, letterSpacing: '-0.03em', margin: '4px 0 2px' }}>24</p>
+                <p style={{ color: 'rgba(0,0,0,0.35)', fontSize: 10 }}>Montréal, Québec</p>
+              </Tile>
+              {/* Date */}
+              <Tile bg="#fff" style={{ padding: '1.2rem 1.4rem' }}>
+                <p style={{ color: 'rgba(0,0,0,0.45)', fontSize: 11, marginBottom: 4 }}>Bon lundi 💜</p>
+                <p style={{ fontWeight: 900, fontSize: 42, lineHeight: 1, color: DARK, letterSpacing: '-0.03em', margin: '4px 0 2px' }}>23</p>
+                <p style={{ color: 'rgba(0,0,0,0.35)', fontSize: 10 }}>février 2026</p>
+              </Tile>
+            </div>
+
+            {/* Résultat campagne */}
+            <Tile bg="#fff" style={{ padding: '1.2rem 1.4rem', display: 'flex', gap: 12, alignItems: 'center' }}>
+              <div style={{ width: 80, height: 80, borderRadius: 12, overflow: 'hidden', flexShrink: 0, position: 'relative' }}>
+                <img src={WORK1} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                <div style={{ position: 'absolute', top: 6, right: 6, width: 20, height: 20, borderRadius: '50%', background: DARK, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                  <span style={{ color: '#fff', fontSize: 9 }}>↗</span>
+                </div>
+              </div>
+              <div>
+                <p style={{ fontWeight: 900, fontSize: 28, color: DARK, letterSpacing: '-0.02em', lineHeight: 1 }}>749k$</p>
+                <p style={{ color: 'rgba(0,0,0,0.4)', fontSize: 11, marginTop: 4, lineHeight: 1.4 }}>amassés lors de notre<br />dernière campagne</p>
+              </div>
+            </Tile>
+
+            {/* Téléphone */}
+            <div style={{ display: 'flex', gap: 8 }}>
+              <a href="tel:4385431987" style={{ flex: 1, background: PURPLE, color: '#fff', fontWeight: 700, fontSize: 14, padding: '14px 20px', borderRadius: 999, textDecoration: 'none', display: 'flex', alignItems: 'center', gap: 10 }}>
+                <span style={{ fontSize: 16 }}>📞</span> 438 543 1987
+              </a>
+              <Tile bg="#fff" style={{ width: 48, height: 48, display: 'flex', alignItems: 'center', justifyContent: 'center', borderRadius: 999, flexShrink: 0 }}>
+                <span style={{ fontSize: 18 }}>✉️</span>
+              </Tile>
+            </div>
+
+            {/* Texte + CTA */}
+            <Tile bg="#fff" style={{ padding: '1.2rem 1.4rem' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 10 }}>
+                <p style={{ fontWeight: 700, fontSize: 13, color: DARK }}>Choisissez l'intelligence.</p>
+                <div style={{ width: 24, height: 24, borderRadius: '50%', background: DARK, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                  <span style={{ color: '#fff', fontSize: 10 }}>↗</span>
+                </div>
+              </div>
+              <div style={{ display: 'flex', gap: 6, marginBottom: 10 }}>
+                <div style={{ width: 24, height: 24, borderRadius: '50%', background: CREAM }} />
+                <div style={{ width: 24, height: 24, borderRadius: '50%', background: '#e0e7ff' }} />
+              </div>
+              <p style={{ color: 'rgba(0,0,0,0.4)', fontSize: 11, lineHeight: 1.6 }}>
+                At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium.
+              </p>
+            </Tile>
+
+            {/* Barre croissance */}
+            <Tile bg="#fff" style={{ padding: '1rem 1.4rem' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 8 }}>
+                <p style={{ color: 'rgba(0,0,0,0.5)', fontSize: 11 }}>Croissance actuelle</p>
+                <p style={{ color: PURPLE, fontWeight: 700, fontSize: 11 }}>+4%</p>
+              </div>
+              <div style={{ height: 6, borderRadius: 3, background: '#f0edf8', overflow: 'hidden' }}>
+                <div style={{ width: '74%', height: '100%', borderRadius: 3, background: `linear-gradient(to right, ${PURPLE}, #a78bfa)` }} />
+              </div>
+            </Tile>
+          </div>
+
+          {/* ── Colonne droite : MacBook ── */}
+          <Tile bg="" style={{ position: 'relative', minHeight: 520, overflow: 'hidden', background: 'linear-gradient(135deg, #ddd6fe 0%, #bfdbfe 50%, #e0e7ff 100%)' }}>
+            <div style={{ position: 'absolute', inset: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '2rem' }}>
               <img
-                src={NUKLEO_LOGO}
-                alt="nukleo."
-                style={{ width: '100%', maxWidth: 420, height: 'auto', marginBottom: '1.5rem', display: 'block' }}
+                src={HERO_IMAGE}
+                alt="Nukleo work"
+                style={{
+                  width: '90%',
+                  maxWidth: 600,
+                  height: 'auto',
+                  objectFit: 'contain',
+                  filter: 'drop-shadow(0 40px 60px rgba(0,0,0,0.25))',
+                  transform: 'perspective(1200px) rotateX(4deg)',
+                }}
               />
-              <p style={{ color: 'rgba(0,0,0,0.45)', fontSize: 16, lineHeight: 1.65, maxWidth: 400 }}>
-                We build brands, platforms, and strategies that compound. Not agencies. Not vendors. A growth partner.
-              </p>
-            </div>
-            <div style={{ display: 'flex', gap: 12 }}>
-              <Link href="/start" style={{ background: DARK, color: '#fff', fontWeight: 700, fontSize: 13, padding: '14px 28px', borderRadius: 999, textDecoration: 'none' }}>
-                Start a project ↗
-              </Link>
-              <Link href="/work" style={{ color: DARK, fontWeight: 600, fontSize: 13, padding: '14px 28px', border: '1px solid rgba(0,0,0,0.12)', borderRadius: 999, textDecoration: 'none' }}>
-                See our work
-              </Link>
-            </div>
-          </Tile>
-
-          {/* Tuile image hero */}
-          <Tile bg={DARK} style={{ position: 'relative', minHeight: 480, overflow: 'hidden' }}>
-            <img src={HERO_IMAGE} alt="Nukleo" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', opacity: 0.7 }} />
-            <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(135deg, rgba(124,58,237,0.3) 0%, transparent 60%)' }} />
-            <div style={{ position: 'absolute', bottom: 32, left: 32, right: 32 }}>
-              <p style={{ color: 'rgba(255,255,255,0.5)', fontSize: 11, letterSpacing: '0.3em', textTransform: 'uppercase', marginBottom: 8 }}>Montreal · Canada</p>
-              <p style={{ color: '#fff', fontWeight: 800, fontSize: 22, lineHeight: 1.2 }}>
-                Where strategy meets<br />execution.
-              </p>
             </div>
           </Tile>
         </div>
