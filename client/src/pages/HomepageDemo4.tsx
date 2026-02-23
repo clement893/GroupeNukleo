@@ -429,7 +429,15 @@ export default function HomepageDemo4() {
   }, [menuOpen]);
 
   return (
-    <div className="font-sans bg-gradient-to-b from-gray-100/80 via-white to-gray-50/60" style={{ color: DARK }}>
+    <div className="font-sans relative bg-gradient-to-b from-gray-100/80 via-white to-gray-50/60" style={{ color: DARK }}>
+
+      {/* ─── DÉGRADÉ HAUT DE PAGE (purple, lavender, reddish-brown) ───────────── */}
+      <div
+        className="absolute top-0 left-0 right-0 h-48 lg:h-64 pointer-events-none z-0"
+        style={{
+          background: 'linear-gradient(to bottom, rgba(129,140,248,0.18) 0%, rgba(196,181,253,0.1) 30%, rgba(241,245,249,0.04) 60%, transparent 100%), linear-gradient(to right, rgba(109,40,217,0.22) 0%, rgba(167,139,250,0.1) 30%, rgba(226,232,240,0.05) 55%, rgba(180,140,140,0.1) 80%, rgba(127,29,29,0.08) 100%)',
+        }}
+      />
 
       {/* ─── BOUTON MENU (X en haut à droite) ─────────────────────────────────── */}
       <button
@@ -483,8 +491,30 @@ export default function HomepageDemo4() {
         </div>
       )}
 
+      {/* ─── LOGO PLEINE LARGEUR (style Fort. — nukleo gradient) ─────────────── */}
+      <Link
+        href={getLocalizedPath('/')}
+        className="relative z-10 block w-full py-6 lg:py-8 px-6 lg:px-8 text-center"
+        style={{
+          background: 'linear-gradient(135deg, rgba(80,20,40,0.15) 0%, rgba(60,30,80,0.08) 50%, rgba(255,255,255,0.02) 100%)',
+        }}
+      >
+        <span
+          className="font-heading font-black block w-full text-center leading-[0.85] tracking-tight"
+          style={{
+            fontSize: 'clamp(3.5rem, 12vw, 10rem)',
+            background: 'linear-gradient(90deg, #8C3141 0%, #6B2D5E 40%, #7c3aed 100%)',
+            WebkitBackgroundClip: 'text',
+            WebkitTextFillColor: 'transparent',
+            backgroundClip: 'text',
+          }}
+        >
+          nukleo<span className="text-[0.75em] opacity-80">&gt;</span>
+        </span>
+      </Link>
+
       {/* ─── WRAPPER GLOBAL ─────────────────────────────────────────────────── */}
-      <div className="p-3 lg:p-4 flex flex-col gap-3 lg:gap-4">
+      <div className="relative z-10 p-3 lg:p-4 flex flex-col gap-3 lg:gap-4">
 
         {/* ══════════════════════════════════════════════════════════════════════
             MODULE 1 — HERO EN 3 MODULES DISTINCTS
@@ -505,18 +535,6 @@ export default function HomepageDemo4() {
             <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-black/70" />
 
             <div className="relative z-10 h-full flex flex-col justify-between px-10 lg:px-14 pt-32 pb-12" style={{ minHeight: '92vh' }}>
-              {/* Logo au-dessus du bloc Digital Performance Agency */}
-              <Link href={getLocalizedPath('/')} className="flex flex-col gap-0.5 w-fit">
-                <img
-                  src="/demo/nukleo-logo-rvb.png"
-                  alt="Nukleo"
-                  className="h-5 w-auto object-contain"
-                  style={{ mixBlendMode: 'screen' }}
-                />
-                <span className="text-[10px] font-medium tracking-[0.2em] uppercase text-white/70">
-                  Choose Intelligence
-                </span>
-              </Link>
               {/* Label haut */}
               <div className="flex items-center justify-between">
                 <span className="text-white/30 text-[10px] font-medium tracking-[0.35em] uppercase">
