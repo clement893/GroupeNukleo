@@ -616,30 +616,59 @@ export default function HomepageDemo() {
             MODULE 4 — DÉPARTEMENTS
         ══════════════════════════════════════════════════════════════════════ */}
         <div className="rounded-3xl p-10 lg:p-16" style={{ background: DARK }}>
-          <div className="flex items-end justify-between mb-14">
-            <h2 className="font-heading font-black text-white leading-none tracking-tight" style={{ fontSize: 'clamp(2rem, 4vw, 4.5rem)' }}>
-              Our Departments
-            </h2>
+          <div className="flex items-end justify-between mb-12">
+            <div>
+              <p className="text-white/30 text-[10px] font-medium tracking-[0.35em] uppercase mb-4">Our Departments</p>
+              <h2 className="font-heading font-black text-white leading-none tracking-tight" style={{ fontSize: 'clamp(2rem, 4vw, 4.5rem)' }}>
+                Four ways to<br />grow.
+              </h2>
+            </div>
             <Link href={getLocalizedPath('/services')} className="text-white/40 text-xs font-semibold border-b border-white/20 pb-1 hover:text-white hover:border-white transition-all hidden lg:block">
               All services →
             </Link>
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          {/* Grille 2×2 — cartes carrées */}
+          <div className="grid grid-cols-2 gap-4">
             {DEPTS.map((dept) => (
               <Link
                 key={dept.num}
                 href={getLocalizedPath(dept.href)}
-                className="group relative flex flex-col justify-between p-8 rounded-2xl border border-white/6 hover:border-white/14 transition-all duration-300 hover:-translate-y-1 cursor-pointer"
-                style={{ minHeight: '280px' }}
+                className="group relative rounded-2xl overflow-hidden cursor-pointer"
+                style={{ aspectRatio: '1 / 1' }}
               >
-                <span className="absolute top-4 right-5 font-heading font-black leading-none select-none pointer-events-none" style={{ fontSize: '5.5rem', color: 'rgba(255,255,255,0.03)' }}>
+                {/* Fond coloré subtil au hover */}
+                <div
+                  className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+                  style={{ background: `radial-gradient(ellipse at bottom left, ${dept.color}22 0%, transparent 70%)` }}
+                />
+                {/* Bordure */}
+                <div className="absolute inset-0 rounded-2xl border border-white/8 group-hover:border-white/16 transition-colors duration-300" />
+                {/* Numéro en filigrane */}
+                <span
+                  className="absolute bottom-0 right-0 font-heading font-black leading-none select-none pointer-events-none"
+                  style={{ fontSize: 'clamp(5rem, 10vw, 9rem)', color: 'rgba(255,255,255,0.04)', lineHeight: 1, paddingRight: '0.1em', paddingBottom: '0em' }}
+                >
                   {dept.num}
                 </span>
-                <div className="w-10 h-[3px] rounded-full" style={{ background: dept.color }} />
-                <div className="mt-auto">
-                  <p className="font-heading font-bold text-white text-lg leading-tight mb-3">{dept.name}</p>
-                  <p className="text-white/40 text-sm leading-relaxed mb-6">{dept.desc}</p>
-                  <span className="text-[10px] font-semibold tracking-widest uppercase transition-colors" style={{ color: dept.color }}>Explore →</span>
+                {/* Contenu */}
+                <div className="relative z-10 flex flex-col justify-between h-full p-8 lg:p-10">
+                  {/* Barre couleur en haut */}
+                  <div className="flex items-center justify-between">
+                    <div className="w-8 h-[3px] rounded-full" style={{ background: dept.color }} />
+                    <span
+                      className="text-[10px] font-semibold tracking-widest uppercase opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                      style={{ color: dept.color }}
+                    >
+                      Explore →
+                    </span>
+                  </div>
+                  {/* Nom + description */}
+                  <div>
+                    <p className="font-heading font-black text-white leading-tight mb-3" style={{ fontSize: 'clamp(1.2rem, 2.2vw, 1.8rem)' }}>
+                      {dept.name}
+                    </p>
+                    <p className="text-white/40 text-sm leading-relaxed">{dept.desc}</p>
+                  </div>
                 </div>
               </Link>
             ))}
