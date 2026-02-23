@@ -38,17 +38,7 @@ export default function Home() {
           <div className="absolute inset-0" style={{
             background: `linear-gradient(135deg, rgb(60,15,15) 0%, rgb(40,60,120) 50%, rgb(60,15,15) 100%)`
           }}>
-            {/* Grid Pattern */}
-            <div 
-              className="absolute inset-0 opacity-10"
-              style={{
-                backgroundImage: `
-                  linear-gradient(rgba(139, 92, 246, 0.3) 1px, transparent 1px),
-                  linear-gradient(90deg, rgba(139, 92, 246, 0.3) 1px, transparent 1px)
-                `,
-                backgroundSize: '50px 50px'
-              }}
-            />
+
             
             {/* Animated Gradient Orbs - GPU optimized - reduced on mobile */}
             <div className="absolute top-0 left-0 w-[600px] h-[600px] bg-red-900/10 rounded-full blur-[120px] animate-pulse max-md:hidden" style={{ animationDuration: '4s', willChange: 'opacity', transform: 'translateZ(0)' }} />

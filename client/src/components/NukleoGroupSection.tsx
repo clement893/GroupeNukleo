@@ -3,11 +3,7 @@ import { ArrowUpRight, ExternalLink } from 'lucide-react';
 export default function NukleoGroupSection() {
   return (
     <section className="py-32 text-white relative overflow-hidden" style={{ backgroundColor: '#1a1a1c' }}>
-      {/* Subtle background texture */}
-      <div className="absolute inset-0 opacity-3" style={{
-        backgroundImage: 'linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px)',
-        backgroundSize: '80px 80px'
-      }} />
+
 
       <div className="container relative z-10">
         {/* Section Header */}
