@@ -336,7 +336,7 @@ function ProjectsCarousel() {
                 <div className="absolute inset-0 flex flex-col justify-between p-10 lg:p-14 z-10">
                   <div className="flex items-start justify-between">
                     <div>
-                      <p className="text-white/30 text-[10px] font-medium tracking-[0.35em] uppercase mb-2">Selected Work</p>
+                      <p className="text-white/35 text-xs font-medium tracking-[0.2em] uppercase mb-2">Accrois la performance par l'excellence numérique</p>
                       <span className="font-heading font-black text-white/15 leading-none" style={{ fontSize: '5rem' }}>
                         {project.num}
                       </span>
@@ -504,7 +504,7 @@ export default function HomepageDemo4() {
             {/* Module 1B — Widgets Météo + Date (néomorphique, côte à côte) */}
             <div className="flex flex-row gap-3 lg:gap-4 flex-1">
               <div
-                className="rounded-3xl flex flex-col items-center justify-center p-6 lg:p-8 flex-1 min-h-[140px] min-w-0"
+                className="rounded-3xl flex flex-col items-center justify-center p-4 lg:p-5 flex-1 min-h-[100px] min-w-0"
                 style={{
                   background: 'linear-gradient(145deg, rgba(255,255,255,0.9) 0%, rgba(245,243,239,0.95) 100%)',
                   boxShadow: '6px 6px 12px rgba(0,0,0,0.08), -6px -6px 12px rgba(255,255,255,0.8), inset 1px 1px 0 rgba(255,255,255,0.5)',
@@ -517,7 +517,7 @@ export default function HomepageDemo4() {
                 <span className="text-gray-500 text-sm mt-2">Montréal, Québec</span>
               </div>
               <div
-                className="rounded-3xl flex flex-col justify-center p-6 lg:p-8 flex-1 min-h-[140px] min-w-0"
+                className="rounded-3xl flex flex-col justify-center p-4 lg:p-5 flex-1 min-h-[100px] min-w-0"
                 style={{
                   background: 'linear-gradient(145deg, rgba(255,255,255,0.9) 0%, rgba(245,243,239,0.95) 100%)',
                   boxShadow: '6px 6px 12px rgba(0,0,0,0.08), -6px -6px 12px rgba(255,255,255,0.8), inset 1px 1px 0 rgba(255,255,255,0.5)',
@@ -531,6 +531,13 @@ export default function HomepageDemo4() {
 
             {/* Module 1C — Slider projets / portfolio */}
             <HeroProjectSlider />
+
+            <Link
+              href={getLocalizedPath('/contact')}
+              className="text-center text-black/70 text-xs font-semibold tracking-widest uppercase hover:text-black transition-colors py-2"
+            >
+              Contactez-nous
+            </Link>
 
           </div>
 
