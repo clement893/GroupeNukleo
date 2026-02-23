@@ -253,98 +253,132 @@ function TeamStackSection() {
 
 // ─── PROJECTS TRIPTYCH ─────────────────────────────────────────────────────
 function ProjectsCarousel() {
-  const [hovered, setHovered] = useState<number | null>(null);
+  const [active, setActive] = useState(0);
+
+  // Largeurs : panneau actif = 70%, les 2 autres se partagent 30% (15% chacun)
+  const getWidth = (i: number) => {
+    if (PROJECTS.length === 1) return '100%';
+    const others = PROJECTS.length - 1;
+    return i === active ? '70%' : `${30 / others}%`;
+  };
 
   return (
     <div className="rounded-3xl overflow-hidden" style={{ background: DARK }}>
 
-      {/* En-tête */}
-      <div className="flex items-end justify-between px-10 lg:px-14 pt-12 pb-8">
-        <div>
-          <p className="text-white/30 text-[10px] font-medium tracking-[0.35em] uppercase mb-3">Selected Work</p>
-          <h2
-            className="font-heading font-black text-white leading-none tracking-tight"
-            style={{ fontSize: 'clamp(1.8rem, 3vw, 3rem)' }}
-          >
-            Three projects.<br />Three proofs.
-          </h2>
-        </div>
-        <Link
-          href="/projects"
-          className="text-white/40 text-xs font-semibold border-b border-white/20 pb-1 hover:text-white hover:border-white transition-all hidden lg:block"
-        >
-          All work →
-        </Link>
+      {/* Triptyque plein cadre */}
+      <div
+        className="flex"
+        style={{ height: '85vh', gap: '3px' }}
+      >
+        {PROJECTS.map((project, i) => {
+          const isActive = i === active;
+          return (
+            <div
+              key={project.num}
+              className="relative overflow-hidden cursor-pointer flex-shrink-0"
+              style={{
+                width: getWidth(i),
+                transition: 'width 0.65s cubic-bezier(0.77, 0, 0.175, 1)',
+                borderRadius: i === 0 ? '1.5rem 0 0 1.5rem' : i === PROJECTS.length - 1 ? '0 1.5rem 1.5rem 0' : '0',
+              }}
+              onClick={() => !isActive && setActive(i)}
+            >
+              {/* Image */}
+              <img
+                src={project.img}
+                alt={project.name}
+                className="absolute inset-0 w-full h-full object-cover"
+                style={{
+                  filter: isActive ? 'grayscale(0) brightness(0.6)' : 'grayscale(1) brightness(0.35)',
+                  transform: isActive ? 'scale(1.02)' : 'scale(1.08)',
+                  transition: 'filter 0.65s ease, transform 0.65s ease',
+                }}
+              />
+
+              {/* Gradient bas — uniquement sur le panneau actif */}
+              <div
+                className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/15 to-transparent"
+                style={{ opacity: isActive ? 1 : 0.6, transition: 'opacity 0.5s ease' }}
+              />
+
+              {/* — PANNEAU ACTIF : contenu plein */}
+              {isActive && (
+                <div className="absolute inset-0 flex flex-col justify-between p-10 lg:p-14 z-10">
+                  {/* Haut */}
+                  <div className="flex items-start justify-between">
+                    <div>
+                      <p className="text-white/30 text-[10px] font-medium tracking-[0.35em] uppercase mb-2">Selected Work</p>
+                      <span className="font-heading font-black text-white/15 leading-none" style={{ fontSize: '5rem' }}>
+                        {project.num}
+                      </span>
+                    </div>
+                    <span className="text-white/40 text-[10px] font-medium tracking-[0.3em] uppercase mt-2">
+                      {project.category}
+                    </span>
+                  </div>
+                  {/* Bas */}
+                  <div>
+                    <h2
+                      className="font-heading font-black text-white leading-[0.88] tracking-tight mb-4"
+                      style={{ fontSize: 'clamp(2.5rem, 4.5vw, 5.5rem)' }}
+                    >
+                      {project.name}
+                    </h2>
+                    <p className="text-white/55 text-sm lg:text-base leading-relaxed max-w-lg mb-6">
+                      {project.tagline}
+                    </p>
+                    <div className="flex items-center gap-5">
+                      <span
+                        className="text-xs font-semibold px-4 py-2 rounded-full text-white"
+                        style={{ background: project.color }}
+                      >
+                        {project.result}
+                      </span>
+                      <Link
+                        href="/projects"
+                        className="text-white/50 text-xs font-semibold border-b border-white/25 pb-0.5 hover:text-white hover:border-white transition-all"
+                      >
+                        View case study →
+                      </Link>
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {/* — OREILLE : nom vertical + indicateur */}
+              {!isActive && (
+                <div className="absolute inset-0 flex flex-col items-center justify-center gap-4 z-10">
+                  <span
+                    className="text-white/30 font-heading font-black text-xs tracking-widest uppercase"
+                    style={{
+                      writingMode: 'vertical-rl',
+                      textOrientation: 'mixed',
+                      transform: 'rotate(180deg)',
+                    }}
+                  >
+                    {project.name}
+                  </span>
+                  <div className="w-[2px] h-8 rounded-full" style={{ background: project.color, opacity: 0.6 }} />
+                </div>
+              )}
+            </div>
+          );
+        })}
       </div>
 
-      {/* Triptyque */}
-      <div className="grid grid-cols-3 gap-3 px-10 lg:px-14 pb-12">
-        {PROJECTS.map((project, i) => (
-          <div
-            key={project.num}
-            className="relative rounded-2xl overflow-hidden cursor-pointer group"
-            style={{ aspectRatio: '2 / 3' }}
-            onMouseEnter={() => setHovered(i)}
-            onMouseLeave={() => setHovered(null)}
-          >
-            {/* Image */}
-            <img
-              src={project.img}
-              alt={project.name}
-              className="absolute inset-0 w-full h-full object-cover transition-all duration-700"
-              style={{
-                filter: hovered === i
-                  ? 'grayscale(0) brightness(0.65)'
-                  : 'grayscale(0.6) brightness(0.5)',
-                transform: hovered === i ? 'scale(1.04)' : 'scale(1)',
-              }}
-            />
-
-            {/* Gradient bas */}
-            <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent" />
-
-            {/* Numéro en filigrane */}
-            <span
-              className="absolute top-4 left-5 font-heading font-black text-white/10 leading-none select-none"
-              style={{ fontSize: '4rem' }}
-            >
-              {project.num}
-            </span>
-
-            {/* Contenu bas */}
-            <div className="absolute bottom-0 left-0 right-0 p-6">
-              <p className="text-white/40 text-[9px] font-medium tracking-[0.3em] uppercase mb-2">
-                {project.category}
-              </p>
-              <p className="font-heading font-black text-white leading-tight mb-2" style={{ fontSize: 'clamp(1.1rem, 2vw, 1.6rem)' }}>
-                {project.name}
-              </p>
-              <p
-                className="text-white/55 text-xs leading-relaxed mb-4 transition-all duration-300"
-                style={{
-                  maxHeight: hovered === i ? '60px' : '0px',
-                  opacity: hovered === i ? 1 : 0,
-                  overflow: 'hidden',
-                }}
-              >
-                {project.tagline}
-              </p>
-              <div className="flex items-center justify-between">
-                <span
-                  className="text-[9px] font-semibold px-3 py-1 rounded-full text-white"
-                  style={{ background: project.color }}
-                >
-                  {project.result}
-                </span>
-                <span
-                  className="text-white/40 text-[10px] font-semibold transition-all duration-300"
-                  style={{ opacity: hovered === i ? 1 : 0 }}
-                >
-                  View →
-                </span>
-              </div>
-            </div>
-          </div>
+      {/* Dots navigation */}
+      <div className="flex items-center justify-center gap-2 py-5">
+        {PROJECTS.map((p, i) => (
+          <button
+            key={i}
+            onClick={() => setActive(i)}
+            className="rounded-full transition-all duration-300"
+            style={{
+              width: i === active ? '28px' : '8px',
+              height: '4px',
+              background: i === active ? PROJECTS[active].color : 'rgba(255,255,255,0.15)',
+            }}
+          />
         ))}
       </div>
 
