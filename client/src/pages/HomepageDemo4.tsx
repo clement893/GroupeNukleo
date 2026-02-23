@@ -491,26 +491,17 @@ export default function HomepageDemo4() {
         </div>
       )}
 
-      {/* ─── LOGO PLEINE LARGEUR (style Fort. — nukleo gradient) ─────────────── */}
+      {/* ─── LOGO PLEINE PAGE (100vh, fond noir) ─────────────────────────────── */}
       <Link
         href={getLocalizedPath('/')}
-        className="relative z-10 block w-full py-6 lg:py-8 px-6 lg:px-8 text-center"
-        style={{
-          background: 'linear-gradient(135deg, rgba(80,20,40,0.15) 0%, rgba(60,30,80,0.08) 50%, rgba(255,255,255,0.02) 100%)',
-        }}
+        className="relative z-10 flex items-center justify-center w-full min-h-screen bg-black"
       >
-        <span
-          className="font-heading font-black block w-full text-center leading-[0.85] tracking-tight"
-          style={{
-            fontSize: 'clamp(3.5rem, 12vw, 10rem)',
-            background: 'linear-gradient(90deg, #8C3141 0%, #6B2D5E 40%, #7c3aed 100%)',
-            WebkitBackgroundClip: 'text',
-            WebkitTextFillColor: 'transparent',
-            backgroundClip: 'text',
-          }}
-        >
-          nukleo<span className="text-[0.75em] opacity-80">&gt;</span>
-        </span>
+        <img
+          src="/demo/nukleo-logo-rvb.png"
+          alt="Nukleo"
+          className="w-[90vw] max-w-6xl object-contain object-center"
+          style={{ maxHeight: '75vh' }}
+        />
       </Link>
 
       {/* ─── WRAPPER GLOBAL ─────────────────────────────────────────────────── */}
