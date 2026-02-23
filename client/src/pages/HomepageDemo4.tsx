@@ -579,7 +579,7 @@ export default function HomepageDemo4() {
       />
 
       {/* ─── HEADER / MENU EN HAUT (logo gauche, nav droite) ─────────────────── */}
-      <header className="fixed top-0 left-0 right-0 z-50 px-[15%] py-4 lg:py-5 flex items-center justify-between bg-white/80 backdrop-blur-md border-b border-black/5">
+      <header className="fixed top-0 left-0 right-0 z-50 px-[8%] py-4 lg:py-5 flex items-center justify-between bg-white/80 backdrop-blur-md border-b border-black/5">
         <Link href={getLocalizedPath('/')} className="flex items-center gap-2 shrink-0">
           <img
             src="/demo/nukleo-logo-rvb.svg"
@@ -669,7 +669,7 @@ export default function HomepageDemo4() {
       )}
 
       {/* ─── WRAPPER GLOBAL ─────────────────────────────────────────────────── */}
-      <div className="relative z-10 pt-20 lg:pt-24 px-[15%] py-3 lg:py-4 flex flex-col gap-[16px] lg:gap-[22px]">
+      <div className="relative z-10 pt-20 lg:pt-24 px-[8%] py-3 lg:py-4 flex flex-col gap-[24px] lg:gap-[33px]">
 
         {/* ══════════════════════════════════════════════════════════════════════
             HÉRO — TITRE PRINCIPAL
@@ -681,12 +681,12 @@ export default function HomepageDemo4() {
         {/* ══════════════════════════════════════════════════════════════════════
             MODULE 1 — WIDGETS (projets, météo, date, who we are)
         ══════════════════════════════════════════════════════════════════════ */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-3 lg:gap-4" style={{ minHeight: '92vh' }}>
+        <div className="grid grid-cols-1 lg:grid-cols-[65fr_35fr] gap-3 lg:gap-4" style={{ minHeight: '92vh' }}>
 
-          {/* Colonne gauche (50%) — Nos derniers projets */}
+          {/* Colonne gauche (65%) — Nos derniers projets */}
           <HeroProjectSliderLarge />
 
-          {/* Colonne droite (50%) — Météo + Date en haut, Who We Are en dessous */}
+          {/* Colonne droite (35%) — Météo + Date en haut, Who We Are en dessous */}
           <div className="flex flex-col gap-3 lg:gap-4">
             {/* Météo + Date */}
             <div className="flex flex-row gap-3 lg:gap-4 flex-shrink-0">
@@ -750,7 +750,7 @@ export default function HomepageDemo4() {
         {/* ══════════════════════════════════════════════════════════════════════
             MODULE 4 — DÉPARTEMENTS (100%) + ÉQUIPE (100%)
         ══════════════════════════════════════════════════════════════════════ */}
-        <div className="flex flex-col gap-[16px] lg:gap-[22px]">
+        <div className="flex flex-col gap-[24px] lg:gap-[33px]">
           {/* 100% — 4 départements en ligne */}
           <div className="rounded-3xl overflow-hidden">
             <DepartmentsWidget />
