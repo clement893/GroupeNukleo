@@ -66,7 +66,7 @@ export default function HomepageDemo() {
           />
         </video>
         {/* Overlay gradient pour lisibilité du texte */}
-        <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0A]/85 via-[#0A0A0A]/20 to-[#0A0A0A]/10" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[rgba(10,10,10,0.85)] via-[rgba(10,10,10,0.2)] to-[rgba(10,10,10,0.1)]" />
 
         <div className="relative z-10 px-8 lg:px-16 pb-20 lg:pb-28">
           <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-10">
@@ -141,7 +141,7 @@ export default function HomepageDemo() {
 
             {/* Texte */}
             <div className="order-1 lg:order-2">
-              <p className="text-xs font-medium tracking-widest uppercase text-[#0A0A0A]/40 mb-8">
+              <p className="text-xs font-medium tracking-widest uppercase text-[rgba(10,10,10,0.4)] mb-8">
                 Who We Are
               </p>
               <h2
@@ -150,10 +150,10 @@ export default function HomepageDemo() {
               >
                 We make digital performance tangible.
               </h2>
-              <p className="text-[#0A0A0A]/55 text-base lg:text-lg leading-relaxed mb-5">
+              <p className="text-[rgba(10,10,10,0.55)] text-base lg:text-lg leading-relaxed mb-5">
                 Nukleo is a digital performance agency. We co-create the strategies, technologies, and creative that help ambitious organizations grow — with clarity, precision, and measurable results.
               </p>
-              <p className="text-[#0A0A0A]/55 text-base lg:text-lg leading-relaxed mb-12">
+              <p className="text-[rgba(10,10,10,0.55)] text-base lg:text-lg leading-relaxed mb-12">
                 Our approach combines human expertise with AI-powered execution, so you get more impact, faster, and at a cost that reflects real value.
               </p>
               <Link
@@ -250,7 +250,7 @@ export default function HomepageDemo() {
 
           <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between mb-16">
             <div>
-              <p className="text-xs font-medium tracking-widest uppercase text-[#0A0A0A]/40 mb-5">Selected Work</p>
+              <p className="text-xs font-medium tracking-widest uppercase text-[rgba(10,10,10,0.4)] mb-5">Selected Work</p>
               <h2
                 className="font-heading font-black text-[#0A0A0A] leading-[0.92] tracking-tight"
                 style={{ fontSize: 'clamp(2.2rem, 4.5vw, 5.5rem)' }}
@@ -274,7 +274,7 @@ export default function HomepageDemo() {
               { img: '/demo/project-3.jpg', category: 'Agency & Studio', title: 'Market Entry Campaign', result: '3× pipeline in 90 days', client: 'B2B SaaS startup' },
             ].map((project, i) => (
               <Link key={i} href={getLocalizedPath('/projects')} className="group block">
-                <div className="relative aspect-[4/3] overflow-hidden rounded-xl mb-0 bg-[#0A0A0A]/5">
+                <div className="relative aspect-[4/3] overflow-hidden rounded-xl mb-0 bg-[rgba(10,10,10,0.05)]">
                   <img
                     src={project.img}
                     alt={project.title}
@@ -304,7 +304,7 @@ export default function HomepageDemo() {
         <div className="max-w-screen-xl mx-auto">
           <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between mb-16">
             <div>
-              <p className="text-xs font-medium tracking-widest uppercase text-[#0A0A0A]/40 mb-5">The Team</p>
+              <p className="text-xs font-medium tracking-widest uppercase text-[rgba(10,10,10,0.4)] mb-5">The Team</p>
               <h2
                 className="font-heading font-black text-[#0A0A0A] leading-[0.92] tracking-tight"
                 style={{ fontSize: 'clamp(2.2rem, 4.5vw, 5.5rem)' }}
@@ -312,7 +312,7 @@ export default function HomepageDemo() {
                 People who deliver.
               </h2>
             </div>
-            <p className="text-[#0A0A0A]/40 text-base max-w-xs mt-8 lg:mt-0 pb-2">
+            <p className="text-[rgba(10,10,10,0.4)] text-base max-w-xs mt-8 lg:mt-0 pb-2">
               Strategists, engineers, designers, and marketers — united by one standard: excellence.
             </p>
           </div>
@@ -324,7 +324,7 @@ export default function HomepageDemo() {
               { img: '/demo/team-4.jpg', name: 'Alex P.', role: 'Agency & Marketing' },
             ].map((member) => (
               <div key={member.name} className="group">
-                <div className="aspect-[3/4] overflow-hidden rounded-xl mb-4 bg-[#0A0A0A]/5">
+                <div className="aspect-[3/4] overflow-hidden rounded-xl mb-4 bg-[rgba(10,10,10,0.05)]">
                   <img
                     src={member.img}
                     alt={member.name}
@@ -333,12 +333,12 @@ export default function HomepageDemo() {
                   />
                 </div>
                 <p className="font-heading font-bold text-[#0A0A0A] text-base mb-0.5">{member.name}</p>
-                <p className="text-[#0A0A0A]/40 text-xs font-medium uppercase tracking-widest">{member.role}</p>
+                <p className="text-[rgba(10,10,10,0.4)] text-xs font-medium uppercase tracking-widest">{member.role}</p>
               </div>
             ))}
           </div>
-          <div className="mt-14 pt-10 border-t border-[#0A0A0A]/10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-            <p className="text-[#0A0A0A]/40 text-sm">A growing team of 15+ specialists across Montréal and beyond.</p>
+          <div className="mt-14 pt-10 border-t border-[rgba(10,10,10,0.1)] flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+            <p className="text-[rgba(10,10,10,0.4)] text-sm">A growing team of 15+ specialists across Montréal and beyond.</p>
             <Link href={getLocalizedPath('/about')} className="inline-flex items-center gap-2 font-semibold text-sm border-b-2 border-[#0A0A0A] pb-1 hover:gap-4 transition-all duration-200">
               Meet the full team →
             </Link>
@@ -346,8 +346,8 @@ export default function HomepageDemo() {
         </div>
       </section>
 
-      {/* ─── STATS ────────────────────────────────────────────────────── */ */}
-      <section className="py-20 border-t border-b border-[#0A0A0A]/8 px-8 lg:px-16">
+      {/* ─── STATS ────────────────────────────────────────────────────── */}
+      <section className="py-20 border-t border-b border-[rgba(10,10,10,0.08)] px-8 lg:px-16">
         <div className="max-w-screen-xl mx-auto grid grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-6">
           {[
             { value: '15+', label: 'Years of combined expertise' },
@@ -362,7 +362,7 @@ export default function HomepageDemo() {
               >
                 {stat.value}
               </p>
-              <p className="text-[#0A0A0A]/45 text-sm leading-relaxed">{stat.label}</p>
+              <p className="text-[rgba(10,10,10,0.45)] text-sm leading-relaxed">{stat.label}</p>
             </div>
           ))}
         </div>
@@ -379,7 +379,7 @@ export default function HomepageDemo() {
             className="w-full h-full object-cover object-center opacity-20 mix-blend-luminosity"
             loading="lazy"
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-[#C8102E]/60 via-[#C8102E]/80 to-[#C8102E]" />
+          <div className="absolute inset-0 bg-gradient-to-b from-[rgba(200,16,46,0.6)] via-[rgba(200,16,46,0.8)] to-[#C8102E]" />
         </div>
 
         <div className="relative z-10 px-8 lg:px-16 pt-32 lg:pt-44 pb-32 lg:pb-44">
@@ -429,7 +429,7 @@ export default function HomepageDemo() {
                   loading="lazy"
                 />
                 {/* Overlay rouge subtil */}
-                <div className="absolute inset-0 bg-[#C8102E]/10" />
+                <div className="absolute inset-0 bg-[rgba(200,16,46,0.1)]" />
               </div>
             </div>
 
