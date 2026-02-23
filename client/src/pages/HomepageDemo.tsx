@@ -79,8 +79,8 @@ export default function HomepageDemo() {
               </h1>
             </div>
 
-            {/* Accroche + CTA */}
-            <div className="lg:max-w-xs pb-2">
+            {/* Accroche + CTA — glassmorphisme */}
+            <div className="lg:max-w-xs pb-2 backdrop-blur-md bg-white/5 border border-white/10 rounded-2xl px-6 py-7">
               <p className="text-white/85 text-xs font-semibold uppercase tracking-widest mb-3">
                 For ambitious organizations — any size.
               </p>
@@ -212,7 +212,7 @@ export default function HomepageDemo() {
               <Link
                 key={dept.number}
                 href={getLocalizedPath(dept.link)}
-                className="group flex flex-col lg:flex-row lg:items-center gap-4 lg:gap-12 py-9 lg:py-12 hover:pl-3 transition-all duration-300 cursor-pointer"
+                className="group flex flex-col lg:flex-row lg:items-center gap-4 lg:gap-12 py-9 lg:py-12 hover:pl-3 hover:bg-white/5 hover:backdrop-blur-sm rounded-xl transition-all duration-300 cursor-pointer px-4 -mx-4"
               >
                 <span className="text-white/20 text-xs font-mono tracking-widest shrink-0 w-6">
                   {dept.number}
@@ -258,7 +258,7 @@ export default function HomepageDemo() {
             </Link>
           </div>
 
-          {/* Grille 3 projets */}
+          {/* Grille 3 projets — glassmorphisme sur les légendes */}
           <div className="grid lg:grid-cols-3 gap-6 lg:gap-8">
             {[
               { img: '/demo/project-1.jpg', category: 'Studio & Agency', title: 'Brand Relaunch', result: '−50% cost per acquisition', client: 'Mid-size retailer' },
@@ -266,22 +266,24 @@ export default function HomepageDemo() {
               { img: '/demo/project-3.jpg', category: 'Agency & Studio', title: 'Market Entry Campaign', result: '3× pipeline in 90 days', client: 'B2B SaaS startup' },
             ].map((project, i) => (
               <Link key={i} href={getLocalizedPath('/projects')} className="group block">
-                <div className="aspect-[4/3] overflow-hidden rounded-xl mb-5 bg-[#0A0A0A]/5">
+                <div className="relative aspect-[4/3] overflow-hidden rounded-xl mb-0 bg-[#0A0A0A]/5">
                   <img
                     src={project.img}
                     alt={project.title}
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                     loading="lazy"
                   />
-                </div>
-                <div className="flex items-start justify-between">
-                  <div>
-                    <p className="text-[#0A0A0A]/35 text-xs font-medium uppercase tracking-widest mb-2">{project.category}</p>
-                    <h3 className="font-heading font-bold text-lg text-[#0A0A0A] group-hover:text-[#0A0A0A]/50 transition-colors mb-1">{project.title}</h3>
-                    <p className="text-[#0A0A0A]/40 text-sm">{project.result}</p>
-                    <p className="text-[#0A0A0A]/25 text-xs mt-1">{project.client}</p>
+                  {/* Légende glassmorphisme sur l'image */}
+                  <div className="absolute bottom-0 left-0 right-0 p-5 backdrop-blur-md bg-white/10 border-t border-white/15">
+                    <div className="flex items-start justify-between">
+                      <div>
+                        <p className="text-white/60 text-xs font-medium uppercase tracking-widest mb-1">{project.category}</p>
+                        <h3 className="font-heading font-bold text-base text-white mb-0.5">{project.title}</h3>
+                        <p className="text-white/70 text-xs">{project.result}</p>
+                      </div>
+                      <span className="text-white/40 text-lg group-hover:text-white group-hover:translate-x-1 group-hover:-translate-y-1 transition-all duration-200 mt-0.5 shrink-0">↗</span>
+                    </div>
                   </div>
-                  <span className="text-[#0A0A0A]/20 text-xl group-hover:text-[#0A0A0A] group-hover:translate-x-1 group-hover:-translate-y-1 transition-all duration-200 mt-1 shrink-0">↗</span>
                 </div>
               </Link>
             ))}
