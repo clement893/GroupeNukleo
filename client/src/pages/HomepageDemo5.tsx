@@ -66,7 +66,7 @@ function HeroWords() {
   }, []);
 
   return (
-    <div style={{ paddingTop: '0.5rem', marginBottom: 40, minHeight: 'clamp(7rem, 18vw, 16rem)', display: 'flex', alignItems: 'center' }}>
+    <div style={{ paddingTop: '0.5rem', marginBottom: 50, minHeight: 'clamp(7rem, 18vw, 16rem)', display: 'flex', alignItems: 'center' }}>
       <span
         style={{
           fontFamily: 'var(--font-heading, sans-serif)',
@@ -174,11 +174,11 @@ function NewsCarousel() {
       {/* Contenu bas */}
       <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, padding: '1.4rem 1.5rem' }}>
         {/* Badge catégorie */}
-        <div style={{ display: 'inline-block', background: p.color, color: '#fff', fontSize: '0.58rem', fontWeight: 800, letterSpacing: '0.12em', textTransform: 'uppercase', padding: '3px 10px', borderRadius: 999, marginBottom: 8 }}>{p.category}</div>
+        <div style={{ display: 'inline-block', background: p.color, color: '#fff', fontSize: '0.58rem', fontWeight: 800, letterSpacing: '0.12em', textTransform: 'uppercase', padding: '3px 10px', borderRadius: 999, marginBottom: 10 }}>{p.category}</div>
         {/* Titre */}
-        <div style={{ fontFamily: 'var(--font-heading, sans-serif)', fontWeight: 900, fontSize: 'clamp(1.2rem, 2.5vw, 1.9rem)', color: '#fff', lineHeight: 1.05, letterSpacing: '-0.02em', marginBottom: 6 }}>{p.name}</div>
+        <div style={{ fontFamily: 'var(--font-heading, sans-serif)', fontWeight: 900, fontSize: 'clamp(1.2rem, 2.5vw, 1.9rem)', color: '#fff', lineHeight: 1.05, letterSpacing: '-0.02em', marginBottom: 8 }}>{p.name}</div>
         {/* Tagline */}
-        <div style={{ fontSize: '0.72rem', color: 'rgba(255,255,255,0.65)', marginBottom: 14, lineHeight: 1.5 }}>{p.tagline}</div>
+        <div style={{ fontSize: '0.72rem', color: 'rgba(255,255,255,0.65)', marginBottom: 18, lineHeight: 1.5 }}>{p.tagline}</div>
         {/* Résultat + dots */}
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
           <span style={{ fontSize: '0.65rem', fontWeight: 700, color: '#fff', background: `${p.color}55`, border: `1px solid ${p.color}`, padding: '3px 10px', borderRadius: 999 }}>{p.result}</span>
@@ -385,7 +385,7 @@ function ProjectsCarousel() {
                 <div className="absolute inset-0 flex flex-col justify-between z-10" style={{ padding: 'clamp(1.5rem, 3vw, 3.5rem)' }}>
                   <div className="flex items-start justify-between">
                     <div>
-                      <p style={{ color: 'rgba(255,255,255,0.35)', fontSize: '0.65rem', fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase', marginBottom: 8 }}>Accrois la performance</p>
+                      <p style={{ color: 'rgba(255,255,255,0.35)', fontSize: '0.65rem', fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase', marginBottom: 10 }}>Accrois la performance</p>
                       <span style={{ fontFamily: 'var(--font-heading, sans-serif)', fontWeight: 900, color: 'rgba(255,255,255,0.12)', lineHeight: 1, fontSize: '5rem' }}>
                         {project.num}
                       </span>
@@ -395,10 +395,10 @@ function ProjectsCarousel() {
                     </span>
                   </div>
                   <div>
-                    <h2 style={{ fontFamily: 'var(--font-heading, sans-serif)', fontWeight: 900, color: '#fff', lineHeight: 0.88, letterSpacing: '-0.03em', marginBottom: 16, fontSize: 'clamp(2.5rem, 4.5vw, 5.5rem)' }}>
+                    <h2 style={{ fontFamily: 'var(--font-heading, sans-serif)', fontWeight: 900, color: '#fff', lineHeight: 0.88, letterSpacing: '-0.03em', marginBottom: 20, fontSize: 'clamp(2.5rem, 4.5vw, 5.5rem)' }}>
                       {project.name}
                     </h2>
-                    <p style={{ color: 'rgba(255,255,255,0.55)', fontSize: '0.9rem', lineHeight: 1.6, maxWidth: 420, marginBottom: 24 }}>
+                    <p style={{ color: 'rgba(255,255,255,0.55)', fontSize: '0.9rem', lineHeight: 1.6, maxWidth: 420, marginBottom: 30 }}>
                       {project.tagline}
                     </p>
                     <div style={{ display: 'flex', alignItems: 'center', gap: 20 }}>
@@ -600,7 +600,7 @@ export default function HomepageDemo5() {
       )}
 
       {/* ── Contenu principal ─────────────────────────────────────────────── */}
-      <div style={{ position: 'relative', zIndex: 10, paddingTop: 88 }}>
+      <div style={{ position: 'relative', zIndex: 10, paddingTop: 110 }}>
 
         {/* ════════════════════════════════════════════════════════════════════
             SECTION 1 — LOGO MASSIF + HERO WIDGETS
@@ -661,13 +661,13 @@ export default function HomepageDemo5() {
                 {/* Contenu */}
                 <div style={{ position: 'relative', zIndex: 1, padding: '1.4rem 1.5rem', height: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
                   <div>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 14 }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 18 }}>
                       <div style={{ width: 28, height: 28, borderRadius: 8, background: `linear-gradient(135deg, ${BORDEAUX}, ${PURPLE})`, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" /></svg>
                       </div>
                       <span style={{ fontSize: '0.58rem', fontWeight: 800, letterSpacing: '0.18em', color: 'rgba(255,255,255,0.4)', textTransform: 'uppercase' }}>Nukleo Digital</span>
                     </div>
-                    <p style={{ fontFamily: 'var(--font-heading, sans-serif)', fontWeight: 900, fontSize: 'clamp(1.05rem, 1.8vw, 1.45rem)', lineHeight: 1.1, letterSpacing: '-0.03em', marginBottom: 12 }}>
+                    <p style={{ fontFamily: 'var(--font-heading, sans-serif)', fontWeight: 900, fontSize: 'clamp(1.05rem, 1.8vw, 1.45rem)', lineHeight: 1.1, letterSpacing: '-0.03em', marginBottom: 15 }}>
                       <span style={{ background: `linear-gradient(90deg, #fff 0%, rgba(255,255,255,0.75) 100%)`, WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>Accroître votre</span><br />
                       <span style={{ background: `linear-gradient(90deg, ${PURPLE} 0%, #a78bfa 50%, ${BORDEAUX} 100%)`, WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>performance</span><br />
                       <span style={{ background: `linear-gradient(90deg, #fff 0%, rgba(255,255,255,0.75) 100%)`, WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>par l'excellence</span><br />
@@ -697,7 +697,7 @@ export default function HomepageDemo5() {
                 background: 'linear-gradient(145deg, rgba(255,255,255,0.92), rgba(245,243,239,0.97))',
                 boxShadow: '6px 6px 14px rgba(0,0,0,0.07), -4px -4px 10px rgba(255,255,255,0.75)',
               }}>
-                <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 8 }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 10 }}>
                   <span style={{ fontSize: '0.68rem', color: '#9ca3af' }}>Croissance actuelle</span>
                   <span style={{ fontSize: '0.68rem', fontWeight: 700, color: PURPLE }}>+4%</span>
                 </div>
@@ -740,7 +740,7 @@ export default function HomepageDemo5() {
 
           {/* Citation centrale */}
           <div style={{ textAlign: 'center', padding: '0 2rem' }}>
-            <p style={{ fontSize: '0.65rem', fontWeight: 700, letterSpacing: '0.25em', textTransform: 'uppercase', color: '#9ca3af', marginBottom: 16 }}>Nukleo Digital</p>
+            <p style={{ fontSize: '0.65rem', fontWeight: 700, letterSpacing: '0.25em', textTransform: 'uppercase', color: '#9ca3af', marginBottom: 20 }}>Nukleo Digital</p>
             <blockquote style={{
               fontFamily: 'var(--font-heading, sans-serif)', fontWeight: 900,
               fontSize: 'clamp(1.4rem, 3vw, 2.4rem)', lineHeight: 1.15, color: DARK, letterSpacing: '-0.02em',
@@ -781,14 +781,14 @@ export default function HomepageDemo5() {
         {/* ════════════════════════════════════════════════════════════════════
             SECTION 5 — TRIPTYQUE PROJETS (pleine largeur)
         ════════════════════════════════════════════════════════════════════ */}
-        <div style={{ marginBottom: 48 }}>
+        <div style={{ marginBottom: 60 }}>
           <ProjectsCarousel />
         </div>
 
         {/* ════════════════════════════════════════════════════════════════════
             SECTION 6 — ROUGE ON BLUE + STATS LIGNE
         ════════════════════════════════════════════════════════════════════ */}
-        <div style={{ padding: '0 6%', marginBottom: 48, display: 'grid', gridTemplateColumns: '2fr 1fr', gap: 16 }}>
+        <div style={{ padding: '0 6%', marginBottom: 60, display: 'grid', gridTemplateColumns: '2fr 1fr', gap: 16 }}>
 
           {/* Rouge on Blue */}
           <div style={{
@@ -852,7 +852,7 @@ export default function HomepageDemo5() {
         {/* ════════════════════════════════════════════════════════════════════
             SECTION 7 — CTA FINAL
         ════════════════════════════════════════════════════════════════════ */}
-        <div style={{ padding: '0 6%', marginBottom: 48 }}>
+        <div style={{ padding: '0 6%', marginBottom: 60 }}>
           <div style={{
             borderRadius: 24, padding: '4rem 5rem',
             background: DARK,
@@ -880,7 +880,7 @@ export default function HomepageDemo5() {
         {/* ════════════════════════════════════════════════════════════════════
             SECTION 8 — CONTACT WIDGET
         ════════════════════════════════════════════════════════════════════ */}
-        <div style={{ padding: '0 6%', marginBottom: 48 }}>
+        <div style={{ padding: '0 6%', marginBottom: 60 }}>
           <ContactWidget />
         </div>
 
