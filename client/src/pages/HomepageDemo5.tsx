@@ -342,21 +342,13 @@ export default function HomepageDemo5() {
         ════════════════════════════════════════════════════════════════════ */}
         <div style={{ padding: '0 6% 0' }}>
 
-          {/* Logo typographique massif */}
-          <div style={{ overflow: 'hidden', marginBottom: '-0.15em', paddingTop: '0.5rem' }}>
-            <h1 style={{
-              fontFamily: 'var(--font-heading, sans-serif)',
-              fontWeight: 900,
-              fontSize: 'clamp(5.5rem, 14vw, 13rem)',
-              lineHeight: 0.88,
-              letterSpacing: '-0.04em',
-              background: `linear-gradient(110deg, ${BORDEAUX} 0%, ${PURPLE} 100%)`,
-              WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent',
-              backgroundClip: 'text',
-              marginLeft: '-0.04em',
-              userSelect: 'none',
-            }}>nukleo.</h1>
+          {/* Logo image SVG */}
+          <div style={{ paddingTop: '0.5rem', marginBottom: 8 }}>
+            <img
+              src="/demo/nukleo-logo-rvb.svg"
+              alt="Nukleo"
+              style={{ height: 'clamp(3.5rem, 8vw, 7rem)', width: 'auto', display: 'block' }}
+            />
           </div>
 
           {/* Hero grid : widgets gauche (30%) + MacBook droite (70%) */}
@@ -455,8 +447,10 @@ export default function HomepageDemo5() {
 
             </div>
 
-            {/* Colonne Carrousel Projets */}
-            <HeroProjectsCarousel />
+            {/* Colonne Selected Work — Triptyque */}
+            <div style={{ borderRadius: 24, overflow: 'hidden' }}>
+              <Triptych />
+            </div>
           </div>
         </div>
 
