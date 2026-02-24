@@ -512,7 +512,7 @@ export default function HomepageDemo5() {
         borderBottom: '1px solid rgba(10,10,10,0.06)',
       }}>
         <Link href={getLocalizedPath('/')}>
-          <img src="/demo/nukleo-logo-rvb.svg" alt="Nukleo" style={{ height: 44, width: 'auto' }} />
+          <img src="/demo/nukleo-logo-rvb.svg" alt="Nukleo" style={{ height: 64, width: 'auto' }} />
         </Link>
         <nav style={{ display: 'flex', alignItems: 'center', gap: '2rem' }} className="hidden lg:flex">
           {NAV_LINKS.map(l => (
