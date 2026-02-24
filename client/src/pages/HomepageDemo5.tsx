@@ -271,6 +271,112 @@ function HeroProjectsCarousel() {
   );
 }
 
+// ─── ProjectsCarousel (identique à demo4) ───────────────────────────────────
+function ProjectsCarousel() {
+  const [active, setActive] = useState(0);
+  const getLocalizedPath = useLocalizedPath();
+
+  const getWidth = (i: number) => {
+    if (PROJECTS.length === 1) return '100%';
+    const inactiveCount = PROJECTS.length - 1;
+    const inactiveWidth = 8;
+    return i === active ? `${100 - inactiveCount * inactiveWidth}%` : `${inactiveWidth}%`;
+  };
+
+  return (
+    <div className="rounded-3xl overflow-hidden">
+      <div className="flex gap-4 lg:gap-5 p-4 lg:p-5" style={{ height: '85vh', background: DARK }}>
+        {PROJECTS.map((project, i) => {
+          const isActive = i === active;
+          return (
+            <div
+              key={project.num}
+              className="relative overflow-hidden cursor-pointer flex-shrink-0"
+              style={{
+                width: getWidth(i),
+                transition: 'width 0.65s cubic-bezier(0.77, 0, 0.175, 1)',
+                borderRadius: '1rem',
+                background: 'rgba(255,255,255,0.05)',
+              }}
+              onClick={() => !isActive && setActive(i)}
+            >
+              <img
+                src={project.img}
+                alt={project.name}
+                className="absolute inset-0 w-full h-full object-cover"
+                style={{
+                  filter: isActive ? 'grayscale(0) brightness(0.6)' : 'grayscale(1) brightness(0.35)',
+                  transition: 'filter 0.65s ease',
+                }}
+              />
+              <div
+                className="absolute inset-0"
+                style={{ background: 'linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.1) 60%, transparent 100%)', opacity: isActive ? 1 : 0.6, transition: 'opacity 0.5s ease' }}
+              />
+
+              {isActive && (
+                <div className="absolute inset-0 flex flex-col justify-between z-10" style={{ padding: 'clamp(1.5rem, 3vw, 3.5rem)' }}>
+                  <div className="flex items-start justify-between">
+                    <div>
+                      <p style={{ color: 'rgba(255,255,255,0.35)', fontSize: '0.65rem', fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase', marginBottom: 8 }}>Accrois la performance</p>
+                      <span style={{ fontFamily: 'var(--font-heading, sans-serif)', fontWeight: 900, color: 'rgba(255,255,255,0.12)', lineHeight: 1, fontSize: '5rem' }}>
+                        {project.num}
+                      </span>
+                    </div>
+                    <span style={{ color: 'rgba(255,255,255,0.4)', fontSize: '0.6rem', fontWeight: 700, letterSpacing: '0.3em', textTransform: 'uppercase', marginTop: 8 }}>
+                      {project.category}
+                    </span>
+                  </div>
+                  <div>
+                    <h2 style={{ fontFamily: 'var(--font-heading, sans-serif)', fontWeight: 900, color: '#fff', lineHeight: 0.88, letterSpacing: '-0.03em', marginBottom: 16, fontSize: 'clamp(2.5rem, 4.5vw, 5.5rem)' }}>
+                      {project.name}
+                    </h2>
+                    <p style={{ color: 'rgba(255,255,255,0.55)', fontSize: '0.9rem', lineHeight: 1.6, maxWidth: 420, marginBottom: 24 }}>
+                      {project.tagline}
+                    </p>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: 20 }}>
+                      <span style={{ fontSize: '0.7rem', fontWeight: 700, padding: '0.4rem 1rem', borderRadius: 999, color: '#fff', background: project.color }}>
+                        {project.result}
+                      </span>
+                      <Link
+                        href={getLocalizedPath('/projects')}
+                        style={{ color: 'rgba(255,255,255,0.5)', fontSize: '0.75rem', fontWeight: 700, borderBottom: '1px solid rgba(255,255,255,0.25)', paddingBottom: 2, textDecoration: 'none' }}
+                      >
+                        View case study →
+                      </Link>
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {!isActive && (
+                <div className="absolute inset-0 flex flex-col items-center justify-center gap-4 z-10">
+                  <span
+                    style={{ color: 'rgba(255,255,255,0.3)', fontFamily: 'var(--font-heading, sans-serif)', fontWeight: 900, fontSize: '0.65rem', letterSpacing: '0.2em', textTransform: 'uppercase', writingMode: 'vertical-rl', textOrientation: 'mixed', transform: 'rotate(180deg)' }}
+                  >
+                    {project.name}
+                  </span>
+                  <div style={{ width: 2, height: 32, borderRadius: 999, background: project.color, opacity: 0.6 }} />
+                </div>
+              )}
+            </div>
+          );
+        })}
+      </div>
+
+      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8, padding: '20px 0', background: DARK }}>
+        {PROJECTS.map((p, i) => (
+          <button
+            key={i}
+            onClick={() => setActive(i)}
+            style={{ width: i === active ? 28 : 8, height: 4, borderRadius: 999, background: i === active ? PROJECTS[active].color : 'rgba(255,255,255,0.15)', border: 'none', cursor: 'pointer', transition: 'all 0.3s ease', padding: 0 }}
+          />
+        ))}
+      </div>
+    </div>
+  );
+}
+
 // ─── Triptyque projets ───────────────────────────────────────────────────────
 function Triptych() {
   const [active, setActive] = useState(0);
@@ -499,20 +605,49 @@ export default function HomepageDemo5() {
                 <span style={{ color: '#fff', fontWeight: 700, fontSize: '0.85rem' }}>438 543 1987</span>
               </a>
 
-              {/* Tagline + texte */}
+              {/* Widget About Us — version forte */}
               <div style={{
-                borderRadius: 20, padding: '1rem 1.1rem',
-                background: 'linear-gradient(145deg, rgba(255,255,255,0.92), rgba(245,243,239,0.97))',
-                boxShadow: '6px 6px 14px rgba(0,0,0,0.07), -4px -4px 10px rgba(255,255,255,0.75)',
+                borderRadius: 20,
+                background: DARK,
                 flex: 1,
+                position: 'relative',
+                overflow: 'hidden',
+                minHeight: 160,
               }}>
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 8 }}>
-                  <p style={{ fontWeight: 700, fontSize: '0.8rem', color: DARK }}>Choisissez l'intelligence.</p>
-                  <ArrowUpRight size={14} color={PURPLE} />
+                {/* Grille de fond */}
+                <div style={{ position: 'absolute', inset: 0, backgroundImage: 'linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px)', backgroundSize: '24px 24px' }} />
+                {/* Orbes */}
+                <div style={{ position: 'absolute', top: -30, right: -30, width: 120, height: 120, borderRadius: '50%', background: `radial-gradient(circle, ${PURPLE}55 0%, transparent 70%)` }} />
+                <div style={{ position: 'absolute', bottom: -20, left: -20, width: 80, height: 80, borderRadius: '50%', background: `radial-gradient(circle, ${BORDEAUX}44 0%, transparent 70%)` }} />
+                {/* Contenu */}
+                <div style={{ position: 'relative', zIndex: 1, padding: '1.4rem 1.5rem', height: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+                  <div>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 14 }}>
+                      <div style={{ width: 28, height: 28, borderRadius: 8, background: `linear-gradient(135deg, ${BORDEAUX}, ${PURPLE})`, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" /></svg>
+                      </div>
+                      <span style={{ fontSize: '0.58rem', fontWeight: 800, letterSpacing: '0.18em', color: 'rgba(255,255,255,0.4)', textTransform: 'uppercase' }}>Nukleo Digital</span>
+                    </div>
+                    <p style={{ fontFamily: 'var(--font-heading, sans-serif)', fontWeight: 900, fontSize: 'clamp(1.1rem, 2vw, 1.5rem)', lineHeight: 1.1, letterSpacing: '-0.03em', marginBottom: 10 }}>
+                      <span style={{ background: `linear-gradient(90deg, #fff 0%, rgba(255,255,255,0.7) 100%)`, WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>Choisissez</span><br />
+                      <span style={{ background: `linear-gradient(90deg, ${PURPLE} 0%, #a78bfa 50%, ${BORDEAUX} 100%)`, WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>l'intelligence.</span>
+                    </p>
+                    <p style={{ fontSize: '0.65rem', color: 'rgba(255,255,255,0.5)', lineHeight: 1.6 }}>
+                      Stratégie, technologie et créativité — augmentées par l'IA pour des résultats mesurables.
+                    </p>
+                  </div>
+                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginTop: 14 }}>
+                    <div style={{ display: 'flex', gap: 6 }}>
+                      {['Agency', 'Studio', 'Tech'].map(s => (
+                        <span key={s} style={{ fontSize: '0.55rem', fontWeight: 700, padding: '3px 8px', borderRadius: 999, border: '1px solid rgba(255,255,255,0.12)', color: 'rgba(255,255,255,0.45)', letterSpacing: '0.08em' }}>{s}</span>
+                      ))}
+                    </div>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: 5, background: `linear-gradient(90deg, ${BORDEAUX}, ${PURPLE})`, borderRadius: 999, padding: '5px 12px', cursor: 'pointer' }}>
+                      <span style={{ fontSize: '0.6rem', fontWeight: 700, color: '#fff' }}>Démarrer</span>
+                      <ArrowUpRight size={10} color="#fff" />
+                    </div>
+                  </div>
                 </div>
-                <p style={{ fontSize: '0.68rem', color: '#6b7280', lineHeight: 1.6 }}>
-                  Nukleo transforme les organisations ambitieuses par la stratégie numérique, la technologie et la créativité — avec la précision de l'IA.
-                </p>
               </div>
 
               {/* Barre croissance */}
@@ -612,7 +747,7 @@ export default function HomepageDemo5() {
             <h2 style={{ fontFamily: 'var(--font-heading, sans-serif)', fontWeight: 900, fontSize: 'clamp(1.5rem, 3vw, 2.5rem)', letterSpacing: '-0.03em', color: DARK }}>Selected Work</h2>
             <Link href={getLocalizedPath('/projects')} style={{ fontSize: '0.75rem', fontWeight: 700, color: PURPLE, textDecoration: 'none' }}>All projects ↗</Link>
           </div>
-          <Triptych />
+          <ProjectsCarousel />
         </div>
 
         {/* ════════════════════════════════════════════════════════════════════
