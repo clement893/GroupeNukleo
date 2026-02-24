@@ -306,7 +306,7 @@ function ProjectsCarousel() {
 
   return (
     <div className="rounded-3xl overflow-hidden">
-      <div className="flex gap-4 lg:gap-5 p-4 lg:p-5" style={{ height: '85vh', background: DARK }}>
+      <div className="flex gap-4 lg:gap-5 p-4 lg:p-5" style={{ height: '85vh', background: 'transparent' }}>
         {PROJECTS.map((project, i) => {
           const isActive = i === active;
           return (
@@ -764,10 +764,6 @@ export default function HomepageDemo5() {
             SECTION 5 — TRIPTYQUE PROJETS (pleine largeur)
         ════════════════════════════════════════════════════════════════════ */}
         <div style={{ marginBottom: 48 }}>
-          <div style={{ padding: '0 6%', marginBottom: 20, display: 'flex', justifyContent: 'space-between', alignItems: 'baseline' }}>
-            <h2 style={{ fontFamily: 'var(--font-heading, sans-serif)', fontWeight: 900, fontSize: 'clamp(1.5rem, 3vw, 2.5rem)', letterSpacing: '-0.03em', color: DARK }}>Selected Work</h2>
-            <Link href={getLocalizedPath('/projects')} style={{ fontSize: '0.75rem', fontWeight: 700, color: PURPLE, textDecoration: 'none' }}>All projects ↗</Link>
-          </div>
           <ProjectsCarousel />
         </div>
 
