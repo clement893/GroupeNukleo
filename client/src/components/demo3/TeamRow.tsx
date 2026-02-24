@@ -1,153 +1,150 @@
 import { useState } from 'react';
 
+const DARK = '#0A0A0A';
 const TEAM_IMGS = ['/demo/team-1.jpg', '/demo/team-2.jpg', '/demo/team-3.jpg', '/demo/team-4.jpg'];
 
 const TEAM_MEMBERS = [
-  { name: 'Clément Laberge',    role: 'Founder & CEO',          img: TEAM_IMGS[0], color: '#7c3aed', bio: "Fondateur de Nukleo, passionné par la transformation numérique et l'IA appliquée. 15 ans d'expérience en stratégie digitale." },
-  { name: 'Marie-Ève Tremblay', role: 'Creative Director',      img: TEAM_IMGS[1], color: '#7B1D3A', bio: 'Directrice créative, elle donne vie aux marques à travers des expériences visuelles mémorables.' },
-  { name: 'Alexandre Côté',     role: 'Head of Tech',           img: TEAM_IMGS[2], color: '#2563eb', bio: "Architecte technique, il pilote les solutions digitales et intègre l'IA au cœur des produits." },
-  { name: 'Sophie Nguyen',      role: 'Strategy Lead',          img: TEAM_IMGS[3], color: '#059669', bio: 'Stratège digitale, elle accompagne les organisations dans leur transformation numérique.' },
-  { name: 'Thomas Fortin',      role: 'AI Solutions Architect', img: TEAM_IMGS[2], color: '#0891b2', bio: "Spécialiste IA, il conçoit des solutions agentiques pour automatiser et optimiser." },
+  { name: 'Clément Laberge',    role: 'Founder & CEO',          img: TEAM_IMGS[0], color: '#7c3aed' },
+  { name: 'Marie-Ève Tremblay', role: 'Creative Director',      img: TEAM_IMGS[1], color: '#f97316' },
+  { name: 'Alexandre Côté',     role: 'Head of Tech',           img: TEAM_IMGS[2], color: '#2563eb' },
+  { name: 'Sophie Nguyen',      role: 'Strategy Lead',          img: TEAM_IMGS[3], color: '#059669' },
 ];
 
 export function TeamRow() {
-  const [active, setActive] = useState(0);
-  const m = TEAM_MEMBERS[active];
+  const [activeIndex, setActiveIndex] = useState(0);
+
+  const goTo = (i: number) => setActiveIndex(i);
+  const prev = () => setActiveIndex((a) => Math.max(0, a - 1));
+  const next = () => setActiveIndex((a) => Math.min(TEAM_MEMBERS.length - 1, a + 1));
+
+  const handleWheel = (e: React.WheelEvent) => {
+    e.preventDefault();
+    if (e.deltaY > 0) next();
+    else prev();
+  };
+
+  const CARD_W = 220;
+  const CARD_H = 300;
+  const STACK_OVERFLOW = 36;
 
   return (
-    <div style={{ padding: '0 6%', marginBottom: 64 }}>
-      {/* En-tête */}
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', marginBottom: 40 }}>
-        <h2 style={{
-          fontFamily: 'var(--font-heading, sans-serif)', fontWeight: 900,
-          fontSize: 'clamp(1.5rem, 3vw, 2.5rem)', letterSpacing: '-0.03em', color: '#0A0A0A',
-        }}>
-          Notre équipe
-        </h2>
-        <span style={{ fontSize: '0.72rem', fontWeight: 700, color: '#9ca3af' }}>
-          {String(active + 1).padStart(2, '0')} / {String(TEAM_MEMBERS.length).padStart(2, '0')}
-        </span>
-      </div>
-
-      {/* Layout 3 colonnes */}
-      <div style={{
-        display: 'grid',
-        gridTemplateColumns: '1fr 1.4fr 1fr',
-        gap: 56,
-        alignItems: 'center',
-      }}>
-
-        {/* Colonne gauche — nom + rôle + dots */}
-        <div>
-          <p style={{ fontSize: '0.58rem', fontWeight: 800, letterSpacing: '0.28em', textTransform: 'uppercase', color: '#9ca3af', marginBottom: 20 }}>
-            Rencontrez l'équipe
+    <div
+      className="rounded-3xl overflow-hidden flex flex-col"
+      style={{ background: DARK, margin: '0 6%', marginBottom: 48 }}
+      onWheel={handleWheel}
+    >
+      <div className="flex flex-col items-center gap-7 flex-1 px-8 py-10">
+        {/* Titre */}
+        <div className="text-center shrink-0">
+          <p className="text-white/30 text-[10px] font-medium tracking-[0.35em] uppercase mb-2">
+            Notre équipe
           </p>
-          <h3 style={{
-            fontFamily: 'var(--font-heading, sans-serif)', fontWeight: 900,
-            fontSize: 'clamp(1.6rem, 2.4vw, 2.4rem)', lineHeight: 1.05,
-            letterSpacing: '-0.03em', color: '#0A0A0A', marginBottom: 10,
-            transition: 'opacity 0.3s ease',
-          }}>
-            {m.name}
-          </h3>
-          <div style={{ width: 40, height: 2.5, background: m.color, borderRadius: 999, marginBottom: 14, transition: 'background 0.4s ease' }} />
-          <p style={{ fontSize: '0.85rem', color: '#6b7280', lineHeight: 1.6, marginBottom: 36 }}>
-            {m.role}
-          </p>
+          <h2
+            className="font-heading font-black text-white leading-[0.9] tracking-tight"
+            style={{ fontSize: 'clamp(1.8rem, 3vw, 3rem)' }}
+          >
+            Les gens derrière le travail.
+          </h2>
+        </div>
 
-          {/* Dots navigation */}
-          <div style={{ display: 'flex', gap: 8 }}>
+        {/* Pile de cartes 3D */}
+        <div
+          style={{
+            perspective: '1200px',
+            width: `${CARD_W}px`,
+            height: `${CARD_H + STACK_OVERFLOW}px`,
+            position: 'relative',
+          }}
+        >
+          {TEAM_MEMBERS.map((member, i) => {
+            const offset = i - activeIndex;
+            const isActive = i === activeIndex;
+            const isBelow = offset > 0;
+            const isAbove = offset < 0;
+            const translateY = isActive ? '0px' : isBelow ? `${offset * 16}px` : `${offset * 160}px`;
+            const translateZ = isActive ? '0px' : isBelow ? `${-offset * 50}px` : '0px';
+            const scale = isActive ? 1 : isBelow ? Math.max(0.78, 1 - offset * 0.07) : 0.95;
+            const opacity = isAbove ? 0 : isBelow ? Math.max(0.1, 1 - offset * 0.32) : 1;
+            const zIndex = isActive ? 50 : isBelow ? 50 - offset : 0;
+
+            return (
+              <div
+                key={member.name}
+                className="absolute rounded-2xl overflow-hidden cursor-pointer"
+                onClick={() => isBelow && goTo(i)}
+                style={{
+                  width: `${CARD_W}px`,
+                  height: `${CARD_H}px`,
+                  top: 0,
+                  left: 0,
+                  transform: `translateY(${translateY}) translateZ(${translateZ}) scale(${scale})`,
+                  opacity,
+                  zIndex,
+                  transition: 'transform 0.55s cubic-bezier(0.25, 0.46, 0.45, 0.94), opacity 0.45s ease',
+                  transformStyle: 'preserve-3d',
+                  boxShadow: isActive
+                    ? '0 40px 80px rgba(0,0,0,0.7), 0 0 0 1px rgba(255,255,255,0.08)'
+                    : '0 12px 30px rgba(0,0,0,0.5)',
+                }}
+              >
+                <img
+                  src={member.img}
+                  alt={member.name}
+                  className="w-full h-full object-cover"
+                  style={{ filter: isActive ? 'grayscale(0)' : 'grayscale(0.7) brightness(0.65)' }}
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
+                {isBelow && offset <= 2 && (
+                  <div className="absolute top-4 right-4 text-white/25 font-heading font-black text-sm">
+                    0{i + 1}
+                  </div>
+                )}
+              </div>
+            );
+          })}
+        </div>
+
+        {/* Nom + rôle + dots + flèches */}
+        <div className="flex flex-col items-center gap-2 text-center shrink-0">
+          <div style={{ minHeight: '52px' }}>
+            <p
+              className="font-heading font-bold text-white text-xl leading-tight"
+              key={activeIndex}
+              style={{ animation: 'fadeUp 0.4s ease forwards' }}
+            >
+              {TEAM_MEMBERS[activeIndex].name}
+            </p>
+            <p className="text-white/40 text-sm mt-1">{TEAM_MEMBERS[activeIndex].role}</p>
+          </div>
+          <div className="flex gap-2">
             {TEAM_MEMBERS.map((_, i) => (
               <button
                 key={i}
-                onClick={() => setActive(i)}
+                onClick={() => goTo(i)}
+                className="h-[2px] rounded-full transition-all duration-300"
                 style={{
-                  width: i === active ? 28 : 8, height: 8, borderRadius: 999,
-                  padding: 0, border: 'none', cursor: 'pointer',
-                  background: i === active ? m.color : '#e5e7eb',
-                  transition: 'all 0.35s ease',
+                  width: i === activeIndex ? '28px' : '10px',
+                  background: i === activeIndex ? TEAM_MEMBERS[activeIndex].color : 'rgba(255,255,255,0.2)',
                 }}
               />
             ))}
           </div>
-        </div>
-
-        {/* Colonne centre — photo portrait avec fondu croisé */}
-        <div style={{ position: 'relative' }}>
-          {/* Conteneur photo avec ratio portrait fixe */}
-          <div style={{
-            position: 'relative',
-            width: '100%',
-            paddingBottom: '130%', // ratio portrait 10:13
-            borderRadius: 24,
-            overflow: 'hidden',
-            boxShadow: '0 24px 60px rgba(0,0,0,0.22)',
-            background: '#1a1a1a',
-          }}>
-            {TEAM_MEMBERS.map((mem, i) => (
-              <img
-                key={mem.name}
-                src={mem.img}
-                alt={mem.name}
-                style={{
-                  position: 'absolute',
-                  inset: 0,
-                  width: '100%',
-                  height: '100%',
-                  objectFit: 'cover',
-                  objectPosition: 'top center',
-                  opacity: i === active ? 1 : 0,
-                  transition: 'opacity 0.55s ease',
-                }}
-              />
-            ))}
-            {/* Overlay dégradé bas */}
-            <div style={{
-              position: 'absolute', inset: 0,
-              background: 'linear-gradient(to top, rgba(0,0,0,0.4) 0%, transparent 45%)',
-            }} />
+          <div className="flex gap-2">
+            <button
+              onClick={prev}
+              disabled={activeIndex === 0}
+              className="w-8 h-8 rounded-full border border-white/15 flex items-center justify-center text-white/50 hover:text-white hover:border-white/40 transition-all disabled:opacity-20 text-sm"
+            >
+              ↑
+            </button>
+            <button
+              onClick={next}
+              disabled={activeIndex === TEAM_MEMBERS.length - 1}
+              className="w-8 h-8 rounded-full border border-white/15 flex items-center justify-center text-white/50 hover:text-white hover:border-white/40 transition-all disabled:opacity-20 text-sm"
+            >
+              ↓
+            </button>
           </div>
-
-          {/* Flèches prev / next */}
-          <button
-            onClick={() => setActive(a => (a - 1 + TEAM_MEMBERS.length) % TEAM_MEMBERS.length)}
-            style={{
-              position: 'absolute', left: -20, top: '50%', transform: 'translateY(-50%)',
-              width: 40, height: 40, borderRadius: '50%',
-              background: '#fff', border: '1px solid #e5e7eb',
-              boxShadow: '0 4px 14px rgba(0,0,0,0.1)',
-              cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center',
-            }}
-          >
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#0A0A0A" strokeWidth="2.5">
-              <polyline points="15 18 9 12 15 6" />
-            </svg>
-          </button>
-          <button
-            onClick={() => setActive(a => (a + 1) % TEAM_MEMBERS.length)}
-            style={{
-              position: 'absolute', right: -20, top: '50%', transform: 'translateY(-50%)',
-              width: 40, height: 40, borderRadius: '50%',
-              background: '#fff', border: '1px solid #e5e7eb',
-              boxShadow: '0 4px 14px rgba(0,0,0,0.1)',
-              cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center',
-            }}
-          >
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#0A0A0A" strokeWidth="2.5">
-              <polyline points="9 18 15 12 9 6" />
-            </svg>
-          </button>
-        </div>
-
-        {/* Colonne droite — bio */}
-        <div>
-          <p style={{
-            fontSize: 'clamp(0.85rem, 1.1vw, 1rem)',
-            color: '#374151', lineHeight: 1.8,
-            transition: 'opacity 0.3s ease',
-          }}>
-            {m.bio}
-          </p>
         </div>
       </div>
     </div>
