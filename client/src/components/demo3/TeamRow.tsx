@@ -34,19 +34,6 @@ export function TeamRow() {
       onWheel={handleWheel}
     >
       <div className="flex flex-col items-center gap-7 flex-1 px-8 py-10">
-        {/* Titre */}
-        <div className="text-center shrink-0">
-          <p className="text-white/30 text-[10px] font-medium tracking-[0.35em] uppercase mb-2">
-            Notre équipe
-          </p>
-          <h2
-            className="font-heading font-black text-white leading-[0.9] tracking-tight"
-            style={{ fontSize: 'clamp(1.8rem, 3vw, 3rem)' }}
-          >
-            Les gens derrière le travail.
-          </h2>
-        </div>
-
         {/* Pile de cartes 3D */}
         <div
           style={{
