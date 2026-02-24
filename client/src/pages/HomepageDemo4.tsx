@@ -57,144 +57,254 @@ const PROJECTS = [
   },
 ];
 
-// ─── HERO WOW — Cinématique, gradient, révélations échelonnées ───────────────
-const HERO_LINES = [
-  { words: ['Augmenter votre ', { text: 'Performance', gradient: true }] },
-  { words: ["par L'", { text: 'Excellence', gradient: true }, ' numérique'] },
-];
+
+// ─── HERO WOW — SPLIT KINETIC ───────────────────────────────────────────────
+function useCountUp(target: number, duration = 1800, delay = 400) {
+  const [count, setCount] = useState(0);
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      const start = performance.now();
+      const step = (now: number) => {
+        const elapsed = now - start;
+        const progress = Math.min(elapsed / duration, 1);
+        const eased = 1 - Math.pow(1 - progress, 3);
+        setCount(Math.round(eased * target));
+        if (progress < 1) requestAnimationFrame(step);
+      };
+      requestAnimationFrame(step);
+    }, delay);
+    return () => clearTimeout(timer);
+  }, [target, duration, delay]);
+  return count;
+}
 
 function HeroWow() {
-  const [mounted, setMounted] = useState(false);
   const getLocalizedPath = useLocalizedPath();
+  const [lineVisible, setLineVisible] = useState(false);
+  const [textVisible, setTextVisible] = useState(false);
+  const count240 = useCountUp(240, 1600, 600);
+  const count749 = useCountUp(749, 1800, 800);
+  const count60 = useCountUp(60, 1400, 1000);
 
   useEffect(() => {
-    const t = setTimeout(() => setMounted(true), 100);
-    return () => clearTimeout(t);
+    const t1 = setTimeout(() => setTextVisible(true), 100);
+    const t2 = setTimeout(() => setLineVisible(true), 500);
+    return () => { clearTimeout(t1); clearTimeout(t2); };
   }, []);
 
   return (
-    <section className="relative min-h-[70vh] lg:min-h-[85vh] flex flex-col justify-center overflow-hidden">
-      {/* Orbs flottants en arrière-plan */}
+    <div
+      className="relative overflow-hidden rounded-3xl"
+      style={{
+        minHeight: '100vh',
+        background: '#080810',
+      }}
+    >
+      {/* Particules lumineuses — orbes de couleur */}
       <div className="absolute inset-0 pointer-events-none" aria-hidden>
-        <div
-          className="absolute w-[min(80vw,500px)] h-[min(80vw,500px)] rounded-full opacity-[0.12] blur-[80px]"
-          style={{
-            background: 'radial-gradient(circle, rgba(124,58,237,0.4) 0%, transparent 70%)',
-            top: '10%',
-            right: '-5%',
-            animation: 'hero-orb-float 12s ease-in-out infinite',
-          }}
-        />
-        <div
-          className="absolute w-[min(60vw,400px)] h-[min(60vw,400px)] rounded-full opacity-[0.08] blur-[60px]"
-          style={{
-            background: 'radial-gradient(circle, rgba(139,92,246,0.5) 0%, transparent 70%)',
-            bottom: '5%',
-            left: '-3%',
-            animation: 'hero-orb-float 15s ease-in-out infinite 2s',
-          }}
-        />
+        <div style={{
+          position: 'absolute', top: '-10%', left: '-5%',
+          width: '55%', height: '60%',
+          background: 'radial-gradient(ellipse at center, rgba(124,58,237,0.28) 0%, rgba(109,40,217,0.12) 40%, transparent 70%)',
+          filter: 'blur(40px)',
+        }} />
+        <div style={{
+          position: 'absolute', top: '5%', right: '-10%',
+          width: '45%', height: '50%',
+          background: 'radial-gradient(ellipse at center, rgba(127,29,29,0.22) 0%, rgba(185,28,28,0.08) 40%, transparent 70%)',
+          filter: 'blur(50px)',
+        }} />
+        <div style={{
+          position: 'absolute', bottom: '10%', left: '30%',
+          width: '40%', height: '35%',
+          background: 'radial-gradient(ellipse at center, rgba(124,58,237,0.12) 0%, transparent 70%)',
+          filter: 'blur(60px)',
+        }} />
+        {/* Grille subtile */}
+        <div style={{
+          position: 'absolute', inset: 0,
+          backgroundImage: 'linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px)',
+          backgroundSize: '60px 60px',
+        }} />
       </div>
 
-      {/* Titre principal */}
-      <h1
-        className="font-heading font-black leading-[0.88] tracking-tight text-left relative z-10"
-        style={{
-          fontSize: 'clamp(3rem, 9vw, 8rem)',
-          color: DARK,
-        }}
-      >
-        {HERO_LINES.map((line, lineIdx) => (
-          <span key={lineIdx} className="block">
-            {line.words.map((word, wordIdx) => {
-              if (typeof word === 'string') {
-                return (
-                  <span
-                    key={wordIdx}
-                    className="inline"
-                    style={{
-                      animation: mounted ? 'hero-reveal 0.8s cubic-bezier(0.16,1,0.3,1) forwards' : 'none',
-                      opacity: mounted ? 1 : 0,
-                      animationDelay: `${lineIdx * 0.35 + wordIdx * 0.12}s`,
-                      animationFillMode: 'both',
-                    }}
-                  >
-                    {word}
-                  </span>
-                );
-              }
-              const w = word as { text: string; gradient: boolean };
-              return (
-                <span
-                  key={wordIdx}
-                  className="inline-block"
-                  style={{
-                    background: 'linear-gradient(105deg, #7c3aed 0%, #a78bfa 25%, #c4b5fd 50%, #7c3aed 75%, #6d28d9 100%)',
-                    backgroundSize: '200% 200%',
-                    backgroundClip: 'text',
-                    WebkitBackgroundClip: 'text',
-                    color: 'transparent',
-                    animation: mounted
-                      ? 'hero-reveal 0.8s cubic-bezier(0.16,1,0.3,1) forwards, hero-shimmer 6s ease-in-out infinite 1.5s'
-                      : 'none',
-                    opacity: mounted ? 1 : 0,
-                    animationDelay: `${lineIdx * 0.35 + wordIdx * 0.12}s`,
-                    animationFillMode: 'both',
-                  }}
-                >
-                  {w.text}
-                </span>
-              );
-            })}
-            {lineIdx < HERO_LINES.length - 1 && <br />}
-          </span>
-        ))}
-      </h1>
+      {/* Contenu principal */}
+      <div className="relative z-10 flex flex-col lg:flex-row h-full" style={{ minHeight: '100vh' }}>
 
-      {/* Sous-titre / CTA */}
-      <div
-        className="mt-8 lg:mt-12 flex flex-wrap items-center gap-6"
-        style={{
-          animation: mounted ? 'hero-reveal 0.8s cubic-bezier(0.16,1,0.3,1) forwards' : 'none',
-          opacity: mounted ? 1 : 0,
-          animationDelay: '0.9s',
-          animationFillMode: 'both',
-        }}
-      >
-        <Link
-          href={getLocalizedPath('/start-project')}
-          className="inline-flex items-center justify-center px-8 py-4 rounded-full font-semibold text-sm tracking-widest uppercase transition-all duration-300 hover:scale-[1.02] hover:shadow-xl"
-          style={{ color: 'white', backgroundColor: DARK }}
-        >
-          Start a project
-        </Link>
-        <span className="text-sm font-medium tracking-wide" style={{ color: `${DARK}60` }}>
-          Agence de performance digitale · Montréal
-        </span>
-      </div>
-
-      {/* Indicateur de scroll */}
-      <div
-        className="absolute bottom-8 left-0 right-0 flex justify-center"
-        style={{
-          animation: mounted ? 'hero-reveal 0.6s cubic-bezier(0.16,1,0.3,1) 1.2s forwards' : 'none',
-          opacity: mounted ? 1 : 0,
-        }}
-      >
-        <div
-          className="w-8 h-12 rounded-full border-2 flex items-start justify-center pt-2"
-          style={{ borderColor: `${DARK}25` }}
-        >
-          <div
-            className="w-1 h-2 rounded-full"
+        {/* ── COLONNE GAUCHE : titre + sous-titre + CTA ── */}
+        <div className="flex-1 flex flex-col justify-center px-10 lg:px-16 py-20 lg:py-24">
+          {/* Label */}
+          <p
+            className="text-white/30 text-[10px] font-medium tracking-[0.4em] uppercase mb-8"
             style={{
-              backgroundColor: `${DARK}40`,
-              animation: 'hero-scroll-bounce 2s ease-in-out infinite',
+              opacity: textVisible ? 1 : 0,
+              transform: textVisible ? 'translateY(0)' : 'translateY(12px)',
+              transition: 'opacity 0.6s ease, transform 0.6s ease',
+            }}
+          >
+            Nukleo Digital — Choisissez l'intelligence
+          </p>
+
+          {/* Titre massif */}
+          <h1
+            className="font-heading font-black leading-[0.88] tracking-tight"
+            style={{
+              fontSize: 'clamp(3.5rem, 8vw, 8rem)',
+              opacity: textVisible ? 1 : 0,
+              transform: textVisible ? 'translateY(0)' : 'translateY(24px)',
+              transition: 'opacity 0.7s ease 0.1s, transform 0.7s ease 0.1s',
+            }}
+          >
+            <span style={{ color: 'rgba(255,255,255,0.92)' }}>Augmenter{' '}</span>
+            <span style={{ color: 'rgba(255,255,255,0.92)' }}>votre</span>
+            <br />
+            <span style={{
+              background: 'linear-gradient(135deg, #a78bfa 0%, #7c3aed 35%, #9333ea 60%, #c084fc 100%)',
+              backgroundSize: '200% auto',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+              backgroundClip: 'text',
+              animation: 'shimmer-text 3s linear infinite',
+            }}>
+              Performance.
+            </span>
+          </h1>
+
+          {/* Ligne décorative animée */}
+          <div
+            style={{
+              height: '1px',
+              background: 'linear-gradient(to right, rgba(124,58,237,0.8), rgba(196,181,253,0.3), transparent)',
+              marginTop: '2rem',
+              marginBottom: '2rem',
+              transformOrigin: 'left',
+              transform: lineVisible ? 'scaleX(1)' : 'scaleX(0)',
+              transition: 'transform 0.9s cubic-bezier(0.77,0,0.175,1) 0.3s',
+              maxWidth: '480px',
             }}
           />
+
+          {/* Sous-titre */}
+          <p
+            className="text-white/50 leading-relaxed max-w-md"
+            style={{
+              fontSize: 'clamp(0.95rem, 1.5vw, 1.15rem)',
+              opacity: textVisible ? 1 : 0,
+              transform: textVisible ? 'translateY(0)' : 'translateY(16px)',
+              transition: 'opacity 0.7s ease 0.3s, transform 0.7s ease 0.3s',
+            }}
+          >
+            Nukleo transforme les entreprises par l'excellence numérique — stratégie, créativité et technologie réunis.
+          </p>
+
+          {/* CTA */}
+          <div
+            className="flex items-center gap-4 mt-10"
+            style={{
+              opacity: textVisible ? 1 : 0,
+              transform: textVisible ? 'translateY(0)' : 'translateY(16px)',
+              transition: 'opacity 0.7s ease 0.45s, transform 0.7s ease 0.45s',
+            }}
+          >
+            <Link
+              href={getLocalizedPath('/start-project')}
+              className="group flex items-center gap-2 px-6 py-3.5 rounded-full font-semibold text-sm tracking-wide transition-all duration-300"
+              style={{
+                background: 'white',
+                color: DARK,
+              }}
+              onMouseEnter={(e) => {
+                (e.currentTarget as HTMLElement).style.background = NUKLEO_PURPLE;
+                (e.currentTarget as HTMLElement).style.color = 'white';
+              }}
+              onMouseLeave={(e) => {
+                (e.currentTarget as HTMLElement).style.background = 'white';
+                (e.currentTarget as HTMLElement).style.color = DARK;
+              }}
+            >
+              Démarrer un projet
+              <span style={{ transition: 'transform 0.2s ease' }} className="group-hover:translate-x-1 inline-block">→</span>
+            </Link>
+            <Link
+              href={getLocalizedPath('/projects')}
+              className="text-white/40 text-sm font-medium hover:text-white/80 transition-colors border-b border-white/15 hover:border-white/40 pb-0.5"
+            >
+              Voir nos projets
+            </Link>
+          </div>
+        </div>
+
+        {/* ── COLONNE DROITE : compteurs + scroll ── */}
+        <div
+          className="flex flex-col justify-center gap-0 px-10 lg:px-14 py-20 lg:py-24 lg:w-[340px] shrink-0"
+          style={{
+            borderLeft: '1px solid rgba(255,255,255,0.06)',
+          }}
+        >
+          {/* Compteur 1 */}
+          {[
+            { value: count240, suffix: '%', label: 'croissance digitale moyenne', color: '#a78bfa' },
+            { value: count749, suffix: 'k$', label: 'générés pour nos clients', color: '#f97316' },
+            { value: count60, suffix: '+', label: 'clients transformés', color: '#34d399' },
+          ].map((stat, i) => (
+            <div
+              key={i}
+              className="py-8 lg:py-10"
+              style={{
+                borderBottom: i < 2 ? '1px solid rgba(255,255,255,0.06)' : 'none',
+                opacity: textVisible ? 1 : 0,
+                transform: textVisible ? 'translateX(0)' : 'translateX(20px)',
+                transition: `opacity 0.7s ease ${0.4 + i * 0.15}s, transform 0.7s ease ${0.4 + i * 0.15}s`,
+              }}
+            >
+              <div
+                className="font-heading font-black leading-none"
+                style={{
+                  fontSize: 'clamp(3rem, 5vw, 4.5rem)',
+                  color: stat.color,
+                }}
+              >
+                +{stat.value}{stat.suffix}
+              </div>
+              <p className="text-white/35 text-xs font-medium mt-2 leading-snug max-w-[180px]">
+                {stat.label}
+              </p>
+            </div>
+          ))}
+
+          {/* Scroll indicator */}
+          <div
+            className="flex items-center gap-3 mt-8"
+            style={{
+              opacity: textVisible ? 0.4 : 0,
+              transition: 'opacity 0.7s ease 1s',
+            }}
+          >
+            <div
+              style={{
+                width: '1px',
+                height: '40px',
+                background: 'linear-gradient(to bottom, rgba(255,255,255,0.5), transparent)',
+                animation: 'scroll-pulse 1.8s ease-in-out infinite',
+              }}
+            />
+            <span className="text-white/40 text-[10px] font-medium tracking-[0.3em] uppercase">Scroll</span>
+          </div>
         </div>
       </div>
-    </section>
+
+      {/* Keyframes injectés */}
+      <style>{`
+        @keyframes shimmer-text {
+          0% { background-position: 0% center; }
+          100% { background-position: 200% center; }
+        }
+        @keyframes scroll-pulse {
+          0%, 100% { opacity: 0.3; transform: scaleY(1); }
+          50% { opacity: 0.8; transform: scaleY(1.15); }
+        }
+      `}</style>
+    </div>
   );
 }
 
@@ -745,11 +855,9 @@ export default function HomepageDemo4() {
       <div className="relative z-10 pt-20 lg:pt-24 px-[8%] py-3 lg:py-4 flex flex-col gap-[24px] lg:gap-[33px]">
 
         {/* ══════════════════════════════════════════════════════════════════════
-            HÉRO — TITRE PRINCIPAL
+            HÉRO WOW — SPLIT KINETIC
         ══════════════════════════════════════════════════════════════════════ */}
-        <div className="pt-7 lg:pt-14 pb-[2.625rem] lg:pb-[4.375rem]">
-          <HeroWow />
-        </div>
+        <HeroWow />
 
         {/* ══════════════════════════════════════════════════════════════════════
             MODULE 1 — WIDGETS (projets, météo, date, who we are)
