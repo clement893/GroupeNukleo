@@ -10,8 +10,8 @@ const TEAM_MEMBERS = [
   { name: 'Thomas Fortin',      role: 'AI Solutions Architect', img: TEAM_IMGS[2], color: '#0891b2', bio: 'Spécialiste IA, il conçoit des solutions agentiques pour automatiser et optimiser.' },
 ];
 
-const CARD_HEIGHT = 200;
-const VISIBLE_OFFSET = 100;
+const CARD_HEIGHT = 280;
+const VISIBLE_OFFSET = 120;
 
 export function TeamRow() {
   const [active, setActive] = useState(0);
@@ -72,7 +72,7 @@ export function TeamRow() {
         {/* Centre — pile de cartes scroll vertical */}
         <div
           ref={imagesRef}
-          style={{ position: 'relative', height: 380, cursor: 'n-resize', userSelect: 'none' }}
+          style={{ position: 'relative', height: 480, cursor: 'n-resize', userSelect: 'none' }}
         >
           {TEAM_MEMBERS.map((mem, i) => {
             const offset = i - active;
