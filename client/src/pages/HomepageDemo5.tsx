@@ -50,9 +50,9 @@ function NewsCarousel() {
   const [active, setActive] = useState(0);
   const [isHovered, setIsHovered] = useState(false);
   const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
-  const getLocalizedPath = useLocalizedPath();
 
   const next = useCallback(() => setActive(a => (a + 1) % PROJECTS.length), []);
+  const prev = useCallback(() => setActive(a => (a - 1 + PROJECTS.length) % PROJECTS.length), []);
 
   useEffect(() => {
     if (!isHovered) timerRef.current = setInterval(next, 4000);
@@ -63,68 +63,89 @@ function NewsCarousel() {
 
   return (
     <div
-      style={{ borderRadius: 20, overflow: 'hidden', background: '#fff', height: '100%', display: 'flex', flexDirection: 'column', boxShadow: '0 4px 24px rgba(0,0,0,0.08)' }}
+      style={{ borderRadius: 20, overflow: 'hidden', position: 'relative', height: '100%', minHeight: 320 }}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      {/* Header barre */}
-      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '10px 16px', borderBottom: '1px solid #f0eeea' }}>
-        <span style={{ fontSize: '0.6rem', fontWeight: 800, letterSpacing: '0.12em', color: '#9ca3af', textTransform: 'uppercase' }}>Selected Work</span>
-        <div style={{ display: 'flex', gap: 6 }}>
-          {PROJECTS.map((_, i) => (
-            <button key={i} onClick={() => setActive(i)} style={{ width: i === active ? 20 : 6, height: 6, borderRadius: 999, background: i === active ? p.color : '#e5e7eb', border: 'none', cursor: 'pointer', transition: 'all 0.3s ease', padding: 0 }} />
-          ))}
-        </div>
+      {/* Images en fondu croisé */}
+      {PROJECTS.map((proj, i) => (
+        <img
+          key={proj.num}
+          src={proj.img}
+          alt={proj.name}
+          style={{
+            position: 'absolute', inset: 0, width: '100%', height: '100%',
+            objectFit: 'cover',
+            opacity: i === active ? 1 : 0,
+            transition: 'opacity 0.7s ease',
+          }}
+        />
+      ))}
+
+      {/* Overlay gradient bas */}
+      <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(0,0,0,0.82) 0%, rgba(0,0,0,0.15) 50%, transparent 100%)' }} />
+
+      {/* Label haut gauche */}
+      <div style={{ position: 'absolute', top: 16, left: 18, display: 'flex', alignItems: 'center', gap: 6 }}>
+        <span style={{ fontSize: '0.58rem', fontWeight: 800, letterSpacing: '0.18em', color: 'rgba(255,255,255,0.55)', textTransform: 'uppercase' }}>Our Latest Work</span>
       </div>
 
-      {/* Image principale */}
-      <div style={{ position: 'relative', flex: '1 1 55%', overflow: 'hidden', minHeight: 160 }}>
-        {PROJECTS.map((proj, i) => (
-          <img
-            key={proj.num}
-            src={proj.img}
-            alt={proj.name}
-            style={{
-              position: 'absolute', inset: 0, width: '100%', height: '100%',
-              objectFit: 'cover',
-              opacity: i === active ? 1 : 0,
-              transition: 'opacity 0.6s ease',
-            }}
-          />
-        ))}
-        {/* Overlay gradient */}
-        <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(0,0,0,0.7) 0%, transparent 55%)' }} />
+      {/* Compteur haut droite */}
+      <div style={{ position: 'absolute', top: 14, right: 18, fontSize: '0.65rem', fontWeight: 700, color: 'rgba(255,255,255,0.4)', fontFamily: 'var(--font-heading, sans-serif)' }}>
+        {String(active + 1).padStart(2, '0')} / {String(PROJECTS.length).padStart(2, '0')}
+      </div>
+
+      {/* Flèche gauche */}
+      <button
+        onClick={prev}
+        style={{
+          position: 'absolute', left: 14, top: '50%', transform: 'translateY(-50%)',
+          width: 36, height: 36, borderRadius: '50%',
+          background: 'rgba(255,255,255,0.12)', backdropFilter: 'blur(8px)',
+          border: '1px solid rgba(255,255,255,0.2)',
+          color: '#fff', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center',
+          transition: 'background 0.2s',
+        }}
+      >
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><polyline points="15 18 9 12 15 6" /></svg>
+      </button>
+
+      {/* Flèche droite */}
+      <button
+        onClick={next}
+        style={{
+          position: 'absolute', right: 14, top: '50%', transform: 'translateY(-50%)',
+          width: 36, height: 36, borderRadius: '50%',
+          background: 'rgba(255,255,255,0.12)', backdropFilter: 'blur(8px)',
+          border: '1px solid rgba(255,255,255,0.2)',
+          color: '#fff', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center',
+          transition: 'background 0.2s',
+        }}
+      >
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><polyline points="9 18 15 12 9 6" /></svg>
+      </button>
+
+      {/* Contenu bas */}
+      <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, padding: '1.4rem 1.5rem' }}>
         {/* Badge catégorie */}
-        <div style={{ position: 'absolute', top: 12, left: 12, background: p.color, color: '#fff', fontSize: '0.6rem', fontWeight: 800, letterSpacing: '0.1em', textTransform: 'uppercase', padding: '3px 10px', borderRadius: 999 }}>{p.category}</div>
-        {/* Titre sur image */}
-        <div style={{ position: 'absolute', bottom: 14, left: 14, right: 14 }}>
-          <div style={{ fontFamily: 'var(--font-heading, sans-serif)', fontWeight: 900, fontSize: 'clamp(1.1rem, 2.2vw, 1.6rem)', color: '#fff', lineHeight: 1.1, letterSpacing: '-0.02em' }}>{p.name}</div>
-          <div style={{ fontSize: '0.72rem', color: 'rgba(255,255,255,0.75)', marginTop: 4 }}>{p.tagline}</div>
-        </div>
-      </div>
-
-      {/* Vignettes projets */}
-      <div style={{ flex: '0 0 auto', borderTop: '1px solid #f0eeea' }}>
-        {PROJECTS.map((proj, i) => (
-          <div
-            key={proj.num}
-            onClick={() => setActive(i)}
-            style={{
-              display: 'flex', alignItems: 'center', gap: 10, padding: '8px 14px',
-              cursor: 'pointer',
-              background: i === active ? '#faf9f7' : 'transparent',
-              borderLeft: `3px solid ${i === active ? proj.color : 'transparent'}`,
-              transition: 'all 0.2s ease',
-            }}
-          >
-            <img src={proj.img} alt={proj.name} style={{ width: 38, height: 38, borderRadius: 8, objectFit: 'cover', flexShrink: 0, filter: i === active ? 'none' : 'grayscale(0.6)' }} />
-            <div style={{ flex: 1, minWidth: 0 }}>
-              <div style={{ fontFamily: 'var(--font-heading, sans-serif)', fontWeight: 800, fontSize: '0.78rem', color: DARK, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{proj.name}</div>
-              <div style={{ fontSize: '0.62rem', color: '#9ca3af', marginTop: 1 }}>{proj.category}</div>
-            </div>
-            <div style={{ fontSize: '0.6rem', fontWeight: 700, color: proj.color, background: `${proj.color}15`, padding: '2px 7px', borderRadius: 999, whiteSpace: 'nowrap' }}>{proj.result}</div>
+        <div style={{ display: 'inline-block', background: p.color, color: '#fff', fontSize: '0.58rem', fontWeight: 800, letterSpacing: '0.12em', textTransform: 'uppercase', padding: '3px 10px', borderRadius: 999, marginBottom: 8 }}>{p.category}</div>
+        {/* Titre */}
+        <div style={{ fontFamily: 'var(--font-heading, sans-serif)', fontWeight: 900, fontSize: 'clamp(1.2rem, 2.5vw, 1.9rem)', color: '#fff', lineHeight: 1.05, letterSpacing: '-0.02em', marginBottom: 6 }}>{p.name}</div>
+        {/* Tagline */}
+        <div style={{ fontSize: '0.72rem', color: 'rgba(255,255,255,0.65)', marginBottom: 14, lineHeight: 1.5 }}>{p.tagline}</div>
+        {/* Résultat + dots */}
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+          <span style={{ fontSize: '0.65rem', fontWeight: 700, color: '#fff', background: `${p.color}55`, border: `1px solid ${p.color}`, padding: '3px 10px', borderRadius: 999 }}>{p.result}</span>
+          <div style={{ display: 'flex', gap: 5 }}>
+            {PROJECTS.map((_, i) => (
+              <button
+                key={i}
+                onClick={() => setActive(i)}
+                style={{ width: i === active ? 18 : 5, height: 5, borderRadius: 999, background: i === active ? '#fff' : 'rgba(255,255,255,0.3)', border: 'none', cursor: 'pointer', transition: 'all 0.3s ease', padding: 0 }}
+              />
+            ))}
           </div>
-        ))}
+        </div>
       </div>
     </div>
   );
