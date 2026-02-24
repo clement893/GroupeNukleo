@@ -45,6 +45,52 @@ function CountUp({ target, prefix = '', suffix = '', duration = 1800 }: { target
   return <span ref={ref}>{prefix}{val.toLocaleString()}{suffix}</span>;
 }
 
+// ─── Titre hero animé mot par mot ─────────────────────────────────────────────
+const HERO_WORDS = ['Audacieux.', 'Assumé.', 'Intelligents.'];
+
+function HeroWords() {
+  const [wordIndex, setWordIndex] = useState(0);
+  const [visible, setVisible] = useState(true);
+
+  useEffect(() => {
+    const cycle = () => {
+      // Fade out
+      setVisible(false);
+      setTimeout(() => {
+        setWordIndex(i => (i + 1) % HERO_WORDS.length);
+        setVisible(true);
+      }, 400);
+    };
+    const id = setInterval(cycle, 2800);
+    return () => clearInterval(id);
+  }, []);
+
+  return (
+    <div style={{ paddingTop: '0.5rem', marginBottom: 8, minHeight: 'clamp(7rem, 18vw, 16rem)', display: 'flex', alignItems: 'center' }}>
+      <span
+        style={{
+          fontFamily: 'var(--font-heading, sans-serif)',
+          fontWeight: 900,
+          fontSize: 'clamp(5rem, 16vw, 14rem)',
+          lineHeight: 0.92,
+          letterSpacing: '-0.04em',
+          display: 'block',
+          background: 'linear-gradient(90deg, #7B1D3A 0%, #6B21A8 100%)',
+          WebkitBackgroundClip: 'text',
+          WebkitTextFillColor: 'transparent',
+          backgroundClip: 'text',
+          opacity: visible ? 1 : 0,
+          transform: visible ? 'translateY(0)' : 'translateY(12px)',
+          transition: 'opacity 0.35s ease, transform 0.35s ease',
+          userSelect: 'none',
+        }}
+      >
+        {HERO_WORDS[wordIndex]}
+      </span>
+    </div>
+  );
+}
+
 // ─── Carrousel Projets Hero — style "une de journal" ──────────────────────────
 function NewsCarousel() {
   const [active, setActive] = useState(0);
@@ -561,14 +607,8 @@ export default function HomepageDemo5() {
         ════════════════════════════════════════════════════════════════════ */}
         <div style={{ padding: '0 6% 0' }}>
 
-          {/* Logo image SVG */}
-          <div style={{ paddingTop: '0.5rem', marginBottom: 8 }}>
-            <img
-              src="/demo/nukleo-logo-rvb.svg"
-              alt="Nukleo"
-              style={{ height: 'clamp(8rem, 20vw, 18rem)', width: 'auto', display: 'block' }}
-            />
-          </div>
+          {/* Titre animé mot par mot */}
+          <HeroWords />
 
           {/* Hero grid : widgets gauche (30%) + MacBook droite (70%) */}
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 2.5fr', gap: 14, marginTop: 14, alignItems: 'stretch', minHeight: '52vh' }}>
