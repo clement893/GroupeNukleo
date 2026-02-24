@@ -498,8 +498,12 @@ export default function HomepageDemo5() {
 
       {/* ── Dégradé flottant haut de page ─────────────────────────────────── */}
       <div style={{
-        position: 'fixed', top: 0, left: 0, right: 0, height: 600,
-        background: 'radial-gradient(ellipse 80% 55% at 50% -10%, rgba(196,181,253,0.55) 0%, rgba(147,197,253,0.3) 45%, transparent 75%)',
+        position: 'fixed', top: 0, left: 0, right: 0, height: 520,
+        background: [
+          'radial-gradient(ellipse 60% 70% at 0% 0%, rgba(107,33,168,0.45) 0%, transparent 60%)',
+          'radial-gradient(ellipse 60% 70% at 100% 0%, rgba(123,29,58,0.38) 0%, transparent 60%)',
+          'radial-gradient(ellipse 50% 60% at 50% -5%, rgba(245,243,239,0.9) 0%, transparent 65%)',
+        ].join(', '),
         pointerEvents: 'none', zIndex: 0,
       }} />
 
@@ -508,8 +512,8 @@ export default function HomepageDemo5() {
         position: 'fixed', top: 0, left: 0, right: 0, zIndex: 50,
         padding: '0 6% ', height: 68,
         display: 'flex', alignItems: 'center', justifyContent: 'space-between',
-        background: 'rgba(245,243,239,0.82)', backdropFilter: 'blur(16px)',
-        borderBottom: '1px solid rgba(10,10,10,0.06)',
+        background: 'transparent',
+        borderBottom: 'none',
       }}>
         <Link href={getLocalizedPath('/')} style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', gap: 14 }}>
           <img src="/demo/nukleo-logo-rvb.svg" alt="Nukleo" style={{ height: 44, width: 'auto' }} />
