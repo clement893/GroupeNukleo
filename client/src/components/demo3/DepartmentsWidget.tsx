@@ -52,31 +52,15 @@ export function DepartmentsWidget() {
 
   return (
     <div style={{ marginBottom: 64 }}>
-      {/* En-tête */}
-      <div style={{
-        padding: '0 6%',
-        display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', marginBottom: 32,
-      }}>
-        <h2 style={{
-          fontFamily: 'var(--font-heading, sans-serif)', fontWeight: 900,
-          fontSize: 'clamp(1.5rem, 3vw, 2.5rem)', letterSpacing: '-0.03em', color: '#0A0A0A',
-        }}>
-          Nos départements
-        </h2>
-        <Link href={getLocalizedPath('/services')} style={{ fontSize: '0.75rem', fontWeight: 700, color: '#7c3aed', textDecoration: 'none' }}>
-          Tous les services ↗
-        </Link>
-      </div>
-
-      {/* Piste de scroll horizontal avec cartes décalées */}
+      {/* Piste de scroll horizontal — bord à bord */}
       <div
         style={{
           position: 'relative',
           height: CONTAINER_HEIGHT,
           overflowX: 'auto',
           overflowY: 'visible',
-          paddingLeft: '6vw',
-          paddingRight: '6vw',
+          paddingLeft: 0,
+          paddingRight: 0,
           msOverflowStyle: 'none',
           scrollbarWidth: 'none',
         } as React.CSSProperties}
@@ -84,7 +68,7 @@ export function DepartmentsWidget() {
         {/* Conteneur interne flex pour les cartes */}
         <div style={{
           display: 'flex',
-          gap: 16,
+          gap: 12,
           alignItems: 'flex-start',
           height: '100%',
           width: 'max-content',
@@ -95,10 +79,10 @@ export function DepartmentsWidget() {
               href={getLocalizedPath(dept.href)}
               style={{
                 flexShrink: 0,
-                width: 'clamp(260px, 38vw, 460px)',
+                width: 'clamp(280px, 40vw, 500px)',
                 height: dept.height,
                 marginTop: dept.offsetTop,
-                borderRadius: 24,
+                borderRadius: 20,
                 background: dept.color,
                 position: 'relative',
                 overflow: 'hidden',
