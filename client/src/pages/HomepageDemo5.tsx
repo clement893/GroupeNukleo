@@ -45,7 +45,92 @@ function CountUp({ target, prefix = '', suffix = '', duration = 1800 }: { target
   return <span ref={ref}>{prefix}{val.toLocaleString()}{suffix}</span>;
 }
 
-// ─── Carrousel Projets Hero ─────────────────────────────────────────────────
+// ─── Carrousel Projets Hero — style "une de journal" ──────────────────────────
+function NewsCarousel() {
+  const [active, setActive] = useState(0);
+  const [isHovered, setIsHovered] = useState(false);
+  const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
+  const getLocalizedPath = useLocalizedPath();
+
+  const next = useCallback(() => setActive(a => (a + 1) % PROJECTS.length), []);
+
+  useEffect(() => {
+    if (!isHovered) timerRef.current = setInterval(next, 4000);
+    return () => { if (timerRef.current) clearInterval(timerRef.current); };
+  }, [isHovered, next]);
+
+  const p = PROJECTS[active];
+
+  return (
+    <div
+      style={{ borderRadius: 20, overflow: 'hidden', background: '#fff', height: '100%', display: 'flex', flexDirection: 'column', boxShadow: '0 4px 24px rgba(0,0,0,0.08)' }}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+    >
+      {/* Header barre */}
+      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '10px 16px', borderBottom: '1px solid #f0eeea' }}>
+        <span style={{ fontSize: '0.6rem', fontWeight: 800, letterSpacing: '0.12em', color: '#9ca3af', textTransform: 'uppercase' }}>Selected Work</span>
+        <div style={{ display: 'flex', gap: 6 }}>
+          {PROJECTS.map((_, i) => (
+            <button key={i} onClick={() => setActive(i)} style={{ width: i === active ? 20 : 6, height: 6, borderRadius: 999, background: i === active ? p.color : '#e5e7eb', border: 'none', cursor: 'pointer', transition: 'all 0.3s ease', padding: 0 }} />
+          ))}
+        </div>
+      </div>
+
+      {/* Image principale */}
+      <div style={{ position: 'relative', flex: '1 1 55%', overflow: 'hidden', minHeight: 160 }}>
+        {PROJECTS.map((proj, i) => (
+          <img
+            key={proj.num}
+            src={proj.img}
+            alt={proj.name}
+            style={{
+              position: 'absolute', inset: 0, width: '100%', height: '100%',
+              objectFit: 'cover',
+              opacity: i === active ? 1 : 0,
+              transition: 'opacity 0.6s ease',
+            }}
+          />
+        ))}
+        {/* Overlay gradient */}
+        <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(0,0,0,0.7) 0%, transparent 55%)' }} />
+        {/* Badge catégorie */}
+        <div style={{ position: 'absolute', top: 12, left: 12, background: p.color, color: '#fff', fontSize: '0.6rem', fontWeight: 800, letterSpacing: '0.1em', textTransform: 'uppercase', padding: '3px 10px', borderRadius: 999 }}>{p.category}</div>
+        {/* Titre sur image */}
+        <div style={{ position: 'absolute', bottom: 14, left: 14, right: 14 }}>
+          <div style={{ fontFamily: 'var(--font-heading, sans-serif)', fontWeight: 900, fontSize: 'clamp(1.1rem, 2.2vw, 1.6rem)', color: '#fff', lineHeight: 1.1, letterSpacing: '-0.02em' }}>{p.name}</div>
+          <div style={{ fontSize: '0.72rem', color: 'rgba(255,255,255,0.75)', marginTop: 4 }}>{p.tagline}</div>
+        </div>
+      </div>
+
+      {/* Vignettes projets */}
+      <div style={{ flex: '0 0 auto', borderTop: '1px solid #f0eeea' }}>
+        {PROJECTS.map((proj, i) => (
+          <div
+            key={proj.num}
+            onClick={() => setActive(i)}
+            style={{
+              display: 'flex', alignItems: 'center', gap: 10, padding: '8px 14px',
+              cursor: 'pointer',
+              background: i === active ? '#faf9f7' : 'transparent',
+              borderLeft: `3px solid ${i === active ? proj.color : 'transparent'}`,
+              transition: 'all 0.2s ease',
+            }}
+          >
+            <img src={proj.img} alt={proj.name} style={{ width: 38, height: 38, borderRadius: 8, objectFit: 'cover', flexShrink: 0, filter: i === active ? 'none' : 'grayscale(0.6)' }} />
+            <div style={{ flex: 1, minWidth: 0 }}>
+              <div style={{ fontFamily: 'var(--font-heading, sans-serif)', fontWeight: 800, fontSize: '0.78rem', color: DARK, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{proj.name}</div>
+              <div style={{ fontSize: '0.62rem', color: '#9ca3af', marginTop: 1 }}>{proj.category}</div>
+            </div>
+            <div style={{ fontSize: '0.6rem', fontWeight: 700, color: proj.color, background: `${proj.color}15`, padding: '2px 7px', borderRadius: 999, whiteSpace: 'nowrap' }}>{proj.result}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+// ─── Ancien Carrousel Projets Hero ───────────────────────────────────────────
 function HeroProjectsCarousel() {
   const [active, setActive] = useState(0);
   const [isHovered, setIsHovered] = useState(false);
@@ -447,10 +532,8 @@ export default function HomepageDemo5() {
 
             </div>
 
-            {/* Colonne Selected Work — Triptyque */}
-            <div style={{ borderRadius: 24, overflow: 'hidden' }}>
-              <Triptych />
-            </div>
+            {/* Colonne Selected Work — News Carrousel */}
+            <NewsCarousel />
           </div>
         </div>
 
