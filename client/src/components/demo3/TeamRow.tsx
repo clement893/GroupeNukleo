@@ -1,21 +1,52 @@
 import { useState } from 'react';
 
-const DARK = '#0A0A0A';
 const TEAM_IMGS = ['/demo/team-1.jpg', '/demo/team-2.jpg', '/demo/team-3.jpg', '/demo/team-4.jpg'];
 
 const TEAM_MEMBERS = [
-  { name: 'Clément Laberge',    role: 'Founder & CEO',          img: TEAM_IMGS[0], color: '#7c3aed' },
-  { name: 'Marie-Ève Tremblay', role: 'Creative Director',      img: TEAM_IMGS[1], color: '#f97316' },
-  { name: 'Alexandre Côté',     role: 'Head of Tech',           img: TEAM_IMGS[2], color: '#2563eb' },
-  { name: 'Sophie Nguyen',      role: 'Strategy Lead',          img: TEAM_IMGS[3], color: '#059669' },
+  {
+    name: 'Clément Laberge',
+    role: 'Founder & CEO',
+    tagline: 'Audacieux en stratégie.\nAssumé en tant que fondateur.\nFort en tant que PDG.',
+    img: TEAM_IMGS[0],
+    color: '#7c3aed',
+    bio: 'Fondateur de Nukleo, Clément pilote la vision et la croissance de l\'agence. Passionné par la transformation numérique et l\'IA appliquée, il accompagne les organisations vers l\'excellence digitale depuis plus de 15 ans.',
+  },
+  {
+    name: 'Marie-Ève Tremblay',
+    role: 'Creative Director',
+    tagline: 'Créative dans l\'âme.\nExigeante dans l\'exécution.\nLeader en design.',
+    img: TEAM_IMGS[1],
+    color: '#f97316',
+    bio: 'Directrice créative, Marie-Ève donne vie aux marques à travers des expériences visuelles mémorables. Elle dirige le Studio Nukleo avec une vision forte et un sens aigu de l\'esthétique.',
+  },
+  {
+    name: 'Alexandre Côté',
+    role: 'Head of Tech',
+    tagline: 'Architecte technique.\nIntégrateur d\'IA.\nBâtisseur de produits.',
+    img: TEAM_IMGS[2],
+    color: '#2563eb',
+    bio: 'Architecte technique, Alexandre pilote les solutions digitales et intègre l\'IA au cœur des produits Nukleo. Il conçoit des systèmes robustes, scalables et orientés performance.',
+  },
+  {
+    name: 'Sophie Nguyen',
+    role: 'Strategy Lead',
+    tagline: 'Stratège numérique.\nOrientée résultats.\nPassionnée de données.',
+    img: TEAM_IMGS[3],
+    color: '#059669',
+    bio: 'Stratège digitale, Sophie accompagne les organisations dans leur transformation numérique. Elle conçoit des feuilles de route claires, mesurables et alignées sur les objectifs d\'affaires.',
+  },
 ];
 
-export function TeamRow() {
-  const [activeIndex, setActiveIndex] = useState(0);
+// Constantes pile
+const CARD_W = 260;
+const CARD_H = 360;
+const STACK_OVERFLOW = 48;
 
-  const goTo = (i: number) => setActiveIndex(i);
-  const prev = () => setActiveIndex((a) => Math.max(0, a - 1));
-  const next = () => setActiveIndex((a) => Math.min(TEAM_MEMBERS.length - 1, a + 1));
+export function TeamRow() {
+  const [active, setActive] = useState(0);
+
+  const prev = () => setActive((a) => Math.max(0, a - 1));
+  const next = () => setActive((a) => Math.min(TEAM_MEMBERS.length - 1, a + 1));
 
   const handleWheel = (e: React.WheelEvent) => {
     e.preventDefault();
@@ -23,32 +54,82 @@ export function TeamRow() {
     else prev();
   };
 
-  const CARD_W = 220;
-  const CARD_H = 300;
-  const STACK_OVERFLOW = 36;
+  const m = TEAM_MEMBERS[active];
 
   return (
     <div
-      className="rounded-3xl overflow-hidden flex flex-col"
-      style={{ background: DARK, margin: '0 6%', marginBottom: 48 }}
+      style={{ padding: '64px 6%', marginBottom: 48 }}
       onWheel={handleWheel}
     >
-      <div className="flex flex-col items-center gap-7 flex-1 px-8 py-10">
-        {/* Pile de cartes 3D */}
+      {/* Grille 3 colonnes */}
+      <div style={{
+        display: 'grid',
+        gridTemplateColumns: '1fr auto 1fr',
+        gap: '5vw',
+        alignItems: 'center',
+      }}>
+
+        {/* ── COLONNE GAUCHE : nom + tagline ── */}
+        <div>
+          <h3 style={{
+            fontFamily: 'var(--font-heading, sans-serif)',
+            fontWeight: 900,
+            fontSize: 'clamp(1.6rem, 2.6vw, 2.6rem)',
+            lineHeight: 1.05,
+            letterSpacing: '-0.03em',
+            color: '#0A0A0A',
+            marginBottom: 16,
+          }}>
+            {m.name}
+          </h3>
+          <div style={{ width: 40, height: 2.5, background: m.color, borderRadius: 999, marginBottom: 20, transition: 'background 0.4s' }} />
+          <p style={{
+            fontSize: '0.9rem',
+            color: '#374151',
+            lineHeight: 1.9,
+            whiteSpace: 'pre-line',
+          }}>
+            {m.tagline}
+          </p>
+
+          {/* Dots */}
+          <div style={{ display: 'flex', gap: 8, marginTop: 36 }}>
+            {TEAM_MEMBERS.map((_, i) => (
+              <button
+                key={i}
+                onClick={() => setActive(i)}
+                style={{
+                  width: i === active ? 28 : 8, height: 8, borderRadius: 999,
+                  padding: 0, border: 'none', cursor: 'pointer',
+                  background: i === active ? m.color : '#d1d5db',
+                  transition: 'all 0.35s ease',
+                }}
+              />
+            ))}
+          </div>
+        </div>
+
+        {/* ── COLONNE CENTRE : pile de photos avec scroll vertical ── */}
         <div
           style={{
-            perspective: '1200px',
-            width: `${CARD_W}px`,
-            height: `${CARD_H + STACK_OVERFLOW}px`,
             position: 'relative',
+            width: CARD_W,
+            height: CARD_H + STACK_OVERFLOW,
+            perspective: '1200px',
+            flexShrink: 0,
           }}
         >
           {TEAM_MEMBERS.map((member, i) => {
-            const offset = i - activeIndex;
-            const isActive = i === activeIndex;
+            const offset = i - active;
+            const isActive = i === active;
             const isBelow = offset > 0;
             const isAbove = offset < 0;
-            const translateY = isActive ? '0px' : isBelow ? `${offset * 16}px` : `${offset * 160}px`;
+
+            const translateY = isActive
+              ? '0px'
+              : isBelow
+              ? `${offset * 18}px`
+              : `${offset * 180}px`;
             const translateZ = isActive ? '0px' : isBelow ? `${-offset * 50}px` : '0px';
             const scale = isActive ? 1 : isBelow ? Math.max(0.78, 1 - offset * 0.07) : 0.95;
             const opacity = isAbove ? 0 : isBelow ? Math.max(0.1, 1 - offset * 0.32) : 1;
@@ -57,82 +138,114 @@ export function TeamRow() {
             return (
               <div
                 key={member.name}
-                className="absolute rounded-2xl overflow-hidden cursor-pointer"
-                onClick={() => isBelow && goTo(i)}
+                onClick={() => isBelow && setActive(i)}
                 style={{
-                  width: `${CARD_W}px`,
-                  height: `${CARD_H}px`,
-                  top: 0,
-                  left: 0,
+                  position: 'absolute',
+                  top: 0, left: 0,
+                  width: CARD_W,
+                  height: CARD_H,
+                  borderRadius: 20,
+                  overflow: 'hidden',
+                  cursor: isBelow ? 'pointer' : 'default',
                   transform: `translateY(${translateY}) translateZ(${translateZ}) scale(${scale})`,
                   opacity,
                   zIndex,
                   transition: 'transform 0.55s cubic-bezier(0.25, 0.46, 0.45, 0.94), opacity 0.45s ease',
                   transformStyle: 'preserve-3d',
                   boxShadow: isActive
-                    ? '0 40px 80px rgba(0,0,0,0.7), 0 0 0 1px rgba(255,255,255,0.08)'
-                    : '0 12px 30px rgba(0,0,0,0.5)',
+                    ? '0 32px 64px rgba(0,0,0,0.22), 0 0 0 1px rgba(0,0,0,0.06)'
+                    : '0 8px 24px rgba(0,0,0,0.12)',
                 }}
               >
                 <img
                   src={member.img}
                   alt={member.name}
-                  className="w-full h-full object-cover"
-                  style={{ filter: isActive ? 'grayscale(0)' : 'grayscale(0.7) brightness(0.65)' }}
+                  style={{
+                    width: '100%', height: '100%',
+                    objectFit: 'cover', objectPosition: 'top center',
+                    filter: isActive ? 'grayscale(0)' : 'grayscale(0.6) brightness(0.7)',
+                    transition: 'filter 0.5s ease',
+                  }}
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
+                <div style={{
+                  position: 'absolute', inset: 0,
+                  background: 'linear-gradient(to top, rgba(0,0,0,0.35) 0%, transparent 50%)',
+                }} />
                 {isBelow && offset <= 2 && (
-                  <div className="absolute top-4 right-4 text-white/25 font-heading font-black text-sm">
+                  <div style={{
+                    position: 'absolute', top: 14, right: 14,
+                    fontSize: '0.7rem', fontWeight: 800, color: 'rgba(255,255,255,0.3)',
+                    letterSpacing: '0.1em',
+                  }}>
                     0{i + 1}
                   </div>
                 )}
               </div>
             );
           })}
-        </div>
 
-        {/* Nom + rôle + dots + flèches */}
-        <div className="flex flex-col items-center gap-2 text-center shrink-0">
-          <div style={{ minHeight: '52px' }}>
-            <p
-              className="font-heading font-bold text-white text-xl leading-tight"
-              key={activeIndex}
-              style={{ animation: 'fadeUp 0.4s ease forwards' }}
-            >
-              {TEAM_MEMBERS[activeIndex].name}
-            </p>
-            <p className="text-white/40 text-sm mt-1">{TEAM_MEMBERS[activeIndex].role}</p>
-          </div>
-          <div className="flex gap-2">
-            {TEAM_MEMBERS.map((_, i) => (
-              <button
-                key={i}
-                onClick={() => goTo(i)}
-                className="h-[2px] rounded-full transition-all duration-300"
-                style={{
-                  width: i === activeIndex ? '28px' : '10px',
-                  background: i === activeIndex ? TEAM_MEMBERS[activeIndex].color : 'rgba(255,255,255,0.2)',
-                }}
-              />
-            ))}
-          </div>
-          <div className="flex gap-2">
+          {/* Flèches ↑↓ */}
+          <div style={{
+            position: 'absolute',
+            bottom: -48,
+            left: '50%',
+            transform: 'translateX(-50%)',
+            display: 'flex',
+            gap: 8,
+          }}>
             <button
               onClick={prev}
-              disabled={activeIndex === 0}
-              className="w-8 h-8 rounded-full border border-white/15 flex items-center justify-center text-white/50 hover:text-white hover:border-white/40 transition-all disabled:opacity-20 text-sm"
+              disabled={active === 0}
+              style={{
+                width: 34, height: 34, borderRadius: '50%',
+                border: '1.5px solid #d1d5db', background: '#fff',
+                cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center',
+                opacity: active === 0 ? 0.3 : 1, transition: 'opacity 0.2s',
+              }}
             >
-              ↑
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#0A0A0A" strokeWidth="2.5">
+                <polyline points="18 15 12 9 6 15" />
+              </svg>
             </button>
             <button
               onClick={next}
-              disabled={activeIndex === TEAM_MEMBERS.length - 1}
-              className="w-8 h-8 rounded-full border border-white/15 flex items-center justify-center text-white/50 hover:text-white hover:border-white/40 transition-all disabled:opacity-20 text-sm"
+              disabled={active === TEAM_MEMBERS.length - 1}
+              style={{
+                width: 34, height: 34, borderRadius: '50%',
+                border: '1.5px solid #d1d5db', background: '#fff',
+                cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center',
+                opacity: active === TEAM_MEMBERS.length - 1 ? 0.3 : 1, transition: 'opacity 0.2s',
+              }}
             >
-              ↓
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#0A0A0A" strokeWidth="2.5">
+                <polyline points="6 9 12 15 18 9" />
+              </svg>
             </button>
           </div>
         </div>
+
+        {/* ── COLONNE DROITE : bio ── */}
+        <div>
+          <p style={{
+            fontSize: 'clamp(0.88rem, 1.05vw, 1rem)',
+            color: '#4b5563',
+            lineHeight: 1.85,
+          }}>
+            {m.bio}
+          </p>
+          <p style={{
+            marginTop: 24,
+            fontSize: '0.72rem',
+            fontWeight: 700,
+            letterSpacing: '0.2em',
+            textTransform: 'uppercase',
+            color: m.color,
+            transition: 'color 0.4s',
+          }}>
+            {m.role}
+          </p>
+        </div>
+
       </div>
     </div>
   );
