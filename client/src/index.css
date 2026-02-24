@@ -575,4 +575,36 @@
     0%, 49% { opacity: 1; }
     50%, 100% { opacity: 0; }
   }
+
+  /* Hero WOW — staggered reveal */
+  @keyframes hero-reveal {
+    from {
+      opacity: 0;
+      transform: translateY(28px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Hero gradient shimmer */
+  @keyframes hero-shimmer {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+
+  /* Hero orb float */
+  @keyframes hero-orb-float {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    33% { transform: translate(6%, -4%) scale(1.02); }
+    66% { transform: translate(-4%, 5%) scale(0.98); }
+  }
+
+  /* Hero scroll indicator bounce */
+  @keyframes hero-scroll-bounce {
+    0%, 100% { transform: translateY(0); opacity: 0.5; }
+    50% { transform: translateY(6px); opacity: 1; }
+  }
 }

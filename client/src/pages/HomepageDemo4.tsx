@@ -57,71 +57,144 @@ const PROJECTS = [
   },
 ];
 
-// ─── HERO TYPEWRITER ────────────────────────────────────────────────────────
-const HERO_TEXT = [
-  { text: "Augmenter votre ", purple: false },
-  { text: "Performance", purple: true },
-  { text: "\npar L'", purple: false },
-  { text: "Excellence", purple: true },
-  { text: " numérique", purple: false },
+// ─── HERO WOW — Cinématique, gradient, révélations échelonnées ───────────────
+const HERO_LINES = [
+  { words: ['Augmenter votre ', { text: 'Performance', gradient: true }] },
+  { words: ["par L'", { text: 'Excellence', gradient: true }, ' numérique'] },
 ];
 
-function HeroTypewriter() {
-  const [visibleLength, setVisibleLength] = useState(0);
-  const fullText = HERO_TEXT.map((s) => s.text).join('');
-  const totalLength = fullText.length;
+function HeroWow() {
+  const [mounted, setMounted] = useState(false);
+  const getLocalizedPath = useLocalizedPath();
 
   useEffect(() => {
-    if (visibleLength >= totalLength) return;
-    const t = setTimeout(() => setVisibleLength((n) => n + 1), 50);
+    const t = setTimeout(() => setMounted(true), 100);
     return () => clearTimeout(t);
-  }, [visibleLength, totalLength]);
-
-  let charIndex = 0;
-  const segments = HERO_TEXT.map((seg) => {
-    const start = charIndex;
-    const end = charIndex + seg.text.length;
-    charIndex = end;
-    const take = Math.max(0, Math.min(seg.text.length, visibleLength - start));
-    const visiblePart = seg.text.slice(0, take);
-    return { ...seg, visiblePart };
-  });
+  }, []);
 
   return (
-    <h1
-      className="font-heading font-black leading-[0.9] tracking-tight text-left"
-      style={{
-        fontSize: 'clamp(2.5rem, 8vw, 6.5rem)',
-        color: DARK,
-      }}
-    >
-      {segments.map((seg, i) =>
-        seg.visiblePart ? (
-          seg.purple ? (
-            <span key={i} style={{ color: NUKLEO_PURPLE }}>
-              {seg.visiblePart.replace(/\n/g, '')}
-              {seg.text.startsWith('\n') && seg.visiblePart && <br />}
-            </span>
-          ) : (
-            <span key={i}>
-              {seg.visiblePart.split('\n').map((line, j) => (
-                <span key={j}>
-                  {line}
-                  {j < seg.visiblePart!.split('\n').length - 1 && <br />}
-                </span>
-              ))}
-            </span>
-          )
-        ) : null
-      )}
-      {visibleLength < totalLength && (
-        <span
-          className="inline-block w-[0.08em] h-[0.9em] ml-[0.02em] bg-current align-middle"
-          style={{ color: DARK, animation: 'typewriter-blink 0.8s step-end infinite' }}
-          aria-hidden
+    <section className="relative min-h-[70vh] lg:min-h-[85vh] flex flex-col justify-center overflow-hidden">
+      {/* Orbs flottants en arrière-plan */}
+      <div className="absolute inset-0 pointer-events-none" aria-hidden>
+        <div
+          className="absolute w-[min(80vw,500px)] h-[min(80vw,500px)] rounded-full opacity-[0.12] blur-[80px]"
+          style={{
+            background: 'radial-gradient(circle, rgba(124,58,237,0.4) 0%, transparent 70%)',
+            top: '10%',
+            right: '-5%',
+            animation: 'hero-orb-float 12s ease-in-out infinite',
+          }}
         />
-      )}
-    </h1>
+        <div
+          className="absolute w-[min(60vw,400px)] h-[min(60vw,400px)] rounded-full opacity-[0.08] blur-[60px]"
+          style={{
+            background: 'radial-gradient(circle, rgba(139,92,246,0.5) 0%, transparent 70%)',
+            bottom: '5%',
+            left: '-3%',
+            animation: 'hero-orb-float 15s ease-in-out infinite 2s',
+          }}
+        />
+      </div>
+
+      {/* Titre principal */}
+      <h1
+        className="font-heading font-black leading-[0.88] tracking-tight text-left relative z-10"
+        style={{
+          fontSize: 'clamp(3rem, 9vw, 8rem)',
+          color: DARK,
+        }}
+      >
+        {HERO_LINES.map((line, lineIdx) => (
+          <span key={lineIdx} className="block">
+            {line.words.map((word, wordIdx) => {
+              if (typeof word === 'string') {
+                return (
+                  <span
+                    key={wordIdx}
+                    className="inline"
+                    style={{
+                      animation: mounted ? 'hero-reveal 0.8s cubic-bezier(0.16,1,0.3,1) forwards' : 'none',
+                      opacity: mounted ? 1 : 0,
+                      animationDelay: `${lineIdx * 0.35 + wordIdx * 0.12}s`,
+                      animationFillMode: 'both',
+                    }}
+                  >
+                    {word}
+                  </span>
+                );
+              }
+              const w = word as { text: string; gradient: boolean };
+              return (
+                <span
+                  key={wordIdx}
+                  className="inline-block"
+                  style={{
+                    background: 'linear-gradient(105deg, #7c3aed 0%, #a78bfa 25%, #c4b5fd 50%, #7c3aed 75%, #6d28d9 100%)',
+                    backgroundSize: '200% 200%',
+                    backgroundClip: 'text',
+                    WebkitBackgroundClip: 'text',
+                    color: 'transparent',
+                    animation: mounted
+                      ? 'hero-reveal 0.8s cubic-bezier(0.16,1,0.3,1) forwards, hero-shimmer 6s ease-in-out infinite 1.5s'
+                      : 'none',
+                    opacity: mounted ? 1 : 0,
+                    animationDelay: `${lineIdx * 0.35 + wordIdx * 0.12}s`,
+                    animationFillMode: 'both',
+                  }}
+                >
+                  {w.text}
+                </span>
+              );
+            })}
+            {lineIdx < HERO_LINES.length - 1 && <br />}
+          </span>
+        ))}
+      </h1>
+
+      {/* Sous-titre / CTA */}
+      <div
+        className="mt-8 lg:mt-12 flex flex-wrap items-center gap-6"
+        style={{
+          animation: mounted ? 'hero-reveal 0.8s cubic-bezier(0.16,1,0.3,1) forwards' : 'none',
+          opacity: mounted ? 1 : 0,
+          animationDelay: '0.9s',
+          animationFillMode: 'both',
+        }}
+      >
+        <Link
+          href={getLocalizedPath('/start-project')}
+          className="inline-flex items-center justify-center px-8 py-4 rounded-full font-semibold text-sm tracking-widest uppercase transition-all duration-300 hover:scale-[1.02] hover:shadow-xl"
+          style={{ color: 'white', backgroundColor: DARK }}
+        >
+          Start a project
+        </Link>
+        <span className="text-sm font-medium tracking-wide" style={{ color: `${DARK}60` }}>
+          Agence de performance digitale · Montréal
+        </span>
+      </div>
+
+      {/* Indicateur de scroll */}
+      <div
+        className="absolute bottom-8 left-0 right-0 flex justify-center"
+        style={{
+          animation: mounted ? 'hero-reveal 0.6s cubic-bezier(0.16,1,0.3,1) 1.2s forwards' : 'none',
+          opacity: mounted ? 1 : 0,
+        }}
+      >
+        <div
+          className="w-8 h-12 rounded-full border-2 flex items-start justify-center pt-2"
+          style={{ borderColor: `${DARK}25` }}
+        >
+          <div
+            className="w-1 h-2 rounded-full"
+            style={{
+              backgroundColor: `${DARK}40`,
+              animation: 'hero-scroll-bounce 2s ease-in-out infinite',
+            }}
+          />
+        </div>
+      </div>
+    </section>
   );
 }
 
@@ -675,7 +748,7 @@ export default function HomepageDemo4() {
             HÉRO — TITRE PRINCIPAL
         ══════════════════════════════════════════════════════════════════════ */}
         <div className="pt-7 lg:pt-14 pb-[2.625rem] lg:pb-[4.375rem]">
-          <HeroTypewriter />
+          <HeroWow />
         </div>
 
         {/* ══════════════════════════════════════════════════════════════════════
