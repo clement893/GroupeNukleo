@@ -511,8 +511,10 @@ export default function HomepageDemo5() {
         background: 'rgba(245,243,239,0.82)', backdropFilter: 'blur(16px)',
         borderBottom: '1px solid rgba(10,10,10,0.06)',
       }}>
-        <Link href={getLocalizedPath('/')}>
-          <img src="/demo/nukleo-logo-rvb.svg" alt="Nukleo" style={{ height: 64, width: 'auto' }} />
+        <Link href={getLocalizedPath('/')} style={{ textDecoration: 'none' }}>
+          <span style={{ fontFamily: 'var(--font-heading, sans-serif)', fontWeight: 900, fontSize: 'clamp(0.85rem, 1.4vw, 1.05rem)', letterSpacing: '-0.02em', color: '#0A0A0A', lineHeight: 1 }}>
+            Choisissez<br /><span style={{ background: 'linear-gradient(90deg, #7B1D3A, #6B21A8)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>L'intelligence</span>
+          </span>
         </Link>
         <nav style={{ display: 'flex', alignItems: 'center', gap: '2rem' }} className="hidden lg:flex">
           {NAV_LINKS.map(l => (
