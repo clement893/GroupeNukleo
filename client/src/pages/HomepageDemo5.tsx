@@ -667,7 +667,7 @@ export default function HomepageDemo5() {
                       </div>
                       <span style={{ fontSize: '0.58rem', fontWeight: 800, letterSpacing: '0.18em', color: 'rgba(255,255,255,0.4)', textTransform: 'uppercase' }}>Nukleo Digital</span>
                     </div>
-                    <p style={{ fontFamily: 'var(--font-heading, sans-serif)', fontWeight: 900, fontSize: 'clamp(1.05rem, 1.8vw, 1.45rem)', lineHeight: 1.1, letterSpacing: '-0.03em', marginBottom: 19 }}>
+                    <p style={{ fontFamily: 'var(--font-heading, sans-serif)', fontWeight: 900, fontSize: 'clamp(1.6rem, 2.8vw, 2.4rem)', lineHeight: 1.08, letterSpacing: '-0.03em', marginBottom: 24 }}>
                       <span style={{ background: `linear-gradient(90deg, #fff 0%, rgba(255,255,255,0.75) 100%)`, WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>Accroître votre</span><br />
                       <span style={{ background: `linear-gradient(90deg, ${PURPLE} 0%, #a78bfa 50%, ${BORDEAUX} 100%)`, WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>performance</span><br />
                       <span style={{ background: `linear-gradient(90deg, #fff 0%, rgba(255,255,255,0.75) 100%)`, WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>par l'excellence</span><br />
@@ -723,7 +723,7 @@ export default function HomepageDemo5() {
         {/* ════════════════════════════════════════════════════════════════════
             SECTION 3 — STATS + CITATION ÉDITORIALE
         ════════════════════════════════════════════════════════════════════ */}
-        <div style={{ padding: '56px 6%', display: 'grid', gridTemplateColumns: '1fr 2fr 1fr', gap: 24, alignItems: 'center' }}>
+        <div style={{ padding: '56px 6%', marginBottom: 180, display: 'grid', gridTemplateColumns: '1fr 2fr 1fr', gap: 24, alignItems: 'center' }}>
 
           {/* Stat gauche */}
           <div style={{ textAlign: 'center' }}>
