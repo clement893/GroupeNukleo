@@ -347,7 +347,7 @@ export default function HomepageDemo5() {
             <img
               src="/demo/nukleo-logo-rvb.svg"
               alt="Nukleo"
-              style={{ height: 'clamp(3.5rem, 8vw, 7rem)', width: 'auto', display: 'block' }}
+              style={{ height: 'clamp(5rem, 12vw, 11rem)', width: 'auto', display: 'block' }}
             />
           </div>
 
