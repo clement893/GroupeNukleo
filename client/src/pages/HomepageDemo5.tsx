@@ -771,11 +771,7 @@ export default function HomepageDemo5() {
         {/* ════════════════════════════════════════════════════════════════════
             SECTION 4 — DÉPARTEMENTS
         ════════════════════════════════════════════════════════════════════ */}
-        <div style={{ padding: '0 6%', marginBottom: 48 }}>
-          <div style={{ borderRadius: 24, overflow: 'hidden' }}>
-            <DepartmentsWidget />
-          </div>
-        </div>
+        <DepartmentsWidget />
 
         {/* ════════════════════════════════════════════════════════════════════
             SECTION 4b — ÉQUIPE HORIZONTALE
