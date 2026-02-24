@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 
 const TEAM_IMGS = ['/demo/team-1.jpg', '/demo/team-2.jpg', '/demo/team-3.jpg', '/demo/team-4.jpg'];
 
@@ -38,28 +38,36 @@ const TEAM_MEMBERS = [
 ];
 
 // Constantes pile
-const CARD_W = 260;
-const CARD_H = 360;
-const STACK_OVERFLOW = 48;
+const CARD_W = 520;
+const CARD_H = 720;
+const STACK_OVERFLOW = 80;
 
 export function TeamRow() {
   const [active, setActive] = useState(0);
+  const stackRef = useRef<HTMLDivElement>(null);
 
   const prev = () => setActive((a) => Math.max(0, a - 1));
   const next = () => setActive((a) => Math.min(TEAM_MEMBERS.length - 1, a + 1));
 
-  const handleWheel = (e: React.WheelEvent) => {
-    e.preventDefault();
-    if (e.deltaY > 0) next();
-    else prev();
-  };
+  // Attacher le wheel listener en non-passif sur la pile uniquement
+  useEffect(() => {
+    const el = stackRef.current;
+    if (!el) return;
+    const onWheel = (e: WheelEvent) => {
+      e.preventDefault();
+      e.stopPropagation();
+      if (e.deltaY > 0) setActive((a) => Math.min(TEAM_MEMBERS.length - 1, a + 1));
+      else setActive((a) => Math.max(0, a - 1));
+    };
+    el.addEventListener('wheel', onWheel, { passive: false });
+    return () => el.removeEventListener('wheel', onWheel);
+  }, []);
 
   const m = TEAM_MEMBERS[active];
 
   return (
     <div
       style={{ padding: '64px 6%', marginBottom: 48 }}
-      onWheel={handleWheel}
     >
       {/* Grille 3 colonnes */}
       <div style={{
@@ -111,12 +119,14 @@ export function TeamRow() {
 
         {/* ── COLONNE CENTRE : pile de photos avec scroll vertical ── */}
         <div
+          ref={stackRef}
           style={{
             position: 'relative',
             width: CARD_W,
             height: CARD_H + STACK_OVERFLOW,
             perspective: '1200px',
             flexShrink: 0,
+            cursor: 'ns-resize',
           }}
         >
           {TEAM_MEMBERS.map((member, i) => {
