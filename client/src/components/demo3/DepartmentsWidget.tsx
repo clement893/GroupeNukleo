@@ -1,4 +1,3 @@
-import { useRef } from 'react';
 import { Link } from 'wouter';
 import { useLocalizedPath } from '@/hooks/useLocalizedPath';
 
@@ -10,6 +9,8 @@ const DEPARTMENTS = [
     href: '/services/agency',
     color: '#7B1D3A',
     img: '/demo/dept-agency.jpg',
+    height: 460,   // grande
+    offsetTop: 60, // décalée vers le bas
   },
   {
     num: '02',
@@ -18,6 +19,8 @@ const DEPARTMENTS = [
     href: '/services/studio',
     color: '#4338ca',
     img: '/demo/dept-studio.jpg',
+    height: 560,   // la plus grande — carte centrale
+    offsetTop: 0,  // alignée en haut
   },
   {
     num: '03',
@@ -26,6 +29,8 @@ const DEPARTMENTS = [
     href: '/services/tech',
     color: '#0f172a',
     img: '/demo/dept-tech.jpg',
+    height: 520,   // grande
+    offsetTop: 30, // légèrement décalée
   },
   {
     num: '04',
@@ -34,19 +39,23 @@ const DEPARTMENTS = [
     href: '/services/consulting',
     color: '#7B1D3A',
     img: '/demo/dept-consulting.jpg',
+    height: 460,   // même que Agency
+    offsetTop: 80, // la plus décalée
   },
 ];
 
+// Hauteur totale du conteneur = max(height + offsetTop) de toutes les cartes
+const CONTAINER_HEIGHT = Math.max(...DEPARTMENTS.map(d => d.height + d.offsetTop)) + 40;
+
 export function DepartmentsWidget() {
   const getLocalizedPath = useLocalizedPath();
-  const scrollRef = useRef<HTMLDivElement>(null);
 
   return (
-    <div style={{ marginBottom: 48 }}>
+    <div style={{ marginBottom: 64 }}>
       {/* En-tête */}
       <div style={{
         padding: '0 6%',
-        display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', marginBottom: 28,
+        display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', marginBottom: 32,
       }}>
         <h2 style={{
           fontFamily: 'var(--font-heading, sans-serif)', fontWeight: 900,
@@ -59,103 +68,107 @@ export function DepartmentsWidget() {
         </Link>
       </div>
 
-      {/* Piste de scroll horizontal — déborde sur les bords */}
+      {/* Piste de scroll horizontal avec cartes décalées */}
       <div
-        ref={scrollRef}
         style={{
-          display: 'flex',
-          gap: 16,
+          position: 'relative',
+          height: CONTAINER_HEIGHT,
           overflowX: 'auto',
-          scrollSnapType: 'x mandatory',
-          scrollPaddingLeft: '6vw',
+          overflowY: 'visible',
           paddingLeft: '6vw',
           paddingRight: '6vw',
-          paddingBottom: 4,
-          cursor: 'grab',
-          /* masquer la scrollbar */
           msOverflowStyle: 'none',
           scrollbarWidth: 'none',
         } as React.CSSProperties}
       >
-        {DEPARTMENTS.map((dept) => (
-          <Link
-            key={dept.num}
-            href={getLocalizedPath(dept.href)}
-            style={{
-              flexShrink: 0,
-              scrollSnapAlign: 'start',
-              width: 'clamp(300px, 42vw, 520px)',
-              height: 'clamp(400px, 58vh, 600px)',
-              borderRadius: 24,
-              background: dept.color,
-              position: 'relative',
-              overflow: 'hidden',
-              textDecoration: 'none',
-              display: 'flex',
-              flexDirection: 'column',
-              justifyContent: 'space-between',
-              padding: '1.8rem',
-            }}
-          >
-            {/* Image en haut à gauche */}
-            <div style={{
-              width: 'clamp(120px, 32%, 180px)',
-              aspectRatio: '1/1',
-              borderRadius: 14,
-              overflow: 'hidden',
-              background: 'rgba(255,255,255,0.15)',
-              flexShrink: 0,
-            }}>
-              <img
-                src={dept.img}
-                alt={dept.name}
-                style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-              />
-            </div>
-
-            {/* Bas — nom en très grand + flèche */}
-            <div style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between' }}>
-              <div>
-                <p style={{
-                  fontSize: '0.56rem', fontWeight: 700, letterSpacing: '0.22em',
-                  textTransform: 'uppercase', color: 'rgba(255,255,255,0.4)', marginBottom: 6,
-                }}>
-                  Nukleo.{dept.name}
-                </p>
-                <span style={{
-                  fontFamily: 'var(--font-heading, sans-serif)',
-                  fontWeight: 900,
-                  fontSize: 'clamp(3rem, 7vw, 5.5rem)',
-                  lineHeight: 0.88,
-                  letterSpacing: '-0.04em',
-                  color: '#fff',
-                  display: 'block',
-                }}>
-                  {dept.name}
-                </span>
-              </div>
-
-              {/* Flèche ↗ */}
+        {/* Conteneur interne flex pour les cartes */}
+        <div style={{
+          display: 'flex',
+          gap: 16,
+          alignItems: 'flex-start',
+          height: '100%',
+          width: 'max-content',
+        }}>
+          {DEPARTMENTS.map((dept) => (
+            <Link
+              key={dept.num}
+              href={getLocalizedPath(dept.href)}
+              style={{
+                flexShrink: 0,
+                width: 'clamp(260px, 38vw, 460px)',
+                height: dept.height,
+                marginTop: dept.offsetTop,
+                borderRadius: 24,
+                background: dept.color,
+                position: 'relative',
+                overflow: 'hidden',
+                textDecoration: 'none',
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'space-between',
+                padding: '1.6rem',
+                transition: 'transform 0.3s ease, box-shadow 0.3s ease',
+                boxShadow: '0 12px 40px rgba(0,0,0,0.18)',
+              }}
+            >
+              {/* Image en haut à gauche */}
               <div style={{
-                width: 52, height: 52, borderRadius: '50%',
-                border: '1.5px solid rgba(255,255,255,0.35)',
-                display: 'flex', alignItems: 'center', justifyContent: 'center',
-                flexShrink: 0, marginLeft: 16,
+                width: 'clamp(110px, 30%, 160px)',
+                aspectRatio: '1/1',
+                borderRadius: 14,
+                overflow: 'hidden',
+                background: 'rgba(255,255,255,0.15)',
+                flexShrink: 0,
               }}>
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.2">
-                  <line x1="7" y1="17" x2="17" y2="7" />
-                  <polyline points="7 7 17 7 17 17" />
-                </svg>
+                <img
+                  src={dept.img}
+                  alt={dept.name}
+                  style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                />
               </div>
-            </div>
-          </Link>
-        ))}
+
+              {/* Bas — nom en très grand + flèche */}
+              <div style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between' }}>
+                <div>
+                  <p style={{
+                    fontSize: '0.55rem', fontWeight: 700, letterSpacing: '0.22em',
+                    textTransform: 'uppercase', color: 'rgba(255,255,255,0.4)', marginBottom: 6,
+                  }}>
+                    Nukleo.{dept.name}
+                  </p>
+                  <span style={{
+                    fontFamily: 'var(--font-heading, sans-serif)',
+                    fontWeight: 900,
+                    fontSize: 'clamp(2.8rem, 6vw, 5rem)',
+                    lineHeight: 0.88,
+                    letterSpacing: '-0.04em',
+                    color: '#fff',
+                    display: 'block',
+                  }}>
+                    {dept.name}
+                  </span>
+                </div>
+
+                {/* Flèche ↗ */}
+                <div style={{
+                  width: 50, height: 50, borderRadius: '50%',
+                  border: '1.5px solid rgba(255,255,255,0.35)',
+                  display: 'flex', alignItems: 'center', justifyContent: 'center',
+                  flexShrink: 0, marginLeft: 12,
+                }}>
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.2">
+                    <line x1="7" y1="17" x2="17" y2="7" />
+                    <polyline points="7 7 17 7 17 17" />
+                  </svg>
+                </div>
+              </div>
+            </Link>
+          ))}
+        </div>
       </div>
 
-      {/* Masquer la scrollbar webkit */}
-      <style>{`
-        div::-webkit-scrollbar { display: none; }
-      `}</style>
+      {/* Masquer scrollbar webkit */}
+      <style>{`div::-webkit-scrollbar { display: none; }`}</style>
     </div>
   );
 }
