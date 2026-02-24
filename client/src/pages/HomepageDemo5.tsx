@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 import { Link } from 'wouter';
 import { useLocalizedPath } from '@/hooks/useLocalizedPath';
 import { TeamScrollCards, DepartmentsWidget, DoubleLogoCarousel, ContactWidget } from '@/components/demo3';
@@ -43,6 +43,147 @@ function CountUp({ target, prefix = '', suffix = '', duration = 1800 }: { target
     return () => obs.disconnect();
   }, [target, duration]);
   return <span ref={ref}>{prefix}{val.toLocaleString()}{suffix}</span>;
+}
+
+// ─── Carrousel Projets Hero ─────────────────────────────────────────────────
+function HeroProjectsCarousel() {
+  const [active, setActive] = useState(0);
+  const [isHovered, setIsHovered] = useState(false);
+  const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
+  const getLocalizedPath = useLocalizedPath();
+
+  const next = useCallback(() => setActive(a => (a + 1) % PROJECTS.length), []);
+
+  useEffect(() => {
+    if (!isHovered) {
+      timerRef.current = setInterval(next, 3500);
+    }
+    return () => { if (timerRef.current) clearInterval(timerRef.current); };
+  }, [isHovered, next]);
+
+  const getWidth = (i: number) => {
+    const inactiveW = 9;
+    return i === active ? `${100 - (PROJECTS.length - 1) * inactiveW}%` : `${inactiveW}%`;
+  };
+
+  return (
+    <div
+      style={{ borderRadius: 24, overflow: 'hidden', position: 'relative', minHeight: 340, display: 'flex', flexDirection: 'column' }}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+    >
+      {/* Panneaux */}
+      <div style={{ display: 'flex', gap: 6, flex: 1, padding: 6, background: '#0a0a0a' }}>
+        {PROJECTS.map((p, i) => {
+          const isA = i === active;
+          return (
+            <div
+              key={p.num}
+              onClick={() => setActive(i)}
+              style={{
+                width: getWidth(i),
+                transition: 'width 0.6s cubic-bezier(0.77,0,0.175,1)',
+                borderRadius: 18,
+                overflow: 'hidden',
+                position: 'relative',
+                cursor: isA ? 'default' : 'pointer',
+                flexShrink: 0,
+              }}
+            >
+              {/* Image */}
+              <img
+                src={p.img}
+                alt={p.name}
+                style={{
+                  position: 'absolute', inset: 0, width: '100%', height: '100%',
+                  objectFit: 'cover',
+                  filter: isA ? 'grayscale(0) brightness(0.65)' : 'grayscale(1) brightness(0.28)',
+                  transition: 'filter 0.6s ease',
+                }}
+              />
+              {/* Gradient overlay */}
+              <div style={{
+                position: 'absolute', inset: 0,
+                background: isA
+                  ? 'linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.05) 55%, transparent 100%)'
+                  : 'rgba(0,0,0,0.5)',
+                transition: 'opacity 0.5s',
+              }} />
+              {/* Barre couleur panneau inactif */}
+              {!isA && (
+                <div style={{
+                  position: 'absolute', left: '50%', top: '25%', bottom: '25%',
+                  width: 2, background: p.color, opacity: 0.75,
+                  transform: 'translateX(-50%)',
+                  borderRadius: 999,
+                }} />
+              )}
+              {/* Nom vertical panneau inactif */}
+              {!isA && (
+                <div style={{
+                  position: 'absolute', top: '50%', left: '50%',
+                  transform: 'translate(-50%, -50%) rotate(-90deg)',
+                  whiteSpace: 'nowrap',
+                  color: 'rgba(255,255,255,0.45)',
+                  fontSize: '0.6rem', fontWeight: 700,
+                  letterSpacing: '0.22em', textTransform: 'uppercase',
+                }}>{p.name}</div>
+              )}
+              {/* Contenu panneau actif */}
+              {isA && (
+                <div style={{
+                  position: 'absolute', bottom: 0, left: 0, right: 0,
+                  padding: '2rem 2.2rem',
+                  zIndex: 2,
+                }}>
+                  {/* Numéro + catégorie */}
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: '0.6rem' }}>
+                    <span style={{ fontFamily: 'var(--font-heading, sans-serif)', fontWeight: 900, fontSize: '4rem', lineHeight: 1, color: 'rgba(255,255,255,0.08)', letterSpacing: '-0.04em' }}>{p.num}</span>
+                    <span style={{ fontSize: '0.58rem', fontWeight: 700, letterSpacing: '0.25em', textTransform: 'uppercase', color: p.color }}>{p.category}</span>
+                  </div>
+                  <h3 style={{
+                    fontFamily: 'var(--font-heading, sans-serif)', fontWeight: 900,
+                    fontSize: 'clamp(1.8rem, 3.5vw, 3.5rem)', lineHeight: 0.9,
+                    letterSpacing: '-0.03em', color: '#fff', marginBottom: '0.7rem',
+                  }}>{p.name}</h3>
+                  <p style={{ fontSize: '0.78rem', color: 'rgba(255,255,255,0.5)', lineHeight: 1.55, marginBottom: '1.1rem', maxWidth: 340 }}>{p.tagline}</p>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: 14 }}>
+                    <span style={{
+                      display: 'inline-flex', alignItems: 'center', gap: 5,
+                      background: p.color, color: '#fff',
+                      fontSize: '0.65rem', fontWeight: 700,
+                      padding: '0.35rem 0.9rem', borderRadius: 999,
+                    }}>{p.result}</span>
+                    <Link
+                      href={getLocalizedPath('/projects')}
+                      style={{ color: 'rgba(255,255,255,0.4)', fontSize: '0.65rem', fontWeight: 600, textDecoration: 'none', borderBottom: '1px solid rgba(255,255,255,0.2)', paddingBottom: 1 }}
+                    >View case →</Link>
+                  </div>
+                </div>
+              )}
+            </div>
+          );
+        })}
+      </div>
+
+      {/* Dots navigation */}
+      <div style={{ display: 'flex', justifyContent: 'center', gap: 6, padding: '10px 0 8px', background: '#0a0a0a' }}>
+        {PROJECTS.map((p, i) => (
+          <button
+            key={i}
+            onClick={() => setActive(i)}
+            style={{
+              border: 'none', cursor: 'pointer', padding: 0,
+              height: 3, borderRadius: 999,
+              width: i === active ? 28 : 8,
+              background: i === active ? PROJECTS[active].color : 'rgba(255,255,255,0.18)',
+              transition: 'all 0.3s ease',
+            }}
+          />
+        ))}
+      </div>
+    </div>
+  );
 }
 
 // ─── Triptyque projets ───────────────────────────────────────────────────────
@@ -314,33 +455,8 @@ export default function HomepageDemo5() {
 
             </div>
 
-            {/* Colonne MacBook */}
-            <div style={{
-              borderRadius: 24,
-              background: 'linear-gradient(135deg, #e8e4f5 0%, #dde8f5 50%, #e8f0f5 100%)',
-              display: 'flex', alignItems: 'center', justifyContent: 'center',
-              overflow: 'hidden', position: 'relative',
-              minHeight: 340,
-            }}>
-              {/* Orbes décoratifs */}
-              <div style={{ position: 'absolute', top: '15%', left: '20%', width: 180, height: 180, borderRadius: '50%', background: 'rgba(196,181,253,0.35)', filter: 'blur(40px)' }} />
-              <div style={{ position: 'absolute', bottom: '10%', right: '15%', width: 140, height: 140, borderRadius: '50%', background: 'rgba(147,197,253,0.3)', filter: 'blur(35px)' }} />
-              {/* MacBook mockup */}
-              <img
-                src="/demo/macbook-mockup.png"
-                alt="Nukleo projects"
-                style={{ width: '82%', maxWidth: 680, position: 'relative', zIndex: 1, filter: 'drop-shadow(0 30px 60px rgba(0,0,0,0.18))' }}
-                onError={(e) => {
-                  // Fallback si l'image n'existe pas
-                  const t = e.currentTarget.parentElement!;
-                  e.currentTarget.style.display = 'none';
-                  const div = document.createElement('div');
-                  div.style.cssText = 'text-align:center;padding:2rem;';
-                  div.innerHTML = `<p style="font-size:0.8rem;color:#9ca3af;">Mockup MacBook</p>`;
-                  t.appendChild(div);
-                }}
-              />
-            </div>
+            {/* Colonne Carrousel Projets */}
+            <HeroProjectsCarousel />
           </div>
         </div>
 
