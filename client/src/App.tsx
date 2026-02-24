@@ -85,6 +85,7 @@ const HomepageDemo = lazyWithRetry(() => import('./pages/HomepageDemo'));
 const HomepageDemo2 = lazyWithRetry(() => import('./pages/HomepageDemo2'));
 const HomepageDemo3 = lazyWithRetry(() => import('./pages/HomepageDemo3'));
 const HomepageDemo4 = lazyWithRetry(() => import('./pages/HomepageDemo4'));
+const HomepageDemo5 = lazyWithRetry(() => import('./pages/HomepageDemo5'));
 
 // New department pages
 const NukleoTech = lazyWithRetry(() => import("./pages/services/NukleoTech"));
@@ -166,6 +167,7 @@ function App() {
               <Route path="/demo2" component={HomepageDemo2} />
               <Route path="/demo3" component={HomepageDemo3} />
               <Route path="/demo4" component={HomepageDemo4} />
+              <Route path="/demo5" component={HomepageDemo5} />
               <Route path="/" component={Home} />
               <Route path="/projects" component={withPageVisibility(Projects, "/projects")} />
               <Route path="/about" component={withPageVisibility(About, "/about")} />
