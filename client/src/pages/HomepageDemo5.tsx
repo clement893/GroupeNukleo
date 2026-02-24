@@ -644,36 +644,7 @@ export default function HomepageDemo5() {
                 </div>
               </div>
 
-              {/* Résultat campagne */}
-              <div style={{
-                borderRadius: 20, padding: '1rem 1.1rem',
-                background: 'linear-gradient(145deg, rgba(255,255,255,0.92), rgba(245,243,239,0.97))',
-                boxShadow: '6px 6px 14px rgba(0,0,0,0.07), -4px -4px 10px rgba(255,255,255,0.75)',
-                display: 'flex', alignItems: 'center', gap: 12,
-              }}>
-                <div style={{ width: 52, height: 52, borderRadius: 12, overflow: 'hidden', flexShrink: 0 }}>
-                  <img src={WORK1} alt="campagne" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
-                </div>
-                <div>
-                  <div style={{ fontFamily: 'var(--font-heading, sans-serif)', fontWeight: 900, fontSize: '1.5rem', color: DARK, lineHeight: 1 }}>749k$</div>
-                  <div style={{ fontSize: '0.65rem', color: '#9ca3af', marginTop: 3 }}>amassés lors de notre<br />dernière campagne</div>
-                </div>
-              </div>
-
-              {/* CTA téléphone */}
-              <a href="tel:+14385431987" style={{
-                borderRadius: 20, padding: '0.85rem 1.1rem',
-                background: PURPLE,
-                display: 'flex', alignItems: 'center', gap: 10, textDecoration: 'none',
-                boxShadow: `0 6px 20px ${PURPLE}55`,
-              }}>
-                <div style={{ width: 32, height: 32, borderRadius: '50%', border: '1.5px solid rgba(255,255,255,0.4)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 01.01 1.18 2 2 0 012 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92z" /></svg>
-                </div>
-                <span style={{ color: '#fff', fontWeight: 700, fontSize: '0.85rem' }}>438 543 1987</span>
-              </a>
-
-              {/* Widget About Us — version forte */}
+              {/* Widget positionnement — version forte */}
               <div style={{
                 borderRadius: 20,
                 background: DARK,
@@ -696,12 +667,14 @@ export default function HomepageDemo5() {
                       </div>
                       <span style={{ fontSize: '0.58rem', fontWeight: 800, letterSpacing: '0.18em', color: 'rgba(255,255,255,0.4)', textTransform: 'uppercase' }}>Nukleo Digital</span>
                     </div>
-                    <p style={{ fontFamily: 'var(--font-heading, sans-serif)', fontWeight: 900, fontSize: 'clamp(1.1rem, 2vw, 1.5rem)', lineHeight: 1.1, letterSpacing: '-0.03em', marginBottom: 10 }}>
-                      <span style={{ background: `linear-gradient(90deg, #fff 0%, rgba(255,255,255,0.7) 100%)`, WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>Choisissez</span><br />
-                      <span style={{ background: `linear-gradient(90deg, ${PURPLE} 0%, #a78bfa 50%, ${BORDEAUX} 100%)`, WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>l'intelligence.</span>
+                    <p style={{ fontFamily: 'var(--font-heading, sans-serif)', fontWeight: 900, fontSize: 'clamp(1.05rem, 1.8vw, 1.45rem)', lineHeight: 1.1, letterSpacing: '-0.03em', marginBottom: 12 }}>
+                      <span style={{ background: `linear-gradient(90deg, #fff 0%, rgba(255,255,255,0.75) 100%)`, WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>Accroître votre</span><br />
+                      <span style={{ background: `linear-gradient(90deg, ${PURPLE} 0%, #a78bfa 50%, ${BORDEAUX} 100%)`, WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>performance</span><br />
+                      <span style={{ background: `linear-gradient(90deg, #fff 0%, rgba(255,255,255,0.75) 100%)`, WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>par l'excellence</span><br />
+                      <span style={{ background: `linear-gradient(90deg, ${PURPLE} 0%, #a78bfa 50%, ${BORDEAUX} 100%)`, WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>numérique.</span>
                     </p>
-                    <p style={{ fontSize: '0.65rem', color: 'rgba(255,255,255,0.5)', lineHeight: 1.6 }}>
-                      Stratégie, technologie et créativité — augmentées par l'IA pour des résultats mesurables.
+                    <p style={{ fontSize: '0.63rem', color: 'rgba(255,255,255,0.45)', lineHeight: 1.65 }}>
+                      Stratégie, technologie et créativité — augmentées par l'IA pour des résultats mesurables et durables.
                     </p>
                   </div>
                   <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginTop: 14 }}>
