@@ -9,8 +9,8 @@ const DEPARTMENTS = [
     href: '/services/agency',
     color: '#7B1D3A',
     img: '/demo/dept-agency.jpg',
-    height: 460,   // grande
-    offsetTop: 60, // décalée vers le bas
+    height: 500,
+    offsetTop: 0,   // rangée haute
   },
   {
     num: '02',
@@ -19,8 +19,8 @@ const DEPARTMENTS = [
     href: '/services/studio',
     color: '#4338ca',
     img: '/demo/dept-studio.jpg',
-    height: 560,   // la plus grande — carte centrale
-    offsetTop: 0,  // alignée en haut
+    height: 500,
+    offsetTop: 100, // rangée basse
   },
   {
     num: '03',
@@ -29,8 +29,8 @@ const DEPARTMENTS = [
     href: '/services/tech',
     color: '#0f172a',
     img: '/demo/dept-tech.jpg',
-    height: 520,   // grande
-    offsetTop: 30, // légèrement décalée
+    height: 500,
+    offsetTop: 0,   // rangée haute
   },
   {
     num: '04',
@@ -39,8 +39,8 @@ const DEPARTMENTS = [
     href: '/services/consulting',
     color: '#7B1D3A',
     img: '/demo/dept-consulting.jpg',
-    height: 460,   // même que Agency
-    offsetTop: 80, // la plus décalée
+    height: 500,
+    offsetTop: 100, // rangée basse
   },
 ];
 
