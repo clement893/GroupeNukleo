@@ -66,7 +66,7 @@ function HeroWords() {
   }, []);
 
   return (
-    <div style={{ paddingTop: '0.5rem', marginBottom: 62, minHeight: 'clamp(7rem, 18vw, 16rem)', display: 'flex', alignItems: 'center' }}>
+    <div style={{ paddingTop: '0.5rem', marginBottom: 78, minHeight: 'clamp(7rem, 18vw, 16rem)', display: 'flex', alignItems: 'center' }}>
       <span
         style={{
           fontFamily: 'var(--font-heading, sans-serif)',
