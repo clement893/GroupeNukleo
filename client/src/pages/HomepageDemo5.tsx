@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
 import { Link } from 'wouter';
 import { useLocalizedPath } from '@/hooks/useLocalizedPath';
-import { TeamScrollCards, DepartmentsWidget, DoubleLogoCarousel, ContactWidget } from '@/components/demo3';
+import { TeamScrollCards, DepartmentsWidget, DoubleLogoCarousel, ContactWidget, TeamRow } from '@/components/demo3';
 import { Sun, Menu, X, ArrowUpRight } from 'lucide-react';
 
 // ─── Constantes ──────────────────────────────────────────────────────────────
@@ -796,16 +796,18 @@ export default function HomepageDemo5() {
         </div>
 
         {/* ════════════════════════════════════════════════════════════════════
-            SECTION 4 — DÉPARTEMENTS (gauche) + ÉQUIPE (droite)
+            SECTION 4 — DÉPARTEMENTS
         ════════════════════════════════════════════════════════════════════ */}
-        <div style={{ padding: '0 6%', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16, marginBottom: 48 }}>
+        <div style={{ padding: '0 6%', marginBottom: 48 }}>
           <div style={{ borderRadius: 24, overflow: 'hidden' }}>
             <DepartmentsWidget />
           </div>
-          <div style={{ borderRadius: 24, overflow: 'hidden' }}>
-            <TeamScrollCards />
-          </div>
         </div>
+
+        {/* ════════════════════════════════════════════════════════════════════
+            SECTION 4b — ÉQUIPE HORIZONTALE
+        ════════════════════════════════════════════════════════════════════ */}
+        <TeamRow />
 
         {/* ════════════════════════════════════════════════════════════════════
             SECTION 5 — TRIPTYQUE PROJETS (pleine largeur)

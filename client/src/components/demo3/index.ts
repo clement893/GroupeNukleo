@@ -15,3 +15,4 @@ export { TeamScrollCards } from './TeamScrollCards';
 export { DepartmentsWidget } from './DepartmentsWidget';
 export { AboutUsWidget } from './AboutUsWidget';
 export { ContactWidget } from './ContactWidget';
+export { TeamRow } from './TeamRow';
