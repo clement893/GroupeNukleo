@@ -65,13 +65,14 @@ export function DepartmentsWidget() {
           scrollbarWidth: 'none',
         } as React.CSSProperties}
       >
-        {/* Conteneur interne flex pour les cartes */}
+        {/* Conteneur interne flex pour les cartes — centré */}
         <div style={{
           display: 'flex',
           gap: 12,
           alignItems: 'flex-start',
           height: '100%',
-          width: 'max-content',
+          width: '100%',
+          justifyContent: 'center',
         }}>
           {DEPARTMENTS.map((dept) => (
             <Link
