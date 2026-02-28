@@ -175,8 +175,14 @@ async function startServer() {
   
   // Security: CORS configuration
   app.use(cors({
-    origin: process.env.NODE_ENV === 'production' 
-      ? ['https://nukleo.digital', 'https://nukleodigital-production.up.railway.app', 'https://www.nukleo.digital']
+    origin: process.env.NODE_ENV === 'production'
+      ? [
+          'https://nukleo.digital',
+          'https://nukleodigital-production.up.railway.app',
+          'https://www.nukleo.digital',
+          'https://ingenious-rebirth-production-7f81.up.railway.app',
+          /^https:\/\/[a-z0-9-]+\.up\.railway\.app$/,
+        ]
       : true,
     credentials: true,
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
@@ -555,9 +561,23 @@ async function startServer() {
     standardHeaders: true,
     legacyHeaders: false,
   });
+  /** Client IP: X-Forwarded-For (first = client in most proxies; Railway may use last, we try first then last). */
+  function getClientIp(req: express.Request): string | undefined {
+    const raw = req.get('x-forwarded-for');
+    let ip: string | undefined;
+    if (raw) {
+      const parts = raw.split(',').map((s) => s.trim()).filter(Boolean);
+      ip = parts.length ? (parts[0] ?? parts[parts.length - 1]) : undefined;
+    }
+    if (!ip) ip = req.ip || req.socket?.remoteAddress || undefined;
+    if (!ip) return undefined;
+    ip = ip.replace(/^::ffff:/, '');
+    if (!ip || ip === '::1' || ip === '127.0.0.1') return undefined;
+    return ip;
+  }
   app.get('/api/weather', weatherLimiter, async (req, res) => {
-    const clientIp = (req.ip || req.socket?.remoteAddress || '').replace(/^::ffff:/, '') || undefined;
-    if (!clientIp || clientIp === '::1' || clientIp === '127.0.0.1') {
+    const clientIp = getClientIp(req);
+    if (!clientIp) {
       // En local, pas d'IP publique : utiliser un fallback géo (ex. Paris) pour que la météo s'affiche
       const lat = 48.8566;
       const lon = 2.3522;
@@ -584,27 +604,50 @@ async function startServer() {
         return res.status(502).json({ error: 'Weather service unavailable' });
       }
     }
+    type Geo = { city: string; region: string; country: string; lat: number; lon: number };
+    let geo: Geo | null = null;
     try {
       const geoRes = await fetch(`https://ipapi.co/${clientIp}/json/`, {
         headers: { 'Accept': 'application/json', 'User-Agent': 'NukleoWeather/1.0' },
         signal: AbortSignal.timeout(8000),
       });
-      if (!geoRes.ok) {
-        logger.warn('[Weather] ipapi.co failed', { status: geoRes.status, ip: clientIp });
+      if (geoRes.ok) {
+        const j = await geoRes.json();
+        const lat = Number(j.latitude);
+        const lon = Number(j.longitude);
+        if (Number.isFinite(lat) && Number.isFinite(lon)) {
+          geo = {
+            city: j.city ?? '',
+            region: j.region ?? j.region_code ?? '',
+            country: j.country_name ?? j.country ?? '',
+            lat,
+            lon,
+          };
+        }
+      }
+      if (!geo) {
+        const ipApiRes = await fetch(`http://ip-api.com/json/${clientIp}?fields=status,city,regionName,country,lat,lon`, {
+          signal: AbortSignal.timeout(6000),
+        });
+        if (ipApiRes.ok) {
+          const j = await ipApiRes.json();
+          if (j.status === 'success' && Number.isFinite(Number(j.lat)) && Number.isFinite(Number(j.lon))) {
+            geo = {
+              city: j.city ?? '',
+              region: j.regionName ?? '',
+              country: j.country ?? '',
+              lat: Number(j.lat),
+              lon: Number(j.lon),
+            };
+          }
+        }
+      }
+      if (!geo) {
+        logger.warn('[Weather] Geo failed for both providers', { ip: clientIp });
         return res.status(502).json({ error: 'Geolocation unavailable' });
       }
-      const geo = await geoRes.json();
-      const lat = Number(geo.latitude);
-      const lon = Number(geo.longitude);
-      if (!Number.isFinite(lat) || !Number.isFinite(lon)) {
-        logger.warn('[Weather] Invalid geo', { ip: clientIp });
-        return res.status(502).json({ error: 'Geolocation unavailable' });
-      }
-      const city = geo.city ?? '';
-      const region = geo.region ?? geo.region_code ?? '';
-      const country = geo.country_name ?? geo.country ?? '';
-      const locationLabel = [city, region, country].filter(Boolean).slice(0, 2).join(', ') || 'Unknown';
-      const weatherUrl = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m,weather_code`;
+      const locationLabel = [geo.city, geo.region, geo.country].filter(Boolean).slice(0, 2).join(', ') || 'Unknown';
+      const weatherUrl = `https://api.open-meteo.com/v1/forecast?latitude=${geo.lat}&longitude=${geo.lon}&current=temperature_2m,weather_code`;
       const wRes = await fetch(weatherUrl, { signal: AbortSignal.timeout(8000) });
       if (!wRes.ok) return res.status(502).json({ error: 'Weather service unavailable' });
       const j = await wRes.json();
@@ -614,9 +657,9 @@ async function startServer() {
       return res.json({
         temperature: temp,
         weatherCode,
-        city: city || 'Unknown',
-        region,
-        country,
+        city: geo.city || 'Unknown',
+        region: geo.region,
+        country: geo.country,
         locationLabel,
       });
     } catch (e) {
