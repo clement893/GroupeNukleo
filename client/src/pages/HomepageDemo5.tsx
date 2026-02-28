@@ -379,7 +379,7 @@ function Triptych() {
     <div
       className="w-full overflow-hidden relative"
       style={{
-        height: 'clamp(483px, 78vh, 828px)',
+        height: 'clamp(483px, 82vh, 960px)',
         display: 'flex',
         gap: 21,
       }}
@@ -464,10 +464,6 @@ function Triptych() {
                       Voir l'étude de cas →
                     </Link>
                   </div>
-                </div>
-                {/* Légende discrète en bas à gauche (projet + année) */}
-                <div style={{ position: 'absolute', bottom: 18, left: 28, color: 'rgba(255,255,255,0.45)', fontSize: '0.68rem', fontWeight: 500 }}>
-                  {p.name} · 2025
                 </div>
               </>
             )}
@@ -899,7 +895,9 @@ export default function HomepageDemo5() {
             padding: 'clamp(3.5rem, 6vw, 5rem) clamp(2.5rem, 4vw, 4rem)',
             textAlign: 'center',
           }}>
-          <h2 style={{
+          <h2
+            className="lg:whitespace-nowrap"
+            style={{
               fontFamily: "'Plus Jakarta Sans', sans-serif",
               fontWeight: 700,
               fontSize: 'clamp(2.5rem, 5.5vw, 4.5rem)',
@@ -912,7 +910,8 @@ export default function HomepageDemo5() {
               backgroundClip: 'text',
               WebkitBackgroundClip: 'text',
               color: 'transparent',
-            }}>
+            }}
+          >
               Prêt.e à performer?
             </h2>
             <p style={{
@@ -925,7 +924,7 @@ export default function HomepageDemo5() {
               marginLeft: 'auto',
               marginRight: 'auto',
             }}>
-              Passez à l'action : stratégie, créativité et technologie au service de votre croissance. Discutons de votre prochain projet.
+              Stratégie, créativité et technologie au service de votre croissance : nous vous accompagnons de l’idéation à la mise en œuvre. Que vous ayez un projet précis ou une ambition à clarifier, parlons de la suite. Ensemble, passons à l’action et donnons forme à votre prochain cap.
             </p>
             <SplitCTAButton href="/contact" label="Contactez-nous" ariaLabel="Contactez-nous" />
           </div>
