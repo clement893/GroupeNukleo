@@ -192,78 +192,87 @@ export default function About() {
         <section style={{ padding: '4rem 6% 5rem' }}>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-10 max-w-6xl mx-auto">
             {HOME_SERVICES.map((service) => (
-              <article
+              <Link
                 key={service.title}
-                style={{
-                  borderRadius: 20,
-                  overflow: 'hidden',
-                  boxShadow: '0 4px 24px rgba(0,0,0,0.06)',
-                  display: 'flex',
-                  flexDirection: 'column',
-                  background: CARD_BG,
-                }}
+                href={getLocalizedPath(service.path)}
+                aria-label={`Voir ${service.title}`}
+                style={{ textDecoration: 'none', color: 'inherit' }}
+                className="group"
               >
-                <div style={{ position: 'relative', paddingTop: '60%', background: service.imageBg }}>
-                  <div style={{ position: 'absolute', inset: 0 }} />
-                  <Link
-                    href={getLocalizedPath('/services')}
-                    style={{
-                      position: 'absolute',
-                      top: 12,
-                      right: 12,
-                      width: 36,
-                      height: 36,
-                      borderRadius: 10,
-                      background: DARK,
-                      color: '#fff',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      textDecoration: 'none',
-                    }}
-                    aria-label={`Voir ${service.title}`}
-                  >
-                    <ArrowUpRight size={18} strokeWidth={2.5} />
-                  </Link>
-                </div>
-                <h3 style={{
-                  fontFamily: "'Plus Jakarta Sans', sans-serif",
-                  fontWeight: 700,
-                  fontSize: '1.1rem',
-                  color: DARK,
-                  margin: 0,
-                  padding: '1.25rem 1.25rem 0.5rem',
-                }}>
-                  {service.title}
-                </h3>
-                <p style={{
-                  fontSize: '0.8rem',
-                  color: '#6b7280',
-                  lineHeight: 1.55,
-                  margin: 0,
-                  padding: '0 1.25rem',
-                  flex: 1,
-                }}>
-                  {service.description}
-                </p>
-                <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, padding: '1rem 1.25rem 1.25rem', fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 400 }}>
-                  {service.tags.map((tag) => (
+                <article
+                  style={{
+                    borderRadius: 20,
+                    overflow: 'hidden',
+                    boxShadow: '0 4px 24px rgba(0,0,0,0.06)',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    background: CARD_BG,
+                    cursor: 'pointer',
+                    transition: 'box-shadow 0.2s ease',
+                  }}
+                  className="group-hover:shadow-lg"
+                >
+                  <div style={{ position: 'relative', paddingTop: '60%', background: service.imageBg }}>
+                    <div style={{ position: 'absolute', inset: 0 }} />
                     <span
-                      key={tag}
                       style={{
-                        fontSize: '0.7rem',
-                        color: '#4b5563',
-                        background: '#f3f4f6',
-                        padding: '4px 10px',
-                        borderRadius: 8,
-                        fontWeight: 500,
+                        position: 'absolute',
+                        top: 12,
+                        right: 12,
+                        width: 36,
+                        height: 36,
+                        borderRadius: 10,
+                        background: DARK,
+                        color: '#fff',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        pointerEvents: 'none',
                       }}
+                      aria-hidden
                     >
-                      {tag}
+                      <ArrowUpRight size={18} strokeWidth={2.5} />
                     </span>
-                  ))}
-                </div>
-              </article>
+                  </div>
+                  <h3 style={{
+                    fontFamily: "'Plus Jakarta Sans', sans-serif",
+                    fontWeight: 700,
+                    fontSize: '1.1rem',
+                    color: DARK,
+                    margin: 0,
+                    padding: '1.25rem 1.25rem 0.5rem',
+                  }}>
+                    {service.title}
+                  </h3>
+                  <p style={{
+                    fontSize: '0.8rem',
+                    color: '#6b7280',
+                    lineHeight: 1.55,
+                    margin: 0,
+                    padding: '0 1.25rem',
+                    flex: 1,
+                  }}>
+                    {service.description}
+                  </p>
+                  <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, padding: '1rem 1.25rem 1.25rem', fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 400 }}>
+                    {service.tags.map((tag) => (
+                      <span
+                        key={tag}
+                        style={{
+                          fontSize: '0.7rem',
+                          color: '#4b5563',
+                          background: '#f3f4f6',
+                          padding: '4px 10px',
+                          borderRadius: 8,
+                          fontWeight: 500,
+                        }}
+                      >
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                </article>
+              </Link>
             ))}
           </div>
         </section>
