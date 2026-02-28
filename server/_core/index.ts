@@ -656,6 +656,7 @@ async function startServer() {
   
   // development mode uses Vite, production mode uses static files
   // IMPORTANT: serveStatic must be AFTER API routes to ensure API endpoints work
+  // Use production static serving unless explicitly in development (avoids ENOENT /client/index.html on Railway)
   if (process.env.NODE_ENV === "development") {
     await setupVite(app, server);
   } else {
@@ -754,7 +755,8 @@ async function startServer() {
   
   // Catch-all route for SPA - serve index.html for all non-API routes
   // This must be AFTER all API routes and serveStatic
-  if (process.env.NODE_ENV === "production") {
+  // Run whenever not in development (so staging/production always use dist/public)
+  if (process.env.NODE_ENV !== "development") {
     const distPath = path.resolve(process.cwd(), "dist", "public");
     app.get('*', async (req, res) => {
       // Skip asset requests that weren't found (but NOT /projects/ route for SPA)
