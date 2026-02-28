@@ -114,6 +114,18 @@
   html {
     scrollbar-width: none;
     -ms-overflow-style: none;
+    /* Base 16px pour mobile/tablet */
+    font-size: 16px;
+  }
+  /* Grands écrans : augmenter la base pour que rem et clamp(..., rem) scale nt */
+  @media (min-width: 1400px) {
+    html { font-size: 18px; }
+  }
+  @media (min-width: 1800px) {
+    html { font-size: 20px; }
+  }
+  @media (min-width: 2200px) {
+    html { font-size: 22px; }
   }
   html::-webkit-scrollbar {
     display: none;
