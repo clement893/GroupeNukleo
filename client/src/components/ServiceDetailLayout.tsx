@@ -96,34 +96,36 @@ export default function ServiceDetailLayout(props: ServiceDetailLayoutProps) {
     window.scrollTo(0, 0);
   }, []);
 
-  const heroTitleGradient = `linear-gradient(90deg, ${BORDEAUX} 0%, ${BORDEAUX} 35%, ${PURPLE} 100%)`;
+  const heroTitleGradient = 'linear-gradient(to right, #6B1817, #5636AD)';
 
   return (
     <main
       className="min-h-screen"
-      style={{
-        background: 'linear-gradient(to bottom, transparent 0%, transparent 400px, #ffffff 400px, #ffffff 100%)',
-      }}
+      style={{ background: 'transparent' }}
     >
       {/* Hero : fond transparent pour laisser voir le dégradé global (navbar + hero) */}
       <section
-        className="relative pt-24 pb-8 lg:pt-28 lg:pb-12 overflow-hidden"
-        style={{ background: 'transparent' }}
+        className="relative pt-24 pb-8 lg:pt-28 lg:pb-12"
+        style={{ background: 'transparent', overflow: 'visible' }}
       >
-        <div className="container relative">
+        <div className="container relative" style={{ overflow: 'visible' }}>
           <h1
             className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-3"
             style={{
-              backgroundImage: heroTitleGradient,
+              background: heroTitleGradient,
               WebkitBackgroundClip: 'text',
               backgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
               color: 'transparent',
-              fontFamily: 'var(--font-heading, sans-serif)',
+              fontFamily: "'Plus Jakarta Sans', sans-serif",
+              lineHeight: 1.25,
+              paddingBottom: '0.28em',
+              overflow: 'visible',
             }}
           >
             {pageTitle}
           </h1>
-          <p className="text-base lg:text-lg text-gray-700 max-w-2xl mb-8 lg:mb-10 leading-relaxed">
+          <p className="text-base lg:text-lg text-gray-700 max-w-2xl mb-8 lg:mb-10 leading-relaxed" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
             {tagline}
           </p>
           {heroImage && (
@@ -175,6 +177,7 @@ export default function ServiceDetailLayout(props: ServiceDetailLayoutProps) {
                               backdropFilter: 'blur(16px) saturate(180%)',
                               color: '#111827',
                               isolation: 'isolate',
+                              fontFamily: "'Plus Jakarta Sans', sans-serif",
                             }
                           : {
                               background: 'rgba(255, 255, 255, 0.4)',
@@ -184,6 +187,7 @@ export default function ServiceDetailLayout(props: ServiceDetailLayoutProps) {
                               backdropFilter: 'blur(16px) saturate(180%)',
                               color: '#374151',
                               isolation: 'isolate',
+                              fontFamily: "'Plus Jakarta Sans', sans-serif",
                             }
                       }
                     >
@@ -210,6 +214,7 @@ export default function ServiceDetailLayout(props: ServiceDetailLayoutProps) {
                                   backdropFilter: 'blur(16px) saturate(180%)',
                                   color: '#111827',
                                   isolation: 'isolate',
+                                  fontFamily: "'Plus Jakarta Sans', sans-serif",
                                 }
                               : {
                                   background: 'rgba(255, 255, 255, 0.4)',
@@ -219,6 +224,7 @@ export default function ServiceDetailLayout(props: ServiceDetailLayoutProps) {
                                   backdropFilter: 'blur(16px) saturate(180%)',
                                   color: '#374151',
                                   isolation: 'isolate',
+                                  fontFamily: "'Plus Jakarta Sans', sans-serif",
                                 }
                           }
                         >
@@ -239,15 +245,15 @@ export default function ServiceDetailLayout(props: ServiceDetailLayoutProps) {
             >
               {hasTabs && activeTab ? (
                 <div>
-                  <h2 className="text-3xl lg:text-4xl font-bold mb-1 text-gray-900" style={{ fontFamily: 'var(--font-heading, sans-serif)', fontSize: 'clamp(1.75rem, 4vw, 2.5rem)' }}>
+                  <h2 className="text-3xl lg:text-4xl font-bold mb-1" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 'clamp(1.75rem, 4vw, 2.5rem)', display: 'inline-block', background: heroTitleGradient, WebkitBackgroundClip: 'text', backgroundClip: 'text', color: 'transparent' }}>
                     {activeTab.title}
                   </h2>
                   {activeTab.subtitle && (
-                    <p className="text-2xl lg:text-3xl font-bold text-gray-900 mb-6" style={{ fontFamily: 'var(--font-heading, sans-serif)', fontSize: 'clamp(1.5rem, 3vw, 1.875rem)' }}>
+                    <p className="text-2xl lg:text-3xl font-bold mb-6" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 'clamp(1.5rem, 3vw, 1.875rem)', display: 'inline-block', background: heroTitleGradient, WebkitBackgroundClip: 'text', backgroundClip: 'text', color: 'transparent' }}>
                       {activeTab.subtitle}
                     </p>
                   )}
-                  <p className="text-lg text-gray-600 leading-relaxed mb-10 max-w-3xl" style={{ color: '#555555' }}>
+                  <p className="text-lg text-gray-600 leading-relaxed mb-10 max-w-3xl" style={{ color: '#555555', fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
                     {activeTab.description}
                   </p>
                   <ul className="space-y-4">
@@ -262,6 +268,7 @@ export default function ServiceDetailLayout(props: ServiceDetailLayoutProps) {
                             WebkitBackdropFilter: 'blur(16px) saturate(180%)',
                             backdropFilter: 'blur(16px) saturate(180%)',
                             isolation: 'isolate',
+                            fontFamily: "'Plus Jakarta Sans', sans-serif",
                           }}
                         >
                           {benefit}
@@ -273,16 +280,16 @@ export default function ServiceDetailLayout(props: ServiceDetailLayoutProps) {
               ) : (
                 <div className="space-y-10">
                   <div>
-                    <h2 className="text-2xl lg:text-3xl font-bold mb-4" style={{ color: PURPLE, fontFamily: 'var(--font-heading, sans-serif)' }}>
+                    <h2 className="text-2xl lg:text-3xl font-bold mb-4" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", display: 'inline-block', background: heroTitleGradient, WebkitBackgroundClip: 'text', backgroundClip: 'text', color: 'transparent' }}>
                       {mainTitle}
                     </h2>
-                    <p className="text-gray-700 leading-relaxed mb-6">{mainDescription}</p>
+                    <p className="text-gray-700 leading-relaxed mb-6" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>{mainDescription}</p>
                     <div className="flex flex-wrap gap-2 mb-8">
                       {mainTags.map((tag) => (
                         <span
                           key={tag}
                           className="px-3 py-1.5 rounded-lg border border-gray-200 text-gray-700 text-sm font-medium"
-                          style={{ background: 'rgba(255,255,255,0.8)' }}
+                          style={{ background: 'rgba(255,255,255,0.8)', fontFamily: "'Plus Jakarta Sans', sans-serif" }}
                         >
                           {tag}
                         </span>
@@ -301,13 +308,13 @@ export default function ServiceDetailLayout(props: ServiceDetailLayoutProps) {
                         <Sparkles className="w-16 h-16 text-white/95" strokeWidth={1.5} />
                       </div>
                       <div className="flex-1 flex flex-col justify-center">
-                        <p className="text-gray-700 leading-relaxed mb-6">{extensionsDescription}</p>
+                        <p className="text-gray-700 leading-relaxed mb-6" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>{extensionsDescription}</p>
                         <div className="grid grid-cols-2 gap-3">
                           {highlightItems.map((item, index) => (
                             <div
                               key={index}
                               className="p-4 rounded-xl border border-gray-200 shadow-sm"
-                              style={{ background: 'rgba(255,255,255,0.95)' }}
+                              style={{ background: 'rgba(255,255,255,0.95)', fontFamily: "'Plus Jakarta Sans', sans-serif" }}
                             >
                               <h3 className="font-bold mb-1 text-gray-900 text-sm">{item.title}</h3>
                               <p className="text-gray-600 text-xs leading-relaxed line-clamp-2">{item.description}</p>
@@ -371,17 +378,17 @@ export default function ServiceDetailLayout(props: ServiceDetailLayoutProps) {
               {/* Droite : titre, sous-titre, paragraphe, grille 2×2 cartes glass */}
               <div className="lg:col-span-7 order-1 lg:order-2 space-y-6">
                 {sectionVisualTitle && (
-                  <h2 className="text-2xl lg:text-3xl xl:text-4xl font-bold text-gray-900" style={{ fontFamily: 'var(--font-heading, sans-serif)' }}>
+                  <h2 className="text-2xl lg:text-3xl xl:text-4xl font-bold text-gray-900" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
                     {sectionVisualTitle}
                   </h2>
                 )}
                 {sectionVisualSubtitle && (
-                  <p className="text-xl lg:text-2xl font-semibold text-gray-800">
+                  <p className="text-xl lg:text-2xl font-semibold text-gray-800" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
                     {sectionVisualSubtitle}
                   </p>
                 )}
                 {sectionVisualDescription && (
-                  <p className="text-base lg:text-lg text-gray-600 leading-relaxed">
+                  <p className="text-base lg:text-lg text-gray-600 leading-relaxed" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
                     {sectionVisualDescription}
                   </p>
                 )}
@@ -399,8 +406,8 @@ export default function ServiceDetailLayout(props: ServiceDetailLayoutProps) {
                         isolation: 'isolate',
                       }}
                     >
-                      <h3 className="font-bold text-gray-900 mb-1.5">{item.title}</h3>
-                      <p className="text-gray-600 text-sm leading-relaxed">{item.description}</p>
+                      <h3 className="font-bold text-gray-900 mb-1.5" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>{item.title}</h3>
+                      <p className="text-gray-600 text-sm leading-relaxed" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>{item.description}</p>
                     </div>
                   ))}
                 </div>
@@ -416,12 +423,12 @@ export default function ServiceDetailLayout(props: ServiceDetailLayoutProps) {
           <div className="text-center max-w-2xl mx-auto mb-12">
             <h2
               className="text-lg lg:text-xl font-bold tracking-widest uppercase mb-4 text-gray-700"
-              style={{ fontFamily: 'var(--font-heading, sans-serif)' }}
+              style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}
             >
               {expertiseSectionTitle}
             </h2>
             {expertiseSectionDescription && (
-              <p className="text-gray-600 leading-relaxed">{expertiseSectionDescription}</p>
+              <p className="text-gray-600 leading-relaxed" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>{expertiseSectionDescription}</p>
             )}
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -444,12 +451,12 @@ export default function ServiceDetailLayout(props: ServiceDetailLayoutProps) {
                     isolation: 'isolate',
                   }}
                 >
-                  <h3 className="text-lg font-bold mb-2 text-gray-900" style={{ fontFamily: 'var(--font-heading, sans-serif)' }}>
+                  <h3 className="text-lg font-bold mb-2 text-gray-900" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
                     {item.title}
                   </h3>
-                  <p className="text-gray-600 text-sm leading-relaxed mb-3">{item.description}</p>
+                  <p className="text-gray-600 text-sm leading-relaxed mb-3" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>{item.description}</p>
                   {deliverablesText && (
-                    <p className="text-xs text-gray-500 leading-relaxed">
+                    <p className="text-xs text-gray-500 leading-relaxed" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
                       <span className="font-medium">{expertiseDeliverablesLabel ?? 'Livrables : '}</span>
                       {deliverablesText}
                     </p>
@@ -467,11 +474,11 @@ export default function ServiceDetailLayout(props: ServiceDetailLayoutProps) {
           <div className="text-center max-w-2xl mx-auto mb-10">
             <h2
               className="text-2xl lg:text-3xl font-bold mb-4"
-              style={{ color: BORDEAUX, fontFamily: 'var(--font-heading, sans-serif)' }}
+              style={{ color: BORDEAUX, fontFamily: "'Plus Jakarta Sans', sans-serif" }}
             >
               {teamTitle}
             </h2>
-            <p className="text-gray-600 leading-relaxed mb-8">{teamDescription}</p>
+            <p className="text-gray-600 leading-relaxed mb-8" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>{teamDescription}</p>
           </div>
           {teamMembers && teamMembers.length > 0 ? (
             <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6 mb-14">
@@ -496,10 +503,10 @@ export default function ServiceDetailLayout(props: ServiceDetailLayoutProps) {
                     />
                   </div>
                   <div className="p-4">
-                    <h3 className="font-bold text-gray-900" style={{ fontFamily: 'var(--font-heading, sans-serif)' }}>
+                    <h3 className="font-bold text-gray-900" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
                       {member.name}
                     </h3>
-                    <p className="text-sm text-gray-600 mt-0.5">{member.role}</p>
+                    <p className="text-sm text-gray-600 mt-0.5" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>{member.role}</p>
                   </div>
                 </article>
               ))}
@@ -514,7 +521,7 @@ export default function ServiceDetailLayout(props: ServiceDetailLayoutProps) {
           <div className="max-w-2xl mx-auto text-center rounded-2xl border border-gray-200 py-12 px-8" style={{ background: 'rgba(248,248,248,0.95)' }}>
             <h2
               className="text-2xl lg:text-3xl font-bold mb-6 text-gray-800"
-              style={{ fontFamily: 'var(--font-heading, sans-serif)' }}
+              style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}
             >
               {ctaTitle}
             </h2>

@@ -220,7 +220,7 @@ export default function Services() {
       <div
         className="min-h-screen"
         style={{
-          background: 'linear-gradient(to bottom, transparent 0%, transparent 400px, #ffffff 400px, #ffffff 100%)',
+          background: 'transparent',
         }}
       >
         {/* Breadcrumb */}
@@ -236,11 +236,18 @@ export default function Services() {
             </p>
             <h1
               className="text-5xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight"
-              style={{ color: '#5A1E29', fontFamily: 'var(--font-heading, sans-serif)' }}
+              style={{
+                fontFamily: "'Plus Jakarta Sans', sans-serif",
+                display: 'inline-block',
+                background: 'linear-gradient(to right, #6B1817, #5636AD)',
+                WebkitBackgroundClip: 'text',
+                backgroundClip: 'text',
+                color: 'transparent',
+              }}
             >
               {heroTitle}
               <br />
-              <span style={{ color: '#5A1E29' }}>{heroSubtitle}</span>
+              <span>{heroSubtitle}</span>
             </h1>
             <p className="text-sm md:text-base text-gray-500 mb-4 font-medium">
               {heroSubtitleGradient}

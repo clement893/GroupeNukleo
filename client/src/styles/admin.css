@@ -1,4 +1,15 @@
-/* Admin Panel Styles - Aktiv Grotesk Font Family */
+/* Admin Panel Styles - Nouvelle direction admin */
+
+.admin-app {
+  --admin-sidebar-bg: #16161a;
+  --admin-border: rgba(255, 255, 255, 0.08);
+  --admin-bg: #fafafa;
+  --admin-foreground: #fff;
+  --admin-muted: #a1a1aa;
+  --admin-hover: rgba(255, 255, 255, 0.06);
+  --admin-accent: #6B1817;
+  --admin-accent-foreground: #fff;
+}
 
 /* Ensure Aktiv Grotesk fonts are loaded for admin */
 @layer base {

@@ -533,11 +533,11 @@ export default function HomepageDemo5() {
             wordSpacing: '0.12em',
             margin: 0,
             display: 'inline-block',
-            width: 'auto',
+            width: 'fit-content',
             maxWidth: '100%',
             overflowWrap: 'break-word',
             wordBreak: 'break-word',
-            background: 'linear-gradient(90deg, #712D3A 0%, #803342 35%, #6A3A8E 100%)',
+            background: 'linear-gradient(to right, #6B1817, #5636AD)',
             WebkitBackgroundClip: 'text',
             WebkitTextFillColor: 'transparent',
             backgroundClip: 'text',
@@ -683,7 +683,7 @@ export default function HomepageDemo5() {
           }}>
             SOYONS AUDACIEUX.
           </p>
-          <h2 className="hero-headline-gradient" style={{
+          <h2 style={{
             fontFamily: "'Plus Jakarta Sans', sans-serif",
             fontWeight: 400,
             fontSize: 'clamp(2.25rem, 5vw, 3.75rem)',
@@ -691,6 +691,11 @@ export default function HomepageDemo5() {
             letterSpacing: '-0.03em',
             margin: '0 0 1.5rem 0',
             display: 'inline-block',
+            width: 'fit-content',
+            background: 'linear-gradient(to right, #6B1817, #5636AD)',
+            WebkitBackgroundClip: 'text',
+            WebkitTextFillColor: 'transparent',
+            backgroundClip: 'text',
           }}>
             Un seul partenaire.<br />
             Une intelligence intégrée.<br />
@@ -755,7 +760,19 @@ export default function HomepageDemo5() {
             {/* Droite (~55%) : "On [verbe]" dans pill glass + "l'IA" en charcoal */}
             <div style={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap', gap: 0, justifyContent: 'center', minHeight: 200 }}>
               <div className="glass-heading-panel">
-                <span className="gradient-text-on-ia">
+                <span
+                  style={{
+                    fontFamily: "'Plus Jakarta Sans', sans-serif",
+                    fontWeight: 700,
+                    fontSize: 'clamp(2.2rem, 4.4vw, 3rem)',
+                    lineHeight: 1.1,
+                    letterSpacing: '-0.02em',
+                    background: 'linear-gradient(to right, #6B1817, #5636AD)',
+                    WebkitBackgroundClip: 'text',
+                    WebkitTextFillColor: 'transparent',
+                    backgroundClip: 'text',
+                  }}
+                >
                   On {ON_IA_VERBS[onIaIndex]}
                 </span>
               </div>
@@ -874,13 +891,15 @@ export default function HomepageDemo5() {
             padding: '3.5rem 3rem',
             textAlign: 'center',
           }}>
-            <h2 style={{
+          <h2 style={{
               fontFamily: "'Plus Jakarta Sans', sans-serif",
               fontWeight: 700,
               fontSize: 'clamp(2rem, 4vw, 3.25rem)',
               lineHeight: 1.1,
               letterSpacing: '-0.03em',
               margin: '0 0 1.25rem 0',
+              display: 'inline-block',
+              width: 'fit-content',
               background: 'linear-gradient(to right, #6B1817, #5636AD)',
               backgroundClip: 'text',
               WebkitBackgroundClip: 'text',

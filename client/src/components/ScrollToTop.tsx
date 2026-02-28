@@ -16,16 +16,23 @@ export default function ScrollToTop() {
   }, []);
 
   useEffect(() => {
+    if ('scrollRestoration' in history) {
+      history.scrollRestoration = 'manual';
+    }
+  }, []);
+
+  useEffect(() => {
     scrollToTop();
-    // Après le paint : annule un éventuel scroll dû au layout ou au lazy loading
     const rafId = requestAnimationFrame(() => {
       scrollToTop();
+      requestAnimationFrame(scrollToTop);
     });
-    // Une fois le contenu lazy chargé : on force encore le scroll en haut
-    const tId = setTimeout(scrollToTop, 150);
+    const t1 = setTimeout(scrollToTop, 150);
+    const t2 = setTimeout(scrollToTop, 400);
     return () => {
       cancelAnimationFrame(rafId);
-      clearTimeout(tId);
+      clearTimeout(t1);
+      clearTimeout(t2);
     };
   }, [location]);
 

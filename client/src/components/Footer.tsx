@@ -15,6 +15,7 @@ const MAIN_LINKS = [
   { key: 'about' as const, href: '/about' },
   { key: 'projects' as const, href: '/projects' },
   { key: 'contact' as const, href: '/contact' },
+  { key: 'faq' as const, href: '/faq' },
 ];
 
 // Services (colonne droite du bloc gauche) — libellés design référence
@@ -34,6 +35,7 @@ function Footer() {
     about: t('nav.about'),
     projects: language === 'fr' ? 'Nos projets' : t('nav.projects'),
     contact: t('nav.contact'),
+    faq: t('nav.faq'),
   }), [t, language]);
 
   const { data: allVisibilities } = trpc.pageVisibility.getAll.useQuery(undefined, {

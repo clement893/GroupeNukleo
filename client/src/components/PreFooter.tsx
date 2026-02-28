@@ -22,27 +22,31 @@ export default function PreFooter() {
     <section
       aria-label="Signature Nukleo"
       style={{
-        padding: 'clamp(2rem, 6vw, 4rem) 6%',
+        padding: 'clamp(0.75rem, 2.5vw, 1.5rem) 6% clamp(0.5rem, 1.5vw, 1rem)',
         background: '#EFE8E8',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'flex-start',
-        minHeight: 'clamp(6rem, 16vw, 14rem)',
+        minHeight: 'clamp(3rem, 8vw, 6rem)',
         border: 'none',
         borderTop: 'none',
         boxShadow: 'none',
+        overflow: 'visible',
       }}
     >
       <span
+        className="pre-footer-gradient-text"
         style={{
-          fontFamily: 'var(--font-heading, sans-serif)',
-          fontWeight: 900,
+          fontFamily: "'Plus Jakarta Sans', sans-serif",
+          fontWeight: 700,
           fontSize: 'clamp(3.5rem, 12vw, 11rem)',
-          lineHeight: 0.92,
+          lineHeight: 1.25,
           letterSpacing: '-0.04em',
           display: 'block',
           textAlign: 'left',
-          color: '#5a0f2b',
+          width: 'fit-content',
+          paddingRight: '0.3em',
+          paddingBottom: '0.15em',
           opacity: visible ? 1 : 0,
           transform: visible ? 'translateY(0)' : 'translateY(12px)',
           transition: 'opacity 0.35s ease, transform 0.35s ease',

@@ -1,9 +1,8 @@
 // Leo.tsx
 import { useState, useRef, useEffect } from 'react';
 import SEO from '@/components/SEO';
-import Breadcrumb from '@/components/Breadcrumb';
 import OptimizedImage from '@/components/OptimizedImage';
-import { Send, Mic, Mail, X } from 'lucide-react';
+import { Send } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { trpc } from '@/lib/trpc';
@@ -11,8 +10,9 @@ import { Link } from 'wouter';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { logger } from '@/lib/logger';
 import { useLocalizedPath } from '@/hooks/useLocalizedPath';
-import { ChatMessage, isValidChatMessage } from '@/types/localStorage';
 import PageLayout from '@/components/PageLayout';
+
+const HERO_GRADIENT = 'linear-gradient(to right, #6B1817, #5636AD)';
 
 interface Message {
   role: 'user' | 'assistant' | 'system';
@@ -490,7 +490,7 @@ export default function Leo() {
     }]);
   };
 
-  const handleKeyPress = (e: React.KeyboardEvent) => {
+  const handleKeyDown = (e: React.KeyboardEvent) => {
     if (e.key === 'Enter' && !e.shiftKey) {
       e.preventDefault();
       if (showEmailForm) {
@@ -509,27 +509,24 @@ export default function Leo() {
         keywords={t('leo.seoKeywords') || "AI chatbot, AI assistant, AI consultation, AI strategy, AI transformation help, AI implementation guide, free AI consultation, AI advisor"}
         ogImage="https://nukleodigital-production.up.railway.app/og-image.jpg"
       />
-      <div className="min-h-screen bg-gradient-to-br from-[oklch(0.35_0.15_300)] via-[oklch(0.40_0.15_320)] to-[oklch(0.35_0.15_340)] flex flex-col overflow-hidden">
-      {/* Toolbar with Leo-specific actions - positioned below header */}
-      <div className="fixed top-20 sm:top-24 left-0 right-0 z-40 bg-gradient-to-br from-[oklch(0.35_0.15_300)] via-[oklch(0.40_0.15_320)] to-[oklch(0.35_0.15_340)] backdrop-blur-md border-b border-white/10 px-4 py-2">
+      <div className="min-h-screen flex flex-col" style={{ background: 'transparent', fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
+      {/* Toolbar */}
+      <div className="fixed top-20 sm:top-24 left-0 right-0 z-40 bg-white/95 backdrop-blur-md border-b border-gray-200 px-4 py-2">
         <div className="container">
           <div className="flex items-center justify-between gap-2 sm:gap-4">
-            {/* Left side - Expert Mode Toggle */}
             <button
               onClick={() => setIsExpertMode(!isExpertMode)}
-              className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/10 border border-white/20 text-white hover:bg-white/20 transition-all"
+              className="flex items-center gap-2 px-3 py-1.5 rounded-full border border-gray-200 text-gray-700 hover:bg-gray-50 transition-all text-sm font-medium"
+              style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}
               title={isExpertMode ? t('leo.switchToStandard') : t('leo.switchToExpert')}
             >
-              <span className="text-xs font-medium">
-                {isExpertMode ? `🔬 ${t('leo.expertMode')}` : `💡 ${t('leo.standardMode')}`}
-              </span>
+              {isExpertMode ? `🔬 ${t('leo.expertMode')}` : `💡 ${t('leo.standardMode')}`}
             </button>
-            
-            {/* Right side - New Chat button */}
             <Button
               onClick={handleNewChat}
               variant="outline"
-              className="bg-white/10 border-white/20 text-white hover:bg-white/20 hover:text-white"
+              className="border-gray-300 text-gray-700 hover:bg-gray-50 hover:text-gray-900"
+              style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}
             >
               {t('leo.newChat')}
             </Button>
@@ -537,26 +534,42 @@ export default function Leo() {
         </div>
       </div>
 
-      {/* Breadcrumb */}
-      <div className="container pt-32 sm:pt-36 pb-4">
-        <Breadcrumb items={[{ name: t('nav.leo') || 'LEO AI Assistant', url: '/leo' }]} />
-      </div>
-
-      {/* Status indicator */}
-      <div className="container pb-4">
+      {/* Hero title + status */}
+      <div className="container pt-32 sm:pt-36 pb-2">
+        <h1
+          style={{
+            fontFamily: "'Plus Jakarta Sans', sans-serif",
+            fontWeight: 700,
+            fontSize: 'clamp(2rem, 5vw, 3.5rem)',
+            lineHeight: 1.15,
+            letterSpacing: '-0.03em',
+            margin: '0 0 0.5rem 0',
+            background: HERO_GRADIENT,
+            WebkitBackgroundClip: 'text',
+            backgroundClip: 'text',
+            WebkitTextFillColor: 'transparent',
+            color: 'transparent',
+            display: 'inline-block',
+          }}
+        >
+          {t('nav.leo') || 'LEO'}
+        </h1>
         <div className="flex items-center gap-2">
-          <div className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
-          <span className="text-xs text-white/60 uppercase tracking-wider">{t('leo.aiOnline')}</span>
+          <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+          <span className="text-xs text-gray-500 uppercase tracking-wider font-medium">{t('leo.aiOnline')}</span>
         </div>
       </div>
 
       {/* Chat container */}
-      <div className="flex-1 container pb-32 overflow-y-auto overflow-x-hidden" style={{ maxHeight: 'calc(100vh - 200px)', WebkitOverflowScrolling: 'touch' }}>
-        <div className="max-w-3xl mx-auto space-y-8 py-4">
+      <div className="flex-1 min-h-0 flex flex-col overflow-hidden">
+        <div
+          className="flex-1 overflow-y-auto overflow-x-hidden container bg-gray-50/50"
+          style={{ WebkitOverflowScrolling: 'touch' }}
+        >
+        <div className="max-w-3xl mx-auto space-y-8 py-4 pb-36">
           {safeMessages.map((message, index) => (
             <div key={index}>
               {message.isEmailForm ? (
-                // Inline Email Form
                 <div className="flex gap-4 justify-start">
                   <div className="flex-shrink-0">
                       <OptimizedImage 
@@ -570,40 +583,46 @@ export default function Leo() {
                       />
                   </div>
                   <div className="flex flex-col items-start max-w-[70%]">
-                    <span className="text-xs text-white/40 uppercase tracking-wider mb-2">{t('leo.leoLabel')}</span>
-                    <div className="px-6 py-4 rounded-2xl bg-white/10 backdrop-blur-md border border-cyan-500/30 text-white">
-                      <p className="text-base leading-relaxed mb-4">{message.content}</p>
+                    <span className="text-xs text-gray-500 uppercase tracking-wider mb-2 font-medium">{t('leo.leoLabel')}</span>
+                    <div className="px-6 py-4 rounded-2xl bg-white border border-gray-200 shadow-sm">
+                      <p className="text-base leading-relaxed mb-4 text-gray-800">{message.content}</p>
                       <div className="space-y-3">
                         <input
                           type="text"
                           placeholder={t('leo.namePlaceholder')}
                           value={nameInput}
                           onChange={(e) => setNameInput(e.target.value)}
-                          onKeyPress={handleKeyPress}
-                          className="w-full px-4 py-2 bg-white/10 border border-white/20 rounded-lg text-sm text-white placeholder-white/40 focus:outline-none focus:border-cyan-500"
+                          onKeyDown={handleKeyDown}
+                          className="w-full px-4 py-2 border border-gray-200 rounded-lg text-sm text-gray-900 placeholder-gray-400 focus:outline-none focus:border-[#5A1E29] focus:ring-1 focus:ring-[#5A1E29]"
+                          style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}
                         />
                         <input
                           type="email"
                           placeholder={t('leo.emailPlaceholder')}
                           value={emailInput}
                           onChange={(e) => setEmailInput(e.target.value)}
-                          onKeyPress={handleKeyPress}
-                          className="w-full px-4 py-2 bg-white/10 border border-white/20 rounded-lg text-sm text-white placeholder-white/40 focus:outline-none focus:border-cyan-500"
+                          onKeyDown={handleKeyDown}
+                          className="w-full px-4 py-2 border border-gray-200 rounded-lg text-sm text-gray-900 placeholder-gray-400 focus:outline-none focus:border-[#5A1E29] focus:ring-1 focus:ring-[#5A1E29]"
+                          style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}
                         />
                         <div className="flex gap-2">
                           <Button
+                            type="button"
                             onClick={handleSkipEmail}
                             variant="outline"
                             size="sm"
-                            className="flex-1 border-white/20 text-white hover:bg-white/10 text-xs"
+                            className="flex-1 border-gray-300 text-gray-700 hover:bg-gray-50 text-xs font-medium"
+                            style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}
                           >
                             {t('leo.skip')}
                           </Button>
                           <Button
+                            type="button"
                             onClick={handleEmailSubmit}
                             disabled={!emailInput.trim() || saveContactMutation.isPending}
                             size="sm"
-                            className="flex-1 bg-white text-purple-900 hover:bg-white/90 disabled:opacity-50 text-xs"
+                            className="flex-1 text-white hover:opacity-90 disabled:opacity-50 text-xs font-medium"
+                            style={{ background: HERO_GRADIENT, fontFamily: "'Plus Jakarta Sans', sans-serif" }}
                           >
                             {saveContactMutation.isPending ? t('leo.saving') : t('leo.send')}
                           </Button>
@@ -613,7 +632,6 @@ export default function Leo() {
                   </div>
                 </div>
               ) : (
-                // Regular Message
                 <div
                   className={`flex gap-4 ${
                     message.role === 'user' ? 'justify-end' : 'justify-start'
@@ -636,19 +654,20 @@ export default function Leo() {
                   )}
 
                   <div className={`flex flex-col ${message.role === 'user' ? 'items-end' : 'items-start'} max-w-[70%]`}>
-                    <span className="text-xs text-white/40 uppercase tracking-wider mb-2">
+                    <span className="text-xs text-gray-500 uppercase tracking-wider mb-2 font-medium">
                       {message.role === 'assistant' ? t('leo.leoLabel') : t('leo.youLabel')}
                     </span>
                     <div
                       className={`px-6 py-4 rounded-2xl ${
                         message.role === 'user'
-                          ? 'bg-gradient-to-r from-[oklch(0.85_0.15_300)] to-[oklch(0.85_0.15_340)] text-white'
-                          : 'bg-white/10 backdrop-blur-md border border-white/20 text-white'
+                          ? 'text-white'
+                          : 'bg-white border border-gray-200 shadow-sm text-gray-900'
                       }`}
+                      style={message.role === 'user' ? { background: HERO_GRADIENT } : undefined}
                     >
-                      <p className="text-base leading-relaxed whitespace-pre-wrap">{message.content}</p>
+                      <p className="text-base leading-relaxed whitespace-pre-wrap" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>{message.content}</p>
                     </div>
-                    <span className="text-xs text-white/30 mt-2">
+                    <span className="text-xs text-gray-400 mt-2" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
                       {message.timestamp.toLocaleTimeString('fr-FR', {
                         hour: '2-digit',
                         minute: '2-digit',
@@ -658,8 +677,8 @@ export default function Leo() {
 
                   {message.role === 'user' && (
                     <div className="flex-shrink-0">
-                      <div className="w-12 h-12 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center">
-                        <span className="text-white font-semibold text-lg">👤</span>
+                      <div className="w-12 h-12 rounded-full bg-gray-200 flex items-center justify-center">
+                        <span className="text-gray-600 font-semibold text-lg">👤</span>
                       </div>
                     </div>
                   )}
@@ -668,7 +687,7 @@ export default function Leo() {
             </div>
           ))}
 
-          {/* Typing indicator while loading */}
+          {/* Typing indicator */}
           {isLoading && !isTyping && (
             <div className="flex gap-4 justify-start">
               <div className="flex-shrink-0">
@@ -683,12 +702,12 @@ export default function Leo() {
                 />
               </div>
               <div className="flex flex-col items-start">
-                <span className="text-xs text-white/40 uppercase tracking-wider mb-2">LEO</span>
-                <div className="px-6 py-4 rounded-2xl bg-white/10 backdrop-blur-md border border-white/20">
+                <span className="text-xs text-gray-500 uppercase tracking-wider mb-2 font-medium">LEO</span>
+                <div className="px-6 py-4 rounded-2xl bg-white border border-gray-200 shadow-sm">
                   <div className="flex gap-2">
-                    <div className="w-2 h-2 rounded-full bg-white/60 animate-bounce" style={{ animationDelay: '0ms' }} />
-                    <div className="w-2 h-2 rounded-full bg-white/60 animate-bounce" style={{ animationDelay: '150ms' }} />
-                    <div className="w-2 h-2 rounded-full bg-white/60 animate-bounce" style={{ animationDelay: '300ms' }} />
+                    <div className="w-2 h-2 rounded-full bg-gray-400 animate-bounce" style={{ animationDelay: '0ms' }} />
+                    <div className="w-2 h-2 rounded-full bg-gray-400 animate-bounce" style={{ animationDelay: '150ms' }} />
+                    <div className="w-2 h-2 rounded-full bg-gray-400 animate-bounce" style={{ animationDelay: '300ms' }} />
                   </div>
                 </div>
               </div>
@@ -710,27 +729,28 @@ export default function Leo() {
                 />
               </div>
               <div className="flex flex-col items-start max-w-[70%]">
-                <span className="text-xs text-white/40 uppercase tracking-wider mb-2">LEO</span>
-                <div className="px-6 py-4 rounded-2xl bg-white/10 backdrop-blur-md border border-white/20 text-white">
-                  <p className="text-base leading-relaxed whitespace-pre-wrap">
+                <span className="text-xs text-gray-500 uppercase tracking-wider mb-2 font-medium">LEO</span>
+                <div className="px-6 py-4 rounded-2xl bg-white border border-gray-200 shadow-sm text-gray-900">
+                  <p className="text-base leading-relaxed whitespace-pre-wrap" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
                     {typingText}
-                    <span className="inline-block w-0.5 h-4 bg-white/60 ml-0.5 animate-pulse" />
+                    <span className="inline-block w-0.5 h-4 bg-gray-500 ml-0.5 animate-pulse" />
                   </p>
                 </div>
               </div>
             </div>
           )}
 
-          {/* Suggestions - Show when there are 2 or fewer messages, or when user hasn't interacted much */}
+          {/* Suggestions */}
           {showSuggestions && messages.length <= 3 && (
             <div className="mt-8 space-y-4">
-              <p className="text-sm text-white/60 text-center">{t('leo.suggestionsPrompt')}</p>
+              <p className="text-sm text-gray-500 text-center font-medium" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>{t('leo.suggestionsPrompt')}</p>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                 {safeSuggestions.map((suggestion, index) => (
                   <button
                     key={index}
                     onClick={() => handleSuggestionClick(suggestion)}
-                    className="px-6 py-4 rounded-xl bg-white/5 backdrop-blur-sm border border-white/10 hover:bg-white/10 hover:border-white/20 transition-all text-left text-white/80 hover:text-white text-sm group"
+                    className="px-6 py-4 rounded-xl bg-white border border-gray-200 hover:border-gray-300 hover:shadow-md transition-all text-left text-gray-700 hover:text-gray-900 text-sm font-medium group"
+                    style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}
                   >
                     <span className="block group-hover:translate-x-1 transition-transform">
                       {suggestion}
@@ -743,47 +763,48 @@ export default function Leo() {
 
           <div ref={messagesEndRef} />
         </div>
+        </div>
       </div>
 
-      {/* Input fixed at bottom */}
-      <div className="fixed bottom-0 left-0 right-0 bg-gradient-to-t from-[oklch(0.35_0.15_300)] via-[oklch(0.35_0.15_300)] to-transparent pt-8 pb-6">
+      {/* Input fixed at bottom - z-index so it stays visible when clicking/focusing */}
+      <div className="fixed bottom-0 left-0 right-0 z-30 bg-white border-t border-gray-200 pt-4 pb-6 safe-area-pb" style={{ boxShadow: '0 -4px 24px rgba(0,0,0,0.06)' }}>
         <div className="container">
           <div className="max-w-3xl mx-auto">
-            <div className="flex gap-3 items-center bg-white/10 backdrop-blur-md border border-white/20 rounded-full px-6 py-3">
-              <span className="text-white/40 text-lg">›</span>
+            <div className="flex gap-3 items-center bg-white border border-gray-200 rounded-full px-5 py-2.5 shadow-sm">
+              {showEmailForm ? (
+                <p className="flex-1 text-sm text-gray-500 py-2 px-1" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
+                  {t('leo.emailFormHint') || 'Complétez le formulaire ci-dessus pour continuer.'}
+                </p>
+              ) : (
+                <>
               <Input
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
-                onKeyPress={handleKeyPress}
+                onKeyDown={handleKeyDown}
                 placeholder={t('leo.inputPlaceholder')}
-                disabled={isLoading || showEmailForm}
-                className="flex-1 bg-transparent border-0 text-white placeholder:text-white/40 focus-visible:ring-0 focus-visible:ring-offset-0 text-base"
+                disabled={isLoading}
+                className="flex-1 bg-transparent border-0 text-gray-900 placeholder:text-gray-400 focus-visible:ring-0 focus-visible:ring-offset-0 text-base min-w-0"
+                style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}
               />
               <button
+                type="button"
                 onClick={handleSend}
-                disabled={isLoading || !input.trim() || showEmailForm}
-                className="text-white/60 hover:text-white transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
+                disabled={isLoading || !input.trim()}
+                className="flex items-center justify-center w-10 h-10 rounded-full text-white transition-opacity disabled:opacity-30 disabled:cursor-not-allowed shrink-0 flex-shrink-0"
+                style={{ background: HERO_GRADIENT }}
                 aria-label="Send message"
               >
                 <Send className="w-5 h-5" />
               </button>
-              {/* Voice input - Coming soon */}
-              {/* <button 
-                className="text-white/60 hover:text-white transition-colors"
-                aria-label="Voice input (coming soon)"
-                disabled
-                title="Voice input coming soon"
-              >
-                <Mic className="w-5 h-5 opacity-50" />
-              </button> */}
+                </>
+              )}
             </div>
 
-            {/* Footer links */}
-            <div className="flex items-center justify-between mt-4 text-xs text-white/40">
-              <Link href={safeGetLocalizedPath('/privacy')} className="hover:text-white/60 transition-colors uppercase tracking-wider">
+            <div className="flex items-center justify-between mt-4 text-xs text-gray-500" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
+              <Link href={safeGetLocalizedPath('/privacy')} className="hover:text-gray-700 transition-colors uppercase tracking-wider font-medium">
                 {t('leo.privacyPolicy')}
               </Link>
-              <a href="mailto:hello@nukleo.com" className="hover:text-white/60 transition-colors uppercase tracking-wider">
+              <a href="mailto:hello@nukleo.com" className="hover:text-gray-700 transition-colors uppercase tracking-wider font-medium">
                 hello@nukleo.com
               </a>
             </div>

@@ -1,43 +1,48 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import OptimizedImage from '@/components/OptimizedImage';
 
 interface ProjectsHeroProps {
   headline: string;
   description: string;
-  /** Images for hero: first 9 used (3 per slide × 3 slides), then fallback repeat */
+  /** Images for hero: first 3 used in triptych, rest unused */
   heroImages: string[];
+  /** Returns URL for a project detail page given image name. If not provided, triptych panels won't link. */
+  getProjectUrl?: (imageName: string) => string;
 }
 
 const SLIDE_LABELS = ['01', '02', '03'];
 
-function getSlideImages(heroImages: string[], slideIndex: number): string[] {
-  const base = slideIndex * 3;
+function getTriptychImages(heroImages: string[]): string[] {
   const list = heroImages.length ? heroImages : [];
   return [
-    list[base % list.length] ?? list[0],
-    list[(base + 1) % list.length] ?? list[0],
-    list[(base + 2) % list.length] ?? list[0],
+    list[0] ?? list[0],
+    list[1] ?? list[0],
+    list[2] ?? list[0],
   ].filter(Boolean);
 }
 
-export default function ProjectsHero({ headline, description, heroImages }: ProjectsHeroProps) {
-  const [activeSlide, setActiveSlide] = useState(0);
-
-  // Auto-rotate every 5s
-  useEffect(() => {
-    const t = setInterval(() => {
-      setActiveSlide((prev) => (prev + 1) % 3);
-    }, 5000);
-    return () => clearInterval(t);
-  }, []);
-
-  const slideImages = getSlideImages(heroImages, activeSlide);
+export default function ProjectsHero({ headline, description, heroImages, getProjectUrl }: ProjectsHeroProps) {
+  const [active, setActive] = useState(0);
+  const triptychImages = getTriptychImages(heroImages);
 
   return (
     <section className="pt-24 pb-12 lg:pt-32 lg:pb-16">
       <div className="container">
         <div className="max-w-4xl mb-10 lg:mb-14">
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold mb-4" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", display: 'inline-block', background: 'linear-gradient(to right, #6B1817, #5636AD)', backgroundClip: 'text', WebkitBackgroundClip: 'text', color: 'transparent' }}>
+          <h1
+            className="font-bold mb-4 w-fit"
+            style={{
+              fontFamily: "'Plus Jakarta Sans', sans-serif",
+              display: 'inline-block',
+              background: 'linear-gradient(to right, #6B1817, #5636AD)',
+              backgroundClip: 'text',
+              WebkitBackgroundClip: 'text',
+              color: 'transparent',
+              fontSize: 'clamp(2.5rem, 8vw, 7rem)',
+              lineHeight: 1.05,
+              letterSpacing: '-0.03em',
+            }}
+          >
             {headline}
           </h1>
           <p className="text-lg lg:text-xl text-gray-600 max-w-2xl" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
@@ -45,110 +50,103 @@ export default function ProjectsHero({ headline, description, heroImages }: Proj
           </p>
         </div>
 
-        <div className="flex flex-col lg:flex-row lg:items-stretch gap-8 lg:gap-10">
-          {/* Carousel: 3 overlapping screens — images change by activeSlide */}
-          <div className="flex-1 relative min-h-[280px] sm:min-h-[340px] lg:min-h-[400px]">
-            <div className="relative w-full max-w-2xl mx-auto">
-              <div className="relative w-full transition-opacity duration-500" style={{ aspectRatio: '16/10' }}>
+        {/* Triptyque 3 panneaux (comme page principale) */}
+        {triptychImages.length > 0 && (
+          <div
+            className="w-full overflow-hidden relative rounded-xl"
+            style={{
+              height: 'clamp(320px, 55vh, 580px)',
+              display: 'flex',
+              gap: 21,
+            }}
+          >
+            {triptychImages.slice(0, 3).map((imageName, i) => {
+              const isActive = i === active;
+              const projectUrl = getProjectUrl ? getProjectUrl(imageName) : null;
+              return (
                 <div
-                  className="absolute rounded-lg overflow-hidden shadow-xl border border-white/20 bg-white"
+                  key={`${imageName}-${i}`}
+                  role="button"
+                  tabIndex={0}
+                  onClick={() => setActive(i)}
+                  onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); setActive(i); } }}
                   style={{
-                    width: '70%',
-                    left: '0%',
-                    top: '5%',
-                    transform: 'rotate(-3deg)',
-                    zIndex: 1,
+                    flex: isActive ? '1 1 0' : '0 0 6.8%',
+                    minWidth: isActive ? 0 : undefined,
+                    transition: 'flex 0.6s cubic-bezier(0.77,0,0.175,1)',
+                    position: 'relative',
+                    cursor: isActive ? 'default' : 'pointer',
+                    overflow: 'hidden',
+                    borderRadius: 12,
                   }}
                 >
-                  <div className="h-6 bg-gray-100 border-b flex items-center px-2 gap-1" />
-                  {slideImages[0] ? (
+                  <div
+                    style={{
+                      position: 'absolute',
+                      inset: 0,
+                      width: '100%',
+                      height: '100%',
+                    }}
+                  >
                     <OptimizedImage
-                      src={`/projects/${slideImages[0]}`}
+                      src={`/projects/${imageName}`}
                       alt=""
-                      width={600}
-                      height={360}
-                      className="w-full h-full object-cover"
+                      width={800}
+                      height={600}
+                      fill
                       loading="eager"
                       fetchPriority="high"
+                      className="w-full h-full transition-[filter] duration-500 ease-out object-cover"
+                      style={{
+                        filter: isActive ? 'grayscale(0) brightness(0.7)' : 'grayscale(1) brightness(0.55)',
+                        objectPosition: isActive ? 'center' : 'top',
+                      }}
                     />
-                  ) : (
-                    <div className="w-full h-full bg-gray-200 min-h-[200px]" />
-                  )}
-                </div>
-                <div
-                  className="absolute rounded-lg overflow-hidden shadow-xl border border-white/20 bg-white"
-                  style={{
-                    width: '70%',
-                    left: '18%',
-                    top: '0%',
-                    transform: 'rotate(1deg)',
-                    zIndex: 2,
-                  }}
-                >
-                  <div className="h-6 bg-gray-100 border-b flex items-center px-2 gap-1" />
-                  {slideImages[1] ? (
-                    <OptimizedImage
-                      src={`/projects/${slideImages[1]}`}
-                      alt=""
-                      width={600}
-                      height={360}
-                      className="w-full h-full object-cover"
-                      loading="eager"
-                      fetchPriority="high"
-                    />
-                  ) : (
-                    <div className="w-full h-full bg-gray-200 min-h-[200px]" />
-                  )}
-                </div>
-                <div
-                  className="absolute rounded-lg overflow-hidden shadow-xl border border-white/20 bg-white"
-                  style={{
-                    width: '70%',
-                    left: '30%',
-                    top: '8%',
-                    transform: 'rotate(2deg)',
-                    zIndex: 3,
-                  }}
-                >
-                  <div className="h-6 bg-gray-100 border-b flex items-center px-2 gap-1" />
-                  {slideImages[2] ? (
-                    <OptimizedImage
-                      src={`/projects/${slideImages[2]}`}
-                      alt=""
-                      width={600}
-                      height={360}
-                      className="w-full h-full object-cover"
-                      loading="eager"
-                      fetchPriority="high"
-                    />
-                  ) : (
-                    <div className="w-full h-full bg-gray-200 min-h-[200px]" />
-                  )}
-                </div>
-              </div>
-            </div>
-          </div>
+                  </div>
+                  <div style={{ position: 'absolute', inset: 0, background: isActive ? 'linear-gradient(to top, rgba(0,0,0,0.88) 0%, rgba(0,0,0,0.15) 55%, transparent 100%)' : 'rgba(0,0,0,0.22)', transition: 'background 0.5s ease' }} />
 
-          {/* Indicator: 01, 02, 03 vertical blocks */}
-          <div className="flex lg:flex-col gap-2 lg:w-28 shrink-0">
-            {SLIDE_LABELS.map((label, index) => (
-              <button
-                key={label}
-                type="button"
-                onClick={() => setActiveSlide(index)}
-                className={`
-                  flex items-center gap-3 px-4 py-3 lg:px-4 lg:py-4 rounded-lg border transition-all duration-200
-                  ${activeSlide === index
-                    ? 'bg-[#5A1E29] text-white border-[#5A1E29]'
-                    : 'bg-white/80 text-gray-600 border-gray-200 hover:border-gray-300 hover:bg-gray-50'
-                  }
-                `}
-              >
-                <span className="text-lg font-semibold tabular-nums" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>{label}</span>
-              </button>
-            ))}
+                  <div
+                    style={{
+                      position: 'absolute',
+                      bottom: 24,
+                      right: 24,
+                      fontFamily: "'Plus Jakarta Sans', sans-serif",
+                      fontSize: 'clamp(2rem, 4vw, 3.5rem)',
+                      fontWeight: 700,
+                      color: isActive ? 'rgba(167,139,250,0.9)' : 'rgba(167,139,250,0.4)',
+                      opacity: 0.92,
+                      lineHeight: 1,
+                      letterSpacing: '-0.04em',
+                      transition: 'color 0.4s ease',
+                      textShadow: '0 2px 20px rgba(0,0,0,0.2)',
+                    }}
+                  >
+                    {SLIDE_LABELS[i]}
+                  </div>
+
+                  {isActive && projectUrl && (
+                    <div style={{ position: 'absolute', bottom: 24, left: 28 }}>
+                      <a
+                        href={projectUrl}
+                        style={{
+                          color: 'rgba(255,255,255,0.85)',
+                          fontSize: '0.8rem',
+                          fontWeight: 600,
+                          borderBottom: '1px solid rgba(255,255,255,0.4)',
+                          paddingBottom: 2,
+                          textDecoration: 'none',
+                          fontFamily: "'Plus Jakarta Sans', sans-serif",
+                        }}
+                      >
+                        Voir le projet →
+                      </a>
+                    </div>
+                  )}
+                </div>
+              );
+            })}
           </div>
-        </div>
+        )}
       </div>
     </section>
   );

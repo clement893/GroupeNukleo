@@ -413,7 +413,7 @@
   }
 
   .gradient-text-on-ia {
-    background: linear-gradient(to right, #6B1817, #5636AD);
+    background: linear-gradient(90deg, #B91C1C 0%, #6B2338 25%, #7C479B 50%, #4F46E5 75%, #1D4ED8 100%);
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -426,13 +426,22 @@
     transition: opacity 0.35s ease;
   }
 
-  /* Dégradé strictement sur le lettrage (hero SOYONS AUDACIEUX) */
+  /* Dégradé strictement sur le lettrage (hero SOYONS AUDACIEUX) — spectre rouge à bleu */
   .hero-headline-gradient {
-    background: linear-gradient(to right, #6B1817 0%, #5636AD 100%) !important;
+    background: linear-gradient(90deg, #B91C1C 0%, #6B2338 25%, #7C479B 50%, #4F46E5 75%, #1D4ED8 100%) !important;
     -webkit-background-clip: text !important;
     background-clip: text !important;
     -webkit-text-fill-color: transparent !important;
     color: transparent !important;
+  }
+
+  /* Dégradé PreFooter (mots qui défilent) — même que Performez maintenant */
+  .pre-footer-gradient-text {
+    background: linear-gradient(to right, #6B1817, #5636AD);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
   }
 
   .dark-charcoal-text {

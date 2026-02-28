@@ -17,6 +17,8 @@ interface OptimizedImageProps {
   alt: string;
   width?: number;
   height?: number;
+  /** When true, image fills its container (100% width/height, no aspect-ratio constraint). Use for hero/cover layouts. */
+  fill?: boolean;
   className?: string;
   loading?: 'lazy' | 'eager';
   fetchPriority?: 'high' | 'low' | 'auto';
@@ -35,6 +37,7 @@ export default function OptimizedImage({
   alt,
   width,
   height,
+  fill = false,
   className = '',
   loading = 'lazy',
   fetchPriority = 'auto',
@@ -133,15 +136,15 @@ export default function OptimizedImage({
       <img
         src={src}
         alt={alt}
-        width={width}
-        height={height}
+        width={fill ? undefined : width}
+        height={fill ? undefined : height}
         className={className}
         loading={loading}
         fetchPriority={fetchPriority}
         decoding="async"
         onLoad={handleLoad}
         onError={handleError}
-        style={style}
+        style={fill ? { width: '100%', height: '100%', objectFit: 'cover', ...style } : style}
         aria-label={alt}
       />
     );
@@ -167,8 +170,8 @@ export default function OptimizedImage({
         <img
           src={sources.fallback}
           alt={alt}
-          width={width}
-          height={height}
+          width={fill ? undefined : width}
+          height={fill ? undefined : height}
           className={`${className} ${isLoaded ? 'opacity-100' : 'opacity-0'} transition-opacity duration-200`}
           loading={loading}
           fetchPriority={fetchPriority}
@@ -177,10 +180,14 @@ export default function OptimizedImage({
           onError={handleError}
           style={{
             ...style,
-            aspectRatio: width && height ? `${width} / ${height}` : undefined,
-            willChange: !isLoaded ? 'opacity' : undefined, // Optimize for opacity transitions
-            maxWidth: '100%',
-            height: 'auto',
+            ...(fill
+              ? { width: '100%', height: '100%', minHeight: '100%', objectFit: 'cover' }
+              : {
+                  aspectRatio: width && height ? `${width} / ${height}` : undefined,
+                  willChange: !isLoaded ? 'opacity' : undefined,
+                  maxWidth: '100%',
+                  height: 'auto',
+                }),
           }}
           aria-label={alt}
         />
@@ -193,8 +200,8 @@ export default function OptimizedImage({
     <img
       src={currentSrc}
       alt={alt}
-      width={width}
-      height={height}
+      width={fill ? undefined : width}
+      height={fill ? undefined : height}
       className={`${className} ${isLoaded ? 'opacity-100' : 'opacity-0'} transition-opacity duration-200`}
       loading={loading}
       fetchPriority={fetchPriority}
@@ -205,10 +212,14 @@ export default function OptimizedImage({
       onError={handleError}
       style={{
         ...style,
-        aspectRatio: width && height ? `${width} / ${height}` : undefined,
-        willChange: !isLoaded ? 'opacity' : undefined, // Optimize for opacity transitions
-        maxWidth: '100%',
-        height: 'auto',
+        ...(fill
+          ? { width: '100%', height: '100%', minHeight: '100%', objectFit: 'cover' }
+          : {
+              aspectRatio: width && height ? `${width} / ${height}` : undefined,
+              willChange: !isLoaded ? 'opacity' : undefined,
+              maxWidth: '100%',
+              height: 'auto',
+            }),
       }}
       aria-label={alt}
     />

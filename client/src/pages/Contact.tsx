@@ -107,14 +107,36 @@ export default function Contact() {
       <StructuredData data={montrealOfficeSchema} />
       <StructuredData data={halifaxOfficeSchema} />
 
-      <div className="min-h-screen" style={{ background: OFF_WHITE, fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
-        {/* Formulaire de contact */}
+      <div className="min-h-screen" style={{ background: 'transparent', fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
+        {/* Titre + formulaire à gauche, carte à droite */}
         <section className="pt-24 pb-12 lg:pt-28 lg:pb-16">
           <div className="w-full px-4 sm:px-6 lg:px-8">
-            <div className="max-w-2xl mx-auto">
-              {/* Formulaire dans glass-panel */}
-              <div className="glass-panel w-full rounded-2xl p-8 lg:p-12">
-              <div className="max-w-2xl">
+            {/* Titre + sous-texte */}
+            <div className="mb-8">
+                <h2
+                  className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold leading-tight mb-4 w-fit"
+                  style={{
+                    fontFamily: "'Plus Jakarta Sans', sans-serif",
+                    background: 'linear-gradient(to right, #6B1817, #5636AD)',
+                    WebkitBackgroundClip: 'text',
+                    WebkitTextFillColor: 'transparent',
+                    backgroundClip: 'text',
+                  }}
+                >
+                  Performez maintenant
+                </h2>
+              <p
+                className="text-base md:text-lg text-gray-600 leading-relaxed"
+                style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 400, color: '#444' }}
+              >
+                Choisissez la transformation numérique et contactez-nous
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 lg:grid-cols-[1fr_1fr] gap-8 lg:gap-12 items-stretch">
+              {/* Gauche : formulaire */}
+              <div className="glass-panel w-full rounded-2xl p-8 lg:p-12 h-full flex flex-col">
+              <div className="max-w-xl">
               <h2 className="text-2xl lg:text-3xl font-bold mb-6" style={{ color: BORDEAUX, fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
                 {t('contact.sendMessage')}
               </h2>
@@ -252,95 +274,56 @@ export default function Contact() {
               </form>
               </div>
               </div>
-            </div>
-          </div>
-        </section>
 
-        {/* Bloc 2 colonnes : villes à gauche, carte à droite */}
-        <section className="pb-16 lg:pb-24">
-          <div className="container">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-stretch">
-              {/* Gauche : titre, sous-titre, bureaux cliquables, email */}
-              <div className="order-1 flex flex-col justify-center">
-                <h1
-                  className="text-3xl md:text-4xl lg:text-5xl font-bold leading-tight mb-2"
-                  style={{ color: BORDEAUX, fontFamily: "'Plus Jakarta Sans', sans-serif" }}
-                >
-                  {t('contact.heroTitleNew')}
-                </h1>
-                <p className="text-lg text-gray-800 mb-8">
-                  {t('contact.heroSubtitle')}
-                </p>
-                <div className="space-y-5">
+              {/* Droite : villes au-dessus de la carte, adresse affichée sur la carte au clic */}
+              <div className="flex flex-col h-full rounded-2xl overflow-hidden shadow-lg bg-white/80 backdrop-blur border border-white/40 min-h-[320px]">
+                {/* Onglets villes */}
+                <div className="flex border-b border-gray-200/60">
                   <button
                     type="button"
                     onClick={() => setSelectedOffice('montreal')}
-                    className="w-full text-left flex items-start gap-3 hover:opacity-80 transition-opacity cursor-pointer border-none bg-transparent p-0"
+                    className={`flex-1 px-4 py-3 text-sm font-semibold transition-colors ${
+                      selectedOffice === 'montreal'
+                        ? 'bg-[#6B2338] text-white'
+                        : 'bg-gray-100/80 text-gray-700 hover:bg-gray-200/80'
+                    }`}
                   >
-                    <MapPin className="w-4 h-4 flex-shrink-0 mt-1" style={{ color: '#DC2626' }} aria-hidden />
-                    <div>
-                      <p className="font-semibold text-gray-900">{t('contact.montreal')}</p>
-                      <p className="text-gray-600 text-sm leading-relaxed mt-0.5">
-                        {t('contact.addressMontreal').includes(', ')
-                          ? (() => {
-                              const [street, ...rest] = t('contact.addressMontreal').split(', ');
-                              return (
-                                <>
-                                  {street}
-                                  <br />
-                                  {rest.join(', ')}
-                                </>
-                              );
-                            })()
-                          : t('contact.addressMontreal')}
-                      </p>
-                    </div>
+                    {t('contact.montreal')}
                   </button>
                   <button
                     type="button"
                     onClick={() => setSelectedOffice('halifax')}
-                    className="w-full text-left flex items-start gap-3 hover:opacity-80 transition-opacity cursor-pointer border-none bg-transparent p-0"
+                    className={`flex-1 px-4 py-3 text-sm font-semibold transition-colors ${
+                      selectedOffice === 'halifax'
+                        ? 'bg-[#6B2338] text-white'
+                        : 'bg-gray-100/80 text-gray-700 hover:bg-gray-200/80'
+                    }`}
                   >
-                    <MapPin className="w-4 h-4 flex-shrink-0 mt-1" style={{ color: '#DC2626' }} aria-hidden />
-                    <div>
-                      <p className="font-semibold text-gray-900">{t('contact.halifax')}</p>
-                      <p className="text-gray-600 text-sm leading-relaxed mt-0.5">
-                        {t('contact.addressHalifax').includes(', ')
-                          ? (() => {
-                              const [street, ...rest] = t('contact.addressHalifax').split(', ');
-                              return (
-                                <>
-                                  {street}
-                                  <br />
-                                  {rest.join(', ')}
-                                </>
-                              );
-                            })()
-                          : t('contact.addressHalifax')}
-                      </p>
-                    </div>
+                    {t('contact.halifax')}
                   </button>
                 </div>
-                <p className="mt-6 text-gray-700">
-                  <a href="mailto:hello@nukleo.com" className="text-gray-900 hover:underline">
-                    hello@nukleo.com
-                  </a>
-                </p>
-              </div>
-              {/* Droite : carte, mise à jour selon la ville sélectionnée */}
-              <div className="order-2 rounded-2xl overflow-hidden shadow-lg bg-gray-100 min-h-[320px] lg:min-h-[480px]">
-                <iframe
-                  key={selectedOffice}
-                  title={t('contact.whereToFindUs')}
-                  src={MAP_EMBED[selectedOffice]}
-                  width="100%"
-                  height="100%"
-                  style={{ minHeight: 320, border: 0 }}
-                  allowFullScreen
-                  loading="lazy"
-                  referrerPolicy="no-referrer-when-downgrade"
-                  className="block w-full h-full min-h-[320px] lg:min-h-[480px]"
-                />
+                {/* Adresse affichée sur la carte au clic */}
+                <div className="px-4 py-3 bg-gray-50/90 border-b border-gray-200/60 min-h-[3.5rem] flex items-center">
+                  <MapPin className="w-4 h-4 flex-shrink-0 mr-2 text-[#6B2338]" aria-hidden />
+                  <p className="text-gray-700 text-sm leading-relaxed">
+                    {selectedOffice === 'montreal' ? t('contact.addressMontreal') : t('contact.addressHalifax')}
+                  </p>
+                </div>
+                {/* Carte */}
+                <div className="bg-gray-100 flex-1 min-h-0">
+                  <iframe
+                    key={selectedOffice}
+                    title={t('contact.whereToFindUs')}
+                    src={MAP_EMBED[selectedOffice]}
+                    width="100%"
+                    height="100%"
+                    style={{ minHeight: 320, border: 0 }}
+                    allowFullScreen
+                    loading="lazy"
+                    referrerPolicy="no-referrer-when-downgrade"
+                    className="block w-full h-full min-h-[320px]"
+                  />
+                </div>
               </div>
             </div>
           </div>

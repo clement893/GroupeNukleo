@@ -4,7 +4,7 @@ import SEO from '@/components/SEO';
 import OptimizedImage from '@/components/OptimizedImage';
 import { trpc } from '@/lib/trpc';
 import { useLanguage } from '@/contexts/LanguageContext';
-import { slugToImageName } from '@/lib/projectSlug';
+import { slugToImageName, getProjectKey, getImagesForProject } from '@/lib/projectSlug';
 import { useEffect, useState } from 'react';
 import { useLocalizedPath } from '@/hooks/useLocalizedPath';
 
@@ -102,8 +102,27 @@ export default function ProjectDetail() {
     }
   }, [uploadedImages]);
 
+  // Toujours arriver en haut de la page à l'ouverture du projet (après lazy load / layout)
+  useEffect(() => {
+    const scroll = () => window.scrollTo(0, 0);
+    scroll();
+    const raf = requestAnimationFrame(() => {
+      scroll();
+      requestAnimationFrame(scroll);
+    });
+    const t1 = setTimeout(scroll, 50);
+    const t2 = setTimeout(scroll, 250);
+    return () => {
+      cancelAnimationFrame(raf);
+      clearTimeout(t1);
+      clearTimeout(t2);
+    };
+  }, [slug]);
+
   const imageName = slug ? slugToImageName(slug, imageNames.length > 0 ? imageNames : FALLBACK_IMAGES) : null;
   const meta = imageName && slug ? getProjectMeta(slug, imageName, language) : null;
+  const projectKey = imageName ? getProjectKey(imageName) : '';
+  const projectImages = projectKey ? getImagesForProject(projectKey, imageNames.length > 0 ? imageNames : FALLBACK_IMAGES) : [];
 
   if (!slug || !imageName || !meta) {
     return (
@@ -194,36 +213,46 @@ export default function ProjectDetail() {
           </div>
         </section>
 
-        {/* ═══ Galerie : 3 lignes de 2 images, fond sombre ═══ */}
+        {/* ═══ Galerie : toutes les images du projet ═══ */}
         <section style={{ background: 'transparent', padding: '3rem 6% 4rem' }}>
           <div style={{ maxWidth: 1400, margin: '0 auto' }}>
-            {/* Ligne 1 */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-              <div style={{ aspectRatio: '4/3', background: '#2d2d2d', borderRadius: 8, overflow: 'hidden' }}>
-                <OptimizedImage src={heroImageUrl} alt="" width={600} height={450} className="w-full h-full object-cover" loading="lazy" />
+            {projectImages.length > 0 ? (
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                {projectImages.map((name, idx) => {
+                  const src = `/projects/${name}`;
+                  const isPortrait = idx % 3 === 1;
+                  return (
+                    <div
+                      key={name}
+                      style={{
+                        aspectRatio: isPortrait ? '3/4' : '4/3',
+                        background: '#2d2d2d',
+                        borderRadius: 8,
+                        overflow: 'hidden',
+                      }}
+                    >
+                      <OptimizedImage
+                        src={src}
+                        alt={meta?.title ?? name}
+                        width={isPortrait ? 400 : 600}
+                        height={isPortrait ? 533 : 450}
+                        className="w-full h-full object-cover"
+                        loading="lazy"
+                      />
+                    </div>
+                  );
+                })}
               </div>
-              <div style={{ aspectRatio: '4/3', background: '#2d2d2d', borderRadius: 8, overflow: 'hidden' }}>
-                <OptimizedImage src={heroImageUrl} alt="" width={600} height={450} className="w-full h-full object-cover" loading="lazy" />
+            ) : (
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div style={{ aspectRatio: '4/3', background: '#2d2d2d', borderRadius: 8, overflow: 'hidden' }}>
+                  <OptimizedImage src={heroImageUrl} alt="" width={600} height={450} className="w-full h-full object-cover" loading="lazy" />
+                </div>
+                <div style={{ aspectRatio: '4/3', background: '#2d2d2d', borderRadius: 8, overflow: 'hidden' }}>
+                  <OptimizedImage src={heroImageUrl} alt="" width={600} height={450} className="w-full h-full object-cover" loading="lazy" />
+                </div>
               </div>
-            </div>
-            {/* Ligne 2 */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-              <div style={{ aspectRatio: '3/4', background: '#2d2d2d', borderRadius: 8, overflow: 'hidden' }}>
-                <div style={{ width: '100%', height: '100%', background: '#374151', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#9ca3af', fontSize: '0.875rem', fontFamily: "'Plus Jakarta Sans', sans-serif" }}>Placeholder</div>
-              </div>
-              <div style={{ aspectRatio: '3/4', background: '#2d2d2d', borderRadius: 8, overflow: 'hidden' }}>
-                <div style={{ width: '100%', height: '100%', background: '#374151', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#9ca3af', fontSize: '0.875rem', fontFamily: "'Plus Jakarta Sans', sans-serif" }}>Placeholder</div>
-              </div>
-            </div>
-            {/* Ligne 3 */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div style={{ aspectRatio: '4/3', background: '#2d2d2d', borderRadius: 8, overflow: 'hidden' }}>
-                <OptimizedImage src={heroImageUrl} alt="" width={600} height={450} className="w-full h-full object-cover" loading="lazy" />
-              </div>
-              <div style={{ aspectRatio: '4/3', background: '#2d2d2d', borderRadius: 8, overflow: 'hidden' }}>
-                <OptimizedImage src={heroImageUrl} alt="" width={600} height={450} className="w-full h-full object-cover" loading="lazy" />
-              </div>
-            </div>
+            )}
           </div>
         </section>
 

@@ -1,7 +1,6 @@
 import PageLayout from '@/components/PageLayout';
 import SEO from '@/components/SEO';
 import StructuredData, { createPersonSchema } from '@/components/StructuredData';
-import Breadcrumb from '@/components/Breadcrumb';
 import { Link } from 'wouter';
 import { Trophy, Handshake, Star, Heart, ArrowUpRight } from 'lucide-react';
 import { SplitCTAButton } from '@/components/SplitCTAButton';
@@ -57,7 +56,6 @@ export default function About() {
       <div style={{ minHeight: '100vh', color: '#374151' }}>
         {/* Hero */}
         <section style={{ padding: 'clamp(5rem, 10vh, 7rem) 6% 0' }}>
-          <Breadcrumb items={[{ name: t('nav.about'), url: '/about' }]} />
           {/* Titre + sous-titre en haut, alignés à gauche */}
           <div style={{ marginBottom: 'clamp(2rem, 6vw, 4rem)' }}>
             <h1
@@ -65,10 +63,12 @@ export default function About() {
                 fontFamily: "'Plus Jakarta Sans', sans-serif",
                 fontWeight: 700,
                 fontSize: 'clamp(2.5rem, 5vw, 4.5rem)',
-                lineHeight: 1.05,
+                lineHeight: 1.15,
                 letterSpacing: '-0.03em',
                 margin: '0 0 1rem 0',
+                paddingBottom: '0.06em',
                 display: 'inline-block',
+                overflow: 'visible',
                 background: 'linear-gradient(to right, #6B1817, #5636AD)',
                 backgroundClip: 'text',
                 WebkitBackgroundClip: 'text',

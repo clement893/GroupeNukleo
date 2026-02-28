@@ -8,7 +8,8 @@ import OptimizedImage from '@/components/OptimizedImage';
 import { trpc } from '@/lib/trpc';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { useLocalizedPath } from '@/hooks/useLocalizedPath';
-import { imageNameToSlug } from '@/lib/projectSlug';
+import { imageNameToSlug, oneImagePerProject } from '@/lib/projectSlug';
+import { PROJECT_FILTER_LABELS, filterImagesByCategory, type ProjectFilterValue } from '@/data/projectCategories';
 import { logger } from '@/lib/logger';
 import { MOBILE_BREAKPOINT } from '@/lib/constants';
 
@@ -91,18 +92,22 @@ export default function Projects() {
   });
 
   const [images, setImages] = useState<string[]>([]);
+  const [filter, setFilter] = useState<ProjectFilterValue>('Tous');
   const [visibleImages, setVisibleImages] = useState<Set<number>>(new Set());
   const imageRefs = useRef<(HTMLDivElement | null)[]>([]);
 
+  const filteredImages = filterImagesByCategory(images, filter);
+
   useEffect(() => {
     if (imagesError) {
-      setImages(fallbackImages);
+      setImages(oneImagePerProject(fallbackImages));
       return;
     }
     if (uploadedImages && Array.isArray(uploadedImages)) {
-      setImages(uploadedImages.length > 0 ? uploadedImages.map((img) => img.name) : fallbackImages);
+      const names = uploadedImages.length > 0 ? uploadedImages.map((img) => img.name) : fallbackImages;
+      setImages(oneImagePerProject(names));
     } else if (!isLoadingImages) {
-      setImages(fallbackImages);
+      setImages(oneImagePerProject(fallbackImages));
     }
   }, [uploadedImages, isLoadingImages, imagesError]);
 
@@ -124,14 +129,14 @@ export default function Projects() {
     );
     imageRefs.current.forEach((ref) => ref && observer.observe(ref));
     return () => observer.disconnect();
-  }, [images]);
+  }, [filteredImages]);
 
   useEffect(() => {
-    if (images.length === 0) return;
+    if (filteredImages.length === 0) return;
     const isMobile = typeof window !== 'undefined' && window.innerWidth < MOBILE_BREAKPOINT;
-    const n = isMobile ? Math.min(2, images.length) : Math.min(6, images.length);
+    const n = isMobile ? Math.min(2, filteredImages.length) : Math.min(6, filteredImages.length);
     setVisibleImages(new Set(Array.from({ length: n }, (_, i) => i)));
-  }, [images.length]);
+  }, [filteredImages.length]);
 
   return (
     <PageLayout>
@@ -141,13 +146,43 @@ export default function Projects() {
         keywords="portfolio, projects, branding, web design, digital agency, creative work"
       />
 
-      {/* Light background: lavender gradient → white */}
-      <div className="min-h-screen bg-gradient-to-b from-[#F5F3F8] to-white">
+      {/* Fond unifié avec le reste du site (PageLayout) */}
+      <div className="min-h-screen">
         <ProjectsHero
           headline={t('projects.heroHeadline')}
           description={t('projects.description')}
-          heroImages={images}
+          heroImages={filteredImages}
+          getProjectUrl={(name) => getLocalizedPath(`/projects/${imageNameToSlug(name)}`)}
         />
+
+        {/* Filtres par catégorie — sous le triptyque */}
+        <section className="container pt-2 pb-6 lg:pb-8">
+          <div
+            className="flex flex-wrap items-center justify-center gap-2 lg:gap-3"
+            role="tablist"
+            aria-label="Filtrer les projets par catégorie"
+          >
+            {PROJECT_FILTER_LABELS.map((label) => (
+              <button
+                key={label}
+                type="button"
+                role="tab"
+                aria-selected={filter === label}
+                onClick={() => setFilter(label)}
+                className={`
+                  px-4 py-2 rounded-full text-sm font-medium transition-all duration-200
+                  ${filter === label
+                    ? 'bg-[#5A1E29] text-white shadow-md'
+                    : 'bg-white/90 text-gray-700 border border-gray-200 hover:border-gray-300 hover:bg-gray-50'
+                  }
+                `}
+                style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}
+              >
+                {label}
+              </button>
+            ))}
+          </div>
+        </section>
 
         {/* 2-column grid with colored cells */}
         <section className="pb-16 lg:pb-24">
@@ -167,9 +202,13 @@ export default function Projects() {
                 <p className="mb-2">{t('projects.noImages')}</p>
                 <p className="text-sm text-gray-500">{t('projects.noImagesAdmin')}</p>
               </div>
+            ) : filteredImages.length === 0 ? (
+              <p className="text-center py-12 text-gray-500" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
+                Aucun projet dans cette catégorie.
+              </p>
             ) : (
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 lg:gap-6">
-                {images.map((image, index) => {
+                {filteredImages.map((image, index) => {
                   const isVisible = visibleImages.has(index);
                   const imageAlt = image.replace(/[-_]/g, ' ').replace(/\.(jpg|png|jpeg)$/i, '').replace(/\d+$/, '').trim();
                   const bgColor = GRID_BG_COLORS[index % GRID_BG_COLORS.length];
@@ -180,22 +219,40 @@ export default function Projects() {
                     <Link key={`${image}-${index}`} href={projectUrl}>
                       <div
                         ref={(el) => { imageRefs.current[index] = el; }}
-                        className="block group cursor-pointer overflow-hidden rounded-xl min-h-[240px] sm:min-h-[280px] lg:min-h-[320px]"
+                        className="block group cursor-pointer overflow-hidden rounded-xl min-h-[240px] sm:min-h-[280px] lg:min-h-[320px] relative"
                         style={{ backgroundColor: bgColor }}
                       >
                         {!isVisible ? (
                           <div className="w-full h-full min-h-[240px] sm:min-h-[280px] lg:min-h-[320px] animate-pulse" />
                         ) : (
-                          <OptimizedImage
-                            src={`/projects/${image}`}
-                            alt={imageAlt}
-                            width={600}
-                            height={400}
-                            className="w-full h-full min-h-[240px] sm:min-h-[280px] lg:min-h-[320px] object-cover transition-transform duration-300 group-hover:scale-105"
-                            loading={index < 4 ? 'eager' : 'lazy'}
-                            fetchPriority={index < 4 ? 'high' : 'low'}
-                            sizes="(max-width: 640px) 100vw, 50vw"
-                          />
+                          <>
+                            <OptimizedImage
+                              src={`/projects/${image}`}
+                              alt={imageAlt}
+                              width={600}
+                              height={400}
+                              className="w-full h-full min-h-[240px] sm:min-h-[280px] lg:min-h-[320px] object-cover transition-transform duration-300 group-hover:scale-105"
+                              loading={index < 4 ? 'eager' : 'lazy'}
+                              fetchPriority={index < 4 ? 'high' : 'low'}
+                              sizes="(max-width: 640px) 100vw, 50vw"
+                            />
+                            <div
+                              className="absolute inset-0 flex items-end justify-start bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 p-4 lg:p-5"
+                              aria-hidden
+                            >
+                              <span
+                                className="text-white font-bold text-left"
+                                style={{
+                                  fontFamily: "'Plus Jakarta Sans', sans-serif",
+                                  fontSize: 'clamp(1rem, 2.5vw, 1.5rem)',
+                                  lineHeight: 1.2,
+                                  textShadow: '0 2px 12px rgba(0,0,0,0.4)',
+                                }}
+                              >
+                                {imageAlt}
+                              </span>
+                            </div>
+                          </>
                         )}
                       </div>
                     </Link>

@@ -93,7 +93,17 @@ export default function StartProject() {
 
         {/* Header */}
         <div className="max-w-3xl mx-auto text-center mb-16">
-          <h1 className="text-4xl md:text-6xl font-bold mb-6 text-white">
+          <h1
+            className="text-4xl md:text-6xl font-bold mb-6"
+            style={{
+              fontFamily: "'Plus Jakarta Sans', sans-serif",
+              display: 'inline-block',
+              background: 'linear-gradient(to right, #6B1817, #5636AD)',
+              WebkitBackgroundClip: 'text',
+              backgroundClip: 'text',
+              color: 'transparent',
+            }}
+          >
             {t('startProject.pageTitle')}
           </h1>
           <p className="text-lg md:text-xl text-white/70">

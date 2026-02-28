@@ -1,11 +1,12 @@
 import { Link } from "wouter";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { AdminHeader } from "@/components/AdminHeader";
-import { 
-  LayoutDashboard, 
+import { AdminSidebar } from "@/components/AdminSidebar";
+import {
+  LayoutDashboard,
   Loader2,
-  BarChart3, 
-  MessageSquare, 
+  BarChart3,
+  MessageSquare,
   Building2,
   Settings,
   ArrowRight,
@@ -15,40 +16,37 @@ import {
   Database,
   TrendingUp,
   FileText,
-  Image as ImageIcon
+  Image as ImageIcon,
 } from "lucide-react";
+import "@/styles/admin.css";
 
 interface AdminCardProps {
   title: string;
   description: string;
   icon: React.ReactNode;
   href: string;
-  badge?: string;
 }
 
-function AdminCard({ title, description, icon, href, badge }: AdminCardProps) {
+function AdminCard({ title, description, icon, href }: AdminCardProps) {
   return (
     <Link href={href}>
-      <Card className="hover:shadow-lg transition-shadow cursor-pointer group">
-        <CardHeader>
-          <div className="flex items-start justify-between">
-            <div className="flex items-center gap-3">
-              <div className="p-3 bg-primary/10 rounded-lg group-hover:bg-primary/20 transition-colors">
+      <Card className="admin-home-card group cursor-pointer border border-zinc-200 bg-white hover:border-zinc-300 hover:shadow-md transition-all duration-200">
+        <CardHeader className="pb-4">
+          <div className="flex items-start justify-between gap-3">
+            <div className="flex items-center gap-3 min-w-0">
+              <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-zinc-100 text-zinc-600 group-hover:bg-[#6B1817]/10 group-hover:text-[#6B1817] transition-colors">
                 {icon}
               </div>
-              <div>
-                <CardTitle className="flex items-center gap-2">
+              <div className="min-w-0">
+                <CardTitle className="text-base font-semibold text-zinc-900 group-hover:text-[#6B1817] transition-colors">
                   {title}
-                  {badge && (
-                    <span className="text-xs bg-primary/20 text-primary px-2 py-1 rounded-full">
-                      {badge}
-                    </span>
-                  )}
                 </CardTitle>
-                <CardDescription className="mt-1">{description}</CardDescription>
+                <CardDescription className="mt-0.5 text-sm text-zinc-500 line-clamp-2">
+                  {description}
+                </CardDescription>
               </div>
             </div>
-            <ArrowRight className="w-5 h-5 text-muted-foreground group-hover:text-primary transition-colors" />
+            <ArrowRight className="h-5 w-5 shrink-0 text-zinc-400 group-hover:text-[#6B1817] group-hover:translate-x-0.5 transition-all" />
           </div>
         </CardHeader>
       </Card>
@@ -56,201 +54,136 @@ function AdminCard({ title, description, icon, href, badge }: AdminCardProps) {
   );
 }
 
+const ADMIN_CATEGORIES = [
+  {
+    title: "Analytics & Tracking",
+    description: "Suivi et analyses des performances",
+    sections: [
+      { title: "Dashboard", description: "Vue d'ensemble des statistiques et métriques principales", icon: <LayoutDashboard className="h-5 w-5" />, href: "/admin/dashboard" },
+      { title: "Analytics & Tracking", description: "Google Analytics, Facebook Pixel, LinkedIn Insight Tag", icon: <TrendingUp className="h-5 w-5" />, href: "/admin/analytics" },
+      { title: "LEO Analytics", description: "Statistiques des interactions avec LEO", icon: <BarChart3 className="h-5 w-5" />, href: "/admin/leo-analytics" },
+    ],
+  },
+  {
+    title: "Gestion des Contacts & Leads",
+    description: "Contacts, leads et messages",
+    sections: [
+      { title: "LEO Contacts", description: "Contacts et conversations LEO", icon: <MessageSquare className="h-5 w-5" />, href: "/admin/leo-contacts" },
+      { title: "Agency Leads", description: "Leads et demandes des agences", icon: <Building2 className="h-5 w-5" />, href: "/admin/agency-leads" },
+      { title: "Contact Messages", description: "Messages du formulaire de contact", icon: <MessageSquare className="h-5 w-5" />, href: "/admin/contact-messages" },
+      { title: "Start Project Submissions", description: "Demandes de projets Start Project", icon: <FileText className="h-5 w-5" />, href: "/admin/start-project-submissions" },
+      { title: "AI News Subscribers", description: "Abonnés à la newsletter AI News", icon: <Mail className="h-5 w-5" />, href: "/admin/ai-news-subscribers" },
+      { title: "Témoignages", description: "Synchroniser les témoignages", icon: <MessageSquare className="h-5 w-5" />, href: "/admin/testimonials" },
+    ],
+  },
+  {
+    title: "Configuration & Paramètres",
+    description: "Paramètres du site",
+    sections: [
+      { title: "Visibilité des Pages", description: "Contrôler l'accès aux pages du site", icon: <Globe className="h-5 w-5" />, href: "/admin/page-visibility" },
+      { title: "Gestion des Loaders", description: "Animations de chargement et rotation", icon: <Loader2 className="h-5 w-5" />, href: "/admin/loader-migration" },
+      { title: "Gestion des Sons", description: "Sons interactifs de l'interface", icon: <Volume2 className="h-5 w-5" />, href: "/admin/sounds" },
+      { title: "Images de Projets", description: "Uploader et gérer les images projets", icon: <ImageIcon className="h-5 w-5" />, href: "/admin/projects-images" },
+    ],
+  },
+  {
+    title: "Outils de Développement",
+    description: "Migrations et technique",
+    sections: [
+      { title: "Migration DB", description: "Créer les tables (page_visibility, analytics)", icon: <Database className="h-5 w-5" />, href: "/admin/run-migration" },
+      { title: "Migration Loaders", description: "Sanitiser les loaders HTML (a11y, SEO)", icon: <Database className="h-5 w-5" />, href: "/admin/loader-migration" },
+    ],
+  },
+];
+
+const totalSections = ADMIN_CATEGORIES.reduce((sum, c) => sum + c.sections.length, 0);
+
 export default function AdminHome() {
-  // Organiser les sections par catégories
-  const adminCategories = [
-    {
-      title: "📊 Analytics & Tracking",
-      description: "Suivi et analyses des performances",
-      sections: [
-        {
-          title: "Dashboard",
-          description: "Vue d'ensemble des statistiques et métriques principales",
-          icon: <LayoutDashboard className="w-6 h-6 text-primary" />,
-          href: "/admin/dashboard",
-        },
-        {
-          title: "Analytics & Tracking",
-          description: "Configurer Google Analytics, Facebook Pixel, LinkedIn Insight Tag",
-          icon: <TrendingUp className="w-6 h-6 text-primary" />,
-          href: "/admin/analytics",
-        },
-        {
-          title: "LEO Analytics",
-          description: "Statistiques et analyses des interactions avec LEO",
-          icon: <BarChart3 className="w-6 h-6 text-primary" />,
-          href: "/admin/leo-analytics",
-        },
-      ],
-    },
-    {
-      title: "💬 Gestion des Contacts & Leads",
-      description: "Gérer les contacts, leads et messages",
-      sections: [
-        {
-          title: "LEO Contacts",
-          description: "Gérer les contacts et conversations LEO",
-          icon: <MessageSquare className="w-6 h-6 text-primary" />,
-          href: "/admin/leo-contacts",
-        },
-        {
-          title: "Agency Leads",
-          description: "Gérer les leads et demandes des agences",
-          icon: <Building2 className="w-6 h-6 text-primary" />,
-          href: "/admin/agency-leads",
-        },
-        {
-          title: "Contact Messages",
-          description: "Gérer les messages reçus via le formulaire de contact",
-          icon: <MessageSquare className="w-6 h-6 text-primary" />,
-          href: "/admin/contact-messages",
-        },
-        {
-          title: "Start Project Submissions",
-          description: "Gérer les demandes de projets soumises via Start Project",
-          icon: <FileText className="w-6 h-6 text-primary" />,
-          href: "/admin/start-project-submissions",
-        },
-        {
-          title: "AI News Subscribers",
-          description: "Gérer les abonnés à la newsletter AI News",
-          icon: <Mail className="w-6 h-6 text-primary" />,
-          href: "/admin/ai-news-subscribers",
-        },
-        {
-          title: "Témoignages",
-          description: "Synchroniser les témoignages depuis la plateforme interne",
-          icon: <MessageSquare className="w-6 h-6 text-primary" />,
-          href: "/admin/testimonials",
-        },
-      ],
-    },
-    {
-      title: "⚙️ Configuration & Paramètres",
-      description: "Paramètres du site et configuration",
-      sections: [
-        {
-          title: "Visibilité des Pages",
-          description: "Contrôler quelles pages sont accessibles sur le site",
-          icon: <Globe className="w-6 h-6 text-primary" />,
-          href: "/admin/page-visibility",
-        },
-        {
-          title: "Gestion des Loaders",
-          description: "Gérer les animations de chargement et leur rotation",
-          icon: <Loader2 className="w-6 h-6 text-primary" />,
-          href: "/admin/loaders",
-        },
-        {
-          title: "Gestion des Sons",
-          description: "Personnaliser les sons interactifs de l'interface",
-          icon: <Volume2 className="w-6 h-6 text-primary" />,
-          href: "/admin/sounds",
-        },
-        {
-          title: "Images de Projets",
-          description: "Uploader et gérer les images de la page projets",
-          icon: <ImageIcon className="w-6 h-6 text-primary" />,
-          href: "/admin/projects-images",
-        },
-      ],
-    },
-    {
-      title: "🔧 Outils de Développement",
-      description: "Outils techniques et migrations",
-      sections: [
-        {
-          title: "Migration DB",
-          description: "Créer les tables nécessaires (page_visibility, analytics)",
-          icon: <Database className="w-6 h-6 text-primary" />,
-          href: "/admin/run-migration",
-        },
-        {
-          title: "Migration Loaders",
-          description: "Sanitiser les loaders HTML pour l'accessibilité et le SEO",
-          icon: <Database className="w-6 h-6 text-primary" />,
-          href: "/admin/loader-migration",
-        },
-      ],
-    },
-  ];
-
   return (
-    <div className="min-h-screen bg-gradient-to-br from-background via-background to-primary/5">
+    <div className="admin-app min-h-screen bg-zinc-50" data-admin-panel>
       <AdminHeader />
-      <div className="container mx-auto py-12">
-        {/* Header */}
-        <div className="mb-12">
-          <h1 className="text-5xl font-bold mb-4 bg-gradient-to-r from-primary to-primary/60 bg-clip-text text-transparent">
-            Administration
-          </h1>
-          <p className="text-xl text-muted-foreground">
-            Centre de contrôle pour gérer tous les aspects de Nukleo Digital
-          </p>
-        </div>
-
-        {/* Quick Stats */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-12">
-          <Card>
-            <CardHeader className="pb-3">
-              <CardDescription>Pages Admin</CardDescription>
-              <CardTitle className="text-3xl">
-                {adminCategories.reduce((sum, cat) => sum + cat.sections.length, 0)}
-              </CardTitle>
-            </CardHeader>
-          </Card>
-          <Card>
-            <CardHeader className="pb-3">
-              <CardDescription>Statut</CardDescription>
-              <CardTitle className="text-3xl flex items-center gap-2">
-                <span className="w-3 h-3 bg-green-500 rounded-full animate-pulse" />
-                En ligne
-              </CardTitle>
-            </CardHeader>
-          </Card>
-          <Card>
-            <CardHeader className="pb-3">
-              <CardDescription>Catégories</CardDescription>
-              <CardTitle className="text-3xl">{adminCategories.length}</CardTitle>
-            </CardHeader>
-          </Card>
-          <Card>
-            <CardHeader className="pb-3">
-              <CardDescription>Dernière mise à jour</CardDescription>
-              <CardTitle className="text-xl">Aujourd'hui</CardTitle>
-            </CardHeader>
-          </Card>
-        </div>
-
-        {/* Admin Sections by Category */}
-        <div className="space-y-8">
-          {adminCategories.map((category, categoryIndex) => (
-            <div key={categoryIndex}>
-              <div className="mb-4">
-                <h2 className="text-2xl font-bold mb-2">{category.title}</h2>
-                <p className="text-muted-foreground">{category.description}</p>
-              </div>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                {category.sections.map((section) => (
-                  <AdminCard key={section.href} {...section} />
-                ))}
-              </div>
-            </div>
-          ))}
-        </div>
-
-        {/* Footer Info */}
-        <div className="mt-12 p-6 bg-muted/50 rounded-lg">
-          <div className="flex items-start gap-3">
-            <Settings className="w-5 h-5 text-muted-foreground mt-1" />
-            <div>
-              <h3 className="font-semibold mb-1">Besoin d'aide ?</h3>
-              <p className="text-sm text-muted-foreground">
-                Pour ajouter de nouvelles sections admin, contactez l'équipe de développement ou consultez la documentation.
+      <div className="flex">
+        <AdminSidebar />
+        <main className="flex-1 min-h-[calc(100vh-3.5rem)] overflow-auto">
+          <div className="p-6 lg:p-8 max-w-5xl">
+            <header className="mb-8">
+              <h1 className="text-2xl font-bold tracking-tight text-zinc-900 sm:text-3xl">
+                Administration
+              </h1>
+              <p className="mt-1 text-zinc-500">
+                Centre de contrôle Nukleo Digital
               </p>
+            </header>
+
+            <section className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+              <Card className="border border-zinc-200 bg-white">
+                <CardHeader className="pb-2">
+                  <CardDescription className="text-xs font-medium uppercase tracking-wider text-zinc-500">
+                    Pages admin
+                  </CardDescription>
+                  <CardTitle className="text-2xl font-bold text-zinc-900">{totalSections}</CardTitle>
+                </CardHeader>
+              </Card>
+              <Card className="border border-zinc-200 bg-white">
+                <CardHeader className="pb-2">
+                  <CardDescription className="text-xs font-medium uppercase tracking-wider text-zinc-500">
+                    Statut
+                  </CardDescription>
+                  <CardTitle className="text-2xl font-bold flex items-center gap-2 text-zinc-900">
+                    <span className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse" />
+                    En ligne
+                  </CardTitle>
+                </CardHeader>
+              </Card>
+              <Card className="border border-zinc-200 bg-white">
+                <CardHeader className="pb-2">
+                  <CardDescription className="text-xs font-medium uppercase tracking-wider text-zinc-500">
+                    Catégories
+                  </CardDescription>
+                  <CardTitle className="text-2xl font-bold text-zinc-900">{ADMIN_CATEGORIES.length}</CardTitle>
+                </CardHeader>
+              </Card>
+              <Card className="border border-zinc-200 bg-white">
+                <CardHeader className="pb-2">
+                  <CardDescription className="text-xs font-medium uppercase tracking-wider text-zinc-500">
+                    Dernière MAJ
+                  </CardDescription>
+                  <CardTitle className="text-lg font-bold text-zinc-900">Aujourd'hui</CardTitle>
+                </CardHeader>
+              </Card>
+            </section>
+
+            <div className="space-y-8">
+              {ADMIN_CATEGORIES.map((category, idx) => (
+                <section key={idx}>
+                  <div className="mb-3">
+                    <h2 className="text-sm font-semibold uppercase tracking-wider text-zinc-500">
+                      {category.title}
+                    </h2>
+                    <p className="text-zinc-600 mt-0.5">{category.description}</p>
+                  </div>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-3">
+                    {category.sections.map((section) => (
+                      <AdminCard key={section.href} {...section} />
+                    ))}
+                  </div>
+                </section>
+              ))}
             </div>
+
+            <footer className="mt-10 p-4 rounded-xl bg-white border border-zinc-200">
+              <div className="flex items-start gap-3">
+                <Settings className="h-5 w-5 text-zinc-400 shrink-0 mt-0.5" />
+                <div>
+                  <h3 className="font-semibold text-zinc-900">Besoin d'aide ?</h3>
+                  <p className="text-sm text-zinc-500 mt-1">
+                    Pour ajouter de nouvelles sections admin, contactez l'équipe de développement ou consultez la documentation.
+                  </p>
+                </div>
+              </div>
+            </footer>
           </div>
-        </div>
+        </main>
       </div>
     </div>
   );
