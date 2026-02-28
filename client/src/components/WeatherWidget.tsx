@@ -28,10 +28,10 @@ function getWeatherIcon(code: number): LucideIcon {
 }
 
 export function WeatherWidget({ className }: { className?: string }) {
-  const { data, loading } = useWeatherByIp();
-  const tempDisplay = loading ? '--' : String(data.temperature);
-  const locationDisplay = loading ? '…' : data.locationLabel;
-  const weatherCode = data.weatherCode ?? 0;
+  const { data, loading, error } = useWeatherByIp();
+  const tempDisplay = loading ? '--' : (data ? String(data.temperature) : '--');
+  const locationDisplay = loading ? '…' : (data ? data.locationLabel : (error ? 'Indisponible' : '…'));
+  const weatherCode = data?.weatherCode ?? 0;
   const Icon = getWeatherIcon(weatherCode);
 
   return (
@@ -54,7 +54,7 @@ export function WeatherWidget({ className }: { className?: string }) {
       `}</style>
       <div
         role="region"
-        aria-label={`Météo : ${loading ? 'chargement' : `${data.temperature} degrés, ${data.locationLabel}`}`}
+        aria-label={`Météo : ${loading ? 'chargement' : data ? `${data.temperature} degrés, ${data.locationLabel}` : 'indisponible'}`}
         className={loading ? `weather-widget-loading ${className ?? ''}`.trim() : className}
         style={{
           borderRadius: 14,

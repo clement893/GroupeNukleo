@@ -546,7 +546,85 @@ async function startServer() {
     }
     res.status(204).send(); // No content response
   });
-  
+
+  // Weather widget: geo by client IP (server-side) + Open-Meteo — évite CORS/CSP en prod
+  const weatherLimiter = rateLimit({
+    windowMs: 15 * 60 * 1000,
+    max: 30,
+    message: { error: 'Too many weather requests' },
+    standardHeaders: true,
+    legacyHeaders: false,
+  });
+  app.get('/api/weather', weatherLimiter, async (req, res) => {
+    const clientIp = (req.ip || req.socket?.remoteAddress || '').replace(/^::ffff:/, '') || undefined;
+    if (!clientIp || clientIp === '::1' || clientIp === '127.0.0.1') {
+      // En local, pas d'IP publique : utiliser un fallback géo (ex. Paris) pour que la météo s'affiche
+      const lat = 48.8566;
+      const lon = 2.3522;
+      const city = 'Paris';
+      const region = 'Île-de-France';
+      const country = 'France';
+      try {
+        const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m,weather_code`;
+        const wRes = await fetch(url, { signal: AbortSignal.timeout(8000) });
+        if (!wRes.ok) return res.status(502).json({ error: 'Weather service unavailable' });
+        const j = await wRes.json();
+        const temp = typeof j?.current?.temperature_2m === 'number' ? Math.round(j.current.temperature_2m) : 24;
+        const weatherCode = typeof j?.current?.weather_code === 'number' ? j.current.weather_code : 0;
+        return res.json({
+          temperature: temp,
+          weatherCode,
+          city,
+          region,
+          country,
+          locationLabel: `${city}, ${region}`,
+        });
+      } catch (e) {
+        logger.warn('[Weather] Open-Meteo failed (local fallback)', e);
+        return res.status(502).json({ error: 'Weather service unavailable' });
+      }
+    }
+    try {
+      const geoRes = await fetch(`https://ipapi.co/${clientIp}/json/`, {
+        headers: { 'Accept': 'application/json', 'User-Agent': 'NukleoWeather/1.0' },
+        signal: AbortSignal.timeout(8000),
+      });
+      if (!geoRes.ok) {
+        logger.warn('[Weather] ipapi.co failed', { status: geoRes.status, ip: clientIp });
+        return res.status(502).json({ error: 'Geolocation unavailable' });
+      }
+      const geo = await geoRes.json();
+      const lat = Number(geo.latitude);
+      const lon = Number(geo.longitude);
+      if (!Number.isFinite(lat) || !Number.isFinite(lon)) {
+        logger.warn('[Weather] Invalid geo', { ip: clientIp });
+        return res.status(502).json({ error: 'Geolocation unavailable' });
+      }
+      const city = geo.city ?? '';
+      const region = geo.region ?? geo.region_code ?? '';
+      const country = geo.country_name ?? geo.country ?? '';
+      const locationLabel = [city, region, country].filter(Boolean).slice(0, 2).join(', ') || 'Unknown';
+      const weatherUrl = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m,weather_code`;
+      const wRes = await fetch(weatherUrl, { signal: AbortSignal.timeout(8000) });
+      if (!wRes.ok) return res.status(502).json({ error: 'Weather service unavailable' });
+      const j = await wRes.json();
+      const temp = typeof j?.current?.temperature_2m === 'number' ? Math.round(j.current.temperature_2m) : null;
+      const weatherCode = typeof j?.current?.weather_code === 'number' ? j.current.weather_code : 0;
+      if (temp === null) return res.status(502).json({ error: 'Weather data invalid' });
+      return res.json({
+        temperature: temp,
+        weatherCode,
+        city: city || 'Unknown',
+        region,
+        country,
+        locationLabel,
+      });
+    } catch (e) {
+      logger.warn('[Weather] Failed', { ip: clientIp, error: e instanceof Error ? e.message : e });
+      return res.status(502).json({ error: 'Weather service unavailable' });
+    }
+  });
+
   // tRPC API with rate limiting - MUST be before serveStatic
   app.use("/api/trpc", generalLimiter);
   app.use(

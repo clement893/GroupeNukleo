@@ -882,21 +882,21 @@ export default function HomepageDemo5() {
         {/* ════════════════════════════════════════════════════════════════════
             SECTION 7 — PRÊT.E À PERFORMER? (CTA type neumorphic)
         ════════════════════════════════════════════════════════════════════ */}
-        <div style={{ padding: '4rem 6%', marginBottom: 5 * 16, background: 'transparent' }}>
+        <div style={{ padding: 'clamp(5rem, 10vh, 8rem) 6%', marginBottom: 5 * 16, background: 'transparent' }}>
           <div style={{
-            maxWidth: 720,
+            maxWidth: 840,
             margin: '0 auto',
             borderRadius: 28,
-            padding: '3.5rem 3rem',
+            padding: 'clamp(3.5rem, 6vw, 5rem) clamp(2.5rem, 4vw, 4rem)',
             textAlign: 'center',
           }}>
           <h2 style={{
               fontFamily: "'Plus Jakarta Sans', sans-serif",
               fontWeight: 700,
-              fontSize: 'clamp(2rem, 4vw, 3.25rem)',
+              fontSize: 'clamp(2.5rem, 5.5vw, 4.5rem)',
               lineHeight: 1.1,
               letterSpacing: '-0.03em',
-              margin: '0 0 1.25rem 0',
+              margin: '0 0 1.5rem 0',
               display: 'inline-block',
               width: 'fit-content',
               background: 'linear-gradient(to right, #6B1817, #5636AD)',
@@ -907,11 +907,12 @@ export default function HomepageDemo5() {
               Prêt.e à performer?
             </h2>
             <p style={{
-              fontSize: '1rem',
+              fontFamily: "'Plus Jakarta Sans', sans-serif",
+              fontSize: 'clamp(1.05rem, 1.35vw, 1.35rem)',
               color: '#374151',
-              lineHeight: 1.6,
-              margin: '0 0 2rem 0',
-              maxWidth: 480,
+              lineHeight: 1.65,
+              margin: '0 0 2.5rem 0',
+              maxWidth: 560,
               marginLeft: 'auto',
               marginRight: 'auto',
             }}>
