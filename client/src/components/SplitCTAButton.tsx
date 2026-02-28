@@ -21,21 +21,21 @@ const SIZES = {
   default: {
     padding: '0.9rem 1.75rem',
     fontSize: '0.9rem',
-    arrowWidth: 48,
-    iconSize: 20,
+    arrowWidth: '2.5rem',
+    iconSize: '1.25rem',
   },
   small: {
     padding: '0.5rem 1rem',
     fontSize: '0.8rem',
-    arrowWidth: 36,
-    iconSize: 16,
+    arrowWidth: '2rem',
+    iconSize: '1rem',
   },
   /** Pour le header : scale avec la vue sur grands écrans */
   header: {
     padding: 'clamp(0.5rem, 1vw, 0.9rem) clamp(1rem, 1.4vw, 1.75rem)',
     fontSize: 'clamp(0.8rem, 0.95vw, 1.05rem)',
-    arrowWidth: 40,
-    iconSize: 18,
+    arrowWidth: '2.25rem',
+    iconSize: '1.125rem',
   },
 } as const;
 
@@ -90,7 +90,7 @@ export function SplitCTAButton({
     color,
     border: 'none',
     margin: 0,
-    borderRadius: 16,
+    borderRadius: '1rem',
     boxShadow: shadowBlock,
   };
 
@@ -109,7 +109,7 @@ export function SplitCTAButton({
         className="inline-flex items-center justify-center transition-transform duration-200 ease-out group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
         aria-hidden
       >
-        <ArrowUpRight size={sz.iconSize} strokeWidth={2.5} />
+        <ArrowUpRight style={{ width: sz.iconSize, height: sz.iconSize }} strokeWidth={2.5} />
       </span>
     </a>
   );
