@@ -13,12 +13,14 @@ export default function PageLayout({ children }: PageLayoutProps) {
     <>
       <SkipToContent />
       <Header />
-      <main id="main-content" role="main" style={{ marginBottom: 0, background: '#EFE8E8', border: 'none', borderWidth: 0, outline: 'none', boxShadow: 'none' }}>
-        {children}
-      </main>
-      <div style={{ marginTop: -12, paddingTop: 12, background: '#EFE8E8', border: 'none', borderWidth: 0, outline: 'none' }}>
-        <PreFooter />
-        <Footer />
+      <div className="page-content-zone" style={{ background: '#EFE8E8' }}>
+        <main id="main-content" role="main" style={{ marginBottom: 0 }}>
+          {children}
+        </main>
+        <div className="page-footer-zone" style={{ paddingTop: 0 }}>
+          <PreFooter />
+          <Footer />
+        </div>
       </div>
     </>
   );

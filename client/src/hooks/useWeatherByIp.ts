@@ -80,8 +80,28 @@ async function getGeoFromIpApiCo(): Promise<{ city: string; region: string; coun
   }
 }
 
-/** ip-api.com: HTTP, gratuit. Fonctionne en local (http). En prod HTTPS = mixed content, donc utilisé en secours. */
+/** ipwho.is: HTTPS, gratuit, CORS. Fonctionne en prod (pas de mixed content). */
+async function getGeoFromIpWhoIs(): Promise<{ city: string; region: string; country: string; lat: number; lon: number } | null> {
+  try {
+    const res = await fetchWithTimeout('https://ipwho.is/');
+    if (!res.ok) return null;
+    const j = await res.json();
+    if (j?.success !== true) return null;
+    const city = j.city ?? '';
+    const region = j.region ?? '';
+    const country = j.country ?? '';
+    const lat = Number(j.latitude);
+    const lon = Number(j.longitude);
+    if (!Number.isFinite(lat) || !Number.isFinite(lon)) return null;
+    return { city, region, country, lat, lon };
+  } catch {
+    return null;
+  }
+}
+
+/** ip-api.com: HTTP uniquement. En prod HTTPS = mixed content (bloqué). Utilisé seulement en local. */
 async function getGeoFromIpApi(): Promise<{ city: string; region: string; country: string; lat: number; lon: number } | null> {
+  if (typeof window !== 'undefined' && window.location?.protocol === 'https:') return null;
   try {
     const res = await fetchWithTimeout('http://ip-api.com/json/?fields=city,regionName,country,lat,lon');
     if (!res.ok) return null;
@@ -102,6 +122,8 @@ async function getGeoFromIpApi(): Promise<{ city: string; region: string; countr
 async function getGeoFromIp(): Promise<{ city: string; region: string; country: string; lat: number; lon: number } | null> {
   const geo = await getGeoFromIpApiCo();
   if (geo) return geo;
+  const geo2 = await getGeoFromIpWhoIs();
+  if (geo2) return geo2;
   return getGeoFromIpApi();
 }
 
@@ -149,6 +171,12 @@ export function useWeatherByIp(): {
     setLoading(true);
     setError(false);
     const startedAt = Date.now();
+    const stopLoading = () => {
+      const elapsed = Date.now() - startedAt;
+      const remaining = Math.max(0, MIN_LOADING_MS - elapsed);
+      if (remaining > 0) setTimeout(() => setLoading(false), remaining);
+      else setLoading(false);
+    };
     try {
       const geo = await getGeoFromIp();
       if (!geo) {
@@ -174,13 +202,7 @@ export function useWeatherByIp(): {
       setData(FALLBACK);
       setError(true);
     } finally {
-      const elapsed = Date.now() - startedAt;
-      const remaining = Math.max(0, MIN_LOADING_MS - elapsed);
-      if (remaining > 0) {
-        setTimeout(() => setLoading(false), remaining);
-      } else {
-        setLoading(false);
-      }
+      stopLoading();
     }
   }, []);
 

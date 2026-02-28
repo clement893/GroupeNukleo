@@ -37,31 +37,32 @@ export function SplitCTAButton({
     display: 'inline-flex',
     alignItems: 'stretch',
     gap: 0,
+    margin: 0,
+    border: 'none',
+    borderRadius: 999,
+    overflow: 'hidden' as const,
+    background: bg,
+    boxShadow,
+    textDecoration: 'none' as const,
   };
   const styleText = {
     display: 'inline-flex',
     alignItems: 'center',
     padding: '0.9rem 1.75rem',
-    background: bg,
     color,
     fontWeight: 700,
     fontSize: '0.9rem',
-    textDecoration: 'none' as const,
-    borderTopLeftRadius: 999,
-    borderBottomLeftRadius: 999,
-    boxShadow,
+    border: 'none',
+    margin: 0,
   };
   const styleArrow = {
     display: 'inline-flex',
     alignItems: 'center',
     justifyContent: 'center',
     width: ARROW_WIDTH,
-    background: bg,
     color,
-    textDecoration: 'none' as const,
-    borderTopRightRadius: 999,
-    borderBottomRightRadius: 999,
-    boxShadow,
+    border: 'none',
+    margin: 0,
   };
 
   return (

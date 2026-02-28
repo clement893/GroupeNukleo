@@ -13,6 +13,15 @@ const BORDEAUX = '#7B1D3A';
 const CREAM = '#F5F3EF';
 const DARK = '#0A0A0A';
 
+/** Style glassmorphism commun (verre dépoli, blur, bordure légère, légère élévation) */
+const GLASS = {
+  background: 'rgba(255,255,255,0.35)',
+  backdropFilter: 'blur(24px)',
+  WebkitBackdropFilter: 'blur(24px)' as const,
+  border: '1px solid rgba(255,255,255,0.75)',
+  boxShadow: '0 8px 32px rgba(0,0,0,0.06), 0 0 0 1px rgba(255,255,255,0.45) inset',
+};
+
 const WORK1 = '/demo/work1.jpg';
 const WORK2 = '/demo/work2.jpg';
 const WORK3 = '/demo/work3.jpg';
@@ -584,12 +593,8 @@ export default function HomepageDemo5() {
                 const monthYear = d.toLocaleDateString('fr-FR', { month: 'long', year: 'numeric' });
                 return (
                   <div style={{
+                    ...GLASS,
                     borderRadius: 24, padding: '1.1rem 1.2rem',
-                    background: 'rgba(255,255,255,0.5)',
-                    backdropFilter: 'blur(16px)',
-                    WebkitBackdropFilter: 'blur(16px)',
-                    border: '1px solid rgba(255,255,255,0.7)',
-                    boxShadow: '0 4px 24px rgba(0,0,0,0.04), 0 0 0 1px rgba(255,255,255,0.5) inset',
                     display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 8, textAlign: 'center',
                   }}>
                     <div style={{ fontSize: '0.7rem', color: '#6b7280' }}>Bon {dayName} <span style={{ color: PURPLE }}>♥</span></div>
@@ -599,15 +604,11 @@ export default function HomepageDemo5() {
                 );
               })()}
 
-              {/* 3. Nous soutenons le monde culturel — verre dépoli + gradient sur montant */}
+              {/* 3. Nous soutenons le monde culturel — glassmorphism */}
               <div style={{
+                ...GLASS,
                 gridColumn: '1 / -1',
                 borderRadius: 24, padding: '1.4rem 1.5rem',
-                background: 'rgba(255,255,255,0.5)',
-                backdropFilter: 'blur(16px)',
-                WebkitBackdropFilter: 'blur(16px)',
-                border: '1px solid rgba(255,255,255,0.7)',
-                boxShadow: '0 4px 24px rgba(0,0,0,0.04), 0 0 0 1px rgba(255,255,255,0.5) inset',
               }}>
                 <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: 8, marginBottom: 12 }}>
                   <h3 style={{ fontFamily: 'var(--font-heading, sans-serif)', fontWeight: 800, fontSize: '1rem', color: DARK, margin: 0 }}>
@@ -630,15 +631,11 @@ export default function HomepageDemo5() {
                 </div>
               </div>
 
-              {/* 4. Campagne 481k$ — verre dépoli blanc */}
+              {/* 4. Campagne 481k$ — glassmorphism */}
               <div style={{
+                ...GLASS,
                 gridColumn: '1 / -1',
                 borderRadius: 24, padding: '1.4rem 1.5rem',
-                background: 'rgba(255,255,255,0.5)',
-                backdropFilter: 'blur(16px)',
-                WebkitBackdropFilter: 'blur(16px)',
-                border: '1px solid rgba(255,255,255,0.7)',
-                boxShadow: '0 4px 24px rgba(0,0,0,0.04), 0 0 0 1px rgba(255,255,255,0.5) inset',
                 display: 'grid',
                 gridTemplateColumns: 'minmax(100px, 1fr) 1.5fr',
                 gap: 20,
@@ -669,27 +666,19 @@ export default function HomepageDemo5() {
                 </div>
               </div>
 
-              {/* 5. 2022 — L'agence fête ses 4 ans — verre dépoli blanc */}
+              {/* 5. 2022 — L'agence fête ses 4 ans — glassmorphism */}
               <div style={{
+                ...GLASS,
                 borderRadius: 24, padding: '1.2rem 1.2rem',
-                background: 'rgba(255,255,255,0.5)',
-                backdropFilter: 'blur(16px)',
-                WebkitBackdropFilter: 'blur(16px)',
-                border: '1px solid rgba(255,255,255,0.7)',
-                boxShadow: '0 4px 24px rgba(0,0,0,0.04), 0 0 0 1px rgba(255,255,255,0.5) inset',
               }}>
                 <div style={{ fontFamily: 'var(--font-heading, sans-serif)', fontWeight: 900, fontSize: '2.2rem', lineHeight: 1, color: DARK, marginBottom: 8 }}>2022</div>
                 <p style={{ fontSize: '0.75rem', color: '#4b5563', lineHeight: 1.4, margin: 0 }}>L'agence fête ses 4 ans</p>
               </div>
 
-              {/* 6. +20 entreprises — verre dépoli blanc */}
+              {/* 6. +20 entreprises — glassmorphism */}
               <div style={{
+                ...GLASS,
                 borderRadius: 24, padding: '1.2rem 1.2rem',
-                background: 'rgba(255,255,255,0.5)',
-                backdropFilter: 'blur(16px)',
-                WebkitBackdropFilter: 'blur(16px)',
-                border: '1px solid rgba(255,255,255,0.7)',
-                boxShadow: '0 4px 24px rgba(0,0,0,0.04), 0 0 0 1px rgba(255,255,255,0.5) inset',
               }}>
                 <div style={{ fontFamily: 'var(--font-heading, sans-serif)', fontWeight: 900, fontSize: '2.2rem', lineHeight: 1, color: DARK, marginBottom: 8 }}>+20</div>
                 <p style={{ fontSize: '0.75rem', color: '#4b5563', lineHeight: 1.4, margin: 0 }}>entreprises accompagnées dans leur transformation numérique</p>

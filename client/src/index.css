@@ -111,6 +111,16 @@
     @apply border-border;
   }
 
+  /* Supprime toute bordure à la jonction main / footer pour éviter la barre blanche */
+  .page-content-zone,
+  .page-content-zone > main#main-content,
+  .page-content-zone > .page-footer-zone {
+    border: none !important;
+    border-width: 0 !important;
+    outline: none !important;
+    box-shadow: none !important;
+  }
+
   body {
     @apply text-foreground antialiased;
     font-family: var(--font-sans);
