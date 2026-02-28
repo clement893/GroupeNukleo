@@ -58,7 +58,7 @@ export function WeatherWidget({ className }: { className?: string }) {
         className={loading ? `weather-widget-loading ${className ?? ''}`.trim() : className}
         style={{
           borderRadius: 14,
-          padding: '1.1rem 1.2rem',
+          padding: 'clamp(0.9rem, 1.2vw, 1.35rem) clamp(0.9rem, 1.3vw, 1.5rem)',
           background: 'rgba(255,255,255,0.38)',
           backdropFilter: 'blur(16px) saturate(180%)',
           WebkitBackdropFilter: 'blur(16px) saturate(180%)',
@@ -67,7 +67,7 @@ export function WeatherWidget({ className }: { className?: string }) {
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
-          gap: 8,
+          gap: 'clamp(0.35rem, 0.5vw, 0.6rem)',
           fontFamily: "'Figtree', sans-serif",
         }}
       >
@@ -77,11 +77,11 @@ export function WeatherWidget({ className }: { className?: string }) {
         </div>
         <div
           className={loading ? 'weather-placeholder' : undefined}
-          style={{ fontFamily: "'Figtree', sans-serif", fontWeight: 700, fontSize: '2.2rem', lineHeight: 1, color: DARK }}
+          style={{ fontFamily: "'Figtree', sans-serif", fontWeight: 700, fontSize: 'clamp(1.75rem, 2.2vw, 2.75rem)', lineHeight: 1, color: DARK }}
         >
-          {tempDisplay} <span style={{ fontSize: '1rem', verticalAlign: 'super' }}>°C</span>
+          {tempDisplay} <span style={{ fontSize: 'clamp(0.85rem, 1vw, 1.15rem)', verticalAlign: 'super' }}>°C</span>
         </div>
-        <div className={loading ? 'weather-placeholder' : undefined} style={{ fontSize: '0.7rem', color: '#6b7280', textAlign: 'center' }}>
+        <div className={loading ? 'weather-placeholder' : undefined} style={{ fontSize: 'clamp(0.7rem, 0.85vw, 0.95rem)', color: '#6b7280', textAlign: 'center' }}>
           {locationDisplay}
         </div>
       </div>

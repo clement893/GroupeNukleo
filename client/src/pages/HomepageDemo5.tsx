@@ -65,11 +65,11 @@ function NewsCarousel() {
 
       {/* Label haut gauche */}
       <div style={{ position: 'absolute', top: 16, left: 18, display: 'flex', alignItems: 'center', gap: 6 }}>
-        <span style={{ fontSize: '0.58rem', fontWeight: 800, letterSpacing: '0.18em', color: 'rgba(255,255,255,0.55)', textTransform: 'uppercase' }}>Our Latest Work</span>
+        <span style={{ fontSize: 'clamp(0.58rem, 0.75vw, 0.9rem)', fontWeight: 800, letterSpacing: '0.18em', color: 'rgba(255,255,255,0.55)', textTransform: 'uppercase' }}>Our Latest Work</span>
       </div>
 
       {/* Compteur haut droite */}
-      <div style={{ position: 'absolute', top: 14, right: 18, fontSize: '0.65rem', fontWeight: 700, color: 'rgba(255,255,255,0.4)', fontFamily: 'var(--font-heading, sans-serif)' }}>
+      <div style={{ position: 'absolute', top: 14, right: 18, fontSize: 'clamp(0.65rem, 0.8vw, 0.95rem)', fontWeight: 700, color: 'rgba(255,255,255,0.4)', fontFamily: 'var(--font-heading, sans-serif)' }}>
         {String(active + 1).padStart(2, '0')} / {String(PROJECTS.length).padStart(2, '0')}
       </div>
 
@@ -104,11 +104,11 @@ function NewsCarousel() {
       </button>
 
       {/* Contenu bas */}
-      <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, padding: '1.4rem 1.5rem' }}>
+      <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, padding: 'clamp(1rem, 1.4vw, 1.6rem) clamp(1rem, 1.5vw, 1.75rem)' }}>
         {/* Titre */}
         <div style={{ fontFamily: 'var(--font-heading, sans-serif)', fontWeight: 900, fontSize: 'clamp(1.2rem, 2.5vw, 1.9rem)', color: '#fff', lineHeight: 1.05, letterSpacing: '-0.02em', marginBottom: 10 }}>{p.name}</div>
         {/* Tagline */}
-        <div style={{ fontSize: '0.72rem', color: 'rgba(255,255,255,0.65)', marginBottom: 22, lineHeight: 1.5 }}>{p.tagline}</div>
+        <div style={{ fontSize: 'clamp(0.72rem, 0.95vw, 1.05rem)', color: 'rgba(255,255,255,0.65)', marginBottom: 22, lineHeight: 1.5 }}>{p.tagline}</div>
         {/* Dots navigation */}
         <div style={{ display: 'flex', justifyContent: 'flex-end', gap: 5 }}>
           {PROJECTS.map((_, i) => (
@@ -456,8 +456,7 @@ function Triptych() {
                   <p style={{ color: p.color, fontSize: '0.65rem', fontWeight: 700, letterSpacing: '0.28em', textTransform: 'uppercase', marginBottom: '0.6rem' }}>{p.category}</p>
                   <h3 style={{ color: '#fff', fontFamily: 'var(--font-heading, sans-serif)', fontWeight: 900, fontSize: 'clamp(1.75rem, 3.5vw, 4rem)', lineHeight: 0.92, letterSpacing: '-0.03em', marginBottom: '0.75rem' }}>{p.name}</h3>
                   <p style={{ color: 'rgba(255,255,255,0.65)', fontSize: '0.85rem', marginBottom: '1.25rem', maxWidth: 340 }}>{p.tagline}</p>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: 16, flexWrap: 'wrap' }}>
-                    <span style={{ display: 'inline-flex', alignItems: 'center', gap: 6, background: p.color, color: '#fff', fontSize: '0.7rem', fontWeight: 700, padding: '0.35rem 0.9rem', borderRadius: 999 }}>{p.result}</span>
+                  <div style={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap' }}>
                     <Link
                       href={getLocalizedPath('/projects')}
                       style={{ color: 'rgba(255,255,255,0.7)', fontSize: '0.75rem', fontWeight: 600, borderBottom: '1px solid rgba(255,255,255,0.3)', paddingBottom: 2, textDecoration: 'none' }}
@@ -552,7 +551,7 @@ export default function HomepageDemo5() {
         ════════════════════════════════════════════════════════════════════ */}
         <div style={{ padding: '0 6%', marginBottom: 5 * 16 }}>
           {/* Hero grid : 60% Our Latest Work (gauche) + 40% widgets (droite) */}
-          <div style={{ display: 'grid', gridTemplateColumns: '3fr 2fr', gap: 20, marginTop: 2.5 * 16, alignItems: 'start', minHeight: '52vh' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: '3fr 2fr', gap: 'clamp(1rem, 1.5vw, 1.5rem)', marginTop: 2.5 * 16, alignItems: 'start', minHeight: '52vh' }}>
 
             {/* Colonne Our Latest Work — News Carrousel (gauche) */}
             <NewsCarousel />
@@ -561,8 +560,8 @@ export default function HomepageDemo5() {
             <div style={{
               display: 'grid',
               gridTemplateColumns: '1fr 1fr',
-              gap: 12,
-              padding: 14,
+              gap: 'clamp(0.5rem, 1.2vw, 1rem)',
+              padding: 'clamp(0.75rem, 1.5vw, 1.25rem)',
               borderRadius: 28,
             }}>
               {/* 1. Météo — verre dépoli (style météo/date) */}
@@ -576,12 +575,12 @@ export default function HomepageDemo5() {
                 const monthYear = d.toLocaleDateString('fr-FR', { month: 'long', year: 'numeric' });
                 return (
                   <div className="glass-widget-weather-date" style={{
-                    padding: '1.1rem 1.2rem',
-                    display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 8, textAlign: 'center',
+                    padding: 'clamp(0.9rem, 1.2vw, 1.35rem) clamp(0.9rem, 1.3vw, 1.5rem)',
+                    display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 'clamp(0.35rem, 0.6vw, 0.6rem)', textAlign: 'center',
                   }}>
-                    <div style={{ fontSize: '0.7rem', color: '#6b7280' }}>Bon {dayName} <span style={{ color: PURPLE }}>♥</span></div>
-                    <div style={{ fontFamily: "'Figtree', sans-serif", fontWeight: 700, fontSize: '2.2rem', lineHeight: 1, color: DARK }}>{dayNum}</div>
-                    <div style={{ fontSize: '0.7rem', color: '#6b7280' }}>{monthYear}</div>
+                    <div style={{ fontSize: 'clamp(0.7rem, 0.85vw, 0.95rem)', color: '#6b7280' }}>Bon {dayName} <span style={{ color: PURPLE }}>♥</span></div>
+                    <div style={{ fontFamily: "'Figtree', sans-serif", fontWeight: 700, fontSize: 'clamp(1.75rem, 2.2vw, 2.75rem)', lineHeight: 1, color: DARK }}>{dayNum}</div>
+                    <div style={{ fontSize: 'clamp(0.7rem, 0.85vw, 0.95rem)', color: '#6b7280' }}>{monthYear}</div>
                   </div>
                 );
               })()}
@@ -589,24 +588,24 @@ export default function HomepageDemo5() {
               {/* 3. Nous soutenons le monde culturel — glassmorphism */}
               <div className="glass-widget-culture" style={{
                 gridColumn: '1 / -1',
-                padding: '1.4rem 1.5rem',
+                padding: 'clamp(1rem, 1.5vw, 1.75rem) clamp(1rem, 1.5vw, 1.75rem)',
               }}>
-                <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: 8, marginBottom: 12 }}>
-                  <h3 style={{ fontFamily: "'Figtree', sans-serif", fontWeight: 700, fontSize: '1rem', color: DARK, margin: 0 }}>
+                <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: 'clamp(0.4rem, 0.8vw, 0.75rem)', marginBottom: 'clamp(0.5rem, 0.8vw, 0.9rem)' }}>
+                  <h3 style={{ fontFamily: "'Figtree', sans-serif", fontWeight: 700, fontSize: 'clamp(0.95rem, 1.15vw, 1.35rem)', color: DARK, margin: 0 }}>
                     Nous soutenons le monde culturel
                   </h3>
                   <button type="button" aria-label="Plus d'infos" style={{ width: 24, height: 24, borderRadius: '50%', background: DARK, color: '#fff', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
                     <HelpCircle size={14} />
                   </button>
                 </div>
-                <p style={{ fontSize: '0.78rem', color: '#4b5563', lineHeight: 1.6, margin: '0 0 1.25rem 0' }}>
+                <p style={{ fontSize: 'clamp(0.8rem, 1vw, 1.1rem)', color: '#4b5563', lineHeight: 1.6, margin: '0 0 1.25rem 0' }}>
                   Nous donnons 1% de tous nos revenus; nous faisons des dons; nos employés sont membres du Musée.
                 </p>
                 <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', borderTop: '1px dashed rgba(0,0,0,0.1)', paddingTop: 12 }}>
-                  <span style={{ fontSize: '0.72rem', color: '#6b7280' }}>Montant donné</span>
+                  <span style={{ fontSize: 'clamp(0.72rem, 0.85vw, 0.95rem)', color: '#6b7280' }}>Montant donné</span>
                   <span className="glass-badge-purple" style={{
-                    fontFamily: "'Figtree', sans-serif", fontWeight: 700, fontSize: '1rem',
-                    padding: '4px 12px',
+                    fontFamily: "'Figtree', sans-serif", fontWeight: 700, fontSize: 'clamp(0.9rem, 1.05vw, 1.2rem)',
+                    padding: 'clamp(4px, 0.5vw, 8px) clamp(10px, 1.2vw, 14px)',
                   }}>+456.000$</span>
                 </div>
               </div>
@@ -614,23 +613,23 @@ export default function HomepageDemo5() {
               {/* 4. Campagne 481k$ — glassmorphism */}
               <div className="glass-widget-481k" style={{
                 gridColumn: '1 / -1',
-                padding: '1.4rem 1.5rem',
+                padding: 'clamp(1rem, 1.5vw, 1.75rem) clamp(1rem, 1.5vw, 1.75rem)',
                 display: 'grid',
                 gridTemplateColumns: 'minmax(100px, 1fr) 1.5fr',
-                gap: 20,
+                gap: 'clamp(1rem, 1.5vw, 1.5rem)',
                 alignItems: 'center',
               }}>
                 <div style={{ position: 'relative', minHeight: 120 }}>
                   {/* 3 images / écrans avec fonds pâles (style référence) */}
                   <div style={{ position: 'relative', height: 100 }}>
                     <div style={{ position: 'absolute', left: 0, top: 8, width: 44, height: 72, borderRadius: 10, background: 'rgba(240, 248, 255, 0.95)', boxShadow: '0 2px 12px rgba(0,0,0,0.06)', border: '1px solid rgba(255,255,255,0.8)', transform: 'rotate(-12deg)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                      <span style={{ fontSize: '0.45rem', color: '#94a3b8', textAlign: 'center', padding: 4 }}>Écran</span>
+                      <span style={{ fontSize: 'clamp(0.4rem, 0.5vw, 0.55rem)', color: '#94a3b8', textAlign: 'center', padding: 4 }}>Écran</span>
                     </div>
                     <div style={{ position: 'absolute', left: 28, top: 0, width: 44, height: 72, borderRadius: 10, background: 'rgba(255, 240, 245, 0.95)', boxShadow: '0 2px 12px rgba(0,0,0,0.06)', border: '1px solid rgba(255,255,255,0.8)', transform: 'rotate(4deg)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                      <span style={{ fontSize: '0.45rem', color: '#94a3b8', textAlign: 'center', padding: 4 }}>Transformez la donne</span>
+                      <span style={{ fontSize: 'clamp(0.4rem, 0.5vw, 0.55rem)', color: '#94a3b8', textAlign: 'center', padding: 4 }}>Transformez la donne</span>
                     </div>
                     <div style={{ position: 'absolute', left: 56, top: 12, width: 44, height: 72, borderRadius: 10, background: 'rgba(236, 254, 255, 0.95)', boxShadow: '0 2px 12px rgba(0,0,0,0.06)', border: '1px solid rgba(255,255,255,0.8)', transform: 'rotate(14deg)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                      <span style={{ fontSize: '0.45rem', color: '#94a3b8', textAlign: 'center', padding: 4 }}>Écran</span>
+                      <span style={{ fontSize: 'clamp(0.4rem, 0.5vw, 0.55rem)', color: '#94a3b8', textAlign: 'center', padding: 4 }}>Écran</span>
                     </div>
                   </div>
                   <div style={{ position: 'absolute', top: 0, right: 8, width: 28, height: 28, borderRadius: 6, background: DARK, color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
@@ -638,8 +637,8 @@ export default function HomepageDemo5() {
                   </div>
                 </div>
                 <div>
-                  <div style={{ fontFamily: "'Figtree', sans-serif", fontWeight: 700, fontSize: 'clamp(2rem, 4vw, 3rem)', lineHeight: 1, color: DARK, marginBottom: 8 }}>481k$</div>
-                  <p style={{ fontSize: '0.78rem', color: '#4b5563', lineHeight: 1.5, margin: 0 }}>
+                  <div style={{ fontFamily: "'Figtree', sans-serif", fontWeight: 700, fontSize: 'clamp(1.75rem, 2.5vw, 3rem)', lineHeight: 1, color: DARK, marginBottom: 8 }}>481k$</div>
+                  <p style={{ fontSize: 'clamp(0.8rem, 1vw, 1.1rem)', color: '#4b5563', lineHeight: 1.5, margin: 0 }}>
                     amassés lors de notre dernière campagne pour le Défi 28 jours sans alcool
                   </p>
                 </div>
@@ -647,18 +646,18 @@ export default function HomepageDemo5() {
 
               {/* 5. 2022 — L'agence fête ses 4 ans — glassmorphism */}
               <div className="glass-widget-stats" style={{
-                padding: '1.2rem 1.2rem',
+                padding: 'clamp(0.9rem, 1.2vw, 1.4rem)',
               }}>
-                <div style={{ fontFamily: "'Figtree', sans-serif", fontWeight: 700, fontSize: '2.2rem', lineHeight: 1, color: DARK, marginBottom: 8 }}>2022</div>
-                <p style={{ fontSize: '0.75rem', color: '#4b5563', lineHeight: 1.4, margin: 0 }}>L'agence fête ses 4 ans</p>
+                <div style={{ fontFamily: "'Figtree', sans-serif", fontWeight: 700, fontSize: 'clamp(1.75rem, 2.2vw, 2.75rem)', lineHeight: 1, color: DARK, marginBottom: 8 }}>2022</div>
+                <p style={{ fontSize: 'clamp(0.75rem, 0.9vw, 1rem)', color: '#4b5563', lineHeight: 1.4, margin: 0 }}>L'agence fête ses 4 ans</p>
               </div>
 
               {/* 6. +20 entreprises — glassmorphism */}
               <div className="glass-widget-stats" style={{
-                padding: '1.2rem 1.2rem',
+                padding: 'clamp(0.9rem, 1.2vw, 1.4rem)',
               }}>
-                <div style={{ fontFamily: "'Figtree', sans-serif", fontWeight: 700, fontSize: '2.2rem', lineHeight: 1, color: DARK, marginBottom: 8 }}>+20</div>
-                <p style={{ fontSize: '0.75rem', color: '#4b5563', lineHeight: 1.4, margin: 0 }}>entreprises accompagnées dans leur transformation numérique</p>
+                <div style={{ fontFamily: "'Figtree', sans-serif", fontWeight: 700, fontSize: 'clamp(1.75rem, 2.2vw, 2.75rem)', lineHeight: 1, color: DARK, marginBottom: 8 }}>+20</div>
+                <p style={{ fontSize: 'clamp(0.75rem, 0.9vw, 1rem)', color: '#4b5563', lineHeight: 1.4, margin: 0 }}>entreprises accompagnées dans leur transformation numérique</p>
               </div>
             </div>
           </div>
@@ -673,7 +672,7 @@ export default function HomepageDemo5() {
           textAlign: 'center',
         }}>
           <p style={{
-            fontSize: '0.9375rem',
+            fontSize: 'clamp(0.8125rem, 1vw, 1.0625rem)',
             fontWeight: 400,
             letterSpacing: '0.28em',
             textTransform: 'uppercase',
