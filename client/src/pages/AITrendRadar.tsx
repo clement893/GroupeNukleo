@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import SEO from '@/components/SEO';
-import Header from '@/components/Header';
-import Footer from '@/components/Footer';
+import PageLayout from '@/components/PageLayout';
 import Breadcrumb from '@/components/Breadcrumb';
 import { trpc } from '@/lib/trpc';
 import { useLanguage } from '@/contexts/LanguageContext';
@@ -34,16 +33,15 @@ export default function AITrendRadar() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-950 via-slate-950 to-purple-950">
-      <SEO
-        title="AI Trend Radar 2025 | Tendances IA Canada | Nukleo Digital"
-        description="Découvrez les tendances technologiques en intelligence artificielle pour 2025. Radar interactif des technologies IA émergentes et établies au Canada. Analysez la maturité et l'impact business de chaque technologie."
-        keywords="AI trend radar, tendances IA 2025, technologies IA émergentes, AI trends Canada, radar technologique IA, maturité IA, impact business IA"
-        ogImage="https://nukleo.digital/og-image.jpg"
-      />
-      <Header />
-      
-      <div className="container pt-32 pb-20">
+    <PageLayout>
+      <div className="min-h-screen bg-gradient-to-br from-purple-950 via-slate-950 to-purple-950">
+        <SEO
+          title="AI Trend Radar 2025 | Tendances IA Canada | Nukleo Digital"
+          description="Découvrez les tendances technologiques en intelligence artificielle pour 2025. Radar interactif des technologies IA émergentes et établies au Canada. Analysez la maturité et l'impact business de chaque technologie."
+          keywords="AI trend radar, tendances IA 2025, technologies IA émergentes, AI trends Canada, radar technologique IA, maturité IA, impact business IA"
+          ogImage="https://nukleo.digital/og-image.jpg"
+        />
+        <div className="container pt-32 pb-20">
         <Breadcrumb items={[
           { name: t('nav.resources') || 'Resources', url: '/resources' },
           { name: 'AI Trend Radar', url: '/ai-trend-radar' }
@@ -248,9 +246,8 @@ export default function AITrendRadar() {
           </div>
         </div>
 
+        </div>
       </div>
-      
-      <Footer />
-    </div>
+    </PageLayout>
   );
 }

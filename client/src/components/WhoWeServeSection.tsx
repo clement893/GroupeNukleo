@@ -110,7 +110,7 @@ export default function WhoWeServeSection() {
             </span>
           </p>
           <a
-            href={getLocalizedPath('/start-project')}
+            href={getLocalizedPath('/contact')}
             className="inline-flex items-center gap-3 px-10 py-5 rounded-full bg-white hover:bg-white/90 text-purple-900 font-bold text-lg transition-all duration-300 hover:scale-[1.05] shadow-xl shadow-purple-500/20"
           >
             {t('whoWeServe.cta.button')}

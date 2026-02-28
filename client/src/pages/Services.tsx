@@ -2,6 +2,7 @@ import { Code, Palette, Layers, ArrowRight, Smartphone, Globe, Zap, Link2, PenTo
 import SEO from '@/components/SEO';
 import { Link } from 'wouter';
 import PageLayout from '@/components/PageLayout';
+import { SplitCTAButton } from '@/components/SplitCTAButton';
 import StructuredData, { serviceSchema } from '@/components/StructuredData';
 import Breadcrumb from '@/components/Breadcrumb';
 import { useLanguage } from '@/contexts/LanguageContext';
@@ -415,17 +416,10 @@ export default function Services() {
             <p className="text-xl md:text-2xl text-white/80 mb-10 max-w-2xl mx-auto leading-relaxed">
               {ctaDescription}
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link href={getLocalizedPath('/contact')}>
-                <button className="group inline-flex items-center justify-center gap-3 px-8 py-4 bg-white text-black font-bold hover:bg-white/90 transition-all duration-300 rounded-full text-lg">
-                  {ctaButtonPrimary}
-                  <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-                </button>
-              </Link>
-              <Link href={getLocalizedPath('/projects')}>
-                <button className="inline-flex items-center justify-center gap-3 px-8 py-4 border-2 border-white/30 text-white font-bold hover:bg-white/10 transition-all duration-300 rounded-full text-lg">
-                  {ctaButtonSecondary}
-                </button>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+              <SplitCTAButton href="/contact" label={ctaButtonPrimary} variant="white" ariaLabel={ctaButtonPrimary} />
+              <Link href={getLocalizedPath('/projects')} className="inline-flex items-center justify-center gap-3 px-8 py-4 border-2 border-white/30 text-white font-bold hover:bg-white/10 transition-all duration-300 rounded-full text-lg">
+                {ctaButtonSecondary}
               </Link>
             </div>
           </div>

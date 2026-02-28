@@ -8,7 +8,7 @@ interface CTAButtonProps {
   className?: string;
 }
 
-export function CTAButton({ label, href = '/start-project', className }: CTAButtonProps) {
+export function CTAButton({ label, href = '/contact', className }: CTAButtonProps) {
   const classes = cn(
     'flex items-center justify-center gap-2 w-full font-semibold text-sm py-3 px-6 rounded-xl transition-all duration-200',
     'bg-[#7D56F3] text-white hover:bg-[#6B46E0]',

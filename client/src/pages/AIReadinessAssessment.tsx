@@ -13,9 +13,7 @@ import { ArrowLeft, ArrowRight, Download, CheckCircle } from 'lucide-react';
 import { useSound } from '@/hooks/useSound';
 import { trpc } from '@/lib/trpc';
 import { Link } from 'wouter';
-import { Menu } from 'lucide-react';
-import { useState as useMenuState } from 'react';
-import FullScreenMenu from '@/components/FullScreenMenu';
+import PageLayout from '@/components/PageLayout';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { useLocalizedPath } from '@/hooks/useLocalizedPath';
 import { logger } from '@/lib/logger';
@@ -25,7 +23,6 @@ type AssessmentState = 'intro' | 'quiz' | 'email-capture' | 'results';
 export default function AIReadinessAssessment() {
   const { t } = useLanguage();
   const getLocalizedPath = useLocalizedPath();
-  const [menuOpen, setMenuOpen] = useMenuState(false);
   const [state, setState] = useState<AssessmentState>('intro');
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [answers, setAnswers] = useState<Record<number, number>>({});
@@ -141,39 +138,12 @@ export default function AIReadinessAssessment() {
   };
 
   return (
-    <>
+    <PageLayout>
       <SEO 
         title={t('assessment.seo.title')}
         description={t('assessment.seo.description')}
         keywords={t('assessment.seo.keywords')}
       />
-
-      {/* Header */}
-      <header className="fixed top-0 left-0 right-0 z-50 backdrop-blur-xl border-b border-white/5">
-        <div className="container mx-auto px-6 py-4 flex items-center justify-between">
-          <Link href="/">
-            <img 
-              src="/Nukleo_blanc_RVB.svg" 
-              alt={t('alt.logo') || 'Logo Nukleo Digital - Agence de transformation IA'} 
-              width="120"
-              height="32"
-              fetchPriority="high"
-              loading="eager"
-              className="h-8 w-auto cursor-pointer"
-            />
-          </Link>
-          <button
-            onClick={() => setMenuOpen(true)}
-            className="p-2 text-white hover:text-violet-400 transition-colors"
-            aria-label="Open menu"
-          >
-            <Menu className="w-6 h-6" />
-          </button>
-        </div>
-      </header>
-
-      <FullScreenMenu isOpen={menuOpen} onClose={() => setMenuOpen(false)} />
-
       <div className="min-h-screen bg-gradient-to-br from-slate-950 via-violet-950/20 to-slate-950 pt-32 pb-20 px-4">
       <style>{`
         @keyframes fadeInSlide {
@@ -316,6 +286,6 @@ export default function AIReadinessAssessment() {
         showSkip={true}
       />
     )}
-    </>
+    </PageLayout>
   );
 }

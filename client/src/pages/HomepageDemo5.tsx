@@ -1,8 +1,11 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
 import { Link } from 'wouter';
 import { useLocalizedPath } from '@/hooks/useLocalizedPath';
-import { TeamScrollCards, DepartmentsWidget, DoubleLogoCarousel, ContactWidget, TeamRow } from '@/components/demo3';
-import { Sun, Menu, X, ArrowUpRight } from 'lucide-react';
+import { TeamScrollCards, DoubleLogoCarousel } from '@/components/demo3';
+import { ArrowUpRight, HelpCircle } from 'lucide-react';
+import { SplitCTAButton } from '@/components/SplitCTAButton';
+import { WeatherWidget } from '@/components/WeatherWidget';
+import PageLayout from '@/components/PageLayout';
 
 // ─── Constantes ──────────────────────────────────────────────────────────────
 const PURPLE = '#7c3aed';
@@ -13,83 +16,18 @@ const DARK = '#0A0A0A';
 const WORK1 = '/demo/work1.jpg';
 const WORK2 = '/demo/work2.jpg';
 const WORK3 = '/demo/work3.jpg';
-const TEAM_IMAGE = '/demo/team.jpg';
-const ROB_BG = '/demo/rob-bg.jpg';
-
 const PROJECTS = [
   { num: '01', name: 'MBAM', category: 'Brand & Digital', tagline: 'Redefining cultural engagement online.', result: '+240% digital reach', img: WORK1, color: '#2563eb' },
   { num: '02', name: 'SummitLaw', category: 'Brand & Creative', tagline: 'A law firm that finally looks like its ambition.', result: '+180% qualified leads', img: WORK2, color: PURPLE },
   { num: '03', name: 'QueerTech', category: 'AI & Platform', tagline: 'Technology built for belonging.', result: '+220% member engagement', img: WORK3, color: '#059669' },
 ];
 
-// ─── Compteur animé ──────────────────────────────────────────────────────────
-function CountUp({ target, prefix = '', suffix = '', duration = 1800 }: { target: number; prefix?: string; suffix?: string; duration?: number }) {
-  const [val, setVal] = useState(0);
-  const ref = useRef<HTMLSpanElement>(null);
-  useEffect(() => {
-    const obs = new IntersectionObserver(([e]) => {
-      if (!e.isIntersecting) return;
-      obs.disconnect();
-      const start = performance.now();
-      const tick = (now: number) => {
-        const p = Math.min((now - start) / duration, 1);
-        const ease = 1 - Math.pow(1 - p, 3);
-        setVal(Math.round(ease * target));
-        if (p < 1) requestAnimationFrame(tick);
-      };
-      requestAnimationFrame(tick);
-    }, { threshold: 0.3 });
-    if (ref.current) obs.observe(ref.current);
-    return () => obs.disconnect();
-  }, [target, duration]);
-  return <span ref={ref}>{prefix}{val.toLocaleString()}{suffix}</span>;
-}
-
-// ─── Titre hero animé mot par mot ─────────────────────────────────────────────
-const HERO_WORDS = ['Audacieux.', 'Assumé.', 'Intelligents.'];
-
-function HeroWords() {
-  const [wordIndex, setWordIndex] = useState(0);
-  const [visible, setVisible] = useState(true);
-
-  useEffect(() => {
-    const cycle = () => {
-      // Fade out
-      setVisible(false);
-      setTimeout(() => {
-        setWordIndex(i => (i + 1) % HERO_WORDS.length);
-        setVisible(true);
-      }, 400);
-    };
-    const id = setInterval(cycle, 2800);
-    return () => clearInterval(id);
-  }, []);
-
-  return (
-    <div style={{ paddingTop: '0.5rem', marginBottom: 78, minHeight: 'clamp(7rem, 18vw, 16rem)', display: 'flex', alignItems: 'center' }}>
-      <span
-        style={{
-          fontFamily: 'var(--font-heading, sans-serif)',
-          fontWeight: 900,
-          fontSize: 'clamp(5rem, 16vw, 14rem)',
-          lineHeight: 0.92,
-          letterSpacing: '-0.04em',
-          display: 'block',
-          background: 'linear-gradient(90deg, #7B1D3A 0%, #6B21A8 100%)',
-          WebkitBackgroundClip: 'text',
-          WebkitTextFillColor: 'transparent',
-          backgroundClip: 'text',
-          opacity: visible ? 1 : 0,
-          transform: visible ? 'translateY(0)' : 'translateY(12px)',
-          transition: 'opacity 0.35s ease, transform 0.35s ease',
-          userSelect: 'none',
-        }}
-      >
-        {HERO_WORDS[wordIndex]}
-      </span>
-    </div>
-  );
-}
+const SERVICES = [
+  { title: 'Lab technologique', description: 'Nam libero tempore cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime.', tags: ['Application', 'Plateforme', 'Site web', 'Maintenance', 'Refonte'], imageBg: 'linear-gradient(135deg, rgba(230,228,245,0.9) 0%, rgba(210,205,230,0.95) 100%)' },
+  { title: 'Studio créatif', description: 'Nam libero tempore cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime.', tags: ['Image de marque', 'Idéation', 'UX/UI', 'Production'], imageBg: 'linear-gradient(135deg, rgba(245,240,255,0.9) 0%, rgba(230,220,245,0.95) 100%)' },
+  { title: 'Agence Comm & Marketing', description: 'Nam libero tempore cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime.', tags: ['Campagnes digitales', 'Gestion des réseaux sociaux', 'Stratégie'], imageBg: 'linear-gradient(135deg, rgba(240,238,250,0.9) 0%, rgba(225,220,240,0.95) 100%)' },
+  { title: 'Transition numérique', description: 'Nam libero tempore cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime.', tags: ['Développement IA', 'Formation', 'Accompagnement', 'Stratégie IA'], imageBg: 'linear-gradient(135deg, rgba(200,180,220,0.4) 0%, rgba(120,100,180,0.5) 100%)' },
+];
 
 // ─── Carrousel Projets Hero — style "une de journal" ──────────────────────────
 function NewsCarousel() {
@@ -444,13 +382,18 @@ function ProjectsCarousel() {
   );
 }
 
-// ─── Triptyque projets ───────────────────────────────────────────────────────
+// ─── Triptyque projets (sans fond, blocs fermés à 8%, hauteur +15%) ─────────────────
 function Triptych() {
   const [active, setActive] = useState(0);
+  const getLocalizedPath = useLocalizedPath();
   return (
     <div
-      className="w-full overflow-hidden"
-      style={{ height: 'clamp(420px, 65vh, 700px)', display: 'flex', background: DARK }}
+      className="w-full overflow-hidden relative"
+      style={{
+        height: 'clamp(483px, 78vh, 828px)',
+        display: 'flex',
+        gap: 16,
+      }}
     >
       {PROJECTS.map((p, i) => {
         const isActive = i === active;
@@ -459,43 +402,46 @@ function Triptych() {
             key={p.num}
             onClick={() => setActive(i)}
             style={{
-              flex: isActive ? '1 1 65%' : '0 0 17.5%',
-              transition: 'flex 0.65s cubic-bezier(0.77,0,0.175,1)',
+              flex: isActive ? '1 1 0' : '0 0 8%',
+              minWidth: isActive ? 0 : undefined,
+              transition: 'flex 0.6s cubic-bezier(0.77,0,0.175,1)',
               position: 'relative',
               cursor: isActive ? 'default' : 'pointer',
               overflow: 'hidden',
+              borderRadius: 20,
             }}
           >
-            {/* Image */}
+            {/* Image (panneau actif en premier plan) */}
             <img
               src={p.img}
               alt={p.name}
               style={{
                 position: 'absolute', inset: 0, width: '100%', height: '100%',
                 objectFit: 'cover',
-                filter: isActive ? 'grayscale(0) brightness(0.75)' : 'grayscale(1) brightness(0.35)',
-                transition: 'filter 0.65s ease',
+                filter: isActive ? 'grayscale(0) brightness(0.7)' : 'grayscale(1) brightness(0.2)',
+                transition: 'filter 0.5s ease',
               }}
             />
-            {/* Overlay gradient */}
-            <div style={{ position: 'absolute', inset: 0, background: isActive ? 'linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.1) 60%, transparent 100%)' : 'rgba(0,0,0,0.45)' }} />
+            <div style={{ position: 'absolute', inset: 0, background: isActive ? 'linear-gradient(to top, rgba(0,0,0,0.88) 0%, rgba(0,0,0,0.15) 55%, transparent 100%)' : 'rgba(0,0,0,0.5)', transition: 'background 0.5s ease' }} />
 
-            {/* Barre couleur verticale (panneaux inactifs) */}
-            {!isActive && (
-              <div style={{ position: 'absolute', left: '50%', top: '30%', bottom: '30%', width: 2, background: p.color, opacity: 0.7, transform: 'translateX(-50%)' }} />
-            )}
-
-            {/* Numéro en bas */}
-            <div style={{
-              position: 'absolute', bottom: 20, right: 20,
-              fontFamily: 'var(--font-heading, sans-serif)',
-              fontSize: isActive ? '5rem' : '2rem',
-              fontWeight: 900,
-              color: isActive ? p.color : 'rgba(255,255,255,0.25)',
-              lineHeight: 1,
-              transition: 'font-size 0.5s ease, color 0.5s ease',
-              letterSpacing: '-0.03em',
-            }}>{p.num}</div>
+            {/* Numéro 01 / 02 / 03 — toujours visible en bas à droite du panneau, violet */}
+            <div
+              style={{
+                position: 'absolute',
+                bottom: 24,
+                right: 24,
+                fontFamily: 'var(--font-heading, sans-serif)',
+                fontSize: 'clamp(2.5rem, 5vw, 4.5rem)',
+                fontWeight: 900,
+                color: isActive ? 'rgba(167,139,250,0.95)' : 'rgba(167,139,250,0.45)',
+                lineHeight: 1,
+                letterSpacing: '-0.04em',
+                transition: 'color 0.4s ease',
+                textShadow: '0 2px 20px rgba(0,0,0,0.2)',
+              }}
+            >
+              {p.num}
+            </div>
 
             {/* Nom vertical (panneaux inactifs) */}
             {!isActive && (
@@ -503,22 +449,38 @@ function Triptych() {
                 position: 'absolute', top: '50%', left: '50%',
                 transform: 'translate(-50%, -50%) rotate(-90deg)',
                 whiteSpace: 'nowrap',
-                color: 'rgba(255,255,255,0.6)',
-                fontSize: '0.65rem',
+                color: 'rgba(255,255,255,0.5)',
+                fontSize: '0.7rem',
                 fontWeight: 700,
-                letterSpacing: '0.2em',
+                letterSpacing: '0.22em',
                 textTransform: 'uppercase',
-              }}>{p.name}</div>
+              }}>
+                {p.name}
+              </div>
             )}
 
-            {/* Contenu panneau actif */}
+            {/* Contenu panneau actif + titre projet & année en bas à gauche */}
             {isActive && (
-              <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, padding: '2.5rem 3rem' }}>
-                <p style={{ color: p.color, fontSize: '0.65rem', fontWeight: 700, letterSpacing: '0.25em', textTransform: 'uppercase', marginBottom: '0.75rem' }}>{p.category}</p>
-                <h3 style={{ color: '#fff', fontFamily: 'var(--font-heading, sans-serif)', fontWeight: 900, fontSize: 'clamp(2rem, 4vw, 4.5rem)', lineHeight: 0.9, letterSpacing: '-0.03em', marginBottom: '1rem' }}>{p.name}</h3>
-                <p style={{ color: 'rgba(255,255,255,0.6)', fontSize: '0.9rem', marginBottom: '1.5rem', maxWidth: 380 }}>{p.tagline}</p>
-                <span style={{ display: 'inline-flex', alignItems: 'center', gap: 6, background: p.color, color: '#fff', fontSize: '0.7rem', fontWeight: 700, padding: '0.4rem 1rem', borderRadius: 999 }}>{p.result}</span>
-              </div>
+              <>
+                <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, padding: '2rem 2.5rem 1.5rem 2.5rem' }}>
+                  <p style={{ color: p.color, fontSize: '0.65rem', fontWeight: 700, letterSpacing: '0.28em', textTransform: 'uppercase', marginBottom: '0.6rem' }}>{p.category}</p>
+                  <h3 style={{ color: '#fff', fontFamily: 'var(--font-heading, sans-serif)', fontWeight: 900, fontSize: 'clamp(1.75rem, 3.5vw, 4rem)', lineHeight: 0.92, letterSpacing: '-0.03em', marginBottom: '0.75rem' }}>{p.name}</h3>
+                  <p style={{ color: 'rgba(255,255,255,0.65)', fontSize: '0.85rem', marginBottom: '1.25rem', maxWidth: 340 }}>{p.tagline}</p>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: 16, flexWrap: 'wrap' }}>
+                    <span style={{ display: 'inline-flex', alignItems: 'center', gap: 6, background: p.color, color: '#fff', fontSize: '0.7rem', fontWeight: 700, padding: '0.35rem 0.9rem', borderRadius: 999 }}>{p.result}</span>
+                    <Link
+                      href={getLocalizedPath('/projects')}
+                      style={{ color: 'rgba(255,255,255,0.7)', fontSize: '0.75rem', fontWeight: 600, borderBottom: '1px solid rgba(255,255,255,0.3)', paddingBottom: 2, textDecoration: 'none' }}
+                    >
+                      Voir l'étude de cas →
+                    </Link>
+                  </div>
+                </div>
+                {/* Légende discrète en bas à gauche (projet + année) */}
+                <div style={{ position: 'absolute', bottom: 18, left: 28, color: 'rgba(255,255,255,0.45)', fontSize: '0.68rem', fontWeight: 500 }}>
+                  {p.name} · 2025
+                </div>
+              </>
             )}
           </div>
         );
@@ -528,9 +490,16 @@ function Triptych() {
 }
 
 // ─── Composant principal ─────────────────────────────────────────────────────
+const ON_IA_VERBS = ['maîtrise', 'entraîne', 'personnalise', 'humanise'];
+
 export default function HomepageDemo5() {
   const getLocalizedPath = useLocalizedPath();
-  const [menuOpen, setMenuOpen] = useState(false);
+  const [onIaIndex, setOnIaIndex] = useState(0);
+
+  useEffect(() => {
+    const id = setInterval(() => setOnIaIndex(i => (i + 1) % ON_IA_VERBS.length), 3200);
+    return () => clearInterval(id);
+  }, []);
 
   const NAV_LINKS = [
     { label: 'Services', href: '/services' },
@@ -540,366 +509,434 @@ export default function HomepageDemo5() {
   ];
 
   return (
-    <div style={{ background: CREAM, minHeight: '100vh', fontFamily: 'var(--font-body, sans-serif)', color: DARK }}>
-
-      {/* ── Dégradé flottant haut de page ─────────────────────────────────── */}
-      <div style={{
-        position: 'fixed', top: 0, left: 0, right: 0, height: 520,
-        background: [
-          'radial-gradient(ellipse 60% 70% at 0% 0%, rgba(107,33,168,0.45) 0%, transparent 60%)',
-          'radial-gradient(ellipse 60% 70% at 100% 0%, rgba(123,29,58,0.38) 0%, transparent 60%)',
-          'radial-gradient(ellipse 50% 60% at 50% -5%, rgba(245,243,239,0.9) 0%, transparent 65%)',
-        ].join(', '),
-        pointerEvents: 'none', zIndex: 0,
-      }} />
-
-      {/* ── Header ────────────────────────────────────────────────────────── */}
-      <header style={{
-        position: 'fixed', top: 0, left: 0, right: 0, zIndex: 50,
-        padding: '0 6% ', height: 68,
-        display: 'flex', alignItems: 'center', justifyContent: 'space-between',
-        background: 'transparent',
-        borderBottom: 'none',
-      }}>
-        <Link href={getLocalizedPath('/')} style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', gap: 14 }}>
-          <img src="/demo/nukleo-logo-rvb.svg" alt="Nukleo" style={{ height: 44, width: 'auto' }} />
-          <span style={{ fontFamily: 'var(--font-heading, sans-serif)', fontWeight: 800, fontSize: '0.72rem', letterSpacing: '-0.01em', color: '#0A0A0A', lineHeight: 1.25, opacity: 0.55 }}>
-            Choisissez<br />L'intelligence
-          </span>
-        </Link>
-        <nav style={{ display: 'flex', alignItems: 'center', gap: '2rem' }} className="hidden lg:flex">
-          {NAV_LINKS.map(l => (
-            <Link key={l.label} href={getLocalizedPath(l.href)} style={{ fontSize: '0.78rem', fontWeight: 500, letterSpacing: '0.08em', color: `${DARK}99`, textDecoration: 'none' }}
-              className="hover:opacity-100 transition-opacity">{l.label}</Link>
-          ))}
-          <Link href={getLocalizedPath('/start-project')}
-            style={{ fontSize: '0.75rem', fontWeight: 700, padding: '0.5rem 1.25rem', borderRadius: 999, background: DARK, color: '#fff', textDecoration: 'none' }}
-            className="hover:opacity-80 transition-opacity">
-            Start a project
-          </Link>
-        </nav>
-        <button onClick={() => setMenuOpen(true)} className="lg:hidden" style={{ background: 'none', border: 'none', cursor: 'pointer' }}>
-          <Menu size={22} />
-        </button>
-      </header>
-
-      {/* ── Menu mobile ───────────────────────────────────────────────────── */}
-      {menuOpen && (
-        <div style={{ position: 'fixed', inset: 0, zIndex: 100, background: DARK, display: 'flex', flexDirection: 'column', padding: '2rem 8%' }}>
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '3rem' }}>
-            <img src="/demo/nukleo-logo-rvb.png" alt="Nukleo" style={{ height: 32, filter: 'brightness(10)' }} />
-            <button onClick={() => setMenuOpen(false)} style={{ background: 'none', border: 'none', cursor: 'pointer', color: '#fff' }}><X size={24} /></button>
-          </div>
-          <nav style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
-            {NAV_LINKS.map(l => (
-              <Link key={l.label} href={getLocalizedPath(l.href)} onClick={() => setMenuOpen(false)}
-                style={{ fontSize: '2rem', fontWeight: 900, color: '#fff', textDecoration: 'none', fontFamily: 'var(--font-heading, sans-serif)' }}>{l.label}</Link>
-            ))}
-          </nav>
-        </div>
-      )}
-
-      {/* ── Contenu principal ─────────────────────────────────────────────── */}
-      <div style={{ position: 'relative', zIndex: 10, paddingTop: 138 }}>
+    <PageLayout>
+      <div
+        style={{
+          minHeight: '100vh',
+          fontFamily: 'var(--font-body, sans-serif)',
+          color: DARK,
+        }}
+      >
+        {/* ── Contenu principal ─────────────────────────────────────────────── */}
+        <div style={{ position: 'relative', zIndex: 10, paddingTop: 120 }}>
 
         {/* ════════════════════════════════════════════════════════════════════
-            SECTION 1 — LOGO MASSIF + HERO WIDGETS
+            SECTION HERO — L'agence numérique des PME et des OBNL
         ════════════════════════════════════════════════════════════════════ */}
-        <div style={{ padding: '0 6% 0' }}>
+        <section style={{
+          minHeight: '27.5vh',
+          padding: 'clamp(2rem, 5vh, 4rem) 6%',
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          justifyContent: 'center',
+          background: 'transparent',
+          boxSizing: 'border-box',
+        }}>
+          <h1 style={{
+            fontFamily: 'var(--font-heading, sans-serif)',
+            fontWeight: 900,
+            fontSize: 'clamp(1.5rem, 8vw, 9rem)',
+            lineHeight: 1.05,
+            letterSpacing: '-0.04em',
+            margin: 0,
+            width: '100%',
+            maxWidth: '100%',
+            overflowWrap: 'break-word',
+            wordBreak: 'break-word',
+            background: 'linear-gradient(90deg, #712D3A 0%, #803342 35%, #6A3A8E 100%)',
+            WebkitBackgroundClip: 'text',
+            WebkitTextFillColor: 'transparent',
+            backgroundClip: 'text',
+          }}>
+            <span style={{ display: 'block' }}>L'agence numérique</span>
+            <span style={{ display: 'block' }}>des PME et des OBNL</span>
+          </h1>
+        </section>
 
-          {/* Titre animé mot par mot */}
-          <HeroWords />
+        {/* ════════════════════════════════════════════════════════════════════
+            SECTION 1 — LOGO MASSIF + HERO WIDGETS (fond blanc)
+        ════════════════════════════════════════════════════════════════════ */}
+        <div style={{ padding: '0 6%', marginBottom: 5 * 16 }}>
+          {/* Hero grid : 60% Our Latest Work (gauche) + 40% widgets (droite) */}
+          <div style={{ display: 'grid', gridTemplateColumns: '3fr 2fr', gap: 20, marginTop: 2.5 * 16, alignItems: 'start', minHeight: '52vh' }}>
 
-          {/* Hero grid : widgets gauche (30%) + MacBook droite (70%) */}
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 2.5fr', gap: 14, marginTop: 14, alignItems: 'stretch', minHeight: '52vh' }}>
-
-            {/* Colonne widgets */}
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
-
-              {/* Météo + Date */}
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10 }}>
-                {/* Météo */}
-                <div style={{
-                  borderRadius: 20, padding: '1rem 1.1rem',
-                  background: 'linear-gradient(145deg, rgba(255,255,255,0.92), rgba(245,243,239,0.97))',
-                  boxShadow: '6px 6px 14px rgba(0,0,0,0.07), -4px -4px 10px rgba(255,255,255,0.75)',
-                  display: 'flex', flexDirection: 'column', alignItems: 'flex-start', gap: 4,
-                }}>
-                  <Sun size={20} strokeWidth={1.5} color="#9ca3af" />
-                  <div style={{ fontFamily: 'var(--font-heading, sans-serif)', fontWeight: 900, fontSize: '2.4rem', lineHeight: 1, color: DARK }}>
-                    24<span style={{ fontSize: '1rem', verticalAlign: 'super' }}>°</span>
-                  </div>
-                  <div style={{ fontSize: '0.68rem', color: '#9ca3af' }}>Montréal, Qc</div>
-                </div>
-                {/* Date */}
-                <div style={{
-                  borderRadius: 20, padding: '1rem 1.1rem',
-                  background: 'linear-gradient(145deg, rgba(255,255,255,0.92), rgba(245,243,239,0.97))',
-                  boxShadow: '6px 6px 14px rgba(0,0,0,0.07), -4px -4px 10px rgba(255,255,255,0.75)',
-                  display: 'flex', flexDirection: 'column', gap: 4,
-                }}>
-                  <div style={{ fontSize: '0.68rem', color: '#9ca3af' }}>Bon lundi <span style={{ color: PURPLE }}>♥</span></div>
-                  <div style={{ fontFamily: 'var(--font-heading, sans-serif)', fontWeight: 900, fontSize: '2.4rem', lineHeight: 1, color: DARK }}>24</div>
-                  <div style={{ fontSize: '0.68rem', color: '#9ca3af' }}>fév. 2026</div>
-                </div>
-              </div>
-
-              {/* Widget positionnement — version forte */}
-              <div style={{
-                borderRadius: 20,
-                background: DARK,
-                flex: 1,
-                position: 'relative',
-                overflow: 'hidden',
-                minHeight: 160,
-              }}>
-                {/* Grille de fond */}
-                <div style={{ position: 'absolute', inset: 0, backgroundImage: 'linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px)', backgroundSize: '24px 24px' }} />
-                {/* Orbes */}
-                <div style={{ position: 'absolute', top: -30, right: -30, width: 120, height: 120, borderRadius: '50%', background: `radial-gradient(circle, ${PURPLE}55 0%, transparent 70%)` }} />
-                <div style={{ position: 'absolute', bottom: -20, left: -20, width: 80, height: 80, borderRadius: '50%', background: `radial-gradient(circle, ${BORDEAUX}44 0%, transparent 70%)` }} />
-                {/* Contenu */}
-                <div style={{ position: 'relative', zIndex: 1, padding: '1.4rem 1.5rem', height: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
-                  <div>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 22 }}>
-                      <div style={{ width: 28, height: 28, borderRadius: 8, background: `linear-gradient(135deg, ${BORDEAUX}, ${PURPLE})`, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" /></svg>
-                      </div>
-                      <span style={{ fontSize: '0.58rem', fontWeight: 800, letterSpacing: '0.18em', color: 'rgba(255,255,255,0.4)', textTransform: 'uppercase' }}>Nukleo Digital</span>
-                    </div>
-                    <p style={{ fontFamily: 'var(--font-heading, sans-serif)', fontWeight: 900, fontSize: 'clamp(1.6rem, 2.8vw, 2.4rem)', lineHeight: 1.08, letterSpacing: '-0.03em', marginBottom: 24 }}>
-                      <span style={{ background: `linear-gradient(90deg, #fff 0%, rgba(255,255,255,0.75) 100%)`, WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>Accroître votre</span><br />
-                      <span style={{ background: `linear-gradient(90deg, ${PURPLE} 0%, #a78bfa 50%, ${BORDEAUX} 100%)`, WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>performance</span><br />
-                      <span style={{ background: `linear-gradient(90deg, #fff 0%, rgba(255,255,255,0.75) 100%)`, WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>par l'excellence</span><br />
-                      <span style={{ background: `linear-gradient(90deg, ${PURPLE} 0%, #a78bfa 50%, ${BORDEAUX} 100%)`, WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>numérique.</span>
-                    </p>
-                    <p style={{ fontSize: '0.63rem', color: 'rgba(255,255,255,0.45)', lineHeight: 1.65 }}>
-                      Stratégie, technologie et créativité — augmentées par l'IA pour des résultats mesurables et durables.
-                    </p>
-                  </div>
-                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginTop: 14 }}>
-                    <div style={{ display: 'flex', gap: 6 }}>
-                      {['Agency', 'Studio', 'Tech'].map(s => (
-                        <span key={s} style={{ fontSize: '0.55rem', fontWeight: 700, padding: '3px 8px', borderRadius: 999, border: '1px solid rgba(255,255,255,0.12)', color: 'rgba(255,255,255,0.45)', letterSpacing: '0.08em' }}>{s}</span>
-                      ))}
-                    </div>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: 5, background: `linear-gradient(90deg, ${BORDEAUX}, ${PURPLE})`, borderRadius: 999, padding: '5px 12px', cursor: 'pointer' }}>
-                      <span style={{ fontSize: '0.6rem', fontWeight: 700, color: '#fff' }}>Démarrer</span>
-                      <ArrowUpRight size={10} color="#fff" />
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              {/* Barre croissance */}
-              <div style={{
-                borderRadius: 20, padding: '0.85rem 1.1rem',
-                background: 'linear-gradient(145deg, rgba(255,255,255,0.92), rgba(245,243,239,0.97))',
-                boxShadow: '6px 6px 14px rgba(0,0,0,0.07), -4px -4px 10px rgba(255,255,255,0.75)',
-              }}>
-                <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 12 }}>
-                  <span style={{ fontSize: '0.68rem', color: '#9ca3af' }}>Croissance actuelle</span>
-                  <span style={{ fontSize: '0.68rem', fontWeight: 700, color: PURPLE }}>+4%</span>
-                </div>
-                <div style={{ height: 4, borderRadius: 999, background: '#e5e7eb', overflow: 'hidden' }}>
-                  <div style={{ height: '100%', width: '64%', borderRadius: 999, background: `linear-gradient(90deg, ${BORDEAUX}, ${PURPLE})` }} />
-                </div>
-              </div>
-
-            </div>
-
-            {/* Colonne Selected Work — News Carrousel */}
+            {/* Colonne Our Latest Work — News Carrousel (gauche) */}
             <NewsCarousel />
+
+            {/* Grille 6 cartes (2 + 1 + 1 + 2) — droite, sans fond */}
+            <div style={{
+              display: 'grid',
+              gridTemplateColumns: '1fr 1fr',
+              gap: 12,
+              padding: 14,
+              borderRadius: 28,
+              background: 'transparent',
+            }}>
+              {/* 1. Météo — verre dépoli blanc (selon IP du visiteur) */}
+              <WeatherWidget />
+
+              {/* 2. Date — verre dépoli blanc (dynamique) */}
+              {(() => {
+                const d = new Date();
+                const dayName = d.toLocaleDateString('fr-FR', { weekday: 'long' });
+                const dayNum = d.getDate();
+                const monthYear = d.toLocaleDateString('fr-FR', { month: 'long', year: 'numeric' });
+                return (
+                  <div style={{
+                    borderRadius: 24, padding: '1.1rem 1.2rem',
+                    background: 'rgba(255,255,255,0.5)',
+                    backdropFilter: 'blur(16px)',
+                    WebkitBackdropFilter: 'blur(16px)',
+                    border: '1px solid rgba(255,255,255,0.7)',
+                    boxShadow: '0 4px 24px rgba(0,0,0,0.04), 0 0 0 1px rgba(255,255,255,0.5) inset',
+                    display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 8, textAlign: 'center',
+                  }}>
+                    <div style={{ fontSize: '0.7rem', color: '#6b7280' }}>Bon {dayName} <span style={{ color: PURPLE }}>♥</span></div>
+                    <div style={{ fontFamily: 'var(--font-heading, sans-serif)', fontWeight: 900, fontSize: '2.2rem', lineHeight: 1, color: DARK }}>{dayNum}</div>
+                    <div style={{ fontSize: '0.7rem', color: '#6b7280' }}>{monthYear}</div>
+                  </div>
+                );
+              })()}
+
+              {/* 3. Nous soutenons le monde culturel — verre dépoli + gradient sur montant */}
+              <div style={{
+                gridColumn: '1 / -1',
+                borderRadius: 24, padding: '1.4rem 1.5rem',
+                background: 'rgba(255,255,255,0.5)',
+                backdropFilter: 'blur(16px)',
+                WebkitBackdropFilter: 'blur(16px)',
+                border: '1px solid rgba(255,255,255,0.7)',
+                boxShadow: '0 4px 24px rgba(0,0,0,0.04), 0 0 0 1px rgba(255,255,255,0.5) inset',
+              }}>
+                <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: 8, marginBottom: 12 }}>
+                  <h3 style={{ fontFamily: 'var(--font-heading, sans-serif)', fontWeight: 800, fontSize: '1rem', color: DARK, margin: 0 }}>
+                    Nous soutenons le monde culturel
+                  </h3>
+                  <button type="button" aria-label="Plus d'infos" style={{ width: 24, height: 24, borderRadius: '50%', background: DARK, color: '#fff', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                    <HelpCircle size={14} />
+                  </button>
+                </div>
+                <p style={{ fontSize: '0.78rem', color: '#4b5563', lineHeight: 1.6, margin: '0 0 1.25rem 0' }}>
+                  Nous donnons 1% de tous nos revenus; nous faisons des dons; nos employés sont membres du Musée.
+                </p>
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', borderTop: '1px dashed rgba(0,0,0,0.1)', paddingTop: 12 }}>
+                  <span style={{ fontSize: '0.72rem', color: '#6b7280' }}>Montant donné</span>
+                  <span style={{
+                    fontFamily: 'var(--font-heading, sans-serif)', fontWeight: 800, fontSize: '1rem', color: DARK,
+                    background: 'linear-gradient(90deg, rgba(147,51,234,0.18) 0%, rgba(236,72,153,0.18) 100%)',
+                    padding: '4px 12px', borderRadius: 10,
+                  }}>+456.000$</span>
+                </div>
+              </div>
+
+              {/* 4. Campagne 481k$ — verre dépoli blanc */}
+              <div style={{
+                gridColumn: '1 / -1',
+                borderRadius: 24, padding: '1.4rem 1.5rem',
+                background: 'rgba(255,255,255,0.5)',
+                backdropFilter: 'blur(16px)',
+                WebkitBackdropFilter: 'blur(16px)',
+                border: '1px solid rgba(255,255,255,0.7)',
+                boxShadow: '0 4px 24px rgba(0,0,0,0.04), 0 0 0 1px rgba(255,255,255,0.5) inset',
+                display: 'grid',
+                gridTemplateColumns: 'minmax(100px, 1fr) 1.5fr',
+                gap: 20,
+                alignItems: 'center',
+              }}>
+                <div style={{ position: 'relative', minHeight: 120 }}>
+                  {/* Placeholder 3 smartphones superposés */}
+                  <div style={{ position: 'relative', height: 100 }}>
+                    <div style={{ position: 'absolute', left: 0, top: 8, width: 44, height: 72, borderRadius: 8, background: 'linear-gradient(145deg, #e5e7eb, #f3f4f6)', boxShadow: '0 4px 12px rgba(0,0,0,0.1)', transform: 'rotate(-12deg)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                      <span style={{ fontSize: '0.45rem', color: '#9ca3af', textAlign: 'center', padding: 4 }}>Écran</span>
+                    </div>
+                    <div style={{ position: 'absolute', left: 28, top: 0, width: 44, height: 72, borderRadius: 8, background: 'linear-gradient(145deg, #f3f4f6, #e5e7eb)', boxShadow: '0 4px 12px rgba(0,0,0,0.1)', transform: 'rotate(4deg)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                      <span style={{ fontSize: '0.45rem', color: '#9ca3af', textAlign: 'center', padding: 4 }}>Transformez la donne</span>
+                    </div>
+                    <div style={{ position: 'absolute', left: 56, top: 12, width: 44, height: 72, borderRadius: 8, background: 'linear-gradient(145deg, #e5e7eb, #f3f4f6)', boxShadow: '0 4px 12px rgba(0,0,0,0.1)', transform: 'rotate(14deg)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                      <span style={{ fontSize: '0.45rem', color: '#9ca3af', textAlign: 'center', padding: 4 }}>Écran</span>
+                    </div>
+                  </div>
+                  <div style={{ position: 'absolute', top: 0, right: 8, width: 28, height: 28, borderRadius: 6, background: DARK, color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                    <ArrowUpRight size={14} />
+                  </div>
+                </div>
+                <div>
+                  <div style={{ fontFamily: 'var(--font-heading, sans-serif)', fontWeight: 900, fontSize: 'clamp(2rem, 4vw, 3rem)', lineHeight: 1, color: DARK, marginBottom: 8 }}>481k$</div>
+                  <p style={{ fontSize: '0.78rem', color: '#4b5563', lineHeight: 1.5, margin: 0 }}>
+                    amassés lors de notre dernière campagne pour le Défi 28 jours sans alcool
+                  </p>
+                </div>
+              </div>
+
+              {/* 5. 2022 — L'agence fête ses 4 ans — verre dépoli blanc */}
+              <div style={{
+                borderRadius: 24, padding: '1.2rem 1.2rem',
+                background: 'rgba(255,255,255,0.5)',
+                backdropFilter: 'blur(16px)',
+                WebkitBackdropFilter: 'blur(16px)',
+                border: '1px solid rgba(255,255,255,0.7)',
+                boxShadow: '0 4px 24px rgba(0,0,0,0.04), 0 0 0 1px rgba(255,255,255,0.5) inset',
+              }}>
+                <div style={{ fontFamily: 'var(--font-heading, sans-serif)', fontWeight: 900, fontSize: '2.2rem', lineHeight: 1, color: DARK, marginBottom: 8 }}>2022</div>
+                <p style={{ fontSize: '0.75rem', color: '#4b5563', lineHeight: 1.4, margin: 0 }}>L'agence fête ses 4 ans</p>
+              </div>
+
+              {/* 6. +20 entreprises — verre dépoli blanc */}
+              <div style={{
+                borderRadius: 24, padding: '1.2rem 1.2rem',
+                background: 'rgba(255,255,255,0.5)',
+                backdropFilter: 'blur(16px)',
+                WebkitBackdropFilter: 'blur(16px)',
+                border: '1px solid rgba(255,255,255,0.7)',
+                boxShadow: '0 4px 24px rgba(0,0,0,0.04), 0 0 0 1px rgba(255,255,255,0.5) inset',
+              }}>
+                <div style={{ fontFamily: 'var(--font-heading, sans-serif)', fontWeight: 900, fontSize: '2.2rem', lineHeight: 1, color: DARK, marginBottom: 8 }}>+20</div>
+                <p style={{ fontSize: '0.75rem', color: '#4b5563', lineHeight: 1.4, margin: 0 }}>entreprises accompagnées dans leur transformation numérique</p>
+              </div>
+            </div>
           </div>
         </div>
 
         {/* ════════════════════════════════════════════════════════════════════
-            SECTION 2 — CARROUSEL LOGOS (pleine largeur)
+            SECTION 2 — CARROUSEL LOGOS (fond blanc, continuité avec laptop/widgets)
         ════════════════════════════════════════════════════════════════════ */}
         <div style={{ marginTop: 48 }}>
           <DoubleLogoCarousel title="Trusted by ambitious organizations" />
         </div>
 
         {/* ════════════════════════════════════════════════════════════════════
-            SECTION 3 — STATS + CITATION ÉDITORIALE
+            SECTION 3 — SOYONS AUDACIEUX + CTA
         ════════════════════════════════════════════════════════════════════ */}
-        <div style={{ padding: '56px 6%', marginBottom: 180, display: 'grid', gridTemplateColumns: '1fr 2fr 1fr', gap: 24, alignItems: 'center' }}>
-
-          {/* Stat gauche */}
-          <div style={{ textAlign: 'center' }}>
-            <div style={{
-              fontFamily: 'var(--font-heading, sans-serif)', fontWeight: 900,
-              fontSize: 'clamp(3.5rem, 7vw, 6rem)', lineHeight: 1, color: DARK, letterSpacing: '-0.04em',
-            }}>
-              <CountUp target={98} suffix="%" />
-            </div>
-            <p style={{ fontSize: '0.75rem', color: '#9ca3af', marginTop: 8, maxWidth: 160, margin: '8px auto 0' }}>
-              taux de satisfaction client sur nos mandats 2024
-            </p>
-          </div>
-
-          {/* Citation centrale */}
-          <div style={{ textAlign: 'center', padding: '0 2rem' }}>
-            <p style={{ fontSize: '0.65rem', fontWeight: 700, letterSpacing: '0.25em', textTransform: 'uppercase', color: '#9ca3af', marginBottom: 25 }}>Nukleo Digital</p>
-            <blockquote style={{
-              fontFamily: 'var(--font-heading, sans-serif)', fontWeight: 900,
-              fontSize: 'clamp(1.4rem, 3vw, 2.4rem)', lineHeight: 1.15, color: DARK, letterSpacing: '-0.02em',
-              margin: 0,
-            }}>
-              "We make digital performance tangible — for organizations that refuse to blend in."
-            </blockquote>
-            <Link href={getLocalizedPath('/about')}
-              style={{ display: 'inline-flex', alignItems: 'center', gap: 6, marginTop: 20, fontSize: '0.75rem', fontWeight: 700, color: PURPLE, textDecoration: 'none' }}>
-              Notre histoire <ArrowUpRight size={13} />
-            </Link>
-          </div>
-
-          {/* Stat droite */}
-          <div style={{ textAlign: 'center' }}>
-            <div style={{
-              fontFamily: 'var(--font-heading, sans-serif)', fontWeight: 900,
-              fontSize: 'clamp(3.5rem, 7vw, 6rem)', lineHeight: 1, color: DARK, letterSpacing: '-0.04em',
-            }}>
-              <CountUp target={60} suffix="+" />
-            </div>
-            <p style={{ fontSize: '0.75rem', color: '#9ca3af', marginTop: 8, maxWidth: 160, margin: '8px auto 0' }}>
-              organisations accompagnées depuis 2019
-            </p>
-          </div>
-        </div>
-
-        {/* ════════════════════════════════════════════════════════════════════
-            SECTION 4 — DÉPARTEMENTS
-        ════════════════════════════════════════════════════════════════════ */}
-        <DepartmentsWidget />
-
-        {/* ════════════════════════════════════════════════════════════════════
-            SECTION 4b — ÉQUIPE HORIZONTALE
-        ════════════════════════════════════════════════════════════════════ */}
-        <TeamRow />
-
-        {/* ════════════════════════════════════════════════════════════════════
-            SECTION 5 — TRIPTYQUE PROJETS (pleine largeur)
-        ════════════════════════════════════════════════════════════════════ */}
-        <div style={{ marginBottom: 75 }}>
-          <ProjectsCarousel />
-        </div>
-
-        {/* ════════════════════════════════════════════════════════════════════
-            SECTION 6 — ROUGE ON BLUE + STATS LIGNE
-        ════════════════════════════════════════════════════════════════════ */}
-        <div style={{ padding: '0 6%', marginBottom: 75, display: 'grid', gridTemplateColumns: '2fr 1fr', gap: 16 }}>
-
-          {/* Rouge on Blue */}
-          <div style={{
-            borderRadius: 24, overflow: 'hidden', position: 'relative',
-            background: 'rgba(200,16,46,0.92)', minHeight: 400,
+        <section style={{
+          padding: '5rem 6% 6rem',
+          marginBottom: 5 * 16,
+          textAlign: 'center',
+        }}>
+          <p style={{
+            fontSize: '0.9375rem',
+            fontWeight: 700,
+            letterSpacing: '0.28em',
+            textTransform: 'uppercase',
+            color: '#374151',
+            marginBottom: 28,
           }}>
-            <img src={ROB_BG} alt="" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', opacity: 0.12, mixBlendMode: 'luminosity' }} />
-            <div style={{ position: 'relative', zIndex: 1, padding: '3rem 3.5rem', height: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
-              <p style={{ fontSize: '0.6rem', fontWeight: 700, letterSpacing: '0.3em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.4)' }}>A Nukleo Group company</p>
-              <div>
-                <h2 style={{ fontFamily: 'var(--font-heading, sans-serif)', fontWeight: 900, fontSize: 'clamp(3rem, 6vw, 7rem)', lineHeight: 0.88, letterSpacing: '-0.04em', color: '#fff', marginBottom: '1.5rem' }}>
-                  Rouge<br />on Blue.
-                </h2>
-                <p style={{ color: 'rgba(255,255,255,0.55)', fontSize: '0.9rem', lineHeight: 1.65, maxWidth: 380, marginBottom: '2rem' }}>
-                  For brands that refuse to blend in. Creative agency for those who believe being exceptional is not a risk — it's a strategy.
+            SOYONS AUDACIEUX.
+          </p>
+          <h2 style={{
+            fontFamily: 'var(--font-heading, sans-serif)',
+            fontWeight: 900,
+            fontSize: 'clamp(2.25rem, 5vw, 3.75rem)',
+            lineHeight: 1.1,
+            letterSpacing: '-0.03em',
+            color: BORDEAUX,
+            margin: '0 0 1.5rem 0',
+          }}>
+            Un seul partenaire.<br />
+            Une intelligence intégrée.<br />
+            Des résultats mesurables.
+          </h2>
+          <p style={{
+            fontSize: 'clamp(1.1875rem, 1.875vw, 1.375rem)',
+            color: '#374151',
+            lineHeight: 1.5,
+            maxWidth: 520,
+            margin: '0 auto 2.5rem',
+          }}>
+            L'excellence numérique ne devrait pas être réservée aux grandes entreprises.
+          </p>
+          <SplitCTAButton href="/contact" label="Performez maintenant" ariaLabel="Performez maintenant" />
+        </section>
+
+        {/* ════════════════════════════════════════════════════════════════════
+            SECTION 3b — ON … L'IA (fond lavande)
+            Ratio : visuel 45% | texte 55%
+        ════════════════════════════════════════════════════════════════════ */}
+        <section style={{ padding: '5rem 6%', marginBottom: 5 * 16 }}>
+          <div className="grid grid-cols-1 lg:grid-cols-[9fr_11fr] gap-8 lg:gap-12 items-center">
+            {/* Gauche (~45%) : carte visuelle placeholder 3D */}
+            <div style={{
+              borderRadius: 28,
+              overflow: 'hidden',
+              aspectRatio: '4/3',
+              background: 'linear-gradient(135deg, rgba(107,33,168,0.28) 0%, rgba(123,29,58,0.22) 50%, rgba(59,130,246,0.22) 100%)',
+              position: 'relative',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+            }}>
+              <div style={{ position: 'absolute', inset: 0, background: 'radial-gradient(circle at 30% 50%, rgba(255,255,255,0.15) 0%, transparent 50%)' }} />
+              <div style={{ position: 'absolute', width: 120, height: 120, borderRadius: '50%', background: 'rgba(255,255,255,0.12)', top: '50%', left: '50%', transform: 'translate(-50%, -50%)' }} />
+              <div style={{ position: 'absolute', width: 60, height: 60, borderRadius: '50%', background: 'rgba(147,51,234,0.3)', top: '30%', right: '25%' }} />
+              <div style={{ position: 'absolute', width: 40, height: 40, borderRadius: '50%', background: 'rgba(96,165,250,0.35)', bottom: '25%', left: '30%' }} />
+            </div>
+            {/* Droite (~55%) : "On [verbe]" (qui change) + "l'IA" (fixe) */}
+            <div style={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap', gap: 16, justifyContent: 'center', minHeight: 200 }}>
+              <span style={{
+                padding: '1rem 2rem',
+                borderRadius: 24,
+                background: 'rgba(255,255,255,0.45)',
+                backdropFilter: 'blur(12px)',
+                WebkitBackdropFilter: 'blur(12px)',
+                border: '1px solid rgba(0,0,0,0.08)',
+                boxShadow: '0 4px 24px rgba(0,0,0,0.06)',
+                fontFamily: 'var(--font-heading, sans-serif)',
+                fontWeight: 800,
+                fontSize: 'clamp(2.2rem, 4.4vw, 3rem)',
+                color: BORDEAUX,
+                transition: 'opacity 0.35s ease',
+              }}>
+                On {ON_IA_VERBS[onIaIndex]}
+              </span>
+              <span style={{ fontFamily: 'var(--font-heading, sans-serif)', fontWeight: 800, fontSize: 'clamp(2.2rem, 4.4vw, 3rem)', color: DARK }}>
+                l'IA
+              </span>
+            </div>
+          </div>
+        </section>
+
+        {/* ════════════════════════════════════════════════════════════════════
+            SECTION 4 — SERVICES (4 cartes, fond blanc)
+        ════════════════════════════════════════════════════════════════════ */}
+        <section style={{ padding: '5rem 6% 6rem', marginBottom: 5 * 16 }}>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-10">
+            {SERVICES.map((service) => (
+              <article
+                key={service.title}
+                style={{
+                  borderRadius: 20,
+                  overflow: 'hidden',
+                  boxShadow: '0 4px 24px rgba(0,0,0,0.06)',
+                  display: 'flex',
+                  flexDirection: 'column',
+                }}
+              >
+                {/* Zone image + icône ↗ */}
+                <div style={{ position: 'relative', paddingTop: '60%', background: service.imageBg }}>
+                  <div style={{ position: 'absolute', inset: 0 }} />
+                  <Link
+                    href={getLocalizedPath('/services')}
+                    style={{
+                      position: 'absolute',
+                      top: 12,
+                      right: 12,
+                      width: 36,
+                      height: 36,
+                      borderRadius: 10,
+                      background: DARK,
+                      color: '#fff',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      textDecoration: 'none',
+                    }}
+                    aria-label={`Voir ${service.title}`}
+                  >
+                    <ArrowUpRight size={18} strokeWidth={2.5} />
+                  </Link>
+                </div>
+                {/* Titre */}
+                <h3 style={{
+                  fontFamily: 'var(--font-heading, sans-serif)',
+                  fontWeight: 800,
+                  fontSize: '1.1rem',
+                  color: DARK,
+                  margin: 0,
+                  padding: '1.25rem 1.25rem 0.5rem',
+                }}>
+                  {service.title}
+                </h3>
+                {/* Description */}
+                <p style={{
+                  fontSize: '0.8rem',
+                  color: '#6b7280',
+                  lineHeight: 1.55,
+                  margin: 0,
+                  padding: '0 1.25rem',
+                  flex: 1,
+                }}>
+                  {service.description}
                 </p>
-                <a href="https://rougeonblue.com" target="_blank" rel="noopener noreferrer"
-                  style={{ display: 'inline-flex', alignItems: 'center', gap: 8, background: '#fff', color: '#C8102E', fontWeight: 700, fontSize: '0.8rem', padding: '0.75rem 1.75rem', borderRadius: 999, textDecoration: 'none' }}>
-                  Oser l'Exception <ArrowUpRight size={14} />
-                </a>
-              </div>
-            </div>
-          </div>
-
-          {/* Colonne stats */}
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
-            {/* Stat 749k$ */}
-            <div style={{
-              borderRadius: 24, padding: '2rem 2.5rem', flex: 1,
-              background: DARK, display: 'flex', flexDirection: 'column', justifyContent: 'space-between',
-            }}>
-              <p style={{ fontSize: '0.6rem', fontWeight: 700, letterSpacing: '0.25em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.35)' }}>Campagne record</p>
-              <div>
-                <div style={{ fontFamily: 'var(--font-heading, sans-serif)', fontWeight: 900, fontSize: 'clamp(2.5rem, 4vw, 4rem)', color: '#fff', lineHeight: 1, letterSpacing: '-0.03em' }}>
-                  <CountUp target={749} prefix="" suffix="k$" />
+                {/* Tags */}
+                <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, padding: '1rem 1.25rem 1.25rem' }}>
+                  {service.tags.map((tag) => (
+                    <span
+                      key={tag}
+                      style={{
+                        fontSize: '0.7rem',
+                        color: '#4b5563',
+                        background: '#f3f4f6',
+                        padding: '4px 10px',
+                        borderRadius: 8,
+                        fontWeight: 500,
+                      }}
+                    >
+                      {tag}
+                    </span>
+                  ))}
                 </div>
-                <p style={{ fontSize: '0.7rem', color: 'rgba(255,255,255,0.4)', marginTop: 8 }}>amassés lors de notre<br />dernière campagne</p>
-              </div>
-              <a href="#" style={{ display: 'inline-flex', alignItems: 'center', gap: 6, color: 'rgba(255,255,255,0.5)', fontSize: '0.7rem', textDecoration: 'none' }}>
-                Voir le cas <ArrowUpRight size={12} />
-              </a>
-            </div>
-
-            {/* Stat 240% */}
-            <div style={{
-              borderRadius: 24, padding: '2rem 2.5rem', flex: 1,
-              background: `linear-gradient(135deg, ${BORDEAUX}, ${PURPLE})`,
-              display: 'flex', flexDirection: 'column', justifyContent: 'space-between',
-            }}>
-              <p style={{ fontSize: '0.6rem', fontWeight: 700, letterSpacing: '0.25em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.5)' }}>Croissance digitale</p>
-              <div>
-                <div style={{ fontFamily: 'var(--font-heading, sans-serif)', fontWeight: 900, fontSize: 'clamp(2.5rem, 4vw, 4rem)', color: '#fff', lineHeight: 1, letterSpacing: '-0.03em' }}>
-                  <CountUp target={240} suffix="%" />
-                </div>
-                <p style={{ fontSize: '0.7rem', color: 'rgba(255,255,255,0.55)', marginTop: 8 }}>de croissance digitale<br />moyenne sur nos mandats</p>
-              </div>
-            </div>
+              </article>
+            ))}
           </div>
+        </section>
+
+        {/* ════════════════════════════════════════════════════════════════════
+            SECTION 5 — TRIPTYQUE PROJETS
+        ════════════════════════════════════════════════════════════════════ */}
+        <div style={{
+          marginBottom: 5 * 16,
+          paddingTop: 4 * 16,
+          paddingBottom: 5 * 16,
+          paddingLeft: '6%',
+          paddingRight: '6%',
+          background: 'transparent',
+        }}>
+          <Triptych />
         </div>
 
         {/* ════════════════════════════════════════════════════════════════════
-            SECTION 7 — CTA FINAL
+            SECTION 7 — PRÊT.E À PERFORMER? (CTA type neumorphic)
         ════════════════════════════════════════════════════════════════════ */}
-        <div style={{ padding: '0 6%', marginBottom: 75 }}>
+        <div style={{ padding: '4rem 6%', marginBottom: 5 * 16, background: 'transparent' }}>
           <div style={{
-            borderRadius: 24, padding: '4rem 5rem',
-            background: DARK,
-            display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', gap: 40,
+            maxWidth: 720,
+            margin: '0 auto',
+            borderRadius: 28,
+            padding: '3.5rem 3rem',
+            textAlign: 'center',
           }}>
             <h2 style={{
-              fontFamily: 'var(--font-heading, sans-serif)', fontWeight: 900,
-              fontSize: 'clamp(2.5rem, 5vw, 6rem)', lineHeight: 0.9, letterSpacing: '-0.04em', color: '#fff',
+              fontFamily: 'var(--font-heading, sans-serif)',
+              fontWeight: 900,
+              fontSize: 'clamp(2rem, 4vw, 3.25rem)',
+              lineHeight: 1.1,
+              letterSpacing: '-0.03em',
+              margin: '0 0 1.25rem 0',
+              background: 'none',
+              WebkitBackgroundClip: 'unset',
+              backgroundClip: 'unset',
+              WebkitTextFillColor: 'unset',
             }}>
-              Ready to<br /><span style={{ color: PURPLE }}>perform?</span>
+              <span style={{ color: '#5a0f2b' }}>Prêt.e à </span>
+              <span style={{ color: '#723C9F', background: 'none', WebkitTextFillColor: 'unset' }}>performer?</span>
             </h2>
-            <div style={{ display: 'flex', gap: 12, flexShrink: 0 }}>
-              <Link href={getLocalizedPath('/start-project')}
-                style={{ display: 'inline-flex', alignItems: 'center', gap: 8, background: '#fff', color: DARK, fontWeight: 700, fontSize: '0.82rem', padding: '0.85rem 2rem', borderRadius: 999, textDecoration: 'none' }}>
-                Start a project →
-              </Link>
-              <Link href={getLocalizedPath('/about')}
-                style={{ display: 'inline-flex', alignItems: 'center', gap: 8, border: '1px solid rgba(255,255,255,0.2)', color: '#fff', fontWeight: 600, fontSize: '0.82rem', padding: '0.85rem 2rem', borderRadius: 999, textDecoration: 'none' }}>
-                About us
-              </Link>
-            </div>
+            <p style={{
+              fontSize: '1rem',
+              color: '#374151',
+              lineHeight: 1.6,
+              margin: '0 0 2rem 0',
+              maxWidth: 480,
+              marginLeft: 'auto',
+              marginRight: 'auto',
+            }}>
+              Passez à l'action : stratégie, créativité et technologie au service de votre croissance. Discutons de votre prochain projet.
+            </p>
+            <SplitCTAButton href="/contact" label="Contactez-nous" ariaLabel="Contactez-nous" />
           </div>
         </div>
 
-        {/* ════════════════════════════════════════════════════════════════════
-            SECTION 8 — CONTACT WIDGET
-        ════════════════════════════════════════════════════════════════════ */}
-        <div style={{ padding: '0 6%', marginBottom: 75 }}>
-          <ContactWidget />
         </div>
-
-        {/* ════════════════════════════════════════════════════════════════════
-            FOOTER
-        ════════════════════════════════════════════════════════════════════ */}
-        <footer style={{ padding: '2rem 6% 3rem', borderTop: `1px solid ${DARK}12` }}>
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-            <nav style={{ display: 'flex', gap: '2rem' }}>
-              {NAV_LINKS.map(l => (
-                <Link key={l.label} href={getLocalizedPath(l.href)}
-                  style={{ fontSize: '0.7rem', fontWeight: 500, letterSpacing: '0.12em', textTransform: 'uppercase', color: `${DARK}55`, textDecoration: 'none' }}>{l.label}</Link>
-              ))}
-            </nav>
-            <p style={{ fontSize: '0.68rem', color: `${DARK}35`, letterSpacing: '0.08em' }}>© 2025 Nukleo Digital · Montréal</p>
-          </div>
-        </footer>
-
       </div>
-    </div>
+    </PageLayout>
   );
 }

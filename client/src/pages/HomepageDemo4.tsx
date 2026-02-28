@@ -207,7 +207,7 @@ function HeroWow() {
             }}
           >
             <Link
-              href={getLocalizedPath('/start-project')}
+              href={getLocalizedPath('/contact')}
               className="group flex items-center gap-2 px-6 py-3.5 rounded-full font-semibold text-sm tracking-wide transition-all duration-300"
               style={{
                 background: 'white',
@@ -787,7 +787,7 @@ export default function HomepageDemo4() {
             </Link>
           ))}
           <Link
-            href={getLocalizedPath('/start-project')}
+            href={getLocalizedPath('/contact')}
             className="text-xs font-semibold tracking-[0.15em] uppercase px-4 py-2 rounded-full transition-colors"
             style={{ color: 'white', backgroundColor: DARK }}
           >
@@ -841,7 +841,7 @@ export default function HomepageDemo4() {
               </Link>
             ))}
             <Link
-              href={getLocalizedPath('/start-project')}
+              href={getLocalizedPath('/contact')}
               onClick={() => setMenuOpen(false)}
               className="mt-4 border border-white/50 text-white text-xs font-semibold px-6 py-3 rounded-full hover:bg-white hover:text-black transition-all backdrop-blur-md"
             >
@@ -990,7 +990,7 @@ export default function HomepageDemo4() {
             <span style={{ color: NUKLEO_PURPLE }}>perform?</span>
           </h2>
           <div className="flex flex-col sm:flex-row gap-4 shrink-0">
-            <Link href={getLocalizedPath('/start-project')} className="inline-flex items-center gap-2 bg-white text-black font-bold px-9 py-4 rounded-full hover:bg-white/90 transition-all duration-200 text-sm backdrop-blur-md">
+            <Link href={getLocalizedPath('/contact')} className="inline-flex items-center gap-2 bg-white text-black font-bold px-9 py-4 rounded-full hover:bg-white/90 transition-all duration-200 text-sm backdrop-blur-md">
               Start a project →
             </Link>
             <Link href={getLocalizedPath('/about')} className="inline-flex items-center gap-2 border border-white/20 text-white font-semibold px-9 py-4 rounded-full hover:border-white/45 transition-all duration-200 text-sm backdrop-blur-md">

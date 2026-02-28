@@ -1,11 +1,10 @@
-import { Button } from '@/components/ui/button';
 import SafeHTML from '@/components/SafeHTML';
+import { SplitCTAButton } from '@/components/SplitCTAButton';
 import { useLanguage } from '@/contexts/LanguageContext';
-import { useLocalizedPath } from '@/hooks/useLocalizedPath';
 
 export default function CTASection() {
   const { t } = useLanguage();
-  const getLocalizedPath = useLocalizedPath();
+  const ctaLabel = t('cta.button');
   return (
     <section className="py-24 lg:py-32 relative gradient-mesh overflow-hidden">
       <div className="container relative z-10">
@@ -16,13 +15,7 @@ export default function CTASection() {
             {t('cta.description')}
           </p>
 
-          <a href={getLocalizedPath('/start-project')}>
-            <Button
-              className="rounded-full text-base px-8 py-6 bg-white text-purple-900 hover:bg-white/90 transition-all duration-500 font-bold tracking-wider hover:scale-[1.022] shimmer"
-            >
-              {t('cta.button')}
-            </Button>
-          </a>
+          <SplitCTAButton href="/contact" label={ctaLabel || 'Contactez-nous'} ariaLabel={ctaLabel || 'Contactez-nous'} />
         </div>
       </div>
     </section>

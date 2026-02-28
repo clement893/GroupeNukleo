@@ -17,10 +17,6 @@ export function FloatingLanguageToggle() {
     '/fr/about',
     '/glossary',
     '/fr/glossary',
-    '/ai-glossary',
-    '/fr/ai-glossary',
-    '/ai-readiness-assessment',
-    '/fr/ai-readiness-assessment',
     '/assessment',
     '/fr/assessment',
   ];

@@ -12,7 +12,7 @@ import { useLanguage } from '@/contexts/LanguageContext';
 import { logger } from '@/lib/logger';
 import { useLocalizedPath } from '@/hooks/useLocalizedPath';
 import { ChatMessage, isValidChatMessage } from '@/types/localStorage';
-import Header from '@/components/Header';
+import PageLayout from '@/components/PageLayout';
 
 interface Message {
   role: 'user' | 'assistant' | 'system';
@@ -502,14 +502,13 @@ export default function Leo() {
   };
 
   return (
-    <>
+    <PageLayout>
       <SEO
         title={t('leo.seoTitle') || "Chat with LEO - AI Assistant | Get Instant AI Consultation"}
         description={t('leo.seoDescription') || "Talk to LEO, Nukleo Digital's AI assistant. Get instant answers about AI transformation, strategy, and implementation for your business. Free AI consultation chatbot."}
         keywords={t('leo.seoKeywords') || "AI chatbot, AI assistant, AI consultation, AI strategy, AI transformation help, AI implementation guide, free AI consultation, AI advisor"}
         ogImage="https://nukleodigital-production.up.railway.app/og-image.jpg"
       />
-      <Header />
       <div className="min-h-screen bg-gradient-to-br from-[oklch(0.35_0.15_300)] via-[oklch(0.40_0.15_320)] to-[oklch(0.35_0.15_340)] flex flex-col overflow-hidden">
       {/* Toolbar with Leo-specific actions - positioned below header */}
       <div className="fixed top-20 sm:top-24 left-0 right-0 z-40 bg-gradient-to-br from-[oklch(0.35_0.15_300)] via-[oklch(0.40_0.15_320)] to-[oklch(0.35_0.15_340)] backdrop-blur-md border-b border-white/10 px-4 py-2">
@@ -792,6 +791,6 @@ export default function Leo() {
         </div>
       </div>
     </div>
-    </>
+    </PageLayout>
   );
 }

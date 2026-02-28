@@ -273,7 +273,7 @@ export default function HomepageDemo3() {
             <Link href={getLocalizedPath('/demo3')} className="hover:text-gray-800">
               Démo 3
             </Link>
-            <Link href={getLocalizedPath('/start-project')} className="hover:text-gray-800">
+            <Link href={getLocalizedPath('/contact')} className="hover:text-gray-800">
               Start a project
             </Link>
           </div>

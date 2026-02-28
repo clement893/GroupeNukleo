@@ -409,7 +409,7 @@ export default function HomepageDemo() {
           <Link href={getLocalizedPath('/projects')} className="text-white/60 text-[11px] font-medium tracking-widest uppercase hover:text-white transition-colors hidden lg:block">Work</Link>
           <Link href={getLocalizedPath('/about')} className="text-white/60 text-[11px] font-medium tracking-widest uppercase hover:text-white transition-colors hidden lg:block">About</Link>
           <Link
-            href={getLocalizedPath('/start-project')}
+            href={getLocalizedPath('/contact')}
             className="border border-white/60 text-white text-[11px] font-semibold px-5 py-2.5 rounded-full hover:bg-white hover:text-black transition-all duration-300"
           >
             Start a project
@@ -484,7 +484,7 @@ export default function HomepageDemo() {
               </div>
               <div className="flex flex-col gap-3 mt-8">
                 <Link
-                  href={getLocalizedPath('/start-project')}
+                  href={getLocalizedPath('/contact')}
                   className="inline-flex items-center justify-center gap-2 bg-white text-black font-bold px-7 py-4 rounded-full hover:bg-white/90 transition-all duration-200 text-sm"
                 >
                   Start a project →
@@ -718,7 +718,7 @@ export default function HomepageDemo() {
             <span style={{ color: NUKLEO_PURPLE }}>perform?</span>
           </h2>
           <div className="flex flex-col sm:flex-row gap-4 shrink-0">
-            <Link href={getLocalizedPath('/start-project')} className="inline-flex items-center gap-2 bg-white text-black font-bold px-9 py-4 rounded-full hover:bg-white/90 transition-all duration-200 text-sm">
+            <Link href={getLocalizedPath('/contact')} className="inline-flex items-center gap-2 bg-white text-black font-bold px-9 py-4 rounded-full hover:bg-white/90 transition-all duration-200 text-sm">
               Start a project →
             </Link>
             <Link href={getLocalizedPath('/about')} className="inline-flex items-center gap-2 border border-white/20 text-white font-semibold px-9 py-4 rounded-full hover:border-white/45 transition-all duration-200 text-sm">

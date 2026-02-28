@@ -1,7 +1,6 @@
 import { Link } from 'wouter';
 import { Home, Compass, Briefcase, Mail, ArrowLeft } from 'lucide-react';
-import Header from '@/components/Header';
-import Footer from '@/components/Footer';
+import PageLayout from '@/components/PageLayout';
 import { useLocalizedPath } from '@/hooks/useLocalizedPath';
 
 export default function NotFound404() {
@@ -14,19 +13,18 @@ export default function NotFound404() {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[rgb(60,15,15)] via-[rgb(40,60,120)] to-[rgb(60,15,15)] relative overflow-hidden">
-      {/* Grain texture overlay */}
-      <div 
-        className="fixed inset-0 opacity-75 mix-blend-overlay pointer-events-none z-10"
-        style={{
-          backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='3.5' numOctaves='5' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`,
-        }}
-      />
+    <PageLayout>
+      <div className="min-h-screen bg-gradient-to-br from-[rgb(60,15,15)] via-[rgb(40,60,120)] to-[rgb(60,15,15)] relative overflow-hidden">
+        {/* Grain texture overlay */}
+        <div 
+          className="fixed inset-0 opacity-75 mix-blend-overlay pointer-events-none z-10"
+          style={{
+            backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='3.5' numOctaves='5' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`,
+          }}
+        />
 
-      <Header />
-
-      {/* Main Content */}
-      <div className="relative z-20 min-h-screen flex items-center justify-center px-6 py-32">
+        {/* Main Content */}
+        <div className="relative z-20 min-h-screen flex items-center justify-center px-6 py-32">
         <div className="max-w-4xl mx-auto text-center">
           {/* 404 Number */}
           <div className="mb-8">
@@ -89,9 +87,8 @@ export default function NotFound404() {
             </p>
           </div>
         </div>
+        </div>
       </div>
-
-      <Footer />
-    </div>
+    </PageLayout>
   );
 }

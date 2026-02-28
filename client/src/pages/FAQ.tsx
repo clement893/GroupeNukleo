@@ -1,6 +1,8 @@
 import PageLayout from '@/components/PageLayout';
+import { SplitCTAButton } from '@/components/SplitCTAButton';
 import SEO from '@/components/SEO';
 import StructuredData, { createFAQSchema } from '@/components/StructuredData';
+import Breadcrumb from '@/components/Breadcrumb';
 import {
   Accordion,
   AccordionContent,
@@ -8,12 +10,14 @@ import {
   AccordionTrigger,
 } from '@/components/ui/accordion';
 import { useLanguage } from '@/contexts/LanguageContext';
-import { useLocalizedPath } from '@/hooks/useLocalizedPath';
+
+const BORDEAUX = '#5A1E29';
+const OFF_WHITE = '#EFE8E8';
+const BTN_PURPLE = '#5B21B6';
 
 export default function FAQ() {
-  const { language } = useLanguage();
-  const getLocalizedPath = useLocalizedPath();
-  
+  const { language, t } = useLanguage();
+
   const faqsFr = [
     {
       category: "Services & Solutions",
@@ -191,7 +195,7 @@ export default function FAQ() {
   ];
 
   const faqs = language === 'fr' ? faqsFr : faqsEn;
-  
+
   const content = {
     fr: {
       title: "Questions Fréquentes",
@@ -217,84 +221,92 @@ export default function FAQ() {
 
   const currentContent = content[language];
 
-  // Flatten all FAQs for schema
-  const allFaqs = faqs.flatMap(category => 
+  const allFaqs = faqs.flatMap(category =>
     category.questions.map(q => ({ question: q.question, answer: q.answer }))
   );
   const faqSchema = createFAQSchema(allFaqs);
 
   return (
     <PageLayout>
-      <SEO 
+      <SEO
         title={currentContent.seoTitle}
         description={currentContent.seoDescription}
         keywords={currentContent.seoKeywords}
       />
       <StructuredData data={faqSchema} />
-      
-      <div className="min-h-screen bg-[#0a0a0a]">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-20 md:py-32 max-w-5xl">
-          <div className="text-center mb-20">
-            <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-white mb-6 leading-tight">
-              {language === 'fr' ? (
-                <>
-                  Questions Fréquentes
-                </>
-              ) : (
-                <>
-                  Frequently Asked Questions
-                </>
-              )}
+
+      <div className="min-h-screen" style={{ color: '#374151' }}>
+        {/* Hero */}
+        <section className="pt-24 pb-10 lg:pt-32 lg:pb-14">
+          <div className="container">
+            <Breadcrumb items={[{ name: t('nav.faq') || 'FAQ', url: '/faq' }]} />
+            <h1
+              className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-3"
+              style={{ color: BORDEAUX, fontFamily: 'var(--font-heading, sans-serif)' }}
+            >
+              {currentContent.title}
             </h1>
-            <p className="text-gray-300 text-lg md:text-xl max-w-2xl mx-auto leading-relaxed">
+            <p className="text-lg text-gray-600 max-w-2xl leading-relaxed">
               {currentContent.subtitle}
             </p>
           </div>
+        </section>
 
-          <div className="space-y-10 md:space-y-14">
-            {faqs.map((category, categoryIndex) => (
-              <div key={categoryIndex} className="space-y-5">
-                <h2 className="text-xl md:text-2xl lg:text-3xl font-bold text-white border-b border-gray-800 pb-3">
-                  {category.category}
-                </h2>
-                
-                <div className="bg-[#111111] border border-gray-800 rounded-xl overflow-hidden shadow-xl">
-                  <Accordion type="single" collapsible className="w-full">
-                    {category.questions.map((faq, faqIndex) => (
-                      <AccordionItem 
-                        key={faqIndex} 
-                        value={`item-${categoryIndex}-${faqIndex}`}
-                        className="border-b border-gray-800 last:border-b-0"
-                      >
-                        <AccordionTrigger className="text-left text-gray-100 hover:text-cyan-400 py-5 px-6 md:px-8 text-base md:text-lg font-semibold transition-colors">
-                          {faq.question}
-                        </AccordionTrigger>
-                        <AccordionContent className="text-gray-300 leading-relaxed pb-6 px-6 md:px-8 text-base md:text-lg">
-                          {faq.answer}
-                        </AccordionContent>
-                      </AccordionItem>
-                    ))}
-                  </Accordion>
+        {/* FAQ by category */}
+        <section className="pb-16 lg:pb-24">
+          <div className="container max-w-4xl">
+            <div className="space-y-12">
+              {faqs.map((category, categoryIndex) => (
+                <div key={categoryIndex} className="space-y-4">
+                  <h2
+                    className="text-xl md:text-2xl font-bold pb-2 border-b border-gray-200"
+                    style={{ color: BORDEAUX, fontFamily: 'var(--font-heading, sans-serif)' }}
+                  >
+                    {category.category}
+                  </h2>
+                  <div className="bg-white rounded-2xl border border-gray-200 overflow-hidden shadow-sm">
+                    <Accordion type="single" collapsible className="w-full">
+                      {category.questions.map((faq, faqIndex) => (
+                        <AccordionItem
+                          key={faqIndex}
+                          value={`item-${categoryIndex}-${faqIndex}`}
+                          className="border-b border-gray-100 last:border-b-0 px-6"
+                        >
+                          <AccordionTrigger className="text-left text-gray-900 hover:text-[#5A1E29] py-5 text-base md:text-lg font-semibold transition-colors hover:no-underline [&[data-state=open]>svg]:rotate-180">
+                            {faq.question}
+                          </AccordionTrigger>
+                          <AccordionContent className="text-gray-600 leading-relaxed pb-5 text-base">
+                            {faq.answer}
+                          </AccordionContent>
+                        </AccordionItem>
+                      ))}
+                    </Accordion>
+                  </div>
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
+        </section>
 
-          <div className="mt-20 bg-gradient-to-br from-[#111111] to-[#0a0a0a] border border-gray-800 rounded-xl p-8 md:p-12 text-center shadow-2xl">
-            <h3 className="text-2xl md:text-3xl font-bold text-white mb-4">
-              {currentContent.ctaTitle}
-            </h3>
-            <p className="text-gray-300 mb-8 text-lg">
-              {currentContent.ctaText}
-            </p>
-            <a 
-              href={getLocalizedPath('/contact')}
-              className="inline-flex items-center justify-center px-10 py-6 bg-white text-purple-900 hover:bg-white/90 transition-all duration-500 font-bold tracking-wider rounded-full shadow-xl hover:shadow-2xl hover:scale-[1.022] text-lg"
+        {/* CTA */}
+        <section className="pb-20 lg:pb-28">
+          <div className="container max-w-2xl">
+            <div
+              className="rounded-2xl p-8 md:p-12 text-center border border-gray-200 bg-white shadow-sm"
             >
-              {currentContent.ctaButton}
-            </a>
+              <h3
+                className="text-2xl md:text-3xl font-bold mb-4"
+                style={{ color: BORDEAUX, fontFamily: 'var(--font-heading, sans-serif)' }}
+              >
+                {currentContent.ctaTitle}
+              </h3>
+              <p className="text-gray-600 mb-8 text-lg">
+                {currentContent.ctaText}
+              </p>
+              <SplitCTAButton href="/contact" label={currentContent.ctaButton} ariaLabel={currentContent.ctaButton} />
+            </div>
           </div>
-        </div>
+        </section>
       </div>
     </PageLayout>
   );

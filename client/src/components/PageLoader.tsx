@@ -349,8 +349,7 @@ export default function PageLoader() {
       <div
         className="fixed inset-0 z-[9999]"
         style={{
-          background: 'linear-gradient(135deg, #1e3a8a 0%, #3730a3 20%, #5b21b6 35%, #7c3aed 50%, #6d28d9 65%, #7f1d1d 85%, #991b1b 100%)',
-          backgroundAttachment: 'fixed',
+          background: '#EFE8E8',
           opacity: 1,
           pointerEvents: "all",
         }}

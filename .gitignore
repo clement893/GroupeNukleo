@@ -8,3 +8,4 @@
 # Coverage
 /coverage/
 *.lcov
+node_modules

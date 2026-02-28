@@ -138,7 +138,7 @@ function HeroSection() {
             <div 
               className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 sm:gap-6"
             >
-              <Link href={getLocalizedPath('/start-project')} className="w-full sm:w-auto">
+              <Link href={getLocalizedPath('/contact')} className="w-full sm:w-auto">
                 <Button
                   onClick={playClick}
                   onMouseEnter={playHover}

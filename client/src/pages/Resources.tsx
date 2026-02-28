@@ -74,28 +74,12 @@ export default function Resources() {
   // Memoize tools array to prevent recalculation on every render
   const tools = useMemo(() => [
     {
-      badge: t('resources.tools.aiReadiness.badge'),
-      title: t('resources.tools.aiReadiness.title'),
-      description: t('resources.tools.aiReadiness.description'),
-      tags: getArrayTranslation('resources.tools.aiReadiness.tags'),
-      link: getLocalizedPath('/ai-readiness'),
-      buttonText: t('resources.tools.aiReadiness.buttonText')
-    },
-    {
       badge: t('resources.tools.radar.badge'),
       title: t('resources.tools.radar.title'),
       description: t('resources.tools.radar.description'),
       tags: getArrayTranslation('resources.tools.radar.tags'),
       link: getLocalizedPath('/radar'),
       buttonText: t('resources.tools.radar.buttonText')
-    },
-    {
-      badge: t('resources.tools.aiGlossary.badge'),
-      title: t('resources.tools.aiGlossary.title'),
-      description: t('resources.tools.aiGlossary.description'),
-      tags: getArrayTranslation('resources.tools.aiGlossary.tags'),
-      link: getLocalizedPath('/ai-glossary'),
-      buttonText: t('resources.tools.aiGlossary.buttonText')
     }
   ], [t, getArrayTranslation, getLocalizedPath]);
 

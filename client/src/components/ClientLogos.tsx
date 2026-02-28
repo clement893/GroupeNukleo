@@ -60,7 +60,7 @@ export default function ClientLogos() {
 
         {/* CTA Button */}
         <div className="text-center">
-          <Link href={getLocalizedPath('/start-project')}>
+          <Link href={getLocalizedPath('/contact')}>
             <a className="inline-flex items-center gap-2 text-white hover:text-white/80 transition-colors text-sm underline decoration-white/50 hover:decoration-white font-medium">
               {language === 'fr' ? 'Commencer votre projet' : 'Start your project'}
               <span className="text-lg">→</span>

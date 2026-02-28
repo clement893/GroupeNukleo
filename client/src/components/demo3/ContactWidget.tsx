@@ -37,7 +37,7 @@ export function ContactWidget({ className = '' }: ContactWidgetProps) {
       </div>
       <div className="flex flex-col sm:flex-row gap-4 shrink-0">
         <Link
-          href={getLocalizedPath('/start-project')}
+          href={getLocalizedPath('/contact')}
           className="inline-flex items-center justify-center gap-2 bg-white text-black font-bold px-8 py-4 rounded-full hover:bg-white/90 transition-all duration-200 text-sm backdrop-blur-md"
         >
           Start a project →

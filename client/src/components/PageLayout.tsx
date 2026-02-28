@@ -1,6 +1,7 @@
 import { ReactNode } from 'react';
 import Header from './Header';
 import Footer from './Footer';
+import PreFooter from './PreFooter';
 import SkipToContent from './SkipToContent';
 
 interface PageLayoutProps {
@@ -12,10 +13,13 @@ export default function PageLayout({ children }: PageLayoutProps) {
     <>
       <SkipToContent />
       <Header />
-      <main id="main-content" role="main">
+      <main id="main-content" role="main" style={{ marginBottom: 0, background: '#EFE8E8', border: 'none', borderWidth: 0, outline: 'none', boxShadow: 'none' }}>
         {children}
       </main>
-      <Footer />
+      <div style={{ marginTop: -12, paddingTop: 12, background: '#EFE8E8', border: 'none', borderWidth: 0, outline: 'none' }}>
+        <PreFooter />
+        <Footer />
+      </div>
     </>
   );
 }

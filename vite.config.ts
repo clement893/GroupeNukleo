@@ -170,11 +170,9 @@ export default defineConfig({
     },
   },
   optimizeDeps: {
-    include: [
-      'wouter', 
-      '@/hooks/useLocalizedPath',
-      'client/src/hooks/useLocalizedPath'
-    ], // Ensure wouter and useLocalizedPath are pre-bundled and available
+    // Do NOT include useLocalizedPath: pre-bundling creates a duplicate LanguageContext
+    // and useLanguage() then runs outside the app's LanguageProvider.
+    include: ['wouter'],
   },
   // Optimize CSS loading - defer non-critical CSS
   css: {

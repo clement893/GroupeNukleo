@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback, memo } from 'react';
 import { Menu, X } from 'lucide-react';
-import { Button } from '@/components/ui/button';
-import { Link, useLocation } from 'wouter';
+import { Link } from 'wouter';
+import { SplitCTAButton } from '@/components/SplitCTAButton';
 import FullScreenMenu from './FullScreenMenu';
 import { useSound } from '@/hooks/useSound';
 import { useLanguage } from '@/contexts/LanguageContext';
@@ -74,6 +74,12 @@ function Header() {
     };
   }, []);
 
+  // Fond uni (sans dégradé), comme sur l'image
+  const headerBg = '#f8f6fc';
+  const btnPurple = '#5B21B6';
+  const logoBordeaux = '#712D3A';
+  const logoCommaPurple = '#7e3e9d';
+
   return (
     <>
       <header 
@@ -85,99 +91,62 @@ function Header() {
         style={isMobile && ANIMATIONS.USE_WILL_CHANGE ? { willChange: 'transform, opacity' } : undefined}
       >
         <div 
-          className={`
-            transition-all duration-300 sm:duration-700 ease-[cubic-bezier(0.16,1,0.3,1)]
-            ${isScrolled 
-              ? 'glass-dark rounded-full px-4 sm:px-6 md:px-8 py-3 sm:py-4' 
-              : 'bg-transparent'
-            }
-          `}
+          className="transition-all duration-300 sm:duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] px-4 sm:px-6 md:px-8 py-3 sm:py-4"
+          style={{
+            background: headerBg,
+            borderRadius: 0,
+            boxShadow: isScrolled ? '0 4px 24px rgba(0,0,0,0.08)' : 'none',
+          }}
         >
           <div className="flex items-center justify-between gap-2 sm:gap-4">
-            {/* Logo */}
-            <Link href={getLocalizedPath('/')} className="flex flex-col items-center group cursor-pointer touch-manipulation">
-              <img 
-                src="/Nukleo_blanc_RVB.svg" 
-                alt={t('alt.logo') || 'Logo Nukleo Digital - Agence de transformation IA'} 
-                width="120"
-                height="32"
-                fetchPriority="high"
-                decoding="async"
-                loading="eager"
-                className="h-7 sm:h-8 w-auto object-contain mb-0.5 sm:mb-1"
-                style={{ aspectRatio: '120 / 32' }}
-              />
-              <span className={`text-[9px] sm:text-[10px] text-white/60 font-medium tracking-wider text-center transition-all duration-300 sm:duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] ${
-                isScrolled ? 'opacity-0 h-0 mb-0 overflow-hidden' : 'opacity-100 h-auto mb-0'
-              }`}>
-                {t('header.tagline')}
+            {/* Logo en couleur : nukleo (bordeaux) + chevron (violet) + virgule (violet), comme sur l'image */}
+            <Link href={getLocalizedPath('/')} className="inline-flex items-baseline cursor-pointer touch-manipulation" aria-label={t('alt.logo') || 'Nukleo Digital - Accueil'}>
+              <span
+                className="font-bold tracking-tight"
+                style={{
+                  fontFamily: 'var(--font-heading, sans-serif)',
+                  fontSize: 'clamp(1.35rem, 3.5vw, 2rem)',
+                  color: logoBordeaux,
+                }}
+              >
+                nukleo
               </span>
+              <span className="ml-0.5" style={{ color: logoCommaPurple, fontSize: '0.9em' }} aria-hidden="true">→</span>
+              <span className="font-bold tracking-tight" style={{ color: logoCommaPurple, fontFamily: 'var(--font-heading, sans-serif)', fontSize: 'clamp(1.35rem, 3.5vw, 2rem)' }}>,</span>
             </Link>
 
-            {/* Right: CTA + Burger Menu */}
-            <div className="flex items-center gap-2 sm:gap-4">
-              <Link href={getLocalizedPath('/start-project')} className="hidden xs:block">
-                <Button
-                  onClick={playClick}
-                  onMouseEnter={playHover}
-                  className="
-                    rounded-full 
-                    px-4 sm:px-6 md:px-8 
-                    py-2.5 sm:py-4 md:py-6 
-                    bg-white 
-                    text-purple-900 
-                    active:bg-white/90 sm:hover:bg-white/90 
-                    transition-all duration-300 
-                    font-bold 
-                    tracking-wider 
-                    text-[10px] sm:text-xs md:text-sm
-                    active:scale-[0.98] sm:hover:scale-[1.045]
-                    flex items-center gap-1.5 sm:gap-2
-                    touch-manipulation
-                  "
-                >
-                  {t('nav.startProject')}
-                </Button>
-              </Link>
+            {/* Right: CTA split (Contactez-nous | flèche) + Burger */}
+            <div className="flex items-center gap-2 sm:gap-3">
+              <SplitCTAButton
+                href="/contact"
+                label={t('nav.contact') || 'Contactez-nous'}
+                ariaLabel={t('nav.contact') || 'Contactez-nous'}
+                className="hidden xs:inline-flex touch-manipulation"
+                onClick={playClick}
+                onMouseEnter={playHover}
+              />
 
-              {/* Burger Menu Button */}
+              {/* Burger : cercle blanc, icône hamburger gris foncé */}
               <button
                 onClick={isMenuOpen ? handleMenuClose : handleMenuOpen}
                 onMouseEnter={playHover}
-                className="
-                  flex items-center gap-1.5 sm:gap-2
-                  text-white 
-                  active:bg-white/20 sm:hover:bg-white/10 
-                  transition-all duration-300 
-                  px-2.5 sm:px-3 py-1.5 sm:py-2 
-                  rounded-lg 
-                  touch-manipulation
-                  font-medium
-                  text-xs sm:text-sm
-                  border border-white/20 sm:hover:border-white/30
-                  backdrop-blur-sm
-                "
+                className="flex items-center justify-center w-11 h-11 rounded-full bg-white text-gray-800 hover:bg-gray-50 active:scale-95 transition-all duration-300 touch-manipulation flex-shrink-0"
                 aria-label={isMenuOpen ? t('header.closeMenu') : t('header.openMenu')}
               >
                 <div className="relative w-5 h-5 sm:w-6 sm:h-6">
                   <Menu 
-                    className={`
-                      absolute inset-0 w-full h-full
-                      transition-all duration-300 ease-in-out
-                      ${isMenuOpen ? 'opacity-0 rotate-90 scale-0' : 'opacity-100 rotate-0 scale-100'}
-                    `}
+                    className={`absolute inset-0 w-full h-full text-gray-800 transition-all duration-300 ease-in-out ${
+                      isMenuOpen ? 'opacity-0 rotate-90 scale-0' : 'opacity-100 rotate-0 scale-100'
+                    }`}
+                    strokeWidth={2}
                   />
                   <X 
-                    className={`
-                      absolute inset-0 w-full h-full
-                      transition-all duration-300 ease-in-out
-                      ${isMenuOpen ? 'opacity-100 rotate-0 scale-100' : 'opacity-0 rotate-90 scale-0'}
-                    `}
+                    className={`absolute inset-0 w-full h-full text-gray-800 transition-all duration-300 ease-in-out ${
+                      isMenuOpen ? 'opacity-100 rotate-0 scale-100' : 'opacity-0 rotate-90 scale-0'
+                    }`}
+                    strokeWidth={2}
                   />
                 </div>
-                <span className="hidden sm:inline-block whitespace-nowrap">
-                  {isMenuOpen ? t('header.closeMenu') : t('header.menu')}
-                </span>
               </button>
             </div>
           </div>

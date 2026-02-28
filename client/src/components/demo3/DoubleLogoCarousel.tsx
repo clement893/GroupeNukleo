@@ -44,7 +44,7 @@ interface DoubleLogoCarouselProps {
 
 export function DoubleLogoCarousel({ title = 'Trusted by ambitious organizations', className = '' }: DoubleLogoCarouselProps) {
   return (
-    <div className={`rounded-2xl overflow-hidden py-[3.75rem] bg-[#EDE9E4] ${className}`}>
+    <div className={`rounded-2xl overflow-hidden py-[3.75rem] ${className}`}>
       <p className="text-center text-xs font-medium tracking-[0.35em] uppercase mb-10 text-gray-500">
         {title}
       </p>

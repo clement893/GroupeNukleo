@@ -1,8 +1,8 @@
 import { Compass, Lightbulb, Zap, TrendingUp, ArrowRight, CheckCircle2, Users, Target, Sparkles, Clock, Shield, BarChart3 } from 'lucide-react';
-import Header from '@/components/Header';
-import Footer from '@/components/Footer';
+import PageLayout from '@/components/PageLayout';
 import SEO from '@/components/SEO';
 import { Link } from 'wouter';
+import { SplitCTAButton } from '@/components/SplitCTAButton';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { useLocalizedPath } from '@/hooks/useLocalizedPath';
 
@@ -114,14 +114,12 @@ export default function Approche() {
   };
 
   return (
-    <>
+    <PageLayout>
       <SEO
         title="Notre approche — Méthodologie Nukleo | Nukleo"
         description="Découverte, stratégie, implémentation, performance. La méthode Nukleo en 4 phases pour garantir des résultats mesurables et durables sur chaque projet."
         keywords="méthodologie Nukleo, approche agile, co-création, transformation numérique, méthode projet IA"
       />
-      <Header />
-
       <main className="min-h-screen bg-[oklch(0.08_0.02_280)]">
 
         {/* Hero */}
@@ -232,24 +230,16 @@ export default function Approche() {
             <p className="text-xl text-white/50 mb-10 max-w-2xl mx-auto">
               Découvrez comment notre approche peut s'appliquer à votre contexte spécifique.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link href={getLocalizedPath('/start-project')}>
-                <button className="inline-flex items-center gap-2 px-10 py-5 bg-white text-black font-semibold rounded-full text-lg hover:bg-white/90 transition-all duration-200">
-                  Démarrer un projet
-                  <ArrowRight className="w-5 h-5" />
-                </button>
-              </Link>
-              <Link href={getLocalizedPath('/services')}>
-                <button className="inline-flex items-center gap-2 px-10 py-5 bg-white/5 hover:bg-white/10 border border-white/10 text-white font-semibold rounded-full text-lg transition-all duration-200">
-                  Voir nos départements
-                </button>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+              <SplitCTAButton href={getLocalizedPath('/contact')} label="Démarrer un projet" variant="white" ariaLabel="Démarrer un projet" />
+              <Link href={getLocalizedPath('/services')} className="inline-flex items-center gap-2 px-10 py-5 bg-white/5 hover:bg-white/10 border border-white/10 text-white font-semibold rounded-full text-lg transition-all duration-200">
+                Voir nos départements
               </Link>
             </div>
           </div>
         </section>
 
       </main>
-      <Footer />
-    </>
+    </PageLayout>
   );
 }

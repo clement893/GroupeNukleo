@@ -1,5 +1,5 @@
 import { lazy, Suspense } from "react";
-import { Route, Switch, useLocation } from "wouter";
+import { Route, Switch, useLocation, Redirect } from "wouter";
 import EnhancedErrorBoundary from "./components/EnhancedErrorBoundary";
 import CustomCursor from "./components/CustomCursor";
 import PageLoader from "./components/PageLoader";
@@ -58,33 +58,23 @@ function GlobalLEO() {
 }
 
 // Eager load only critical pages
-import Home from "./pages/Home";
 import About from "./pages/About";
 import NotFound404 from "@/pages/NotFound404";
 
 // Lazy load all other pages with retry logic for chunk loading errors
 const Projects = lazyWithRetry(() => import("./pages/Projects"));
+const ProjectDetail = lazyWithRetry(() => import("./pages/ProjectDetail"));
 const Resources = lazyWithRetry(() => import("./pages/Resources"));
 const ResourceArticle = lazyWithRetry(() => import("./pages/resources/ResourceArticle"));
 const Contact = lazyWithRetry(() => import("./pages/Contact"));
 const Leo = lazyWithRetry(() => import("./pages/Leo"));
-const AITrendRadar = lazyWithRetry(() => import("./pages/AITrendRadar"));
-const AIReadinessAssessment = lazyWithRetry(() => import("./pages/AIReadinessAssessment"));
-const AIGlossary = lazyWithRetry(() => import("./pages/AIGlossary"));
 const Services = lazyWithRetry(() => import("./pages/Services"));
-const StartProject = lazyWithRetry(() => import("./pages/StartProject"));
 const PrivacyPolicy = lazyWithRetry(() => import("./pages/PrivacyPolicy"));
 const PrivacyPolicyNukleoTime = lazyWithRetry(() => import("./pages/PrivacyPolicyNukleoTime"));
 const TermsOfService = lazyWithRetry(() => import("./pages/TermsOfService"));
 const CookiePolicy = lazyWithRetry(() => import("./pages/CookiePolicy"));
 const FAQ = lazyWithRetry(() => import("./pages/FAQ"));
 
-// Demo page — grand agence design
-const HomepageDemo = lazyWithRetry(() => import('./pages/HomepageDemo'));
-// Demo2 — nouvelle direction design modulaire
-const HomepageDemo2 = lazyWithRetry(() => import('./pages/HomepageDemo2'));
-const HomepageDemo3 = lazyWithRetry(() => import('./pages/HomepageDemo3'));
-const HomepageDemo4 = lazyWithRetry(() => import('./pages/HomepageDemo4'));
 const HomepageDemo5 = lazyWithRetry(() => import('./pages/HomepageDemo5'));
 
 // New department pages
@@ -139,23 +129,21 @@ function App() {
           <Suspense fallback={null}>
             <Switch>
               {/* ===== ROUTES FRANÇAISES ===== */}
-              <Route path="/fr" component={Home} />
+              <Route path="/fr" component={HomepageDemo5} />
               <Route path="/fr/projects" component={withPageVisibility(Projects, "/fr/projects")} />
+              <Route path="/fr/projects/:slug" component={withPageVisibility(ProjectDetail, "/fr/projects")} />
               <Route path="/fr/about" component={withPageVisibility(About, "/fr/about")} />
               <Route path="/fr/approche" component={withPageVisibility(Approche, "/fr/approche")} />
               <Route path="/fr/resources" component={withPageVisibility(Resources, "/fr/resources")} />
               <Route path="/fr/resources/:id" component={withPageVisibility(ResourceArticle, "/fr/resources")} />
               <Route path="/fr/contact" component={withPageVisibility(Contact, "/fr/contact")} />
               <Route path="/fr/leo" component={withPageVisibility(Leo, "/fr/leo")} />
-              <Route path="/fr/ai-trend-radar" component={withPageVisibility(AITrendRadar, "/fr/ai-trend-radar")} />
-              <Route path="/fr/ai-readiness" component={withPageVisibility(AIReadinessAssessment, "/fr/ai-readiness")} />
-              <Route path="/fr/ai-glossary" component={withPageVisibility(AIGlossary, "/fr/ai-glossary")} />
               <Route path="/fr/services" component={withPageVisibility(Services, "/fr/services")} />
               <Route path="/fr/services/tech" component={withPageVisibility(NukleoTech, "/fr/services/tech")} />
               <Route path="/fr/services/consulting" component={withPageVisibility(NukleoConsulting, "/fr/services/consulting")} />
               <Route path="/fr/services/studio" component={withPageVisibility(NukleoStudio, "/fr/services/studio")} />
               <Route path="/fr/services/agency" component={withPageVisibility(NukleoAgency, "/fr/services/agency")} />
-              <Route path="/fr/start-project" component={withPageVisibility(StartProject, "/fr/start-project")} />
+              <Route path="/fr/start-project"><Redirect to="/fr/contact" /></Route>
               <Route path="/fr/privacy-policy" component={withPageVisibility(PrivacyPolicy, "/fr/privacy-policy")} />
               <Route path="/fr/nukleo-time-privacy" component={withPageVisibility(PrivacyPolicyNukleoTime, "/fr/nukleo-time-privacy")} />
               <Route path="/fr/terms-of-service" component={withPageVisibility(TermsOfService, "/fr/terms-of-service")} />
@@ -163,28 +151,21 @@ function App() {
               <Route path="/fr/faq" component={withPageVisibility(FAQ, "/fr/faq")} />
 
               {/* ===== ROUTES ANGLAISES (défaut) ===== */}
-              <Route path="/demo" component={HomepageDemo} />
-              <Route path="/demo2" component={HomepageDemo2} />
-              <Route path="/demo3" component={HomepageDemo3} />
-              <Route path="/demo4" component={HomepageDemo4} />
-              <Route path="/demo5" component={HomepageDemo5} />
-              <Route path="/" component={Home} />
+              <Route path="/" component={HomepageDemo5} />
               <Route path="/projects" component={withPageVisibility(Projects, "/projects")} />
+              <Route path="/projects/:slug" component={withPageVisibility(ProjectDetail, "/projects")} />
               <Route path="/about" component={withPageVisibility(About, "/about")} />
               <Route path="/approche" component={withPageVisibility(Approche, "/approche")} />
               <Route path="/resources" component={withPageVisibility(Resources, "/resources")} />
               <Route path="/resources/:id" component={withPageVisibility(ResourceArticle, "/resources")} />
               <Route path="/contact" component={withPageVisibility(Contact, "/contact")} />
               <Route path="/leo" component={withPageVisibility(Leo, "/leo")} />
-              <Route path="/ai-trend-radar" component={withPageVisibility(AITrendRadar, "/ai-trend-radar")} />
-              <Route path="/ai-readiness" component={withPageVisibility(AIReadinessAssessment, "/ai-readiness")} />
-              <Route path="/ai-glossary" component={withPageVisibility(AIGlossary, "/ai-glossary")} />
               <Route path="/services" component={withPageVisibility(Services, "/services")} />
               <Route path="/services/tech" component={withPageVisibility(NukleoTech, "/services/tech")} />
               <Route path="/services/consulting" component={withPageVisibility(NukleoConsulting, "/services/consulting")} />
               <Route path="/services/studio" component={withPageVisibility(NukleoStudio, "/services/studio")} />
               <Route path="/services/agency" component={withPageVisibility(NukleoAgency, "/services/agency")} />
-              <Route path="/start-project" component={withPageVisibility(StartProject, "/start-project")} />
+              <Route path="/start-project"><Redirect to="/contact" /></Route>
               <Route path="/privacy-policy" component={withPageVisibility(PrivacyPolicy, "/privacy-policy")} />
               <Route path="/nukleo-time-privacy" component={withPageVisibility(PrivacyPolicyNukleoTime, "/nukleo-time-privacy")} />
               <Route path="/terms-of-service" component={withPageVisibility(TermsOfService, "/terms-of-service")} />
