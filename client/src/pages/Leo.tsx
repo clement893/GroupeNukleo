@@ -566,7 +566,7 @@ export default function Leo() {
           className="flex-1 overflow-y-auto overflow-x-hidden container bg-gray-50/50"
           style={{ WebkitOverflowScrolling: 'touch' }}
         >
-        <div className="max-w-3xl mx-auto space-y-8 py-4 pb-36">
+        <div className="max-w-3xl mx-auto space-y-8 py-4 pb-6">
           {safeMessages.map((message, index) => (
             <div key={index}>
               {message.isEmailForm ? (
@@ -764,49 +764,48 @@ export default function Leo() {
           <div ref={messagesEndRef} />
         </div>
         </div>
-      </div>
 
-      {/* Input fixed at bottom - z-index so it stays visible when clicking/focusing */}
-      <div className="fixed bottom-0 left-0 right-0 z-30 bg-white border-t border-gray-200 pt-4 pb-6 safe-area-pb" style={{ boxShadow: '0 -4px 24px rgba(0,0,0,0.06)' }}>
-        <div className="container">
-          <div className="max-w-3xl mx-auto">
-            <div className="flex gap-3 items-center bg-white border border-gray-200 rounded-full px-5 py-2.5 shadow-sm">
-              {showEmailForm ? (
-                <p className="flex-1 text-sm text-gray-500 py-2 px-1" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
-                  {t('leo.emailFormHint') || 'Complétez le formulaire ci-dessus pour continuer.'}
-                </p>
-              ) : (
-                <>
-              <Input
-                value={input}
-                onChange={(e) => setInput(e.target.value)}
-                onKeyDown={handleKeyDown}
-                placeholder={t('leo.inputPlaceholder')}
-                disabled={isLoading}
-                className="flex-1 bg-transparent border-0 text-gray-900 placeholder:text-gray-400 focus-visible:ring-0 focus-visible:ring-offset-0 text-base min-w-0"
-                style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}
-              />
-              <button
-                type="button"
-                onClick={handleSend}
-                disabled={isLoading || !input.trim()}
-                className="flex items-center justify-center w-10 h-10 rounded-full text-white transition-opacity disabled:opacity-30 disabled:cursor-not-allowed shrink-0 flex-shrink-0"
-                style={{ background: HERO_GRADIENT }}
-                aria-label="Send message"
-              >
-                <Send className="w-5 h-5" />
-              </button>
-                </>
-              )}
-            </div>
-
-            <div className="flex items-center justify-between mt-4 text-xs text-gray-500" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
-              <Link href={safeGetLocalizedPath('/privacy')} className="hover:text-gray-700 transition-colors uppercase tracking-wider font-medium">
-                {t('leo.privacyPolicy')}
-              </Link>
-              <a href="mailto:hello@nukleo.com" className="hover:text-gray-700 transition-colors uppercase tracking-wider font-medium">
-                hello@nukleo.com
-              </a>
+        {/* Zone de saisie intégrée à l'espace Leo (pas en bas de la page) */}
+        <div className="flex-shrink-0 border-t border-gray-200 bg-white/95 backdrop-blur-sm px-4 py-4" style={{ boxShadow: '0 -2px 16px rgba(0,0,0,0.04)' }}>
+          <div className="container">
+            <div className="max-w-3xl mx-auto">
+              <div className="flex gap-3 items-center bg-white border border-gray-200 rounded-full px-5 py-2.5 shadow-sm">
+                {showEmailForm ? (
+                  <p className="flex-1 text-sm text-gray-500 py-2 px-1" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
+                    {t('leo.emailFormHint') || 'Complétez le formulaire ci-dessus pour continuer.'}
+                  </p>
+                ) : (
+                  <>
+                    <Input
+                      value={input}
+                      onChange={(e) => setInput(e.target.value)}
+                      onKeyDown={handleKeyDown}
+                      placeholder={t('leo.inputPlaceholder')}
+                      disabled={isLoading}
+                      className="flex-1 bg-transparent border-0 text-gray-900 placeholder:text-gray-400 focus-visible:ring-0 focus-visible:ring-offset-0 text-base min-w-0"
+                      style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}
+                    />
+                    <button
+                      type="button"
+                      onClick={handleSend}
+                      disabled={isLoading || !input.trim()}
+                      className="flex items-center justify-center w-10 h-10 rounded-full text-white transition-opacity disabled:opacity-30 disabled:cursor-not-allowed shrink-0 flex-shrink-0"
+                      style={{ background: HERO_GRADIENT }}
+                      aria-label="Send message"
+                    >
+                      <Send className="w-5 h-5" />
+                    </button>
+                  </>
+                )}
+              </div>
+              <div className="flex items-center justify-between mt-3 text-xs text-gray-500" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
+                <Link href={safeGetLocalizedPath('/privacy')} className="hover:text-gray-700 transition-colors uppercase tracking-wider font-medium">
+                  {t('leo.privacyPolicy')}
+                </Link>
+                <a href="mailto:hello@nukleo.com" className="hover:text-gray-700 transition-colors uppercase tracking-wider font-medium">
+                  hello@nukleo.com
+                </a>
+              </div>
             </div>
           </div>
         </div>

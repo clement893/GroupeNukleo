@@ -2514,6 +2514,7 @@
     "emailPrompt": "Before we continue, I'd love to send you personalized insights! Could you share your email?",
     "emailSuccess": "Perfect! Thank you {{name}}! 🎉 I'll send personalized insights to {{email}}. Now, let's continue our conversation!",
     "emailSkip": "No problem! Let's continue our conversation. 😊",
+    "emailFormHint": "Complete the form above to continue.",
     "errorMessage": "Sorry, I'm having trouble connecting right now. Please try again! 🔄",
     "suggestionsPrompt": "Or choose a topic to get started:",
     "inputPlaceholder": "Type your response...",

@@ -2071,6 +2071,7 @@
     "emailPrompt": "Avant de continuer, j'aimerais vous envoyer des insights personnalisés ! Pourriez-vous partager votre email ?",
     "emailSuccess": "Parfait ! Merci {{name}} ! 🎉 J'enverrai des insights personnalisés à {{email}}. Maintenant, continuons notre conversation !",
     "emailSkip": "Pas de problème ! Continuons notre conversation. 😊",
+    "emailFormHint": "Complétez le formulaire ci-dessus pour continuer.",
     "errorMessage": "Désolé, j'ai des difficultés à me connecter en ce moment. Veuillez réessayer ! 🔄",
     "suggestionsPrompt": "Ou choisissez un sujet pour commencer :",
     "inputPlaceholder": "Tapez votre réponse...",
