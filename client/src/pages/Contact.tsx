@@ -109,7 +109,7 @@ export default function Contact() {
 
       <div className="min-h-screen" style={{ background: 'transparent', fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
         {/* Titre + formulaire à gauche, carte à droite */}
-        <section className="pt-24 pb-12 lg:pt-28 lg:pb-16">
+        <section className="pt-24 pb-6 lg:pt-28 lg:pb-8">
           <div className="w-full px-4 sm:px-6 lg:px-8">
             {/* Titre + sous-texte */}
             <div className="mb-8">

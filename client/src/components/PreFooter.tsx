@@ -22,7 +22,7 @@ export default function PreFooter() {
     <section
       aria-label="Signature Nukleo"
       style={{
-        padding: 'clamp(0.75rem, 2.5vw, 1.5rem) 6% clamp(0.5rem, 1.5vw, 1rem)',
+        padding: 'clamp(0.4rem, 1vw, 0.75rem) 6% clamp(0.5rem, 1.5vw, 1rem)',
         background: '#EFE8E8',
         display: 'flex',
         alignItems: 'center',
