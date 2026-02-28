@@ -12,19 +12,18 @@ import {
 import { useWeatherByIp } from '@/hooks/useWeatherByIp';
 
 const DARK = '#0A0A0A';
-const ICON_COLOR = '#9ca3af';
 
-/** WMO weather code (Open-Meteo) → icône Lucide */
-function getWeatherIcon(code: number): LucideIcon {
-  if (code === 0) return Sun;
-  if (code >= 1 && code <= 2) return CloudSun;
-  if (code === 3) return Cloud;
-  if (code >= 45 && code <= 48) return CloudFog;
-  if (code >= 51 && code <= 57) return CloudDrizzle;
-  if ((code >= 61 && code <= 67) || (code >= 80 && code <= 82)) return CloudRain;
-  if ((code >= 71 && code <= 77) || (code >= 85 && code <= 86)) return Snowflake;
-  if (code >= 95 && code <= 99) return CloudLightning;
-  return Sun;
+/** WMO weather code (Open-Meteo) → icône Lucide + couleur type site météo */
+function getWeatherIconAndColor(code: number): { Icon: LucideIcon; color: string } {
+  if (code === 0) return { Icon: Sun, color: '#f59e0b' }; // soleil jaune/orange
+  if (code >= 1 && code <= 2) return { Icon: CloudSun, color: '#94a3b8' }; // nuageux gris
+  if (code === 3) return { Icon: Cloud, color: '#64748b' }; // nuages gris
+  if (code >= 45 && code <= 48) return { Icon: CloudFog, color: '#94a3b8' }; // brouillard
+  if (code >= 51 && code <= 57) return { Icon: CloudDrizzle, color: '#0ea5e9' }; // bruine bleu
+  if ((code >= 61 && code <= 67) || (code >= 80 && code <= 82)) return { Icon: CloudRain, color: '#0284c7' }; // pluie bleu
+  if ((code >= 71 && code <= 77) || (code >= 85 && code <= 86)) return { Icon: Snowflake, color: '#38bdf8' }; // neige bleu clair
+  if (code >= 95 && code <= 99) return { Icon: CloudLightning, color: '#6366f1' }; // orage violet
+  return { Icon: Sun, color: '#f59e0b' };
 }
 
 export function WeatherWidget({ className }: { className?: string }) {
@@ -32,7 +31,7 @@ export function WeatherWidget({ className }: { className?: string }) {
   const tempDisplay = loading ? '--' : (data ? String(data.temperature) : '--');
   const locationDisplay = loading ? '…' : (data ? data.locationLabel : (error ? 'Indisponible' : '…'));
   const weatherCode = data?.weatherCode ?? 0;
-  const Icon = getWeatherIcon(weatherCode);
+  const { Icon, color: iconColor } = getWeatherIconAndColor(weatherCode);
 
   return (
     <>
@@ -71,15 +70,17 @@ export function WeatherWidget({ className }: { className?: string }) {
           fontFamily: "'Figtree', sans-serif",
         }}
       >
-        {/* Icône météo au-dessus de la température */}
-        <div style={{ marginBottom: 2 }}>
-          <Icon size={28} strokeWidth={1.5} color={ICON_COLOR} />
-        </div>
-        <div
-          className={loading ? 'weather-placeholder' : undefined}
-          style={{ fontFamily: "'Figtree', sans-serif", fontWeight: 700, fontSize: 'clamp(1.75rem, 2.2vw, 2.75rem)', lineHeight: 1, color: DARK }}
-        >
-          {tempDisplay} <span style={{ fontSize: 'clamp(0.85rem, 1vw, 1.15rem)', verticalAlign: 'super' }}>°C</span>
+        {/* Ligne : icône à gauche + température */}
+        <div style={{ display: 'flex', alignItems: 'center', gap: 'clamp(0.5rem, 0.8vw, 1rem)', marginBottom: 2 }}>
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+            <Icon size={52} strokeWidth={1.5} color={iconColor} />
+          </div>
+          <div
+            className={loading ? 'weather-placeholder' : undefined}
+            style={{ fontFamily: "'Figtree', sans-serif", fontWeight: 700, fontSize: 'clamp(1.75rem, 2.2vw, 2.75rem)', lineHeight: 1, color: DARK }}
+          >
+            {tempDisplay} <span style={{ fontSize: 'clamp(0.85rem, 1vw, 1.15rem)', verticalAlign: 'super' }}>°C</span>
+          </div>
         </div>
         <div className={loading ? 'weather-placeholder' : undefined} style={{ fontSize: 'clamp(0.7rem, 0.85vw, 0.95rem)', color: '#6b7280', textAlign: 'center' }}>
           {locationDisplay}
