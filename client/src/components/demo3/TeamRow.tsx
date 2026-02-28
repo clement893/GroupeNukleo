@@ -80,8 +80,8 @@ export function TeamRow() {
         {/* ── COLONNE GAUCHE : nom + tagline ── */}
         <div>
           <h3 style={{
-            fontFamily: 'var(--font-heading, sans-serif)',
-            fontWeight: 900,
+            fontFamily: "'Plus Jakarta Sans', sans-serif",
+            fontWeight: 700,
             fontSize: 'clamp(1.6rem, 2.6vw, 2.6rem)',
             lineHeight: 1.05,
             letterSpacing: '-0.03em',
@@ -92,6 +92,8 @@ export function TeamRow() {
           </h3>
           <div style={{ width: 40, height: 2.5, background: m.color, borderRadius: 999, marginBottom: 20, transition: 'background 0.4s' }} />
           <p style={{
+            fontFamily: "'Plus Jakarta Sans', sans-serif",
+            fontWeight: 400,
             fontSize: '0.9rem',
             color: '#374151',
             lineHeight: 1.9,
@@ -237,6 +239,8 @@ export function TeamRow() {
         {/* ── COLONNE DROITE : bio ── */}
         <div>
           <p style={{
+            fontFamily: "'Plus Jakarta Sans', sans-serif",
+            fontWeight: 400,
             fontSize: 'clamp(0.88rem, 1.05vw, 1rem)',
             color: '#4b5563',
             lineHeight: 1.85,
@@ -244,9 +248,10 @@ export function TeamRow() {
             {m.bio}
           </p>
           <p style={{
+            fontFamily: "'Plus Jakarta Sans', sans-serif",
+            fontWeight: 400,
             marginTop: 24,
             fontSize: '0.72rem',
-            fontWeight: 700,
             letterSpacing: '0.2em',
             textTransform: 'uppercase',
             color: m.color,

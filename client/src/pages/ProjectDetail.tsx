@@ -109,7 +109,7 @@ export default function ProjectDetail() {
     return (
       <PageLayout>
         <div className="min-h-screen flex items-center justify-center">
-          <div className="text-center">
+          <div className="text-center" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
             <p className="text-gray-600 mb-4">{t('projects.notFound') || 'Projet non trouvé.'}</p>
             <Link href={getLocalizedPath('/projects')} className="text-purple-600 hover:underline font-medium">
               {t('projects.backToList') || 'Retour aux projets'}
@@ -133,24 +133,28 @@ export default function ProjectDetail() {
         <section style={{ padding: 'clamp(5rem, 12vh, 8rem) 6% 4rem' }}>
           <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.2fr] gap-8 lg:gap-12 max-w-[1400px] mx-auto items-start">
             <div>
-              <p style={{ fontSize: '0.75rem', fontWeight: 600, letterSpacing: '0.15em', textTransform: 'uppercase', color: '#9ca3af', marginBottom: 12 }}>
+              <p style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: '0.75rem', fontWeight: 600, letterSpacing: '0.15em', textTransform: 'uppercase', color: '#9ca3af', marginBottom: 12 }}>
                 projet
               </p>
               <h1
                 style={{
-                  fontFamily: 'var(--font-heading, sans-serif)',
-                  fontWeight: 900,
+                  fontFamily: "'Plus Jakarta Sans', sans-serif",
+                  fontWeight: 700,
                   fontSize: 'clamp(2rem, 4vw, 3.5rem)',
                   lineHeight: 1.1,
                   letterSpacing: '-0.02em',
-                  color: BORDEAUX,
                   margin: '0 0 0.5rem 0',
+                  display: 'inline-block',
+                  background: 'linear-gradient(to right, #6B1817, #5636AD)',
+                  backgroundClip: 'text',
+                  WebkitBackgroundClip: 'text',
+                  color: 'transparent',
                 }}
               >
                 {meta.title}
               </h1>
               {meta.category && (
-                <p style={{ fontSize: '0.95rem', color: '#6b7280', margin: 0 }}>
+                <p style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: '0.95rem', color: '#6b7280', margin: 0 }}>
                   {meta.category}
                 </p>
               )}
@@ -174,7 +178,7 @@ export default function ProjectDetail() {
         {/* ═══ Bloc texte : gauche = métadonnées (Client, Services, Année), droite = description ═══ */}
         <section style={{ padding: '0 6% 5rem' }}>
           <div className="grid grid-cols-1 lg:grid-cols-[minmax(140px,200px)_1fr] gap-8 lg:gap-12 max-w-[1400px] mx-auto items-start">
-            <div style={{ fontSize: '0.8rem', color: '#6b7280', lineHeight: 1.8 }}>
+            <div style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: '0.8rem', color: '#6b7280', lineHeight: 1.8 }}>
               <p style={{ margin: '0 0 0.5rem 0' }}><strong>Client :</strong></p>
               <p style={{ margin: '0 0 1.25rem 0' }}>{meta.client}</p>
               <p style={{ margin: '0 0 0.5rem 0' }}><strong>Services :</strong></p>
@@ -183,7 +187,7 @@ export default function ProjectDetail() {
               <p style={{ margin: 0 }}>{meta.year}</p>
             </div>
             <div>
-              <p style={{ fontSize: '1rem', lineHeight: 1.8, color: '#374151', margin: 0, textAlign: 'justify' }}>
+              <p style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: '1rem', lineHeight: 1.8, color: '#374151', margin: 0, textAlign: 'justify' }}>
                 {meta.description}
               </p>
             </div>
@@ -205,10 +209,10 @@ export default function ProjectDetail() {
             {/* Ligne 2 */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
               <div style={{ aspectRatio: '3/4', background: '#2d2d2d', borderRadius: 8, overflow: 'hidden' }}>
-                <div style={{ width: '100%', height: '100%', background: '#374151', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#9ca3af', fontSize: '0.875rem' }}>Placeholder</div>
+                <div style={{ width: '100%', height: '100%', background: '#374151', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#9ca3af', fontSize: '0.875rem', fontFamily: "'Plus Jakarta Sans', sans-serif" }}>Placeholder</div>
               </div>
               <div style={{ aspectRatio: '3/4', background: '#2d2d2d', borderRadius: 8, overflow: 'hidden' }}>
-                <div style={{ width: '100%', height: '100%', background: '#374151', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#9ca3af', fontSize: '0.875rem' }}>Placeholder</div>
+                <div style={{ width: '100%', height: '100%', background: '#374151', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#9ca3af', fontSize: '0.875rem', fontFamily: "'Plus Jakarta Sans', sans-serif" }}>Placeholder</div>
               </div>
             </div>
             {/* Ligne 3 */}

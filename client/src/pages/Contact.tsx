@@ -107,13 +107,15 @@ export default function Contact() {
       <StructuredData data={montrealOfficeSchema} />
       <StructuredData data={halifaxOfficeSchema} />
 
-      <div className="min-h-screen" style={{ background: OFF_WHITE }}>
-        {/* Formulaire en haut — pleine largeur, effet glass (glass-panel) */}
+      <div className="min-h-screen" style={{ background: OFF_WHITE, fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
+        {/* Formulaire de contact */}
         <section className="pt-24 pb-12 lg:pt-28 lg:pb-16">
           <div className="w-full px-4 sm:px-6 lg:px-8">
-            <div className="glass-panel w-full rounded-2xl p-8 lg:p-12">
-              <div className="max-w-3xl mx-auto">
-              <h2 className="text-2xl lg:text-3xl font-bold mb-6" style={{ color: BORDEAUX, fontFamily: 'var(--font-heading, sans-serif)' }}>
+            <div className="max-w-2xl mx-auto">
+              {/* Formulaire dans glass-panel */}
+              <div className="glass-panel w-full rounded-2xl p-8 lg:p-12">
+              <div className="max-w-2xl">
+              <h2 className="text-2xl lg:text-3xl font-bold mb-6" style={{ color: BORDEAUX, fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
                 {t('contact.sendMessage')}
               </h2>
               {isSubmitted && (
@@ -249,6 +251,7 @@ export default function Contact() {
                 </Button>
               </form>
               </div>
+              </div>
             </div>
           </div>
         </section>
@@ -261,7 +264,7 @@ export default function Contact() {
               <div className="order-1 flex flex-col justify-center">
                 <h1
                   className="text-3xl md:text-4xl lg:text-5xl font-bold leading-tight mb-2"
-                  style={{ color: BORDEAUX, fontFamily: 'var(--font-heading, sans-serif)' }}
+                  style={{ color: BORDEAUX, fontFamily: "'Plus Jakarta Sans', sans-serif" }}
                 >
                   {t('contact.heroTitleNew')}
                 </h1>

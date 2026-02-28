@@ -6,6 +6,7 @@ import { ArrowUpRight, HelpCircle } from 'lucide-react';
 import { SplitCTAButton } from '@/components/SplitCTAButton';
 import { WeatherWidget } from '@/components/WeatherWidget';
 import PageLayout from '@/components/PageLayout';
+import { HOME_SERVICES } from '@/data/homeServices';
 
 // ─── Constantes ──────────────────────────────────────────────────────────────
 const PURPLE = '#7c3aed';
@@ -20,13 +21,6 @@ const PROJECTS = [
   { num: '01', name: 'MBAM', category: 'Brand & Digital', tagline: 'Redefining cultural engagement online.', result: '+240% digital reach', img: WORK1, color: '#2563eb' },
   { num: '02', name: 'SummitLaw', category: 'Brand & Creative', tagline: 'A law firm that finally looks like its ambition.', result: '+180% qualified leads', img: WORK2, color: PURPLE },
   { num: '03', name: 'QueerTech', category: 'AI & Platform', tagline: 'Technology built for belonging.', result: '+220% member engagement', img: WORK3, color: '#059669' },
-];
-
-const SERVICES = [
-  { title: 'Lab technologique', description: 'Nam libero tempore cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime.', tags: ['Application', 'Plateforme', 'Site web', 'Maintenance', 'Refonte'], imageBg: 'linear-gradient(135deg, rgba(230,228,245,0.9) 0%, rgba(210,205,230,0.95) 100%)' },
-  { title: 'Studio créatif', description: 'Nam libero tempore cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime.', tags: ['Image de marque', 'Idéation', 'UX/UI', 'Production'], imageBg: 'linear-gradient(135deg, rgba(245,240,255,0.9) 0%, rgba(230,220,245,0.95) 100%)' },
-  { title: 'Agence Comm & Marketing', description: 'Nam libero tempore cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime.', tags: ['Campagnes digitales', 'Gestion des réseaux sociaux', 'Stratégie'], imageBg: 'linear-gradient(135deg, rgba(240,238,250,0.9) 0%, rgba(225,220,240,0.95) 100%)' },
-  { title: 'Transition numérique', description: 'Nam libero tempore cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime.', tags: ['Développement IA', 'Formation', 'Accompagnement', 'Stratégie IA'], imageBg: 'linear-gradient(135deg, rgba(200,180,220,0.4) 0%, rgba(120,100,180,0.5) 100%)' },
 ];
 
 // ─── Carrousel Projets Hero — style "une de journal" ──────────────────────────
@@ -775,7 +769,7 @@ export default function HomepageDemo5() {
         ════════════════════════════════════════════════════════════════════ */}
         <section style={{ padding: '5rem 6% 6rem', marginBottom: 5 * 16 }}>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-10">
-            {SERVICES.map((service) => (
+            {HOME_SERVICES.map((service) => (
               <article
                 key={service.title}
                 style={{

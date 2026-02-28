@@ -37,10 +37,10 @@ export default function ProjectsHero({ headline, description, heroImages }: Proj
     <section className="pt-24 pb-12 lg:pt-32 lg:pb-16">
       <div className="container">
         <div className="max-w-4xl mb-10 lg:mb-14">
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold text-[#5A1E29] mb-4 font-heading">
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold mb-4" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", display: 'inline-block', background: 'linear-gradient(to right, #6B1817, #5636AD)', backgroundClip: 'text', WebkitBackgroundClip: 'text', color: 'transparent' }}>
             {headline}
           </h1>
-          <p className="text-lg lg:text-xl text-gray-600 max-w-2xl">
+          <p className="text-lg lg:text-xl text-gray-600 max-w-2xl" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
             {description}
           </p>
         </div>
@@ -144,7 +144,7 @@ export default function ProjectsHero({ headline, description, heroImages }: Proj
                   }
                 `}
               >
-                <span className="text-lg font-semibold tabular-nums">{label}</span>
+                <span className="text-lg font-semibold tabular-nums" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>{label}</span>
               </button>
             ))}
           </div>
