@@ -158,7 +158,7 @@ async function startServer() {
           "https://*.google-analytics.com",
           "https://google-analytics.com"
         ],
-        frameSrc: ["'self'"],
+        frameSrc: ["'self'", "https://www.google.com", "https://maps.google.com", "https://maps.googleapis.com", "https://www.openstreetmap.org"],
         objectSrc: ["'none'"],
         upgradeInsecureRequests: process.env.NODE_ENV === 'production' ? [] : null,
         // CSP Reporting - log violations for monitoring (optional endpoint)
