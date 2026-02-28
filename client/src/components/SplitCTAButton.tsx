@@ -4,7 +4,7 @@ import { useLocalizedPath } from '@/hooks/useLocalizedPath';
 const BTN_PURPLE = '#5D43CD';
 
 export type SplitCTAButtonVariant = 'purple' | 'white';
-export type SplitCTAButtonSize = 'default' | 'small';
+export type SplitCTAButtonSize = 'default' | 'small' | 'header';
 
 export interface SplitCTAButtonProps {
   href: string;
@@ -29,6 +29,13 @@ const SIZES = {
     fontSize: '0.8rem',
     arrowWidth: 36,
     iconSize: 16,
+  },
+  /** Pour le header : scale avec la vue sur grands écrans */
+  header: {
+    padding: 'clamp(0.5rem, 1vw, 0.9rem) clamp(1rem, 1.4vw, 1.75rem)',
+    fontSize: 'clamp(0.8rem, 0.95vw, 1.05rem)',
+    arrowWidth: 40,
+    iconSize: 18,
   },
 } as const;
 

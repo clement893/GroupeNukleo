@@ -106,14 +106,14 @@ function Header() {
                 className="font-bold tracking-tight"
                 style={{
                   fontFamily: 'var(--font-heading, sans-serif)',
-                  fontSize: 'clamp(1.35rem, 3.5vw, 2rem)',
+                  fontSize: 'clamp(1.35rem, 3.5vw, 2.75rem)',
                   color: logoBordeaux,
                 }}
               >
                 nukleo
               </span>
               <span className="ml-0.5" style={{ color: logoCommaPurple, fontSize: '0.9em' }} aria-hidden="true">→</span>
-              <span className="font-bold tracking-tight" style={{ color: logoCommaPurple, fontFamily: 'var(--font-heading, sans-serif)', fontSize: 'clamp(1.35rem, 3.5vw, 2rem)' }}>,</span>
+              <span className="font-bold tracking-tight" style={{ color: logoCommaPurple, fontFamily: 'var(--font-heading, sans-serif)', fontSize: 'clamp(1.35rem, 3.5vw, 2.75rem)' }}>,</span>
             </Link>
 
             {/* Right: CTA split (Contactez-nous | flèche) + Burger */}
@@ -122,20 +122,21 @@ function Header() {
                 href="/contact"
                 label={t('nav.contact') || 'Contactez-nous'}
                 ariaLabel={t('nav.contact') || 'Contactez-nous'}
-                size="small"
+                size="header"
                 className="hidden xs:inline-flex touch-manipulation"
                 onClick={playClick}
                 onMouseEnter={playHover}
               />
 
-              {/* Burger : cercle blanc, icône hamburger gris foncé */}
+              {/* Burger : cercle blanc, icône hamburger — scale sur grands écrans */}
               <button
                 onClick={isMenuOpen ? handleMenuClose : handleMenuOpen}
                 onMouseEnter={playHover}
-                className="flex items-center justify-center w-11 h-11 rounded-full bg-white text-gray-800 hover:bg-gray-50 active:scale-95 transition-all duration-300 touch-manipulation flex-shrink-0"
+                className="flex items-center justify-center rounded-full bg-white text-gray-800 hover:bg-gray-50 active:scale-95 transition-all duration-300 touch-manipulation flex-shrink-0"
+                style={{ width: 'clamp(2.75rem, 4vw, 3.5rem)', height: 'clamp(2.75rem, 4vw, 3.5rem)' }}
                 aria-label={isMenuOpen ? t('header.closeMenu') : t('header.openMenu')}
               >
-                <div className="relative w-5 h-5 sm:w-6 sm:h-6">
+                <div className="relative" style={{ width: 'clamp(1.25rem, 1.5vw, 1.5rem)', height: 'clamp(1.25rem, 1.5vw, 1.5rem)' }}>
                   <Menu 
                     className={`absolute inset-0 w-full h-full text-gray-800 transition-all duration-300 ease-in-out ${
                       isMenuOpen ? 'opacity-0 rotate-90 scale-0' : 'opacity-100 rotate-0 scale-100'
