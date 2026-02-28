@@ -58,7 +58,7 @@ async function fetchWeatherFromApi(): Promise<WeatherByIpResult | null> {
       city: String(j.city ?? ''),
       region: String(j.region ?? ''),
       country: String(j.country ?? ''),
-      locationLabel: String(j.locationLabel ?? [j.city, j.region].filter(Boolean).join(', ') || ''),
+      locationLabel: String(j.locationLabel ?? ([j.city, j.region].filter(Boolean).join(', ') || '')),
     };
   } catch {
     return null;
