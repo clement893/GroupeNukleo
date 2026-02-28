@@ -27,7 +27,7 @@ export default function Services() {
       tagline: t('services.agency.tagline') || 'Marketing & Communication 360',
       icon: Megaphone,
       description: t('services.agency.description') || 'Nous activons et amplifions votre présence numérique. Marketing numérique, gestion des médias sociaux, achat média, stratégie de contenu, infolettres et campagnes de performance — augmentés par l\'IA.',
-      link: '/services/strategic-bureau',
+      link: '/services/agency',
       services: [
         {
           icon: MessageSquare,
@@ -59,7 +59,7 @@ export default function Services() {
       tagline: t('services.studio.tagline') || 'Design & Création',
       icon: Palette,
       description: t('services.studio.description') || 'Nous créons des expériences visuelles et créatives qui rendent votre performance visible et désirable. Design graphique, UX/UI, branding, direction artistique et production créative.',
-      link: '/services/creative-studio',
+      link: '/services/studio',
       services: [
         {
           icon: Sparkles,
@@ -91,7 +91,7 @@ export default function Services() {
       tagline: t('services.lab.tagline') || 'Développement & Intelligence artificielle',
       icon: Code,
       description: t('services.lab.description') || 'Nous concevons et développons les outils numériques qui propulsent votre performance. Développement web, applications mobiles, intégrations IA, automatisation et agents IA sur mesure.',
-      link: '/services/ai-lab',
+      link: '/services/tech',
       services: [
         {
           icon: Smartphone,
@@ -123,7 +123,7 @@ export default function Services() {
       tagline: t('services.bureau.tagline') || 'Transformation numérique & Conseil',
       icon: Layers,
       description: t('services.bureau.description') || 'Nous accompagnons votre organisation dans sa transformation numérique. Audit, stratégie, conseil IA, accompagnement au changement et formation — de la vision à l\'exécution.',
-      link: '/services/strategic-bureau',
+      link: '/services/consulting',
       services: [
         {
           icon: Target,
@@ -217,95 +217,87 @@ export default function Services() {
       />
       <StructuredData data={serviceSchema} />
       
-      <div className="min-h-screen bg-gradient-to-br from-[rgb(107,23,22)] via-[rgb(40,60,120)] to-[rgb(107,23,22)]">
+      <div
+        className="min-h-screen"
+        style={{
+          background: 'linear-gradient(to bottom, transparent 0%, transparent 400px, #ffffff 400px, #ffffff 100%)',
+        }}
+      >
         {/* Breadcrumb */}
         <div className="container max-w-6xl mx-auto pt-24 pb-4 px-4">
           <Breadcrumb items={[{ name: t('nav.services') || 'Services', url: '/services' }]} />
         </div>
         
         {/* Hero Section */}
-        <section className="relative pt-8 pb-20 px-4">
+        <section className="pt-8 pb-16 lg:pb-20 px-4">
           <div className="container max-w-6xl mx-auto">
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 border border-white/20 backdrop-blur-sm mb-8">
-              <span className="text-sm font-medium text-white/90">
-                {ourServices}
-              </span>
-            </div>
-            
-            <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold text-white mb-6 leading-tight">
+            <p className="text-sm font-medium text-gray-500 mb-6">
+              {ourServices}
+            </p>
+            <h1
+              className="text-5xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight"
+              style={{ color: '#5A1E29', fontFamily: 'var(--font-heading, sans-serif)' }}
+            >
               {heroTitle}
               <br />
-              <span className="text-white">
-                {heroSubtitle}
-              </span>
+              <span style={{ color: '#5A1E29' }}>{heroSubtitle}</span>
             </h1>
-            
-            <p className="text-sm md:text-base text-cyan-400/90 mb-4 font-medium">
+            <p className="text-sm md:text-base text-gray-500 mb-4 font-medium">
               {heroSubtitleGradient}
             </p>
-            
-            <p className="text-xl md:text-2xl text-white/80 max-w-3xl leading-relaxed">
+            <p className="text-xl md:text-2xl text-gray-600 max-w-3xl leading-relaxed">
               {heroDescription}
             </p>
           </div>
         </section>
 
         {/* Four Departments Grid */}
-        <section className="py-20 px-4 bg-black/20">
+        <section className="py-16 lg:py-20 px-4">
           <div className="container max-w-7xl mx-auto">
             <div className="grid lg:grid-cols-2 xl:grid-cols-4 gap-8">
               {entities.map((entity) => {
                 const EntityIcon = entity.icon;
                 return (
-                  <div 
+                  <Link
                     key={entity.id}
-                    className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-8 lg:p-10 group hover:bg-white/10 hover:border-white/20 transition-all duration-300 flex flex-col h-full"
+                    href={getLocalizedPath(entity.link)}
+                    className="rounded-2xl p-8 lg:p-10 flex flex-col h-full border border-gray-100 shadow-sm hover:shadow-md transition-shadow cursor-pointer block no-underline text-inherit"
+                    style={{ background: 'rgba(255,255,255,0.9)' }}
                   >
-                    {/* Header */}
                     <div className="flex items-start justify-between mb-6">
-                      <span className="font-mono text-5xl font-bold text-white/20">{entity.number}</span>
-                      <div className="w-16 h-16 border-2 border-white/30 rounded-full flex items-center justify-center group-hover:border-cyan-400 group-hover:bg-cyan-400/10 transition-all">
-                        <EntityIcon className="w-8 h-8 text-white/70 group-hover:text-cyan-400 transition-colors" />
+                      <span className="font-mono text-5xl font-bold text-gray-200">{entity.number}</span>
+                      <div className="w-14 h-14 rounded-xl flex items-center justify-center" style={{ background: 'rgba(90,30,41,0.08)' }}>
+                        <EntityIcon className="w-7 h-7" style={{ color: '#5A1E29' }} />
                       </div>
                     </div>
-                    
-                    {/* Title & Tagline */}
-                    <h2 className="text-2xl md:text-3xl font-bold text-white mb-3">
+                    <h2 className="text-2xl md:text-3xl font-bold mb-2" style={{ color: '#5A1E29', fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 700 }}>
                       {entity.name}
                     </h2>
-                    <p className="text-cyan-400/90 font-semibold mb-6 text-base">{entity.tagline}</p>
-                    
-                    {/* Description */}
-                    <p className="text-white/70 text-base leading-relaxed mb-8">
+                    <p className="font-semibold mb-6 text-base" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 400, color: '#4b5563' }}>{entity.tagline}</p>
+                    <p className="text-base leading-relaxed mb-8" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 400, color: '#4b5563' }}>
                       {entity.description}
                     </p>
-                    
-                    {/* Services List */}
                     <div className="space-y-5 mb-8 flex-grow">
                       {entity.services.map((service, idx) => {
                         const ServiceIcon = service.icon;
                         return (
                           <div key={idx} className="flex items-start gap-4">
-                            <div className="w-10 h-10 rounded-lg bg-white/10 border border-white/20 flex items-center justify-center flex-shrink-0">
-                              <ServiceIcon className="w-5 h-5 text-cyan-400" />
+                            <div className="w-10 h-10 rounded-lg flex items-center justify-center flex-shrink-0 border border-gray-200" style={{ background: 'rgba(255,255,255,0.9)' }}>
+                              <ServiceIcon className="w-5 h-5 text-gray-600" />
                             </div>
                             <div className="flex-1">
-                              <h3 className="text-white font-semibold text-base mb-1">{service.title}</h3>
-                              <p className="text-white/50 text-sm leading-relaxed">{service.description}</p>
+                              <h3 className="mb-1 text-base" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 700, color: '#111827' }}>{service.title}</h3>
+                              <p className="text-sm leading-relaxed" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 400, color: '#6b7280' }}>{service.description}</p>
                             </div>
                           </div>
                         );
                       })}
                     </div>
-                    
-                    {/* CTA */}
-                    <Link href={getLocalizedPath(entity.link)} className="mt-auto">
-                      <button className="inline-flex items-center gap-2 text-cyan-400 hover:text-white font-semibold transition-colors group/btn text-base">
-                        {entity.cta}
-                        <ArrowRight className="w-5 h-5 group-hover/btn:translate-x-1 transition-transform" />
-                      </button>
-                    </Link>
-                  </div>
+                    <span className="mt-auto inline-flex items-center gap-2 font-semibold text-base transition-colors hover:opacity-90" style={{ color: '#5D43CD' }}>
+                      {entity.cta}
+                      <ArrowRight className="w-5 h-5" />
+                    </span>
+                  </Link>
                 );
               })}
             </div>
@@ -313,35 +305,33 @@ export default function Services() {
         </section>
 
         {/* Service Levels Section */}
-        <section className="py-20 px-4">
+        <section className="py-16 lg:py-20 px-4">
           <div className="container max-w-6xl mx-auto">
             <div className="text-center mb-12">
-              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 border border-white/20 backdrop-blur-sm mb-6">
-                <span className="text-sm font-medium text-white/90">
-                  {t('services.serviceLevels.sectionLabel') || 'Nos niveaux de service'}
-                </span>
-              </div>
-              <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
+              <p className="text-sm font-medium text-gray-500 mb-6">
+                {t('services.serviceLevels.sectionLabel') || 'Nos niveaux de service'}
+              </p>
+              <h2 className="text-4xl md:text-5xl font-bold mb-6" style={{ color: '#5A1E29', fontFamily: 'var(--font-heading, sans-serif)' }}>
                 {t('services.serviceLevels.title') || 'Trois façons de travailler ensemble'}
               </h2>
-              <p className="text-lg md:text-xl text-white/70 max-w-3xl mx-auto leading-relaxed">
+              <p className="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
                 {t('services.serviceLevels.description') || 'Quel que soit votre projet, votre budget ou votre niveau de maturité numérique, nous avons un modèle adapté à vos besoins.'}
               </p>
             </div>
-            
             <div className="grid md:grid-cols-3 gap-8">
               {serviceLevels.map((level, idx) => (
-                <div 
+                <div
                   key={idx}
-                  className={`bg-gradient-to-br ${level.gradient} backdrop-blur-sm border ${level.border} rounded-2xl p-8 hover:scale-105 transition-all duration-300`}
+                  className="rounded-2xl p-8 border border-gray-100 shadow-sm hover:shadow-md transition-shadow"
+                  style={{ background: 'rgba(255,255,255,0.9)' }}
                 >
-                  <h3 className="text-2xl font-bold text-white mb-2">{level.name}</h3>
-                  <p className="text-cyan-400/90 font-semibold mb-4 text-sm uppercase tracking-wider">{level.tagline}</p>
-                  <p className="text-white/70 text-base leading-relaxed mb-6">{level.description}</p>
+                  <h3 className="text-2xl font-bold mb-2" style={{ color: '#5A1E29' }}>{level.name}</h3>
+                  <p className="text-gray-600 font-semibold mb-4 text-sm uppercase tracking-wider">{level.tagline}</p>
+                  <p className="text-gray-600 text-base leading-relaxed mb-6">{level.description}</p>
                   <ul className="space-y-2">
                     {Array.isArray(level.highlights) && level.highlights.map((highlight, hIdx) => (
-                      <li key={hIdx} className="flex items-center gap-2 text-white/80 text-sm">
-                        <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 flex-shrink-0" />
+                      <li key={hIdx} className="flex items-center gap-2 text-gray-700 text-sm">
+                        <span className="w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ background: '#5D43CD' }} />
                         {highlight}
                       </li>
                     ))}
@@ -353,40 +343,38 @@ export default function Services() {
         </section>
 
         {/* How It Works Section */}
-        <section className="py-20 px-4 bg-black/30">
+        <section className="py-16 lg:py-20 px-4">
           <div className="container max-w-6xl mx-auto">
             <div className="text-center mb-12">
-              <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
+              <h2 className="text-4xl md:text-5xl font-bold mb-6" style={{ color: '#5A1E29', fontFamily: 'var(--font-heading, sans-serif)' }}>
                 {howItWorksTitle}
               </h2>
-              <p className="text-lg md:text-xl text-white/70 max-w-3xl mx-auto leading-relaxed">
+              <p className="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
                 {howItWorksDescription}
               </p>
             </div>
-            
-            {/* Combinations Table */}
-            <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl overflow-hidden">
+            <div className="rounded-2xl overflow-hidden border border-gray-100 shadow-sm" style={{ background: 'rgba(255,255,255,0.9)' }}>
               <div className="overflow-x-auto">
                 <table className="w-full">
                   <thead>
-                    <tr className="border-b border-white/10 bg-white/5">
-                      <th className="text-left py-5 px-6 text-white/80 font-semibold text-sm uppercase tracking-wider">
+                    <tr className="border-b border-gray-200 bg-gray-50/80">
+                      <th className="text-left py-5 px-6 text-gray-600 font-semibold text-sm uppercase tracking-wider">
                         {language === 'fr' ? 'Projet' : 'Project'}
                       </th>
-                      <th className="text-left py-5 px-6 text-white/80 font-semibold text-sm uppercase tracking-wider">
+                      <th className="text-left py-5 px-6 text-gray-600 font-semibold text-sm uppercase tracking-wider">
                         {language === 'fr' ? 'Départements' : 'Departments'}
                       </th>
-                      <th className="text-left py-5 px-6 text-white/80 font-semibold text-sm uppercase tracking-wider">
+                      <th className="text-left py-5 px-6 text-gray-600 font-semibold text-sm uppercase tracking-wider">
                         {language === 'fr' ? 'Livrables' : 'Deliverables'}
                       </th>
                     </tr>
                   </thead>
                   <tbody>
                     {combinations.map((combo, idx) => (
-                      <tr key={idx} className="border-b border-white/5 hover:bg-white/5 transition-colors last:border-b-0">
-                        <td className="py-5 px-6 text-white font-semibold text-base">{combo.project}</td>
-                        <td className="py-5 px-6 text-cyan-400 font-medium">{combo.teams}</td>
-                        <td className="py-5 px-6 text-white/60 text-sm leading-relaxed">{combo.deliverables}</td>
+                      <tr key={idx} className="border-b border-gray-100 last:border-b-0 hover:bg-gray-50/50 transition-colors">
+                        <td className="py-5 px-6 font-semibold text-base text-gray-900">{combo.project}</td>
+                        <td className="py-5 px-6 font-medium text-gray-700">{combo.teams}</td>
+                        <td className="py-5 px-6 text-gray-600 text-sm leading-relaxed">{combo.deliverables}</td>
                       </tr>
                     ))}
                   </tbody>
@@ -397,28 +385,17 @@ export default function Services() {
         </section>
 
         {/* CTA Section */}
-        <section className="py-24 px-4 relative overflow-hidden">
-          <div 
-            className="absolute inset-0 opacity-20"
-            style={{
-              backgroundImage: `
-                linear-gradient(rgba(139, 92, 246, 0.3) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(139, 92, 246, 0.3) 1px, transparent 1px)
-              `,
-              backgroundSize: '50px 50px'
-            }}
-          />
-          
-          <div className="container relative z-10 max-w-4xl mx-auto text-center">
-            <h2 className="text-4xl md:text-6xl font-bold text-white mb-6">
+        <section className="py-20 lg:py-24 px-4">
+          <div className="container max-w-4xl mx-auto text-center">
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6" style={{ color: '#5A1E29', fontFamily: 'var(--font-heading, sans-serif)' }}>
               {ctaTitle}
             </h2>
-            <p className="text-xl md:text-2xl text-white/80 mb-10 max-w-2xl mx-auto leading-relaxed">
+            <p className="text-xl md:text-2xl text-gray-600 mb-10 max-w-2xl mx-auto leading-relaxed">
               {ctaDescription}
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-              <SplitCTAButton href="/contact" label={ctaButtonPrimary} variant="white" ariaLabel={ctaButtonPrimary} />
-              <Link href={getLocalizedPath('/projects')} className="inline-flex items-center justify-center gap-3 px-8 py-4 border-2 border-white/30 text-white font-bold hover:bg-white/10 transition-all duration-300 rounded-full text-lg">
+              <SplitCTAButton href="/contact" label={ctaButtonPrimary} variant="purple" ariaLabel={ctaButtonPrimary} />
+              <Link href={getLocalizedPath('/projects')} className="inline-flex items-center justify-center gap-3 px-8 py-4 border-2 border-gray-300 text-gray-800 font-bold hover:bg-gray-100 transition-all duration-300 rounded-full text-lg">
                 {ctaButtonSecondary}
               </Link>
             </div>

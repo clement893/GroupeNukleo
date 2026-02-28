@@ -291,9 +291,7 @@ export default function FAQ() {
         {/* CTA */}
         <section className="pb-20 lg:pb-28">
           <div className="container max-w-2xl">
-            <div
-              className="rounded-2xl p-8 md:p-12 text-center border border-gray-200 bg-white shadow-sm"
-            >
+            <div className="p-8 md:p-12 text-center">
               <h3
                 className="text-2xl md:text-3xl font-bold mb-4"
                 style={{ color: BORDEAUX, fontFamily: 'var(--font-heading, sans-serif)' }}

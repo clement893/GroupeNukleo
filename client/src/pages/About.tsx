@@ -201,14 +201,14 @@ export default function About() {
                   <Icon size={48} color="rgba(255,255,255,0.9)" strokeWidth={1.5} />
                 </div>
                 <div style={{ padding: '1.25rem 1.5rem' }}>
-                  <h3 style={{ fontFamily: 'var(--font-heading, sans-serif)', fontWeight: 800, fontSize: '1rem', color: BORDEAUX, margin: '0 0 0.75rem 0' }}>
+                  <h3 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 700, fontSize: '1rem', color: BORDEAUX, margin: '0 0 0.75rem 0' }}>
                     {title}
                   </h3>
-                  <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6 }}>
+                  <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6, fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 400 }}>
                     {tags.map((tag) => (
                       <span
                         key={tag}
-                        style={{ fontSize: '0.7rem', color: '#6b7280', background: '#f3f4f6', padding: '4px 10px', borderRadius: 8, fontWeight: 500 }}
+                        style={{ fontSize: '0.7rem', color: '#6b7280', background: '#f3f4f6', padding: '4px 10px', borderRadius: 8 }}
                       >
                         {tag}
                       </span>
@@ -224,15 +224,17 @@ export default function About() {
         <section style={{ padding: '4rem 6%', background: 'transparent', textAlign: 'center' }}>
           <h2
             style={{
-              fontFamily: 'var(--font-heading, sans-serif)',
-              fontWeight: 900,
+              fontFamily: "'Plus Jakarta Sans', sans-serif",
+              fontWeight: 700,
               fontSize: 'clamp(1.75rem, 3vw, 2.5rem)',
-              color: BORDEAUX,
               margin: '0 0 1rem 0',
+              background: 'linear-gradient(to right, #6B1817, #5636AD)',
+              backgroundClip: 'text',
+              WebkitBackgroundClip: 'text',
+              color: 'transparent',
             }}
           >
-            <span style={{ color: '#5a0f2b' }}>Prêt.e à </span>
-            <span style={{ color: '#7e3e9d' }}>performer ?</span>
+            Prêt.e à performer ?
           </h2>
           <div style={{ width: 80, height: 2, background: '#9ca3af', margin: '0 auto 1.5rem' }} aria-hidden="true" />
           <SplitCTAButton href="/contact" label="Contactez-nous" ariaLabel="Contactez-nous" />

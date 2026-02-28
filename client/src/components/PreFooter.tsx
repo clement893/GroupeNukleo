@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 
-const PRE_FOOTER_WORDS = ['Audacieux.', 'Assumé.', 'Intelligents.'];
+const PRE_FOOTER_WORDS = ['Audacieux.', 'Assumé.', 'Fort.', 'Intelligents.'];
 
 export default function PreFooter() {
   const [wordIndex, setWordIndex] = useState(0);

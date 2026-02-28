@@ -1,28 +1,64 @@
 import PageLayout from '@/components/PageLayout';
 import SEO from '@/components/SEO';
-import ServiceDetailLayout from '@/components/ServiceDetailLayout';
+import ServiceDetailLayout, { type ServiceTabContent } from '@/components/ServiceDetailLayout';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { useLocalizedPath } from '@/hooks/useLocalizedPath';
 
 const NS = 'services.detail.studio';
 
+function normalizeTabs(raw: unknown): ServiceTabContent[] | undefined {
+  if (!Array.isArray(raw) || raw.length === 0) return undefined;
+  return raw.map((item: Record<string, unknown>, index: number) => ({
+    id: typeof item.id === 'string' ? item.id : `tab-${index}`,
+    label: typeof item.label === 'string' ? item.label : '',
+    title: typeof item.title === 'string' ? item.title : '',
+    subtitle: typeof item.subtitle === 'string' ? item.subtitle : undefined,
+    description: typeof item.description === 'string' ? item.description : '',
+    benefits: Array.isArray(item.benefits) ? item.benefits.filter((b): b is string => typeof b === 'string') : [],
+  })).filter(tab => tab.label && tab.title);
+}
+
 export default function NukleoStudio() {
   const { t } = useLanguage();
   const getLocalizedPath = useLocalizedPath();
+
+  const rawTabs = t(`${NS}.tabs`, { returnObjects: true });
+  const tabs = normalizeTabs(rawTabs);
 
   const navItems = (t(`${NS}.navItems`, { returnObjects: true }) as string[]) || [];
   const mainTags = (t(`${NS}.mainTags`, { returnObjects: true }) as string[]) || [];
   const extensionsTags = (t(`${NS}.extensionsTags`, { returnObjects: true }) as string[]) || [];
 
-  const gridItems = Array.from({ length: 6 }, (_, i) => ({
-    title: t(`${NS}.grid${i}Title`),
-    description: t(`${NS}.grid${i}Description`),
+  const gridItems = Array.from({ length: 6 }, (_, i) => {
+    const deliverables = t(`${NS}.grid${i}Deliverables`);
+    return {
+      title: t(`${NS}.grid${i}Title`),
+      description: t(`${NS}.grid${i}Description`),
+      ...(deliverables && !deliverables.startsWith('services.') ? { deliverables } : {}),
+    };
+  });
+
+  const sectionHighlights = Array.from({ length: 4 }, (_, i) => ({
+    title: t(`${NS}.sectionHighlight${i}Title`),
+    description: t(`${NS}.sectionHighlight${i}Description`),
   }));
 
-  const processSteps = Array.from({ length: 4 }, (_, i) => ({
-    title: t(`${NS}.process${i}Title`),
-    description: t(`${NS}.process${i}Description`),
-  }));
+  const teamMembers: { name: string; role: string; image: string; imageAlt?: string }[] = [];
+  for (let i = 0; i < 8; i++) {
+    const name = t(`${NS}.teamMember${i}Name`);
+    if (!name || name.startsWith('services.')) break;
+    const role = t(`${NS}.teamMember${i}Role`);
+    const image = t(`${NS}.teamMember${i}Image`);
+    const imageAlt = t(`${NS}.teamMember${i}ImageAlt`);
+    if (image && !image.startsWith('services.')) {
+      teamMembers.push({
+        name,
+        role: role || '',
+        image,
+        imageAlt: imageAlt && !imageAlt.startsWith('services.') ? imageAlt : undefined,
+      });
+    }
+  }
 
   return (
     <PageLayout>
@@ -34,6 +70,9 @@ export default function NukleoStudio() {
       <ServiceDetailLayout
         pageTitle={t(`${NS}.pageTitle`)}
         tagline={t(`${NS}.tagline`)}
+        heroImage="/demo/dept-studio.jpg"
+        heroImageAlt={t(`${NS}.heroImageAlt`)}
+        tabs={tabs}
         navItems={navItems.map((label, id) => ({ id: String(id), label }))}
         mainTitle={t(`${NS}.mainTitle`)}
         mainDescription={t(`${NS}.mainDescription`)}
@@ -41,13 +80,20 @@ export default function NukleoStudio() {
         extensionsTitle={t(`${NS}.extensionsTitle`)}
         extensionsDescription={t(`${NS}.extensionsDescription`)}
         extensionsTags={extensionsTags}
+        expertiseSectionTitle={t(`${NS}.expertiseSectionTitle`)}
+        expertiseSectionDescription={t(`${NS}.expertiseSectionDescription`) || undefined}
+        expertiseDeliverablesLabel={t(`${NS}.deliverablesLabel`)}
         gridItems={gridItems}
         teamTitle={t(`${NS}.teamTitle`)}
         teamDescription={t(`${NS}.teamDescription`)}
-        processSteps={processSteps}
+        teamMembers={teamMembers.length > 0 ? teamMembers : undefined}
         ctaTitle={t(`${NS}.ctaTitle`)}
         ctaButtonText={t(`${NS}.ctaButtonText`)}
         ctaHref={getLocalizedPath('/contact')}
+        sectionVisualTitle={t(`${NS}.sectionVisualTitle`)}
+        sectionVisualSubtitle={t(`${NS}.sectionVisualSubtitle`)}
+        sectionVisualDescription={t(`${NS}.sectionVisualDescription`)}
+        sectionHighlights={sectionHighlights}
       />
     </PageLayout>
   );

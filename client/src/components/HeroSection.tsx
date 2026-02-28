@@ -96,7 +96,7 @@ function HeroSection() {
   }, [isMobile]);
   
   return (
-    <section className="relative min-h-screen flex items-center justify-center pt-16 sm:pt-20 px-4 sm:px-6 lg:px-8">
+    <section className="relative min-h-screen flex items-center justify-center pt-20 px-4 sm:px-6 lg:px-8">
 
       <div className="container relative z-10 px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-center">
@@ -178,7 +178,8 @@ function HeroSection() {
                     services.map((service: string, index: number) => (
                       <span 
                         key={`${setIndex}-${index}`}
-                        className="text-white/40 active:text-white/60 sm:hover:text-white/80 text-sm sm:text-base md:text-lg lg:text-xl font-medium transition-colors duration-300 cursor-default touch-manipulation"
+                        className="text-white/40 active:text-white/60 sm:hover:text-white/80 text-sm sm:text-base md:text-lg lg:text-xl font-bold transition-colors duration-300 cursor-default touch-manipulation"
+                        style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}
                       >
                         {service}
                       </span>

@@ -59,26 +59,6 @@
   box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
 }
 
-/* Custom Cursor Glow Effect */
-.cursor-glow {
-  width: 400px;
-  height: 400px;
-  background: radial-gradient(
-    circle, 
-    rgba(255, 255, 255, 0.10) 0%, 
-    rgba(255, 255, 255, 0.04) 50%,
-    transparent 70%
-  );
-  position: fixed;
-  pointer-events: none;
-  z-index: 9999;
-  transform: translate(-50%, -50%);
-  transition: opacity 0.3s ease;
-  mix-blend-mode: screen;
-}
-
-/* Curseur système visible + effet halo en arrière-plan */
-
 @import "tailwindcss";
 
 @theme {
@@ -128,6 +108,15 @@
     min-height: 100vh;
     /* Fond unifié sur toutes les pages */
     background: #EFE8E8;
+  }
+
+  /* Masquer la barre de défilement (conserver le scroll) */
+  html {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  html::-webkit-scrollbar {
+    display: none;
   }
 
   /* Dark mode optimizations */
@@ -304,6 +293,156 @@
       inset 0 1px 0 0 rgba(255, 255, 255, 0.15),
       0 8px 32px -4px rgba(0, 0, 0, 0.15),
       0 4px 16px -2px rgba(0, 0, 0, 0.1);
+  }
+
+  /* Glass panel (fond clair type pages service) — blur visible + lisibilité */
+  .glass-panel {
+    position: relative;
+    isolation: isolate;
+    background: rgba(255, 255, 255, 0.5);
+    backdrop-filter: blur(16px) saturate(180%);
+    -webkit-backdrop-filter: blur(16px) saturate(180%);
+    border: 1px solid rgba(255, 255, 255, 0.75);
+    box-shadow:
+      0 4px 24px rgba(0, 0, 0, 0.06),
+      inset 0 1px 0 rgba(255, 255, 255, 0.9);
+  }
+
+  /* ─── Glassmorphism widgets (page principale, colonne droite) — effet verre accentué ─── */
+  .card, .widget {
+    position: relative;
+    overflow: hidden;
+    background: rgba(255, 255, 255, 0.4);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border: 1px solid rgba(255, 255, 255, 0.85);
+    border-radius: 16px;
+    box-shadow:
+      0 8px 32px rgba(0, 0, 0, 0.08),
+      inset 0 1px 0 rgba(255, 255, 255, 0.9);
+  }
+
+  /* Carte météo + carte date */
+  .glass-widget-weather-date {
+    position: relative;
+    overflow: hidden;
+    background: rgba(255, 255, 255, 0.38);
+    backdrop-filter: blur(16px) saturate(180%);
+    -webkit-backdrop-filter: blur(16px) saturate(180%);
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    border-radius: 14px;
+    box-shadow:
+      0 4px 24px rgba(0, 0, 0, 0.06),
+      inset 0 1px 0 rgba(255, 255, 255, 0.85);
+    font-family: 'Figtree', sans-serif;
+  }
+
+  /* Carte "Nous soutenons le monde culturel" */
+  .glass-widget-culture {
+    position: relative;
+    overflow: hidden;
+    background: rgba(255, 255, 255, 0.45);
+    backdrop-filter: blur(22px) saturate(180%);
+    -webkit-backdrop-filter: blur(22px) saturate(180%);
+    border: 1px solid rgba(255, 255, 255, 0.88);
+    border-radius: 16px;
+    box-shadow:
+      0 8px 32px rgba(0, 0, 0, 0.08),
+      inset 0 1px 0 rgba(255, 255, 255, 0.9);
+    font-family: 'Figtree', sans-serif;
+  }
+
+  /* Badge violet "+456.000$" */
+  .glass-badge-purple {
+    background: rgba(120, 80, 220, 0.2);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(120, 80, 220, 0.4);
+    border-radius: 8px;
+    color: #7850dc;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.25);
+  }
+
+  /* Carte "481k$" */
+  .glass-widget-481k {
+    position: relative;
+    overflow: hidden;
+    background: rgba(255, 255, 255, 0.4);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border: 1px solid rgba(255, 255, 255, 0.85);
+    border-radius: 16px;
+    box-shadow:
+      0 8px 32px rgba(0, 0, 0, 0.08),
+      inset 0 1px 0 rgba(255, 255, 255, 0.9);
+    font-family: 'Figtree', sans-serif;
+  }
+
+  /* Cartes stats "2022" et "+20" */
+  .glass-widget-stats {
+    position: relative;
+    overflow: hidden;
+    background: rgba(255, 255, 255, 0.35);
+    backdrop-filter: blur(16px) saturate(180%);
+    -webkit-backdrop-filter: blur(16px) saturate(180%);
+    border: 1px solid rgba(255, 255, 255, 0.78);
+    border-radius: 14px;
+    box-shadow:
+      0 4px 24px rgba(0, 0, 0, 0.06),
+      inset 0 1px 0 rgba(255, 255, 255, 0.8);
+    font-family: 'Figtree', sans-serif;
+  }
+
+  /* ─── Section "On [verbe] l'IA" — glass pill + couleurs image ─── */
+  .glass-heading-panel {
+    position: relative;
+    background: rgba(255, 255, 255, 0.22);
+    backdrop-filter: blur(24px) saturate(160%);
+    -webkit-backdrop-filter: blur(24px) saturate(160%);
+    border: 1px solid rgba(255, 255, 255, 0.9);
+    border-radius: 32px;
+    box-shadow:
+      0 6px 24px rgba(0, 0, 0, 0.07),
+      inset 0 1px 0 rgba(255, 255, 255, 1),
+      inset 0 -1px 1px rgba(255, 255, 255, 0.4);
+    padding: 0.625rem 1.5rem;
+    display: inline-flex;
+    align-items: center;
+    transform: translateZ(0);
+    -webkit-transform: translateZ(0);
+  }
+
+  .gradient-text-on-ia {
+    background: linear-gradient(to right, #6B1817, #5636AD);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-weight: 700;
+    font-size: clamp(2.2rem, 4.4vw, 3rem);
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    transition: opacity 0.35s ease;
+  }
+
+  /* Dégradé strictement sur le lettrage (hero SOYONS AUDACIEUX) */
+  .hero-headline-gradient {
+    background: linear-gradient(to right, #6B1817 0%, #5636AD 100%) !important;
+    -webkit-background-clip: text !important;
+    background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+    color: transparent !important;
+  }
+
+  .dark-charcoal-text {
+    color: #2d2a2f;
+    font-family: var(--font-heading, sans-serif);
+    font-weight: 600;
+    font-size: clamp(2.2rem, 4.4vw, 3rem);
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    margin-left: 0.5rem;
   }
 
   /* Gradient mesh */

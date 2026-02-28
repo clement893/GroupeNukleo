@@ -5,8 +5,8 @@ import { useSound } from '@/hooks/useSound';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { useLocalizedPath } from '@/hooks/useLocalizedPath';
 
-// Fond uni violet (sans dégradé)
-const MENU_BG = '#6F42C1';
+// Fond violet semi-transparent + blur
+const MENU_BG = 'rgba(111, 66, 193, 0.92)';
 
 interface FullScreenMenuProps {
   isOpen: boolean;
@@ -56,8 +56,12 @@ export default function FullScreenMenu({ isOpen, onClose }: FullScreenMenuProps)
 
   return (
     <div
-      className="fixed inset-0 z-50 flex flex-col"
-      style={{ background: MENU_BG }}
+      className="fixed inset-0 z-50 flex flex-col backdrop-blur-md"
+      style={{
+        background: MENU_BG,
+        WebkitBackdropFilter: 'blur(12px)',
+        backdropFilter: 'blur(12px)',
+      }}
       role="dialog"
       aria-modal="true"
       aria-label="Menu principal"
@@ -80,9 +84,10 @@ export default function FullScreenMenu({ isOpen, onClose }: FullScreenMenuProps)
       <div className="flex-shrink-0 px-8 sm:px-12 md:px-16 lg:px-20 pt-8 pb-4">
         <Link href={getLocalizedPath('/')} onClick={handleLinkClick} className="inline-flex items-baseline touch-manipulation" aria-label="Nukleo - Accueil">
           <span
-            className="font-bold tracking-tight"
+            className="tracking-tight"
             style={{
-              fontFamily: 'var(--font-heading, sans-serif)',
+              fontFamily: "'Plus Jakarta Sans', sans-serif",
+              fontWeight: 700,
               fontSize: 'clamp(1.5rem, 4vw, 2.25rem)',
               color: '#712D3A',
             }}
@@ -90,7 +95,7 @@ export default function FullScreenMenu({ isOpen, onClose }: FullScreenMenuProps)
             nukleo
           </span>
           <span className="ml-0.5" style={{ color: '#c4b5fd', fontSize: '0.9em' }} aria-hidden="true">→</span>
-          <span className="font-bold tracking-tight" style={{ color: '#712D3A', fontFamily: 'var(--font-heading, sans-serif)', fontSize: 'clamp(1.5rem, 4vw, 2.25rem)' }}>,</span>
+          <span className="tracking-tight" style={{ color: '#712D3A', fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 700, fontSize: 'clamp(1.5rem, 4vw, 2.25rem)' }}>,</span>
         </Link>
       </div>
 
@@ -102,9 +107,10 @@ export default function FullScreenMenu({ isOpen, onClose }: FullScreenMenuProps)
               <Link href={getLocalizedPath(path)} onClick={handleLinkClick}>
                 <span
                   onMouseEnter={playHover}
-                  className="block py-2 text-white font-bold hover:opacity-90 transition-opacity touch-manipulation"
+                  className="block py-2 text-white hover:opacity-90 transition-opacity touch-manipulation"
                   style={{
-                    fontFamily: 'var(--font-heading, sans-serif)',
+                    fontFamily: "'Plus Jakarta Sans', sans-serif",
+                    fontWeight: 700,
                     fontSize: 'clamp(2.5rem, 10vw, 5rem)',
                     lineHeight: 1.1,
                   }}
@@ -122,7 +128,7 @@ export default function FullScreenMenu({ isOpen, onClose }: FullScreenMenuProps)
 
       {/* Liens services — plus petits, en bas */}
       <div className="px-8 sm:px-12 md:px-16 lg:px-20 py-6 sm:py-8 flex-shrink-0">
-        <div className="flex flex-wrap justify-between gap-x-8 gap-y-4 text-white/80 text-base sm:text-lg font-normal">
+        <div className="flex flex-wrap justify-between gap-x-8 gap-y-4 text-white/80 text-base sm:text-lg" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 700 }}>
           {SERVICE_LINKS.map(({ label, path }) => (
             <Link key={label} href={getLocalizedPath(path)} onClick={handleLinkClick}>
               <span

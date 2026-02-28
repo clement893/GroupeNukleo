@@ -27,7 +27,7 @@ function getWeatherIcon(code: number): LucideIcon {
   return Sun;
 }
 
-export function WeatherWidget() {
+export function WeatherWidget({ className }: { className?: string }) {
   const { data, loading } = useWeatherByIp();
   const tempDisplay = loading ? '--' : String(data.temperature);
   const locationDisplay = loading ? '…' : data.locationLabel;
@@ -55,19 +55,20 @@ export function WeatherWidget() {
       <div
         role="region"
         aria-label={`Météo : ${loading ? 'chargement' : `${data.temperature} degrés, ${data.locationLabel}`}`}
-        className={loading ? 'weather-widget-loading' : undefined}
+        className={loading ? `weather-widget-loading ${className ?? ''}`.trim() : className}
         style={{
-          borderRadius: 24,
+          borderRadius: 14,
           padding: '1.1rem 1.2rem',
-          background: 'rgba(255,255,255,0.35)',
-          backdropFilter: 'blur(24px)',
-          WebkitBackdropFilter: 'blur(24px)',
-          border: '1px solid rgba(255,255,255,0.75)',
-          boxShadow: '0 8px 32px rgba(0,0,0,0.06), 0 0 0 1px rgba(255,255,255,0.45) inset',
+          background: 'rgba(255,255,255,0.38)',
+          backdropFilter: 'blur(16px) saturate(180%)',
+          WebkitBackdropFilter: 'blur(16px) saturate(180%)',
+          border: '1px solid rgba(255,255,255,0.8)',
+          boxShadow: '0 4px 24px rgba(0,0,0,0.06), inset 0 1px 0 rgba(255,255,255,0.85)',
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
           gap: 8,
+          fontFamily: "'Figtree', sans-serif",
         }}
       >
         {/* Icône météo au-dessus de la température */}
@@ -76,7 +77,7 @@ export function WeatherWidget() {
         </div>
         <div
           className={loading ? 'weather-placeholder' : undefined}
-          style={{ fontFamily: 'var(--font-heading, sans-serif)', fontWeight: 900, fontSize: '2.2rem', lineHeight: 1, color: DARK }}
+          style={{ fontFamily: "'Figtree', sans-serif", fontWeight: 700, fontSize: '2.2rem', lineHeight: 1, color: DARK }}
         >
           {tempDisplay} <span style={{ fontSize: '1rem', verticalAlign: 'super' }}>°C</span>
         </div>

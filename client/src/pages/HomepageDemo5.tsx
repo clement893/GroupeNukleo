@@ -13,15 +13,6 @@ const BORDEAUX = '#7B1D3A';
 const CREAM = '#F5F3EF';
 const DARK = '#0A0A0A';
 
-/** Style glassmorphism commun (verre dépoli, blur, bordure légère, légère élévation) */
-const GLASS = {
-  background: 'rgba(255,255,255,0.35)',
-  backdropFilter: 'blur(24px)',
-  WebkitBackdropFilter: 'blur(24px)' as const,
-  border: '1px solid rgba(255,255,255,0.75)',
-  boxShadow: '0 8px 32px rgba(0,0,0,0.06), 0 0 0 1px rgba(255,255,255,0.45) inset',
-};
-
 const WORK1 = '/demo/work1.jpg';
 const WORK2 = '/demo/work2.jpg';
 const WORK3 = '/demo/work3.jpg';
@@ -120,24 +111,19 @@ function NewsCarousel() {
 
       {/* Contenu bas */}
       <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, padding: '1.4rem 1.5rem' }}>
-        {/* Badge catégorie */}
-        <div style={{ display: 'inline-block', background: p.color, color: '#fff', fontSize: '0.58rem', fontWeight: 800, letterSpacing: '0.12em', textTransform: 'uppercase', padding: '3px 10px', borderRadius: 999, marginBottom: 12 }}>{p.category}</div>
         {/* Titre */}
         <div style={{ fontFamily: 'var(--font-heading, sans-serif)', fontWeight: 900, fontSize: 'clamp(1.2rem, 2.5vw, 1.9rem)', color: '#fff', lineHeight: 1.05, letterSpacing: '-0.02em', marginBottom: 10 }}>{p.name}</div>
         {/* Tagline */}
         <div style={{ fontSize: '0.72rem', color: 'rgba(255,255,255,0.65)', marginBottom: 22, lineHeight: 1.5 }}>{p.tagline}</div>
-        {/* Résultat + dots */}
-        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-          <span style={{ fontSize: '0.65rem', fontWeight: 700, color: '#fff', background: `${p.color}55`, border: `1px solid ${p.color}`, padding: '3px 10px', borderRadius: 999 }}>{p.result}</span>
-          <div style={{ display: 'flex', gap: 5 }}>
-            {PROJECTS.map((_, i) => (
-              <button
-                key={i}
-                onClick={() => setActive(i)}
-                style={{ width: i === active ? 18 : 5, height: 5, borderRadius: 999, background: i === active ? '#fff' : 'rgba(255,255,255,0.3)', border: 'none', cursor: 'pointer', transition: 'all 0.3s ease', padding: 0 }}
-              />
-            ))}
-          </div>
+        {/* Dots navigation */}
+        <div style={{ display: 'flex', justifyContent: 'flex-end', gap: 5 }}>
+          {PROJECTS.map((_, i) => (
+            <button
+              key={i}
+              onClick={() => setActive(i)}
+              style={{ width: i === active ? 18 : 5, height: 5, borderRadius: 999, background: i === active ? '#fff' : 'rgba(255,255,255,0.3)', border: 'none', cursor: 'pointer', transition: 'all 0.3s ease', padding: 0 }}
+            />
+          ))}
         </div>
       </div>
     </div>
@@ -401,7 +387,7 @@ function Triptych() {
       style={{
         height: 'clamp(483px, 78vh, 828px)',
         display: 'flex',
-        gap: 16,
+        gap: 21,
       }}
     >
       {PROJECTS.map((p, i) => {
@@ -411,13 +397,13 @@ function Triptych() {
             key={p.num}
             onClick={() => setActive(i)}
             style={{
-              flex: isActive ? '1 1 0' : '0 0 8%',
+              flex: isActive ? '1 1 0' : '0 0 6.8%',
               minWidth: isActive ? 0 : undefined,
               transition: 'flex 0.6s cubic-bezier(0.77,0,0.175,1)',
               position: 'relative',
               cursor: isActive ? 'default' : 'pointer',
               overflow: 'hidden',
-              borderRadius: 20,
+              borderRadius: 12,
             }}
           >
             {/* Image (panneau actif en premier plan) */}
@@ -427,22 +413,23 @@ function Triptych() {
               style={{
                 position: 'absolute', inset: 0, width: '100%', height: '100%',
                 objectFit: 'cover',
-                filter: isActive ? 'grayscale(0) brightness(0.7)' : 'grayscale(1) brightness(0.2)',
+                filter: isActive ? 'grayscale(0) brightness(0.7)' : 'grayscale(1) brightness(0.55)',
                 transition: 'filter 0.5s ease',
               }}
             />
-            <div style={{ position: 'absolute', inset: 0, background: isActive ? 'linear-gradient(to top, rgba(0,0,0,0.88) 0%, rgba(0,0,0,0.15) 55%, transparent 100%)' : 'rgba(0,0,0,0.5)', transition: 'background 0.5s ease' }} />
+            <div style={{ position: 'absolute', inset: 0, background: isActive ? 'linear-gradient(to top, rgba(0,0,0,0.88) 0%, rgba(0,0,0,0.15) 55%, transparent 100%)' : 'rgba(0,0,0,0.22)', transition: 'background 0.5s ease' }} />
 
-            {/* Numéro 01 / 02 / 03 — toujours visible en bas à droite du panneau, violet */}
+            {/* Numéro 01 / 02 / 03 — Plus Jakarta Sans Bold, un peu de transparence */}
             <div
               style={{
                 position: 'absolute',
                 bottom: 24,
                 right: 24,
-                fontFamily: 'var(--font-heading, sans-serif)',
+                fontFamily: "'Plus Jakarta Sans', sans-serif",
                 fontSize: 'clamp(2.5rem, 5vw, 4.5rem)',
-                fontWeight: 900,
-                color: isActive ? 'rgba(167,139,250,0.95)' : 'rgba(167,139,250,0.45)',
+                fontWeight: 700,
+                color: isActive ? 'rgba(167,139,250,0.9)' : 'rgba(167,139,250,0.4)',
+                opacity: 0.92,
                 lineHeight: 1,
                 letterSpacing: '-0.04em',
                 transition: 'color 0.4s ease',
@@ -499,7 +486,7 @@ function Triptych() {
 }
 
 // ─── Composant principal ─────────────────────────────────────────────────────
-const ON_IA_VERBS = ['maîtrise', 'entraîne', 'personnalise', 'humanise'];
+const ON_IA_VERBS = ['maîtrise', 'optimise', 'entraîne', 'personnalise', 'humanise'];
 
 export default function HomepageDemo5() {
   const getLocalizedPath = useLocalizedPath();
@@ -524,10 +511,11 @@ export default function HomepageDemo5() {
           minHeight: '100vh',
           fontFamily: 'var(--font-body, sans-serif)',
           color: DARK,
+          background: '#EFE8E8',
         }}
       >
         {/* ── Contenu principal ─────────────────────────────────────────────── */}
-        <div style={{ position: 'relative', zIndex: 10, paddingTop: 120 }}>
+        <div style={{ position: 'relative', zIndex: 10, paddingTop: 80 }}>
 
         {/* ════════════════════════════════════════════════════════════════════
             SECTION HERO — L'agence numérique des PME et des OBNL
@@ -537,19 +525,21 @@ export default function HomepageDemo5() {
           padding: 'clamp(2rem, 5vh, 4rem) 6%',
           display: 'flex',
           flexDirection: 'column',
-          alignItems: 'center',
+          alignItems: 'flex-start',
           justifyContent: 'center',
           background: 'transparent',
           boxSizing: 'border-box',
         }}>
           <h1 style={{
-            fontFamily: 'var(--font-heading, sans-serif)',
-            fontWeight: 900,
+            fontFamily: "'Plus Jakarta Sans', sans-serif",
+            fontWeight: 700,
             fontSize: 'clamp(1.5rem, 8vw, 9rem)',
             lineHeight: 1.05,
             letterSpacing: '-0.04em',
+            wordSpacing: '0.12em',
             margin: 0,
-            width: '100%',
+            display: 'inline-block',
+            width: 'auto',
             maxWidth: '100%',
             overflowWrap: 'break-word',
             wordBreak: 'break-word',
@@ -573,45 +563,42 @@ export default function HomepageDemo5() {
             {/* Colonne Our Latest Work — News Carrousel (gauche) */}
             <NewsCarousel />
 
-            {/* Grille 6 cartes (2 + 1 + 1 + 2) — droite, sans fond */}
+            {/* Grille 6 cartes (2 + 1 + 1 + 2) — droite */}
             <div style={{
               display: 'grid',
               gridTemplateColumns: '1fr 1fr',
               gap: 12,
               padding: 14,
               borderRadius: 28,
-              background: 'transparent',
             }}>
-              {/* 1. Météo — verre dépoli blanc (selon IP du visiteur) */}
-              <WeatherWidget />
+              {/* 1. Météo — verre dépoli (style météo/date) */}
+              <WeatherWidget className="glass-widget-weather-date" />
 
-              {/* 2. Date — verre dépoli blanc (dynamique) */}
+              {/* 2. Date — verre dépoli (même style que météo) */}
               {(() => {
                 const d = new Date();
                 const dayName = d.toLocaleDateString('fr-FR', { weekday: 'long' });
                 const dayNum = d.getDate();
                 const monthYear = d.toLocaleDateString('fr-FR', { month: 'long', year: 'numeric' });
                 return (
-                  <div style={{
-                    ...GLASS,
-                    borderRadius: 24, padding: '1.1rem 1.2rem',
+                  <div className="glass-widget-weather-date" style={{
+                    padding: '1.1rem 1.2rem',
                     display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 8, textAlign: 'center',
                   }}>
                     <div style={{ fontSize: '0.7rem', color: '#6b7280' }}>Bon {dayName} <span style={{ color: PURPLE }}>♥</span></div>
-                    <div style={{ fontFamily: 'var(--font-heading, sans-serif)', fontWeight: 900, fontSize: '2.2rem', lineHeight: 1, color: DARK }}>{dayNum}</div>
+                    <div style={{ fontFamily: "'Figtree', sans-serif", fontWeight: 700, fontSize: '2.2rem', lineHeight: 1, color: DARK }}>{dayNum}</div>
                     <div style={{ fontSize: '0.7rem', color: '#6b7280' }}>{monthYear}</div>
                   </div>
                 );
               })()}
 
               {/* 3. Nous soutenons le monde culturel — glassmorphism */}
-              <div style={{
-                ...GLASS,
+              <div className="glass-widget-culture" style={{
                 gridColumn: '1 / -1',
-                borderRadius: 24, padding: '1.4rem 1.5rem',
+                padding: '1.4rem 1.5rem',
               }}>
                 <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: 8, marginBottom: 12 }}>
-                  <h3 style={{ fontFamily: 'var(--font-heading, sans-serif)', fontWeight: 800, fontSize: '1rem', color: DARK, margin: 0 }}>
+                  <h3 style={{ fontFamily: "'Figtree', sans-serif", fontWeight: 700, fontSize: '1rem', color: DARK, margin: 0 }}>
                     Nous soutenons le monde culturel
                   </h3>
                   <button type="button" aria-label="Plus d'infos" style={{ width: 24, height: 24, borderRadius: '50%', background: DARK, color: '#fff', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
@@ -623,35 +610,33 @@ export default function HomepageDemo5() {
                 </p>
                 <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', borderTop: '1px dashed rgba(0,0,0,0.1)', paddingTop: 12 }}>
                   <span style={{ fontSize: '0.72rem', color: '#6b7280' }}>Montant donné</span>
-                  <span style={{
-                    fontFamily: 'var(--font-heading, sans-serif)', fontWeight: 800, fontSize: '1rem', color: DARK,
-                    background: 'linear-gradient(90deg, rgba(147,51,234,0.18) 0%, rgba(236,72,153,0.18) 100%)',
-                    padding: '4px 12px', borderRadius: 10,
+                  <span className="glass-badge-purple" style={{
+                    fontFamily: "'Figtree', sans-serif", fontWeight: 700, fontSize: '1rem',
+                    padding: '4px 12px',
                   }}>+456.000$</span>
                 </div>
               </div>
 
               {/* 4. Campagne 481k$ — glassmorphism */}
-              <div style={{
-                ...GLASS,
+              <div className="glass-widget-481k" style={{
                 gridColumn: '1 / -1',
-                borderRadius: 24, padding: '1.4rem 1.5rem',
+                padding: '1.4rem 1.5rem',
                 display: 'grid',
                 gridTemplateColumns: 'minmax(100px, 1fr) 1.5fr',
                 gap: 20,
                 alignItems: 'center',
               }}>
                 <div style={{ position: 'relative', minHeight: 120 }}>
-                  {/* Placeholder 3 smartphones superposés */}
+                  {/* 3 images / écrans avec fonds pâles (style référence) */}
                   <div style={{ position: 'relative', height: 100 }}>
-                    <div style={{ position: 'absolute', left: 0, top: 8, width: 44, height: 72, borderRadius: 8, background: 'linear-gradient(145deg, #e5e7eb, #f3f4f6)', boxShadow: '0 4px 12px rgba(0,0,0,0.1)', transform: 'rotate(-12deg)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                      <span style={{ fontSize: '0.45rem', color: '#9ca3af', textAlign: 'center', padding: 4 }}>Écran</span>
+                    <div style={{ position: 'absolute', left: 0, top: 8, width: 44, height: 72, borderRadius: 10, background: 'rgba(240, 248, 255, 0.95)', boxShadow: '0 2px 12px rgba(0,0,0,0.06)', border: '1px solid rgba(255,255,255,0.8)', transform: 'rotate(-12deg)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                      <span style={{ fontSize: '0.45rem', color: '#94a3b8', textAlign: 'center', padding: 4 }}>Écran</span>
                     </div>
-                    <div style={{ position: 'absolute', left: 28, top: 0, width: 44, height: 72, borderRadius: 8, background: 'linear-gradient(145deg, #f3f4f6, #e5e7eb)', boxShadow: '0 4px 12px rgba(0,0,0,0.1)', transform: 'rotate(4deg)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                      <span style={{ fontSize: '0.45rem', color: '#9ca3af', textAlign: 'center', padding: 4 }}>Transformez la donne</span>
+                    <div style={{ position: 'absolute', left: 28, top: 0, width: 44, height: 72, borderRadius: 10, background: 'rgba(255, 240, 245, 0.95)', boxShadow: '0 2px 12px rgba(0,0,0,0.06)', border: '1px solid rgba(255,255,255,0.8)', transform: 'rotate(4deg)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                      <span style={{ fontSize: '0.45rem', color: '#94a3b8', textAlign: 'center', padding: 4 }}>Transformez la donne</span>
                     </div>
-                    <div style={{ position: 'absolute', left: 56, top: 12, width: 44, height: 72, borderRadius: 8, background: 'linear-gradient(145deg, #e5e7eb, #f3f4f6)', boxShadow: '0 4px 12px rgba(0,0,0,0.1)', transform: 'rotate(14deg)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                      <span style={{ fontSize: '0.45rem', color: '#9ca3af', textAlign: 'center', padding: 4 }}>Écran</span>
+                    <div style={{ position: 'absolute', left: 56, top: 12, width: 44, height: 72, borderRadius: 10, background: 'rgba(236, 254, 255, 0.95)', boxShadow: '0 2px 12px rgba(0,0,0,0.06)', border: '1px solid rgba(255,255,255,0.8)', transform: 'rotate(14deg)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                      <span style={{ fontSize: '0.45rem', color: '#94a3b8', textAlign: 'center', padding: 4 }}>Écran</span>
                     </div>
                   </div>
                   <div style={{ position: 'absolute', top: 0, right: 8, width: 28, height: 28, borderRadius: 6, background: DARK, color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
@@ -659,7 +644,7 @@ export default function HomepageDemo5() {
                   </div>
                 </div>
                 <div>
-                  <div style={{ fontFamily: 'var(--font-heading, sans-serif)', fontWeight: 900, fontSize: 'clamp(2rem, 4vw, 3rem)', lineHeight: 1, color: DARK, marginBottom: 8 }}>481k$</div>
+                  <div style={{ fontFamily: "'Figtree', sans-serif", fontWeight: 700, fontSize: 'clamp(2rem, 4vw, 3rem)', lineHeight: 1, color: DARK, marginBottom: 8 }}>481k$</div>
                   <p style={{ fontSize: '0.78rem', color: '#4b5563', lineHeight: 1.5, margin: 0 }}>
                     amassés lors de notre dernière campagne pour le Défi 28 jours sans alcool
                   </p>
@@ -667,20 +652,18 @@ export default function HomepageDemo5() {
               </div>
 
               {/* 5. 2022 — L'agence fête ses 4 ans — glassmorphism */}
-              <div style={{
-                ...GLASS,
-                borderRadius: 24, padding: '1.2rem 1.2rem',
+              <div className="glass-widget-stats" style={{
+                padding: '1.2rem 1.2rem',
               }}>
-                <div style={{ fontFamily: 'var(--font-heading, sans-serif)', fontWeight: 900, fontSize: '2.2rem', lineHeight: 1, color: DARK, marginBottom: 8 }}>2022</div>
+                <div style={{ fontFamily: "'Figtree', sans-serif", fontWeight: 700, fontSize: '2.2rem', lineHeight: 1, color: DARK, marginBottom: 8 }}>2022</div>
                 <p style={{ fontSize: '0.75rem', color: '#4b5563', lineHeight: 1.4, margin: 0 }}>L'agence fête ses 4 ans</p>
               </div>
 
               {/* 6. +20 entreprises — glassmorphism */}
-              <div style={{
-                ...GLASS,
-                borderRadius: 24, padding: '1.2rem 1.2rem',
+              <div className="glass-widget-stats" style={{
+                padding: '1.2rem 1.2rem',
               }}>
-                <div style={{ fontFamily: 'var(--font-heading, sans-serif)', fontWeight: 900, fontSize: '2.2rem', lineHeight: 1, color: DARK, marginBottom: 8 }}>+20</div>
+                <div style={{ fontFamily: "'Figtree', sans-serif", fontWeight: 700, fontSize: '2.2rem', lineHeight: 1, color: DARK, marginBottom: 8 }}>+20</div>
                 <p style={{ fontSize: '0.75rem', color: '#4b5563', lineHeight: 1.4, margin: 0 }}>entreprises accompagnées dans leur transformation numérique</p>
               </div>
             </div>
@@ -688,38 +671,32 @@ export default function HomepageDemo5() {
         </div>
 
         {/* ════════════════════════════════════════════════════════════════════
-            SECTION 2 — CARROUSEL LOGOS (fond blanc, continuité avec laptop/widgets)
-        ════════════════════════════════════════════════════════════════════ */}
-        <div style={{ marginTop: 48 }}>
-          <DoubleLogoCarousel title="Trusted by ambitious organizations" />
-        </div>
-
-        {/* ════════════════════════════════════════════════════════════════════
-            SECTION 3 — SOYONS AUDACIEUX + CTA
+            SECTION 2 — SOYONS AUDACIEUX + CTA
         ════════════════════════════════════════════════════════════════════ */}
         <section style={{
           padding: '5rem 6% 6rem',
-          marginBottom: 5 * 16,
+          marginBottom: 0,
           textAlign: 'center',
         }}>
           <p style={{
             fontSize: '0.9375rem',
-            fontWeight: 700,
+            fontWeight: 400,
             letterSpacing: '0.28em',
             textTransform: 'uppercase',
             color: '#374151',
             marginBottom: 28,
+            fontFamily: "'Plus Jakarta Sans', sans-serif",
           }}>
             SOYONS AUDACIEUX.
           </p>
-          <h2 style={{
-            fontFamily: 'var(--font-heading, sans-serif)',
-            fontWeight: 900,
+          <h2 className="hero-headline-gradient" style={{
+            fontFamily: "'Plus Jakarta Sans', sans-serif",
+            fontWeight: 400,
             fontSize: 'clamp(2.25rem, 5vw, 3.75rem)',
             lineHeight: 1.1,
             letterSpacing: '-0.03em',
-            color: BORDEAUX,
             margin: '0 0 1.5rem 0',
+            display: 'inline-block',
           }}>
             Un seul partenaire.<br />
             Une intelligence intégrée.<br />
@@ -731,6 +708,8 @@ export default function HomepageDemo5() {
             lineHeight: 1.5,
             maxWidth: 520,
             margin: '0 auto 2.5rem',
+            fontFamily: "'Plus Jakarta Sans', sans-serif",
+            fontWeight: 400,
           }}>
             L'excellence numérique ne devrait pas être réservée aux grandes entreprises.
           </p>
@@ -738,11 +717,31 @@ export default function HomepageDemo5() {
         </section>
 
         {/* ════════════════════════════════════════════════════════════════════
-            SECTION 3b — ON … L'IA (fond lavande)
+            SECTION 2b — CARROUSEL LOGOS (sous SOYONS AUDACIEUX)
+        ════════════════════════════════════════════════════════════════════ */}
+        <div style={{ marginTop: 0, marginBottom: 5 * 16 }}>
+          <DoubleLogoCarousel title="Trusted by ambitious organizations" />
+        </div>
+
+        {/* ════════════════════════════════════════════════════════════════════
+            SECTION 3 — ON … L'IA (fond #EFE8E8, glass pill + dégradé texte)
             Ratio : visuel 45% | texte 55%
         ════════════════════════════════════════════════════════════════════ */}
-        <section style={{ padding: '5rem 6%', marginBottom: 5 * 16 }}>
-          <div className="grid grid-cols-1 lg:grid-cols-[9fr_11fr] gap-8 lg:gap-12 items-center">
+        <section style={{ padding: '5rem 6%', marginBottom: 5 * 16, background: '#EFE8E8', position: 'relative' }}>
+          {/* Fond léger derrière le texte pour que le backdrop-filter du pill soit visible */}
+          <div
+            aria-hidden
+            style={{
+              position: 'absolute',
+              top: 0,
+              right: 0,
+              width: '55%',
+              height: '100%',
+              background: 'radial-gradient(ellipse 80% 70% at 70% 50%, rgba(200,190,220,0.32) 0%, transparent 60%)',
+              pointerEvents: 'none',
+            }}
+          />
+          <div className="grid grid-cols-1 lg:grid-cols-[9fr_11fr] gap-8 lg:gap-12 items-center" style={{ isolation: 'isolate', position: 'relative', zIndex: 1 }}>
             {/* Gauche (~45%) : carte visuelle placeholder 3D */}
             <div style={{
               borderRadius: 28,
@@ -759,27 +758,14 @@ export default function HomepageDemo5() {
               <div style={{ position: 'absolute', width: 60, height: 60, borderRadius: '50%', background: 'rgba(147,51,234,0.3)', top: '30%', right: '25%' }} />
               <div style={{ position: 'absolute', width: 40, height: 40, borderRadius: '50%', background: 'rgba(96,165,250,0.35)', bottom: '25%', left: '30%' }} />
             </div>
-            {/* Droite (~55%) : "On [verbe]" (qui change) + "l'IA" (fixe) */}
-            <div style={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap', gap: 16, justifyContent: 'center', minHeight: 200 }}>
-              <span style={{
-                padding: '1rem 2rem',
-                borderRadius: 24,
-                background: 'rgba(255,255,255,0.45)',
-                backdropFilter: 'blur(12px)',
-                WebkitBackdropFilter: 'blur(12px)',
-                border: '1px solid rgba(0,0,0,0.08)',
-                boxShadow: '0 4px 24px rgba(0,0,0,0.06)',
-                fontFamily: 'var(--font-heading, sans-serif)',
-                fontWeight: 800,
-                fontSize: 'clamp(2.2rem, 4.4vw, 3rem)',
-                color: BORDEAUX,
-                transition: 'opacity 0.35s ease',
-              }}>
-                On {ON_IA_VERBS[onIaIndex]}
-              </span>
-              <span style={{ fontFamily: 'var(--font-heading, sans-serif)', fontWeight: 800, fontSize: 'clamp(2.2rem, 4.4vw, 3rem)', color: DARK }}>
-                l'IA
-              </span>
+            {/* Droite (~55%) : "On [verbe]" dans pill glass + "l'IA" en charcoal */}
+            <div style={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap', gap: 0, justifyContent: 'center', minHeight: 200 }}>
+              <div className="glass-heading-panel">
+                <span className="gradient-text-on-ia">
+                  On {ON_IA_VERBS[onIaIndex]}
+                </span>
+              </div>
+              <span className="dark-charcoal-text">l'IA</span>
             </div>
           </div>
         </section>
@@ -826,8 +812,8 @@ export default function HomepageDemo5() {
                 </div>
                 {/* Titre */}
                 <h3 style={{
-                  fontFamily: 'var(--font-heading, sans-serif)',
-                  fontWeight: 800,
+                  fontFamily: "'Plus Jakarta Sans', sans-serif",
+                  fontWeight: 700,
                   fontSize: '1.1rem',
                   color: DARK,
                   margin: 0,
@@ -847,7 +833,7 @@ export default function HomepageDemo5() {
                   {service.description}
                 </p>
                 {/* Tags */}
-                <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, padding: '1rem 1.25rem 1.25rem' }}>
+                <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, padding: '1rem 1.25rem 1.25rem', fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 400 }}>
                   {service.tags.map((tag) => (
                     <span
                       key={tag}
@@ -895,19 +881,18 @@ export default function HomepageDemo5() {
             textAlign: 'center',
           }}>
             <h2 style={{
-              fontFamily: 'var(--font-heading, sans-serif)',
-              fontWeight: 900,
+              fontFamily: "'Plus Jakarta Sans', sans-serif",
+              fontWeight: 700,
               fontSize: 'clamp(2rem, 4vw, 3.25rem)',
               lineHeight: 1.1,
               letterSpacing: '-0.03em',
               margin: '0 0 1.25rem 0',
-              background: 'none',
-              WebkitBackgroundClip: 'unset',
-              backgroundClip: 'unset',
-              WebkitTextFillColor: 'unset',
+              background: 'linear-gradient(to right, #6B1817, #5636AD)',
+              backgroundClip: 'text',
+              WebkitBackgroundClip: 'text',
+              color: 'transparent',
             }}>
-              <span style={{ color: '#5a0f2b' }}>Prêt.e à </span>
-              <span style={{ color: '#723C9F', background: 'none', WebkitTextFillColor: 'unset' }}>performer?</span>
+              Prêt.e à performer?
             </h2>
             <p style={{
               fontSize: '1rem',

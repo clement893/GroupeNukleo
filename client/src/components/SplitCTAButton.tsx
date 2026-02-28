@@ -2,9 +2,9 @@ import { ArrowUpRight } from 'lucide-react';
 import { useLocalizedPath } from '@/hooks/useLocalizedPath';
 
 const BTN_PURPLE = '#5D43CD';
-const ARROW_WIDTH = 48;
 
 export type SplitCTAButtonVariant = 'purple' | 'white';
+export type SplitCTAButtonSize = 'default' | 'small';
 
 export interface SplitCTAButtonProps {
   href: string;
@@ -12,9 +12,25 @@ export interface SplitCTAButtonProps {
   ariaLabel?: string;
   className?: string;
   variant?: SplitCTAButtonVariant;
+  size?: SplitCTAButtonSize;
   onClick?: () => void;
   onMouseEnter?: () => void;
 }
+
+const SIZES = {
+  default: {
+    padding: '0.9rem 1.75rem',
+    fontSize: '0.9rem',
+    arrowWidth: 48,
+    iconSize: 20,
+  },
+  small: {
+    padding: '0.5rem 1rem',
+    fontSize: '0.8rem',
+    arrowWidth: 36,
+    iconSize: 16,
+  },
+} as const;
 
 export function SplitCTAButton({
   href,
@@ -22,16 +38,18 @@ export function SplitCTAButton({
   ariaLabel,
   className = '',
   variant = 'purple',
+  size = 'default',
   onClick,
   onMouseEnter,
 }: SplitCTAButtonProps) {
   const getLocalizedPath = useLocalizedPath();
   const to = getLocalizedPath(href);
+  const sz = SIZES[size];
 
   const isWhite = variant === 'white';
   const bg = isWhite ? '#fff' : BTN_PURPLE;
   const color = isWhite ? '#0a0a0a' : '#fff';
-  const boxShadow = isWhite ? '0 4px 14px rgba(0,0,0,0.12)' : '0 2px 8px rgba(93,67,205,0.25)';
+  const shadowBlock = isWhite ? '0 2px 8px rgba(0,0,0,0.1)' : '0 2px 8px rgba(93,67,205,0.25)';
 
   const styleWrapper = {
     display: 'inline-flex',
@@ -39,44 +57,52 @@ export function SplitCTAButton({
     gap: 0,
     margin: 0,
     border: 'none',
-    borderRadius: 999,
-    overflow: 'hidden' as const,
-    background: bg,
-    boxShadow,
     textDecoration: 'none' as const,
   };
   const styleText = {
     display: 'inline-flex',
     alignItems: 'center',
-    padding: '0.9rem 1.75rem',
+    padding: sz.padding,
+    background: bg,
     color,
-    fontWeight: 700,
-    fontSize: '0.9rem',
+    fontFamily: "'Figtree', sans-serif",
+    fontWeight: 400,
+    fontSize: sz.fontSize,
     border: 'none',
     margin: 0,
+    borderRadius: 999,
+    boxShadow: shadowBlock,
   };
   const styleArrow = {
     display: 'inline-flex',
     alignItems: 'center',
     justifyContent: 'center',
-    width: ARROW_WIDTH,
+    width: sz.arrowWidth,
+    minWidth: sz.arrowWidth,
+    background: bg,
     color,
     border: 'none',
     margin: 0,
+    borderRadius: 16,
+    boxShadow: shadowBlock,
   };
 
   return (
     <a
       href={to}
       aria-label={ariaLabel ?? label}
-      className={`hover:opacity-95 transition-opacity ${className}`}
+      className={`group hover:opacity-95 transition-opacity ${className}`}
       style={styleWrapper}
       onClick={onClick}
       onMouseEnter={onMouseEnter}
     >
       <span style={styleText}>{label}</span>
-      <span style={styleArrow} aria-hidden>
-        <ArrowUpRight size={20} strokeWidth={2.5} />
+      <span
+        style={styleArrow}
+        className="inline-flex items-center justify-center transition-transform duration-200 ease-out group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+        aria-hidden
+      >
+        <ArrowUpRight size={sz.iconSize} strokeWidth={2.5} />
       </span>
     </a>
   );

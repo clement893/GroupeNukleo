@@ -19,11 +19,6 @@ export default function NukleoTech() {
     description: t(`${NS}.grid${i}Description`),
   }));
 
-  const processSteps = Array.from({ length: 4 }, (_, i) => ({
-    title: t(`${NS}.process${i}Title`),
-    description: t(`${NS}.process${i}Description`),
-  }));
-
   return (
     <PageLayout>
       <SEO
@@ -34,6 +29,8 @@ export default function NukleoTech() {
       <ServiceDetailLayout
         pageTitle={t(`${NS}.pageTitle`)}
         tagline={t(`${NS}.tagline`)}
+        heroImage="/demo/dept-tech.jpg"
+        heroImageAlt={t(`${NS}.heroImageAlt`)}
         navItems={navItems.map((label, id) => ({ id: String(id), label }))}
         mainTitle={t(`${NS}.mainTitle`)}
         mainDescription={t(`${NS}.mainDescription`)}
@@ -41,10 +38,11 @@ export default function NukleoTech() {
         extensionsTitle={t(`${NS}.extensionsTitle`)}
         extensionsDescription={t(`${NS}.extensionsDescription`)}
         extensionsTags={extensionsTags}
+        expertiseSectionTitle={t(`${NS}.expertiseSectionTitle`)}
+        expertiseSectionDescription={t(`${NS}.expertiseSectionDescription`) || undefined}
         gridItems={gridItems}
         teamTitle={t(`${NS}.teamTitle`)}
         teamDescription={t(`${NS}.teamDescription`)}
-        processSteps={processSteps}
         ctaTitle={t(`${NS}.ctaTitle`)}
         ctaButtonText={t(`${NS}.ctaButtonText`)}
         ctaHref={getLocalizedPath('/contact')}

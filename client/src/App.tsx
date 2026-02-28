@@ -1,7 +1,6 @@
 import { lazy, Suspense } from "react";
 import { Route, Switch, useLocation, Redirect } from "wouter";
 import EnhancedErrorBoundary from "./components/EnhancedErrorBoundary";
-import CustomCursor from "./components/CustomCursor";
 import PageLoader from "./components/PageLoader";
 
 import { ThemeProvider } from "./contexts/ThemeContext";
@@ -120,7 +119,6 @@ function App() {
         <LanguageProvider>
           <PageLoader />
           <ArrowBackground variant="default" />
-          <CustomCursor />
           <ScrollToTop />
           <GoogleAnalytics />
           <AnalyticsLoader />

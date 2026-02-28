@@ -35,7 +35,7 @@ function getSoundConfig(): SoundConfig | null {
 
 function areSoundsEnabled(): boolean {
   const enabled = localStorage.getItem(SOUNDS_ENABLED_KEY);
-  return enabled === null || enabled === 'true';
+  return enabled === 'true';
 }
 
 /**

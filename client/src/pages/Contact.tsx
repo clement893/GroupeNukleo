@@ -1,11 +1,10 @@
 import { useState } from 'react';
-import { AlertCircle } from 'lucide-react';
+import { AlertCircle, MapPin } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import PageLayout from '@/components/PageLayout';
 import { trpc } from '@/lib/trpc';
 import SEO from '@/components/SEO';
 import StructuredData, { montrealOfficeSchema, halifaxOfficeSchema } from '@/components/StructuredData';
-import Breadcrumb from '@/components/Breadcrumb';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { extractValidationErrors, getErrorMessage } from '@/lib/trpcErrorHandler';
 import { logger } from '@/lib/logger';
@@ -14,10 +13,16 @@ const BORDEAUX = '#5A1E29';
 const OFF_WHITE = '#EFE8E8';
 
 // Carte : embed Google Maps (adresse Montréal) — pas de clé API requise pour l’embed classique
-const MAP_EMBED_SRC = 'https://www.google.com/maps?q=7236+Rue+Waverly+Montreal+QC+H2R+0C2+Canada&output=embed';
+type OfficeId = 'montreal' | 'halifax';
+
+const MAP_EMBED: Record<OfficeId, string> = {
+  montreal: 'https://www.google.com/maps?q=7236+Rue+Waverly+Montreal+QC+H2R+0C2+Canada&output=embed',
+  halifax: 'https://www.google.com/maps?q=1800+Argyle+St+Unit+801+Halifax+NS+B3J+3N8+Canada&output=embed',
+};
 
 export default function Contact() {
   const { t } = useLanguage();
+  const [selectedOffice, setSelectedOffice] = useState<OfficeId>('montreal');
 
   const [formData, setFormData] = useState({
     firstName: '',
@@ -102,77 +107,13 @@ export default function Contact() {
       <StructuredData data={montrealOfficeSchema} />
       <StructuredData data={halifaxOfficeSchema} />
 
-      <div className="min-h-screen">
-        {/* Hero */}
-        <section className="pt-24 pb-10 lg:pt-32 lg:pb-14">
-          <div className="container">
-            <Breadcrumb items={[{ name: t('nav.contact'), url: '/contact' }]} />
-            <h1
-              className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-3"
-              style={{ color: BORDEAUX, fontFamily: 'var(--font-heading, sans-serif)' }}
-            >
-              {t('contact.heroTitleNew')}
-            </h1>
-            <p className="text-lg text-gray-600 max-w-2xl">
-              {t('contact.heroSubtitle')}
-            </p>
-          </div>
-        </section>
-
-        {/* Contact info + Map (2 colonnes) */}
-        <section className="pb-16 lg:pb-24">
-          <div className="container">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16">
-              <div className="space-y-8">
-                <div>
-                  <h2 className="text-sm font-bold uppercase tracking-wider mb-2" style={{ color: BORDEAUX }}>
-                    {t('contact.whereToFindUs')}
-                  </h2>
-                  <p className="text-gray-600 text-sm leading-relaxed">
-                    {t('contact.addressMontreal')}
-                    <br />
-                    {t('contact.addressHalifax')}
-                  </p>
-                </div>
-                <div>
-                  <h2 className="text-sm font-bold uppercase tracking-wider mb-2" style={{ color: BORDEAUX }}>
-                    {t('contact.phoneLabel')}
-                  </h2>
-                  <a href="tel:+15147771234" className="text-gray-600 hover:underline">
-                    +1 (514) 777-1234
-                  </a>
-                </div>
-                <div>
-                  <h2 className="text-sm font-bold uppercase tracking-wider mb-2" style={{ color: BORDEAUX }}>
-                    {t('contact.emailLabel')}
-                  </h2>
-                  <a href="mailto:hello@nukleo.com" className="text-gray-600 hover:underline">
-                    hello@nukleo.com
-                  </a>
-                </div>
-              </div>
-              <div className="rounded-2xl overflow-hidden shadow-lg bg-gray-100" style={{ minHeight: 320 }}>
-                <iframe
-                  title={t('contact.whereToFindUs')}
-                  src={MAP_EMBED_SRC}
-                  width="100%"
-                  height="100%"
-                  style={{ minHeight: 320, border: 0 }}
-                  allowFullScreen
-                  loading="lazy"
-                  referrerPolicy="no-referrer-when-downgrade"
-                  className="block w-full"
-                />
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Formulaire — sous le bloc contact + carte */}
-        <section className="pb-16 lg:pb-24">
-          <div className="container">
-            <div className="max-w-2xl rounded-2xl p-8 lg:p-10 bg-white shadow-sm border border-gray-100">
-              <h2 className="text-2xl font-bold mb-6" style={{ color: BORDEAUX, fontFamily: 'var(--font-heading, sans-serif)' }}>
+      <div className="min-h-screen" style={{ background: OFF_WHITE }}>
+        {/* Formulaire en haut — pleine largeur, effet glass (glass-panel) */}
+        <section className="pt-24 pb-12 lg:pt-28 lg:pb-16">
+          <div className="w-full px-4 sm:px-6 lg:px-8">
+            <div className="glass-panel w-full rounded-2xl p-8 lg:p-12">
+              <div className="max-w-3xl mx-auto">
+              <h2 className="text-2xl lg:text-3xl font-bold mb-6" style={{ color: BORDEAUX, fontFamily: 'var(--font-heading, sans-serif)' }}>
                 {t('contact.sendMessage')}
               </h2>
               {isSubmitted && (
@@ -307,10 +248,100 @@ export default function Contact() {
                   {isSubmitting || sendMessage.isPending ? (t('common.loading') || 'Envoi...') : t('contact.send')}
                 </Button>
               </form>
+              </div>
             </div>
           </div>
         </section>
 
+        {/* Bloc 2 colonnes : villes à gauche, carte à droite */}
+        <section className="pb-16 lg:pb-24">
+          <div className="container">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-stretch">
+              {/* Gauche : titre, sous-titre, bureaux cliquables, email */}
+              <div className="order-1 flex flex-col justify-center">
+                <h1
+                  className="text-3xl md:text-4xl lg:text-5xl font-bold leading-tight mb-2"
+                  style={{ color: BORDEAUX, fontFamily: 'var(--font-heading, sans-serif)' }}
+                >
+                  {t('contact.heroTitleNew')}
+                </h1>
+                <p className="text-lg text-gray-800 mb-8">
+                  {t('contact.heroSubtitle')}
+                </p>
+                <div className="space-y-5">
+                  <button
+                    type="button"
+                    onClick={() => setSelectedOffice('montreal')}
+                    className="w-full text-left flex items-start gap-3 hover:opacity-80 transition-opacity cursor-pointer border-none bg-transparent p-0"
+                  >
+                    <MapPin className="w-4 h-4 flex-shrink-0 mt-1" style={{ color: '#DC2626' }} aria-hidden />
+                    <div>
+                      <p className="font-semibold text-gray-900">{t('contact.montreal')}</p>
+                      <p className="text-gray-600 text-sm leading-relaxed mt-0.5">
+                        {t('contact.addressMontreal').includes(', ')
+                          ? (() => {
+                              const [street, ...rest] = t('contact.addressMontreal').split(', ');
+                              return (
+                                <>
+                                  {street}
+                                  <br />
+                                  {rest.join(', ')}
+                                </>
+                              );
+                            })()
+                          : t('contact.addressMontreal')}
+                      </p>
+                    </div>
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setSelectedOffice('halifax')}
+                    className="w-full text-left flex items-start gap-3 hover:opacity-80 transition-opacity cursor-pointer border-none bg-transparent p-0"
+                  >
+                    <MapPin className="w-4 h-4 flex-shrink-0 mt-1" style={{ color: '#DC2626' }} aria-hidden />
+                    <div>
+                      <p className="font-semibold text-gray-900">{t('contact.halifax')}</p>
+                      <p className="text-gray-600 text-sm leading-relaxed mt-0.5">
+                        {t('contact.addressHalifax').includes(', ')
+                          ? (() => {
+                              const [street, ...rest] = t('contact.addressHalifax').split(', ');
+                              return (
+                                <>
+                                  {street}
+                                  <br />
+                                  {rest.join(', ')}
+                                </>
+                              );
+                            })()
+                          : t('contact.addressHalifax')}
+                      </p>
+                    </div>
+                  </button>
+                </div>
+                <p className="mt-6 text-gray-700">
+                  <a href="mailto:hello@nukleo.com" className="text-gray-900 hover:underline">
+                    hello@nukleo.com
+                  </a>
+                </p>
+              </div>
+              {/* Droite : carte, mise à jour selon la ville sélectionnée */}
+              <div className="order-2 rounded-2xl overflow-hidden shadow-lg bg-gray-100 min-h-[320px] lg:min-h-[480px]">
+                <iframe
+                  key={selectedOffice}
+                  title={t('contact.whereToFindUs')}
+                  src={MAP_EMBED[selectedOffice]}
+                  width="100%"
+                  height="100%"
+                  style={{ minHeight: 320, border: 0 }}
+                  allowFullScreen
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                  className="block w-full h-full min-h-[320px] lg:min-h-[480px]"
+                />
+              </div>
+            </div>
+          </div>
+        </section>
       </div>
     </PageLayout>
   );

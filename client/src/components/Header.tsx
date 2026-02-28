@@ -74,26 +74,27 @@ function Header() {
     };
   }, []);
 
-  // Fond uni (sans dégradé), comme sur l'image
-  const headerBg = '#f8f6fc';
   const btnPurple = '#5B21B6';
   const logoBordeaux = '#712D3A';
   const logoCommaPurple = '#7e3e9d';
 
   return (
     <>
-      <header 
+      <header
         className={`
-          fixed top-0 left-0 right-0 z-40
+          fixed top-0 left-0 right-0 z-50
           transition-all ${isMobile ? `duration-${animationDuration}` : 'duration-300 sm:duration-700'} ease-[cubic-bezier(0.16,1,0.3,1)]
           ${isScrolled ? 'px-4 sm:px-6 md:px-12 pt-3 sm:pt-4' : 'px-4 sm:px-6 md:px-12 pt-6 sm:pt-8'}
         `}
-        style={isMobile && ANIMATIONS.USE_WILL_CHANGE ? { willChange: 'transform, opacity' } : undefined}
+        style={{
+          background: 'transparent',
+          ...(isMobile && ANIMATIONS.USE_WILL_CHANGE ? { willChange: 'transform, opacity' } : {}),
+        }}
       >
         <div 
           className="transition-all duration-300 sm:duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] px-4 sm:px-6 md:px-8 py-3 sm:py-4"
           style={{
-            background: headerBg,
+            background: 'transparent',
             borderRadius: 0,
             boxShadow: isScrolled ? '0 4px 24px rgba(0,0,0,0.08)' : 'none',
           }}
@@ -121,6 +122,7 @@ function Header() {
                 href="/contact"
                 label={t('nav.contact') || 'Contactez-nous'}
                 ariaLabel={t('nav.contact') || 'Contactez-nous'}
+                size="small"
                 className="hidden xs:inline-flex touch-manipulation"
                 onClick={playClick}
                 onMouseEnter={playHover}

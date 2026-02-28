@@ -11,6 +11,16 @@ function CustomCursor() {
   );
 
   useEffect(() => {
+    if (isTouchDevice) return;
+    if (hidden) {
+      document.body.classList.remove('custom-cursor-active');
+    } else {
+      document.body.classList.add('custom-cursor-active');
+    }
+    return () => { document.body.classList.remove('custom-cursor-active'); };
+  }, [isTouchDevice, hidden]);
+
+  useEffect(() => {
     // Early return for touch devices
     if (isTouchDevice) return;
 
@@ -45,7 +55,7 @@ function CustomCursor() {
 
   return (
     <div 
-      className="cursor-glow hidden md:block"
+      className="cursor-dot hidden md:block"
       style={{ 
         left: `${position.x}px`, 
         top: `${position.y}px` 
