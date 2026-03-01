@@ -17,8 +17,6 @@ const ALL_PAGES = [
   { path: '/fr/projects', label: 'Projets (FR)', description: 'Page des projets en français' },
   { path: '/about', label: 'À propos', description: 'Page à propos' },
   { path: '/fr/about', label: 'À propos (FR)', description: 'Page à propos en français' },
-  { path: '/approche', label: 'Approche', description: 'Page approche / expertise' },
-  { path: '/fr/approche', label: 'Approche (FR)', description: 'Page approche en français' },
   { path: '/resources', label: 'Ressources', description: 'Page ressources' },
   { path: '/fr/resources', label: 'Ressources (FR)', description: 'Page ressources en français' },
   { path: '/contact', label: 'Contact', description: 'Page de contact' },

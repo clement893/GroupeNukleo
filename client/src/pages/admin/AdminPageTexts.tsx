@@ -94,7 +94,6 @@ const PAGE_SECTION_LABELS: Record<string, string> = {
   about: "À propos",
   contact: "Contact",
   projects: "Projets",
-  approche: "Approche",
   resources: "Ressources",
   faq: "FAQ",
   leo: "Leo",
@@ -130,7 +129,7 @@ const PAGE_SECTION_LABELS: Record<string, string> = {
 };
 /** Ordre d’affichage des sections (pages du site en premier) */
 const PAGE_SECTION_ORDER = [
-  "home", "services", "about", "contact", "projects", "approche", "resources", "faq", "leo",
+  "home", "services", "about", "contact", "projects", "resources", "faq", "leo",
   "expertise", "nav", "header", "menu", "footer", "preFooter", "common", "notFound", "alt",
   "hero", "capabilities", "manifesto", "trinity", "cta", "testimonials", "whoWeServe", "clients",
   "startProject", "artsCulture", "agencies", "media", "lab", "bureau", "studio",

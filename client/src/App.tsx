@@ -82,7 +82,6 @@ const NukleoTech = lazyWithRetry(() => import("./pages/services/NukleoTech"));
 const NukleoConsulting = lazyWithRetry(() => import("./pages/services/NukleoConsulting"));
 const NukleoStudio = lazyWithRetry(() => import("./pages/services/NukleoStudio"));
 const NukleoAgency = lazyWithRetry(() => import("./pages/services/NukleoAgency"));
-const Approche = lazyWithRetry(() => import("./pages/Approche"));
 
 // Admin pages
 const AdminLEOAnalytics = lazy(() => import("./pages/admin/AdminLEOAnalytics"));
@@ -133,7 +132,6 @@ function App() {
               <Route path="/fr/projects" component={withPageVisibility(Projects, "/fr/projects")} />
               <Route path="/fr/projects/:slug" component={withPageVisibility(ProjectDetail, "/fr/projects")} />
               <Route path="/fr/about" component={withPageVisibility(About, "/fr/about")} />
-              <Route path="/fr/approche" component={withPageVisibility(Approche, "/fr/approche")} />
               <Route path="/fr/resources" component={withPageVisibility(Resources, "/fr/resources")} />
               <Route path="/fr/resources/:id" component={withPageVisibility(ResourceArticle, "/fr/resources")} />
               <Route path="/fr/contact" component={withPageVisibility(Contact, "/fr/contact")} />
@@ -155,7 +153,6 @@ function App() {
               <Route path="/projects" component={withPageVisibility(Projects, "/projects")} />
               <Route path="/projects/:slug" component={withPageVisibility(ProjectDetail, "/projects")} />
               <Route path="/about" component={withPageVisibility(About, "/about")} />
-              <Route path="/approche" component={withPageVisibility(Approche, "/approche")} />
               <Route path="/resources" component={withPageVisibility(Resources, "/resources")} />
               <Route path="/resources/:id" component={withPageVisibility(ResourceArticle, "/resources")} />
               <Route path="/contact" component={withPageVisibility(Contact, "/contact")} />
