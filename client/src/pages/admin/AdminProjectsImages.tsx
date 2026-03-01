@@ -175,29 +175,7 @@ export default function AdminProjectsImages() {
           </div>
         ) : (
           <>
-            {!isFromApi && (
-              <Card className="mb-6 bg-amber-500/10 border-amber-500/30">
-                <CardContent className="py-4 flex items-center justify-between flex-wrap gap-3">
-                  <p className="text-amber-800 dark:text-amber-200 text-sm">
-                    Les projets affichés viennent du code (projectsData). Enregistrez-les une fois pour pouvoir les modifier ici.
-                  </p>
-                  <Button
-                    onClick={() => initMutation.mutate({ projects: PROJECTS_DATA.map(projectToRecord) })}
-                    disabled={initMutation.isPending}
-                    className="gap-2"
-                  >
-                    {initMutation.isPending ? (
-                      <Loader2 className="w-4 h-4 animate-spin" />
-                    ) : (
-                      <FolderInput className="w-4 h-4" />
-                    )}
-                    Initialiser depuis le site
-                  </Button>
-                </CardContent>
-              </Card>
-            )}
-
-            {/* Triptyques : choisir les 3 projets */}
+            {/* Triptyques en haut : choisir les 3 projets de chaque triptyque */}
             {isFromApi && (
               <Card className="mb-8 bg-white dark:bg-[var(--admin-card)] border-[var(--admin-border)] shadow-sm">
                 <CardHeader>
@@ -210,7 +188,7 @@ export default function AdminProjectsImages() {
                   <div>
                     <p className="text-sm font-medium text-[var(--admin-foreground)] mb-2 flex items-center gap-2">
                       <LayoutPanelTop className="w-4 h-4 text-amber-600" />
-                      Triptyque page d&apos;accueil
+                      Triptyque page d&apos;accueil (3 projets)
                     </p>
                     <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                       {[0, 1, 2].map((i) => (
@@ -226,7 +204,7 @@ export default function AdminProjectsImages() {
                                 return next.slice(0, 3);
                               });
                             }}
-                            className="w-full h-9 rounded-md border border-input bg-background px-3 py-1 text-sm text-[var(--admin-foreground)]"
+                            className="w-full h-9 rounded-md border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 px-3 py-1 text-sm"
                           >
                             <option value="">— Aucun —</option>
                             {projects.map((p) => (
@@ -240,7 +218,7 @@ export default function AdminProjectsImages() {
                   <div>
                     <p className="text-sm font-medium text-[var(--admin-foreground)] mb-2 flex items-center gap-2">
                       <LayoutGrid className="w-4 h-4 text-violet-600" />
-                      Triptyque page Projets
+                      Triptyque page Projets (3 projets)
                     </p>
                     <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                       {[0, 1, 2].map((i) => (
@@ -256,7 +234,7 @@ export default function AdminProjectsImages() {
                                 return next.slice(0, 3);
                               });
                             }}
-                            className="w-full h-9 rounded-md border border-input bg-background px-3 py-1 text-sm text-[var(--admin-foreground)]"
+                            className="w-full h-9 rounded-md border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 px-3 py-1 text-sm"
                           >
                             <option value="">— Aucun —</option>
                             {projects.map((p) => (
@@ -281,6 +259,28 @@ export default function AdminProjectsImages() {
                       <Loader2 className="w-4 h-4 animate-spin" />
                     ) : null}
                     Enregistrer la sélection des triptyques
+                  </Button>
+                </CardContent>
+              </Card>
+            )}
+
+            {!isFromApi && (
+              <Card className="mb-6 bg-amber-500/10 border-amber-500/30">
+                <CardContent className="py-4 flex items-center justify-between flex-wrap gap-3">
+                  <p className="text-amber-800 dark:text-amber-200 text-sm">
+                    Les projets affichés viennent du code (projectsData). Enregistrez-les une fois pour pouvoir les modifier ici.
+                  </p>
+                  <Button
+                    onClick={() => initMutation.mutate({ projects: PROJECTS_DATA.map(projectToRecord) })}
+                    disabled={initMutation.isPending}
+                    className="gap-2"
+                  >
+                    {initMutation.isPending ? (
+                      <Loader2 className="w-4 h-4 animate-spin" />
+                    ) : (
+                      <FolderInput className="w-4 h-4" />
+                    )}
+                    Initialiser depuis le site
                   </Button>
                 </CardContent>
               </Card>

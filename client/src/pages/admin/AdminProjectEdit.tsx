@@ -113,6 +113,9 @@ export default function AdminProjectEdit() {
     );
   }
 
+  const inputClass =
+    'mt-1 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-gray-100 placeholder:text-gray-500 dark:placeholder:text-gray-400';
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!current) return;
@@ -173,7 +176,7 @@ export default function AdminProjectEdit() {
                     <Input
                       value={current.slug}
                       onChange={(e) => setForm({ ...current, slug: e.target.value })}
-                      className="mt-1 bg-background text-[var(--admin-foreground)]"
+                      className={inputClass}
                     />
                   </div>
                   <div>
@@ -181,7 +184,7 @@ export default function AdminProjectEdit() {
                     <Input
                       value={current.key}
                       onChange={(e) => setForm({ ...current, key: e.target.value })}
-                      className="mt-1 bg-background text-[var(--admin-foreground)]"
+                      className={inputClass}
                     />
                   </div>
                 </div>
@@ -190,7 +193,7 @@ export default function AdminProjectEdit() {
                   <Input
                     value={current.title}
                     onChange={(e) => setForm({ ...current, title: e.target.value })}
-                    className="mt-1 bg-background text-[var(--admin-foreground)]"
+                    className={inputClass}
                   />
                 </div>
                 <div className="grid grid-cols-2 gap-4">
@@ -199,7 +202,7 @@ export default function AdminProjectEdit() {
                     <Input
                       value={current.client}
                       onChange={(e) => setForm({ ...current, client: e.target.value })}
-                      className="mt-1 bg-background text-[var(--admin-foreground)]"
+                      className={inputClass}
                     />
                   </div>
                   <div>
@@ -207,7 +210,7 @@ export default function AdminProjectEdit() {
                     <Input
                       value={current.year}
                       onChange={(e) => setForm({ ...current, year: e.target.value })}
-                      className="mt-1 bg-background text-[var(--admin-foreground)]"
+                      className={inputClass}
                     />
                   </div>
                 </div>
@@ -216,7 +219,7 @@ export default function AdminProjectEdit() {
                   <select
                     value={current.category}
                     onChange={(e) => setForm({ ...current, category: e.target.value as ProjectFilterCategory })}
-                    className="w-full mt-1 h-9 rounded-md border border-input bg-background px-3 py-1 text-sm text-[var(--admin-foreground)]"
+                    className={`w-full ${inputClass} h-9 rounded-md border border-gray-300 dark:border-gray-600 px-3 py-1 text-sm`}
                   >
                     {CATEGORIES.map((c) => (
                       <option key={c} value={c}>{c}</option>
@@ -228,7 +231,7 @@ export default function AdminProjectEdit() {
                   <Input
                     value={current.services}
                     onChange={(e) => setForm({ ...current, services: e.target.value })}
-                    className="mt-1 bg-background text-[var(--admin-foreground)]"
+                    className={inputClass}
                   />
                 </div>
                 <div>
@@ -237,7 +240,7 @@ export default function AdminProjectEdit() {
                     value={current.websiteUrl ?? ''}
                     onChange={(e) => setForm({ ...current, websiteUrl: e.target.value || undefined })}
                     placeholder="https://..."
-                    className="mt-1 bg-background text-[var(--admin-foreground)]"
+                    className={inputClass}
                   />
                 </div>
                 <div>
@@ -246,7 +249,7 @@ export default function AdminProjectEdit() {
                     value={current.description.fr}
                     onChange={(e) => setForm({ ...current, description: { ...current.description, fr: e.target.value } })}
                     rows={4}
-                    className="mt-1 bg-background text-[var(--admin-foreground)]"
+                    className={inputClass}
                   />
                 </div>
                 <div>
@@ -255,11 +258,32 @@ export default function AdminProjectEdit() {
                     value={current.description.en}
                     onChange={(e) => setForm({ ...current, description: { ...current.description, en: e.target.value } })}
                     rows={4}
-                    className="mt-1 bg-background text-[var(--admin-foreground)]"
+                    className={inputClass}
                   />
                 </div>
                 <div>
                   <Label className="text-[var(--admin-foreground)]">Images (un par ligne ou séparés par des virgules)</Label>
+                  {current.images.length > 0 && (
+                    <div className="mt-2 mb-2 flex flex-wrap gap-2">
+                      {current.images.map((img) => (
+                        <div
+                          key={img}
+                          className="w-20 h-20 rounded-lg overflow-hidden border border-gray-300 dark:border-gray-600 bg-gray-100 dark:bg-gray-800 flex-shrink-0"
+                          title={img}
+                        >
+                          <img
+                            src={`/projects/${img}`}
+                            alt=""
+                            className="w-full h-full object-cover"
+                            loading="lazy"
+                            onError={(e) => {
+                              (e.target as HTMLImageElement).style.display = 'none';
+                            }}
+                          />
+                        </div>
+                      ))}
+                    </div>
+                  )}
                   <Textarea
                     value={current.images.join('\n')}
                     onChange={(e) => {
@@ -269,7 +293,7 @@ export default function AdminProjectEdit() {
                     }}
                     rows={3}
                     placeholder="Projet_1.jpg&#10;Projet_2.png"
-                    className="mt-1 font-mono text-sm bg-background text-[var(--admin-foreground)]"
+                    className={`${inputClass} font-mono text-sm`}
                   />
                 </div>
                 <div className="flex gap-3 pt-4">
