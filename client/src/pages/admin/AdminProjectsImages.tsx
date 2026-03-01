@@ -9,6 +9,16 @@ import {
   DialogHeader,
   DialogTitle,
 } from '@/components/ui/dialog';
+import {
+  AlertDialog,
+  AlertDialogContent,
+  AlertDialogHeader,
+  AlertDialogFooter,
+  AlertDialogTitle,
+  AlertDialogDescription,
+  AlertDialogAction,
+  AlertDialogCancel,
+} from '@/components/ui/alert-dialog';
 import { useState, useRef, useMemo, useEffect } from 'react';
 import { Link } from 'wouter';
 import {
@@ -145,6 +155,7 @@ export default function AdminProjectsImages() {
   const [homeTriptychImageBySlug, setHomeTriptychImageBySlug] = useState<Record<string, string>>(() => defaultHomeTriptychImageBySlug);
   const [projectsTriptychImageBySlug, setProjectsTriptychImageBySlug] = useState<Record<string, string>>(() => defaultProjectsTriptychImageBySlug);
   const [triptychImagePicker, setTriptychImagePicker] = useState<{ type: 'home' | 'projects'; index: number } | null>(null);
+  const [confirmSave, setConfirmSave] = useState<'triptych' | 'carousel' | null>(null);
   useEffect(() => {
     setHomeTriptychSlugs(defaultHomeSlugs);
     setProjectsTriptychSlugs(defaultProjectsSlugs);
@@ -387,23 +398,7 @@ export default function AdminProjectsImages() {
                   </div>
                 </div>
                 <Button
-                  onClick={async () => {
-                    if (!isFromApi) {
-                      try {
-                        await initMutation.mutateAsync({ projects: PROJECTS_DATA.map(projectToRecord) });
-                        await refetchProjects();
-                      } catch (e: unknown) {
-                        toast.error(e instanceof Error ? e.message : 'Erreur initialisation');
-                        return;
-                      }
-                    }
-                    setTriptychMutation.mutate({
-                      homeTriptychSlugs: homeTriptychSlugs.filter(Boolean),
-                      projectsTriptychSlugs: projectsTriptychSlugs.filter(Boolean),
-                      homeTriptychImageBySlug: homeTriptychImageBySlug,
-                      projectsTriptychImageBySlug: projectsTriptychImageBySlug,
-                    });
-                  }}
+                  onClick={() => setConfirmSave('triptych')}
                   disabled={setTriptychMutation.isPending || initMutation.isPending}
                   className="gap-2"
                 >
@@ -477,6 +472,71 @@ export default function AdminProjectsImages() {
               </DialogContent>
             </Dialog>
 
+            {/* Modale de confirmation avant enregistrement triptyques / carousel */}
+            <AlertDialog open={!!confirmSave} onOpenChange={(open) => !open && setConfirmSave(null)}>
+              <AlertDialogContent className="bg-white dark:bg-[var(--admin-card)] border-[var(--admin-border)]">
+                <AlertDialogHeader>
+                  <AlertDialogTitle className="text-[var(--admin-foreground)]">
+                    Confirmer l&apos;enregistrement
+                  </AlertDialogTitle>
+                  <AlertDialogDescription className="text-[var(--admin-muted)]">
+                    {confirmSave === 'triptych' && (
+                      <>Voulez-vous enregistrer la sélection des triptyques (page d&apos;accueil et page Projets) ? Les 3 projets et images choisis seront mis à jour.</>
+                    )}
+                    {confirmSave === 'carousel' && (
+                      <>Voulez-vous enregistrer la sélection du carousel d&apos;accueil ? Les projets et images affichés en haut de la page d&apos;accueil seront mis à jour.</>
+                    )}
+                  </AlertDialogDescription>
+                </AlertDialogHeader>
+                <AlertDialogFooter>
+                  <AlertDialogCancel className="border-[var(--admin-border)] text-[var(--admin-foreground)]">Annuler</AlertDialogCancel>
+                  <AlertDialogAction
+                    className="bg-cyan-600 hover:bg-cyan-700 text-white"
+                    onClick={async (e) => {
+                      e.preventDefault();
+                      if (!confirmSave) return;
+                      if (confirmSave === 'triptych') {
+                        if (!isFromApi) {
+                          try {
+                            await initMutation.mutateAsync({ projects: PROJECTS_DATA.map(projectToRecord) });
+                            await refetchProjects();
+                          } catch (err: unknown) {
+                            toast.error(err instanceof Error ? err.message : 'Erreur initialisation');
+                            setConfirmSave(null);
+                            return;
+                          }
+                        }
+                        setTriptychMutation.mutate({
+                          homeTriptychSlugs: homeTriptychSlugs.filter(Boolean),
+                          projectsTriptychSlugs: projectsTriptychSlugs.filter(Boolean),
+                          homeTriptychImageBySlug: homeTriptychImageBySlug,
+                          projectsTriptychImageBySlug: projectsTriptychImageBySlug,
+                        });
+                      } else {
+                        if (!isFromApi) {
+                          try {
+                            await initMutation.mutateAsync({ projects: PROJECTS_DATA.map(projectToRecord) });
+                            await refetchProjects();
+                          } catch (err: unknown) {
+                            toast.error(err instanceof Error ? err.message : 'Erreur initialisation');
+                            setConfirmSave(null);
+                            return;
+                          }
+                        }
+                        setCarouselMutation.mutate({
+                          carouselSlugs: carouselSlugs.filter(Boolean),
+                          imageBySlug: carouselImageBySlug,
+                        });
+                      }
+                      setConfirmSave(null);
+                    }}
+                  >
+                    Enregistrer
+                  </AlertDialogAction>
+                </AlertDialogFooter>
+              </AlertDialogContent>
+            </AlertDialog>
+
             {/* Carousel accueil (HOME) : jusqu'à 6 projets + image choisie pour chaque */}
             <Card className="mb-8 bg-white dark:bg-[var(--admin-card)] border-[var(--admin-border)] shadow-sm">
               <CardHeader>
@@ -549,21 +609,7 @@ export default function AdminProjectsImages() {
                   );
                 })}
                 <Button
-                  onClick={async () => {
-                    if (!isFromApi) {
-                      try {
-                        await initMutation.mutateAsync({ projects: PROJECTS_DATA.map(projectToRecord) });
-                        await refetchProjects();
-                      } catch (e: unknown) {
-                        toast.error(e instanceof Error ? e.message : 'Erreur initialisation');
-                        return;
-                      }
-                    }
-                    setCarouselMutation.mutate({
-                      carouselSlugs: carouselSlugs.filter(Boolean),
-                      imageBySlug: carouselImageBySlug,
-                    });
-                  }}
+                  onClick={() => setConfirmSave('carousel')}
                   disabled={setCarouselMutation.isPending || initMutation.isPending}
                   className="gap-2"
                 >
