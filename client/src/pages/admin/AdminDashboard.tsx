@@ -133,83 +133,83 @@ export default function AdminDashboard() {
             </Card>
 
             {/* Contacts & Leads */}
-            <Card className="bg-white/10 backdrop-blur-sm border-white/20">
+            <Card className="bg-white border border-gray-200 shadow-sm">
               <CardHeader>
-                <CardTitle className="text-white flex items-center gap-2">
+                <CardTitle className="text-gray-900 flex items-center gap-2" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
                   <MessageSquare className="w-5 h-5" />
                   Contacts & Leads
                 </CardTitle>
-                <CardDescription className="text-gray-400">
+                <CardDescription className="text-gray-500" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
                   Gestion des contacts
                 </CardDescription>
               </CardHeader>
               <CardContent className="space-y-2">
                 <a
                   href="/admin/leo-contacts"
-                  className="block p-3 rounded-lg bg-white/5 hover:bg-white/10 transition-colors"
+                  className="block p-3 rounded-lg bg-gray-50 hover:bg-gray-100 transition-colors text-gray-700 hover:text-gray-900"
                 >
-                  <div className="text-white font-medium">LEO Contacts</div>
-                  <div className="text-gray-400 text-sm">View emails captured by LEO chatbot</div>
+                  <div className="text-gray-900 font-medium" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>LEO Contacts</div>
+                  <div className="text-gray-500 text-sm" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>View emails captured by LEO chatbot</div>
                 </a>
                 <a
                   href="/admin/agency-leads"
-                  className="block p-3 rounded-lg bg-white/5 hover:bg-white/10 transition-colors"
+                  className="block p-3 rounded-lg bg-gray-50 hover:bg-gray-100 transition-colors text-gray-700 hover:text-gray-900"
                 >
-                  <div className="text-white font-medium">Agency Leads</div>
-                  <div className="text-gray-400 text-sm">Manage agency contact submissions</div>
+                  <div className="text-gray-900 font-medium" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>Agency Leads</div>
+                  <div className="text-gray-500 text-sm" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>Manage agency contact submissions</div>
                 </a>
                 <a
                   href="/admin/contact-messages"
-                  className="block p-3 rounded-lg bg-white/5 hover:bg-white/10 transition-colors"
+                  className="block p-3 rounded-lg bg-gray-50 hover:bg-gray-100 transition-colors text-gray-700 hover:text-gray-900"
                 >
-                  <div className="text-white font-medium">Contact Messages</div>
-                  <div className="text-gray-400 text-sm">Manage contact form submissions</div>
+                  <div className="text-gray-900 font-medium" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>Contact Messages</div>
+                  <div className="text-gray-500 text-sm" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>Manage contact form submissions</div>
                 </a>
               </CardContent>
             </Card>
 
             {/* Configuration */}
-            <Card className="bg-white/10 backdrop-blur-sm border-white/20">
+            <Card className="bg-white border border-gray-200 shadow-sm">
               <CardHeader>
-                <CardTitle className="text-white flex items-center gap-2">
+                <CardTitle className="text-gray-900 flex items-center gap-2" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
                   <Settings className="w-5 h-5" />
                   Configuration
                 </CardTitle>
-                <CardDescription className="text-gray-400">
+                <CardDescription className="text-gray-500" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
                   Paramètres du site
                 </CardDescription>
               </CardHeader>
               <CardContent className="space-y-2">
                 <a
                   href="/admin/page-visibility"
-                  className="block p-3 rounded-lg bg-white/5 hover:bg-white/10 transition-colors"
+                  className="block p-3 rounded-lg bg-gray-50 hover:bg-gray-100 transition-colors text-gray-700 hover:text-gray-900"
                 >
-                  <div className="text-white font-medium">Page Visibility</div>
-                  <div className="text-gray-400 text-sm">Manage page visibility settings</div>
+                  <div className="text-gray-900 font-medium" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>Page Visibility</div>
+                  <div className="text-gray-500 text-sm" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>Manage page visibility settings</div>
                 </a>
                 <a
                   href="/admin/loader-migration"
-                  className="block p-3 rounded-lg bg-white/5 hover:bg-white/10 transition-colors"
+                  className="block p-3 rounded-lg bg-gray-50 hover:bg-gray-100 transition-colors text-gray-700 hover:text-gray-900"
                 >
-                  <div className="text-white font-medium">Loaders</div>
-                  <div className="text-gray-400 text-sm">Manage loading animations</div>
+                  <div className="text-gray-900 font-medium" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>Loaders</div>
+                  <div className="text-gray-500 text-sm" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>Manage loading animations</div>
                 </a>
                 <a
                   href="/admin/sounds"
-                  className="block p-3 rounded-lg bg-white/5 hover:bg-white/10 transition-colors"
+                  className="block p-3 rounded-lg bg-gray-50 hover:bg-gray-100 transition-colors text-gray-700 hover:text-gray-900"
                 >
-                  <div className="text-white font-medium">Sounds</div>
-                  <div className="text-gray-400 text-sm">Manage interface sounds</div>
+                  <div className="text-gray-900 font-medium" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>Sounds</div>
+                  <div className="text-gray-500 text-sm" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>Manage interface sounds</div>
                 </a>
               </CardContent>
             </Card>
           </div>
 
           {/* Recent Activity */}
-          <Card className="bg-white/10 backdrop-blur-sm border-white/20">
+          <Card className="bg-white border border-gray-200 shadow-sm">
             <CardHeader>
-              <CardTitle className="text-white">Recent Activity</CardTitle>
-              <CardDescription className="text-gray-400">
+              <CardTitle className="text-gray-900" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>Recent Activity</CardTitle>
+              <CardDescription className="text-gray-500" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
                 Latest platform updates
               </CardDescription>
             </CardHeader>
@@ -218,22 +218,22 @@ export default function AdminDashboard() {
                 <div className="flex items-start gap-3">
                   <div className="h-2 w-2 rounded-full bg-green-500 mt-2" />
                   <div>
-                    <div className="text-white text-sm">System operational</div>
-                    <div className="text-gray-400 text-xs">All services running normally</div>
+                    <div className="text-gray-900 text-sm" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>System operational</div>
+                    <div className="text-gray-500 text-xs" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>All services running normally</div>
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
                   <div className="h-2 w-2 rounded-full bg-blue-500 mt-2" />
                   <div>
-                    <div className="text-white text-sm">Database connected</div>
-                    <div className="text-gray-400 text-xs">PostgreSQL on Railway</div>
+                    <div className="text-gray-900 text-sm" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>Database connected</div>
+                    <div className="text-gray-500 text-xs" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>PostgreSQL on Railway</div>
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
                   <div className="h-2 w-2 rounded-full bg-purple-500 mt-2" />
                   <div>
-                    <div className="text-white text-sm">LEO AI active</div>
-                    <div className="text-gray-400 text-xs">Chatbot responding to queries</div>
+                    <div className="text-gray-900 text-sm" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>LEO AI active</div>
+                    <div className="text-gray-500 text-xs" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>Chatbot responding to queries</div>
                   </div>
                 </div>
               </div>

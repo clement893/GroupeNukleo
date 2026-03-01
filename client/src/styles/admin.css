@@ -11,6 +11,35 @@
   --admin-accent-foreground: #fff;
 }
 
+/* Zone principale : fond et texte par défaut */
+[data-admin-panel] main {
+  background: #EFE8E8;
+  color: #1a1a1a;
+}
+
+/* Cartes et panneaux dans l’admin : fond blanc, bordure légère */
+[data-admin-panel] main .bg-white\/10,
+[data-admin-panel] main .bg-white\/5,
+[data-admin-panel] main [class*="backdrop-blur-sm"].border-white\/20 {
+  background: #fff !important;
+  border-color: rgba(0, 0, 0, 0.08) !important;
+}
+
+[data-admin-panel] main .text-white {
+  color: #1a1a1a !important;
+}
+
+[data-admin-panel] main .text-gray-300,
+[data-admin-panel] main .text-gray-400 {
+  color: #6b7280 !important;
+}
+
+/* Texte secondaire dans les cartes */
+[data-admin-panel] main .bg-white\/10 .text-gray-200,
+[data-admin-panel] main .bg-white\/5 .text-gray-200 {
+  color: #374151 !important;
+}
+
 /* Typo admin = Plus Jakarta Sans comme le site */
 @layer base {
   [data-admin-panel],
