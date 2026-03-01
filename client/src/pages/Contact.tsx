@@ -112,9 +112,9 @@ export default function Contact() {
         <section className="pt-24 pb-3 lg:pt-28 lg:pb-4">
           <div className="w-full px-4 sm:px-6 lg:px-8">
             {/* Titre + sous-texte */}
-            <div className="mb-4">
+            <div className="mb-2">
                 <h2
-                  className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold leading-tight mb-4 w-fit"
+                  className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold leading-tight mb-2 w-fit"
                   style={{
                     fontFamily: "'Plus Jakarta Sans', sans-serif",
                     background: 'linear-gradient(to right, #6B1817, #5636AD)',
@@ -282,22 +282,24 @@ export default function Contact() {
                   <button
                     type="button"
                     onClick={() => setSelectedOffice('montreal')}
-                    className={`flex-1 px-4 py-3 text-sm font-semibold transition-colors ${
+                    className={`flex-1 px-4 py-3 text-sm font-semibold transition-all ${
                       selectedOffice === 'montreal'
-                        ? 'bg-[#6B2338] text-white'
+                        ? 'text-white'
                         : 'bg-gray-100/80 text-gray-700 hover:bg-gray-200/80'
                     }`}
+                    style={selectedOffice === 'montreal' ? { background: 'linear-gradient(to right, #6B1817, #5636AD)' } : undefined}
                   >
                     {t('contact.montreal')}
                   </button>
                   <button
                     type="button"
                     onClick={() => setSelectedOffice('halifax')}
-                    className={`flex-1 px-4 py-3 text-sm font-semibold transition-colors ${
+                    className={`flex-1 px-4 py-3 text-sm font-semibold transition-all ${
                       selectedOffice === 'halifax'
-                        ? 'bg-[#6B2338] text-white'
+                        ? 'text-white'
                         : 'bg-gray-100/80 text-gray-700 hover:bg-gray-200/80'
                     }`}
+                    style={selectedOffice === 'halifax' ? { background: 'linear-gradient(to right, #6B1817, #5636AD)' } : undefined}
                   >
                     {t('contact.halifax')}
                   </button>

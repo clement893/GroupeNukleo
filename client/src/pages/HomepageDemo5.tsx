@@ -516,7 +516,7 @@ export default function HomepageDemo5() {
         ════════════════════════════════════════════════════════════════════ */}
         <section style={{
           minHeight: '27.5vh',
-          padding: 'clamp(2rem, 5vh, 4rem) 6%',
+          padding: 'clamp(2.5rem, 6.25vh, 5rem) 6%',
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'flex-start',
