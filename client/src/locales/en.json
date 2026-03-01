@@ -57,22 +57,42 @@
     "phase1Title": "Discovery",
     "phase1Subtitle": "Understand before acting",
     "phase1Description": "Before writing a single line of code or proposing a strategy, we take the time to understand your organization, challenges, constraints, and ambitions. This phase is non-negotiable.",
-    "phase1Activities": ["Interviews with key stakeholders", "Audit of existing systems, processes, and data", "Competitive and market analysis", "Definition of objectives and success metrics"],
+    "phase1Activities": [
+      "Interviews with key stakeholders",
+      "Audit of existing systems, processes, and data",
+      "Competitive and market analysis",
+      "Definition of objectives and success metrics"
+    ],
     "phase1Duration": "1–2 weeks",
     "phase2Title": "Strategy",
     "phase2Subtitle": "Design with rigour",
     "phase2Description": "Building on discovery, we co-create a clear strategy with you: technical architecture, action plan, initiative prioritization, and roadmap. Nothing is imposed — everything is co-created.",
-    "phase2Activities": ["Co-creation workshops with your teams", "Definition of architecture and technology choices", "Prioritization of initiatives by impact and effort", "Validation of roadmap and milestones"],
+    "phase2Activities": [
+      "Co-creation workshops with your teams",
+      "Definition of architecture and technology choices",
+      "Prioritization of initiatives by impact and effort",
+      "Validation of roadmap and milestones"
+    ],
     "phase2Duration": "1–3 weeks",
     "phase3Title": "Implementation",
     "phase3Subtitle": "Execute with excellence",
     "phase3Description": "Execution is at the heart of what we do. Two-week sprints, regular demos, continuous adjustments. We deliver value at every iteration, not just at project end.",
-    "phase3Activities": ["Iterative development in 2-week sprints", "Demos and feedback at each sprint", "Continuous testing and quality assurance", "Documentation and knowledge transfer"],
+    "phase3Activities": [
+      "Iterative development in 2-week sprints",
+      "Demos and feedback at each sprint",
+      "Continuous testing and quality assurance",
+      "Documentation and knowledge transfer"
+    ],
     "phase3Duration": "4–16 weeks",
     "phase4Title": "Performance",
     "phase4Subtitle": "Measure and optimize",
     "phase4Description": "A delivered project is not a finished project. We track performance indicators, analyze data, and optimize continuously so your investment generates lasting results.",
-    "phase4Activities": ["Performance dashboard setup", "Data analysis and opportunity identification", "Continuous optimization of deployed systems", "Quarterly reviews and strategic adjustments"],
+    "phase4Activities": [
+      "Performance dashboard setup",
+      "Data analysis and opportunity identification",
+      "Continuous optimization of deployed systems",
+      "Quarterly reviews and strategic adjustments"
+    ],
     "phase4Duration": "Ongoing",
     "principlesLabel": "Our principles",
     "principlesTitle1": "What never changes,",
@@ -95,7 +115,12 @@
     "ctaViewDepartments": "View our departments"
   },
   "preFooter": {
-    "words": ["Bold.", "Assertive.", "Strong.", "Smart."],
+    "words": [
+      "Bold.",
+      "Assertive.",
+      "Strong.",
+      "Smart."
+    ],
     "ariaLabel": "Nukleo signature"
   },
   "notFound": {
@@ -482,7 +507,8 @@
       "title": "Ready to take the lead?",
       "subtitle": "Let's get started",
       "button": "Let's get started"
-    }
+    },
+    "sectionLabel": "Partner of ambitious organizations"
   },
   "services": {
     "creativeStudio": {
@@ -497,7 +523,8 @@
           "You want a smooth and engaging user experience",
           "You're looking for creative campaigns that stand out",
           "You need high-quality visual content at scale"
-        ]
+        ],
+        "title": "Client Needs"
       },
       "approachTitle": "Human creativity, modern tools",
       "approachDescription": "Every project starts with a human idea. Our art directors, designers, and creatives imagine, design, and refine every detail. We use the best tools — including AI — to explore more directions, iterate faster, and deliver impeccable quality. But the vision remains human.",
@@ -521,7 +548,8 @@
           "number": "04",
           "title": "Impact",
           "description": "Creations that generate results"
-        }
+        },
+        "title": "4 Pillars"
       },
       "expertiseTitle": "What we create",
       "expertise": {
@@ -591,22 +619,121 @@
         "pageTitle": "Creative Studio",
         "tagline": "Creativity, amplified. Design & Brand Experiences.",
         "heroImageAlt": "Creative at work with tablet and stylus, design and creation environment.",
-        "navItems": ["Design & Brand Experiences", "Web & UI/UX", "Motion Design", "Visual Production", "Content Strategy"],
+        "navItems": [
+          "Design & Brand Experiences",
+          "Web & UI/UX",
+          "Motion Design",
+          "Visual Production",
+          "Content Strategy"
+        ],
         "tabs": [
-          { "id": "image-marque", "label": "Brand image", "title": "Creativity, amplified.", "subtitle": "Design & Brand Experiences", "description": "Passionate creatives who bring your ideas to life. We design memorable brand identities and digital experiences that make an impact — with the best tools to go faster and further.", "benefits": ["You need a strong, distinctive brand identity", "You want a fluid, engaging user experience", "You're looking for creative campaigns that stand out", "You need quality visual content at scale"] },
-          { "id": "ux-ui", "label": "UX/UI", "title": "Interfaces that convert.", "subtitle": "Web & user experience", "description": "We design intuitive interfaces and user journeys that turn visitors into customers. User research, wireframes, high-fidelity mockups and design systems.", "benefits": ["You're launching a new site or app", "You want to improve your platform's usability", "You need a consistent design system", "You're aiming for a flawless mobile experience"] },
-          { "id": "impressions", "label": "Print", "title": "Print & physical assets.", "subtitle": "Brochures, posters, packaging", "description": "From business cards to packaging, we create print materials that strengthen your brand. Layout, material selection and production follow-up.", "benefits": ["You need print materials for an event", "You're launching a new product line", "You want consistent identity from digital to print", "You're looking for a partner for out-of-home campaigns"] },
-          { "id": "supports-visuels", "label": "Visual assets", "title": "Visual content at scale.", "subtitle": "Photography, video, illustration", "description": "Campaign visuals, social content, brand assets for your channels. We produce quality visual content aligned with your strategy.", "benefits": ["You need to produce a lot of visual content", "You want clear art direction", "You're looking for visuals that stand out", "You need consistency across all your touchpoints"] },
-          { "id": "refonte-marque", "label": "Brand refresh", "title": "A brand that evolves with you.", "subtitle": "Brand strategy & identity", "description": "Brand audit, repositioning, new visual identity and brand guidelines. We support companies that want to modernize or evolve their image.", "benefits": ["Your brand no longer reflects your positioning", "You're merging or launching a new offering", "You want to refresh your image", "You need an actionable brand guideline"] },
-          { "id": "reseaux-sociaux", "label": "Social media assets", "title": "From scroll to engagement.", "subtitle": "Social content & short formats", "description": "Content tailored for social: visuals, stories, carousels and short-form. Brand aesthetics that perform on every platform.", "benefits": ["You want a professional social presence", "You need regular, consistent content", "You're looking to boost engagement", "You're launching a social campaign"] },
-          { "id": "ideation-campagne", "label": "Campaign ideation", "title": "Ideas that make an impact.", "subtitle": "Creative strategy & campaigns", "description": "From creative strategy to campaign concept, we help you launch campaigns that capture attention and deliver results.", "benefits": ["You're launching a product or service", "You need a strong campaign concept", "You want to align creative with business goals", "You're looking for an end-to-end creative partner"] }
+          {
+            "id": "image-marque",
+            "label": "Brand image",
+            "title": "Creativity, amplified.",
+            "subtitle": "Design & Brand Experiences",
+            "description": "Passionate creatives who bring your ideas to life. We design memorable brand identities and digital experiences that make an impact — with the best tools to go faster and further.",
+            "benefits": [
+              "You need a strong, distinctive brand identity",
+              "You want a fluid, engaging user experience",
+              "You're looking for creative campaigns that stand out",
+              "You need quality visual content at scale"
+            ]
+          },
+          {
+            "id": "ux-ui",
+            "label": "UX/UI",
+            "title": "Interfaces that convert.",
+            "subtitle": "Web & user experience",
+            "description": "We design intuitive interfaces and user journeys that turn visitors into customers. User research, wireframes, high-fidelity mockups and design systems.",
+            "benefits": [
+              "You're launching a new site or app",
+              "You want to improve your platform's usability",
+              "You need a consistent design system",
+              "You're aiming for a flawless mobile experience"
+            ]
+          },
+          {
+            "id": "impressions",
+            "label": "Print",
+            "title": "Print & physical assets.",
+            "subtitle": "Brochures, posters, packaging",
+            "description": "From business cards to packaging, we create print materials that strengthen your brand. Layout, material selection and production follow-up.",
+            "benefits": [
+              "You need print materials for an event",
+              "You're launching a new product line",
+              "You want consistent identity from digital to print",
+              "You're looking for a partner for out-of-home campaigns"
+            ]
+          },
+          {
+            "id": "supports-visuels",
+            "label": "Visual assets",
+            "title": "Visual content at scale.",
+            "subtitle": "Photography, video, illustration",
+            "description": "Campaign visuals, social content, brand assets for your channels. We produce quality visual content aligned with your strategy.",
+            "benefits": [
+              "You need to produce a lot of visual content",
+              "You want clear art direction",
+              "You're looking for visuals that stand out",
+              "You need consistency across all your touchpoints"
+            ]
+          },
+          {
+            "id": "refonte-marque",
+            "label": "Brand refresh",
+            "title": "A brand that evolves with you.",
+            "subtitle": "Brand strategy & identity",
+            "description": "Brand audit, repositioning, new visual identity and brand guidelines. We support companies that want to modernize or evolve their image.",
+            "benefits": [
+              "Your brand no longer reflects your positioning",
+              "You're merging or launching a new offering",
+              "You want to refresh your image",
+              "You need an actionable brand guideline"
+            ]
+          },
+          {
+            "id": "reseaux-sociaux",
+            "label": "Social media assets",
+            "title": "From scroll to engagement.",
+            "subtitle": "Social content & short formats",
+            "description": "Content tailored for social: visuals, stories, carousels and short-form. Brand aesthetics that perform on every platform.",
+            "benefits": [
+              "You want a professional social presence",
+              "You need regular, consistent content",
+              "You're looking to boost engagement",
+              "You're launching a social campaign"
+            ]
+          },
+          {
+            "id": "ideation-campagne",
+            "label": "Campaign ideation",
+            "title": "Ideas that make an impact.",
+            "subtitle": "Creative strategy & campaigns",
+            "description": "From creative strategy to campaign concept, we help you launch campaigns that capture attention and deliver results.",
+            "benefits": [
+              "You're launching a product or service",
+              "You need a strong campaign concept",
+              "You want to align creative with business goals",
+              "You're looking for an end-to-end creative partner"
+            ]
+          }
         ],
         "mainTitle": "Creativity, amplified. Design & Brand Experiences.",
         "mainDescription": "We create websites, mobile apps and intuitive interfaces that captivate and deliver results. A user-centric approach combining aesthetics, ergonomics and innovation.",
-        "mainTags": ["Website creation", "Mobile applications", "Interface design"],
+        "mainTags": [
+          "Website creation",
+          "Mobile applications",
+          "Interface design"
+        ],
         "extensionsTitle": "Creative extensions",
         "extensionsDescription": "We elevate brands with creative extensions: from visual content creation to brand strategy, we bring your vision to life with innovative and impactful solutions.",
-        "extensionsTags": ["Strategic consulting", "Art direction", "Advertising campaigns", "Visual identity"],
+        "extensionsTags": [
+          "Strategic consulting",
+          "Art direction",
+          "Advertising campaigns",
+          "Visual identity"
+        ],
         "grid0Title": "Branding & Identity",
         "grid0Description": "We create memorable brands that tell your story and connect with your audience.",
         "grid0Deliverables": "Logo, brand guidelines, naming, storytelling",
@@ -673,13 +800,29 @@
         "pageTitle": "Tech Lab",
         "tagline": "Code that delivers. Development & technology.",
         "heroImageAlt": "Development and technology environment.",
-        "navItems": ["Custom development", "Web & mobile apps", "Data & AI architecture", "Integrations & APIs", "Deployment & DevOps"],
+        "navItems": [
+          "Custom development",
+          "Web & mobile apps",
+          "Data & AI architecture",
+          "Integrations & APIs",
+          "Deployment & DevOps"
+        ],
         "mainTitle": "Code that delivers. Custom development.",
         "mainDescription": "We build the digital solutions that run your business. Web and mobile apps, custom platforms, integrations and automation — a senior dev team that delivers clean code and products that work.",
-        "mainTags": ["Web apps", "Mobile apps", "APIs", "Architecture"],
+        "mainTags": [
+          "Web apps",
+          "Mobile apps",
+          "APIs",
+          "Architecture"
+        ],
         "extensionsTitle": "AI & data solutions",
         "extensionsDescription": "We design the data infrastructure and AI systems that power your performance: data pipelines, autonomous agents, scalable deployment and continuous optimization.",
-        "extensionsTags": ["AI agents", "Data pipelines", "Cloud", "DevOps"],
+        "extensionsTags": [
+          "AI agents",
+          "Data pipelines",
+          "Cloud",
+          "DevOps"
+        ],
         "grid0Title": "Web Applications",
         "grid0Description": "Robust, scalable web platforms tailored to your objectives.",
         "grid1Title": "Mobile Applications",
@@ -712,13 +855,29 @@
         "pageTitle": "Comm & Marketing Agency",
         "tagline": "Clear strategy, concrete execution. Marketing & communication.",
         "heroImageAlt": "Marketing and communication strategy.",
-        "navItems": ["Marketing strategy", "SEO & organic content", "Performance marketing", "Social media & community", "Marketing automation"],
+        "navItems": [
+          "Marketing strategy",
+          "SEO & organic content",
+          "Performance marketing",
+          "Social media & community",
+          "Marketing automation"
+        ],
         "mainTitle": "Clear strategy, concrete execution. Marketing strategy.",
         "mainDescription": "We drive your visibility and growth. From strategy to execution, we deploy campaigns that generate qualified leads and measurable results — SEO, advertising, content and automation, all orchestrated to perform.",
-        "mainTags": ["Strategy", "SEO", "Advertising", "Automation"],
+        "mainTags": [
+          "Strategy",
+          "SEO",
+          "Advertising",
+          "Automation"
+        ],
         "extensionsTitle": "Communication & brand",
         "extensionsDescription": "We structure your communication and strengthen your employer brand. Editorial strategy, content, press relations and community management for a consistent and impactful presence.",
-        "extensionsTags": ["Communication", "Branding", "PR", "Community management"],
+        "extensionsTags": [
+          "Communication",
+          "Branding",
+          "PR",
+          "Community management"
+        ],
         "grid0Title": "Growth strategy",
         "grid0Description": "Positioning, channels and measurable growth objectives.",
         "grid1Title": "SEO & organic content",
@@ -751,13 +910,29 @@
         "pageTitle": "Digital Transformation",
         "tagline": "Move with clarity, not hesitation. Consulting & support in the AI era.",
         "heroImageAlt": "Consulting and digital transformation.",
-        "navItems": ["Audit & diagnosis", "Strategy & roadmap", "Organizational transformation", "Governance & AI ethics", "Performance & optimization"],
+        "navItems": [
+          "Audit & diagnosis",
+          "Strategy & roadmap",
+          "Organizational transformation",
+          "Governance & AI ethics",
+          "Performance & optimization"
+        ],
         "mainTitle": "Move with clarity. Audit & diagnosis.",
         "mainDescription": "We assess your digital and AI maturity, identify high-impact opportunities and risks to address first. A clear diagnosis for an actionable roadmap aligned with your business objectives.",
-        "mainTags": ["Audit", "AI maturity", "Roadmap", "Prioritization"],
+        "mainTags": [
+          "Audit",
+          "AI maturity",
+          "Roadmap",
+          "Prioritization"
+        ],
         "extensionsTitle": "Change management",
         "extensionsDescription": "We support your teams in adopting new tools and processes. Training, change management and upskilling to anchor transformation for the long term.",
-        "extensionsTags": ["Change management", "Training", "AI culture", "Governance"],
+        "extensionsTags": [
+          "Change management",
+          "Training",
+          "AI culture",
+          "Governance"
+        ],
         "grid0Title": "Digital audit & diagnosis",
         "grid0Description": "Assessment of digital and AI maturity, identification of levers.",
         "grid1Title": "Strategy & roadmap",
@@ -799,7 +974,8 @@
           "You want to structure and professionalize your communication",
           "You're looking to generate more leads and visibility",
           "You need a partner who executes, not just advises"
-        ]
+        ],
+        "title": "Client Needs"
       },
       "approachTitle": "Consulting + Execution",
       "approachDescription": "We're not consultants who deliver PowerPoints and disappear. We stay by your side from strategy to execution, with a commitment to results. Our team combines strategic vision with operational expertise.",
@@ -883,7 +1059,8 @@
           "You want a custom web platform for your business",
           "You're looking to automate repetitive processes",
           "You need to integrate your tools together"
-        ]
+        ],
+        "title": "Client Needs"
       },
       "approachTitle": "Pragmatic engineering",
       "approachDescription": "We don't build technology for technology's sake. Every line of code is designed to solve a real problem and create value. Our team combines sharp technical expertise with business understanding. We speak your language, not just the machines'.",
@@ -1299,7 +1476,22 @@
     "addressHalifax": "1800 Argyle St Unit 801, Halifax, NS B3J 3N8, Canada",
     "emailUs": "Email us",
     "phone": "Phone",
-    "ourOffices": "Our Offices"
+    "ourOffices": "Our Offices",
+    "form": {
+      "company": "Company",
+      "email": "Email",
+      "error": "An error occurred. Please try again.",
+      "firstName": "First name",
+      "lastName": "Last name",
+      "message": "Message",
+      "submit": "Send message",
+      "success": "Thank you! Your message has been sent. We will respond shortly."
+    },
+    "formTitle": "Send us a message",
+    "infoTitle": "Our contact details",
+    "seoDescription": "Contact our AI transformation experts in Montreal and Halifax. Free consultation for your project. Contact form or direct call.",
+    "seoKeywords": "contact Nukleo Digital, AI agency contact, AI consultation Montreal, AI project Halifax",
+    "seoTitle": "Contact Us | Let’s start your AI project"
   },
   "about": {
     "title": "About",
@@ -1330,6 +1522,10 @@
       "ownership": {
         "title": "Ownership",
         "description": "We take ownership of every project as if it were our own. We are committed to your results, not just delivery. Your success is our success."
+      },
+      "bienveillance": {
+        "description": "We cultivate an environment where trust and mutual respect enable everyone to perform at their best. Kindness guides our client and internal relationships.",
+        "title": "Kindness"
       }
     },
     "ourTeam": "OUR TEAM",
@@ -1404,7 +1600,26 @@
         "name": "Rouge on Blue",
         "description": "For large-scale transformations requiring the highest level of strategy and creativity. Rouge on Blue is the group's brand for major transformation mandates, driven by a bold vision."
       }
-    }
+    },
+    "ctaButton": "See Careers",
+    "ctaDescription": "We are always looking for passionate talent to join our mission. Check out our job openings and help us build the future.",
+    "ctaTitle": "Join Our Team",
+    "heroDescription": "A team of strategists, creatives, and engineers united by one mission: to democratize digital excellence for ambitious organizations worldwide.",
+    "heroNewSubtitle": "Choose digital transformation now.",
+    "heroNewTitle": "Choose intelligence",
+    "heroTitle": "Co-creators of your digital performance.",
+    "missionDescription": "Nam libero tempore cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime.",
+    "missionLabel": "Our Mission",
+    "missionTitle": "Empowering small and medium-sized businesses in their digital growth.",
+    "officesDescription": "Based in Montreal and Halifax, we serve clients across North America.",
+    "officesTitle": "Our Offices",
+    "seoDescription": "Nukleo Digital AI experts team, strategists and creatives. Mission, values, AI transformation approach. Montreal and Halifax.",
+    "seoKeywords": "Nukleo Digital team, about Nukleo, AI experts, Nukleo mission, AI agency values",
+    "seoTitle": "About Us | The Team Behind Nukleo Digital",
+    "storyDescription1": "Nukleo Digital was born from the fusion of two expertise areas: digital strategy and AI engineering. Frustrated by the siloed approach dominating the industry, we decided to create an agency that thinks in terms of ecosystems, not isolated projects.",
+    "storyDescription2": "Since our founding, we have helped dozens of companies navigate the complexity of digital transformation by delivering solutions that are not only technologically advanced but also deeply aligned with their business goals.",
+    "storyTitle": "Our Story",
+    "valuesLabel": "OUR VALUES"
   },
   "startProject": {
     "seoTitle": "Start Your AI Project | Transform Your Business with AI",
@@ -1444,8 +1659,48 @@
       "submit": "Submit Project Request",
       "thankYou": "Thank You!",
       "successMessage": "We've received your project request. Our team will get back to you within 24 hours.",
-      "privacyNotice": "By submitting this form, you agree to our privacy policy and terms of service."
-    }
+      "privacyNotice": "By submitting this form, you agree to our privacy policy and terms of service.",
+      "additionalInfo": "Additional Information",
+      "budget": "What is your approximate budget?",
+      "budgetOptions": {
+        "10kto25k": "$10,000 - $25,000",
+        "25kto50k": "$25,000 - $50,000",
+        "50kto100k": "$50,000 - $100,000",
+        "lessThan10k": "Less than $10,000",
+        "moreThan100k": "More than $100,000"
+      },
+      "company": "Company",
+      "contactInfo": "Contact Information",
+      "email": "Email",
+      "error": "An error occurred. Please try again.",
+      "firstName": "First Name",
+      "howDidYouHear": "How did you hear about us?",
+      "lastName": "Last Name",
+      "projectDetails": "Project Details",
+      "projectGoals": "What are the main goals of this project?",
+      "projectName": "Project Name",
+      "services": "Which services are you interested in?",
+      "servicesOptions": {
+        "agenticAI": "AI Agent Systems",
+        "aiConsulting": "AI Consulting",
+        "aiNative": "Smart Web Platforms",
+        "creativeStudio": "Creative Studio",
+        "dataPlatforms": "Intelligent data platforms",
+        "transformation": "Enhanced communication and marketing"
+      },
+      "success": "Thank you! Your project has been submitted. We will contact you within 48 hours.",
+      "targetAudience": "Who is your target audience?",
+      "timeline": "What is your desired timeline?",
+      "timelineOptions": {
+        "1to3months": "1-3 months",
+        "3to6months": "3-6 months",
+        "asap": "As soon as possible",
+        "moreThan6months": "More than 6 months"
+      },
+      "website": "Current website (if applicable)"
+    },
+    "description": "This form helps us understand your vision. The more details you provide, the better we can assist you. Fill it out and we will contact you to schedule an initial consultation.",
+    "title": "Let's bring to life<br /><span class=\"text-white/70\">your project</span>"
   },
   "projects": {
     "title": "Projects",
@@ -1738,7 +1993,13 @@
       "error": "✗ Failed to subscribe. Please try again."
     },
     "articleNotFound": "Article Not Found",
-    "backToResources": "Back to Resources"
+    "backToResources": "Back to Resources",
+    "all": "All",
+    "articlesLabel": "Articles",
+    "categories": "Categories",
+    "featured": "Featured",
+    "guides": "Guides",
+    "readMore": "Read More"
   },
   "agencies": {
     "seoTitle": "Your AI & Digital Team on Demand | Nukleo Digital",
@@ -2044,6 +2305,42 @@
     "contact": {
       "title": "Contact | Nukleo Digital",
       "description": "Contact Nukleo Digital to discuss your AI transformation project."
+    },
+    "artsCulture": {
+      "description": "Explore the intersection of art, culture, and AI. Discover how AI is transforming creativity and artistic expression.",
+      "title": "Arts & Culture - AI Creativity - Nukleo"
+    },
+    "assessment": {
+      "description": "Assess your AI maturity with our free audit. Comprehensive diagnosis of your digital transformation and personalized recommendations.",
+      "title": "Free AI Maturity Audit - Assessment - Nukleo"
+    },
+    "cookies": {
+      "description": "Nukleo Digital cookie policy. Learn which cookies we use and how to manage them.",
+      "title": "Cookie Policy - Nukleo"
+    },
+    "faq": {
+      "description": "Find answers to your questions about AI transformation, autonomous agents, costs, and implementation. Comprehensive Nukleo FAQ.",
+      "title": "FAQ - Frequently Asked Questions about AI Transformation - Nukleo"
+    },
+    "glossary": {
+      "description": "Comprehensive glossary of AI and digital transformation terms. Clear definitions and explanations to understand AI and its applications.",
+      "title": "AI Glossary - Definitions & Terminology - Nukleo"
+    },
+    "privacy": {
+      "description": "Nukleo Digital privacy policy. Learn how we protect and use your personal data.",
+      "title": "Privacy Policy - Nukleo"
+    },
+    "projects": {
+      "description": "Discover our successful AI transformation projects. Autonomous agents, intelligent platforms, marketing automation, and integrated AI solutions.",
+      "title": "Our AI Transformation Projects - Use Cases & Solutions - Nukleo"
+    },
+    "radar": {
+      "description": "AI Radar: track the latest trends, innovations, and emerging technologies in artificial intelligence and digital transformation.",
+      "title": "AI Radar - Trends & Innovations - Nukleo"
+    },
+    "terms": {
+      "description": "Nukleo Digital Terms of Use. Conditions governing the use of our services and website.",
+      "title": "Terms of Use - Nukleo"
     }
   },
   "lab": {
@@ -2184,7 +2481,13 @@
       "description": "Let's discuss how our AI services can transform your business and accelerate your growth.",
       "button": "Start Your Transformation",
       "buttonSecondary": "Start a Project"
-    }
+    },
+    "avgROI": "Average ROI increase",
+    "industriesServed": "Industries served",
+    "keyResults": "Key results",
+    "servicesProvided": "Services provided",
+    "trustedBy": "Trusted by industry leaders",
+    "trustedClients": "Trusted clients"
   },
   "artsCultureCommitment": {
     "seoTitle": "Arts & Culture | Nukleo Digital",
@@ -2692,5 +2995,50 @@
         "How do you build internal AI communities of practice?"
       ]
     }
+  },
+  "artsCulture": {
+    "challengeDescription": "Cultural institutions face a major challenge: how to engage an audience accustomed to interactive and personalized digital experiences? How to remain relevant in the attention economy era?",
+    "challengeTitle": "The Challenge: Connecting with a New Generation",
+    "ctaButton": "Talk to an Expert",
+    "ctaDescription": "Let's discuss how AI can help you fulfill your mission and reach a wider audience.",
+    "ctaTitle": "Ready to Reinvent the Cultural Experience?",
+    "heroDescription": "We believe artificial intelligence has the power to enrich and democratize access to culture. We collaborate with museums, galleries, and cultural institutions to create immersive, personalized, and unforgettable experiences.",
+    "heroTitle": "AI at the service<br /><span class=\"text-white/70\">of culture</span>",
+    "seoDescription": "Discover how AI is transforming the arts and culture sector. From augmented creation to audience engagement, explore our solutions for cultural institutions.",
+    "seoKeywords": "AI arts and culture, AI museums, AI artistic creation, AI audience engagement",
+    "seoTitle": "AI for Arts and Culture | Nukleo Digital",
+    "solutionDescription": "We use AI not to replace human creativity, but to enhance it. Our solutions enable you to:",
+    "solutionTitle": "Our solution: AI as a creative partner",
+    "solutions": {
+      "archives": {
+        "description": "Use AI to digitize, catalog, and make thousands of hours of video, audio, or text archives searchable.",
+        "title": "Making archives accessible"
+      },
+      "engagement": {
+        "description": "Create targeted communication campaigns and personalized content that attract new audiences and retain existing visitors.",
+        "title": "Increasing online engagement"
+      },
+      "interactive": {
+        "description": "Create artworks that respond to movement, voice, or even visitors’ emotions.",
+        "title": "Developing interactive installations"
+      },
+      "personalized": {
+        "description": "Imagine a museum guide that adapts in real time to each visitor’s interests and knowledge level.",
+        "title": "Creating personalized visit experiences"
+      }
+    }
+  },
+  "faq": {
+    "categories": {
+      "general": "General",
+      "pricing": "Pricing",
+      "process": "Process",
+      "services": "Services"
+    },
+    "description": "We have gathered the most common questions we receive to help you better understand what we do and how we can assist you.",
+    "seoDescription": "AI transformation FAQ: answers about services, processes, pricing at Nukleo Digital. Frequently asked questions about AI transformation agency.",
+    "seoKeywords": "AI FAQ, AI transformation questions, AI agency process, AI pricing",
+    "seoTitle": "FAQ | Frequently Asked Questions about AI Transformation",
+    "title": "Frequently<br /><span class=\"text-white/70\">Asked Questions</span>"
   }
 }
