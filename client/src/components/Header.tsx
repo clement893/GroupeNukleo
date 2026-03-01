@@ -21,7 +21,7 @@ function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const { playHover, playClick } = useSound();
-  const { t } = useLanguage();
+  const { t, language, setLanguage } = useLanguage();
   const getLocalizedPath = useLocalizedPath();
   const isMobile = useIsMobile(MOBILE_BREAKPOINT);
   
@@ -116,8 +116,36 @@ function Header() {
               <span className="font-bold tracking-tight" style={{ color: logoCommaPurple, fontFamily: 'var(--font-heading, sans-serif)', fontSize: 'clamp(1.35rem, 3.5vw, 2.75rem)' }}>,</span>
             </Link>
 
-            {/* Right: CTA split (Contactez-nous | flèche) + Burger */}
+            {/* Right: Lang switcher (ENG / FR) + CTA split + Burger */}
             <div className="flex items-center gap-2 sm:gap-3">
+              {/* ENG / FR — switcher compact */}
+              <nav className="flex items-center gap-0.5 text-sm font-medium" aria-label={t('header.langSwitch')}>
+                <button
+                  type="button"
+                  onClick={() => setLanguage('en')}
+                  className={`px-2 py-1 rounded transition-colors touch-manipulation ${
+                    language === 'en'
+                      ? 'text-gray-900 font-semibold bg-white/20'
+                      : 'text-white/70 hover:text-white'
+                  }`}
+                  aria-current={language === 'en' ? 'true' : undefined}
+                >
+                  ENG
+                </button>
+                <span className="text-white/50 select-none" aria-hidden="true">/</span>
+                <button
+                  type="button"
+                  onClick={() => setLanguage('fr')}
+                  className={`px-2 py-1 rounded transition-colors touch-manipulation ${
+                    language === 'fr'
+                      ? 'text-gray-900 font-semibold bg-white/20'
+                      : 'text-white/70 hover:text-white'
+                  }`}
+                  aria-current={language === 'fr' ? 'true' : undefined}
+                >
+                  FR
+                </button>
+              </nav>
               <SplitCTAButton
                 href="/contact"
                 label={t('nav.contact') || 'Contactez-nous'}

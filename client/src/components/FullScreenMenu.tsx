@@ -21,10 +21,10 @@ const MAIN_LINKS = [
 ] as const;
 
 const SERVICE_LINKS = [
-  { label: 'Lab technologique', path: '/services/tech' },
-  { label: 'Studio créatif', path: '/services/studio' },
-  { label: 'Agence Comm & Marketing', path: '/services/agency' },
-  { label: 'Transition numérique', path: '/services/consulting' },
+  { labelKey: 'menu.serviceTech', path: '/services/tech' },
+  { labelKey: 'menu.serviceStudio', path: '/services/studio' },
+  { labelKey: 'menu.serviceAgency', path: '/services/agency' },
+  { labelKey: 'menu.serviceConsulting', path: '/services/consulting' },
 ] as const;
 
 export default function FullScreenMenu({ isOpen, onClose }: FullScreenMenuProps) {
@@ -64,7 +64,7 @@ export default function FullScreenMenu({ isOpen, onClose }: FullScreenMenuProps)
       }}
       role="dialog"
       aria-modal="true"
-      aria-label="Menu principal"
+      aria-label={tLang('menu.ariaLabel') || 'Menu principal'}
       aria-hidden={!isOpen}
     >
       {/* Bouton fermer : cercle blanc, X gris — en haut à droite */}
@@ -129,13 +129,13 @@ export default function FullScreenMenu({ isOpen, onClose }: FullScreenMenuProps)
       {/* Liens services — plus petits, en bas */}
       <div className="px-8 sm:px-12 md:px-16 lg:px-20 py-6 sm:py-8 flex-shrink-0">
         <div className="flex flex-wrap justify-between gap-x-8 gap-y-4 text-white/80 text-base sm:text-lg" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 700 }}>
-          {SERVICE_LINKS.map(({ label, path }) => (
-            <Link key={label} href={getLocalizedPath(path)} onClick={handleLinkClick}>
+          {SERVICE_LINKS.map(({ labelKey, path }) => (
+            <Link key={labelKey} href={getLocalizedPath(path)} onClick={handleLinkClick}>
               <span
                 onMouseEnter={playHover}
                 className="hover:text-white transition-colors touch-manipulation"
               >
-                {label}
+                {tLabel(labelKey, labelKey)}
               </span>
             </Link>
           ))}

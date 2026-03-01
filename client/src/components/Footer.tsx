@@ -18,12 +18,12 @@ const MAIN_LINKS = [
   { key: 'faq' as const, href: '/faq' },
 ];
 
-// Services (colonne droite du bloc gauche) — libellés design référence
+// Services (colonne droite du bloc gauche) — libellés via t()
 const SERVICE_LINKS = [
-  { labelFr: 'Lab technologique', labelEn: 'Tech Lab', href: '/services/tech' },
-  { labelFr: 'Studio créatif', labelEn: 'Creative Studio', href: '/services/studio' },
-  { labelFr: 'Agence Comm & Marketing', labelEn: 'Comm & Marketing Agency', href: '/services/agency' },
-  { labelFr: 'Transformation numérique', labelEn: 'Digital Transformation', href: '/services/consulting' },
+  { labelKey: 'menu.serviceTech' as const, href: '/services/tech' },
+  { labelKey: 'menu.serviceStudio' as const, href: '/services/studio' },
+  { labelKey: 'menu.serviceAgency' as const, href: '/services/agency' },
+  { labelKey: 'menu.serviceConsulting' as const, href: '/services/consulting' },
 ];
 
 function Footer() {
@@ -33,10 +33,10 @@ function Footer() {
   const mainNavLabels: Record<string, string> = useMemo(() => ({
     home: t('nav.home'),
     about: t('nav.about'),
-    projects: language === 'fr' ? 'Nos projets' : t('nav.projects'),
+    projects: t('nav.projects'),
     contact: t('nav.contact'),
     faq: t('nav.faq'),
-  }), [t, language]);
+  }), [t]);
 
   const { data: allVisibilities } = trpc.pageVisibility.getAll.useQuery(undefined, {
     retry: false,
@@ -80,7 +80,7 @@ function Footer() {
         fontFamily: "'Plus Jakarta Sans', sans-serif",
         fontWeight: 400,
       }}
-      aria-label="Pied de page Nukleo Digital"
+      aria-label={t('footer.ariaLabel') || 'Pied de page Nukleo Digital'}
     >
       <div
         className="grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-5 w-full"
@@ -130,7 +130,7 @@ function Footer() {
                     className="text-base sm:text-lg hover:opacity-85 transition-opacity touch-manipulation block"
                     style={{ color: FOOTER_TEXT_WHITE }}
                   >
-                    {language === 'fr' ? item.labelFr : item.labelEn}
+                    {t(item.labelKey)}
                   </Link>
                 </li>
               ))}

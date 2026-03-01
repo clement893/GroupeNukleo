@@ -1,8 +1,11 @@
 import { useState, useEffect } from 'react';
+import { useLanguage } from '@/contexts/LanguageContext';
 
-const PRE_FOOTER_WORDS = ['Audacieux.', 'Assumé.', 'Fort.', 'Intelligents.'];
+const DEFAULT_WORDS = ['Audacieux.', 'Assumé.', 'Fort.', 'Intelligents.'];
 
 export default function PreFooter() {
+  const { t } = useLanguage();
+  const words = (t('preFooter.words', { returnObjects: true }) as string[]) || DEFAULT_WORDS;
   const [wordIndex, setWordIndex] = useState(0);
   const [visible, setVisible] = useState(true);
 
@@ -10,17 +13,17 @@ export default function PreFooter() {
     const cycle = () => {
       setVisible(false);
       setTimeout(() => {
-        setWordIndex((i) => (i + 1) % PRE_FOOTER_WORDS.length);
+        setWordIndex((i) => (i + 1) % words.length);
         setVisible(true);
       }, 400);
     };
     const id = setInterval(cycle, 2800);
     return () => clearInterval(id);
-  }, []);
+  }, [words.length]);
 
   return (
     <section
-      aria-label="Signature Nukleo"
+      aria-label={t('preFooter.ariaLabel') || 'Signature Nukleo'}
       style={{
         padding: 'clamp(0.2rem, 0.5vw, 0.4rem) 6% clamp(0.5rem, 1.5vw, 1rem)',
         background: '#EFE8E8',
@@ -53,7 +56,7 @@ export default function PreFooter() {
           userSelect: 'none',
         }}
       >
-        {PRE_FOOTER_WORDS[wordIndex]}
+        {words[wordIndex]}
       </span>
     </section>
   );

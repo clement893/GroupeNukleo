@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
 import { Link } from 'wouter';
 import { useLocalizedPath } from '@/hooks/useLocalizedPath';
+import { useLanguage } from '@/contexts/LanguageContext';
 import { TeamScrollCards, DoubleLogoCarousel } from '@/components/demo3';
 import { ArrowUpRight, HelpCircle } from 'lucide-react';
 import { SplitCTAButton } from '@/components/SplitCTAButton';
@@ -25,6 +26,7 @@ const PROJECTS = [
 
 // ─── Carrousel Projets Hero — style "une de journal" ──────────────────────────
 function NewsCarousel() {
+  const { t } = useLanguage();
   const [active, setActive] = useState(0);
   const [isHovered, setIsHovered] = useState(false);
   const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
@@ -65,7 +67,7 @@ function NewsCarousel() {
 
       {/* Label haut gauche */}
       <div style={{ position: 'absolute', top: 16, left: 18, display: 'flex', alignItems: 'center', gap: 6 }}>
-        <span style={{ fontSize: 'clamp(0.58rem, 0.75vw, 0.9rem)', fontWeight: 800, letterSpacing: '0.18em', color: 'rgba(255,255,255,0.55)', textTransform: 'uppercase' }}>Our Latest Work</span>
+        <span style={{ fontSize: 'clamp(0.58rem, 0.75vw, 0.9rem)', fontWeight: 800, letterSpacing: '0.18em', color: 'rgba(255,255,255,0.55)', textTransform: 'uppercase' }}>{t('home.latestWork')}</span>
       </div>
 
       {/* Compteur haut droite */}
@@ -126,6 +128,7 @@ function NewsCarousel() {
 
 // ─── Ancien Carrousel Projets Hero ───────────────────────────────────────────
 function HeroProjectsCarousel() {
+  const { t } = useLanguage();
   const [active, setActive] = useState(0);
   const [isHovered, setIsHovered] = useState(false);
   const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
@@ -461,7 +464,7 @@ function Triptych() {
                       href={getLocalizedPath('/projects')}
                       style={{ color: 'rgba(255,255,255,0.7)', fontSize: '0.75rem', fontWeight: 600, borderBottom: '1px solid rgba(255,255,255,0.3)', paddingBottom: 2, textDecoration: 'none' }}
                     >
-                      Voir l'étude de cas →
+                      {t('home.caseStudy')}
                     </Link>
                   </div>
                 </div>
@@ -479,6 +482,7 @@ const ON_IA_VERBS = ['maîtrise', 'optimise', 'entraîne', 'personnalise', 'huma
 
 export default function HomepageDemo5() {
   const getLocalizedPath = useLocalizedPath();
+  const { t } = useLanguage();
   const [onIaIndex, setOnIaIndex] = useState(0);
 
   useEffect(() => {
@@ -487,10 +491,10 @@ export default function HomepageDemo5() {
   }, []);
 
   const NAV_LINKS = [
-    { label: 'Services', href: '/services' },
-    { label: 'Work', href: '/projects' },
-    { label: 'About', href: '/about' },
-    { label: 'Contact', href: '/contact' },
+    { label: t('nav.services'), href: '/services' },
+    { label: t('nav.projects'), href: '/projects' },
+    { label: t('nav.about'), href: '/about' },
+    { label: t('nav.contact'), href: '/contact' },
   ];
 
   return (
@@ -590,7 +594,7 @@ export default function HomepageDemo5() {
                   <h3 style={{ fontFamily: "'Figtree', sans-serif", fontWeight: 700, fontSize: 'clamp(0.95rem, 1.15vw, 1.35rem)', color: DARK, margin: 0 }}>
                     Nous soutenons le monde culturel
                   </h3>
-                  <button type="button" aria-label="Plus d'infos" style={{ width: 24, height: 24, borderRadius: '50%', background: DARK, color: '#fff', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                  <button type="button" aria-label={t('home.moreInfo')} style={{ width: 24, height: 24, borderRadius: '50%', background: DARK, color: '#fff', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
                     <HelpCircle size={14} />
                   </button>
                 </div>
@@ -676,7 +680,7 @@ export default function HomepageDemo5() {
             marginBottom: 28,
             fontFamily: "'Plus Jakarta Sans', sans-serif",
           }}>
-            SOYONS AUDACIEUX.
+            {t('home.audacious')}
           </p>
           <h2 style={{
             fontFamily: "'Plus Jakarta Sans', sans-serif",
@@ -692,9 +696,9 @@ export default function HomepageDemo5() {
             WebkitTextFillColor: 'transparent',
             backgroundClip: 'text',
           }}>
-            Un seul partenaire.<br />
-            Une intelligence intégrée.<br />
-            Des résultats mesurables.
+            {t('home.audaciousLine1')}<br />
+            {t('home.audaciousLine2')}<br />
+            {t('home.audaciousLine3')}
           </h2>
           <p style={{
             fontSize: 'clamp(1.1875rem, 1.875vw, 1.375rem)',
@@ -705,16 +709,16 @@ export default function HomepageDemo5() {
             fontFamily: "'Plus Jakarta Sans', sans-serif",
             fontWeight: 400,
           }}>
-            L'excellence numérique ne devrait pas être réservée aux grandes entreprises.
+            {t('home.audaciousParagraph')}
           </p>
-          <SplitCTAButton href="/contact" label="Performez maintenant" ariaLabel="Performez maintenant" />
+          <SplitCTAButton href="/contact" label={t('home.performNow')} ariaLabel={t('home.performNow')} />
         </section>
 
         {/* ════════════════════════════════════════════════════════════════════
             SECTION 2b — CARROUSEL LOGOS (sous SOYONS AUDACIEUX)
         ════════════════════════════════════════════════════════════════════ */}
         <div style={{ marginTop: 0, marginBottom: 5 * 16 }}>
-          <DoubleLogoCarousel title="Trusted by ambitious organizations" />
+          <DoubleLogoCarousel title={t('home.trustedBy')} />
         </div>
 
         {/* ════════════════════════════════════════════════════════════════════
@@ -912,7 +916,7 @@ export default function HomepageDemo5() {
               color: 'transparent',
             }}
           >
-              Prêt.e à performer?
+              {t('home.ctaPerform.title')}
             </h2>
             <p style={{
               fontFamily: "'Plus Jakarta Sans', sans-serif",
@@ -925,9 +929,9 @@ export default function HomepageDemo5() {
               marginLeft: 'auto',
               marginRight: 'auto',
             }}>
-              Stratégie, créativité et technologie au service de votre croissance : nous vous accompagnons de l’idéation à la mise en œuvre. Que vous ayez un projet précis ou une ambition à clarifier, parlons de la suite. Ensemble, passons à l’action et donnons forme à votre prochain cap.
+              {t('home.ctaPerform.paragraph')}
             </p>
-            <SplitCTAButton href="/contact" label="Contactez-nous" ariaLabel="Contactez-nous" />
+            <SplitCTAButton href="/contact" label={t('home.ctaPerform.button')} ariaLabel={t('home.ctaPerform.button')} />
           </div>
         </div>
 

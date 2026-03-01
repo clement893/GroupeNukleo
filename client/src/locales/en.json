@@ -32,7 +32,37 @@
     "tagline": "CHOOSE INTELLIGENCE",
     "menu": "Menu",
     "openMenu": "Open menu",
-    "closeMenu": "Close menu"
+    "closeMenu": "Close menu",
+    "langSwitch": "Change language"
+  },
+  "menu": {
+    "serviceTech": "Tech Lab",
+    "serviceStudio": "Creative Studio",
+    "serviceAgency": "Comm & Marketing Agency",
+    "serviceConsulting": "Digital Transformation",
+    "ariaLabel": "Main menu"
+  },
+  "preFooter": {
+    "words": ["Bold.", "Assertive.", "Strong.", "Smart."],
+    "ariaLabel": "Nukleo signature"
+  },
+  "notFound": {
+    "title": "Page Not Found",
+    "message": "The page you're looking for doesn't exist or has been moved. Let's get you back on track.",
+    "backToHome": "Back to Home",
+    "stillLost": "Still lost?",
+    "contactUs": "Contact us",
+    "stillLostEnd": "and we'll help you find what you need.",
+    "quickLinks": {
+      "home": "Home",
+      "homeDesc": "Back to homepage",
+      "expertise": "Expertise",
+      "expertiseDesc": "Explore our services",
+      "services": "Services",
+      "servicesDesc": "View our services",
+      "contact": "Contact",
+      "contactDesc": "Get in touch"
+    }
   },
   "alt": {
     "logo": "Nukleo Digital Logo - AI Transformation Agency",
@@ -65,6 +95,7 @@
   },
   "footer": {
     "description": "Performance through digital excellence. Choose intelligence.",
+    "ariaLabel": "Nukleo Digital footer",
     "links": {
       "about": "About",
       "services": "Services",
@@ -101,6 +132,22 @@
   "home": {
     "beyondAI": "Beyond Digital",
     "beyondAIDescription": "We create complete performance ecosystems. From strategy to execution, design to technology, communication to digital transformation — all orchestrated and powered by AI.",
+    "ctaPerform": {
+      "title": "Ready to perform?",
+      "paragraph": "Strategy, creativity and technology at the service of your growth: we support you from ideation to implementation. Whether you have a specific project or an ambition to clarify, let's talk about what's next. Together, let's take action and shape your next milestone.",
+      "button": "Contact us"
+    },
+    "latestWork": "Our Latest Work",
+    "caseStudy": "View case study →",
+    "audacious": "LET'S BE BOLD.",
+    "audaciousSub": "Strategy. Creativity. Technology. One team to take the lead.",
+    "performNow": "Perform now",
+    "trustedBy": "Trusted by ambitious organizations",
+    "moreInfo": "More info",
+    "audaciousLine1": "One partner.",
+    "audaciousLine2": "Integrated intelligence.",
+    "audaciousLine3": "Measurable results.",
+    "audaciousParagraph": "Digital excellence shouldn't be reserved for large enterprises.",
     "team": {
       "sectionLabel": "OUR TEAM",
       "title": "Meet Our Team",

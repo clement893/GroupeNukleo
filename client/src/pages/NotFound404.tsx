@@ -2,14 +2,16 @@ import { Link } from 'wouter';
 import { Home, Compass, Briefcase, Mail, ArrowLeft } from 'lucide-react';
 import PageLayout from '@/components/PageLayout';
 import { useLocalizedPath } from '@/hooks/useLocalizedPath';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 export default function NotFound404() {
   const getLocalizedPath = useLocalizedPath();
+  const { t } = useLanguage();
   const quickLinks = [
-    { icon: Home, label: 'Home', path: getLocalizedPath('/'), description: 'Back to homepage' },
-    { icon: Compass, label: 'Expertise', path: getLocalizedPath('/expertise'), description: 'Explore our services' },
-    { icon: Briefcase, label: 'Services', path: getLocalizedPath('/services'), description: 'View our services' },
-    { icon: Mail, label: 'Contact', path: getLocalizedPath('/contact'), description: 'Get in touch' },
+    { icon: Home, labelKey: 'notFound.quickLinks.home', descKey: 'notFound.quickLinks.homeDesc', path: getLocalizedPath('/') },
+    { icon: Compass, labelKey: 'notFound.quickLinks.expertise', descKey: 'notFound.quickLinks.expertiseDesc', path: getLocalizedPath('/expertise') },
+    { icon: Briefcase, labelKey: 'notFound.quickLinks.services', descKey: 'notFound.quickLinks.servicesDesc', path: getLocalizedPath('/services') },
+    { icon: Mail, labelKey: 'notFound.quickLinks.contact', descKey: 'notFound.quickLinks.contactDesc', path: getLocalizedPath('/contact') },
   ];
 
   return (
@@ -38,11 +40,10 @@ export default function NotFound404() {
           {/* Message */}
           <div className="mb-12 space-y-4">
             <h2 className="text-3xl md:text-5xl font-bold text-white italic">
-              Page Not Found
+              {t('notFound.title')}
             </h2>
             <p className="text-lg md:text-xl text-white/70 max-w-2xl mx-auto">
-              The page you're looking for doesn't exist or has been moved. 
-              Let's get you back on track.
+              {t('notFound.message')}
             </p>
           </div>
 
@@ -51,7 +52,7 @@ export default function NotFound404() {
             <Link href={getLocalizedPath('/')}>
               <button className="inline-flex items-center gap-3 px-8 py-4 bg-white text-purple-900 rounded-full font-bold hover:bg-white/90 transition-all duration-300 hover:scale-[1.045]">
                 <ArrowLeft className="w-5 h-5" />
-                Back to Home
+                {t('notFound.backToHome')}
               </button>
             </Link>
           </div>
@@ -61,19 +62,14 @@ export default function NotFound404() {
             {quickLinks.map((link) => (
               <Link key={link.path} href={link.path}>
                 <div className="group relative bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-6 hover:bg-white/10 hover:border-white/20 transition-all duration-500 cursor-pointer hover:scale-[1.045]">
-                  {/* Icon */}
                   <div className="mb-4 inline-flex items-center justify-center w-12 h-12 rounded-full bg-white/10 group-hover:bg-white/20 transition-all duration-300">
                     <link.icon className="w-6 h-6 text-white" />
                   </div>
-                  
-                  {/* Label */}
                   <h3 className="text-xl font-bold text-white mb-2 group-hover:text-cyan-400 transition-colors duration-300">
-                    {link.label}
+                    {t(link.labelKey)}
                   </h3>
-                  
-                  {/* Description */}
                   <p className="text-sm text-white/60 group-hover:text-white/80 transition-colors duration-300">
-                    {link.description}
+                    {t(link.descKey)}
                   </p>
                 </div>
               </Link>
@@ -83,7 +79,7 @@ export default function NotFound404() {
           {/* Help Text */}
           <div className="mt-16 text-white/50 text-sm">
             <p>
-              Still lost? <a href="mailto:hello@nukleo.com" className="text-white/70 hover:text-white underline">Contact us</a> and we'll help you find what you need.
+              {t('notFound.stillLost')} <a href="mailto:hello@nukleo.com" className="text-white/70 hover:text-white underline">{t('notFound.contactUs')}</a> {t('notFound.stillLostEnd')}
             </p>
           </div>
         </div>

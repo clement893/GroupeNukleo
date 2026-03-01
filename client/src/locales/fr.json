@@ -32,7 +32,37 @@
     "tagline": "CHOISIR L'INTELLIGENCE",
     "menu": "Menu",
     "openMenu": "Ouvrir le menu",
-    "closeMenu": "Fermer le menu"
+    "closeMenu": "Fermer le menu",
+    "langSwitch": "Changer la langue"
+  },
+  "menu": {
+    "serviceTech": "Lab technologique",
+    "serviceStudio": "Studio créatif",
+    "serviceAgency": "Agence Comm & Marketing",
+    "serviceConsulting": "Transition numérique",
+    "ariaLabel": "Menu principal"
+  },
+  "preFooter": {
+    "words": ["Audacieux.", "Assumé.", "Fort.", "Intelligents."],
+    "ariaLabel": "Signature Nukleo"
+  },
+  "notFound": {
+    "title": "Page introuvable",
+    "message": "La page que vous recherchez n'existe pas ou a été déplacée. Remettons-vous sur la bonne voie.",
+    "backToHome": "Retour à l'accueil",
+    "stillLost": "Toujours perdu ?",
+    "contactUs": "Contactez-nous",
+    "stillLostEnd": "et nous vous aiderons à trouver ce qu'il vous faut.",
+    "quickLinks": {
+      "home": "Accueil",
+      "homeDesc": "Retour à l'accueil",
+      "expertise": "Expertise",
+      "expertiseDesc": "Découvrir nos services",
+      "services": "Services",
+      "servicesDesc": "Voir nos services",
+      "contact": "Contact",
+      "contactDesc": "Nous contacter"
+    }
   },
   "alt": {
     "logo": "Logo Nukleo Digital - Agence de transformation IA",
@@ -65,6 +95,7 @@
   },
   "footer": {
     "description": "La performance par l'excellence numérique. Choisissez l'intelligence.",
+    "ariaLabel": "Pied de page Nukleo Digital",
     "links": {
       "about": "À propos",
       "services": "Services",
@@ -101,6 +132,22 @@
   "home": {
     "beyondAI": "Au-delà du numérique",
     "beyondAIDescription": "Nous créons des écosystèmes de performance complets. De la stratégie à l'exécution, du design à la technologie, de la communication à la transformation numérique — tout orchestré et augmenté par l'IA.",
+    "ctaPerform": {
+      "title": "Prêt.e à performer?",
+      "paragraph": "Stratégie, créativité et technologie au service de votre croissance : nous vous accompagnons de l'idéation à la mise en œuvre. Que vous ayez un projet précis ou une ambition à clarifier, parlons de la suite. Ensemble, passons à l'action et donnons forme à votre prochain cap.",
+      "button": "Contactez-nous"
+    },
+    "latestWork": "Notre dernier travail",
+    "caseStudy": "Voir l'étude de cas →",
+    "audacious": "SOYONS AUDACIEUX.",
+    "audaciousSub": "Stratégie. Créativité. Technologie. Une seule équipe pour prendre le lead.",
+    "performNow": "Performez maintenant",
+    "trustedBy": "Ils nous font confiance",
+    "moreInfo": "Plus d'infos",
+    "audaciousLine1": "Un seul partenaire.",
+    "audaciousLine2": "Une intelligence intégrée.",
+    "audaciousLine3": "Des résultats mesurables.",
+    "audaciousParagraph": "L'excellence numérique ne devrait pas être réservée aux grandes entreprises.",
     "team": {
       "sectionLabel": "NOTRE ÉQUIPE",
       "title": "Rencontrez notre équipe",
