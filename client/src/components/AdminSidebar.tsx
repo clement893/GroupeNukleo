@@ -6,7 +6,6 @@ import {
   Building2,
   FileText,
   Globe,
-  Loader2,
   Volume2,
   Image as ImageIcon,
   Database,
