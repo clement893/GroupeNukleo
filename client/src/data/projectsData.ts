@@ -14,6 +14,7 @@ export interface ProjectData {
   year: string;
   category: ProjectFilterCategory;
   services: string;
+  websiteUrl?: string; // URL du site client (pour les refontes / développements web)
   description: {
     fr: string;
     en: string;
@@ -30,6 +31,7 @@ export const PROJECTS_DATA: ProjectData[] = [
     year: '2025',
     category: 'Site web',
     services: 'Stratégie de marque, Direction artistique, Maquettes UI/UX',
+    websiteUrl: 'https://succezscolaire.ca',
     description: {
       fr: "Succès Scolaire est une entreprise québécoise spécialisée en tutorat en ligne. Avec Nukleo, nous nous sommes occupé de la refonte complète du site. L'objectif était de concevoir un site vivant et ludique, qui stimule la curiosité et donne envie d'apprendre. Nous avons repensé l'architecture du site aux multiples sous-pages, tout en assurant une navigation intuitive et la préservation des contenus essentiels.",
       en: "Succès Scolaire is a Quebec-based company specializing in online tutoring. With Nukleo, we handled the complete redesign of the site. The goal was to create a lively and playful website that stimulates curiosity and makes learning appealing. We rethought the architecture of the multi-page site while ensuring intuitive navigation and preserving essential content.",
@@ -93,6 +95,7 @@ export const PROJECTS_DATA: ProjectData[] = [
     year: '2026',
     category: 'Site web',
     services: 'Wireframes, Maquettes UI, Développement',
+    websiteUrl: 'https://fondationjeanlapointe.ca',
     description: {
       fr: "La Fondation Jean Lapointe est une organisation qui lutte contre les problèmes de dépendance. Elle a fait appel à Nukleo afin de développer une version plus actuelle et esthétique de son site web. Le processus s'est fait en plusieurs étapes, en commençant par la production de wireframes, des propositions de maquettes UI poussées, et s'est terminé avec le développement du site web.",
       en: "The Jean Lapointe Foundation is an organization that fights addiction problems. They called on Nukleo to develop a more current and aesthetic version of their website. The process took place in several stages, starting with the production of wireframes, high-quality UI mockup proposals, and ending with the development of the website.",
@@ -113,6 +116,7 @@ export const PROJECTS_DATA: ProjectData[] = [
     year: '2024',
     category: 'Site web',
     services: 'Conception UI/UX, Développement',
+    websiteUrl: 'https://arsenalmedia.ca',
     description: {
       fr: "Arsenal Media est le plus important radiodiffuseur au Québec, un groupe médiatique intégré et indépendant qui rejoint des millions de Québécois. Ce ne sont pas une, ni deux, ni trois, mais bien 18 stations de radio pour lesquelles Nukleo a assuré la refonte. Avec un lecteur intégré, la possibilité d'écouter en direct, de rejouer une émission, de retrouver une musique ou encore de consulter le programme de la station, nous avons réalisé un travail complet alliant UX design, UI design et développement technique.",
       en: "Arsenal Media is the largest broadcaster in Quebec, an integrated and independent media group reaching millions of Quebecers. It's not one, two, or three, but 18 radio stations for which Nukleo handled the redesign. With an integrated player, the ability to listen live, replay a show, find a song, or check the station's schedule, we delivered comprehensive work combining UX design, UI design, and technical development.",
@@ -132,6 +136,7 @@ export const PROJECTS_DATA: ProjectData[] = [
     year: '2024',
     category: 'Site web',
     services: 'Conception UI/UX, Développement',
+    websiteUrl: 'https://attitudefraiche.ca',
     description: {
       fr: "Attitude Fraîche, un leader dans la production de mesclun, de laitues et d'autres légumes de plein champ, a lancé avec nous un site web repensé pour améliorer l'expérience utilisateur et mettre en valeur son engagement envers des pratiques agricoles écoresponsables. Nukleo s'est chargé de la conception complète du site web, des maquettes UX jusqu'au développement, en passant par le design UI.",
       en: "Attitude Fraîche, a leader in the production of mesclun, lettuces, and other field vegetables, launched a redesigned website with us to improve the user experience and highlight their commitment to eco-responsible farming practices. Nukleo handled the complete design of the website, from UX mockups to development, including UI design.",
@@ -235,6 +240,7 @@ export const PROJECTS_DATA: ProjectData[] = [
     year: '2024',
     category: 'Brand',
     services: 'Création de nom, Stratégie de marque, Conception de logo, Direction artistique, Développement du site web',
+    websiteUrl: 'https://affilia.ca',
     description: {
       fr: "Anciennement connu sous le nom de CMKZ, Affilia est un cabinet d'avocats basé à Montréal. Pour refléter l'évolution de leur équipe et de leur vision stratégique, le cabinet souhaitait se repositionner et moderniser son image. Avec Nukleo, nous avons mené ce processus de transformation de bout en bout : création du nouveau nom, conception du logo et de l'univers graphique, déclinaison des supports visuels ainsi que la réalisation complète du site web.",
       en: "Formerly known as CMKZ, Affilia is a Montreal-based law firm. To reflect the evolution of their team and strategic vision, the firm wanted to reposition itself and modernize its image. With Nukleo, we led this transformation process from end to end: creating the new name, designing the logo and graphic universe, rolling out visual materials, and building the complete website.",
@@ -277,6 +283,7 @@ export const PROJECTS_DATA: ProjectData[] = [
     year: '2024',
     category: 'Brand',
     services: 'Direction artistique, Conception du logo, Maquettes UI/UX, Développement',
+    websiteUrl: 'https://sycle.ca',
     description: {
       fr: "Sycle est une entreprise qui valorise le sulfate de sodium au Québec. Nukleo s'est occupé de la conception du logo, ainsi que de la conception des wireframes et de l'UI, en plus du développement du site. Le logo reprend le concept des flèches en cercle, ce qui rappelle le recyclage, un enjeu majeur dans l'industrie dans laquelle Sycle évolue.",
       en: "Sycle is a company that recycles sodium sulfate in Quebec. Nukleo handled the logo design, wireframes, UI design, and website development. The logo uses the concept of circular arrows, evoking recycling — a key issue in the industry in which Sycle operates.",
@@ -295,6 +302,7 @@ export const PROJECTS_DATA: ProjectData[] = [
     year: '2025',
     category: 'Site web',
     services: 'Maquettes UI/UX, Développement',
+    websiteUrl: 'https://recruteaction.com',
     description: {
       fr: "Recrute Action est une firme de recrutement située à Montréal et à Dover (États-Unis). L'enjeu ? Avoir un site plus actuel dans lequel le parcours utilisateur est simple et intuitif. Nukleo s'est occupé de la refonte du site, comprenant les wireframes, les maquettes UI ainsi que le développement.",
       en: "Recrute Action is a recruitment firm located in Montreal and Dover (USA). The challenge? Having a more current website where the user journey is simple and intuitive. Nukleo handled the site redesign, including wireframes, UI mockups, and development.",
@@ -312,6 +320,7 @@ export const PROJECTS_DATA: ProjectData[] = [
     year: '2025',
     category: 'Site web',
     services: 'Maquettes UI/UX, Développement',
+    websiteUrl: 'https://matchsticktheatre.ca',
     description: {
       fr: "Matchstick est une troupe de théâtre canadienne basée en Nouvelle-Écosse. Son travail place au cœur de sa démarche la collaboration avec les communautés locales, la mise en valeur des voix sous-représentées et la création d'œuvres offrant au public des moments de vérité partagés. En faisant appel à Nukleo, la troupe a pu se doter d'une nouvelle image grâce à une refonte complète de son site web.",
       en: "Matchstick is a Canadian theatre company based in Nova Scotia. Its work centers on collaboration with local communities, amplifying underrepresented voices, and creating works that offer audiences shared moments of truth. By working with Nukleo, the company was able to give itself a new image through a complete website redesign.",
@@ -464,6 +473,7 @@ export const PROJECTS_DATA: ProjectData[] = [
     year: '2025',
     category: 'Site web',
     services: 'Conception UI/UX',
+    websiteUrl: 'https://dinerenblanc.com',
     description: {
       fr: "Dîner en Blanc, l'expérience gastronomique emblématique à l'échelle mondiale, a rafraîchi son image de marque avec un site web repensé, alliant élégance et accessibilité pour un public international.",
       en: "Dîner en Blanc, the iconic gastronomic experience on a global scale, refreshed its brand image with a redesigned website, combining elegance and accessibility for an international audience.",
@@ -482,6 +492,7 @@ export const PROJECTS_DATA: ProjectData[] = [
     year: '2025',
     category: 'Site web',
     services: 'Conception UI/UX, Développement',
+    websiteUrl: 'https://ajefne.ca',
     description: {
       fr: "L'AJEFNÉ est un organisme à but non lucratif qui facilite l'accès aux services juridiques en français pour les communautés acadienne et francophone. AJEFNE a fait affaire avec Nukleo pour la refonte de son site web. Nous avons travaillé à développer une plateforme représentative des services offerts, afin de bien guider l'utilisateur vers les informations recherchées.",
       en: "AJEFNÉ is a non-profit organization that facilitates access to legal services in French for the Acadian and Francophone communities. AJEFNE worked with Nukleo for the redesign of its website. We worked to develop a platform representative of the services offered, in order to properly guide the user towards the information they are looking for.",
@@ -500,6 +511,7 @@ export const PROJECTS_DATA: ProjectData[] = [
     year: '2025',
     category: 'Site web',
     services: 'Conception UI/UX, Développement',
+    websiteUrl: 'https://associationmarketingquebec.ca',
     description: {
       fr: "L'Association Marketing Québec (AMQ) rassemble depuis 1987 les professionnels du marketing, des communications et du numérique au Québec. Sa mission : inspirer, partager et réseauter. Nukleo a réalisé la refonte complète du site web de l'AMQ, en modernisant l'expérience utilisateur tout en préservant l'identité de cette institution incontournable du marketing québécois. Le nouveau site reflète la vision de l'AMQ : être la référence marketing au Québec, en fédérant les talents et en propulsant les idées.",
       en: "The Association Marketing Québec (AMQ) has been bringing together marketing, communications, and digital professionals in Quebec since 1987. Its mission: inspire, share, and network. Nukleo carried out the complete redesign of the AMQ website, modernizing the user experience while preserving the identity of this cornerstone institution of Quebec marketing. The new site reflects AMQ's vision: to be the marketing reference in Quebec, by uniting talent and propelling ideas.",
@@ -514,6 +526,7 @@ export const PROJECTS_DATA: ProjectData[] = [
     year: '2025',
     category: 'Site web',
     services: 'Conception UI/UX, Développement',
+    websiteUrl: 'https://www.elizabethgreenshieldsfoundation.ca/en',
     description: {
       fr: "La Fondation Elizabeth Greenshields soutient les jeunes artistes représentatifs du monde entier dans les domaines de la peinture, de la sculpture, de la gravure et du dessin. Nukleo a réalisé la refonte complète du site web de la Fondation, en créant une expérience digitale à la hauteur du prestige de l'institution. Le nouveau site met en valeur les boursiers du monde entier et facilite l'accès aux ressources pour les artistes émergents, tout en reflétant l'engagement de la Fondation envers l'excellence artistique.",
       en: "The Elizabeth Greenshields Foundation exists to support young representational artists from around the world in the fields of painting, sculpture, printmaking, and drawing. Nukleo carried out the complete redesign of the Foundation's website, creating a digital experience worthy of the institution's prestige. The new site showcases grantees from around the world and facilitates access to resources for emerging artists, while reflecting the Foundation's commitment to artistic excellence.",
@@ -540,11 +553,12 @@ export const PROJECTS_DATA: ProjectData[] = [
     title: 'Globecar',
     client: 'Globecar',
     year: '2024',
-    category: 'Brand',
-    services: 'Rebranding, Direction artistique, Identité visuelle',
+    category: 'Site web',
+    services: 'Gestion du site web, Maintenance évolutive, Améliorations',
+    websiteUrl: 'https://www.globecar.com/en/',
     description: {
-      fr: "Globecar est une entreprise spécialisée dans la location de véhicules de voyage. Nukleo a accompagné Globecar dans son rebranding, en repensant l'identité visuelle de la marque pour mieux refléter son positionnement sur le marché de la mobilité et du voyage.",
-      en: "Globecar is a company specializing in travel vehicle rentals. Nukleo accompanied Globecar through its rebranding, rethinking the brand's visual identity to better reflect its positioning in the mobility and travel market.",
+      fr: "Globe Car & Truck Rental est la référence montréalaise pour la location de véhicules abordables : voitures, camions, fourgonnettes et véhicules électriques, avec des avantages inclus comme l'assistance routière et la couverture responsabilité civile. Nukleo assure la gestion, la maintenance évolutive et les améliorations continues du site web de Globecar, garantissant une expérience de réservation fluide et performante pour les milliers de clients qui passent par la plateforme chaque mois.",
+      en: "Globe Car & Truck Rental is the Montreal reference for affordable vehicle rentals: cars, trucks, vans, and electric vehicles, with included benefits like roadside assistance and liability coverage. Nukleo handles the management, ongoing maintenance, and continuous improvements of Globecar's website, ensuring a smooth and high-performing booking experience for the thousands of customers who use the platform every month.",
     },
     images: ['Globecar_1.png'],
   },
@@ -565,14 +579,15 @@ export const PROJECTS_DATA: ProjectData[] = [
   {
     slug: 'pmp',
     key: 'PMP',
-    title: 'PMP',
-    client: 'PMP',
+    title: 'PMP Strategy',
+    client: 'PMP Strategy',
     year: '2024',
     category: 'Site web',
     services: 'Conception UI/UX, Développement',
+    websiteUrl: 'https://pmpstrategy.com/en/',
     description: {
-      fr: "Nukleo a réalisé la refonte complète du site web de PMP, en modernisant l'expérience utilisateur et en repensant l'architecture de l'information pour mieux servir les besoins de l'organisation et de ses publics cibles.",
-      en: "Nukleo carried out the complete redesign of PMP's website, modernizing the user experience and rethinking the information architecture to better serve the needs of the organization and its target audiences.",
+      fr: "PMP Strategy est un cabinet de conseil en stratégie de premier plan, présent dans onze villes à travers le monde — Paris, Londres, Montréal, New York, Seattle, Luxembourg, Dubaï, Casablanca, Toronto, Bruxelles et Madrid. Spécialisé dans les secteurs des télécommunications, des médias, de la technologie, de l'énergie, des transports et des services financiers, PMP Strategy accompagne ses clients dans leurs transformations numériques, leurs enjeux ESG et la création de valeur. Nukleo a réalisé la refonte complète du site web de PMP Strategy, en modernisant l'expérience utilisateur et en repensant l'architecture de l'information pour refléter l'envergure internationale du cabinet.",
+      en: "PMP Strategy is a leading strategy consulting firm present in eleven cities around the world — Paris, London, Montreal, New York, Seattle, Luxembourg, Dubai, Casablanca, Toronto, Brussels, and Madrid. Specialized in telecommunications, media, technology, energy, transport, and financial services, PMP Strategy supports its clients through digital transformations, ESG challenges, and value creation. Nukleo carried out the complete redesign of PMP Strategy's website, modernizing the user experience and rethinking the information architecture to reflect the firm's international scope.",
     },
     images: ['PMP_1.png'],
   },
@@ -584,6 +599,7 @@ export const PROJECTS_DATA: ProjectData[] = [
     year: '2024',
     category: 'Site web',
     services: 'Conception UI/UX, Développement, Communications, Marketing annuel',
+    websiteUrl: 'https://queertech.org/en',
     description: {
       fr: "QueerTech est une organisation canadienne qui habilite les personnes 2SLGBTQIA+ à intégrer l'industrie technologique, à faire progresser leur carrière et à lancer des entreprises innovantes. Nukleo a accompagné QueerTech dans la refonte de son site web, en créant une expérience numérique inclusive et dynamique qui reflète la mission de l'organisation. Au-delà du site, Nukleo assure également les communications et le marketing annuel de QueerTech, en soutenant la croissance de la communauté et la visibilité de ses programmes phares : QT Access, QT Leaders et QT Founders.",
       en: "QueerTech is a Canadian organization that empowers 2SLGBTQIA+ people to break into the tech industry, advance their careers, and launch innovative businesses. Nukleo accompanied QueerTech in the redesign of its website, creating an inclusive and dynamic digital experience that reflects the organization's mission. Beyond the site, Nukleo also handles QueerTech's annual communications and marketing, supporting community growth and the visibility of its flagship programs: QT Access, QT Leaders, and QT Founders.",
@@ -598,6 +614,7 @@ export const PROJECTS_DATA: ProjectData[] = [
     year: '2024',
     category: 'Site web',
     services: 'Conception UI/UX, Développement',
+    websiteUrl: 'https://nouvelle-ile.ca',
     description: {
       fr: "Nouvelle Île est une plateforme de médiation culturelle numérique conçue par Verticale, un centre d'artistes de Laval. Elle prend la forme d'une carte interactive accessible en ligne, où chaque icône représente une œuvre d'art éphémère créée spécialement pour un lieu particulier de la ville. Nukleo a développé cette plateforme originale qui révèle l'existence de plus d'une trentaine d'œuvres diffusées par Verticale au cours des quinze dernières années, invitant le public à renouveler son regard sur les espaces qui nous entourent et à cultiver l'esprit des lieux.",
       en: "Nouvelle Île is a digital cultural mediation platform designed by Verticale, an artist-run centre in Laval. It takes the form of an interactive map accessible online, where each icon represents an ephemeral artwork created specifically for a particular location in the city. Nukleo developed this original platform that reveals the existence of over thirty works presented by Verticale over the past fifteen years, inviting the public to renew their perspective on the spaces around us and to cultivate the spirit of places.",
@@ -613,6 +630,7 @@ export const PROJECTS_DATA: ProjectData[] = [
     year: '2024',
     category: 'Site web',
     services: 'Conception UI/UX, Développement',
+    websiteUrl: 'https://osalonmtl.ca',
     description: {
       fr: "O Salon est un salon de coiffure haut de gamme situé au cœur du Plateau Mont-Royal à Montréal. Chaleureux et convivial, il propose des services de coiffure, de coloration et de maquillage non genrés, réalisés par une équipe diversifiée qui se forme régulièrement aux dernières tendances. Nukleo a réalisé la refonte complète du site web d'O Salon, en créant une expérience en ligne qui reflète l'identité unique et l'atmosphère accueillante du salon.",
       en: "O Salon is a high-end hair salon located in the heart of Montreal's Plateau Mont-Royal neighbourhood. Warm and welcoming, it offers gender-neutral hairdressing, colouring, and makeup services, delivered by a diverse team that regularly trains in the latest trends. Nukleo carried out the complete redesign of O Salon's website, creating an online experience that reflects the salon's unique identity and welcoming atmosphere.",
@@ -633,21 +651,38 @@ export const PROJECTS_DATA: ProjectData[] = [
     },
     images: ['PsyEtc_1.jpg'],
   },
+  // ─── Nouveaux projets issus des offres de services ───────────────────────────
   {
-    slug: 'mentor-aero',
-    key: 'MentorAero',
-    title: 'Mentor Aero',
-    client: 'Mentor Aero',
-    year: '2024',
-    category: 'Brand',
-    services: 'Rebranding, Direction artistique, Identité visuelle',
+    slug: 'theatre-nova-scotia',
+    key: 'TheaterNS',
+    title: 'Theatre Nova Scotia',
+    client: 'Theatre Nova Scotia',
+    year: '2025',
+    category: 'Site web',
+    services: 'Conception UI/UX, Développement, Maintenance évolutive',
+    websiteUrl: 'https://theatrens.ca',
     description: {
-      fr: "Mentor Aero est une organisation dédiée au développement des talents dans l'industrie aérospatiale. Nukleo a accompagné Mentor Aero dans son rebranding, en repensant l'identité visuelle de la marque pour mieux refléter son positionnement et son ambition dans un secteur d'excellence.",
-      en: "Mentor Aero is an organization dedicated to developing talent in the aerospace industry. Nukleo accompanied Mentor Aero through its rebranding, rethinking the brand's visual identity to better reflect its positioning and ambition in a sector of excellence.",
+      fr: "Theatre Nova Scotia est l'organisation provinciale dédiée au développement du théâtre professionnel et communautaire en Nouvelle-Écosse. Elle chapeaute un écosystème numérique de quatre sites web : theatrens.ca, performns.ca, dramafest.ca et le site des Merritt Awards. Nukleo a réalisé la conception et le développement de ces plateformes, en assurant une expérience utilisateur cohérente, accessible et conforme aux standards WCAG/ADA. L'agence assure également la maintenance annuelle de l'ensemble de l'écosystème digital, garantissant la stabilité, la sécurité et l'évolution continue des quatre sites.",
+      en: "Theatre Nova Scotia is the provincial organization dedicated to the development of professional and community theatre in Nova Scotia. It oversees a digital ecosystem of four websites: theatrens.ca, performns.ca, dramafest.ca, and the Merritt Awards site. Nukleo designed and developed these platforms, ensuring a consistent, accessible, and WCAG/ADA-compliant user experience. The agency also provides annual maintenance for the entire digital ecosystem, ensuring the stability, security, and continuous evolution of all four sites.",
     },
-    images: ['MentorAero_1.jpg'],
+    images: [],
+  },
+  {
+    slug: 'arise',
+    key: 'Arise',
+    title: 'Arise',
+    client: 'Arise',
+    year: '2025',
+    category: 'Plateforme',
+    services: 'Conception UI/UX, Développement, Plateforme d\'évaluation',
+    description: {
+      fr: "Arise est une plateforme de leadership holistique qui intègre quatre modules d'évaluation complémentaires : MBTI, TKI, 360° et Wellness. Nukleo a conçu et développé le MVP de cette plateforme, en créant une interface élégante et sécurisée qui guide les leaders à travers leur parcours d'évaluation. La plateforme génère automatiquement des rapports personnalisés et offre un tableau de bord administrateur complet pour la gestion des utilisateurs et des données.",
+      en: "Arise is a holistic leadership platform integrating four complementary assessment modules: MBTI, TKI, 360°, and Wellness. Nukleo designed and developed the MVP of this platform, creating an elegant and secure interface that guides leaders through their assessment journey. The platform automatically generates personalized reports and offers a comprehensive admin dashboard for user and data management.",
+    },
+    images: [],
   },
 ];
+
 
 /**
  * Retourne les données d'un projet à partir de son slug.
