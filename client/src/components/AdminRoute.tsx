@@ -7,14 +7,15 @@ interface AdminRouteProps {
 }
 
 export default function AdminRoute({ children }: AdminRouteProps) {
-  const [, setLocation] = useLocation();
+  const [location, setLocation] = useLocation();
   const { data, isLoading } = trpc.adminAuth.checkAuth.useQuery();
 
   useEffect(() => {
     if (!isLoading && !data?.authenticated) {
-      setLocation("/admin/login");
+      const from = encodeURIComponent(location || "/admin");
+      setLocation(`/admin/login?from=${from}`);
     }
-  }, [data, isLoading, setLocation]);
+  }, [data, isLoading, location, setLocation]);
 
   if (isLoading) {
     return (

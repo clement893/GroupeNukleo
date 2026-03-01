@@ -11,12 +11,14 @@ export default function AdminLogin() {
   const search = useSearch();
   const params = new URLSearchParams(search);
   const error = params.get("error");
+  const from = params.get("from");
 
   useEffect(() => {
     if (isAuthenticated) {
-      setLocation("/admin");
+      const target = from && from.startsWith("/admin") && from !== "/admin/login" ? from : "/admin";
+      setLocation(target);
     }
-  }, [isAuthenticated, setLocation]);
+  }, [isAuthenticated, from, setLocation]);
 
   if (loading) {
     return (

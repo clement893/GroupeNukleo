@@ -42,8 +42,9 @@ const redirectToLoginIfUnauthorized = (error: unknown) => {
     return;
   }
   if (msg === NOT_ADMIN_ERR_MSG) {
-    if (window.location.pathname.startsWith('/admin')) {
-      window.location.href = '/admin/login';
+    if (window.location.pathname.startsWith('/admin') && !window.location.pathname.startsWith('/admin/login')) {
+      const from = encodeURIComponent(window.location.pathname);
+      window.location.href = `/admin/login?from=${from}`;
     }
     return;
   }
