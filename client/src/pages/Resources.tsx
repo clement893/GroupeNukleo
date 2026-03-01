@@ -64,15 +64,8 @@ export default function Resources() {
   };
 
   const tools = useMemo(() => [
-    {
-      badge: t('resources.tools.radar.badge'),
-      title: t('resources.tools.radar.title'),
-      description: t('resources.tools.radar.description'),
-      tags: getArrayTranslation('resources.tools.radar.tags'),
-      link: getLocalizedPath('/radar'),
-      buttonText: t('resources.tools.radar.buttonText'),
-    },
-  ], [t, getArrayTranslation, getLocalizedPath]);
+    // Radar / glossary / assessment pages retirés de la refonte — section outils vide pour l’instant
+  ], []);
 
   const categories = useMemo(() => [
     { key: 'all', label: t('resources.filter.all') },
@@ -157,7 +150,8 @@ export default function Resources() {
           </div>
         </section>
 
-        {/* Tools */}
+        {/* Tools — masqué tant qu’aucun outil n’est proposé */}
+        {tools.length > 0 && (
         <section style={{ padding: '0 6% 4rem' }}>
           <div className="container">
             <div style={{ marginBottom: '2rem' }}>
@@ -237,6 +231,7 @@ export default function Resources() {
             </div>
           </div>
         </section>
+        )}
 
         {/* Filter */}
         <section style={{ padding: '0 6% 1.5rem' }}>

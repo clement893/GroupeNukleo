@@ -378,6 +378,7 @@ function ProjectsCarousel() {
 function Triptych() {
   const [active, setActive] = useState(0);
   const getLocalizedPath = useLocalizedPath();
+  const { t } = useLanguage();
   return (
     <div
       className="w-full overflow-hidden relative"

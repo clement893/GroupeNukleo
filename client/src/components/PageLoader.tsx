@@ -255,10 +255,8 @@ export default function PageLoader() {
         // Normalize path to handle language prefixes
         const normalizedPath = location.replace(/^\/(fr|en)/, '') || '/';
         if (normalizedPath === '/') {
-          // Preload Home component in background
-          import('../pages/Home').catch(() => {
-            // Silently fail - component will load normally if preload fails
-          });
+          // Preload Home (HomepageDemo5) in background
+          import('../pages/HomepageDemo5').catch(() => {});
         }
       };
 
