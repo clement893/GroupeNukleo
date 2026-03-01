@@ -137,6 +137,35 @@ export async function initDatabase(req: Request, res: Response) {
       );
     `);
 
+    // Create loaders table (loading screen animations)
+    await db.execute(sql`
+      CREATE TABLE IF NOT EXISTS loaders (
+        id SERIAL PRIMARY KEY,
+        name VARCHAR(255) NOT NULL UNIQUE,
+        description TEXT,
+        css_code TEXT NOT NULL,
+        is_active BOOLEAN DEFAULT false NOT NULL,
+        display_order INTEGER DEFAULT 0 NOT NULL,
+        created_at TIMESTAMP DEFAULT NOW() NOT NULL,
+        updated_at TIMESTAMP DEFAULT NOW() NOT NULL
+      );
+    `);
+
+    // Create page_visibility table (which pages are visible on the site)
+    await db.execute(sql`
+      CREATE TABLE IF NOT EXISTS page_visibility (
+        id SERIAL PRIMARY KEY,
+        path VARCHAR(255) NOT NULL UNIQUE,
+        "isVisible" BOOLEAN DEFAULT true NOT NULL,
+        description TEXT,
+        "createdAt" TIMESTAMP DEFAULT NOW() NOT NULL,
+        "updatedAt" TIMESTAMP DEFAULT NOW() NOT NULL
+      );
+    `);
+    await db.execute(sql`
+      CREATE INDEX IF NOT EXISTS idx_page_visibility_path ON page_visibility(path);
+    `);
+
     // Create radar_technologies table
     await db.execute(sql`
       CREATE TABLE IF NOT EXISTS radar_technologies (
@@ -265,6 +294,8 @@ export async function initDatabase(req: Request, res: Response) {
         "media_assets",
         "agency_leads",
         "admin_users",
+        "loaders",
+        "page_visibility",
         "radar_technologies",
         "radar_positions",
         "ai_news_subscribers",

@@ -20,9 +20,16 @@ export const pageVisibilityRouter = router({
         .orderBy(desc(pageVisibility.updatedAt));
 
       return Array.isArray(pages) ? pages : [];
-    } catch (error) {
-      // Silently handle database connection errors - return empty array
-      if (error instanceof Error && 'code' in error && error.code === 'ECONNREFUSED') {
+    } catch (error: unknown) {
+      const code =
+        (error && typeof error === 'object' && 'code' in error ? (error as { code: string }).code : null) ||
+        (error && typeof error === 'object' && 'cause' in error && error.cause && typeof error.cause === 'object' && 'code' in error.cause
+          ? (error.cause as { code: string }).code
+          : null);
+      if (code === 'ECONNREFUSED' || code === '42P01') {
+        if (code === '42P01') {
+          console.warn("[PageVisibility] Table page_visibility does not exist yet; run init-db or deploy with updated init-db.");
+        }
         return [];
       }
       console.error("[PageVisibility] Error fetching pages:", error);
@@ -48,9 +55,17 @@ export const pageVisibilityRouter = router({
 
         // If page doesn't exist in DB, default to visible
         return page[0] || { path: input.path, isVisible: true };
-      } catch (error) {
-        console.error("[PageVisibility] Error fetching page visibility:", error);
-        // Default to visible if error
+      } catch (error: unknown) {
+        const code =
+          (error && typeof error === 'object' && 'code' in error ? (error as { code: string }).code : null) ||
+          (error && typeof error === 'object' && 'cause' in error && error.cause && typeof error.cause === 'object' && 'code' in error.cause
+            ? (error.cause as { code: string }).code
+            : null);
+        if (code === '42P01') {
+          console.warn("[PageVisibility] Table page_visibility does not exist yet; run init-db or deploy with updated init-db.");
+        } else {
+          console.error("[PageVisibility] Error fetching page visibility:", error);
+        }
         return { path: input.path, isVisible: true };
       }
     }),
