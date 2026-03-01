@@ -8,7 +8,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { useState, useMemo, useEffect } from 'react';
-import { Loader2, ArrowLeft, FolderInput } from 'lucide-react';
+import { Loader2, ArrowLeft, FolderInput, Trash2 } from 'lucide-react';
 import { toast } from 'sonner';
 import { PROJECTS_DATA, type ProjectData } from '@/data/projectsData';
 import type { ProjectFilterCategory } from '@/data/projectsData';
@@ -49,6 +49,8 @@ export default function AdminProjectEdit() {
   const { isAdmin, isLoading: authLoading } = useIsAdminSession();
   const { data: apiProjects, isLoading: projectsLoading, refetch: refetchProjects } =
     trpc.projects.listAdmin.useQuery(undefined, { enabled: isAdmin && !!slug });
+  const { data: uploadedImages = [], isLoading: imagesLoading } =
+    trpc.projectsImages.listAdmin.useQuery(undefined, { enabled: isAdmin && !!slug });
   const initMutation = trpc.projects.initFromClient.useMutation({
     onSuccess: () => {
       toast.success('Projets initialisés');
@@ -262,15 +264,19 @@ export default function AdminProjectEdit() {
                   />
                 </div>
                 <div>
-                  <Label className="text-[var(--admin-foreground)]">Images (un par ligne ou séparés par des virgules)</Label>
-                  {current.images.length > 0 && (
-                    <div className="mt-2 mb-2 flex flex-wrap gap-2">
-                      {current.images.map((img) => (
-                        <div
-                          key={img}
-                          className="w-20 h-20 rounded-lg overflow-hidden border border-gray-300 dark:border-gray-600 bg-gray-100 dark:bg-gray-800 flex-shrink-0"
-                          title={img}
-                        >
+                  <Label className="text-[var(--admin-foreground)]">Images du projet</Label>
+                  <p className="text-xs text-[var(--admin-muted)] mt-0.5 mb-2">
+                    Ajoutez, supprimez ou remplacez les images. Les noms doivent correspondre aux fichiers dans /projects/.
+                  </p>
+
+                  {/* Liste des images avec supprimer / remplacer */}
+                  <div className="space-y-3 mb-3">
+                    {current.images.map((img, index) => (
+                      <div
+                        key={`${img}-${index}`}
+                        className="flex items-center gap-3 p-2 rounded-lg border border-gray-200 dark:border-gray-600 bg-gray-50 dark:bg-gray-800/50"
+                      >
+                        <div className="w-14 h-14 rounded overflow-hidden border border-gray-300 dark:border-gray-600 bg-gray-200 dark:bg-gray-700 flex-shrink-0">
                           <img
                             src={`/projects/${img}`}
                             alt=""
@@ -281,9 +287,85 @@ export default function AdminProjectEdit() {
                             }}
                           />
                         </div>
-                      ))}
-                    </div>
-                  )}
+                        <span className="flex-1 min-w-0 text-sm font-mono text-gray-700 dark:text-gray-300 truncate" title={img}>
+                          {img}
+                        </span>
+                        <select
+                          value={img}
+                          onChange={(e) => {
+                            const v = e.target.value;
+                            if (!v) return;
+                            setForm({
+                              ...current,
+                              images: current.images.map((x, i) => (i === index ? v : x)),
+                            });
+                          }}
+                          className="flex-shrink-0 h-8 rounded border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 text-xs px-2 max-w-[180px]"
+                        >
+                          <option value={img}>{img}</option>
+                          {(uploadedImages as { name: string }[])
+                            .filter((f) => f.name !== img)
+                            .map((f) => (
+                              <option key={f.name} value={f.name}>
+                                {f.name}
+                              </option>
+                            ))}
+                        </select>
+                        <Button
+                          type="button"
+                          variant="ghost"
+                          size="sm"
+                          className="flex-shrink-0 text-red-600 hover:text-red-700 hover:bg-red-50 dark:hover:bg-red-900/20"
+                          onClick={() =>
+                            setForm({
+                              ...current,
+                              images: current.images.filter((_, i) => i !== index),
+                            })
+                          }
+                          aria-label="Supprimer cette image"
+                        >
+                          <Trash2 className="w-4 h-4" />
+                        </Button>
+                      </div>
+                    ))}
+                  </div>
+
+                  {/* Ajouter une image */}
+                  <div className="flex flex-wrap items-center gap-2 mb-2">
+                    <select
+                      id="add-image-select"
+                      className="h-9 rounded border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 text-sm px-3 min-w-[200px]"
+                      value=""
+                      onChange={(e) => {
+                        const v = e.target.value;
+                        if (!v) return;
+                        setForm({ ...current, images: [...current.images, v] });
+                        e.target.value = '';
+                      }}
+                    >
+                      <option value="">— Ajouter une image —</option>
+                      {(uploadedImages as { name: string }[])
+                        .filter((f) => !current.images.includes(f.name))
+                        .map((f) => (
+                          <option key={f.name} value={f.name}>
+                            {f.name}
+                          </option>
+                        ))}
+                    </select>
+                    {imagesLoading && (
+                      <span className="text-xs text-[var(--admin-muted)] flex items-center gap-1">
+                        <Loader2 className="w-3 h-3 animate-spin" /> Chargement…
+                      </span>
+                    )}
+                    {(uploadedImages as { name: string }[])?.length === 0 && !imagesLoading && (
+                      <span className="text-xs text-[var(--admin-muted)]">
+                        Aucune image uploadée. Allez sur la liste des projets pour en ajouter.
+                      </span>
+                    )}
+                  </div>
+
+                  {/* Champ texte pour édition manuelle */}
+                  <Label className="text-[var(--admin-muted)] text-xs block mt-2">Ou éditez la liste (un nom par ligne)</Label>
                   <Textarea
                     value={current.images.join('\n')}
                     onChange={(e) => {
@@ -291,9 +373,9 @@ export default function AdminProjectEdit() {
                       const list = raw.split(/[\n,]/).map((s) => s.trim()).filter(Boolean);
                       setForm({ ...current, images: list });
                     }}
-                    rows={3}
-                    placeholder="Projet_1.jpg&#10;Projet_2.png"
-                    className={`${inputClass} font-mono text-sm`}
+                    rows={2}
+                    placeholder="Projet_1.jpg"
+                    className={`${inputClass} font-mono text-sm mt-1`}
                   />
                 </div>
                 <div className="flex gap-3 pt-4">

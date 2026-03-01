@@ -175,94 +175,97 @@ export default function AdminProjectsImages() {
           </div>
         ) : (
           <>
-            {/* Triptyques en haut : choisir les 3 projets de chaque triptyque */}
-            {isFromApi && (
-              <Card className="mb-8 bg-white dark:bg-[var(--admin-card)] border-[var(--admin-border)] shadow-sm">
-                <CardHeader>
-                  <CardTitle className="text-[var(--admin-foreground)]">Triptyques</CardTitle>
-                  <CardDescription className="text-[var(--admin-muted)]">
-                    Choisissez les 3 projets affichés dans le triptyque de la page d&apos;accueil et les 3 de la page Projets (ordre = position 1, 2, 3).
-                  </CardDescription>
-                </CardHeader>
-                <CardContent className="space-y-6">
-                  <div>
-                    <p className="text-sm font-medium text-[var(--admin-foreground)] mb-2 flex items-center gap-2">
-                      <LayoutPanelTop className="w-4 h-4 text-amber-600" />
-                      Triptyque page d&apos;accueil (3 projets)
-                    </p>
-                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                      {[0, 1, 2].map((i) => (
-                        <div key={i}>
-                          <label className="text-xs text-[var(--admin-muted)] block mb-1">Position {i + 1}</label>
-                          <select
-                            value={homeTriptychSlugs[i] ?? ''}
-                            onChange={(e) => {
-                              const v = e.target.value;
-                              setHomeTriptychSlugs((prev) => {
-                                const next = [...prev];
-                                next[i] = v;
-                                return next.slice(0, 3);
-                              });
-                            }}
-                            className="w-full h-9 rounded-md border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 px-3 py-1 text-sm"
-                          >
-                            <option value="">— Aucun —</option>
-                            {projects.map((p) => (
-                              <option key={p.slug} value={p.slug}>{p.title}</option>
-                            ))}
-                          </select>
-                        </div>
-                      ))}
-                    </div>
+            {/* Triptyques en haut : toujours visible, choisir les 3 projets de chaque triptyque */}
+            <Card className="mb-8 bg-white dark:bg-[var(--admin-card)] border-[var(--admin-border)] shadow-sm">
+              <CardHeader>
+                <CardTitle className="text-[var(--admin-foreground)]">Triptyques</CardTitle>
+                <CardDescription className="text-[var(--admin-muted)]">
+                  Choisissez les 3 projets affichés dans le triptyque de la page d&apos;accueil et les 3 de la page Projets (ordre = position 1, 2, 3).
+                </CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-6">
+                {!isFromApi && (
+                  <p className="text-sm text-amber-700 dark:text-amber-300 bg-amber-500/10 border border-amber-500/30 rounded-lg p-3">
+                    Initialisez d&apos;abord les projets avec le bouton « Initialiser depuis le site » ci‑dessous pour pouvoir enregistrer la sélection des triptyques.
+                  </p>
+                )}
+                <div>
+                  <p className="text-sm font-medium text-[var(--admin-foreground)] mb-2 flex items-center gap-2">
+                    <LayoutPanelTop className="w-4 h-4 text-amber-600" />
+                    Triptyque page d&apos;accueil (3 projets)
+                  </p>
+                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                    {[0, 1, 2].map((i) => (
+                      <div key={i}>
+                        <label className="text-xs text-[var(--admin-muted)] block mb-1">Position {i + 1}</label>
+                        <select
+                          value={homeTriptychSlugs[i] ?? ''}
+                          onChange={(e) => {
+                            const v = e.target.value;
+                            setHomeTriptychSlugs((prev) => {
+                              const next = [...prev];
+                              next[i] = v;
+                              return next.slice(0, 3);
+                            });
+                          }}
+                          className="w-full h-9 rounded-md border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 px-3 py-1 text-sm"
+                        >
+                          <option value="">— Aucun —</option>
+                          {projects.map((p) => (
+                            <option key={p.slug} value={p.slug}>{p.title}</option>
+                          ))}
+                        </select>
+                      </div>
+                    ))}
                   </div>
-                  <div>
-                    <p className="text-sm font-medium text-[var(--admin-foreground)] mb-2 flex items-center gap-2">
-                      <LayoutGrid className="w-4 h-4 text-violet-600" />
-                      Triptyque page Projets (3 projets)
-                    </p>
-                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                      {[0, 1, 2].map((i) => (
-                        <div key={i}>
-                          <label className="text-xs text-[var(--admin-muted)] block mb-1">Position {i + 1}</label>
-                          <select
-                            value={projectsTriptychSlugs[i] ?? ''}
-                            onChange={(e) => {
-                              const v = e.target.value;
-                              setProjectsTriptychSlugs((prev) => {
-                                const next = [...prev];
-                                next[i] = v;
-                                return next.slice(0, 3);
-                              });
-                            }}
-                            className="w-full h-9 rounded-md border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 px-3 py-1 text-sm"
-                          >
-                            <option value="">— Aucun —</option>
-                            {projects.map((p) => (
-                              <option key={p.slug} value={p.slug}>{p.title}</option>
-                            ))}
-                          </select>
-                        </div>
-                      ))}
-                    </div>
+                </div>
+                <div>
+                  <p className="text-sm font-medium text-[var(--admin-foreground)] mb-2 flex items-center gap-2">
+                    <LayoutGrid className="w-4 h-4 text-violet-600" />
+                    Triptyque page Projets (3 projets)
+                  </p>
+                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                    {[0, 1, 2].map((i) => (
+                      <div key={i}>
+                        <label className="text-xs text-[var(--admin-muted)] block mb-1">Position {i + 1}</label>
+                        <select
+                          value={projectsTriptychSlugs[i] ?? ''}
+                          onChange={(e) => {
+                            const v = e.target.value;
+                            setProjectsTriptychSlugs((prev) => {
+                              const next = [...prev];
+                              next[i] = v;
+                              return next.slice(0, 3);
+                            });
+                          }}
+                          className="w-full h-9 rounded-md border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 px-3 py-1 text-sm"
+                        >
+                          <option value="">— Aucun —</option>
+                          {projects.map((p) => (
+                            <option key={p.slug} value={p.slug}>{p.title}</option>
+                          ))}
+                        </select>
+                      </div>
+                    ))}
                   </div>
-                  <Button
-                    onClick={() =>
-                      setTriptychMutation.mutate({
-                        homeTriptychSlugs: homeTriptychSlugs.filter(Boolean),
-                        projectsTriptychSlugs: projectsTriptychSlugs.filter(Boolean),
-                      })
-                    }
-                    disabled={setTriptychMutation.isPending}
-                    className="gap-2"
-                  >
-                    {setTriptychMutation.isPending ? (
-                      <Loader2 className="w-4 h-4 animate-spin" />
-                    ) : null}
-                    Enregistrer la sélection des triptyques
-                  </Button>
-                </CardContent>
-              </Card>
-            )}
+                </div>
+                <Button
+                  onClick={() =>
+                    setTriptychMutation.mutate({
+                      homeTriptychSlugs: homeTriptychSlugs.filter(Boolean),
+                      projectsTriptychSlugs: projectsTriptychSlugs.filter(Boolean),
+                    })
+                  }
+                  disabled={!isFromApi || setTriptychMutation.isPending}
+                  className="gap-2"
+                >
+                  {setTriptychMutation.isPending ? (
+                    <Loader2 className="w-4 h-4 animate-spin" />
+                  ) : null}
+                  Enregistrer la sélection des triptyques
+                </Button>
+              </CardContent>
+            </Card>
 
             {!isFromApi && (
               <Card className="mb-6 bg-amber-500/10 border-amber-500/30">
