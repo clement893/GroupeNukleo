@@ -101,7 +101,10 @@ export default function Projects() {
 
   const heroImages = useMemo(() => {
     const featured = (apiProjects || []).filter((p: { featuredOnProjectsTriptych?: boolean }) => p.featuredOnProjectsTriptych);
-    const fromFeatured = featured.slice(0, 3).flatMap((p: { images?: string[] }) => (p.images && p.images[0] ? [p.images[0]] : [])).filter(Boolean) as string[];
+    const fromFeatured = featured.slice(0, 3).flatMap((p: { images?: string[]; projectsTriptychImage?: string }) => {
+      const img = (p as { projectsTriptychImage?: string }).projectsTriptychImage || (p.images && p.images[0]);
+      return img ? [img] : [];
+    }).filter(Boolean) as string[];
     if (fromFeatured.length >= 3) return fromFeatured;
     return filteredImages.length > 0 ? filteredImages.slice(0, 3) : fromFeatured;
   }, [apiProjects, filteredImages]);

@@ -28,11 +28,17 @@ const FALLBACK_PROJECTS = [
 type HomeProjectItem = { num: string; name: string; category: string; tagline: string; result: string; img: string; color: string };
 const CAROUSEL_COLORS = ['#2563eb', PURPLE, '#059669', '#dc2626', '#7c2d12'];
 
-function mapApiProjectsToHome(apiProjects: Array<{ title: string; category: string; description: { fr: string; en: string }; images: string[]; slug?: string; homeCarouselImage?: string }>, max: number, startIndex: number): HomeProjectItem[] {
+function mapApiProjectsToHome(
+  apiProjects: Array<{ title: string; category: string; description: { fr: string; en: string }; images: string[]; slug?: string; homeCarouselImage?: string; homeTriptychImage?: string }>,
+  max: number,
+  startIndex: number,
+  imageField?: 'homeCarouselImage' | 'homeTriptychImage'
+): HomeProjectItem[] {
   if (!apiProjects?.length) return [];
   return apiProjects.slice(0, max).map((p, i) => {
     const tagline = (p.description?.fr || p.description?.en || '').slice(0, 70);
-    const imgFilename = (p as { homeCarouselImage?: string }).homeCarouselImage || p.images?.[0];
+    const pAny = p as { homeCarouselImage?: string; homeTriptychImage?: string };
+    const imgFilename = (imageField && pAny[imageField]) || p.images?.[0];
     const img = imgFilename ? `/projects/${imgFilename}` : WORK1;
     const num = String(startIndex + i + 1).padStart(2, '0');
     return {
@@ -528,11 +534,11 @@ export default function HomepageDemo5() {
   const { data: apiProjects } = trpc.projects.list.useQuery(undefined, { staleTime: 2 * 60 * 1000 });
   const homeCarouselProjects = useMemo(() => {
     const featured = (apiProjects || []).filter((p: { featuredOnHomeCarousel?: boolean }) => p.featuredOnHomeCarousel);
-    return mapApiProjectsToHome(featured, 6, 0);
+    return mapApiProjectsToHome(featured, 6, 0, 'homeCarouselImage');
   }, [apiProjects]);
   const homeTriptychProjects = useMemo(() => {
     const featured = (apiProjects || []).filter((p: { featuredOnHomeTriptych?: boolean }) => p.featuredOnHomeTriptych);
-    return mapApiProjectsToHome(featured, 3, 0);
+    return mapApiProjectsToHome(featured, 3, 0, 'homeTriptychImage');
   }, [apiProjects]);
 
   return (

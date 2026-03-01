@@ -30,8 +30,12 @@ export const projectSchema = z.object({
   images: z.array(z.string()),
   /** Afficher dans le triptyque de la page d'accueil */
   featuredOnHomeTriptych: z.boolean().optional(),
+  /** Image à afficher dans le triptyque accueil (nom de fichier); si absent, utilise images[0] */
+  homeTriptychImage: z.string().optional(),
   /** Afficher dans le triptyque de la page Projets */
   featuredOnProjectsTriptych: z.boolean().optional(),
+  /** Image à afficher dans le triptyque page Projets; si absent, utilise images[0] */
+  projectsTriptychImage: z.string().optional(),
   /** Afficher dans le carrousel "Latest project" en haut de la page d'accueil */
   featuredOnHomeCarousel: z.boolean().optional(),
   /** Image à afficher dans le carrousel accueil (nom de fichier); si absent, utilise images[0] */
@@ -84,19 +88,25 @@ export async function updateProject(input: ProjectRecord): Promise<ProjectRecord
   return input;
 }
 
-/** Set which 3 projects appear in each triptych (and their order). Reorders projects so home triptych are first, then projects triptych, then rest. */
+/** Set which 3 projects appear in each triptych (and their order + image per project). */
 export async function setTriptychSlugs(input: {
   homeTriptychSlugs: string[];
   projectsTriptychSlugs: string[];
+  homeTriptychImageBySlug?: Record<string, string>;
+  projectsTriptychImageBySlug?: Record<string, string>;
 }): Promise<ProjectRecord[]> {
   const projects = await readProjects();
   const homeSlugs = input.homeTriptychSlugs.slice(0, 3);
   const projectsSlugs = input.projectsTriptychSlugs.slice(0, 3);
+  const homeImg = input.homeTriptychImageBySlug ?? {};
+  const projectsImg = input.projectsTriptychImageBySlug ?? {};
 
   const updated = projects.map((p) => ({
     ...p,
     featuredOnHomeTriptych: homeSlugs.includes(p.slug),
+    homeTriptychImage: homeSlugs.includes(p.slug) && homeImg[p.slug] ? homeImg[p.slug] : undefined,
     featuredOnProjectsTriptych: projectsSlugs.includes(p.slug),
+    projectsTriptychImage: projectsSlugs.includes(p.slug) && projectsImg[p.slug] ? projectsImg[p.slug] : undefined,
   }));
 
   const homeSet = new Set(homeSlugs);

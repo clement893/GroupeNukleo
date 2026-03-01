@@ -22,7 +22,7 @@ import connectPgSimple from "connect-pg-simple";
 import passport from "passport";
 import { configureGoogleAuth, requireAdminAuth } from "./googleAuth";
 import { getDb, getAllAgencyLeads, getLeoAnalytics, getLeoContacts, getAdminStats } from "../db";
-import { getAllPageTexts, updatePageText, createPageText, importPageTextsFromJson } from "../pageTextsApi";
+import { getAllPageTexts, updatePageText, createPageText, importPageTextsFromJson, seedFromLocaleFiles } from "../pageTextsApi";
 import { addLogo, updateLogo, removeLogo, reorderLogos } from "../carouselLogosApi";
 import { analytics } from "../../drizzle/schema";
 import { eq } from "drizzle-orm";
@@ -571,6 +571,19 @@ async function startServer() {
     } catch (e) {
       console.error("[Admin] page-texts import error", e);
       res.status(500).json({ error: e instanceof Error ? e.message : "Import failed" });
+    }
+  });
+
+  app.post("/api/admin/page-texts/seed-from-locales", requireAdminAuth, async (req, res) => {
+    try {
+      const result = await seedFromLocaleFiles();
+      res.json(result);
+    } catch (e) {
+      console.error("[Admin] page-texts seed-from-locales error", e);
+      res.status(500).json({
+        error: e instanceof Error ? e.message : "Seed failed",
+        hint: "Ensure client/src/locales/en.json and fr.json exist (e.g. run from repo root).",
+      });
     }
   });
 

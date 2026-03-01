@@ -4,7 +4,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Loader2, Save, Plus, FileText, Globe, ChevronRight, AlertCircle } from "lucide-react";
+import { Loader2, Save, Plus, FileText, Globe, ChevronRight, AlertCircle, Download } from "lucide-react";
 import { AdminLayout } from "@/components/AdminLayout";
 import { toast } from "sonner";
 
@@ -54,6 +54,18 @@ async function importPageTexts(en: Record<string, string>, fr: Record<string, st
   if (!res.ok) {
     const err = await res.json().catch(() => ({}));
     throw new Error(err.error || res.statusText);
+  }
+  return res.json();
+}
+
+async function seedFromLocales() {
+  const res = await fetch("/api/admin/page-texts/seed-from-locales", {
+    method: "POST",
+    ...credentials,
+  });
+  if (!res.ok) {
+    const data = await res.json().catch(() => ({}));
+    throw new Error(data.error || data.hint || res.statusText);
   }
   return res.json();
 }
@@ -118,6 +130,14 @@ export default function AdminPageTexts() {
       setShowImport(false);
       setImportEn("");
       setImportFr("");
+      queryClient.invalidateQueries({ queryKey: ["admin", "page-texts"] });
+    },
+    onError: (e: Error) => toast.error(e.message),
+  });
+  const seedMutation = useMutation({
+    mutationFn: seedFromLocales,
+    onSuccess: (r: { created: number; updated: number; total: number }) => {
+      toast.success(`Site importé : ${r.created} créés, ${r.updated} mis à jour (${r.total} clés)`);
       queryClient.invalidateQueries({ queryKey: ["admin", "page-texts"] });
     },
     onError: (e: Error) => toast.error(e.message),
@@ -237,6 +257,37 @@ export default function AdminPageTexts() {
             Sélectionnez une page à gauche, modifiez les textes à droite. Données en base de données.
           </p>
         </div>
+
+        {(!texts || texts.length === 0) && !isLoading && (
+          <Card className="mb-6 border-cyan-500/50 bg-cyan-500/10">
+            <CardHeader>
+              <CardTitle className="text-white flex items-center gap-2" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
+                <Download className="w-5 h-5 text-cyan-400" />
+                Importer tout le contenu du site
+              </CardTitle>
+              <CardDescription className="text-white/70" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
+                Les textes du site (en.json / fr.json) seront importés dans la base. Toutes les pages et clés apparaîtront ici pour édition.
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <Button
+                onClick={() => seedMutation.mutate()}
+                disabled={seedMutation.isPending}
+                className="bg-cyan-600 hover:bg-cyan-700 text-white"
+              >
+                {seedMutation.isPending ? (
+                  <Loader2 className="w-4 h-4 animate-spin mr-2" />
+                ) : (
+                  <Download className="w-4 h-4 mr-2" />
+                )}
+                Importer tout depuis les fichiers du site
+              </Button>
+              {seedMutation.isError && (
+                <p className="text-red-400 text-sm mt-2">{(seedMutation.error as Error).message}</p>
+              )}
+            </CardContent>
+          </Card>
+        )}
 
         <div className="flex flex-col lg:flex-row gap-6">
           {/* Left: page selector */}
@@ -418,12 +469,23 @@ export default function AdminPageTexts() {
                           Importer depuis JSON (en / fr)
                         </CardTitle>
                         <CardDescription className="text-white/60 text-sm mt-1">
-                          Collez le contenu des fichiers locales ; les clés seront aplaties.
+                          Collez le contenu des fichiers locales ; les clés seront aplaties. Ou importez directement depuis les fichiers du site.
                         </CardDescription>
                       </div>
-                      <Button variant="outline" size="sm" onClick={() => setShowImport(!showImport)} className="border-white/30 text-white">
-                        {showImport ? "Masquer" : "Afficher"}
-                      </Button>
+                      <div className="flex gap-2">
+                        <Button variant="outline" size="sm" onClick={() => setShowImport(!showImport)} className="border-white/30 text-white">
+                          {showImport ? "Masquer" : "Afficher"}
+                        </Button>
+                        <Button
+                          size="sm"
+                          onClick={() => seedMutation.mutate()}
+                          disabled={seedMutation.isPending}
+                          className="bg-cyan-600 hover:bg-cyan-700 text-white"
+                        >
+                          {seedMutation.isPending ? <Loader2 className="w-4 h-4 animate-spin" /> : <Download className="w-4 h-4" />}
+                          Tout depuis le site
+                        </Button>
+                      </div>
                     </div>
                   </CardHeader>
                   {showImport && (

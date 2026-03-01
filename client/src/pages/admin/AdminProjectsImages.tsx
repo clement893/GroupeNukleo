@@ -110,10 +110,33 @@ export default function AdminProjectsImages() {
   );
   const [homeTriptychSlugs, setHomeTriptychSlugs] = useState<string[]>(() => defaultHomeSlugs);
   const [projectsTriptychSlugs, setProjectsTriptychSlugs] = useState<string[]>(() => defaultProjectsSlugs);
+  const defaultHomeTriptychImageBySlug = useMemo(() => {
+    const out: Record<string, string> = {};
+    projects.filter((p) => p.featuredOnHomeTriptych).slice(0, 3).forEach((p) => {
+      out[p.slug] = (p as { homeTriptychImage?: string }).homeTriptychImage || p.images?.[0] || '';
+    });
+    return out;
+  }, [projects]);
+  const defaultProjectsTriptychImageBySlug = useMemo(() => {
+    const out: Record<string, string> = {};
+    projects.filter((p) => p.featuredOnProjectsTriptych).slice(0, 3).forEach((p) => {
+      out[p.slug] = (p as { projectsTriptychImage?: string }).projectsTriptychImage || p.images?.[0] || '';
+    });
+    return out;
+  }, [projects]);
+  const [homeTriptychImageBySlug, setHomeTriptychImageBySlug] = useState<Record<string, string>>(() => defaultHomeTriptychImageBySlug);
+  const [projectsTriptychImageBySlug, setProjectsTriptychImageBySlug] = useState<Record<string, string>>(() => defaultProjectsTriptychImageBySlug);
   useEffect(() => {
     setHomeTriptychSlugs(defaultHomeSlugs);
     setProjectsTriptychSlugs(defaultProjectsSlugs);
-  }, [defaultHomeSlugs.join(','), defaultProjectsSlugs.join(',')]);
+    setHomeTriptychImageBySlug(defaultHomeTriptychImageBySlug);
+    setProjectsTriptychImageBySlug(defaultProjectsTriptychImageBySlug);
+  }, [
+    defaultHomeSlugs.join(','),
+    defaultProjectsSlugs.join(','),
+    defaultHomeSlugs.map((s) => defaultHomeTriptychImageBySlug[s] ?? '').join(','),
+    defaultProjectsSlugs.map((s) => defaultProjectsTriptychImageBySlug[s] ?? '').join(','),
+  ]);
 
   const defaultCarouselSlugs = useMemo(
     () => projects.filter((p) => p.featuredOnHomeCarousel).slice(0, 6).map((p) => p.slug),
@@ -213,7 +236,7 @@ export default function AdminProjectsImages() {
               <CardContent className="space-y-6">
                 {!isFromApi && (
                   <p className="text-sm text-amber-700 dark:text-amber-300 bg-amber-500/10 border border-amber-500/30 rounded-lg p-3">
-                    Initialisez d&apos;abord les projets avec le bouton « Initialiser depuis le site » ci‑dessous pour pouvoir enregistrer la sélection des triptyques.
+                    Si les projets ne sont pas encore enregistrés, cliquez sur « Enregistrer » : les projets seront initialisés puis la sélection des triptyques sera enregistrée.
                   </p>
                 )}
                 <div>
@@ -222,28 +245,49 @@ export default function AdminProjectsImages() {
                     Triptyque page d&apos;accueil (3 projets)
                   </p>
                   <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                    {[0, 1, 2].map((i) => (
-                      <div key={i}>
-                        <label className="text-xs text-[var(--admin-muted)] block mb-1">Position {i + 1}</label>
-                        <select
-                          value={homeTriptychSlugs[i] ?? ''}
-                          onChange={(e) => {
-                            const v = e.target.value;
-                            setHomeTriptychSlugs((prev) => {
-                              const next = [...prev];
-                              next[i] = v;
-                              return next.slice(0, 3);
-                            });
-                          }}
-                          className="w-full h-9 rounded-md border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 px-3 py-1 text-sm"
-                        >
-                          <option value="">— Aucun —</option>
-                          {projects.map((p) => (
-                            <option key={p.slug} value={p.slug}>{p.title}</option>
-                          ))}
-                        </select>
-                      </div>
-                    ))}
+                    {[0, 1, 2].map((i) => {
+                      const slug = homeTriptychSlugs[i] ?? '';
+                      const proj = projects.find((p) => p.slug === slug);
+                      const images = proj?.images ?? [];
+                      const selectedImg = slug ? (homeTriptychImageBySlug[slug] || images[0] || '') : '';
+                      return (
+                        <div key={i} className="space-y-1">
+                          <label className="text-xs text-[var(--admin-muted)] block">Position {i + 1}</label>
+                          <select
+                            value={slug}
+                            onChange={(e) => {
+                              const v = e.target.value;
+                              setHomeTriptychSlugs((prev) => {
+                                const next = [...prev];
+                                next[i] = v;
+                                return next.slice(0, 3);
+                              });
+                              if (v) {
+                                const p = projects.find((x) => x.slug === v);
+                                setHomeTriptychImageBySlug((prev) => ({ ...prev, [v]: p?.images?.[0] ?? '' }));
+                              }
+                            }}
+                            className="w-full h-9 rounded-md border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 px-3 py-1 text-sm"
+                          >
+                            <option value="">— Aucun —</option>
+                            {projects.map((p) => (
+                              <option key={p.slug} value={p.slug}>{p.title}</option>
+                            ))}
+                          </select>
+                          {slug && images.length > 0 && (
+                            <select
+                              value={selectedImg}
+                              onChange={(e) => setHomeTriptychImageBySlug((prev) => ({ ...prev, [slug]: e.target.value }))}
+                              className="w-full h-8 rounded border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 px-2 py-0.5 text-xs font-mono mt-1"
+                            >
+                              {images.map((img) => (
+                                <option key={img} value={img}>{img}</option>
+                              ))}
+                            </select>
+                          )}
+                        </div>
+                      );
+                    })}
                   </div>
                 </div>
                 <div>
@@ -252,38 +296,70 @@ export default function AdminProjectsImages() {
                     Triptyque page Projets (3 projets)
                   </p>
                   <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                    {[0, 1, 2].map((i) => (
-                      <div key={i}>
-                        <label className="text-xs text-[var(--admin-muted)] block mb-1">Position {i + 1}</label>
-                        <select
-                          value={projectsTriptychSlugs[i] ?? ''}
-                          onChange={(e) => {
-                            const v = e.target.value;
-                            setProjectsTriptychSlugs((prev) => {
-                              const next = [...prev];
-                              next[i] = v;
-                              return next.slice(0, 3);
-                            });
-                          }}
-                          className="w-full h-9 rounded-md border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 px-3 py-1 text-sm"
-                        >
-                          <option value="">— Aucun —</option>
-                          {projects.map((p) => (
-                            <option key={p.slug} value={p.slug}>{p.title}</option>
-                          ))}
-                        </select>
-                      </div>
-                    ))}
+                    {[0, 1, 2].map((i) => {
+                      const slug = projectsTriptychSlugs[i] ?? '';
+                      const proj = projects.find((p) => p.slug === slug);
+                      const images = proj?.images ?? [];
+                      const selectedImg = slug ? (projectsTriptychImageBySlug[slug] || images[0] || '') : '';
+                      return (
+                        <div key={i} className="space-y-1">
+                          <label className="text-xs text-[var(--admin-muted)] block">Position {i + 1}</label>
+                          <select
+                            value={slug}
+                            onChange={(e) => {
+                              const v = e.target.value;
+                              setProjectsTriptychSlugs((prev) => {
+                                const next = [...prev];
+                                next[i] = v;
+                                return next.slice(0, 3);
+                              });
+                              if (v) {
+                                const p = projects.find((x) => x.slug === v);
+                                setProjectsTriptychImageBySlug((prev) => ({ ...prev, [v]: p?.images?.[0] ?? '' }));
+                              }
+                            }}
+                            className="w-full h-9 rounded-md border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 px-3 py-1 text-sm"
+                          >
+                            <option value="">— Aucun —</option>
+                            {projects.map((p) => (
+                              <option key={p.slug} value={p.slug}>{p.title}</option>
+                            ))}
+                          </select>
+                          {slug && images.length > 0 && (
+                            <select
+                              value={selectedImg}
+                              onChange={(e) => setProjectsTriptychImageBySlug((prev) => ({ ...prev, [slug]: e.target.value }))}
+                              className="w-full h-8 rounded border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 px-2 py-0.5 text-xs font-mono mt-1"
+                            >
+                              {images.map((img) => (
+                                <option key={img} value={img}>{img}</option>
+                              ))}
+                            </select>
+                          )}
+                        </div>
+                      );
+                    })}
                   </div>
                 </div>
                 <Button
-                  onClick={() =>
+                  onClick={async () => {
+                    if (!isFromApi) {
+                      try {
+                        await initMutation.mutateAsync({ projects: PROJECTS_DATA.map(projectToRecord) });
+                        await refetchProjects();
+                      } catch (e: unknown) {
+                        toast.error(e instanceof Error ? e.message : 'Erreur initialisation');
+                        return;
+                      }
+                    }
                     setTriptychMutation.mutate({
                       homeTriptychSlugs: homeTriptychSlugs.filter(Boolean),
                       projectsTriptychSlugs: projectsTriptychSlugs.filter(Boolean),
-                    })
-                  }
-                  disabled={!isFromApi || setTriptychMutation.isPending}
+                      homeTriptychImageBySlug: homeTriptychImageBySlug,
+                      projectsTriptychImageBySlug: projectsTriptychImageBySlug,
+                    });
+                  }}
+                  disabled={setTriptychMutation.isPending || initMutation.isPending}
                   className="gap-2"
                 >
                   {setTriptychMutation.isPending ? (
@@ -308,7 +384,7 @@ export default function AdminProjectsImages() {
               <CardContent className="space-y-4">
                 {!isFromApi && (
                   <p className="text-sm text-amber-700 dark:text-amber-300 bg-amber-500/10 border border-amber-500/30 rounded-lg p-3">
-                    Initialisez d&apos;abord les projets avec le bouton « Initialiser depuis le site » ci‑dessous pour enregistrer le carousel.
+                    Si les projets ne sont pas encore enregistrés, cliquez sur « Enregistrer » : les projets seront initialisés puis le carousel sera enregistré.
                   </p>
                 )}
                 {[0, 1, 2, 3, 4, 5].map((i) => {
@@ -366,13 +442,22 @@ export default function AdminProjectsImages() {
                   );
                 })}
                 <Button
-                  onClick={() =>
+                  onClick={async () => {
+                    if (!isFromApi) {
+                      try {
+                        await initMutation.mutateAsync({ projects: PROJECTS_DATA.map(projectToRecord) });
+                        await refetchProjects();
+                      } catch (e: unknown) {
+                        toast.error(e instanceof Error ? e.message : 'Erreur initialisation');
+                        return;
+                      }
+                    }
                     setCarouselMutation.mutate({
                       carouselSlugs: carouselSlugs.filter(Boolean),
                       imageBySlug: carouselImageBySlug,
-                    })
-                  }
-                  disabled={!isFromApi || setCarouselMutation.isPending}
+                    });
+                  }}
+                  disabled={setCarouselMutation.isPending || initMutation.isPending}
                   className="gap-2"
                 >
                   {setCarouselMutation.isPending ? (

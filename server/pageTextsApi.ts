@@ -1,6 +1,23 @@
 import { getDb } from "./db";
 import { pageTexts } from "../drizzle/schema";
 import { eq, asc } from "drizzle-orm";
+import { readFile } from "fs/promises";
+import path from "path";
+
+function flattenObj(obj: Record<string, unknown>, prefix = ""): Record<string, string> {
+  const out: Record<string, string> = {};
+  for (const [k, v] of Object.entries(obj)) {
+    const key = prefix ? `${prefix}.${k}` : k;
+    if (v !== null && typeof v === "object" && !Array.isArray(v)) {
+      Object.assign(out, flattenObj(v as Record<string, unknown>, key));
+    } else if (typeof v === "string") {
+      out[key] = v;
+    } else if (Array.isArray(v) && v.every((x) => typeof x === "string")) {
+      out[key] = (v as string[]).join("\n");
+    }
+  }
+  return out;
+}
 
 export async function getAllPageTexts() {
   const db = await getDb();
@@ -60,4 +77,26 @@ export async function importPageTextsFromJson(en: Record<string, string>, fr: Re
     }
   }
   return { created, updated, total: keys.size };
+}
+
+/** Read locale JSON files from disk, flatten, and import into page_texts. Paths relative to cwd or absolute. */
+export async function seedFromLocaleFiles(
+  enPath: string = path.join(process.cwd(), "client", "src", "locales", "en.json"),
+  frPath: string = path.join(process.cwd(), "client", "src", "locales", "fr.json")
+) {
+  let enRaw: string;
+  let frRaw: string;
+  try {
+    enRaw = await readFile(enPath, "utf-8");
+  } catch (e) {
+    throw new Error(`Cannot read en locale file at ${enPath}: ${e instanceof Error ? e.message : String(e)}`);
+  }
+  try {
+    frRaw = await readFile(frPath, "utf-8");
+  } catch (e) {
+    throw new Error(`Cannot read fr locale file at ${frPath}: ${e instanceof Error ? e.message : String(e)}`);
+  }
+  const en = flattenObj(JSON.parse(enRaw) as Record<string, unknown>);
+  const fr = flattenObj(JSON.parse(frRaw) as Record<string, unknown>);
+  return importPageTextsFromJson(en, fr);
 }

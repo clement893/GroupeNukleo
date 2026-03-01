@@ -27,9 +27,18 @@ export const projectsRouter = router({
       z.object({
         homeTriptychSlugs: z.array(z.string()).max(3),
         projectsTriptychSlugs: z.array(z.string()).max(3),
+        homeTriptychImageBySlug: z.record(z.string(), z.string()).optional(),
+        projectsTriptychImageBySlug: z.record(z.string(), z.string()).optional(),
       })
     )
-    .mutation(({ input }) => setTriptychSlugs(input)),
+    .mutation(({ input }) =>
+      setTriptychSlugs({
+        homeTriptychSlugs: input.homeTriptychSlugs,
+        projectsTriptychSlugs: input.projectsTriptychSlugs,
+        homeTriptychImageBySlug: input.homeTriptychImageBySlug ?? {},
+        projectsTriptychImageBySlug: input.projectsTriptychImageBySlug ?? {},
+      })
+    ),
 
   setCarouselSlugs: adminProcedure
     .input(
