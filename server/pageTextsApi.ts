@@ -79,24 +79,36 @@ export async function importPageTextsFromJson(en: Record<string, string>, fr: Re
   return { created, updated, total: keys.size };
 }
 
-/** Read locale JSON files from disk, flatten, and import into page_texts. Paths relative to cwd or absolute. */
+/** Read locale JSON files from disk, flatten, and import into page_texts. Tries dist/locales (production) then client/src/locales (dev). */
 export async function seedFromLocaleFiles(
-  enPath: string = path.join(process.cwd(), "client", "src", "locales", "en.json"),
-  frPath: string = path.join(process.cwd(), "client", "src", "locales", "fr.json")
+  enPath?: string,
+  frPath?: string
 ) {
+  const candidates = [
+    enPath && frPath ? [enPath, frPath] as const : null,
+    [path.join(process.cwd(), "dist", "locales", "en.json"), path.join(process.cwd(), "dist", "locales", "fr.json")] as const,
+    [path.join(process.cwd(), "locales", "en.json"), path.join(process.cwd(), "locales", "fr.json")] as const,
+    [path.join(process.cwd(), "client", "src", "locales", "en.json"), path.join(process.cwd(), "client", "src", "locales", "fr.json")] as const,
+  ].filter(Boolean) as [string, string][];
+
   let enRaw: string;
   let frRaw: string;
-  try {
-    enRaw = await readFile(enPath, "utf-8");
-  } catch (e) {
-    throw new Error(`Cannot read en locale file at ${enPath}: ${e instanceof Error ? e.message : String(e)}`);
+  let lastErr: Error | null = null;
+
+  for (const [enP, frP] of candidates) {
+    try {
+      enRaw = await readFile(enP, "utf-8");
+      frRaw = await readFile(frP, "utf-8");
+      const en = flattenObj(JSON.parse(enRaw) as Record<string, unknown>);
+      const fr = flattenObj(JSON.parse(frRaw) as Record<string, unknown>);
+      return importPageTextsFromJson(en, fr);
+    } catch (e) {
+      lastErr = e instanceof Error ? e : new Error(String(e));
+      continue;
+    }
   }
-  try {
-    frRaw = await readFile(frPath, "utf-8");
-  } catch (e) {
-    throw new Error(`Cannot read fr locale file at ${frPath}: ${e instanceof Error ? e.message : String(e)}`);
-  }
-  const en = flattenObj(JSON.parse(enRaw) as Record<string, unknown>);
-  const fr = flattenObj(JSON.parse(frRaw) as Record<string, unknown>);
-  return importPageTextsFromJson(en, fr);
+
+  throw new Error(
+    `Could not read locale files. Tried: dist/locales, locales, client/src/locales. Last error: ${lastErr?.message ?? "unknown"}. Ensure build has run (copies locales to dist/locales).`
+  );
 }
