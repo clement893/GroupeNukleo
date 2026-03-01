@@ -151,8 +151,16 @@ const SECTION_ORDER = [
 ];
 const HIDDEN_SECTIONS = new Set(["approche"]);
 
-/** Returns the list of section keys (first segment of locale keys) from the site’s locale files. Used by admin to show the right pages. */
+/** Returns the list of section keys (first segment of locale keys) from the site’s locale files. Used by admin to show the right pages. Prefers dist/locale-sections.json (generated at build) so production always shows correct sections. */
 export async function getLocaleSections(): Promise<string[]> {
+  const embeddedPath = path.join(__dirname, "locale-sections.json");
+  try {
+    const raw = await readFile(embeddedPath, "utf-8");
+    const parsed = JSON.parse(raw);
+    if (Array.isArray(parsed) && parsed.every((x) => typeof x === "string")) return parsed;
+  } catch {
+    // fallback: read fr.json from candidates
+  }
   for (const { fr: frP } of getLocaleFilePaths()) {
     try {
       const raw = await readFile(frP, "utf-8");
