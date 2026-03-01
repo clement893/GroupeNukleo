@@ -32,14 +32,20 @@ export const projectSchema = z.object({
   featuredOnHomeTriptych: z.boolean().optional(),
   /** Image à afficher dans le triptyque accueil (nom de fichier); si absent, utilise images[0] */
   homeTriptychImage: z.string().optional(),
+  /** Ordre dans le triptyque accueil (0, 1, 2) pour garder l'ordre choisi */
+  homeTriptychOrder: z.number().min(0).max(2).optional(),
   /** Afficher dans le triptyque de la page Projets */
   featuredOnProjectsTriptych: z.boolean().optional(),
   /** Image à afficher dans le triptyque page Projets; si absent, utilise images[0] */
   projectsTriptychImage: z.string().optional(),
+  /** Ordre dans le triptyque page Projets (0, 1, 2) pour garder l'ordre choisi */
+  projectsTriptychOrder: z.number().min(0).max(2).optional(),
   /** Afficher dans le carrousel "Latest project" en haut de la page d'accueil */
   featuredOnHomeCarousel: z.boolean().optional(),
   /** Image à afficher dans le carrousel accueil (nom de fichier); si absent, utilise images[0] */
   homeCarouselImage: z.string().optional(),
+  /** Ordre dans le carrousel accueil (0..5) pour garder l'ordre choisi */
+  homeCarouselOrder: z.number().min(0).max(5).optional(),
 });
 
 export type ProjectRecord = z.infer<typeof projectSchema>;
@@ -96,6 +102,10 @@ export async function setTriptychSlugs(input: {
   projectsTriptychImageBySlug?: Record<string, string>;
 }): Promise<ProjectRecord[]> {
   const projects = await readProjects();
+  if (projects.length === 0) {
+    throw new Error("Aucun projet en base. Cliquez d'abord sur « Initialiser depuis le site » puis enregistrez les triptyques.");
+  }
+
   const homeSlugs = input.homeTriptychSlugs.slice(0, 3);
   const projectsSlugs = input.projectsTriptychSlugs.slice(0, 3);
   const homeImg = input.homeTriptychImageBySlug ?? {};
@@ -105,18 +115,18 @@ export async function setTriptychSlugs(input: {
     ...p,
     featuredOnHomeTriptych: homeSlugs.includes(p.slug),
     homeTriptychImage: homeSlugs.includes(p.slug) && homeImg[p.slug] ? homeImg[p.slug] : undefined,
+    homeTriptychOrder: homeSlugs.includes(p.slug) ? homeSlugs.indexOf(p.slug) : undefined,
     featuredOnProjectsTriptych: projectsSlugs.includes(p.slug),
     projectsTriptychImage: projectsSlugs.includes(p.slug) && projectsImg[p.slug] ? projectsImg[p.slug] : undefined,
+    projectsTriptychOrder: projectsSlugs.includes(p.slug) ? projectsSlugs.indexOf(p.slug) : undefined,
   }));
 
-  const homeSet = new Set(homeSlugs);
-  const homeOrder = homeSlugs.map((s) => updated.find((p) => p.slug === s)).filter(Boolean) as ProjectRecord[];
+  // Ordre pour le site : les 3 du triptyque Projets en premier (ordre choisi), puis le reste
   const projectsOrder = projectsSlugs
-    .filter((s) => !homeSet.has(s))
     .map((s) => updated.find((p) => p.slug === s))
-    .filter(Boolean) as ProjectRecord[];
-  const rest = updated.filter((p) => !homeSlugs.includes(p.slug) && !projectsSlugs.includes(p.slug));
-  const reordered = [...homeOrder, ...projectsOrder, ...rest];
+    .filter((p): p is ProjectRecord => Boolean(p));
+  const rest = updated.filter((p) => !projectsSlugs.includes(p.slug));
+  const reordered = [...projectsOrder, ...rest];
 
   await writeProjects(reordered);
   return reordered;
@@ -130,6 +140,10 @@ export async function setCarouselSlugs(input: {
   imageBySlug: Record<string, string>;
 }): Promise<ProjectRecord[]> {
   const projects = await readProjects();
+  if (projects.length === 0) {
+    throw new Error("Aucun projet en base. Cliquez d'abord sur « Initialiser depuis le site » puis enregistrez le carousel.");
+  }
+
   const slugs = input.carouselSlugs.slice(0, MAX_CAROUSEL_SLIDES);
   const imageBySlug = input.imageBySlug || {};
 
@@ -137,9 +151,10 @@ export async function setCarouselSlugs(input: {
     ...p,
     featuredOnHomeCarousel: slugs.includes(p.slug),
     homeCarouselImage: slugs.includes(p.slug) && imageBySlug[p.slug] ? imageBySlug[p.slug] : undefined,
+    homeCarouselOrder: slugs.includes(p.slug) ? slugs.indexOf(p.slug) : undefined,
   }));
 
-  const carouselOrder = slugs.map((s) => updated.find((p) => p.slug === s)).filter(Boolean) as ProjectRecord[];
+  const carouselOrder = slugs.map((s) => updated.find((p) => p.slug === s)).filter((p): p is ProjectRecord => Boolean(p));
   const rest = updated.filter((p) => !slugs.includes(p.slug));
   const reordered = [...carouselOrder, ...rest];
 

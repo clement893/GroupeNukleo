@@ -72,20 +72,26 @@ export default function AdminProjectsImages() {
   const setTriptychMutation = trpc.projects.setTriptychSlugs.useMutation({
     onSuccess: () => {
       toast.success('Triptyques enregistrés', {
-        description: 'La sélection des 3 projets (accueil et page Projets) a bien été enregistrée.',
+        description: 'La sélection des 3 projets (accueil et page Projets) est enregistrée. Le site public va afficher cette sélection.',
+        duration: 5000,
       });
       refetchProjects();
       utils.projects.list.invalidate();
+      utils.projects.listAdmin.invalidate();
     },
-    onError: (e) => toast.error(e.message),
+    onError: (e) => toast.error(e.message || 'Erreur lors de l\'enregistrement'),
   });
   const setCarouselMutation = trpc.projects.setCarouselSlugs.useMutation({
     onSuccess: () => {
-      toast.success('Carousel accueil enregistré');
+      toast.success('Carousel accueil enregistré', {
+        description: 'Les projets et images du carousel « Our Latest Work » sont enregistrés. La page d\'accueil va afficher cette sélection.',
+        duration: 5000,
+      });
       refetchProjects();
       utils.projects.list.invalidate();
+      utils.projects.listAdmin.invalidate();
     },
-    onError: (e) => toast.error(e.message),
+    onError: (e) => toast.error(e.message || 'Erreur lors de l\'enregistrement'),
   });
 
   const { data: images, isLoading: imagesLoading, refetch: refetchImages } =

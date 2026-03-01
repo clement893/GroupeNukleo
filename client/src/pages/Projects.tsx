@@ -101,7 +101,12 @@ export default function Projects() {
 
   const heroImages = useMemo(() => {
     const featured = (apiProjects || []).filter((p: { featuredOnProjectsTriptych?: boolean }) => p.featuredOnProjectsTriptych);
-    const fromFeatured = featured.slice(0, 3).flatMap((p: { images?: string[]; projectsTriptychImage?: string }) => {
+    const sorted = [...featured].sort((a, b) => {
+      const orderA = (a as { projectsTriptychOrder?: number }).projectsTriptychOrder ?? 999;
+      const orderB = (b as { projectsTriptychOrder?: number }).projectsTriptychOrder ?? 999;
+      return orderA - orderB;
+    });
+    const fromFeatured = sorted.slice(0, 3).flatMap((p: { images?: string[]; projectsTriptychImage?: string }) => {
       const img = (p as { projectsTriptychImage?: string }).projectsTriptychImage || (p.images && p.images[0]);
       return img ? [img] : [];
     }).filter(Boolean) as string[];

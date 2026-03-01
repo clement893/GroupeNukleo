@@ -534,11 +534,21 @@ export default function HomepageDemo5() {
   const { data: apiProjects } = trpc.projects.list.useQuery(undefined, { staleTime: 60 * 1000, refetchOnWindowFocus: true });
   const homeCarouselProjects = useMemo(() => {
     const featured = (apiProjects || []).filter((p: { featuredOnHomeCarousel?: boolean }) => p.featuredOnHomeCarousel);
-    return mapApiProjectsToHome(featured, 6, 0, 'homeCarouselImage');
+    const sorted = [...featured].sort((a, b) => {
+      const orderA = (a as { homeCarouselOrder?: number }).homeCarouselOrder ?? 999;
+      const orderB = (b as { homeCarouselOrder?: number }).homeCarouselOrder ?? 999;
+      return orderA - orderB;
+    });
+    return mapApiProjectsToHome(sorted, 6, 0, 'homeCarouselImage');
   }, [apiProjects]);
   const homeTriptychProjects = useMemo(() => {
     const featured = (apiProjects || []).filter((p: { featuredOnHomeTriptych?: boolean }) => p.featuredOnHomeTriptych);
-    return mapApiProjectsToHome(featured, 3, 0, 'homeTriptychImage');
+    const sorted = [...featured].sort((a, b) => {
+      const orderA = (a as { homeTriptychOrder?: number }).homeTriptychOrder ?? 999;
+      const orderB = (b as { homeTriptychOrder?: number }).homeTriptychOrder ?? 999;
+      return orderA - orderB;
+    });
+    return mapApiProjectsToHome(sorted, 3, 0, 'homeTriptychImage');
   }, [apiProjects]);
 
   return (
