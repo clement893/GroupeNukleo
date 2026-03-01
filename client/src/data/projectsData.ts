@@ -4,7 +4,7 @@
  * year, category (filtre), services, description (FR + EN), et images.
  */
 
-export type ProjectFilterCategory = 'Design' | 'Brand' | 'Site web' | 'Plateforme' | 'Transformation';
+export type ProjectFilterCategory = 'Brand' | 'Site web' | 'Plateforme' | 'Marketing numérique' | 'Campagnes' | 'Transformation';
 
 export interface ProjectData {
   slug: string;
@@ -70,7 +70,7 @@ export const PROJECTS_DATA: ProjectData[] = [
     title: 'Défi 28 jours sans alcool',
     client: 'Fondation Jean Lapointe',
     year: '2024',
-    category: 'Design',
+    category: 'Campagnes',
     services: 'Idéation de campagne, Direction artistique, Direction de tournage, Déclinaisons visuelles',
     description: {
       fr: "La Fondation Jean Lapointe sensibilise le public aux dangers de la dépendance à l'alcool. Grâce au Défi 28 jours sans alcool, elle mobilise la population tout en récoltant des fonds pour soutenir ses actions de prévention et d'accompagnement. Nukleo a accompagné la Fondation dans l'idéation et la conception de la campagne, en assurant la direction artistique et la déclinaison complète des visuels. L'agence a également adapté le site web pour soutenir la campagne et dirigé les tournages afin de garantir une cohérence visuelle et narrative sur l'ensemble des canaux. Résultat : une mobilisation massive et plus de 749 000 $ amassés pour la cause.",
@@ -194,7 +194,7 @@ export const PROJECTS_DATA: ProjectData[] = [
     title: 'Fondation du MBAM',
     client: 'Fondation du Musée des Beaux-Arts de Montréal',
     year: '2024',
-    category: 'Design',
+    category: 'Campagnes',
     services: 'Design de logo, Direction artistique',
     description: {
       fr: "Pour animer les soirées phares de la Fondation du Musée des Beaux-Arts de Montréal, Nukleo a conçu l'identité visuelle propre à chacune des trois soirées : In Situ (Cercle des Anges), Contre-Jour (Cercle des Jeunes Philanthropes) et Perspectives (Cercle des Anges). L'agence a pris en charge la conception des logos et assuré la direction artistique des trois univers afin de créer des expériences visuelles à la fois cohérentes et différenciées.",
@@ -337,7 +337,7 @@ export const PROJECTS_DATA: ProjectData[] = [
     title: 'Maison Jean Lapointe',
     client: 'Maison Jean Lapointe',
     year: '2024',
-    category: 'Design',
+    category: 'Campagnes',
     services: 'Direction artistique, Conception visuelle',
     description: {
       fr: "La Maison Jean Lapointe et La Fondation Jean Lapointe ont fait appel aux services de Nukleo pour la conception de leur rapport annuel 2024 et 2025. Un rapport coloré, accessible et attractif, qui reflète l'engagement de l'organisation envers ses bénéficiaires et ses donateurs.",
@@ -358,7 +358,7 @@ export const PROJECTS_DATA: ProjectData[] = [
     title: 'CQDE',
     client: 'CQDE',
     year: '2025',
-    category: 'Design',
+    category: 'Campagnes',
     services: 'Idéation de campagne, Direction artistique, Déclinaisons visuelles',
     description: {
       fr: "Le CQDE est un organisme québécois qui œuvre à la protection de l'environnement par des actions juridiques, éducatives et de sensibilisation. Nukleo a orchestré pour le CQDE une campagne intégrée combinant infolettres, publications organiques sur les médias sociaux et publicités payantes ciblées. L'objectif fixé de 35 000 $ en dons a été atteint grâce à une stratégie de contenu alignée sur les actions récentes du CQDE.",
@@ -378,7 +378,7 @@ export const PROJECTS_DATA: ProjectData[] = [
     title: 'Municipalité de Clare',
     client: 'CDÉNÉ',
     year: '2025',
-    category: 'Design',
+    category: 'Campagnes',
     services: 'Idéation de campagne, Direction artistique, Direction de tournage, Déclinaisons visuelles',
     description: {
       fr: "Le CDÉNÉ a mandaté Nukleo pour concevoir une campagne digitale visant à attirer des francophones du monde entier à s'installer en Nouvelle-Écosse, et plus particulièrement dans la municipalité de Clare. Structurée en deux volets — « Vivre en Clare » en jaune et « S'installer en famille à Clare » en bleu — la campagne délivre des messages ciblés et adaptés à deux publics distincts. Les résultats ont largement dépassé les attentes.",
@@ -397,7 +397,7 @@ export const PROJECTS_DATA: ProjectData[] = [
     title: 'Réseau Santé Nouvelle-Écosse',
     client: 'Réseau Santé Nouvelle-Écosse',
     year: '2025',
-    category: 'Design',
+    category: 'Campagnes',
     services: 'Direction artistique, Idéation de campagne, Stratégie digitale',
     description: {
       fr: "Réseau Santé Nouvelle-Écosse est le principal fournisseur de services de santé de la province. Dans le but de faire progresser la médecine, l'organisation recherche des patients simulés pour enrichir la formation de ses médecins. Pour soutenir cette initiative, Nukleo a été mandaté afin de concevoir une campagne de communication à la fois percutante et visuelle.",
@@ -415,7 +415,7 @@ export const PROJECTS_DATA: ProjectData[] = [
     title: 'Les Voix Ferrées',
     client: 'Les Voix Ferrées',
     year: '2024',
-    category: 'Design',
+    category: 'Campagnes',
     services: 'Direction artistique, Conception visuelle',
     description: {
       fr: "Les Voix Ferrées, c'est un ensemble vocal basé à Montréal qui fait principalement du a cappella. Pour leurs événements-bénéfice (Spag Show et État de veille), ils ont confié à Nukleo la création des programmes graphiques. Nous nous sommes occupé de l'illustration principale, de la mise en page et de la direction visuelle des livrets.",
@@ -434,7 +434,7 @@ export const PROJECTS_DATA: ProjectData[] = [
     title: 'Zú',
     client: 'Zú',
     year: '2024',
-    category: 'Design',
+    category: 'Campagnes',
     services: 'Direction artistique, Conception de visuels, Stratégie de communication, Gestion des médias sociaux',
     description: {
       fr: "Zú est un organisme montréalais qui propulse les entrepreneur·e·s et startups des industries créatives et technologiques. Pour Zú, Nukleo conçoit et exécute une stratégie de communication numérique complète qui soutient ses événements phares (Sommets Influence et Émergence). Elle inclut la création de contenus réguliers, la gestion de campagnes publicitaires (Google Grant, Meta) et l'optimisation continue du site web.",
@@ -453,7 +453,7 @@ export const PROJECTS_DATA: ProjectData[] = [
     title: 'DocTocToc',
     client: 'DocTocToc',
     year: '2025',
-    category: 'Design',
+    category: 'Campagnes',
     services: 'Direction artistique, Stratégie de communication, Réseaux sociaux, Conception de visuels',
     description: {
       fr: "DocTocToc est un organisme sans but lucratif qui facilite l'accès aux soins de santé pour les enfants de 0 à 5 ans et leur famille. Pour DocTocToc, Nukleo a conçu et déployé une stratégie de communication intégrée afin d'accompagner le lancement officiel de l'organisation, incluant l'ensemble des contenus promotionnels et la production complète de l'événement inaugural.",
@@ -539,7 +539,7 @@ export const PROJECTS_DATA: ProjectData[] = [
     title: 'CFM',
     client: 'CFM',
     year: '2024',
-    category: 'Design',
+    category: 'Campagnes',
     services: 'Direction artistique, Conception visuelle',
     description: {
       fr: "Direction artistique et conception visuelle pour CFM.",
@@ -643,7 +643,7 @@ export const PROJECTS_DATA: ProjectData[] = [
     title: 'Psy etc.',
     client: 'Psy etc.',
     year: '2024',
-    category: 'Design',
+    category: 'Marketing numérique',
     services: 'Direction artistique, Réseaux sociaux',
     description: {
       fr: "Direction artistique et création de contenu pour les réseaux sociaux de Psy etc.",
@@ -676,7 +676,7 @@ export const PROJECTS_DATA: ProjectData[] = [
     title: 'CDÉNÉ',
     client: 'CDÉNÉ',
     year: '2025',
-    category: 'Design',
+    category: 'Campagnes',
     services: 'Idéation de campagne, Direction artistique, Production vidéo, Stratégie de communication',
     description: {
       fr: "Le Conseil de développement économique des Nouvelles-Écosse (CDÉNÉ) est un organisme francophone qui soutient le développement économique et l'attraction de nouveaux résidents en Nouvelle-Écosse. Nukleo a été mandaté par le CDÉNÉ pour concevoir et produire plusieurs campagnes de communication, notamment une série de vidéos visant à attirer les alumnis de l'Université Sainte-Anne à revenir s'établir dans la province. L'agence a assuré la direction artistique, supervisé les tournages sur place à Halifax et livré des contenus authentiques et inspirants pour rejoindre les communautés francophones du Canada et de l'international.",
@@ -711,7 +711,7 @@ export const PROJECTS_DATA: ProjectData[] = [
     title: 'Entertainment AI',
     client: 'Entertainment AI',
     year: '2025',
-    category: 'Design',
+    category: 'Marketing numérique',
     services: 'Stratégie marketing numérique, Gestion des campagnes publicitaires, SEO, Réseaux sociaux',
     websiteUrl: 'https://entertainmentai.ca',
     description: {
@@ -726,7 +726,7 @@ export const PROJECTS_DATA: ProjectData[] = [
     title: 'HHHusher',
     client: 'HHHusher',
     year: '2025',
-    category: 'Design',
+    category: 'Marketing numérique',
     services: 'Stratégie marketing numérique, Gestion des campagnes publicitaires, Marketing par courriel',
     description: {
       fr: "HHHusher est une entreprise innovante qui commercialise un système de sourdine révolutionnaire pour batteries acoustiques, permettant aux batteurs de jouer à volume réduit sans compromettre la sensation de jeu. Après le lancement de son site transactionnel Shopify, HHHusher a mandaté Nukleo pour élaborer une stratégie de marketing numérique structurée visant à accélérer les ventes auprès de deux marchés cibles : les musiciens (B2C) et les studios professionnels (B2B). L'agence a mis en place un tunnel de conversion optimisé, des campagnes Meta et Google Ads, une stratégie d'influence et l'intégration de Klaviyo pour l'automatisation des communications.",
@@ -740,7 +740,7 @@ export const PROJECTS_DATA: ProjectData[] = [
     title: 'Centre des femmes de Montréal',
     client: 'Centre des femmes de Montréal',
     year: '2025',
-    category: 'Design',
+    category: 'Marketing numérique',
     services: 'Gestion des réseaux sociaux, Campagnes publicitaires, Infolettres, Photographie, Stratégie de communication',
     description: {
       fr: "Le Centre des femmes de Montréal est un organisme communautaire féministe dont la mission est d'aider les femmes à s'aider elles-mêmes, en leur offrant des services d'éducation populaire, de soutien et d'entraide. Nukleo a pris en charge les communications numériques du Centre pour une période de six mois, incluant la gestion des réseaux sociaux (Facebook, LinkedIn, Instagram), la création et l'envoi d'infolettres, la gestion de campagnes publicitaires ciblées pour rejoindre les femmes qui ont le plus besoin des services, la mise à jour du site web et la coordination d'une séance photo professionnelle pour renouveler la banque d'images de l'organisme.",
@@ -754,7 +754,7 @@ export const PROJECTS_DATA: ProjectData[] = [
     title: 'Filles de l\'Ouest',
     client: 'Filles de l\'Ouest',
     year: '2025',
-    category: 'Design',
+    category: 'Campagnes',
     services: 'Direction artistique, Conception visuelle',
     description: {
       fr: "Direction artistique et conception visuelle pour Filles de l'Ouest.",

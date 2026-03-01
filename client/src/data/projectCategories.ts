@@ -2,7 +2,7 @@ import { imageNameToSlug } from '@/lib/projectSlug';
 import { PROJECTS_DATA, type ProjectFilterCategory } from '@/data/projectsData';
 
 /** Filtres affichés sous le triptyque sur la page Projets */
-export const PROJECT_FILTER_LABELS = ['Tous', 'Design', 'Brand', 'Site web', 'Plateforme', 'Transformation'] as const;
+export const PROJECT_FILTER_LABELS = ['Tous', 'Brand', 'Site web', 'Plateforme', 'Marketing numérique', 'Campagnes', 'Transformation'] as const;
 export type ProjectFilterValue = (typeof PROJECT_FILTER_LABELS)[number];
 
 /**
