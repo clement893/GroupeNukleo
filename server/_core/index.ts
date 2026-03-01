@@ -21,7 +21,7 @@ import session from "express-session";
 import connectPgSimple from "connect-pg-simple";
 import passport from "passport";
 import { configureGoogleAuth, requireAdminAuth } from "./googleAuth";
-import { getDb } from "../db";
+import { getDb, getAllAgencyLeads } from "../db";
 import postgres from "postgres";
 import { sql } from "drizzle-orm";
 import multer from "multer";
@@ -332,7 +332,18 @@ async function startServer() {
       res.status(401).json({ error: 'Not authenticated' });
     }
   });
-  
+
+  // Admin: agency leads (REST, same auth as /api/auth/me — avoids tRPC session issues on Railway)
+  app.get("/api/admin/agency-leads", requireAdminAuth, async (req, res) => {
+    try {
+      const leads = await getAllAgencyLeads();
+      res.json(leads);
+    } catch (e) {
+      console.error("[Admin] agency-leads error", e);
+      res.status(500).json({ error: "Failed to fetch leads" });
+    }
+  });
+
   // OAuth callback under /api/oauth/callback
   registerOAuthRoutes(app);
   // Sitemap and robots.txt

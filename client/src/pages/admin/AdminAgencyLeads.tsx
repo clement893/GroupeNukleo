@@ -1,5 +1,5 @@
 import { useState, useMemo } from 'react';
-import { trpc } from '@/lib/trpc';
+import { useQuery } from '@tanstack/react-query';
 import DashboardLayout from '@/components/DashboardLayout';
 import { Button } from '@/components/ui/button';
 import { 
@@ -16,7 +16,14 @@ import {
 } from 'lucide-react';
 
 export default function AdminAgencyLeads() {
-  const { data: leads, isLoading } = trpc.agencies.getAllLeads.useQuery();
+  const { data: leads, isLoading, isError, error, refetch } = useQuery({
+    queryKey: ['admin', 'agency-leads'],
+    queryFn: async () => {
+      const res = await fetch('/api/admin/agency-leads', { credentials: 'include' });
+      if (!res.ok) throw new Error(res.status === 401 ? 'Sign in required' : 'Failed to load leads');
+      return res.json();
+    },
+  });
   
   const [searchTerm, setSearchTerm] = useState('');
   const [filterScore, setFilterScore] = useState<string>('all');
@@ -231,6 +238,11 @@ export default function AdminAgencyLeads() {
         <div className="bg-white/5 border border-white/10 rounded-lg overflow-hidden">
           {isLoading ? (
             <div className="p-12 text-center text-white/60">Loading leads...</div>
+          ) : isError ? (
+            <div className="p-12 text-center">
+              <p className="text-red-300 mb-2">{error instanceof Error ? error.message : 'Failed to load leads'}</p>
+              <Button onClick={() => refetch()} variant="outline" className="text-white border-white/30">Retry</Button>
+            </div>
           ) : filteredLeads.length === 0 ? (
             <div className="p-12 text-center text-white/60">No leads found</div>
           ) : (

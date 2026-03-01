@@ -17,13 +17,15 @@ import {
 import { toast } from "sonner";
 
 export default function AdminCarouselLogos() {
+  // Use public procedure for listing so the page loads even when admin session
+  // isn't recognized on tRPC (e.g. cookie/session issues on Railway). Mutations stay admin-only.
   const {
     data: logos,
     isLoading,
     isError,
     error,
     refetch,
-  } = trpc.carouselLogos.getAllAdmin.useQuery(undefined, {
+  } = trpc.carouselLogos.getAll.useQuery(undefined, {
     retry: 1,
     retryDelay: 2000,
     refetchOnWindowFocus: false,
