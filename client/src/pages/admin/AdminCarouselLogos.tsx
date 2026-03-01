@@ -17,7 +17,17 @@ import {
 import { toast } from "sonner";
 
 export default function AdminCarouselLogos() {
-  const { data: logos, isLoading, refetch } = trpc.carouselLogos.getAllAdmin.useQuery();
+  const {
+    data: logos,
+    isLoading,
+    isError,
+    error,
+    refetch,
+  } = trpc.carouselLogos.getAllAdmin.useQuery(undefined, {
+    retry: 1,
+    retryDelay: 2000,
+    refetchOnWindowFocus: false,
+  });
   const addMutation = trpc.carouselLogos.add.useMutation({
     onSuccess: () => {
       toast.success("Logo ajouté");
@@ -167,6 +177,21 @@ export default function AdminCarouselLogos() {
               {isLoading ? (
                 <div className="flex items-center justify-center py-12">
                   <Loader2 className="w-8 h-8 text-purple-400 animate-spin" />
+                </div>
+              ) : isError ? (
+                <div className="text-center py-12 space-y-4">
+                  <p className="text-red-300">
+                    Impossible de charger les logos. {error?.message || "Erreur réseau ou session expirée."}
+                  </p>
+                  <p className="text-gray-400 text-sm">
+                    Si la page vous renvoie à l&apos;accueil admin, reconnectez-vous puis réessayez.
+                  </p>
+                  <Button
+                    onClick={() => refetch()}
+                    className="bg-violet-600 hover:bg-violet-700 text-white"
+                  >
+                    Réessayer
+                  </Button>
                 </div>
               ) : !logos || logos.length === 0 ? (
                 <p className="text-gray-400 text-center py-8">Aucun logo. Ajoutez-en un ci-dessus.</p>

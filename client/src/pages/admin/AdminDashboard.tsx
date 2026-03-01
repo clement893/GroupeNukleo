@@ -12,7 +12,7 @@ export default function AdminDashboard() {
       <AdminRoute>
         <AdminLayout>
           <div className="p-6 lg:p-8 max-w-7xl mx-auto">
-            <div className="text-white text-lg">Loading dashboard...</div>
+            <div className="text-gray-600 text-lg" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>Loading dashboard...</div>
           </div>
         </AdminLayout>
       </AdminRoute>
@@ -71,8 +71,8 @@ export default function AdminDashboard() {
           {/* Header */}
           <div className="flex items-center justify-between">
             <div>
-              <h1 className="text-4xl font-bold text-white mb-2">Admin Dashboard</h1>
-              <p className="text-gray-300">Overview of all platform data and statistics</p>
+              <h1 className="text-4xl font-bold text-gray-900 mb-2" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>Admin Dashboard</h1>
+              <p className="text-gray-600" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>Overview of all platform data and statistics</p>
             </div>
           </div>
 
@@ -81,9 +81,9 @@ export default function AdminDashboard() {
             {statCards.map((stat, index) => {
               const Icon = stat.icon;
               return (
-                <Card key={index} className="bg-white/10 backdrop-blur-sm border-white/20">
+                <Card key={index} className="bg-white border border-gray-200 shadow-sm">
                   <CardHeader className="flex flex-row items-center justify-between pb-2">
-                    <CardTitle className="text-sm font-medium text-gray-200">
+                    <CardTitle className="text-sm font-medium text-gray-600" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
                       {stat.title}
                     </CardTitle>
                     <div className={`h-10 w-10 rounded-full bg-gradient-to-r ${stat.color} flex items-center justify-center`}>
@@ -91,8 +91,8 @@ export default function AdminDashboard() {
                     </div>
                   </CardHeader>
                   <CardContent>
-                    <div className="text-3xl font-bold text-white mb-1">{stat.value}</div>
-                    <CardDescription className="text-gray-400 text-sm">
+                    <div className="text-3xl font-bold text-gray-900 mb-1" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>{stat.value}</div>
+                    <CardDescription className="text-gray-500 text-sm" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
                       {stat.description}
                     </CardDescription>
                   </CardContent>
@@ -104,30 +104,30 @@ export default function AdminDashboard() {
           {/* Quick Links - Organized by Category */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {/* Analytics & Tracking */}
-            <Card className="bg-white/10 backdrop-blur-sm border-white/20">
+            <Card className="bg-white border border-gray-200 shadow-sm">
               <CardHeader>
-                <CardTitle className="text-white flex items-center gap-2">
+                <CardTitle className="text-gray-900 flex items-center gap-2" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
                   <BarChart3 className="w-5 h-5" />
                   Analytics & Tracking
                 </CardTitle>
-                <CardDescription className="text-gray-400">
+                <CardDescription className="text-gray-500" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
                   Suivi et analyses
                 </CardDescription>
               </CardHeader>
               <CardContent className="space-y-2">
                 <a
                   href="/admin/analytics"
-                  className="block p-3 rounded-lg bg-white/5 hover:bg-white/10 transition-colors"
+                  className="block p-3 rounded-lg bg-gray-50 hover:bg-gray-100 transition-colors text-gray-700 hover:text-gray-900"
                 >
-                  <div className="text-white font-medium">Analytics & Tracking</div>
-                  <div className="text-gray-400 text-sm">Google Analytics, Facebook Pixel, LinkedIn</div>
+                  <div className="text-gray-900 font-medium" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>Analytics & Tracking</div>
+                  <div className="text-gray-500 text-sm" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>Google Analytics, Facebook Pixel, LinkedIn</div>
                 </a>
                 <a
                   href="/admin/leo-analytics"
-                  className="block p-3 rounded-lg bg-white/5 hover:bg-white/10 transition-colors"
+                  className="block p-3 rounded-lg bg-gray-50 hover:bg-gray-100 transition-colors text-gray-700 hover:text-gray-900"
                 >
-                  <div className="text-white font-medium">LEO Analytics</div>
-                  <div className="text-gray-400 text-sm">View detailed LEO session data</div>
+                  <div className="text-gray-900 font-medium" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>LEO Analytics</div>
+                  <div className="text-gray-500 text-sm" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>View detailed LEO session data</div>
                 </a>
               </CardContent>
             </Card>

@@ -81,9 +81,10 @@ export function AdminSidebar() {
                       className={cn(
                         "flex items-center gap-2.5 rounded-lg px-2.5 py-2 text-sm font-medium transition-colors",
                         isActive
-                          ? "bg-[var(--admin-accent)] text-[var(--admin-accent-foreground)]"
+                          ? "text-white"
                           : "text-[var(--admin-foreground)] hover:bg-[var(--admin-hover)]"
                       )}
+                      style={isActive ? { background: 'linear-gradient(to right, #6B1817, #5636AD)' } : undefined}
                     >
                       <Icon className="h-4 w-4 shrink-0 opacity-80" />
                       <span className="truncate">{item.label}</span>

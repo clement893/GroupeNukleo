@@ -1,43 +1,35 @@
-/* Admin Panel Styles - Nouvelle direction admin */
+/* Admin Panel - Thème aligné site Nukleo : fond clair, Plus Jakarta Sans, bordeaux/violet */
 
 .admin-app {
-  --admin-sidebar-bg: #16161a;
-  --admin-border: rgba(255, 255, 255, 0.08);
-  --admin-bg: #fafafa;
-  --admin-foreground: #fff;
-  --admin-muted: #a1a1aa;
-  --admin-hover: rgba(255, 255, 255, 0.06);
-  --admin-accent: #6B1817;
+  --admin-sidebar-bg: #ffffff;
+  --admin-border: rgba(0, 0, 0, 0.08);
+  --admin-bg: #EFE8E8;
+  --admin-foreground: #1a1a1a;
+  --admin-muted: #6b7280;
+  --admin-hover: rgba(107, 24, 23, 0.06);
+  --admin-accent: linear-gradient(to right, #6B1817, #5636AD);
   --admin-accent-foreground: #fff;
 }
 
-/* Ensure Aktiv Grotesk fonts are loaded for admin */
+/* Typo admin = Plus Jakarta Sans comme le site */
 @layer base {
-  /* Admin body text */
-  body[data-admin="true"],
-  body.admin-panel,
-  [data-admin-panel] {
-    font-family: var(--font-sans);
+  [data-admin-panel],
+  [data-admin-panel] * {
+    font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
   }
 
-  /* Admin headings */
   [data-admin-panel] h1,
   [data-admin-panel] h2,
   [data-admin-panel] h3,
   [data-admin-panel] h4,
   [data-admin-panel] h5,
   [data-admin-panel] h6 {
-    font-family: var(--font-heading);
     font-weight: 700;
     letter-spacing: -0.025em;
-  }
-
-  /* Admin specific font overrides */
-  [data-admin-panel] * {
-    font-family: var(--font-sans);
+    color: #1a1a1a;
   }
 
   [data-admin-panel] .font-heading {
-    font-family: var(--font-heading);
+    font-family: 'Plus Jakarta Sans', sans-serif;
   }
 }
