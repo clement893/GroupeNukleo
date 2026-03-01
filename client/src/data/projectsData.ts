@@ -560,7 +560,7 @@ export const PROJECTS_DATA: ProjectData[] = [
       fr: "Globe Car & Truck Rental est la référence montréalaise pour la location de véhicules abordables : voitures, camions, fourgonnettes et véhicules électriques, avec des avantages inclus comme l'assistance routière et la couverture responsabilité civile. Nukleo assure la gestion, la maintenance évolutive et les améliorations continues du site web de Globecar, garantissant une expérience de réservation fluide et performante pour les milliers de clients qui passent par la plateforme chaque mois.",
       en: "Globe Car & Truck Rental is the Montreal reference for affordable vehicle rentals: cars, trucks, vans, and electric vehicles, with included benefits like roadside assistance and liability coverage. Nukleo handles the management, ongoing maintenance, and continuous improvements of Globecar's website, ensuring a smooth and high-performing booking experience for the thousands of customers who use the platform every month.",
     },
-    images: ['Globecar_1.png'],
+    images: ['Globecar_1.png', 'Globecar_2.jpeg'],
   },
   {
     slug: 'go-coupon',
@@ -574,7 +574,7 @@ export const PROJECTS_DATA: ProjectData[] = [
       fr: "GoCoupons est la plateforme de référence au Canada pour les coupons de caisse et les offres de remboursement. Elle permet aux consommateurs d'économiser sur leurs achats quotidiens grâce à des coupons imprimables et des offres de cashback. Nukleo assure la maintenance et l'évolution continue de la plateforme, en garantissant sa stabilité, ses performances et l'intégration de nouvelles fonctionnalités. L'agence travaille également sur des projets d'intelligence artificielle pour enrichir l'expérience utilisateur et optimiser la personnalisation des offres.",
       en: "GoCoupons is the reference platform in Canada for cash coupons and rebate offers. It allows consumers to save on their daily purchases through printable coupons and cashback offers. Nukleo handles the ongoing maintenance and evolution of the platform, ensuring its stability, performance, and the integration of new features. The agency is also working on artificial intelligence projects to enrich the user experience and optimize offer personalization.",
     },
-    images: ['GoCoupon_1.png'],
+    images: ['GoCoupon_1.png', 'GoCoupon_2.jpeg'],
   },
   {
     slug: 'pmp',
@@ -589,7 +589,7 @@ export const PROJECTS_DATA: ProjectData[] = [
       fr: "PMP Strategy est un cabinet de conseil en stratégie de premier plan, présent dans onze villes à travers le monde — Paris, Londres, Montréal, New York, Seattle, Luxembourg, Dubaï, Casablanca, Toronto, Bruxelles et Madrid. Spécialisé dans les secteurs des télécommunications, des médias, de la technologie, de l'énergie, des transports et des services financiers, PMP Strategy accompagne ses clients dans leurs transformations numériques, leurs enjeux ESG et la création de valeur. Nukleo a réalisé la refonte complète du site web de PMP Strategy, en modernisant l'expérience utilisateur et en repensant l'architecture de l'information pour refléter l'envergure internationale du cabinet.",
       en: "PMP Strategy is a leading strategy consulting firm present in eleven cities around the world — Paris, London, Montreal, New York, Seattle, Luxembourg, Dubai, Casablanca, Toronto, Brussels, and Madrid. Specialized in telecommunications, media, technology, energy, transport, and financial services, PMP Strategy supports its clients through digital transformations, ESG challenges, and value creation. Nukleo carried out the complete redesign of PMP Strategy's website, modernizing the user experience and rethinking the information architecture to reflect the firm's international scope.",
     },
-    images: ['PMP_1.png'],
+    images: ['PMP_1.png', 'PMP_2.png'],
   },
   {
     slug: 'queertech',
@@ -604,7 +604,7 @@ export const PROJECTS_DATA: ProjectData[] = [
       fr: "QueerTech est une organisation canadienne qui habilite les personnes 2SLGBTQIA+ à intégrer l'industrie technologique, à faire progresser leur carrière et à lancer des entreprises innovantes. Nukleo a accompagné QueerTech dans la refonte de son site web, en créant une expérience numérique inclusive et dynamique qui reflète la mission de l'organisation. Au-delà du site, Nukleo assure également les communications et le marketing annuel de QueerTech, en soutenant la croissance de la communauté et la visibilité de ses programmes phares : QT Access, QT Leaders et QT Founders.",
       en: "QueerTech is a Canadian organization that empowers 2SLGBTQIA+ people to break into the tech industry, advance their careers, and launch innovative businesses. Nukleo accompanied QueerTech in the redesign of its website, creating an inclusive and dynamic digital experience that reflects the organization's mission. Beyond the site, Nukleo also handles QueerTech's annual communications and marketing, supporting community growth and the visibility of its flagship programs: QT Access, QT Leaders, and QT Founders.",
     },
-    images: ['Queertech_1.png', 'Queertech_2.png'],
+    images: ['Queertech_1.png', 'Queertech_2.png', 'Queertech_3.jpeg'],
   },
   {
     slug: 'nouvelle-ile',
@@ -619,7 +619,7 @@ export const PROJECTS_DATA: ProjectData[] = [
       fr: "Nouvelle Île est une plateforme de médiation culturelle numérique conçue par Verticale, un centre d'artistes de Laval. Elle prend la forme d'une carte interactive accessible en ligne, où chaque icône représente une œuvre d'art éphémère créée spécialement pour un lieu particulier de la ville. Nukleo a développé cette plateforme originale qui révèle l'existence de plus d'une trentaine d'œuvres diffusées par Verticale au cours des quinze dernières années, invitant le public à renouveler son regard sur les espaces qui nous entourent et à cultiver l'esprit des lieux.",
       en: "Nouvelle Île is a digital cultural mediation platform designed by Verticale, an artist-run centre in Laval. It takes the form of an interactive map accessible online, where each icon represents an ephemeral artwork created specifically for a particular location in the city. Nukleo developed this original platform that reveals the existence of over thirty works presented by Verticale over the past fifteen years, inviting the public to renew their perspective on the spaces around us and to cultivate the spirit of places.",
     },
-    images: ['NouvelleIle_1.jpg'],
+    images: ['NouvelleIle_1.jpg', 'NouvelleIle_2.png'],
   },
 
   {
@@ -665,7 +665,9 @@ export const PROJECTS_DATA: ProjectData[] = [
       fr: "Theatre Nova Scotia est l'organisation provinciale dédiée au développement du théâtre professionnel et communautaire en Nouvelle-Écosse. Elle chapeaute un écosystème numérique de quatre sites web : theatrens.ca, performns.ca, dramafest.ca et le site des Merritt Awards. Nukleo a réalisé la conception et le développement de ces plateformes, en assurant une expérience utilisateur cohérente, accessible et conforme aux standards WCAG/ADA. L'agence assure également la maintenance annuelle de l'ensemble de l'écosystème digital, garantissant la stabilité, la sécurité et l'évolution continue des quatre sites.",
       en: "Theatre Nova Scotia is the provincial organization dedicated to the development of professional and community theatre in Nova Scotia. It oversees a digital ecosystem of four websites: theatrens.ca, performns.ca, dramafest.ca, and the Merritt Awards site. Nukleo designed and developed these platforms, ensuring a consistent, accessible, and WCAG/ADA-compliant user experience. The agency also provides annual maintenance for the entire digital ecosystem, ensuring the stability, security, and continuous evolution of all four sites.",
     },
-    images: [],
+    images: [
+      'TheaterNS_1.jpeg',
+    ],
   },
   // ─── Projets issus des nouvelles offres de services ───────────────────────────
   {
@@ -680,7 +682,12 @@ export const PROJECTS_DATA: ProjectData[] = [
       fr: "Le Conseil de développement économique des Nouvelles-Écosse (CDÉNÉ) est un organisme francophone qui soutient le développement économique et l'attraction de nouveaux résidents en Nouvelle-Écosse. Nukleo a été mandaté par le CDÉNÉ pour concevoir et produire plusieurs campagnes de communication, notamment une série de vidéos visant à attirer les alumnis de l'Université Sainte-Anne à revenir s'établir dans la province. L'agence a assuré la direction artistique, supervisé les tournages sur place à Halifax et livré des contenus authentiques et inspirants pour rejoindre les communautés francophones du Canada et de l'international.",
       en: "The Conseil de développement économique des Nouvelles-Écosse (CDÉNÉ) is a Francophone organization that supports economic development and the attraction of new residents to Nova Scotia. Nukleo was mandated by CDÉNÉ to design and produce several communication campaigns, including a series of videos aimed at attracting Université Sainte-Anne alumni to return and settle in the province. The agency handled the artistic direction, supervised on-site shoots in Halifax, and delivered authentic and inspiring content to reach Francophone communities across Canada and internationally.",
     },
-    images: [],
+    images: [
+      'CDENE_1.png',
+      'CDENE_2.png',
+      'CDENE_3.png',
+      'CDENE_4.png',
+    ],
   },
   {
     slug: 'arsenal-nouvelles',
@@ -694,7 +701,9 @@ export const PROJECTS_DATA: ProjectData[] = [
       fr: "Arsenal est un groupe média indépendant qui opère plusieurs sites de nouvelles et de radio au Québec. Nukleo assure la maintenance mensuelle de l'ensemble de l'écosystème digital d'Arsenal, incluant les sites de nouvelles et les sites des stations de radio (Viva, Hit Country, O). L'agence gère la surveillance des serveurs, les mises à jour de sécurité, l'optimisation des performances et les banques d'heures pour les évolutions et améliorations continues.",
       en: "Arsenal is an independent media group operating several news and radio websites in Quebec. Nukleo handles the monthly maintenance of Arsenal's entire digital ecosystem, including news sites and radio station websites (Viva, Hit Country, O). The agency manages server monitoring, security updates, performance optimization, and hour banks for ongoing evolutions and improvements.",
     },
-    images: [],
+    images: [
+      'ArsenalNouvelles_1.png',
+    ],
   },
   {
     slug: 'entertain-ai',
@@ -704,6 +713,7 @@ export const PROJECTS_DATA: ProjectData[] = [
     year: '2025',
     category: 'Design',
     services: 'Stratégie marketing numérique, Gestion des campagnes publicitaires, SEO, Réseaux sociaux',
+    websiteUrl: 'https://entertainmentai.ca',
     description: {
       fr: "Entertainment AI est une conférence annuelle dédiée à l'intersection de l'intelligence artificielle et des industries créatives. Nukleo a conçu et déployé une stratégie de marketing numérique complète pour maximiser les ventes de billets de l'édition 2026. Le mandat a inclus l'optimisation du site web, la configuration des outils de suivi et de retargeting, la gestion des campagnes multicanales (LinkedIn, Meta, Google Ads), l'activation du programme Google Ad Grants et la mise en place d'une stratégie d'infolettres automatisée.",
       en: "Entertainment AI is an annual conference dedicated to the intersection of artificial intelligence and the creative industries. Nukleo designed and deployed a comprehensive digital marketing strategy to maximize ticket sales for the 2026 edition. The mandate included website optimization, tracking and retargeting setup, management of multichannel campaigns (LinkedIn, Meta, Google Ads), activation of the Google Ad Grants program, and the implementation of an automated newsletter strategy.",
