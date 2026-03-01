@@ -6,7 +6,9 @@ import { trpc } from '@/lib/trpc';
 import { Download, Mail, Building, Calendar, FileText, User, MessageSquare } from 'lucide-react';
 
 export default function AdminContactMessages() {
-  const { data: messages, isLoading, refetch } = trpc.admin.getContactMessages.useQuery();
+  const { data: messages, isLoading, refetch } = trpc.admin.getContactMessages.useQuery(undefined, {
+    refetchOnWindowFocus: true,
+  });
   const [selectedMessage, setSelectedMessage] = useState<number | null>(null);
 
   const exportToCSV = () => {
@@ -59,7 +61,7 @@ export default function AdminContactMessages() {
               Contact Messages
             </h1>
             <p className="text-gray-400">
-              Gérer les messages reçus via le formulaire de contact
+              Messages envoyés depuis le formulaire de contact du site (page Contact). Chaque envoi est enregistré en base et visible ici.
             </p>
           </div>
           <Button onClick={exportToCSV} disabled={!messages || messages.length === 0} className="gap-2 bg-white/10 hover:bg-white/20 border border-white/20 text-white">

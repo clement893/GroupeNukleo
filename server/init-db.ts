@@ -202,7 +202,7 @@ export async function initDatabase(req: Request, res: Response) {
       );
     `);
 
-    // Create contact_messages table
+    // Create contact_messages table (formulaire de contact du site → admin Contact Messages)
     await db.execute(sql`
       CREATE TABLE IF NOT EXISTS contact_messages (
         id SERIAL PRIMARY KEY,
@@ -211,6 +211,7 @@ export async function initDatabase(req: Request, res: Response) {
         email VARCHAR(320) NOT NULL,
         company VARCHAR(255) NOT NULL,
         message TEXT NOT NULL,
+        consent BOOLEAN DEFAULT true NOT NULL,
         "createdAt" TIMESTAMP DEFAULT NOW() NOT NULL,
         "updatedAt" TIMESTAMP DEFAULT NOW() NOT NULL
       );
