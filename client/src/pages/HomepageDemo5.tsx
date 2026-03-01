@@ -920,7 +920,7 @@ export default function HomepageDemo5() {
               color: '#374151',
               lineHeight: 1.65,
               margin: '0 0 2.5rem 0',
-              maxWidth: 560,
+              maxWidth: '40vw',
               marginLeft: 'auto',
               marginRight: 'auto',
             }}>
