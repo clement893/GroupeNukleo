@@ -12,10 +12,12 @@ export function ProtectedAdminRoute({ children }: ProtectedAdminRouteProps) {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-[#1a0b2e] via-[#2d1b4e] to-[#0f0519] flex items-center justify-center">
-        <div className="text-center">
-          <div className="inline-block w-16 h-16 border-4 border-white/20 border-t-white rounded-full animate-spin mb-4" />
-          <p className="text-white/60">Vérification de l&apos;authentification...</p>
+      <div className="admin-app min-h-screen bg-[#0f0f12] flex items-center justify-center p-4" data-admin-panel>
+        <div className="w-full max-w-[400px]">
+          <div className="rounded-2xl border border-white/10 bg-[#16161a] p-8 shadow-xl text-center">
+            <div className="inline-block w-8 h-8 border-2 border-white/20 border-t-white rounded-full animate-spin mb-4" />
+            <p className="text-sm text-white/50">Vérification de l&apos;authentification...</p>
+          </div>
         </div>
       </div>
     );

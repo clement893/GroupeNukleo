@@ -4,7 +4,6 @@ import {
   BarChart3,
   MessageSquare,
   Building2,
-  Mail,
   FileText,
   Globe,
   Loader2,
@@ -33,7 +32,6 @@ const NAV_GROUPS = [
       { label: "Agency Leads", href: "/admin/agency-leads", icon: Building2 },
       { label: "Contact Messages", href: "/admin/contact-messages", icon: MessageSquare },
       { label: "Start Project", href: "/admin/start-project-submissions", icon: FileText },
-      { label: "AI News Subscribers", href: "/admin/ai-news-subscribers", icon: Mail },
       { label: "Témoignages", href: "/admin/testimonials", icon: MessageSquare },
     ],
   },
@@ -42,7 +40,6 @@ const NAV_GROUPS = [
     items: [
       { label: "Textes des pages (EN/FR)", href: "/admin/page-texts", icon: FileText },
       { label: "Visibilité des pages", href: "/admin/page-visibility", icon: Globe },
-      { label: "Loaders", href: "/admin/loader-migration", icon: Loader2 },
       { label: "Sons", href: "/admin/sounds", icon: Volume2 },
       { label: "Projets", href: "/admin/projects-images", icon: ImageIcon },
       { label: "Logos carousel", href: "/admin/carousel-logos", icon: LayoutGrid },
@@ -52,7 +49,6 @@ const NAV_GROUPS = [
     label: "Développement",
     items: [
       { label: "Migration DB", href: "/admin/run-migration", icon: Database },
-      { label: "Migration Loaders", href: "/admin/loader-migration", icon: Database },
     ],
   },
 ];

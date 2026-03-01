@@ -136,7 +136,7 @@ export default function About() {
               fontSize: 'clamp(1.75rem, 3vw, 2.5rem)',
               lineHeight: 1.2,
               margin: '0 auto 1.5rem',
-              maxWidth: '100%',
+              maxWidth: 'min(100%, 40vw)',
               background: 'linear-gradient(to right, #6B1817, #5636AD)',
               backgroundClip: 'text',
               WebkitBackgroundClip: 'text',

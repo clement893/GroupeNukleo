@@ -1,6 +1,5 @@
 import { useState, useMemo } from "react";
 import { trpc } from "@/lib/trpc";
-import { useIsAdminSession } from "@/hooks/useIsAdminSession";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -27,14 +26,12 @@ function flattenObj(obj: Record<string, unknown>, prefix = ""): Record<string, s
 type TextRow = { id: number; key: string; textEn: string; textFr: string };
 
 export default function AdminPageTexts() {
-  const { isAdmin, isLoading: authLoading } = useIsAdminSession();
   const {
     data: texts,
     isLoading,
     error,
     refetch,
   } = trpc.pageTexts.getAll.useQuery(undefined, {
-    enabled: isAdmin,
     retry: false,
     refetchOnWindowFocus: false,
   });
@@ -121,7 +118,7 @@ export default function AdminPageTexts() {
     }
   };
 
-  if (authLoading) {
+  if (isLoading && !texts) {
     return (
       <AdminLayout>
         <div className="min-h-[50vh] flex items-center justify-center">
@@ -131,17 +128,8 @@ export default function AdminPageTexts() {
     );
   }
 
-  if (!isAdmin) {
-    return (
-      <AdminLayout>
-        <div className="p-6 flex items-center justify-center min-h-[40vh]">
-          <p className="text-white/70">Accès réservé aux administrateurs.</p>
-        </div>
-      </AdminLayout>
-    );
-  }
-
   if (error) {
+    const isForbidden = error.data?.code === "FORBIDDEN" || error.message?.toLowerCase().includes("admin");
     return (
       <AdminLayout>
         <div className="p-6 lg:p-8 max-w-2xl mx-auto">
@@ -152,14 +140,18 @@ export default function AdminPageTexts() {
                 Erreur de chargement
               </CardTitle>
               <CardDescription className="text-white/60">
-                Les textes des pages n&apos;ont pas pu être chargés depuis la base de données.
+                {isForbidden
+                  ? "La session admin n'est pas reconnue pour cette requête. Essayez de rafraîchir la page ou de vous reconnecter."
+                  : "Les textes des pages n'ont pas pu être chargés depuis la base de données."}
               </CardDescription>
             </CardHeader>
             <CardContent>
               <p className="text-white/80 mb-4">{error.message || "Une erreur est survenue"}</p>
-              <p className="text-sm text-white/50 mb-4">
-                Vérifiez que la table <code className="bg-white/10 px-1 rounded">page_texts</code> existe (exécutez la migration DB depuis l&apos;admin).
-              </p>
+              {!isForbidden && (
+                <p className="text-sm text-white/50 mb-4">
+                  Vérifiez que la table <code className="bg-white/10 px-1 rounded">page_texts</code> existe (exécutez la migration DB depuis l&apos;admin).
+                </p>
+              )}
               <Button onClick={() => refetch()} className="bg-cyan-600 hover:bg-cyan-700 text-white">
                 Réessayer
               </Button>

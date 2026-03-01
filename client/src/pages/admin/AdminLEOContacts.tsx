@@ -1,6 +1,5 @@
 import { Fragment, useState } from 'react';
 import { trpc } from '@/lib/trpc';
-import AdminRoute from '@/components/AdminRoute';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Loader2, Mail, User, Calendar, MessageSquare, Download, RefreshCw, MessageCircle } from 'lucide-react';
 import { AdminLayout } from "@/components/AdminLayout";
@@ -57,38 +56,34 @@ export default function AdminLEOContacts() {
 
   if (isError) {
     return (
-      <AdminRoute>
-        <AdminLayout>
-          <div className="p-6 lg:p-8 max-w-7xl mx-auto">
-            <Card className="bg-white/10 backdrop-blur-md border-white/20">
-              <CardHeader>
-                <CardTitle className="text-red-400">Erreur de chargement</CardTitle>
-                <CardDescription className="text-white/60">
-                  Impossible de charger les contacts LEO. Vérifiez la connexion à la base de données.
-                </CardDescription>
-              </CardHeader>
-              <CardContent>
-                <Button onClick={() => refetchAll()} className="bg-cyan-500 hover:bg-cyan-600 text-white">
-                  <RefreshCw className="w-4 h-4 mr-2" />
-                  Réessayer
-                </Button>
-              </CardContent>
-            </Card>
-          </div>
-        </AdminLayout>
-      </AdminRoute>
+      <AdminLayout>
+        <div className="p-6 lg:p-8 max-w-7xl mx-auto">
+          <Card className="bg-white/10 backdrop-blur-md border-white/20">
+            <CardHeader>
+              <CardTitle className="text-red-400">Erreur de chargement</CardTitle>
+              <CardDescription className="text-white/60">
+                Impossible de charger les contacts LEO. Vérifiez la connexion à la base de données.
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <Button onClick={() => refetchAll()} className="bg-cyan-500 hover:bg-cyan-600 text-white">
+                <RefreshCw className="w-4 h-4 mr-2" />
+                Réessayer
+              </Button>
+            </CardContent>
+          </Card>
+        </div>
+      </AdminLayout>
     );
   }
 
   if (isLoading) {
     return (
-      <AdminRoute>
-        <AdminLayout>
-          <div className="min-h-[50vh] flex items-center justify-center">
-            <Loader2 className="w-8 h-8 text-cyan-400 animate-spin" />
-          </div>
-        </AdminLayout>
-      </AdminRoute>
+      <AdminLayout>
+        <div className="min-h-[50vh] flex items-center justify-center">
+          <Loader2 className="w-8 h-8 text-cyan-400 animate-spin" />
+        </div>
+      </AdminLayout>
     );
   }
 
@@ -96,8 +91,7 @@ export default function AdminLEOContacts() {
   const today = new Date().toDateString();
 
   return (
-    <AdminRoute>
-      <AdminLayout>
+    <AdminLayout>
         <div className="p-6 lg:p-8 max-w-7xl mx-auto">
           <div className="flex items-center justify-between mb-8">
             <div>
@@ -314,6 +308,5 @@ export default function AdminLEOContacts() {
           </Card>
         </div>
       </AdminLayout>
-    </AdminRoute>
   );
 }

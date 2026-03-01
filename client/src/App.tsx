@@ -91,7 +91,6 @@ const AdminLEOContacts = lazy(() => import("./pages/admin/AdminLEOContacts"));
 const AdminLogin = lazy(() => import("./pages/admin/AdminLogin"));
 const CreateFirstAdmin = lazy(() => import("./pages/CreateFirstAdmin"));
 const AdminDashboard = lazy(() => import("./pages/admin/AdminDashboard"));
-const AdminAINewsSubscribers = lazy(() => import("./pages/admin/AdminAINewsSubscribers"));
 const AdminStartProjectSubmissions = lazy(() => import("./pages/admin/AdminStartProjectSubmissions"));
 const AdminContactMessages = lazy(() => import("./pages/admin/AdminContactMessages"));
 const AdminSounds = lazy(() => import("./pages/admin/AdminSounds"));
@@ -100,7 +99,6 @@ const AdminPageTexts = lazy(() => import("./pages/admin/AdminPageTexts"));
 const AdminAnalytics = lazy(() => import("./pages/admin/AdminAnalytics"));
 const AdminTestimonials = lazy(() => import("./pages/admin/AdminTestimonials"));
 const RunMigration = lazy(() => import("./pages/admin/RunMigration"));
-const AdminLoaderMigration = lazy(() => import("./pages/admin/AdminLoaderMigration"));
 const AdminHome = lazy(() => import("./pages/admin/AdminHome"));
 const AdminProjectsImages = lazy(() => import("./pages/admin/AdminProjectsImages"));
 const AdminCarouselLogos = lazy(() => import("./pages/admin/AdminCarouselLogos"));
@@ -188,9 +186,6 @@ function App() {
               <Route path="/admin/dashboard">
                 <ProtectedAdminRoute><AdminDashboard /></ProtectedAdminRoute>
               </Route>
-              <Route path="/admin/ai-news-subscribers">
-                <ProtectedAdminRoute><AdminAINewsSubscribers /></ProtectedAdminRoute>
-              </Route>
               <Route path="/admin/sounds">
                 <ProtectedAdminRoute><AdminSounds /></ProtectedAdminRoute>
               </Route>
@@ -214,9 +209,6 @@ function App() {
               </Route>
               <Route path="/admin/run-migration">
                 <ProtectedAdminRoute><RunMigration /></ProtectedAdminRoute>
-              </Route>
-              <Route path="/admin/loader-migration">
-                <ProtectedAdminRoute><AdminLoaderMigration /></ProtectedAdminRoute>
               </Route>
               <Route path="/admin/projects-images">
                 <ProtectedAdminRoute><AdminProjectsImages /></ProtectedAdminRoute>

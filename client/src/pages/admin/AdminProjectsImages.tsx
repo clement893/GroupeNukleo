@@ -270,9 +270,8 @@ export default function AdminProjectsImages() {
                         <Button
                           variant="outline"
                           size="sm"
-                          className="shrink-0"
+                          className="shrink-0 text-gray-900 border-gray-300 hover:bg-gray-100 hover:text-gray-900"
                           onClick={() => setEditing(project)}
-                          disabled={!isFromApi}
                         >
                           <Pencil className="w-4 h-4 mr-2" />
                           Modifier
@@ -401,9 +400,18 @@ export default function AdminProjectsImages() {
                 className="space-y-4"
                 onSubmit={(e) => {
                   e.preventDefault();
+                  if (!isFromApi) {
+                    toast.error('Initialisez d\'abord les projets avec le bouton « Initialiser depuis le site » pour pouvoir enregistrer.');
+                    return;
+                  }
                   updateMutation.mutate(editing);
                 }}
               >
+                {!isFromApi && (
+                  <p className="text-sm text-amber-700 dark:text-amber-300 bg-amber-500/10 border border-amber-500/30 rounded-lg p-3">
+                    Les projets ne sont pas encore enregistrés en base. Cliquez sur « Initialiser depuis le site » sur la page pour pouvoir enregistrer vos modifications.
+                  </p>
+                )}
                 <div className="grid grid-cols-2 gap-4">
                   <div>
                     <Label>Slug</Label>
@@ -548,7 +556,7 @@ export default function AdminProjectsImages() {
                   <Button type="button" variant="outline" onClick={() => setEditing(null)}>
                     Annuler
                   </Button>
-                  <Button type="submit" disabled={updateMutation.isPending}>
+                  <Button type="submit" disabled={!isFromApi || updateMutation.isPending}>
                     {updateMutation.isPending ? (
                       <Loader2 className="w-4 h-4 animate-spin mr-2" />
                     ) : null}

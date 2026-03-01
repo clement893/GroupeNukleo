@@ -22,10 +22,18 @@ export default function AdminLogin() {
 
   if (loading) {
     return (
-      <div className="admin-app min-h-screen bg-[#0f0f12] flex items-center justify-center" data-admin-panel>
-        <div className="text-center">
-          <div className="inline-block w-10 h-10 border-2 border-white/20 border-t-white rounded-full animate-spin mb-4" />
-          <p className="text-sm text-white/50">Chargement...</p>
+      <div className="admin-app min-h-screen bg-[#0f0f12] flex items-center justify-center p-4" data-admin-panel>
+        <div className="w-full max-w-[400px]">
+          <div className="rounded-2xl border border-white/10 bg-[#16161a] p-8 shadow-xl">
+            <div className="mb-8 text-center">
+              <img src="/Nukleo_blanc_RVB.svg" alt="Nukleo" className="h-10 mx-auto" />
+            </div>
+            <h1 className="text-xl font-bold text-white text-center tracking-tight">Administration</h1>
+            <p className="text-white/50 text-sm text-center mt-2">Vérification de la session...</p>
+            <div className="mt-6 flex justify-center">
+              <div className="inline-block w-8 h-8 border-2 border-white/20 border-t-white rounded-full animate-spin" />
+            </div>
+          </div>
         </div>
       </div>
     );
