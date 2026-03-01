@@ -70,6 +70,13 @@ async function seedFromLocales() {
   return res.json();
 }
 
+async function fetchLocaleSections(): Promise<string[]> {
+  const res = await fetch("/api/admin/page-texts/sections", credentials);
+  if (!res.ok) return [];
+  const data = await res.json().catch(() => ({}));
+  return Array.isArray(data.sections) ? data.sections : [];
+}
+
 function flattenObj(obj: Record<string, unknown>, prefix = ""): Record<string, string> {
   const out: Record<string, string> = {};
   for (const [k, v] of Object.entries(obj)) {
@@ -220,6 +227,7 @@ export default function AdminPageTexts() {
     onSuccess: (r: { created: number; updated: number; total: number }) => {
       toast.success(`Site importé : ${r.created} créés, ${r.updated} mis à jour (${r.total} clés)`);
       queryClient.invalidateQueries({ queryKey: ["admin", "page-texts"] });
+      queryClient.invalidateQueries({ queryKey: ["admin", "page-texts", "sections"] });
     },
     onError: (e: Error) => toast.error(e.message),
   });
@@ -233,6 +241,13 @@ export default function AdminPageTexts() {
   const [importFr, setImportFr] = useState("");
   const [dirty, setDirty] = useState<Record<number, { textEn: string; textFr: string }>>({});
 
+  const { data: localeSections = [] } = useQuery({
+    queryKey: ["admin", "page-texts", "sections"],
+    queryFn: fetchLocaleSections,
+    staleTime: 60 * 1000,
+    retry: false,
+  });
+
   const pages = useMemo(() => {
     const fromDb = new Set<string>();
     if (texts?.length) {
@@ -241,14 +256,14 @@ export default function AdminPageTexts() {
         fromDb.add(section);
       }
     }
-    // Pages/sections actives du site (pas "approche", page retirée)
-    const HIDDEN_SECTIONS = new Set(["approche"]);
-    const list = [...PAGE_SECTION_ORDER];
+    const HIDDEN = new Set(["approche"]);
+    const source = localeSections.length > 0 ? localeSections : PAGE_SECTION_ORDER;
+    const list = source.filter((p) => !HIDDEN.has(p));
     for (const s of fromDb) {
-      if (!HIDDEN_SECTIONS.has(s) && !list.includes(s)) list.push(s);
+      if (!HIDDEN.has(s) && !list.includes(s)) list.push(s);
     }
-    return list.filter((p) => !HIDDEN_SECTIONS.has(p));
-  }, [texts]);
+    return list;
+  }, [texts, localeSections]);
 
   const selectedPageKey = selectedPage ?? (pages[0] ?? null);
   const itemsForPage = useMemo(() => {

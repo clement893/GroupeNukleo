@@ -112,3 +112,37 @@ export async function seedFromLocaleFiles(
     `Could not read locale files. Tried: dist/locales, locales, client/src/locales. Last error: ${lastErr?.message ?? "unknown"}. Ensure build has run (copies locales to dist/locales).`
   );
 }
+
+/** Ordre prioritaire des sections (pages du site) pour l’admin. */
+const SECTION_ORDER = [
+  "home", "services", "about", "contact", "projects", "resources", "faq", "leo",
+  "nav", "header", "menu", "footer", "preFooter", "common", "notFound", "alt",
+  "hero", "capabilities", "manifesto", "trinity", "cta", "testimonials", "whoWeServe", "clients",
+  "startProject", "expertise", "artsCulture", "agencies", "media", "lab", "bureau", "studio",
+  "artsCultureCommitment", "assessment", "seo", "pwa", "other",
+];
+const HIDDEN_SECTIONS = new Set(["approche"]);
+
+/** Returns the list of section keys (first segment of locale keys) from the site’s locale files. Used by admin to show the right pages. */
+export async function getLocaleSections(): Promise<string[]> {
+  const candidates = [
+    [path.join(process.cwd(), "dist", "locales", "fr.json"), path.join(process.cwd(), "dist", "locales", "en.json")] as const,
+    [path.join(process.cwd(), "locales", "fr.json"), path.join(process.cwd(), "locales", "en.json")] as const,
+    [path.join(process.cwd(), "client", "src", "locales", "fr.json"), path.join(process.cwd(), "client", "src", "locales", "en.json")] as const,
+  ] as const;
+
+  for (const [frP] of candidates) {
+    try {
+      const raw = await readFile(frP, "utf-8");
+      const data = JSON.parse(raw) as Record<string, unknown>;
+      const keys = Object.keys(data).filter((k) => !HIDDEN_SECTIONS.has(k));
+      const orderSet = new Set(SECTION_ORDER);
+      const ordered = SECTION_ORDER.filter((k) => keys.includes(k));
+      const rest = keys.filter((k) => !orderSet.has(k));
+      return [...ordered, ...rest];
+    } catch {
+      continue;
+    }
+  }
+  return [...SECTION_ORDER];
+}

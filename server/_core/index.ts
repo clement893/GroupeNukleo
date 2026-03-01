@@ -22,7 +22,7 @@ import connectPgSimple from "connect-pg-simple";
 import passport from "passport";
 import { configureGoogleAuth, requireAdminAuth } from "./googleAuth";
 import { getDb, getAllAgencyLeads, getLeoAnalytics, getLeoContacts, getAdminStats } from "../db";
-import { getAllPageTexts, updatePageText, createPageText, importPageTextsFromJson, seedFromLocaleFiles } from "../pageTextsApi";
+import { getAllPageTexts, updatePageText, createPageText, importPageTextsFromJson, seedFromLocaleFiles, getLocaleSections } from "../pageTextsApi";
 import { addLogo, updateLogo, removeLogo, reorderLogos } from "../carouselLogosApi";
 import { analytics } from "../../drizzle/schema";
 import { eq } from "drizzle-orm";
@@ -525,6 +525,15 @@ async function startServer() {
   });
 
   // Admin: page texts (REST, same auth — avoids tRPC session issues on Railway)
+  app.get("/api/admin/page-texts/sections", requireAdminAuth, async (req, res) => {
+    try {
+      const sections = await getLocaleSections();
+      res.json({ sections });
+    } catch (e) {
+      console.error("[Admin] page-texts sections error", e);
+      res.status(500).json({ error: "Failed to fetch locale sections" });
+    }
+  });
   app.get("/api/admin/page-texts", requireAdminAuth, async (req, res) => {
     try {
       const texts = await getAllPageTexts();
