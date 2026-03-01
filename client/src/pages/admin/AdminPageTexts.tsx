@@ -129,11 +129,43 @@ const PAGE_SECTION_LABELS: Record<string, string> = {
 };
 /** Ordre d’affichage des sections (pages du site en premier) */
 const PAGE_SECTION_ORDER = [
-  "home", "services", "about", "contact", "projects", "approche", "resources", "faq", "leo",
-  "expertise", "nav", "header", "menu", "footer", "preFooter", "common", "notFound", "alt",
-  "hero", "capabilities", "manifesto", "trinity", "cta", "testimonials", "whoWeServe", "clients",
-  "startProject", "artsCulture", "agencies", "media", "lab", "bureau", "studio",
-  "artsCultureCommitment", "assessment", "seo", "pwa",
+  "home",
+  "services",
+  "about",
+  "contact",
+  "projects",
+  "resources",
+  "faq",
+  "leo",
+  "nav",
+  "header",
+  "menu",
+  "footer",
+  "preFooter",
+  "common",
+  "notFound",
+  "alt",
+  "hero",
+  "capabilities",
+  "manifesto",
+  "trinity",
+  "cta",
+  "testimonials",
+  "whoWeServe",
+  "clients",
+  "startProject",
+  "expertise",
+  "artsCulture",
+  "agencies",
+  "media",
+  "lab",
+  "bureau",
+  "studio",
+  "artsCultureCommitment",
+  "assessment",
+  "seo",
+  "pwa",
+  "other",
 ];
 
 export default function AdminPageTexts() {
@@ -209,12 +241,13 @@ export default function AdminPageTexts() {
         fromDb.add(section);
       }
     }
-    // Toujours afficher les pages du site actuel en premier (source de vérité = site, pas la BDD)
+    // Pages/sections actives du site (pas "approche", page retirée)
+    const HIDDEN_SECTIONS = new Set(["approche"]);
     const list = [...PAGE_SECTION_ORDER];
     for (const s of fromDb) {
-      if (!PAGE_SECTION_ORDER.includes(s) && !list.includes(s)) list.push(s);
+      if (!HIDDEN_SECTIONS.has(s) && !list.includes(s)) list.push(s);
     }
-    return list;
+    return list.filter((p) => !HIDDEN_SECTIONS.has(p));
   }, [texts]);
 
   const selectedPageKey = selectedPage ?? (pages[0] ?? null);

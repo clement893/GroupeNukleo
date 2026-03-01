@@ -125,29 +125,46 @@ export default function AdminProjectsImages() {
     featuredOnProjectsTriptych?: boolean;
     featuredOnHomeCarousel?: boolean;
     homeCarouselImage?: string;
+    homeTriptychImage?: string;
+    projectsTriptychImage?: string;
+    homeTriptychOrder?: number;
+    projectsTriptychOrder?: number;
+    homeCarouselOrder?: number;
   }>;
   const isFromApi = Boolean(apiProjects && apiProjects.length > 0);
 
-  const defaultHomeSlugs = useMemo(
-    () => projects.filter((p) => p.featuredOnHomeTriptych).slice(0, 3).map((p) => p.slug),
-    [projects]
-  );
-  const defaultProjectsSlugs = useMemo(
-    () => projects.filter((p) => p.featuredOnProjectsTriptych).slice(0, 3).map((p) => p.slug),
-    [projects]
-  );
+  const defaultHomeSlugs = useMemo(() => {
+    const featured = projects.filter((p) => p.featuredOnHomeTriptych);
+    if (featured.length > 0) {
+      featured.sort((a, b) => (a.homeTriptychOrder ?? 99) - (b.homeTriptychOrder ?? 99));
+      return featured.slice(0, 3).map((p) => p.slug);
+    }
+    return projects.slice(0, 3).map((p) => p.slug);
+  }, [projects]);
+  const defaultProjectsSlugs = useMemo(() => {
+    const featured = projects.filter((p) => p.featuredOnProjectsTriptych);
+    if (featured.length > 0) {
+      featured.sort((a, b) => (a.projectsTriptychOrder ?? 99) - (b.projectsTriptychOrder ?? 99));
+      return featured.slice(0, 3).map((p) => p.slug);
+    }
+    return projects.slice(0, 3).map((p) => p.slug);
+  }, [projects]);
   const [homeTriptychSlugs, setHomeTriptychSlugs] = useState<string[]>(() => defaultHomeSlugs);
   const [projectsTriptychSlugs, setProjectsTriptychSlugs] = useState<string[]>(() => defaultProjectsSlugs);
   const defaultHomeTriptychImageBySlug = useMemo(() => {
     const out: Record<string, string> = {};
-    projects.filter((p) => p.featuredOnHomeTriptych).slice(0, 3).forEach((p) => {
+    const featured = projects.filter((p) => p.featuredOnHomeTriptych).sort((a, b) => (a.homeTriptychOrder ?? 99) - (b.homeTriptychOrder ?? 99));
+    const list = featured.length > 0 ? featured.slice(0, 3) : projects.slice(0, 3);
+    list.forEach((p) => {
       out[p.slug] = (p as { homeTriptychImage?: string }).homeTriptychImage || p.images?.[0] || '';
     });
     return out;
   }, [projects]);
   const defaultProjectsTriptychImageBySlug = useMemo(() => {
     const out: Record<string, string> = {};
-    projects.filter((p) => p.featuredOnProjectsTriptych).slice(0, 3).forEach((p) => {
+    const featured = projects.filter((p) => p.featuredOnProjectsTriptych).sort((a, b) => (a.projectsTriptychOrder ?? 99) - (b.projectsTriptychOrder ?? 99));
+    const list = featured.length > 0 ? featured.slice(0, 3) : projects.slice(0, 3);
+    list.forEach((p) => {
       out[p.slug] = (p as { projectsTriptychImage?: string }).projectsTriptychImage || p.images?.[0] || '';
     });
     return out;
@@ -168,13 +185,16 @@ export default function AdminProjectsImages() {
     defaultProjectsSlugs.map((s) => defaultProjectsTriptychImageBySlug[s] ?? '').join(','),
   ]);
 
-  const defaultCarouselSlugs = useMemo(
-    () => projects.filter((p) => p.featuredOnHomeCarousel).slice(0, 6).map((p) => p.slug),
-    [projects]
-  );
+  const defaultCarouselSlugs = useMemo(() => {
+    const featured = projects.filter((p) => p.featuredOnHomeCarousel).sort((a, b) => (a.homeCarouselOrder ?? 99) - (b.homeCarouselOrder ?? 99));
+    if (featured.length > 0) return featured.slice(0, 6).map((p) => p.slug);
+    return projects.slice(0, 6).map((p) => p.slug);
+  }, [projects]);
   const defaultCarouselImageBySlug = useMemo(() => {
     const out: Record<string, string> = {};
-    projects.filter((p) => p.featuredOnHomeCarousel).slice(0, 6).forEach((p) => {
+    const featured = projects.filter((p) => p.featuredOnHomeCarousel).sort((a, b) => (a.homeCarouselOrder ?? 99) - (b.homeCarouselOrder ?? 99));
+    const list = featured.length > 0 ? featured.slice(0, 6) : projects.slice(0, 6);
+    list.forEach((p) => {
       out[p.slug] = (p as { homeCarouselImage?: string }).homeCarouselImage || p.images?.[0] || '';
     });
     return out;
