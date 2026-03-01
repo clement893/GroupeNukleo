@@ -30,35 +30,107 @@ export default function AdminCarouselLogos() {
     retryDelay: 2000,
     refetchOnWindowFocus: false,
   });
-  const addMutation = trpc.carouselLogos.add.useMutation({
-    onSuccess: () => {
-      toast.success("Logo ajouté");
+  const [removePendingId, setRemovePendingId] = useState<string | null>(null);
+
+  async function deleteLogo(id: string, alt: string) {
+    if (!confirm(`Supprimer le logo « ${alt} » ?`)) return;
+    setRemovePendingId(id);
+    try {
+      const res = await fetch(`/api/admin/carousel-logos/${encodeURIComponent(id)}`, {
+        method: "DELETE",
+        credentials: "include",
+      });
+      if (!res.ok) {
+        const data = await res.json().catch(() => ({}));
+        throw new Error(data?.error || "Erreur suppression");
+      }
+      toast.success("Logo supprimé");
       refetch();
+    } catch (e) {
+      toast.error(e instanceof Error ? e.message : "Erreur");
+    } finally {
+      setRemovePendingId(null);
+    }
+  }
+
+  const [addPending, setAddPending] = useState(false);
+  async function addLogoRest() {
+    if (!newSrc.trim() || !newAlt.trim()) {
+      toast.error("Chemin image et texte alternatif requis");
+      return;
+    }
+    setAddPending(true);
+    try {
+      const res = await fetch("/api/admin/carousel-logos", {
+        method: "POST",
+        credentials: "include",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ src: newSrc.trim(), alt: newAlt.trim(), url: newUrl.trim() || undefined }),
+      });
+      if (!res.ok) {
+        const data = await res.json().catch(() => ({}));
+        throw new Error(data?.error || "Erreur ajout");
+      }
+      toast.success("Logo ajouté");
       setNewSrc("");
       setNewAlt("");
       setNewUrl("");
-    },
-    onError: (e) => toast.error(e.message),
-  });
-  const updateMutation = trpc.carouselLogos.update.useMutation({
-    onSuccess: () => {
+      refetch();
+    } catch (e) {
+      toast.error(e instanceof Error ? e.message : "Erreur");
+    } finally {
+      setAddPending(false);
+    }
+  }
+
+  const [updatePendingId, setUpdatePendingId] = useState<string | null>(null);
+  async function updateLogoRest(id: string) {
+    setUpdatePendingId(id);
+    try {
+      const res = await fetch("/api/admin/carousel-logos", {
+        method: "PATCH",
+        credentials: "include",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ id, url: editUrl.trim() }),
+      });
+      if (!res.ok) {
+        const data = await res.json().catch(() => ({}));
+        throw new Error(data?.error || "Erreur mise à jour");
+      }
       toast.success("Logo mis à jour");
-      refetch();
       setEditingId(null);
-    },
-    onError: (e) => toast.error(e.message),
-  });
-  const removeMutation = trpc.carouselLogos.remove.useMutation({
-    onSuccess: () => {
-      toast.success("Logo supprimé");
+      setEditUrl("");
       refetch();
-    },
-    onError: (e) => toast.error(e.message),
-  });
-  const reorderMutation = trpc.carouselLogos.reorder.useMutation({
-    onSuccess: () => refetch(),
-    onError: (e) => toast.error(e.message),
-  });
+    } catch (e) {
+      toast.error(e instanceof Error ? e.message : "Erreur");
+    } finally {
+      setUpdatePendingId(null);
+    }
+  }
+
+  const [reorderPending, setReorderPending] = useState(false);
+  async function reorderLogosRest(newOrder: typeof logos) {
+    if (!newOrder || newOrder.length === 0) return;
+    const order = newOrder.map((l, i) => ({ id: l.id, displayOrder: i }));
+    setReorderPending(true);
+    try {
+      const res = await fetch("/api/admin/carousel-logos/reorder", {
+        method: "POST",
+        credentials: "include",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(order),
+      });
+      if (!res.ok) {
+        const data = await res.json().catch(() => ({}));
+        throw new Error(data?.error || "Erreur réordonnancement");
+      }
+      refetch();
+    } catch (e) {
+      toast.error(e instanceof Error ? e.message : "Erreur");
+    } finally {
+      setReorderPending(false);
+    }
+  }
 
   const [newSrc, setNewSrc] = useState("");
   const [newAlt, setNewAlt] = useState("");
@@ -67,24 +139,15 @@ export default function AdminCarouselLogos() {
   const [editUrl, setEditUrl] = useState("");
 
   const handleAdd = () => {
-    if (!newSrc.trim() || !newAlt.trim()) {
-      toast.error("Chemin image et texte alternatif requis");
-      return;
-    }
-    addMutation.mutate({
-      src: newSrc.trim(),
-      alt: newAlt.trim(),
-      url: newUrl.trim() || undefined,
-    });
+    addLogoRest();
   };
 
   const handleUpdateUrl = (id: string) => {
-    updateMutation.mutate({ id, url: editUrl.trim() });
+    updateLogoRest(id);
   };
 
   const handleRemove = (id: string, alt: string) => {
-    if (!confirm(`Supprimer le logo « ${alt} » ?`)) return;
-    removeMutation.mutate({ id });
+    deleteLogo(id, alt);
   };
 
   const moveLogo = (index: number, direction: "up" | "down") => {
@@ -93,9 +156,7 @@ export default function AdminCarouselLogos() {
     const target = direction === "up" ? index - 1 : index + 1;
     if (target < 0 || target >= newOrder.length) return;
     [newOrder[index], newOrder[target]] = [newOrder[target], newOrder[index]];
-    reorderMutation.mutate(
-      newOrder.map((l, i) => ({ id: l.id, displayOrder: i }))
-    );
+    reorderLogosRest(newOrder);
   };
 
   return (
@@ -154,10 +215,10 @@ export default function AdminCarouselLogos() {
               </div>
               <Button
                 onClick={handleAdd}
-                disabled={addMutation.isPending || !newSrc.trim() || !newAlt.trim()}
+                disabled={addPending || !newSrc.trim() || !newAlt.trim()}
                 className="bg-violet-600 hover:bg-violet-700 text-white"
               >
-                {addMutation.isPending ? (
+                {addPending ? (
                   <Loader2 className="w-4 h-4 animate-spin mr-2" />
                 ) : (
                   <Plus className="w-4 h-4 mr-2" />
@@ -211,7 +272,7 @@ export default function AdminCarouselLogos() {
                           size="icon"
                           className="text-gray-400 hover:text-white"
                           onClick={() => moveLogo(index, "up")}
-                          disabled={index === 0 || reorderMutation.isPending}
+                          disabled={index === 0 || reorderPending}
                         >
                           <ChevronUp className="w-4 h-4" />
                         </Button>
@@ -221,7 +282,7 @@ export default function AdminCarouselLogos() {
                           size="icon"
                           className="text-gray-400 hover:text-white"
                           onClick={() => moveLogo(index, "down")}
-                          disabled={index === logos.length - 1 || reorderMutation.isPending}
+                          disabled={index === logos.length - 1 || reorderPending}
                         >
                           <ChevronDown className="w-4 h-4" />
                         </Button>
@@ -250,7 +311,7 @@ export default function AdminCarouselLogos() {
                             <Button
                               size="sm"
                               onClick={() => handleUpdateUrl(logo.id)}
-                              disabled={updateMutation.isPending}
+                              disabled={updatePendingId !== null}
                             >
                               Enregistrer
                             </Button>
@@ -304,9 +365,13 @@ export default function AdminCarouselLogos() {
                           e.stopPropagation();
                           handleRemove(logo.id, logo.alt);
                         }}
-                        disabled={removeMutation.isPending}
+                        disabled={removePendingId !== null}
                       >
-                        <Trash2 className="w-4 h-4" />
+                        {removePendingId === logo.id ? (
+                          <Loader2 className="w-4 h-4 animate-spin" />
+                        ) : (
+                          <Trash2 className="w-4 h-4" />
+                        )}
                       </Button>
                     </li>
                   ))}

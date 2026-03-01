@@ -21,7 +21,10 @@ import session from "express-session";
 import connectPgSimple from "connect-pg-simple";
 import passport from "passport";
 import { configureGoogleAuth, requireAdminAuth } from "./googleAuth";
-import { getDb, getAllAgencyLeads } from "../db";
+import { getDb, getAllAgencyLeads, getLeoAnalytics } from "../db";
+import { addLogo, updateLogo, removeLogo, reorderLogos } from "../carouselLogosApi";
+import { analytics } from "../../drizzle/schema";
+import { eq } from "drizzle-orm";
 import postgres from "postgres";
 import { sql } from "drizzle-orm";
 import multer from "multer";
@@ -341,6 +344,154 @@ async function startServer() {
     } catch (e) {
       console.error("[Admin] agency-leads error", e);
       res.status(500).json({ error: "Failed to fetch leads" });
+    }
+  });
+
+  // Admin: carousel logos mutations (REST, same auth — so delete/add/update/reorder work on Railway)
+  app.post("/api/admin/carousel-logos", requireAdminAuth, async (req, res) => {
+    try {
+      const { src, alt, url } = req.body || {};
+      if (!src?.trim() || !alt?.trim()) return res.status(400).json({ error: "src and alt required" });
+      const logo = await addLogo({ src: src.trim(), alt: alt.trim(), url: url?.trim() || undefined });
+      res.json(logo);
+    } catch (e) {
+      console.error("[Admin] carousel-logos add error", e);
+      res.status(500).json({ error: e instanceof Error ? e.message : "Failed to add logo" });
+    }
+  });
+
+  app.patch("/api/admin/carousel-logos", requireAdminAuth, async (req, res) => {
+    try {
+      const { id, src, alt, url, displayOrder } = req.body || {};
+      if (!id) return res.status(400).json({ error: "id required" });
+      const logo = await updateLogo({ id, src, alt, url, displayOrder });
+      res.json(logo);
+    } catch (e) {
+      console.error("[Admin] carousel-logos update error", e);
+      res.status(500).json({ error: e instanceof Error ? e.message : "Failed to update logo" });
+    }
+  });
+
+  app.delete("/api/admin/carousel-logos/:id", requireAdminAuth, async (req, res) => {
+    try {
+      const id = req.params.id;
+      if (!id) return res.status(400).json({ error: "id required" });
+      await removeLogo(id);
+      res.json({ success: true });
+    } catch (e) {
+      console.error("[Admin] carousel-logos delete error", e);
+      res.status(500).json({ error: e instanceof Error ? e.message : "Failed to delete logo" });
+    }
+  });
+
+  app.post("/api/admin/carousel-logos/reorder", requireAdminAuth, async (req, res) => {
+    try {
+      const order = req.body;
+      if (!Array.isArray(order)) return res.status(400).json({ error: "order must be an array of { id, displayOrder }" });
+      const logos = await reorderLogos(order);
+      res.json(logos);
+    } catch (e) {
+      console.error("[Admin] carousel-logos reorder error", e);
+      res.status(500).json({ error: e instanceof Error ? e.message : "Failed to reorder" });
+    }
+  });
+
+  // Admin: analytics config (REST, same auth)
+  app.get("/api/admin/analytics-config", requireAdminAuth, async (req, res) => {
+    try {
+      const db = await getDb();
+      if (!db) return res.json([]);
+      const configs = await db.select().from(analytics);
+      res.json(Array.isArray(configs) ? configs : []);
+    } catch (e) {
+      console.error("[Admin] analytics-config GET error", e);
+      res.status(500).json({ error: "Failed to fetch analytics config" });
+    }
+  });
+
+  app.put("/api/admin/analytics-config", requireAdminAuth, async (req, res) => {
+    try {
+      const { provider, isEnabled, trackingId } = req.body || {};
+      if (!provider || typeof isEnabled !== "boolean") {
+        return res.status(400).json({ error: "provider and isEnabled required" });
+      }
+      const db = await getDb();
+      if (!db) return res.status(503).json({ error: "Database not available" });
+      const existing = await db.select().from(analytics).where(eq(analytics.provider, provider)).limit(1);
+      if (existing.length > 0) {
+        await db.update(analytics).set({
+          isEnabled,
+          trackingId: trackingId ?? existing[0].trackingId,
+          updatedAt: new Date(),
+        }).where(eq(analytics.provider, provider));
+      } else {
+        await db.insert(analytics).values({
+          provider,
+          isEnabled,
+          trackingId: trackingId || null,
+        });
+      }
+      res.json({ success: true });
+    } catch (e) {
+      console.error("[Admin] analytics-config PUT error", e);
+      res.status(500).json({ error: "Failed to update analytics config" });
+    }
+  });
+
+  // Admin: LEO analytics (REST, same auth — computed same as leoAnalytics router)
+  app.get("/api/admin/leo-analytics", requireAdminAuth, async (req, res) => {
+    try {
+      const sessions = await getLeoAnalytics();
+      const totalSessions = sessions.length;
+      const completedSessions = sessions.filter((s: { emailCaptured: number }) => s.emailCaptured === 1).length;
+      const completionRate = totalSessions > 0 ? (completedSessions / totalSessions) * 100 : 0;
+      const totalMessages = sessions.reduce((sum: number, s: { messageCount?: number }) => sum + (s.messageCount || 0), 0);
+      const avgMessages = totalSessions > 0 ? totalMessages / totalSessions : 0;
+      const sessionsWithDuration = sessions.filter((s: { conversationDuration?: number }) => s.conversationDuration);
+      const totalDuration = sessionsWithDuration.reduce((sum: number, s: { conversationDuration?: number }) => sum + (s.conversationDuration || 0), 0);
+      const avgDuration = sessionsWithDuration.length > 0 ? totalDuration / sessionsWithDuration.length : 0;
+      const byPage: Record<string, { total: number; completed: number; completionRate: number; avgMessages: number; avgDuration: number }> = {};
+      sessions.forEach((session: { pageContext: string; emailCaptured: number }) => {
+        if (!byPage[session.pageContext]) {
+          byPage[session.pageContext] = { total: 0, completed: 0, completionRate: 0, avgMessages: 0, avgDuration: 0 };
+        }
+        byPage[session.pageContext].total++;
+        if (session.emailCaptured === 1) byPage[session.pageContext].completed++;
+      });
+      Object.keys(byPage).forEach(page => {
+        const pageData = byPage[page];
+        pageData.completionRate = pageData.total > 0 ? (pageData.completed / pageData.total) * 100 : 0;
+        const pageSessions = sessions.filter((s: { pageContext: string }) => s.pageContext === page);
+        pageData.avgMessages = pageSessions.length > 0 ? pageSessions.reduce((sum: number, s: { messageCount?: number }) => sum + (s.messageCount || 0), 0) / pageSessions.length : 0;
+        const withDur = pageSessions.filter((s: { conversationDuration?: number }) => s.conversationDuration);
+        pageData.avgDuration = withDur.length > 0 ? withDur.reduce((sum: number, s: { conversationDuration?: number }) => sum + (s.conversationDuration || 0), 0) / withDur.length : 0;
+      });
+      const thirtyDaysAgo = new Date();
+      thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30);
+      const recentSessionsForSeries = sessions.filter((s: { startedAt: Date }) => new Date(s.startedAt) >= thirtyDaysAgo);
+      const dailyData: Record<string, { date: string; sessions: number; conversions: number }> = {};
+      recentSessionsForSeries.forEach((session: { startedAt: Date; emailCaptured: number }) => {
+        const date = new Date(session.startedAt).toISOString().split("T")[0];
+        if (!dailyData[date]) dailyData[date] = { date, sessions: 0, conversions: 0 };
+        dailyData[date].sessions++;
+        if (session.emailCaptured === 1) dailyData[date].conversions++;
+      });
+      const timeSeriesData = Object.values(dailyData).sort((a, b) => a.date.localeCompare(b.date));
+      res.json({
+        overview: { totalSessions, completedSessions, completionRate, avgMessages, avgDuration },
+        byPage,
+        funnel: {
+          started: totalSessions,
+          engaged: sessions.filter((s: { messageCount?: number }) => (s.messageCount || 0) >= 3).length,
+          qualified: sessions.filter((s: { messageCount?: number }) => (s.messageCount || 0) >= 5).length,
+          converted: completedSessions,
+        },
+        timeSeries: timeSeriesData,
+        recentSessions: sessions.slice(0, 50),
+      });
+    } catch (e) {
+      console.error("[Admin] leo-analytics error", e);
+      res.status(500).json({ error: "Failed to fetch LEO analytics" });
     }
   });
 
