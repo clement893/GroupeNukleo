@@ -43,7 +43,7 @@ const NAV_GROUPS = [
       { label: "Visibilité des pages", href: "/admin/page-visibility", icon: Globe },
       { label: "Loaders", href: "/admin/loader-migration", icon: Loader2 },
       { label: "Sons", href: "/admin/sounds", icon: Volume2 },
-      { label: "Images projets", href: "/admin/projects-images", icon: ImageIcon },
+      { label: "Projets", href: "/admin/projects-images", icon: ImageIcon },
       { label: "Logos carousel", href: "/admin/carousel-logos", icon: LayoutGrid },
     ],
   },

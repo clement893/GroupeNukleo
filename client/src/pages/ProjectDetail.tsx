@@ -42,6 +42,18 @@ export default function ProjectDetail() {
     staleTime: 5 * 60 * 1000,
   });
 
+  const { data: apiProjects } = trpc.projects.list.useQuery(undefined, {
+    retry: 1,
+    staleTime: 2 * 60 * 1000,
+  });
+
+  // Projet : priorité à l’API (éditions admin), sinon projectsData
+  const projectData = slug
+    ? (apiProjects?.length
+        ? apiProjects.find((p) => p.slug === slug)
+        : null) ?? PROJECTS_DATA.find((p) => p.slug === slug) ?? null
+    : null;
+
   const [imageNames, setImageNames] = useState<string[]>([]);
 
   useEffect(() => {
@@ -79,10 +91,7 @@ export default function ProjectDetail() {
     return () => cancelAnimationFrame(raf);
   }, [slug]);
 
-  // Chercher d'abord dans projectsData par slug
-  const projectData = slug ? PROJECTS_DATA.find((p) => p.slug === slug) : null;
-
-  // Si trouvé dans projectsData, utiliser directement ses données
+  // Si trouvé (API ou static), afficher la page projet
   if (projectData) {
     const description = language === 'fr' ? projectData.description.fr : projectData.description.en;
     const heroImage = projectData.images[0];

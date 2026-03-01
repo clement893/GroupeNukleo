@@ -83,7 +83,7 @@ const ADMIN_CATEGORIES = [
       { title: "Visibilité des Pages", description: "Contrôler l'accès aux pages du site", icon: <Globe className="h-5 w-5" />, href: "/admin/page-visibility" },
       { title: "Gestion des Loaders", description: "Animations de chargement et rotation", icon: <Loader2 className="h-5 w-5" />, href: "/admin/loader-migration" },
       { title: "Gestion des Sons", description: "Sons interactifs de l'interface", icon: <Volume2 className="h-5 w-5" />, href: "/admin/sounds" },
-      { title: "Images de Projets", description: "Uploader et gérer les images projets", icon: <ImageIcon className="h-5 w-5" />, href: "/admin/projects-images" },
+      { title: "Projets", description: "Gérer les projets, images, descriptions et liens", icon: <ImageIcon className="h-5 w-5" />, href: "/admin/projects-images" },
       { title: "Logos carousel", description: "Gérer les logos du carrousel d'accueil", icon: <LayoutGrid className="h-5 w-5" />, href: "/admin/carousel-logos" },
     ],
   },

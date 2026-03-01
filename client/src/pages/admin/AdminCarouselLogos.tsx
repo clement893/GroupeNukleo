@@ -1,10 +1,18 @@
-import { useState } from "react";
+import { useState, useCallback, useEffect } from "react";
 import { trpc } from "@/lib/trpc";
 import { AdminLayout } from "@/components/AdminLayout";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
 import {
   Loader2,
   Plus,
@@ -13,8 +21,12 @@ import {
   ChevronDown,
   ExternalLink,
   LayoutGrid,
+  Upload,
+  ImageIcon,
 } from "lucide-react";
 import { toast } from "sonner";
+
+const ACCEPT_IMAGES = "image/png,image/jpeg,image/jpg,image/webp,image/svg+xml";
 
 export default function AdminCarouselLogos() {
   // Use public procedure for listing so the page loads even when admin session
@@ -50,36 +62,6 @@ export default function AdminCarouselLogos() {
       toast.error(e instanceof Error ? e.message : "Erreur");
     } finally {
       setRemovePendingId(null);
-    }
-  }
-
-  const [addPending, setAddPending] = useState(false);
-  async function addLogoRest() {
-    if (!newSrc.trim() || !newAlt.trim()) {
-      toast.error("Chemin image et texte alternatif requis");
-      return;
-    }
-    setAddPending(true);
-    try {
-      const res = await fetch("/api/admin/carousel-logos", {
-        method: "POST",
-        credentials: "include",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ src: newSrc.trim(), alt: newAlt.trim(), url: newUrl.trim() || undefined }),
-      });
-      if (!res.ok) {
-        const data = await res.json().catch(() => ({}));
-        throw new Error(data?.error || "Erreur ajout");
-      }
-      toast.success("Logo ajouté");
-      setNewSrc("");
-      setNewAlt("");
-      setNewUrl("");
-      refetch();
-    } catch (e) {
-      toast.error(e instanceof Error ? e.message : "Erreur");
-    } finally {
-      setAddPending(false);
     }
   }
 
@@ -132,14 +114,117 @@ export default function AdminCarouselLogos() {
     }
   }
 
-  const [newSrc, setNewSrc] = useState("");
-  const [newAlt, setNewAlt] = useState("");
-  const [newUrl, setNewUrl] = useState("");
   const [editingId, setEditingId] = useState<string | null>(null);
   const [editUrl, setEditUrl] = useState("");
 
+  const [addModalOpen, setAddModalOpen] = useState(false);
+  const [addModalFile, setAddModalFile] = useState<File | null>(null);
+  const [addModalPreviewUrl, setAddModalPreviewUrl] = useState<string | null>(null);
+  useEffect(() => {
+    if (addModalFile) {
+      const url = URL.createObjectURL(addModalFile);
+      setAddModalPreviewUrl(url);
+      return () => URL.revokeObjectURL(url);
+    }
+    setAddModalPreviewUrl(null);
+    return () => {};
+  }, [addModalFile]);
+
+  const [addModalAlt, setAddModalAlt] = useState("");
+  const [addModalUrl, setAddModalUrl] = useState("");
+  const [addModalPath, setAddModalPath] = useState("");
+  const [addModalDragging, setAddModalDragging] = useState(false);
+  const [addModalPending, setAddModalPending] = useState(false);
+
+  const resetAddModal = useCallback(() => {
+    setAddModalFile(null);
+    setAddModalAlt("");
+    setAddModalUrl("");
+    setAddModalPath("");
+    setAddModalOpen(false);
+  }, []);
+
+  const onAddModalDrop = useCallback((e: React.DragEvent) => {
+    e.preventDefault();
+    setAddModalDragging(false);
+    const file = e.dataTransfer.files[0];
+    if (file && file.type.startsWith("image/")) {
+      setAddModalFile(file);
+      setAddModalPath("");
+    } else toast.error("Déposez une image (PNG, JPG, WebP, SVG)");
+  }, []);
+
+  const onAddModalFileInput = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      setAddModalFile(file);
+      setAddModalPath("");
+    }
+    e.target.value = "";
+  }, []);
+
+  async function submitAddLogo() {
+    if (!addModalAlt.trim()) {
+      toast.error("Texte alternatif (alt) requis");
+      return;
+    }
+    let src: string;
+    if (addModalFile) {
+      setAddModalPending(true);
+      try {
+        const form = new FormData();
+        form.append("file", addModalFile);
+        const upRes = await fetch("/api/admin/carousel-logos/upload", {
+          method: "POST",
+          credentials: "include",
+          body: form,
+        });
+        if (!upRes.ok) {
+          const data = await upRes.json().catch(() => ({}));
+          throw new Error(data?.error || "Erreur upload");
+        }
+        const { path: uploadedPath } = await upRes.json();
+        src = uploadedPath;
+      } catch (e) {
+        toast.error(e instanceof Error ? e.message : "Erreur upload");
+        setAddModalPending(false);
+        return;
+      }
+      setAddModalPending(false);
+    } else if (addModalPath.trim()) {
+      src = addModalPath.trim().startsWith("/") ? addModalPath.trim() : `/${addModalPath.trim()}`;
+    } else {
+      toast.error("Déposez une image ou indiquez un chemin");
+      return;
+    }
+    setAddModalPending(true);
+    try {
+      const res = await fetch("/api/admin/carousel-logos", {
+        method: "POST",
+        credentials: "include",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          src,
+          alt: addModalAlt.trim(),
+          url: addModalUrl.trim() || undefined,
+        }),
+      });
+      if (!res.ok) {
+        const data = await res.json().catch(() => ({}));
+        throw new Error(data?.error || "Erreur ajout");
+      }
+      toast.success("Logo ajouté");
+      resetAddModal();
+      refetch();
+    } catch (e) {
+      toast.error(e instanceof Error ? e.message : "Erreur");
+    } finally {
+      setAddModalPending(false);
+    }
+  }
+
   const handleAdd = () => {
-    addLogoRest();
+    setAddModalOpen(true);
   };
 
   const handleUpdateUrl = (id: string) => {
@@ -163,43 +248,93 @@ export default function AdminCarouselLogos() {
     <AdminLayout>
       <div className="p-6 lg:p-8 max-w-5xl mx-auto space-y-8">
         <div>
-          <h1 className="text-4xl font-bold text-white mb-2 flex items-center gap-3">
+            <h1 className="text-4xl font-bold text-white mb-2 flex items-center gap-3">
               <LayoutGrid className="w-8 h-8 text-purple-400" />
               Logos du carrousel
             </h1>
             <p className="text-gray-300">
               Gérer les logos affichés dans le carrousel de la page d&apos;accueil. Ajoutez, supprimez et associez un lien vers le site du client.
             </p>
+            {!isLoading && !isError && (
+              <p className="text-sm text-violet-300 mt-2 font-medium">
+                {logos?.length ?? 0} logo{logos?.length !== 1 ? "s" : ""} au total
+              </p>
+            )}
           </div>
 
-          {/* Add new logo */}
-          <Card className="bg-white/10 backdrop-blur-sm border-white/20">
-            <CardHeader>
-              <CardTitle className="text-white flex items-center gap-2">
-                <Plus className="w-5 h-5" />
-                Ajouter un logo
-              </CardTitle>
-              <CardDescription className="text-gray-400">
-                Chemin de l&apos;image (ex. /demo/logos/AMQ.png), texte alternatif et lien optionnel vers le site
-              </CardDescription>
-            </CardHeader>
-            <CardContent className="space-y-4">
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          {/* Add logo: button opens modal with drag-and-drop */}
+          <div className="flex flex-wrap items-center gap-4">
+            <Button
+              onClick={() => setAddModalOpen(true)}
+              className="bg-violet-600 hover:bg-violet-700 text-white"
+            >
+              <Plus className="w-4 h-4 mr-2" />
+              Ajouter un logo
+            </Button>
+          </div>
+
+          <Dialog open={addModalOpen} onOpenChange={(open) => !open && resetAddModal()}>
+            <DialogContent className="sm:max-w-md bg-[#1a1a2e] border-white/20 text-white">
+              <DialogHeader>
+                <DialogTitle className="text-white flex items-center gap-2">
+                  <ImageIcon className="w-5 h-5 text-violet-400" />
+                  Ajouter un logo
+                </DialogTitle>
+                <DialogDescription className="text-gray-400">
+                  Glissez-déposez une image ou indiquez un chemin. Renseignez le texte alternatif (obligatoire).
+                </DialogDescription>
+              </DialogHeader>
+              <div className="space-y-4 py-2">
+                <div
+                  onDragOver={(e) => { e.preventDefault(); setAddModalDragging(true); }}
+                  onDragLeave={() => setAddModalDragging(false)}
+                  onDrop={onAddModalDrop}
+                  className={`border-2 border-dashed rounded-xl p-8 text-center transition-colors ${
+                    addModalDragging ? "border-violet-500 bg-violet-500/10" : "border-white/30 bg-white/5"
+                  }`}
+                >
+                  <input
+                    type="file"
+                    accept={ACCEPT_IMAGES}
+                    onChange={onAddModalFileInput}
+                    className="hidden"
+                    id="carousel-logo-file"
+                  />
+                  <label htmlFor="carousel-logo-file" className="cursor-pointer block">
+                    {addModalFile ? (
+                      <div className="flex flex-col items-center gap-2">
+                        <img
+                          src={addModalPreviewUrl ?? ""}
+                          alt="Aperçu"
+                          className="max-h-20 max-w-32 object-contain mx-auto rounded"
+                        />
+                        <span className="text-sm text-gray-400">{addModalFile.name}</span>
+                        <span className="text-xs text-violet-400">Cliquez ou déposez pour remplacer</span>
+                      </div>
+                    ) : (
+                      <div className="flex flex-col items-center gap-2">
+                        <Upload className="w-10 h-10 text-violet-400 mx-auto" />
+                        <span className="text-gray-300">Glissez une image ici ou cliquez pour parcourir</span>
+                        <span className="text-xs text-gray-500">PNG, JPG, WebP, SVG — 2 Mo max</span>
+                      </div>
+                    )}
+                  </label>
+                </div>
                 <div>
-                  <Label className="text-gray-300">Chemin image</Label>
+                  <Label className="text-gray-300">Ou chemin de l&apos;image</Label>
                   <Input
                     placeholder="/demo/logos/Nom.png"
-                    value={newSrc}
-                    onChange={(e) => setNewSrc(e.target.value)}
+                    value={addModalPath}
+                    onChange={(e) => { setAddModalPath(e.target.value); if (e.target.value) setAddModalFile(null); }}
                     className="bg-white/5 border-white/20 text-white mt-1"
                   />
                 </div>
                 <div>
-                  <Label className="text-gray-300">Texte alternatif (alt)</Label>
+                  <Label className="text-gray-300">Texte alternatif (alt) *</Label>
                   <Input
                     placeholder="Nom du client"
-                    value={newAlt}
-                    onChange={(e) => setNewAlt(e.target.value)}
+                    value={addModalAlt}
+                    onChange={(e) => setAddModalAlt(e.target.value)}
                     className="bg-white/5 border-white/20 text-white mt-1"
                   />
                 </div>
@@ -207,26 +342,27 @@ export default function AdminCarouselLogos() {
                   <Label className="text-gray-300">Lien vers le site (optionnel)</Label>
                   <Input
                     placeholder="https://..."
-                    value={newUrl}
-                    onChange={(e) => setNewUrl(e.target.value)}
+                    value={addModalUrl}
+                    onChange={(e) => setAddModalUrl(e.target.value)}
                     className="bg-white/5 border-white/20 text-white mt-1"
                   />
                 </div>
               </div>
-              <Button
-                onClick={handleAdd}
-                disabled={addPending || !newSrc.trim() || !newAlt.trim()}
-                className="bg-violet-600 hover:bg-violet-700 text-white"
-              >
-                {addPending ? (
-                  <Loader2 className="w-4 h-4 animate-spin mr-2" />
-                ) : (
-                  <Plus className="w-4 h-4 mr-2" />
-                )}
-                Ajouter
-              </Button>
-            </CardContent>
-          </Card>
+              <DialogFooter className="gap-2 sm:gap-0">
+                <Button type="button" variant="ghost" onClick={() => resetAddModal()} className="text-gray-400">
+                  Annuler
+                </Button>
+                <Button
+                  onClick={submitAddLogo}
+                  disabled={addModalPending || !addModalAlt.trim() || (!addModalFile && !addModalPath.trim())}
+                  className="bg-violet-600 hover:bg-violet-700 text-white"
+                >
+                  {addModalPending ? <Loader2 className="w-4 h-4 animate-spin mr-2" /> : <Plus className="w-4 h-4 mr-2" />}
+                  Ajouter
+                </Button>
+              </DialogFooter>
+            </DialogContent>
+          </Dialog>
 
           {/* List */}
           <Card className="bg-white/10 backdrop-blur-sm border-white/20">

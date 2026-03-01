@@ -396,6 +396,31 @@ async function startServer() {
     }
   });
 
+  const CAROUSEL_LOGOS_DIR = path.resolve(process.cwd(), "client", "public", "demo", "logos");
+  const carouselLogoUpload = multer({
+    storage: multer.diskStorage({
+      destination: (_req, _file, cb) => {
+        if (!existsSync(CAROUSEL_LOGOS_DIR)) mkdirSync(CAROUSEL_LOGOS_DIR, { recursive: true });
+        cb(null, CAROUSEL_LOGOS_DIR);
+      },
+      filename: (_req, file, cb) => {
+        const ext = path.extname(file.originalname) || ".png";
+        const base = path.basename(file.originalname, path.extname(file.originalname)).replace(/[^a-zA-Z0-9_-]/g, "_");
+        cb(null, `${base}-${Date.now()}${ext}`);
+      },
+    }),
+    limits: { fileSize: 2 * 1024 * 1024 },
+    fileFilter: (_req, file, cb) => {
+      const ok = /^image\/(png|jpeg|jpg|gif|webp|svg\+xml)$/i.test(file.mimetype);
+      cb(ok ? null : new Error("Format non supporté. Utilisez PNG, JPG, WebP ou SVG."), ok);
+    },
+  });
+  app.post("/api/admin/carousel-logos/upload", requireAdminAuth, carouselLogoUpload.single("file"), (req, res) => {
+    if (!req.file) return res.status(400).json({ error: "Aucun fichier" });
+    const publicPath = `/demo/logos/${req.file.filename}`;
+    res.json({ path: publicPath });
+  });
+
   // Admin: analytics config (REST, same auth)
   app.get("/api/admin/analytics-config", requireAdminAuth, async (req, res) => {
     try {
@@ -689,14 +714,18 @@ async function startServer() {
   // Error handler for multer (catches errors from upload middleware)
   app.use((err: any, req: express.Request, res: express.Response, next: express.NextFunction) => {
     if (err instanceof multer.MulterError) {
-      console.error("[ProjectsImages] Multer error:", err);
+      console.error("[Multer] error:", err.code, req.path);
       if (err.code === 'LIMIT_FILE_SIZE') {
-        return res.status(400).json({ error: 'File too large. Maximum size is 10MB' });
+        const msg = req.path === '/api/admin/carousel-logos/upload' ? 'Fichier trop volumineux (2 Mo max)' : 'File too large. Maximum size is 10MB';
+        return res.status(400).json({ error: msg });
       }
       return res.status(400).json({ error: `Upload error: ${err.message}` });
     }
     if (err && req.path === '/api/admin/projects-images/upload') {
       console.error("[ProjectsImages] Upload middleware error:", err);
+      return res.status(400).json({ error: err.message || 'Upload failed' });
+    }
+    if (err && req.path === '/api/admin/carousel-logos/upload') {
       return res.status(400).json({ error: err.message || 'Upload failed' });
     }
     next(err);
