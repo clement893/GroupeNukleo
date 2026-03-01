@@ -28,11 +28,12 @@ const FALLBACK_PROJECTS = [
 type HomeProjectItem = { num: string; name: string; category: string; tagline: string; result: string; img: string; color: string };
 const CAROUSEL_COLORS = ['#2563eb', PURPLE, '#059669', '#dc2626', '#7c2d12'];
 
-function mapApiProjectsToHome(apiProjects: Array<{ title: string; category: string; description: { fr: string; en: string }; images: string[]; slug?: string }>, max: number, startIndex: number): HomeProjectItem[] {
+function mapApiProjectsToHome(apiProjects: Array<{ title: string; category: string; description: { fr: string; en: string }; images: string[]; slug?: string; homeCarouselImage?: string }>, max: number, startIndex: number): HomeProjectItem[] {
   if (!apiProjects?.length) return [];
   return apiProjects.slice(0, max).map((p, i) => {
     const tagline = (p.description?.fr || p.description?.en || '').slice(0, 70);
-    const img = p.images?.[0] ? `/projects/${p.images[0]}` : WORK1;
+    const imgFilename = (p as { homeCarouselImage?: string }).homeCarouselImage || p.images?.[0];
+    const img = imgFilename ? `/projects/${imgFilename}` : WORK1;
     const num = String(startIndex + i + 1).padStart(2, '0');
     return {
       num,

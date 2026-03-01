@@ -5,6 +5,7 @@ import {
   initProjects,
   updateProject,
   setTriptychSlugs,
+  setCarouselSlugs,
   projectSchema,
 } from "../projectsApi";
 
@@ -29,4 +30,13 @@ export const projectsRouter = router({
       })
     )
     .mutation(({ input }) => setTriptychSlugs(input)),
+
+  setCarouselSlugs: adminProcedure
+    .input(
+      z.object({
+        carouselSlugs: z.array(z.string()).max(6),
+        imageBySlug: z.record(z.string(), z.string()).optional(),
+      })
+    )
+    .mutation(({ input }) => setCarouselSlugs({ carouselSlugs: input.carouselSlugs, imageBySlug: input.imageBySlug ?? {} })),
 });

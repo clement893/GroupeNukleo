@@ -34,6 +34,8 @@ export const projectSchema = z.object({
   featuredOnProjectsTriptych: z.boolean().optional(),
   /** Afficher dans le carrousel "Latest project" en haut de la page d'accueil */
   featuredOnHomeCarousel: z.boolean().optional(),
+  /** Image à afficher dans le carrousel accueil (nom de fichier); si absent, utilise images[0] */
+  homeCarouselImage: z.string().optional(),
 });
 
 export type ProjectRecord = z.infer<typeof projectSchema>;
@@ -105,6 +107,31 @@ export async function setTriptychSlugs(input: {
     .filter(Boolean) as ProjectRecord[];
   const rest = updated.filter((p) => !homeSlugs.includes(p.slug) && !projectsSlugs.includes(p.slug));
   const reordered = [...homeOrder, ...projectsOrder, ...rest];
+
+  await writeProjects(reordered);
+  return reordered;
+}
+
+const MAX_CAROUSEL_SLIDES = 6;
+
+/** Set which projects (and which image per project) appear in the home carousel. */
+export async function setCarouselSlugs(input: {
+  carouselSlugs: string[];
+  imageBySlug: Record<string, string>;
+}): Promise<ProjectRecord[]> {
+  const projects = await readProjects();
+  const slugs = input.carouselSlugs.slice(0, MAX_CAROUSEL_SLIDES);
+  const imageBySlug = input.imageBySlug || {};
+
+  const updated = projects.map((p) => ({
+    ...p,
+    featuredOnHomeCarousel: slugs.includes(p.slug),
+    homeCarouselImage: slugs.includes(p.slug) && imageBySlug[p.slug] ? imageBySlug[p.slug] : undefined,
+  }));
+
+  const carouselOrder = slugs.map((s) => updated.find((p) => p.slug === s)).filter(Boolean) as ProjectRecord[];
+  const rest = updated.filter((p) => !slugs.includes(p.slug));
+  const reordered = [...carouselOrder, ...rest];
 
   await writeProjects(reordered);
   return reordered;

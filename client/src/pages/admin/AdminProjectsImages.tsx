@@ -46,6 +46,7 @@ function projectToRecord(p: ProjectData) {
     featuredOnHomeTriptych: (p as any).featuredOnHomeTriptych ?? false,
     featuredOnProjectsTriptych: (p as any).featuredOnProjectsTriptych ?? false,
     featuredOnHomeCarousel: (p as any).featuredOnHomeCarousel ?? false,
+    homeCarouselImage: (p as any).homeCarouselImage ?? undefined,
   };
 }
 
@@ -63,6 +64,13 @@ export default function AdminProjectsImages() {
   const setTriptychMutation = trpc.projects.setTriptychSlugs.useMutation({
     onSuccess: () => {
       toast.success('Triptyques enregistrés');
+      refetchProjects();
+    },
+    onError: (e) => toast.error(e.message),
+  });
+  const setCarouselMutation = trpc.projects.setCarouselSlugs.useMutation({
+    onSuccess: () => {
+      toast.success('Carousel accueil enregistré');
       refetchProjects();
     },
     onError: (e) => toast.error(e.message),
@@ -88,6 +96,7 @@ export default function AdminProjectsImages() {
     featuredOnHomeTriptych?: boolean;
     featuredOnProjectsTriptych?: boolean;
     featuredOnHomeCarousel?: boolean;
+    homeCarouselImage?: string;
   }>;
   const isFromApi = Boolean(apiProjects && apiProjects.length > 0);
 
@@ -105,6 +114,24 @@ export default function AdminProjectsImages() {
     setHomeTriptychSlugs(defaultHomeSlugs);
     setProjectsTriptychSlugs(defaultProjectsSlugs);
   }, [defaultHomeSlugs.join(','), defaultProjectsSlugs.join(',')]);
+
+  const defaultCarouselSlugs = useMemo(
+    () => projects.filter((p) => p.featuredOnHomeCarousel).slice(0, 6).map((p) => p.slug),
+    [projects]
+  );
+  const defaultCarouselImageBySlug = useMemo(() => {
+    const out: Record<string, string> = {};
+    projects.filter((p) => p.featuredOnHomeCarousel).slice(0, 6).forEach((p) => {
+      out[p.slug] = (p as { homeCarouselImage?: string }).homeCarouselImage || p.images?.[0] || '';
+    });
+    return out;
+  }, [projects]);
+  const [carouselSlugs, setCarouselSlugs] = useState<string[]>(() => defaultCarouselSlugs);
+  const [carouselImageBySlug, setCarouselImageBySlug] = useState<Record<string, string>>(() => defaultCarouselImageBySlug);
+  useEffect(() => {
+    setCarouselSlugs(defaultCarouselSlugs);
+    setCarouselImageBySlug(defaultCarouselImageBySlug);
+  }, [defaultCarouselSlugs.join(','), defaultCarouselSlugs.map((s) => defaultCarouselImageBySlug[s] ?? '').join(',')]);
 
   const handleFileSelect = async (event: React.ChangeEvent<HTMLInputElement>) => {
     const files = event.target.files;
@@ -263,6 +290,95 @@ export default function AdminProjectsImages() {
                     <Loader2 className="w-4 h-4 animate-spin" />
                   ) : null}
                   Enregistrer la sélection des triptyques
+                </Button>
+              </CardContent>
+            </Card>
+
+            {/* Carousel accueil (HOME) : jusqu'à 6 projets + image choisie pour chaque */}
+            <Card className="mb-8 bg-white dark:bg-[var(--admin-card)] border-[var(--admin-border)] shadow-sm">
+              <CardHeader>
+                <CardTitle className="text-[var(--admin-foreground)] flex items-center gap-2">
+                  <Layers className="w-5 h-5 text-cyan-600" />
+                  Carousel accueil (HOME)
+                </CardTitle>
+                <CardDescription className="text-[var(--admin-muted)]">
+                  Choisissez jusqu&apos;à 6 projets pour le carrousel « Our Latest Work » en haut de la page d&apos;accueil, et l&apos;image affichée pour chaque projet.
+                </CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                {!isFromApi && (
+                  <p className="text-sm text-amber-700 dark:text-amber-300 bg-amber-500/10 border border-amber-500/30 rounded-lg p-3">
+                    Initialisez d&apos;abord les projets avec le bouton « Initialiser depuis le site » ci‑dessous pour enregistrer le carousel.
+                  </p>
+                )}
+                {[0, 1, 2, 3, 4, 5].map((i) => {
+                  const slug = carouselSlugs[i] ?? '';
+                  const proj = projects.find((p) => p.slug === slug);
+                  const images = proj?.images ?? [];
+                  const selectedImage = slug ? (carouselImageBySlug[slug] || images[0] || '') : '';
+                  return (
+                    <div key={i} className="flex flex-wrap items-center gap-3 p-3 rounded-lg border border-gray-200 dark:border-gray-600 bg-gray-50/50 dark:bg-gray-800/30">
+                      <span className="text-sm font-medium text-[var(--admin-muted)] w-8">Slide {i + 1}</span>
+                      <select
+                        value={slug}
+                        onChange={(e) => {
+                          const v = e.target.value;
+                          setCarouselSlugs((prev) => {
+                            const next = [...prev];
+                            next[i] = v;
+                            return next.slice(0, 6);
+                          });
+                          if (v) {
+                            const p = projects.find((x) => x.slug === v);
+                            setCarouselImageBySlug((prev) => ({ ...prev, [v]: p?.images?.[0] ?? '' }));
+                          }
+                        }}
+                        className="h-9 rounded-md border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 px-3 py-1 text-sm min-w-[180px]"
+                      >
+                        <option value="">— Aucun —</option>
+                        {projects.map((p) => (
+                          <option key={p.slug} value={p.slug}>{p.title}</option>
+                        ))}
+                      </select>
+                      {slug && (
+                        <>
+                          <span className="text-xs text-[var(--admin-muted)]">Image :</span>
+                          <select
+                            value={selectedImage}
+                            onChange={(e) => {
+                              const v = e.target.value;
+                              setCarouselImageBySlug((prev) => ({ ...prev, [slug]: v }));
+                            }}
+                            className="h-9 rounded-md border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 px-3 py-1 text-sm min-w-[160px] font-mono text-xs"
+                          >
+                            {images.map((img) => (
+                              <option key={img} value={img}>{img}</option>
+                            ))}
+                          </select>
+                          {selectedImage && (
+                            <div className="w-12 h-12 rounded overflow-hidden border border-gray-300 dark:border-gray-600 flex-shrink-0">
+                              <img src={`/projects/${selectedImage}`} alt="" className="w-full h-full object-cover" onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }} />
+                            </div>
+                          )}
+                        </>
+                      )}
+                    </div>
+                  );
+                })}
+                <Button
+                  onClick={() =>
+                    setCarouselMutation.mutate({
+                      carouselSlugs: carouselSlugs.filter(Boolean),
+                      imageBySlug: carouselImageBySlug,
+                    })
+                  }
+                  disabled={!isFromApi || setCarouselMutation.isPending}
+                  className="gap-2"
+                >
+                  {setCarouselMutation.isPending ? (
+                    <Loader2 className="w-4 h-4 animate-spin" />
+                  ) : null}
+                  Enregistrer le carousel accueil
                 </Button>
               </CardContent>
             </Card>
