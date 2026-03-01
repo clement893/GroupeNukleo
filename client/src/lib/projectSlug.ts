@@ -24,6 +24,14 @@ export function getProjectKey(imageName: string): string {
   return withoutExt.replace(/_\d+$/, '');
 }
 
+/** Projets exclus de la page Projets (ne pas afficher). */
+const EXCLUDED_PROJECT_KEYS = ['Numerota', 'MentorAero'];
+
+export function isExcludedProject(imageName: string): boolean {
+  const key = getProjectKey(imageName);
+  return EXCLUDED_PROJECT_KEYS.some((e) => e.toLowerCase() === key.toLowerCase());
+}
+
 /**
  * Keep only one image per project (first occurrence for each project key).
  * Removes gallery duplicates so each project appears once.

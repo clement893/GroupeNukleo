@@ -2,7 +2,7 @@ import { trpc } from '@/lib/trpc';
 import AdminRoute from '@/components/AdminRoute';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Loader2, Database, CheckCircle2, XCircle, AlertTriangle, RefreshCw } from 'lucide-react';
-import { AdminHeader } from "@/components/AdminHeader";
+import { AdminLayout } from "@/components/AdminLayout";
 import { Button } from '@/components/ui/button';
 import { useState } from 'react';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
@@ -61,9 +61,8 @@ export default function AdminLoaderMigration() {
 
   return (
     <AdminRoute>
-      <AdminHeader />
-      <div className="min-h-screen bg-gradient-to-br from-[oklch(0.25_0.05_300)] to-[oklch(0.15_0.05_340)] p-8">
-        <div className="max-w-4xl mx-auto">
+      <AdminLayout>
+        <div className="p-6 lg:p-8 max-w-4xl mx-auto">
           <div className="mb-8">
             <h1 className="text-4xl font-bold text-white mb-2 flex items-center gap-3">
               <Database className="w-8 h-8 text-cyan-400" />
@@ -276,7 +275,7 @@ export default function AdminLoaderMigration() {
             </CardContent>
           </Card>
         </div>
-      </div>
+      </AdminLayout>
     </AdminRoute>
   );
 }

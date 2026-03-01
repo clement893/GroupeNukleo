@@ -2,7 +2,8 @@ import { trpc } from '@/lib/trpc';
 import AdminRoute from '@/components/AdminRoute';
 import { Card } from '@/components/ui/card';
 import { Loader2, Mail, User, Calendar, MessageSquare, Download } from 'lucide-react';
-import { AdminHeader } from "@/components/AdminHeader";
+import AdminRoute from '@/components/AdminRoute';
+import { AdminLayout } from "@/components/AdminLayout";
 import { Button } from '@/components/ui/button';
 import { useState } from 'react';
 
@@ -13,10 +14,11 @@ export default function AdminLEOContacts() {
   if (isLoading) {
     return (
       <AdminRoute>
-      <AdminHeader />
-        <div className="min-h-screen bg-gradient-to-br from-[oklch(0.25_0.05_300)] to-[oklch(0.15_0.05_340)] flex items-center justify-center">
-          <Loader2 className="w-8 h-8 text-cyan-400 animate-spin" />
-        </div>
+        <AdminLayout>
+          <div className="min-h-[50vh] flex items-center justify-center">
+            <Loader2 className="w-8 h-8 text-cyan-400 animate-spin" />
+          </div>
+        </AdminLayout>
       </AdminRoute>
     );
   }
@@ -49,9 +51,8 @@ export default function AdminLEOContacts() {
 
   return (
     <AdminRoute>
-      <AdminHeader />
-      <div className="min-h-screen bg-gradient-to-br from-[oklch(0.25_0.05_300)] to-[oklch(0.15_0.05_340)] p-8">
-        <div className="max-w-7xl mx-auto">
+      <AdminLayout>
+        <div className="p-6 lg:p-8 max-w-7xl mx-auto">
           {/* Header */}
           <div className="flex items-center justify-between mb-8">
             <div>
@@ -227,7 +228,7 @@ export default function AdminLEOContacts() {
             )}
           </Card>
         </div>
-      </div>
+      </AdminLayout>
     </AdminRoute>
   );
 }

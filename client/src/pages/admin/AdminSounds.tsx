@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { AdminHeader } from '@/components/AdminHeader';
+import { AdminLayout } from '@/components/AdminLayout';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Volume2, VolumeX, Play, Save, RotateCcw } from 'lucide-react';
@@ -420,27 +420,26 @@ export default function AdminSounds() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-background via-background to-primary/5">
-      <AdminHeader />
-      <div className="container mx-auto py-12">
+    <AdminLayout>
+      <div className="p-6 lg:p-8 container mx-auto max-w-5xl">
         {/* Header */}
         <div className="mb-12">
-          <h1 className="text-5xl font-bold mb-4 bg-gradient-to-r from-primary to-primary/60 bg-clip-text text-transparent">
+          <h1 className="text-4xl font-bold text-white mb-2">
             Gestion des Sons
           </h1>
-          <p className="text-lg text-muted-foreground">
+          <p className="text-gray-400">
             Personnalisez les sons interactifs de l'interface
           </p>
         </div>
 
         {/* Enable/Disable Toggle */}
-        <Card className="mb-8">
+        <Card className="mb-8 bg-white/10 backdrop-blur-sm border-white/20">
           <CardHeader>
-            <CardTitle className="flex items-center gap-2">
+            <CardTitle className="flex items-center gap-2 text-white">
               {soundsEnabled ? <Volume2 className="w-5 h-5" /> : <VolumeX className="w-5 h-5" />}
               Activer/Désactiver les sons
             </CardTitle>
-            <CardDescription>
+            <CardDescription className="text-gray-400">
               Activez ou désactivez tous les sons interactifs du site
             </CardDescription>
           </CardHeader>
@@ -490,7 +489,7 @@ export default function AdminSounds() {
           <Card className="mb-6">
             <CardHeader>
               <CardTitle>{currentLibrary.name}</CardTitle>
-              <CardDescription>{currentLibrary.description}</CardDescription>
+              <CardDescription className="text-gray-400">{currentLibrary.description}</CardDescription>
             </CardHeader>
           </Card>
 
@@ -502,21 +501,21 @@ export default function AdminSounds() {
                 <Card
                   key={index}
                   className={cn(
-                    "cursor-pointer transition-all",
+                    "cursor-pointer transition-all bg-white/5 border-white/10",
                     selectedPreset?.name === preset.name
-                      ? 'ring-2 ring-primary shadow-lg'
-                      : 'hover:shadow-md'
+                      ? 'ring-2 ring-white/50 shadow-lg'
+                      : 'hover:bg-white/10'
                   )}
                   onClick={() => handleSelectPreset(preset)}
                 >
                   <CardHeader>
-                    <CardTitle className="flex items-center justify-between">
+                    <CardTitle className="flex items-center justify-between text-white">
                       {preset.name}
                       {selectedPreset?.name === preset.name && (
-                        <div className="w-3 h-3 bg-primary rounded-full" />
+                        <div className="w-3 h-3 bg-purple-400 rounded-full" />
                       )}
                     </CardTitle>
-                    <CardDescription>{preset.description}</CardDescription>
+                    <CardDescription className="text-gray-400">{preset.description}</CardDescription>
                   </CardHeader>
                   <CardContent>
                     <div className="flex gap-2">
@@ -565,17 +564,17 @@ export default function AdminSounds() {
         </div>
 
         {/* Info */}
-        <Card className="mt-8">
+        <Card className="mt-8 bg-white/10 backdrop-blur-sm border-white/20">
           <CardHeader>
-            <CardTitle>Note</CardTitle>
+            <CardTitle className="text-white">Note</CardTitle>
           </CardHeader>
           <CardContent>
-            <p className="text-sm text-muted-foreground">
+            <p className="text-sm text-gray-400">
               Les sons sont générés en temps réel avec Web Audio API. Les changements nécessitent un rechargement de la page pour être appliqués à l'ensemble du site.
             </p>
           </CardContent>
         </Card>
       </div>
-    </div>
+    </AdminLayout>
   );
 }

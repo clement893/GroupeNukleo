@@ -2,7 +2,7 @@ import { trpc } from "@/lib/trpc";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Users, MessageSquare, FileText, TrendingUp, Activity, Database, BarChart3, Settings } from "lucide-react";
 import AdminRoute from "@/components/AdminRoute";
-import { AdminHeader } from "@/components/AdminHeader";
+import { AdminLayout } from "@/components/AdminLayout";
 
 export default function AdminDashboard() {
   const { data: stats, isLoading } = trpc.admin.getStats.useQuery();
@@ -10,11 +10,11 @@ export default function AdminDashboard() {
   if (isLoading) {
     return (
       <AdminRoute>
-        <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 p-8">
-          <div className="max-w-7xl mx-auto">
+        <AdminLayout>
+          <div className="p-6 lg:p-8 max-w-7xl mx-auto">
             <div className="text-white text-lg">Loading dashboard...</div>
           </div>
-        </div>
+        </AdminLayout>
       </AdminRoute>
     );
   }
@@ -66,9 +66,8 @@ export default function AdminDashboard() {
 
   return (
     <AdminRoute>
-      <AdminHeader />
-      <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 p-8">
-        <div className="max-w-7xl mx-auto space-y-8">
+      <AdminLayout>
+        <div className="p-6 lg:p-8 max-w-7xl mx-auto space-y-8">
           {/* Header */}
           <div className="flex items-center justify-between">
             <div>
@@ -189,7 +188,7 @@ export default function AdminDashboard() {
                   <div className="text-gray-400 text-sm">Manage page visibility settings</div>
                 </a>
                 <a
-                  href="/admin/loaders"
+                  href="/admin/loader-migration"
                   className="block p-3 rounded-lg bg-white/5 hover:bg-white/10 transition-colors"
                 >
                   <div className="text-white font-medium">Loaders</div>
@@ -241,7 +240,7 @@ export default function AdminDashboard() {
             </CardContent>
           </Card>
         </div>
-      </div>
+      </AdminLayout>
     </AdminRoute>
   );
 }

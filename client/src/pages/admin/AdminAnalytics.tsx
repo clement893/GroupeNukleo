@@ -2,7 +2,7 @@ import { trpc } from '@/lib/trpc';
 import AdminRoute from '@/components/AdminRoute';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Loader2, Save, BarChart3, Facebook, Linkedin, CheckCircle2, XCircle } from 'lucide-react';
-import { AdminHeader } from "@/components/AdminHeader";
+import { AdminLayout } from "@/components/AdminLayout";
 import { Button } from '@/components/ui/button';
 import { useState, useEffect } from 'react';
 import { Switch } from '@/components/ui/switch';
@@ -134,28 +134,28 @@ export default function AdminAnalytics() {
   if (isLoading) {
     return (
       <AdminRoute>
-        <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 p-8">
-          <div className="max-w-7xl mx-auto">
+        <AdminLayout>
+          <div className="p-6 lg:p-8 max-w-7xl mx-auto">
             <div className="flex items-center gap-2 text-white text-lg">
               <Loader2 className="w-5 h-5 animate-spin" />
               Chargement des configurations analytics...
             </div>
           </div>
-        </div>
+        </AdminLayout>
       </AdminRoute>
     );
   }
 
   return (
     <AdminRoute>
-      <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 p-8">
-        <div className="max-w-7xl mx-auto">
-          <AdminHeader 
-            title="Gestion des Analytics et Tracking"
-            description="Configurez les outils de suivi et analytics pour votre site"
-          />
+      <AdminLayout>
+        <div className="p-6 lg:p-8 max-w-7xl mx-auto">
+          <div className="mb-8">
+            <h1 className="text-4xl font-bold text-white mb-2">Gestion des Analytics et Tracking</h1>
+            <p className="text-gray-400">Configurez les outils de suivi et analytics pour votre site</p>
+          </div>
 
-          <div className="mt-8 space-y-6">
+          <div className="space-y-6">
             {ANALYTICS_PROVIDERS.map((provider) => {
               const Icon = provider.icon;
               const config = localConfigs[provider.id];
@@ -283,7 +283,7 @@ export default function AdminAnalytics() {
             </CardContent>
           </Card>
         </div>
-      </div>
+      </AdminLayout>
     </AdminRoute>
   );
 }

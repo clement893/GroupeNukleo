@@ -1,7 +1,7 @@
 import { trpc } from '@/lib/trpc';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Loader2, Eye, EyeOff, Globe, Save } from 'lucide-react';
-import { AdminHeader } from "@/components/AdminHeader";
+import { AdminLayout } from "@/components/AdminLayout";
 import { Button } from '@/components/ui/button';
 import { useState, useEffect } from 'react';
 import { Switch } from '@/components/ui/switch';
@@ -147,9 +147,8 @@ export default function AdminPageVisibility() {
   // Show error state if query failed
   if (error) {
     return (
-      <>
-        <AdminHeader />
-        <div className="min-h-screen bg-gradient-to-br from-[oklch(0.25_0.05_300)] to-[oklch(0.15_0.05_340)] flex items-center justify-center p-8">
+      <AdminLayout>
+        <div className="min-h-[50vh] flex items-center justify-center p-8">
           <Card className="bg-white/5 backdrop-blur-md border-white/10 max-w-md">
             <CardHeader>
               <CardTitle className="text-red-400">Erreur de chargement</CardTitle>
@@ -168,22 +167,20 @@ export default function AdminPageVisibility() {
             </CardContent>
           </Card>
         </div>
-      </>
+      </AdminLayout>
     );
   }
 
-  // Show loading state
   if (isLoading) {
     return (
-      <>
-        <AdminHeader />
-        <div className="min-h-screen bg-gradient-to-br from-[oklch(0.25_0.05_300)] to-[oklch(0.15_0.05_340)] flex items-center justify-center">
+      <AdminLayout>
+        <div className="min-h-[50vh] flex items-center justify-center">
           <div className="text-center">
             <Loader2 className="w-8 h-8 text-cyan-400 animate-spin mx-auto mb-4" />
             <p className="text-white/60">Chargement des pages...</p>
           </div>
         </div>
-      </>
+      </AdminLayout>
     );
   }
 
@@ -191,11 +188,9 @@ export default function AdminPageVisibility() {
   const hiddenCount = Object.values(localVisibility).filter((v) => !v).length;
 
   return (
-    <>
-      <AdminHeader />
-      <div className="min-h-screen bg-gradient-to-br from-[oklch(0.25_0.05_300)] to-[oklch(0.15_0.05_340)] p-8">
-        <div className="max-w-7xl mx-auto">
-          <div className="flex items-center justify-between mb-8">
+    <AdminLayout>
+      <div className="p-6 lg:p-8 max-w-7xl mx-auto">
+        <div className="flex items-center justify-between mb-8">
             <div>
               <h1 className="text-4xl font-bold text-white mb-2 flex items-center gap-3">
                 <Globe className="w-8 h-8 text-cyan-400" />
@@ -316,7 +311,6 @@ export default function AdminPageVisibility() {
             })}
           </div>
         </div>
-      </div>
-    </>
+      </AdminLayout>
   );
 }

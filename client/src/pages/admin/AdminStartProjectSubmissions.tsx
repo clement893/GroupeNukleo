@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { AdminHeader } from '@/components/AdminHeader';
+import { AdminLayout } from '@/components/AdminLayout';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { trpc } from '@/lib/trpc';
@@ -73,20 +73,19 @@ export default function AdminStartProjectSubmissions() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-background via-background to-primary/5">
-      <AdminHeader />
-      <div className="container mx-auto py-12">
+    <AdminLayout>
+      <div className="p-6 lg:p-8 container mx-auto max-w-6xl">
         {/* Header */}
         <div className="mb-8 flex items-center justify-between">
           <div>
-            <h1 className="text-5xl font-bold mb-4 bg-gradient-to-r from-primary to-primary/60 bg-clip-text text-transparent">
+            <h1 className="text-4xl font-bold text-white mb-2">
               Start Project Submissions
             </h1>
-            <p className="text-lg text-muted-foreground">
+            <p className="text-gray-400">
               Gérer les demandes de projets soumises via le formulaire Start Project
             </p>
           </div>
-          <Button onClick={exportToCSV} disabled={!submissions || submissions.length === 0} className="gap-2">
+          <Button onClick={exportToCSV} disabled={!submissions || submissions.length === 0} className="gap-2 bg-white/10 hover:bg-white/20 border border-white/20 text-white">
             <Download className="w-4 h-4" />
             Exporter CSV
           </Button>
@@ -95,16 +94,16 @@ export default function AdminStartProjectSubmissions() {
         {/* Stats */}
         {submissions && submissions.length > 0 && (
           <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
-            <Card>
+            <Card className="bg-white/10 backdrop-blur-sm border-white/20">
               <CardHeader className="pb-2">
-                <CardDescription>Total Submissions</CardDescription>
-                <CardTitle className="text-3xl">{submissions.length}</CardTitle>
+                <CardDescription className="text-gray-400">Total Submissions</CardDescription>
+                <CardTitle className="text-3xl text-white">{submissions.length}</CardTitle>
               </CardHeader>
             </Card>
-            <Card>
+            <Card className="bg-white/10 backdrop-blur-sm border-white/20">
               <CardHeader className="pb-2">
-                <CardDescription>This Month</CardDescription>
-                <CardTitle className="text-3xl">
+                <CardDescription className="text-gray-400">This Month</CardDescription>
+                <CardTitle className="text-3xl text-white">
                   {submissions.filter(s => {
                     const subDate = new Date(s.createdAt);
                     const now = new Date();
@@ -113,10 +112,10 @@ export default function AdminStartProjectSubmissions() {
                 </CardTitle>
               </CardHeader>
             </Card>
-            <Card>
+            <Card className="bg-white/10 backdrop-blur-sm border-white/20">
               <CardHeader className="pb-2">
-                <CardDescription>This Week</CardDescription>
-                <CardTitle className="text-3xl">
+                <CardDescription className="text-gray-400">This Week</CardDescription>
+                <CardTitle className="text-3xl text-white">
                   {submissions.filter(s => {
                     const subDate = new Date(s.createdAt);
                     const now = new Date();
@@ -126,10 +125,10 @@ export default function AdminStartProjectSubmissions() {
                 </CardTitle>
               </CardHeader>
             </Card>
-            <Card>
+            <Card className="bg-white/10 backdrop-blur-sm border-white/20">
               <CardHeader className="pb-2">
-                <CardDescription>Today</CardDescription>
-                <CardTitle className="text-3xl">
+                <CardDescription className="text-gray-400">Today</CardDescription>
+                <CardTitle className="text-3xl text-white">
                   {submissions.filter(s => {
                     const subDate = new Date(s.createdAt);
                     const today = new Date();
@@ -143,15 +142,15 @@ export default function AdminStartProjectSubmissions() {
 
         {/* Submissions List */}
         {isLoading ? (
-          <Card>
+          <Card className="bg-white/10 backdrop-blur-sm border-white/20">
             <CardContent className="py-12 text-center">
-              <p className="text-muted-foreground">Chargement...</p>
+              <p className="text-gray-400">Chargement...</p>
             </CardContent>
           </Card>
         ) : !submissions || submissions.length === 0 ? (
-          <Card>
+          <Card className="bg-white/10 backdrop-blur-sm border-white/20">
             <CardContent className="py-12 text-center">
-              <p className="text-muted-foreground">Aucune soumission pour le moment</p>
+              <p className="text-gray-400">Aucune soumission pour le moment</p>
             </CardContent>
           </Card>
         ) : (
@@ -159,19 +158,19 @@ export default function AdminStartProjectSubmissions() {
             {submissions && Array.isArray(submissions) ? submissions.map((submission) => (
               <Card
                 key={submission.id}
-                className={`cursor-pointer transition-all ${
-                  selectedSubmission === submission.id ? 'ring-2 ring-primary' : ''
+                className={`cursor-pointer transition-all bg-white/5 backdrop-blur-sm border-white/20 hover:bg-white/10 ${
+                  selectedSubmission === submission.id ? 'ring-2 ring-white/50 bg-white/10' : ''
                 }`}
                 onClick={() => setSelectedSubmission(selectedSubmission === submission.id ? null : submission.id)}
               >
                 <CardHeader>
                   <div className="flex items-start justify-between">
                     <div className="flex-1">
-                      <CardTitle className="flex items-center gap-2 mb-2">
-                        <User className="w-5 h-5 text-primary" />
+                      <CardTitle className="flex items-center gap-2 mb-2 text-white">
+                        <User className="w-5 h-5 text-purple-400" />
                         {submission.name}
                       </CardTitle>
-                      <CardDescription className="flex items-center gap-4 flex-wrap">
+                      <CardDescription className="flex items-center gap-4 flex-wrap text-gray-400">
                         <span className="flex items-center gap-1">
                           <Mail className="w-4 h-4" />
                           {submission.email}
@@ -187,10 +186,10 @@ export default function AdminStartProjectSubmissions() {
                       </CardDescription>
                     </div>
                     <div className="flex flex-col gap-2 items-end">
-                      <span className="px-3 py-1 bg-primary/20 text-primary text-xs font-semibold rounded-full">
+                      <span className="px-3 py-1 bg-purple-500/20 text-purple-300 text-xs font-semibold rounded-full">
                         {formatProjectType(submission.projectType)}
                       </span>
-                      <span className="px-3 py-1 bg-green-500/20 text-green-600 dark:text-green-400 text-xs font-semibold rounded-full flex items-center gap-1">
+                      <span className="px-3 py-1 bg-green-500/20 text-green-400 text-xs font-semibold rounded-full flex items-center gap-1">
                         <DollarSign className="w-3 h-3" />
                         {formatBudget(submission.budget)}
                       </span>
@@ -198,19 +197,20 @@ export default function AdminStartProjectSubmissions() {
                   </div>
                 </CardHeader>
                 {selectedSubmission === submission.id && (
-                  <CardContent className="pt-0 border-t">
+                  <CardContent className="pt-0 border-t border-white/10">
                     <div className="mt-4 space-y-4">
                       <div>
-                        <h4 className="text-sm font-semibold text-muted-foreground mb-2 flex items-center gap-2">
+                        <h4 className="text-sm font-semibold text-gray-400 mb-2 flex items-center gap-2">
                           <FileText className="w-4 h-4" />
                           Project Description
                         </h4>
-                        <p className="text-sm leading-relaxed whitespace-pre-wrap">{submission.description}</p>
+                        <p className="text-sm leading-relaxed whitespace-pre-wrap text-gray-300">{submission.description}</p>
                       </div>
                       <div className="flex gap-2">
                         <Button
                           variant="outline"
                           size="sm"
+                          className="border-white/20 text-white hover:bg-white/10"
                           onClick={(e) => {
                             e.stopPropagation();
                             window.location.href = `mailto:${submission.email}`;
@@ -228,6 +228,6 @@ export default function AdminStartProjectSubmissions() {
           </div>
         )}
       </div>
-    </div>
+    </AdminLayout>
   );
 }

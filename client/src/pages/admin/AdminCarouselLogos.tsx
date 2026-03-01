@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { trpc } from "@/lib/trpc";
-import { AdminHeader } from "@/components/AdminHeader";
+import { AdminLayout } from "@/components/AdminLayout";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -87,12 +87,10 @@ export default function AdminCarouselLogos() {
   };
 
   return (
-    <>
-      <AdminHeader />
-      <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 p-8">
-        <div className="max-w-5xl mx-auto space-y-8">
-          <div>
-            <h1 className="text-4xl font-bold text-white mb-2 flex items-center gap-3">
+    <AdminLayout>
+      <div className="p-6 lg:p-8 max-w-5xl mx-auto space-y-8">
+        <div>
+          <h1 className="text-4xl font-bold text-white mb-2 flex items-center gap-3">
               <LayoutGrid className="w-8 h-8 text-purple-400" />
               Logos du carrousel
             </h1>
@@ -286,7 +284,6 @@ export default function AdminCarouselLogos() {
             </CardContent>
           </Card>
         </div>
-      </div>
-    </>
+      </AdminLayout>
   );
 }

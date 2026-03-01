@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { AdminHeader } from '@/components/AdminHeader';
+import { AdminLayout } from '@/components/AdminLayout';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { trpc } from '@/lib/trpc';
@@ -50,20 +50,19 @@ export default function AdminContactMessages() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-background via-background to-primary/5">
-      <AdminHeader />
-      <div className="container mx-auto py-12">
+    <AdminLayout>
+      <div className="p-6 lg:p-8 container mx-auto max-w-6xl">
         {/* Header */}
         <div className="mb-8 flex items-center justify-between">
           <div>
-            <h1 className="text-5xl font-bold mb-4 bg-gradient-to-r from-primary to-primary/60 bg-clip-text text-transparent">
+            <h1 className="text-4xl font-bold text-white mb-2">
               Contact Messages
             </h1>
-            <p className="text-lg text-muted-foreground">
+            <p className="text-gray-400">
               Gérer les messages reçus via le formulaire de contact
             </p>
           </div>
-          <Button onClick={exportToCSV} disabled={!messages || messages.length === 0} className="gap-2">
+          <Button onClick={exportToCSV} disabled={!messages || messages.length === 0} className="gap-2 bg-white/10 hover:bg-white/20 border border-white/20 text-white">
             <Download className="w-4 h-4" />
             Exporter CSV
           </Button>
@@ -72,16 +71,16 @@ export default function AdminContactMessages() {
         {/* Stats */}
         {messages && messages.length > 0 && (
           <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
-            <Card>
+            <Card className="bg-white/10 backdrop-blur-sm border-white/20">
               <CardHeader className="pb-2">
-                <CardDescription>Total Messages</CardDescription>
-                <CardTitle className="text-3xl">{messages.length}</CardTitle>
+                <CardDescription className="text-gray-400">Total Messages</CardDescription>
+                <CardTitle className="text-3xl text-white">{messages.length}</CardTitle>
               </CardHeader>
             </Card>
-            <Card>
+            <Card className="bg-white/10 backdrop-blur-sm border-white/20">
               <CardHeader className="pb-2">
-                <CardDescription>This Month</CardDescription>
-                <CardTitle className="text-3xl">
+                <CardDescription className="text-gray-400">This Month</CardDescription>
+                <CardTitle className="text-3xl text-white">
                   {messages.filter(m => {
                     const msgDate = new Date(m.createdAt);
                     const now = new Date();
@@ -90,10 +89,10 @@ export default function AdminContactMessages() {
                 </CardTitle>
               </CardHeader>
             </Card>
-            <Card>
+            <Card className="bg-white/10 backdrop-blur-sm border-white/20">
               <CardHeader className="pb-2">
-                <CardDescription>This Week</CardDescription>
-                <CardTitle className="text-3xl">
+                <CardDescription className="text-gray-400">This Week</CardDescription>
+                <CardTitle className="text-3xl text-white">
                   {messages.filter(m => {
                     const msgDate = new Date(m.createdAt);
                     const now = new Date();
@@ -103,10 +102,10 @@ export default function AdminContactMessages() {
                 </CardTitle>
               </CardHeader>
             </Card>
-            <Card>
+            <Card className="bg-white/10 backdrop-blur-sm border-white/20">
               <CardHeader className="pb-2">
-                <CardDescription>Today</CardDescription>
-                <CardTitle className="text-3xl">
+                <CardDescription className="text-gray-400">Today</CardDescription>
+                <CardTitle className="text-3xl text-white">
                   {messages.filter(m => {
                     const msgDate = new Date(m.createdAt);
                     const today = new Date();
@@ -120,16 +119,16 @@ export default function AdminContactMessages() {
 
         {/* Messages List */}
         {isLoading ? (
-          <Card>
+          <Card className="bg-white/10 backdrop-blur-sm border-white/20">
             <CardContent className="py-12 text-center">
-              <p className="text-muted-foreground">Chargement...</p>
+              <p className="text-gray-400">Chargement...</p>
             </CardContent>
           </Card>
         ) : !messages || messages.length === 0 ? (
-          <Card>
+          <Card className="bg-white/10 backdrop-blur-sm border-white/20">
             <CardContent className="py-12 text-center">
-              <MessageSquare className="w-16 h-16 text-muted-foreground mx-auto mb-4 opacity-50" />
-              <p className="text-muted-foreground">Aucun message pour le moment</p>
+              <MessageSquare className="w-16 h-16 text-gray-500 mx-auto mb-4 opacity-50" />
+              <p className="text-gray-400">Aucun message pour le moment</p>
             </CardContent>
           </Card>
         ) : (
@@ -137,19 +136,19 @@ export default function AdminContactMessages() {
             {messages && Array.isArray(messages) ? messages.map((message) => (
               <Card
                 key={message.id}
-                className={`cursor-pointer transition-all ${
-                  selectedMessage === message.id ? 'ring-2 ring-primary' : ''
+                className={`cursor-pointer transition-all bg-white/5 backdrop-blur-sm border-white/20 hover:bg-white/10 ${
+                  selectedMessage === message.id ? 'ring-2 ring-white/50 bg-white/10' : ''
                 }`}
                 onClick={() => setSelectedMessage(selectedMessage === message.id ? null : message.id)}
               >
                 <CardHeader>
                   <div className="flex items-start justify-between">
                     <div className="flex-1">
-                      <CardTitle className="flex items-center gap-2 mb-2">
-                        <User className="w-5 h-5 text-primary" />
+                      <CardTitle className="flex items-center gap-2 mb-2 text-white">
+                        <User className="w-5 h-5 text-purple-400" />
                         {message.firstName} {message.lastName}
                       </CardTitle>
-                      <CardDescription className="flex items-center gap-4 flex-wrap">
+                      <CardDescription className="flex items-center gap-4 flex-wrap text-gray-400">
                         <span className="flex items-center gap-1">
                           <Mail className="w-4 h-4" />
                           {message.email}
@@ -167,19 +166,20 @@ export default function AdminContactMessages() {
                   </div>
                 </CardHeader>
                 {selectedMessage === message.id && (
-                  <CardContent className="pt-0 border-t">
+                  <CardContent className="pt-0 border-t border-white/10">
                     <div className="mt-4 space-y-4">
                       <div>
-                        <h4 className="text-sm font-semibold text-muted-foreground mb-2 flex items-center gap-2">
+                        <h4 className="text-sm font-semibold text-gray-400 mb-2 flex items-center gap-2">
                           <MessageSquare className="w-4 h-4" />
                           Message
                         </h4>
-                        <p className="text-sm leading-relaxed whitespace-pre-wrap">{message.message}</p>
+                        <p className="text-sm leading-relaxed whitespace-pre-wrap text-gray-300">{message.message}</p>
                       </div>
                       <div className="flex gap-2">
                         <Button
                           variant="outline"
                           size="sm"
+                          className="border-white/20 text-white hover:bg-white/10"
                           onClick={(e) => {
                             e.stopPropagation();
                             window.location.href = `mailto:${message.email}?subject=Re: Your message to Nukleo Digital&body=Hi ${message.firstName},%0D%0A%0D%0A`;
@@ -197,6 +197,6 @@ export default function AdminContactMessages() {
           </div>
         )}
       </div>
-    </div>
+    </AdminLayout>
   );
 }

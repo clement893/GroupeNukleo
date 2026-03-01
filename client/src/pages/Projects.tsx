@@ -8,7 +8,7 @@ import OptimizedImage from '@/components/OptimizedImage';
 import { trpc } from '@/lib/trpc';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { useLocalizedPath } from '@/hooks/useLocalizedPath';
-import { imageNameToSlug, oneImagePerProject } from '@/lib/projectSlug';
+import { imageNameToSlug, oneImagePerProject, isExcludedProject } from '@/lib/projectSlug';
 import { PROJECT_FILTER_LABELS, filterImagesByCategory, type ProjectFilterValue } from '@/data/projectCategories';
 import { logger } from '@/lib/logger';
 import { MOBILE_BREAKPOINT } from '@/lib/constants';
@@ -116,14 +116,14 @@ export default function Projects() {
 
   useEffect(() => {
     if (imagesError) {
-      setImages(oneImagePerProject(fallbackImages));
+      setImages(oneImagePerProject(fallbackImages.filter((name) => !isExcludedProject(name))));
       return;
     }
     if (uploadedImages && Array.isArray(uploadedImages)) {
       const names = uploadedImages.length > 0 ? uploadedImages.map((img) => img.name) : fallbackImages;
-      setImages(oneImagePerProject(names));
+      setImages(oneImagePerProject(names.filter((name) => !isExcludedProject(name))));
     } else if (!isLoadingImages) {
-      setImages(oneImagePerProject(fallbackImages));
+      setImages(oneImagePerProject(fallbackImages.filter((name) => !isExcludedProject(name))));
     }
   }, [uploadedImages, isLoadingImages, imagesError]);
 
