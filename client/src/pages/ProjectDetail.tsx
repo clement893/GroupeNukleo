@@ -7,8 +7,13 @@ import { useLanguage } from '@/contexts/LanguageContext';
 import { slugToImageName, getProjectKey, getImagesForProject } from '@/lib/projectSlug';
 import { useEffect, useState } from 'react';
 import { useLocalizedPath } from '@/hooks/useLocalizedPath';
+import { PROJECTS_DATA, getProjectByKey } from '@/data/projectsData';
 
-const FALLBACK_IMAGES = [
+// Liste de toutes les images connues depuis la source de données centralisée
+const ALL_KNOWN_IMAGES: string[] = PROJECTS_DATA.flatMap((p) => p.images);
+
+// Fallback pour les images déjà en production (anciens noms)
+const LEGACY_FALLBACK_IMAGES = [
   'AMQ_1.png', 'AdeleBlais_2.jpg', 'Affilia_3.jpg', 'Affilia_4.jpg', 'Affilia_7.png',
   'Arsenal_1.jpg', 'Arsenal_2.jpg', 'CECS_2.jpg', 'CQDE_2.jpg', 'CQDE_4.jpg',
   'D28_24_14.jpg', 'D28_24_17.jpg', 'D28_24_19.jpg', 'D28_24_5.jpg', 'D28_25_4.jpg',
@@ -23,63 +28,6 @@ const FALLBACK_IMAGES = [
 ];
 
 const BORDEAUX = '#5A1E29';
-const OFF_WHITE = '#EFE8E8';
-
-/** Metadata for known projects. Fallback for others from filename. */
-const PROJECT_METADATA: Record<string, { title: string; category?: string; subtitle?: string; description: string; client?: string; services?: string; year?: string }> = {
-  'mbam-1': {
-    title: 'Les cercles de la Fondation du MBAM',
-    category: 'Fondation, Design & Marketing',
-    subtitle: 'Fondation Jean-Paul Riopelle',
-    description: "Pour animer les soirées charité de la Fondation du Musée des Beaux-Arts de Montréal, Nukleo a conçu l'identité visuelle propre à chacune des trois soirées : Contre-jour, Perspectives et Le Cercle des Anges. Stratégie de communication, design et développement web au service d'événements mémorables.",
-    client: 'Fondation du MBAM',
-    services: 'Stratégie, Design, Développement web',
-    year: '2023',
-  },
-  'mbam-2': {
-    title: 'Fondation du MBAM',
-    category: 'Art & culture',
-    description: "Identité visuelle et supports de communication pour les événements de la Fondation du Musée des Beaux-Arts de Montréal.",
-    client: 'Fondation du MBAM',
-    services: 'Design, Communication',
-    year: '2023',
-  },
-  'zu-2': {
-    title: 'Titre du projet',
-    category: 'Catégorie, Design & Marketing',
-    subtitle: 'Sous-titre du projet',
-    description: "Description du projet. Placeholder : Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-    client: 'Nom du client',
-    services: 'Stratégie, Design, Développement',
-    year: '2023',
-  },
-};
-
-function getProjectMeta(slug: string, imageName: string, _language: string) {
-  const meta = PROJECT_METADATA[slug];
-  if (meta) {
-    return {
-      title: meta.title,
-      category: meta.category,
-      subtitle: meta.subtitle,
-      description: meta.description,
-      client: meta.client ?? '—',
-      services: meta.services ?? '—',
-      year: meta.year ?? new Date().getFullYear().toString(),
-    };
-  }
-  const baseName = imageName.replace(/\.(jpg|jpeg|png|gif|webp)$/i, '').replace(/[-_]/g, ' ');
-  const title = baseName.replace(/\d+$/, '').trim() || baseName;
-  return {
-    title: title.charAt(0).toUpperCase() + title.slice(1).toLowerCase(),
-    category: undefined,
-    subtitle: undefined,
-    description: 'Description du projet à venir.',
-    client: '—',
-    services: '—',
-    year: new Date().getFullYear().toString(),
-  };
-}
 
 export default function ProjectDetail() {
   const [location] = useLocation();
@@ -87,22 +35,29 @@ export default function ProjectDetail() {
   const slug = slugPart && slugPart.length > 0 ? slugPart : null;
   const { t, language } = useLanguage();
   const getLocalizedPath = useLocalizedPath();
+
   const { data: uploadedImages } = trpc.projectsImages.list.useQuery(undefined, {
     retry: 1,
     refetchOnWindowFocus: false,
     staleTime: 5 * 60 * 1000,
   });
+
   const [imageNames, setImageNames] = useState<string[]>([]);
 
   useEffect(() => {
     if (uploadedImages && Array.isArray(uploadedImages) && uploadedImages.length > 0) {
-      setImageNames(uploadedImages.map((img) => img.name));
+      // Combiner les images uploadées avec les images connues de projectsData
+      const uploadedNames = uploadedImages.map((img) => img.name);
+      const combined = [...new Set([...uploadedNames, ...ALL_KNOWN_IMAGES])];
+      setImageNames(combined);
     } else {
-      setImageNames(FALLBACK_IMAGES);
+      // Utiliser les images de projectsData + legacy fallback
+      const combined = [...new Set([...ALL_KNOWN_IMAGES, ...LEGACY_FALLBACK_IMAGES])];
+      setImageNames(combined);
     }
   }, [uploadedImages]);
 
-  // Toujours arriver en haut de la page à l'ouverture du projet (après lazy load / layout)
+  // Scroll en haut à chaque ouverture de projet
   useEffect(() => {
     const scroll = () => window.scrollTo(0, 0);
     scroll();
@@ -119,12 +74,167 @@ export default function ProjectDetail() {
     };
   }, [slug]);
 
-  const imageName = slug ? slugToImageName(slug, imageNames.length > 0 ? imageNames : FALLBACK_IMAGES) : null;
-  const meta = imageName && slug ? getProjectMeta(slug, imageName, language) : null;
-  const projectKey = imageName ? getProjectKey(imageName) : '';
-  const projectImages = projectKey ? getImagesForProject(projectKey, imageNames.length > 0 ? imageNames : FALLBACK_IMAGES) : [];
+  // Chercher d'abord dans projectsData par slug
+  const projectData = slug ? PROJECTS_DATA.find((p) => p.slug === slug) : null;
 
-  if (!slug || !imageName || !meta) {
+  // Si trouvé dans projectsData, utiliser directement ses données
+  if (projectData) {
+    const description = language === 'fr' ? projectData.description.fr : projectData.description.en;
+    const heroImage = projectData.images[0];
+    const heroImageUrl = `/projects/${heroImage}`;
+    const galleryImages = projectData.images;
+
+    return (
+      <PageLayout>
+        <SEO
+          title={`${projectData.title} | ${t('projects.title')} | Nukleo`}
+          description={description}
+        />
+        <main className="min-h-screen">
+          {/* ═══ Hero ═══ */}
+          <section style={{ padding: 'clamp(5rem, 12vh, 8rem) 6% 4rem' }}>
+            <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.2fr] gap-8 lg:gap-12 max-w-[1400px] mx-auto items-start">
+              <div>
+                <p style={{
+                  fontFamily: "'Plus Jakarta Sans', sans-serif",
+                  fontSize: '0.75rem',
+                  fontWeight: 600,
+                  letterSpacing: '0.15em',
+                  textTransform: 'uppercase',
+                  color: '#9ca3af',
+                  marginBottom: 12,
+                }}>
+                  projet
+                </p>
+                <h1 style={{
+                  fontFamily: "'Plus Jakarta Sans', sans-serif",
+                  fontWeight: 700,
+                  fontSize: 'clamp(2rem, 4vw, 3.5rem)',
+                  lineHeight: 1.1,
+                  letterSpacing: '-0.02em',
+                  margin: '0 0 0.5rem 0',
+                  display: 'inline-block',
+                  background: 'linear-gradient(to right, #6B1817, #5636AD)',
+                  backgroundClip: 'text',
+                  WebkitBackgroundClip: 'text',
+                  color: 'transparent',
+                }}>
+                  {projectData.title}
+                </h1>
+                <p style={{
+                  fontFamily: "'Plus Jakarta Sans', sans-serif",
+                  fontSize: '0.95rem',
+                  color: '#6b7280',
+                  margin: 0,
+                }}>
+                  {projectData.category}
+                </p>
+              </div>
+              <div style={{ borderRadius: 12, overflow: 'hidden' }} className="lg:mt-0 mt-6">
+                <div style={{ aspectRatio: '21/9', minHeight: 220, maxHeight: 420, background: '#e5e7eb' }}>
+                  <OptimizedImage
+                    src={heroImageUrl}
+                    alt={projectData.title}
+                    width={1200}
+                    height={514}
+                    className="w-full h-full object-cover"
+                    loading="eager"
+                    fetchPriority="high"
+                  />
+                </div>
+              </div>
+            </div>
+          </section>
+
+          {/* ═══ Métadonnées + description ═══ */}
+          <section style={{ padding: '0 6% 5rem' }}>
+            <div className="grid grid-cols-1 lg:grid-cols-[minmax(140px,200px)_1fr] gap-8 lg:gap-12 max-w-[1400px] mx-auto items-start">
+              <div style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: '0.8rem', color: '#6b7280', lineHeight: 1.8 }}>
+                <p style={{ margin: '0 0 0.5rem 0' }}><strong>Client :</strong></p>
+                <p style={{ margin: '0 0 1.25rem 0' }}>{projectData.client}</p>
+                <p style={{ margin: '0 0 0.5rem 0' }}><strong>Services :</strong></p>
+                <p style={{ margin: '0 0 1.25rem 0' }}>{projectData.services}</p>
+                <p style={{ margin: '0 0 0.5rem 0' }}><strong>Année :</strong></p>
+                <p style={{ margin: 0 }}>{projectData.year}</p>
+              </div>
+              <div>
+                <p style={{
+                  fontFamily: "'Plus Jakarta Sans', sans-serif",
+                  fontSize: '1rem',
+                  lineHeight: 1.8,
+                  color: '#374151',
+                  margin: 0,
+                  textAlign: 'justify',
+                }}>
+                  {description}
+                </p>
+              </div>
+            </div>
+          </section>
+
+          {/* ═══ Galerie ═══ */}
+          {galleryImages.length > 1 && (
+            <section style={{ background: 'transparent', padding: '3rem 6% 4rem' }}>
+              <div style={{ maxWidth: 1400, margin: '0 auto' }}>
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                  {galleryImages.map((name, idx) => {
+                    const src = `/projects/${name}`;
+                    const isPortrait = idx % 3 === 1;
+                    return (
+                      <div
+                        key={name}
+                        style={{
+                          aspectRatio: isPortrait ? '3/4' : '4/3',
+                          background: '#2d2d2d',
+                          borderRadius: 8,
+                          overflow: 'hidden',
+                        }}
+                      >
+                        <OptimizedImage
+                          src={src}
+                          alt={projectData.title}
+                          width={isPortrait ? 400 : 600}
+                          height={isPortrait ? 533 : 450}
+                          className="w-full h-full object-cover"
+                          loading="lazy"
+                        />
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+            </section>
+          )}
+
+          {/* ═══ Navigation retour ═══ */}
+          <section style={{ padding: '2rem 6% 5rem' }}>
+            <div style={{ maxWidth: 1400, margin: '0 auto' }}>
+              <Link
+                href={getLocalizedPath('/projects')}
+                style={{
+                  fontFamily: "'Plus Jakarta Sans', sans-serif",
+                  fontSize: '0.9rem',
+                  color: BORDEAUX,
+                  fontWeight: 600,
+                  textDecoration: 'none',
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: 8,
+                }}
+              >
+                ← {t('projects.backToList') || 'Retour aux projets'}
+              </Link>
+            </div>
+          </section>
+        </main>
+      </PageLayout>
+    );
+  }
+
+  // ─── Fallback : projet non trouvé dans projectsData, tenter via imageNames ───
+  const imageName = slug ? slugToImageName(slug, imageNames.length > 0 ? imageNames : LEGACY_FALLBACK_IMAGES) : null;
+
+  if (!slug || !imageName) {
     return (
       <PageLayout>
         <div className="min-h-screen flex items-center justify-center">
@@ -139,37 +249,54 @@ export default function ProjectDetail() {
     );
   }
 
+  const projectKey = getProjectKey(imageName);
+  const projectByKey = getProjectByKey(projectKey);
+  const projectImages = getImagesForProject(projectKey, imageNames.length > 0 ? imageNames : LEGACY_FALLBACK_IMAGES);
   const heroImageUrl = `/projects/${imageName}`;
+
+  const fallbackTitle = imageName
+    .replace(/\.(jpg|jpeg|png|gif|webp)$/i, '')
+    .replace(/[-_]/g, ' ')
+    .replace(/\d+$/, '')
+    .trim();
+
+  const meta = {
+    title: projectByKey?.title ?? (fallbackTitle.charAt(0).toUpperCase() + fallbackTitle.slice(1).toLowerCase()),
+    category: projectByKey?.category,
+    description: projectByKey
+      ? (language === 'fr' ? projectByKey.description.fr : projectByKey.description.en)
+      : 'Description du projet à venir.',
+    client: projectByKey?.client ?? '—',
+    services: projectByKey?.services ?? '—',
+    year: projectByKey?.year ?? new Date().getFullYear().toString(),
+  };
 
   return (
     <PageLayout>
       <SEO
         title={`${meta.title} | ${t('projects.title')} | Nukleo`}
-        description={meta.description || `${meta.title} — projet Nukleo Digital`}
+        description={meta.description}
       />
       <main className="min-h-screen">
-        {/* ═══ Hero : fond beige, gauche = label + titre + sous-titre, droite = grande image ═══ */}
         <section style={{ padding: 'clamp(5rem, 12vh, 8rem) 6% 4rem' }}>
           <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.2fr] gap-8 lg:gap-12 max-w-[1400px] mx-auto items-start">
             <div>
               <p style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: '0.75rem', fontWeight: 600, letterSpacing: '0.15em', textTransform: 'uppercase', color: '#9ca3af', marginBottom: 12 }}>
                 projet
               </p>
-              <h1
-                style={{
-                  fontFamily: "'Plus Jakarta Sans', sans-serif",
-                  fontWeight: 700,
-                  fontSize: 'clamp(2rem, 4vw, 3.5rem)',
-                  lineHeight: 1.1,
-                  letterSpacing: '-0.02em',
-                  margin: '0 0 0.5rem 0',
-                  display: 'inline-block',
-                  background: 'linear-gradient(to right, #6B1817, #5636AD)',
-                  backgroundClip: 'text',
-                  WebkitBackgroundClip: 'text',
-                  color: 'transparent',
-                }}
-              >
+              <h1 style={{
+                fontFamily: "'Plus Jakarta Sans', sans-serif",
+                fontWeight: 700,
+                fontSize: 'clamp(2rem, 4vw, 3.5rem)',
+                lineHeight: 1.1,
+                letterSpacing: '-0.02em',
+                margin: '0 0 0.5rem 0',
+                display: 'inline-block',
+                background: 'linear-gradient(to right, #6B1817, #5636AD)',
+                backgroundClip: 'text',
+                WebkitBackgroundClip: 'text',
+                color: 'transparent',
+              }}>
                 {meta.title}
               </h1>
               {meta.category && (
@@ -178,7 +305,7 @@ export default function ProjectDetail() {
                 </p>
               )}
             </div>
-            <div style={{ borderRadius: 12, overflow: 'hidden', marginTop: 0 }} className="lg:mt-0 mt-6">
+            <div style={{ borderRadius: 12, overflow: 'hidden' }} className="lg:mt-0 mt-6">
               <div style={{ aspectRatio: '21/9', minHeight: 220, maxHeight: 420, background: '#e5e7eb' }}>
                 <OptimizedImage
                   src={heroImageUrl}
@@ -194,7 +321,6 @@ export default function ProjectDetail() {
           </div>
         </section>
 
-        {/* ═══ Bloc texte : gauche = métadonnées (Client, Services, Année), droite = description ═══ */}
         <section style={{ padding: '0 6% 5rem' }}>
           <div className="grid grid-cols-1 lg:grid-cols-[minmax(140px,200px)_1fr] gap-8 lg:gap-12 max-w-[1400px] mx-auto items-start">
             <div style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: '0.8rem', color: '#6b7280', lineHeight: 1.8 }}>
@@ -213,7 +339,6 @@ export default function ProjectDetail() {
           </div>
         </section>
 
-        {/* ═══ Galerie : toutes les images du projet ═══ */}
         <section style={{ background: 'transparent', padding: '3rem 6% 4rem' }}>
           <div style={{ maxWidth: 1400, margin: '0 auto' }}>
             {projectImages.length > 0 ? (
@@ -222,23 +347,8 @@ export default function ProjectDetail() {
                   const src = `/projects/${name}`;
                   const isPortrait = idx % 3 === 1;
                   return (
-                    <div
-                      key={name}
-                      style={{
-                        aspectRatio: isPortrait ? '3/4' : '4/3',
-                        background: '#2d2d2d',
-                        borderRadius: 8,
-                        overflow: 'hidden',
-                      }}
-                    >
-                      <OptimizedImage
-                        src={src}
-                        alt={meta?.title ?? name}
-                        width={isPortrait ? 400 : 600}
-                        height={isPortrait ? 533 : 450}
-                        className="w-full h-full object-cover"
-                        loading="lazy"
-                      />
+                    <div key={name} style={{ aspectRatio: isPortrait ? '3/4' : '4/3', background: '#2d2d2d', borderRadius: 8, overflow: 'hidden' }}>
+                      <OptimizedImage src={src} alt={meta.title} width={isPortrait ? 400 : 600} height={isPortrait ? 533 : 450} className="w-full h-full object-cover" loading="lazy" />
                     </div>
                   );
                 })}
@@ -248,14 +358,21 @@ export default function ProjectDetail() {
                 <div style={{ aspectRatio: '4/3', background: '#2d2d2d', borderRadius: 8, overflow: 'hidden' }}>
                   <OptimizedImage src={heroImageUrl} alt="" width={600} height={450} className="w-full h-full object-cover" loading="lazy" />
                 </div>
-                <div style={{ aspectRatio: '4/3', background: '#2d2d2d', borderRadius: 8, overflow: 'hidden' }}>
-                  <OptimizedImage src={heroImageUrl} alt="" width={600} height={450} className="w-full h-full object-cover" loading="lazy" />
-                </div>
               </div>
             )}
           </div>
         </section>
 
+        <section style={{ padding: '2rem 6% 5rem' }}>
+          <div style={{ maxWidth: 1400, margin: '0 auto' }}>
+            <Link
+              href={getLocalizedPath('/projects')}
+              style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: '0.9rem', color: BORDEAUX, fontWeight: 600, textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: 8 }}
+            >
+              ← {t('projects.backToList') || 'Retour aux projets'}
+            </Link>
+          </div>
+        </section>
       </main>
     </PageLayout>
   );
