@@ -20,6 +20,7 @@
     "verify:ga": "node scripts/verify-ga-tag.js",
     "validate:translations": "node scripts/validate-translations.js",
     "verify:build": "node scripts/verify-build-chunks.js",
+    "seed:page-texts": "tsx scripts/seed-page-texts.ts",
     "db:push": "drizzle-kit generate && drizzle-kit migrate",
     "migrate:page-visibility": "node migrate-page-visibility.mjs",
     "migrate:loaders": "tsx server/migrate-loaders.ts",
