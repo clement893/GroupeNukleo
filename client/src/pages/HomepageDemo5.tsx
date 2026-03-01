@@ -889,7 +889,7 @@ export default function HomepageDemo5() {
         ════════════════════════════════════════════════════════════════════ */}
         <div style={{ padding: 'clamp(5rem, 10vh, 8rem) 6%', marginBottom: 5 * 16, background: 'transparent' }}>
           <div style={{
-            maxWidth: 840,
+            maxWidth: 'min(90vw, 1200px)',
             margin: '0 auto',
             borderRadius: 28,
             padding: 'clamp(3.5rem, 6vw, 5rem) clamp(2.5rem, 4vw, 4rem)',
@@ -920,6 +920,7 @@ export default function HomepageDemo5() {
               color: '#374151',
               lineHeight: 1.65,
               margin: '0 0 2.5rem 0',
+              width: '100%',
               maxWidth: '40vw',
               marginLeft: 'auto',
               marginRight: 'auto',
