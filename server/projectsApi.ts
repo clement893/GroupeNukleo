@@ -2,7 +2,10 @@ import fs from "fs/promises";
 import path from "path";
 import { z } from "zod";
 
-const DATA_DIR = path.resolve(process.cwd(), "data");
+// Allow Railway etc. to point to a persistent volume (e.g. DATA_PATH=/tmp/data or a mounted volume)
+const DATA_DIR = process.env.DATA_PATH
+  ? path.resolve(process.env.DATA_PATH)
+  : path.resolve(process.cwd(), "data");
 const PROJECTS_FILE = path.join(DATA_DIR, "projects.json");
 
 const projectCategoryEnum = z.enum([
@@ -60,7 +63,19 @@ export async function readProjects(): Promise<ProjectRecord[]> {
       .filter((r): r is z.SafeParseSuccess<ProjectRecord> => r.success)
       .map((r) => r.data);
   } catch {
-    return [];
+    // No data/projects.json yet (e.g. first deploy on Railway): use fallback from build
+    try {
+      const fallbackPath = path.join(process.cwd(), "dist", "data", "fallback-projects.json");
+      const raw = await fs.readFile(fallbackPath, "utf-8");
+      const data = JSON.parse(raw);
+      const projects = Array.isArray(data.projects) ? data.projects : [];
+      return projects
+        .map((p: unknown) => projectSchema.safeParse(p))
+        .filter((r): r is z.SafeParseSuccess<ProjectRecord> => r.success)
+        .map((r) => r.data);
+    } catch {
+      return [];
+    }
   }
 }
 

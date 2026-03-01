@@ -531,7 +531,11 @@ export default function HomepageDemo5() {
     { label: t('nav.contact'), href: '/contact' },
   ];
 
-  const { data: apiProjects } = trpc.projects.list.useQuery(undefined, { staleTime: 60 * 1000, refetchOnWindowFocus: true });
+  const { data: apiProjects } = trpc.projects.list.useQuery(undefined, {
+    staleTime: 5 * 1000,
+    refetchOnWindowFocus: true,
+    refetchOnMount: true,
+  });
   const homeCarouselProjects = useMemo(() => {
     const featured = (apiProjects || []).filter((p: { featuredOnHomeCarousel?: boolean }) => p.featuredOnHomeCarousel);
     const sorted = [...featured].sort((a, b) => {
