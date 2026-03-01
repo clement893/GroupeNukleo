@@ -1,10 +1,11 @@
 import { useState, useMemo } from "react";
 import { trpc } from "@/lib/trpc";
+import { useIsAdminSession } from "@/hooks/useIsAdminSession";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Loader2, Save, Plus, FileText, Globe, ChevronDown, ChevronRight } from "lucide-react";
+import { Loader2, Save, Plus, FileText, Globe, ChevronRight, AlertCircle } from "lucide-react";
 import { AdminLayout } from "@/components/AdminLayout";
 import { toast } from "sonner";
 
@@ -23,8 +24,21 @@ function flattenObj(obj: Record<string, unknown>, prefix = ""): Record<string, s
   return out;
 }
 
+type TextRow = { id: number; key: string; textEn: string; textFr: string };
+
 export default function AdminPageTexts() {
-  const { data: texts, isLoading, refetch } = trpc.pageTexts.getAll.useQuery();
+  const { isAdmin, isLoading: authLoading } = useIsAdminSession();
+  const {
+    data: texts,
+    isLoading,
+    error,
+    refetch,
+  } = trpc.pageTexts.getAll.useQuery(undefined, {
+    enabled: isAdmin,
+    retry: false,
+    refetchOnWindowFocus: false,
+  });
+
   const updateMutation = trpc.pageTexts.update.useMutation({
     onSuccess: () => {
       toast.success("Texte enregistré");
@@ -53,36 +67,30 @@ export default function AdminPageTexts() {
     onError: (e) => toast.error(e.message),
   });
 
+  const [selectedPage, setSelectedPage] = useState<string | null>(null);
   const [newKey, setNewKey] = useState("");
   const [newEn, setNewEn] = useState("");
   const [newFr, setNewFr] = useState("");
   const [showImport, setShowImport] = useState(false);
   const [importEn, setImportEn] = useState("");
   const [importFr, setImportFr] = useState("");
-  const [expandedSections, setExpandedSections] = useState<Set<string>>(new Set(["common", "nav", "header"]));
   const [dirty, setDirty] = useState<Record<number, { textEn: string; textFr: string }>>({});
 
-  const sections = useMemo(() => {
-    if (!texts) return [];
-    const bySection: Record<string, typeof texts> = {};
+  const pages = useMemo(() => {
+    if (!texts?.length) return [];
+    const sectionSet = new Set<string>();
     for (const t of texts) {
       const section = t.key.split(".")[0] ?? "other";
-      if (!bySection[section]) bySection[section] = [];
-      bySection[section].push(t);
+      sectionSet.add(section);
     }
-    return Object.entries(bySection)
-      .sort(([a], [b]) => a.localeCompare(b))
-      .map(([name, items]) => ({ name, items }));
+    return Array.from(sectionSet).sort((a, b) => a.localeCompare(b));
   }, [texts]);
 
-  const toggleSection = (name: string) => {
-    setExpandedSections((prev) => {
-      const next = new Set(prev);
-      if (next.has(name)) next.delete(name);
-      else next.add(name);
-      return next;
-    });
-  };
+  const selectedPageKey = selectedPage ?? (pages[0] ?? null);
+  const itemsForPage = useMemo(() => {
+    if (!texts || !selectedPageKey) return [];
+    return texts.filter((t) => t.key.split(".")[0] === selectedPageKey) as TextRow[];
+  }, [texts, selectedPageKey]);
 
   const handleSave = (id: number, textEn: string, textFr: string) => {
     updateMutation.mutate({ id, textEn, textFr });
@@ -108,19 +116,55 @@ export default function AdminPageTexts() {
       const flatEn = flattenObj(en);
       const flatFr = flattenObj(fr);
       importMutation.mutate({ en: flatEn, fr: flatFr });
-    } catch (e) {
+    } catch {
       toast.error("JSON invalide (EN ou FR)");
     }
   };
 
-  if (isLoading) {
+  if (authLoading) {
     return (
       <AdminLayout>
         <div className="min-h-[50vh] flex items-center justify-center">
-          <div className="text-center">
-            <Loader2 className="w-8 h-8 text-cyan-400 animate-spin mx-auto mb-4" />
-            <p className="text-white/60">Chargement des textes...</p>
-          </div>
+          <Loader2 className="w-8 h-8 text-cyan-400 animate-spin" />
+        </div>
+      </AdminLayout>
+    );
+  }
+
+  if (!isAdmin) {
+    return (
+      <AdminLayout>
+        <div className="p-6 flex items-center justify-center min-h-[40vh]">
+          <p className="text-white/70">Accès réservé aux administrateurs.</p>
+        </div>
+      </AdminLayout>
+    );
+  }
+
+  if (error) {
+    return (
+      <AdminLayout>
+        <div className="p-6 lg:p-8 max-w-2xl mx-auto">
+          <Card className="bg-white/10 border-white/20">
+            <CardHeader>
+              <CardTitle className="text-red-400 flex items-center gap-2">
+                <AlertCircle className="w-5 h-5" />
+                Erreur de chargement
+              </CardTitle>
+              <CardDescription className="text-white/60">
+                Les textes des pages n&apos;ont pas pu être chargés depuis la base de données.
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <p className="text-white/80 mb-4">{error.message || "Une erreur est survenue"}</p>
+              <p className="text-sm text-white/50 mb-4">
+                Vérifiez que la table <code className="bg-white/10 px-1 rounded">page_texts</code> existe (exécutez la migration DB depuis l&apos;admin).
+              </p>
+              <Button onClick={() => refetch()} className="bg-cyan-600 hover:bg-cyan-700 text-white">
+                Réessayer
+              </Button>
+            </CardContent>
+          </Card>
         </div>
       </AdminLayout>
     );
@@ -129,213 +173,250 @@ export default function AdminPageTexts() {
   return (
     <AdminLayout>
       <div className="p-6 lg:p-8 max-w-7xl mx-auto">
-        <div className="flex items-center justify-between mb-8">
-          <div>
-            <h1 className="text-4xl font-bold text-gray-900 mb-2 flex items-center gap-3" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
-              <FileText className="w-8 h-8 text-cyan-600" />
-              Textes des pages (EN / FR)
-            </h1>
-            <p className="text-gray-600" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
-              Gérer les textes du site en anglais et en français. Les clés correspondent aux fichiers de traduction (ex. common.loading, nav.home).
-            </p>
-          </div>
+        <div className="mb-6">
+          <h1 className="text-3xl font-bold text-white mb-1 flex items-center gap-3" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
+            <FileText className="w-7 h-7 text-cyan-400" />
+            Textes des pages (EN / FR)
+          </h1>
+          <p className="text-white/60" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
+            Sélectionnez une page à gauche, modifiez les textes à droite. Données en base de données.
+          </p>
         </div>
 
-        {/* Add new key */}
-        <Card className="bg-white border border-gray-200 shadow-sm mb-8">
-          <CardHeader>
-            <CardTitle className="text-gray-900 flex items-center gap-2" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
-              <Plus className="w-5 h-5" />
-              Ajouter une clé
-            </CardTitle>
-            <CardDescription className="text-gray-500" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
-              Créer une nouvelle clé de traduction (ex. common.myKey)
-            </CardDescription>
-          </CardHeader>
-          <CardContent className="space-y-4">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-              <div>
-                <Label className="text-gray-700">Clé</Label>
-                <Input
-                  placeholder="ex. common.loading"
-                  value={newKey}
-                  onChange={(e) => setNewKey(e.target.value)}
-                  className="mt-1 font-mono text-sm"
-                />
-              </div>
-              <div>
-                <Label className="text-gray-700">EN</Label>
-                <Input
-                  placeholder="English text"
-                  value={newEn}
-                  onChange={(e) => setNewEn(e.target.value)}
-                  className="mt-1"
-                />
-              </div>
-              <div>
-                <Label className="text-gray-700">FR</Label>
-                <Input
-                  placeholder="Texte français"
-                  value={newFr}
-                  onChange={(e) => setNewFr(e.target.value)}
-                  className="mt-1"
-                />
-              </div>
-            </div>
-            <Button
-              onClick={handleCreate}
-              disabled={createMutation.isPending || !newKey.trim()}
-              className="bg-cyan-600 hover:bg-cyan-700 text-white"
-            >
-              {createMutation.isPending ? <Loader2 className="w-4 h-4 animate-spin mr-2" /> : <Plus className="w-4 h-4 mr-2" />}
-              Ajouter
-            </Button>
-          </CardContent>
-        </Card>
-
-        {/* Import from JSON */}
-        <Card className="bg-white border border-gray-200 shadow-sm mb-8">
-          <CardHeader>
-            <div className="flex items-center justify-between">
-              <div>
-                <CardTitle className="text-gray-900 flex items-center gap-2" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
-                  <Globe className="w-5 h-5" />
-                  Importer depuis les fichiers JSON (en.json / fr.json)
-                </CardTitle>
-                <CardDescription className="text-gray-500 mt-1" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
-                  Collez le contenu des fichiers locales (structure imbriquée acceptée). Les clés seront aplaties (ex. common.loading).
-                </CardDescription>
-              </div>
-              <Button variant="outline" size="sm" onClick={() => setShowImport(!showImport)}>
-                {showImport ? "Masquer" : "Afficher"}
-              </Button>
-            </div>
-          </CardHeader>
-          {showImport && (
-            <CardContent className="space-y-4">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div>
-                  <Label className="text-gray-700">en.json</Label>
-                  <textarea
-                    className="mt-1 w-full h-40 font-mono text-xs border rounded p-2"
-                    placeholder='{ "common": { "loading": "Loading..." } }'
-                    value={importEn}
-                    onChange={(e) => setImportEn(e.target.value)}
-                  />
+        <div className="flex flex-col lg:flex-row gap-6">
+          {/* Left: page selector */}
+          <Card className="lg:w-56 shrink-0 bg-white/10 border-white/20">
+            <CardHeader className="pb-2">
+              <CardTitle className="text-white text-sm font-medium">Pages</CardTitle>
+              <CardDescription className="text-white/50 text-xs">
+                {texts?.length ?? 0} clés
+              </CardDescription>
+            </CardHeader>
+            <CardContent className="pt-0">
+              {isLoading ? (
+                <div className="flex items-center justify-center py-8">
+                  <Loader2 className="w-6 h-6 text-cyan-400 animate-spin" />
                 </div>
-                <div>
-                  <Label className="text-gray-700">fr.json</Label>
-                  <textarea
-                    className="mt-1 w-full h-40 font-mono text-xs border rounded p-2"
-                    placeholder='{ "common": { "loading": "Chargement..." } }'
-                    value={importFr}
-                    onChange={(e) => setImportFr(e.target.value)}
-                  />
-                </div>
-              </div>
-              <Button
-                onClick={handleImport}
-                disabled={importMutation.isPending || !importEn.trim() || !importFr.trim()}
-                variant="secondary"
-              >
-                {importMutation.isPending ? <Loader2 className="w-4 h-4 animate-spin mr-2" /> : null}
-                Importer
-              </Button>
+              ) : pages.length === 0 ? (
+                <p className="text-white/50 text-sm py-4">Aucune page. Ajoutez une clé ou importez.</p>
+              ) : (
+                <nav className="space-y-0.5">
+                  {pages.map((page) => (
+                    <button
+                      key={page}
+                      type="button"
+                      onClick={() => setSelectedPage(page)}
+                      className={`w-full flex items-center gap-2 px-3 py-2.5 rounded-lg text-left text-sm transition-colors ${
+                        selectedPageKey === page
+                          ? "bg-cyan-600/80 text-white"
+                          : "text-white/80 hover:bg-white/10"
+                      }`}
+                    >
+                      <ChevronRight className="w-4 h-4 shrink-0" />
+                      {page}
+                    </button>
+                  ))}
+                </nav>
+              )}
             </CardContent>
-          )}
-        </Card>
+          </Card>
 
-        {/* List by section */}
-        <Card className="bg-white border border-gray-200 shadow-sm">
-          <CardHeader>
-            <CardTitle className="text-gray-900" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
-              Textes ({texts?.length ?? 0} clés)
-            </CardTitle>
-            <CardDescription className="text-gray-500" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
-              Modifier une valeur puis cliquer sur Enregistrer pour la ligne.
-            </CardDescription>
-          </CardHeader>
-          <CardContent>
-            {!texts?.length ? (
-              <p className="text-gray-500 py-8 text-center">Aucun texte. Ajoutez une clé ou importez depuis les JSON.</p>
-            ) : (
-              <div className="space-y-4">
-                {sections.map(({ name, items }) => {
-                  const isOpen = expandedSections.has(name);
-                  return (
-                    <div key={name} className="border border-gray-200 rounded-lg overflow-hidden">
-                      <button
-                        type="button"
-                        className="w-full flex items-center gap-2 px-4 py-3 bg-gray-50 hover:bg-gray-100 text-left font-medium text-gray-900"
-                        onClick={() => toggleSection(name)}
-                      >
-                        {isOpen ? <ChevronDown className="w-4 h-4" /> : <ChevronRight className="w-4 h-4" />}
-                        {name} ({items.length})
-                      </button>
-                      {isOpen && (
-                        <div className="divide-y divide-gray-100">
-                          {items.map((row) => {
-                            const local = dirty[row.id] ?? { textEn: row.textEn, textFr: row.textFr };
-                            const hasChange =
-                              local.textEn !== row.textEn || local.textFr !== row.textFr;
-                            return (
-                              <div key={row.id} className="p-4 bg-white hover:bg-gray-50/50">
-                                <div className="flex items-start gap-4 flex-wrap">
-                                  <div className="w-full md:w-48 shrink-0">
-                                    <span className="font-mono text-sm text-gray-600 break-all">{row.key}</span>
-                                  </div>
-                                  <div className="flex-1 min-w-[200px] space-y-2">
-                                    <div>
-                                      <Label className="text-xs text-gray-500">EN</Label>
-                                      <Input
-                                        value={local.textEn}
-                                        onChange={(e) =>
-                                          setDirty((prev) => ({
-                                            ...prev,
-                                            [row.id]: { ...local, textEn: e.target.value },
-                                          }))
-                                        }
-                                        className="mt-0.5 text-sm"
-                                      />
-                                    </div>
-                                    <div>
-                                      <Label className="text-xs text-gray-500">FR</Label>
-                                      <Input
-                                        value={local.textFr}
-                                        onChange={(e) =>
-                                          setDirty((prev) => ({
-                                            ...prev,
-                                            [row.id]: { ...local, textFr: e.target.value },
-                                          }))
-                                        }
-                                        className="mt-0.5 text-sm"
-                                      />
-                                    </div>
-                                  </div>
-                                  <div className="shrink-0">
-                                    <Button
-                                      size="sm"
-                                      onClick={() => handleSave(row.id, local.textEn, local.textFr)}
-                                      disabled={updateMutation.isPending || !hasChange}
-                                      className="bg-cyan-600 hover:bg-cyan-700 text-white"
-                                    >
-                                      {updateMutation.isPending ? <Loader2 className="w-4 h-4 animate-spin" /> : <Save className="w-4 h-4 mr-1" />}
-                                      Enregistrer
-                                    </Button>
-                                  </div>
+          {/* Right: content for selected page */}
+          <div className="flex-1 min-w-0 space-y-6">
+            {selectedPageKey && (
+              <>
+                <Card className="bg-white/10 border-white/20">
+                  <CardHeader>
+                    <CardTitle className="text-white" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
+                      Contenu — {selectedPageKey}
+                    </CardTitle>
+                    <CardDescription className="text-white/60" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
+                      Modifiez les valeurs puis enregistrez pour chaque ligne.
+                    </CardDescription>
+                  </CardHeader>
+                  <CardContent>
+                    {itemsForPage.length === 0 ? (
+                      <p className="text-white/50 py-8 text-center">
+                        Aucune clé pour cette page. Ajoutez une clé ci-dessous (ex. {selectedPageKey}.maCle).
+                      </p>
+                    ) : (
+                      <div className="space-y-4">
+                        {itemsForPage.map((row) => {
+                          const local = dirty[row.id] ?? { textEn: row.textEn, textFr: row.textFr };
+                          const hasChange = local.textEn !== row.textEn || local.textFr !== row.textFr;
+                          return (
+                            <div
+                              key={row.id}
+                              className="p-4 rounded-lg bg-white/5 border border-white/10 space-y-3"
+                            >
+                              <div className="font-mono text-sm text-cyan-300/90">{row.key}</div>
+                              <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                                <div>
+                                  <Label className="text-xs text-white/50">EN</Label>
+                                  <Input
+                                    value={local.textEn}
+                                    onChange={(e) =>
+                                      setDirty((prev) => ({
+                                        ...prev,
+                                        [row.id]: { ...local, textEn: e.target.value },
+                                      }))
+                                    }
+                                    className="mt-1 bg-white/10 border-white/20 text-white placeholder:text-white/40"
+                                  />
+                                </div>
+                                <div>
+                                  <Label className="text-xs text-white/50">FR</Label>
+                                  <Input
+                                    value={local.textFr}
+                                    onChange={(e) =>
+                                      setDirty((prev) => ({
+                                        ...prev,
+                                        [row.id]: { ...local, textFr: e.target.value },
+                                      }))
+                                    }
+                                    className="mt-1 bg-white/10 border-white/20 text-white placeholder:text-white/40"
+                                  />
                                 </div>
                               </div>
-                            );
-                          })}
-                        </div>
-                      )}
+                              <div>
+                                <Button
+                                  size="sm"
+                                  onClick={() => handleSave(row.id, local.textEn, local.textFr)}
+                                  disabled={updateMutation.isPending || !hasChange}
+                                  className="bg-cyan-600 hover:bg-cyan-700 text-white"
+                                >
+                                  {updateMutation.isPending ? (
+                                    <Loader2 className="w-4 h-4 animate-spin mr-1" />
+                                  ) : (
+                                    <Save className="w-4 h-4 mr-1" />
+                                  )}
+                                  Enregistrer
+                                </Button>
+                              </div>
+                            </div>
+                          );
+                        })}
+                      </div>
+                    )}
+                  </CardContent>
+                </Card>
+
+                {/* Add key */}
+                <Card className="bg-white/10 border-white/20">
+                  <CardHeader>
+                    <CardTitle className="text-white text-base flex items-center gap-2">
+                      <Plus className="w-4 h-4" />
+                      Ajouter une clé
+                    </CardTitle>
+                    <CardDescription className="text-white/60 text-sm">
+                      Ex. {selectedPageKey}.maCle
+                    </CardDescription>
+                  </CardHeader>
+                  <CardContent className="space-y-3">
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+                      <div>
+                        <Label className="text-white/70 text-sm">Clé</Label>
+                        <Input
+                          placeholder={`${selectedPageKey}.maCle`}
+                          value={newKey}
+                          onChange={(e) => setNewKey(e.target.value)}
+                          className="mt-1 bg-white/10 border-white/20 text-white font-mono text-sm"
+                        />
+                      </div>
+                      <div>
+                        <Label className="text-white/70 text-sm">EN</Label>
+                        <Input
+                          placeholder="English"
+                          value={newEn}
+                          onChange={(e) => setNewEn(e.target.value)}
+                          className="mt-1 bg-white/10 border-white/20 text-white"
+                        />
+                      </div>
+                      <div>
+                        <Label className="text-white/70 text-sm">FR</Label>
+                        <Input
+                          placeholder="Français"
+                          value={newFr}
+                          onChange={(e) => setNewFr(e.target.value)}
+                          className="mt-1 bg-white/10 border-white/20 text-white"
+                        />
+                      </div>
                     </div>
-                  );
-                })}
-              </div>
+                    <Button
+                      onClick={handleCreate}
+                      disabled={createMutation.isPending || !newKey.trim()}
+                      className="bg-cyan-600 hover:bg-cyan-700 text-white"
+                    >
+                      {createMutation.isPending ? <Loader2 className="w-4 h-4 animate-spin mr-2" /> : <Plus className="w-4 h-4 mr-2" />}
+                      Ajouter
+                    </Button>
+                  </CardContent>
+                </Card>
+
+                {/* Import from JSON */}
+                <Card className="bg-white/10 border-white/20">
+                  <CardHeader>
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <CardTitle className="text-white text-base flex items-center gap-2">
+                          <Globe className="w-4 h-4" />
+                          Importer depuis JSON (en / fr)
+                        </CardTitle>
+                        <CardDescription className="text-white/60 text-sm mt-1">
+                          Collez le contenu des fichiers locales ; les clés seront aplaties.
+                        </CardDescription>
+                      </div>
+                      <Button variant="outline" size="sm" onClick={() => setShowImport(!showImport)} className="border-white/30 text-white">
+                        {showImport ? "Masquer" : "Afficher"}
+                      </Button>
+                    </div>
+                  </CardHeader>
+                  {showImport && (
+                    <CardContent className="space-y-3">
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                        <div>
+                          <Label className="text-white/70 text-sm">en.json</Label>
+                          <textarea
+                            className="mt-1 w-full h-32 font-mono text-xs rounded border border-white/20 bg-white/10 text-white p-2 placeholder:text-white/40"
+                            placeholder='{ "common": { "loading": "Loading..." } }'
+                            value={importEn}
+                            onChange={(e) => setImportEn(e.target.value)}
+                          />
+                        </div>
+                        <div>
+                          <Label className="text-white/70 text-sm">fr.json</Label>
+                          <textarea
+                            className="mt-1 w-full h-32 font-mono text-xs rounded border border-white/20 bg-white/10 text-white p-2 placeholder:text-white/40"
+                            placeholder='{ "common": { "loading": "Chargement..." } }'
+                            value={importFr}
+                            onChange={(e) => setImportFr(e.target.value)}
+                          />
+                        </div>
+                      </div>
+                      <Button
+                        onClick={handleImport}
+                        disabled={importMutation.isPending || !importEn.trim() || !importFr.trim()}
+                        variant="secondary"
+                        className="bg-white/10 text-white border-white/20 hover:bg-white/20"
+                      >
+                        {importMutation.isPending ? <Loader2 className="w-4 h-4 animate-spin mr-2" /> : null}
+                        Importer
+                      </Button>
+                    </CardContent>
+                  )}
+                </Card>
+              </>
             )}
-          </CardContent>
-        </Card>
+
+            {!selectedPageKey && !isLoading && (
+              <Card className="bg-white/10 border-white/20">
+                <CardContent className="py-12 text-center text-white/60">
+                  Aucune page pour l’instant. Ajoutez une clé (ex. common.loading) ou importez depuis les JSON pour créer les premières entrées.
+                </CardContent>
+              </Card>
+            )}
+          </div>
+        </div>
       </div>
     </AdminLayout>
   );

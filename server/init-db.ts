@@ -299,6 +299,22 @@ export async function initDatabase(req: Request, res: Response) {
       CREATE INDEX IF NOT EXISTS idx_page_texts_key ON page_texts(key);
     `);
 
+    // Create carousel_logos table (logos strip on homepage - persisted in DB across deploys)
+    await db.execute(sql`
+      CREATE TABLE IF NOT EXISTS carousel_logos (
+        id SERIAL PRIMARY KEY,
+        src VARCHAR(512) NOT NULL,
+        alt VARCHAR(255) NOT NULL,
+        url VARCHAR(512) DEFAULT '' NOT NULL,
+        display_order INTEGER DEFAULT 0 NOT NULL,
+        "createdAt" TIMESTAMP DEFAULT NOW() NOT NULL,
+        "updatedAt" TIMESTAMP DEFAULT NOW() NOT NULL
+      );
+    `);
+    await db.execute(sql`
+      CREATE INDEX IF NOT EXISTS idx_carousel_logos_display_order ON carousel_logos(display_order);
+    `);
+
     res.json({ 
       message: "Database initialized successfully! All tables created.",
       tables: [
@@ -318,7 +334,8 @@ export async function initDatabase(req: Request, res: Response) {
         "contact_messages",
         "testimonials",
         "analytics",
-        "page_texts"
+        "page_texts",
+        "carousel_logos"
       ]
     });
   } catch (error) {

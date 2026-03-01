@@ -304,3 +304,17 @@ export const analytics = pgTable("analytics", {
 
 export type Analytics = typeof analytics.$inferSelect;
 export type InsertAnalytics = typeof analytics.$inferInsert;
+
+// Carousel logos (homepage / logos strip) - persisted in DB so they survive deploys
+export const carouselLogos = pgTable("carousel_logos", {
+  id: integer("id").primaryKey().generatedAlwaysAsIdentity(),
+  src: varchar("src", { length: 512 }).notNull(),
+  alt: varchar("alt", { length: 255 }).notNull(),
+  url: varchar("url", { length: 512 }).default("").notNull(),
+  displayOrder: integer("display_order").default(0).notNull(),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().notNull(),
+});
+
+export type CarouselLogo = typeof carouselLogos.$inferSelect;
+export type InsertCarouselLogo = typeof carouselLogos.$inferInsert;

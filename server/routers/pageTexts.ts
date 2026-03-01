@@ -7,10 +7,20 @@ import { z } from "zod";
 export const pageTextsRouter = router({
   /** List all page texts (admin) */
   getAll: adminProcedure.query(async () => {
-    const db = await getDb();
-    if (!db) return [];
-    const rows = await db.select().from(pageTexts).orderBy(asc(pageTexts.key));
-    return rows;
+    try {
+      const db = await getDb();
+      if (!db) return [];
+      const rows = await db.select().from(pageTexts).orderBy(asc(pageTexts.key));
+      return rows;
+    } catch (e: unknown) {
+      const code = e && typeof e === "object" && "code" in e ? (e as { code: string }).code : null;
+      if (code === "42P01") {
+        console.warn("[PageTexts] Table page_texts does not exist yet. Run init-db or migration.");
+        return [];
+      }
+      console.error("[PageTexts] getAll error:", e);
+      throw e;
+    }
   }),
 
   /** Public: get all translations for a language (flat key -> value). Used by frontend to override locale JSON. */

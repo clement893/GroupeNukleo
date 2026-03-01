@@ -9,3 +9,6 @@
 /coverage/
 *.lcov
 node_modules
+
+# Carousel logos JSON – logos are stored in DB (carousel_logos table) to persist across deploys
+data/carousel-logos.json
