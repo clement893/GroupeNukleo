@@ -559,7 +559,10 @@ export default function HomepageDemo5() {
         ════════════════════════════════════════════════════════════════════ */}
         <section style={{
           minHeight: '27.5vh',
-          padding: 'clamp(2.5rem, 6.25vh, 5rem) 6%',
+          paddingTop: 'clamp(2.5rem, 6.25vh, 5rem)',
+          paddingBottom: 'clamp(3rem, 7.5vh, 6rem)',
+          paddingLeft: '6%',
+          paddingRight: '6%',
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'flex-start',
