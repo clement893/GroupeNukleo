@@ -8,6 +8,8 @@ interface ProjectsHeroProps {
   heroImages: string[];
   /** Returns URL for a project detail page given image name. If not provided, triptych panels won't link. */
   getProjectUrl?: (imageName: string) => string;
+  /** Label for "View project" link (e.g. "View project →"). Optional, for i18n. */
+  viewProjectLabel?: string;
 }
 
 const SLIDE_LABELS = ['01', '02', '03'];
@@ -21,7 +23,7 @@ function getTriptychImages(heroImages: string[]): string[] {
   ].filter(Boolean);
 }
 
-export default function ProjectsHero({ headline, description, heroImages, getProjectUrl }: ProjectsHeroProps) {
+export default function ProjectsHero({ headline, description, heroImages, getProjectUrl, viewProjectLabel = 'Voir le projet →' }: ProjectsHeroProps) {
   const [active, setActive] = useState(0);
   const triptychImages = getTriptychImages(heroImages);
 
@@ -95,7 +97,8 @@ export default function ProjectsHero({ headline, description, heroImages, getPro
                       height={600}
                       fill
                       loading="eager"
-                      fetchPriority="high"
+                      fetchPriority={i === 0 ? 'high' : 'low'}
+                      sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 33vw"
                       className="w-full h-full transition-[filter] duration-500 ease-out object-cover"
                       style={{
                         filter: isActive ? 'grayscale(0) brightness(0.7)' : 'grayscale(1) brightness(0.55)',
@@ -138,7 +141,7 @@ export default function ProjectsHero({ headline, description, heroImages, getPro
                           fontFamily: "'Plus Jakarta Sans', sans-serif",
                         }}
                       >
-                        Voir le projet →
+                        {viewProjectLabel}
                       </a>
                     </div>
                   )}

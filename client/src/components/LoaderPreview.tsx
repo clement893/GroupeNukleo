@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import SafeHTML from "@/components/SafeHTML";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 interface LoaderPreviewProps {
   cssCode: string;
@@ -16,6 +17,7 @@ export default function LoaderPreview({
   onClose,
   loaderName,
 }: LoaderPreviewProps) {
+  const { t } = useLanguage();
   const [isReady, setIsReady] = useState(false);
 
   useEffect(() => {
@@ -158,7 +160,7 @@ export default function LoaderPreview({
             e.stopPropagation();
             onClose();
           }}
-          aria-label="Fermer la prévisualisation"
+          aria-label={t('common.closePreview')}
         >
           <X className="w-6 h-6" />
         </Button>

@@ -43,8 +43,8 @@
   font-display: optional;
 }
 
-/* XBold 800 */
-@font-face {
+/* XBold 800 - DISABLED: XBold.woff2 triggers OTS parsing error. Re-enable when file is replaced. */
+/* @font-face {
   font-family: 'Aktiv Grotesk';
   src: url('/fonts/AktivGrotesk-XBold.woff2') format('woff2');
   font-weight: 800;
@@ -58,10 +58,10 @@
   font-weight: 800;
   font-style: italic;
   font-display: optional;
-}
+} */
 
-/* Black 900 */
-@font-face {
+/* Black 900 - DISABLED: AktivGrotesk-Black.woff2 triggers OTS parsing error. Re-enable when file is replaced. */
+/* @font-face {
   font-family: 'Aktiv Grotesk';
   src: url('/fonts/AktivGrotesk-Black.woff2') format('woff2');
   font-weight: 900;
@@ -75,5 +75,5 @@
   font-weight: 900;
   font-style: italic;
   font-display: optional;
-}
+} */
 

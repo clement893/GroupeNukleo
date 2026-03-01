@@ -1,39 +1,33 @@
-import { useEffect } from 'react';
+import { useLayoutEffect } from 'react';
 import { useLocation } from 'wouter';
 
 function scrollToTop() {
-  window.scrollTo(0, 0);
+  try {
+    window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+  } catch {
+    window.scrollTo(0, 0);
+  }
+  document.documentElement.scrollTop = 0;
+  document.body.scrollTop = 0;
 }
 
 export default function ScrollToTop() {
   const [location] = useLocation();
 
-  useEffect(() => {
-    // Désactiver la restauration automatique du scroll par le navigateur
+  useLayoutEffect(() => {
     if ('scrollRestoration' in history) {
       history.scrollRestoration = 'manual';
     }
   }, []);
 
-  useEffect(() => {
-    if ('scrollRestoration' in history) {
-      history.scrollRestoration = 'manual';
-    }
-  }, []);
-
-  useEffect(() => {
+  // useLayoutEffect = avant paint, scroll uniquement au moment du changement de route (pas de timeouts pour ne pas ramener en haut après coup)
+  useLayoutEffect(() => {
     scrollToTop();
     const rafId = requestAnimationFrame(() => {
       scrollToTop();
       requestAnimationFrame(scrollToTop);
     });
-    const t1 = setTimeout(scrollToTop, 150);
-    const t2 = setTimeout(scrollToTop, 400);
-    return () => {
-      cancelAnimationFrame(rafId);
-      clearTimeout(t1);
-      clearTimeout(t2);
-    };
+    return () => cancelAnimationFrame(rafId);
   }, [location]);
 
   return null;

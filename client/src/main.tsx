@@ -18,6 +18,12 @@ import { logger } from "./lib/logger";
 
 // Initialize Sentry for client-side error monitoring
 initSentry();
+
+// Désactiver la restauration du scroll par le navigateur le plus tôt possible (évite de rester en milieu de page à l'ouverture d'un projet)
+if (typeof window !== 'undefined' && 'scrollRestoration' in history) {
+  history.scrollRestoration = 'manual';
+}
+
 // CSS is loaded normally - Vite handles optimization and code splitting
 // Critical CSS is inlined in index.html to prevent render blocking
 // Non-critical CSS (admin) is split into separate chunks

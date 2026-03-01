@@ -98,6 +98,22 @@ export default function Projects() {
 
   const filteredImages = filterImagesByCategory(images, filter);
 
+  // Preload first images so they start loading before paint (faster LCP)
+  useEffect(() => {
+    if (filteredImages.length === 0) return;
+    const toPreload = filteredImages.slice(0, 6).map((name) => `/projects/${name}`);
+    const links: HTMLLinkElement[] = [];
+    toPreload.forEach((href) => {
+      const link = document.createElement('link');
+      link.rel = 'preload';
+      link.as = 'image';
+      link.href = href;
+      document.head.appendChild(link);
+      links.push(link);
+    });
+    return () => links.forEach((l) => l.remove());
+  }, [filteredImages]);
+
   useEffect(() => {
     if (imagesError) {
       setImages(oneImagePerProject(fallbackImages));
@@ -125,7 +141,7 @@ export default function Projects() {
           });
         });
       },
-      { rootMargin: isMobile ? '30px' : '150px', threshold: 0.01 }
+      { rootMargin: isMobile ? '80px' : '400px', threshold: 0.01 }
     );
     imageRefs.current.forEach((ref) => ref && observer.observe(ref));
     return () => observer.disconnect();
@@ -134,7 +150,7 @@ export default function Projects() {
   useEffect(() => {
     if (filteredImages.length === 0) return;
     const isMobile = typeof window !== 'undefined' && window.innerWidth < MOBILE_BREAKPOINT;
-    const n = isMobile ? Math.min(2, filteredImages.length) : Math.min(6, filteredImages.length);
+    const n = isMobile ? Math.min(2, filteredImages.length) : Math.min(3, filteredImages.length);
     setVisibleImages(new Set(Array.from({ length: n }, (_, i) => i)));
   }, [filteredImages.length]);
 
@@ -153,6 +169,7 @@ export default function Projects() {
           description={t('projects.description')}
           heroImages={filteredImages}
           getProjectUrl={(name) => getLocalizedPath(`/projects/${imageNameToSlug(name)}`)}
+          viewProjectLabel={t('projects.viewProject')}
         />
 
         {/* Filtres par catégorie — sous le triptyque */}
@@ -160,7 +177,7 @@ export default function Projects() {
           <div
             className="flex flex-wrap items-center justify-center gap-2 lg:gap-3"
             role="tablist"
-            aria-label="Filtrer les projets par catégorie"
+            aria-label={t('projects.filterAriaLabel')}
           >
             {PROJECT_FILTER_LABELS.map((label) => (
               <button
@@ -204,10 +221,10 @@ export default function Projects() {
               </div>
             ) : filteredImages.length === 0 ? (
               <p className="text-center py-12 text-gray-500" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
-                Aucun projet dans cette catégorie.
+                {t('projects.noProjectsInCategory')}
               </p>
             ) : (
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 lg:gap-6">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-6">
                 {filteredImages.map((image, index) => {
                   const isVisible = visibleImages.has(index);
                   const imageAlt = image.replace(/[-_]/g, ' ').replace(/\.(jpg|png|jpeg)$/i, '').replace(/\d+$/, '').trim();
@@ -216,7 +233,17 @@ export default function Projects() {
                   const projectUrl = getLocalizedPath(`/projects/${projectSlug}`);
 
                   return (
-                    <Link key={`${image}-${index}`} href={projectUrl}>
+                    <Link
+                      key={`${image}-${index}`}
+                      href={projectUrl}
+                      onClick={() => {
+                        if (typeof window !== 'undefined') {
+                          try { window.scrollTo({ top: 0, left: 0, behavior: 'instant' }); } catch { window.scrollTo(0, 0); }
+                          document.documentElement.scrollTop = 0;
+                          document.body.scrollTop = 0;
+                        }
+                      }}
+                    >
                       <div
                         ref={(el) => { imageRefs.current[index] = el; }}
                         className="block group cursor-pointer overflow-hidden rounded-xl min-h-[240px] sm:min-h-[280px] lg:min-h-[320px] relative"
@@ -229,12 +256,12 @@ export default function Projects() {
                             <OptimizedImage
                               src={`/projects/${image}`}
                               alt={imageAlt}
-                              width={600}
-                              height={400}
+                              width={500}
+                              height={333}
                               className="w-full h-full min-h-[240px] sm:min-h-[280px] lg:min-h-[320px] object-cover transition-transform duration-300 group-hover:scale-105"
-                              loading={index < 4 ? 'eager' : 'lazy'}
-                              fetchPriority={index < 4 ? 'high' : 'low'}
-                              sizes="(max-width: 640px) 100vw, 50vw"
+                              loading={index < 3 ? 'eager' : 'lazy'}
+                              fetchPriority={index < 3 ? 'high' : 'low'}
+                              sizes="(max-width: 640px) 100vw, (max-width: 1280px) 50vw, 33vw"
                             />
                             <div
                               className="absolute inset-0 flex items-end justify-start bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 p-4 lg:p-5"

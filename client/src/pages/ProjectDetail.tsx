@@ -5,7 +5,7 @@ import OptimizedImage from '@/components/OptimizedImage';
 import { trpc } from '@/lib/trpc';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { slugToImageName, getProjectKey, getImagesForProject } from '@/lib/projectSlug';
-import { useEffect, useState } from 'react';
+import { useEffect, useLayoutEffect, useState } from 'react';
 import { useLocalizedPath } from '@/hooks/useLocalizedPath';
 import { PROJECTS_DATA, getProjectByKey } from '@/data/projectsData';
 
@@ -57,21 +57,26 @@ export default function ProjectDetail() {
     }
   }, [uploadedImages]);
 
-  // Scroll en haut à chaque ouverture de projet
-  useEffect(() => {
-    const scroll = () => window.scrollTo(0, 0);
+  // Scroll en haut à l'ouverture du projet uniquement (pas de timeouts pour ne pas ramener en haut pendant que l'utilisateur scroll)
+  useLayoutEffect(() => {
+    if ('scrollRestoration' in history) {
+      history.scrollRestoration = 'manual';
+    }
+    const scroll = () => {
+      try {
+        window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+      } catch {
+        window.scrollTo(0, 0);
+      }
+      document.documentElement.scrollTop = 0;
+      document.body.scrollTop = 0;
+    };
     scroll();
     const raf = requestAnimationFrame(() => {
       scroll();
       requestAnimationFrame(scroll);
     });
-    const t1 = setTimeout(scroll, 50);
-    const t2 = setTimeout(scroll, 250);
-    return () => {
-      cancelAnimationFrame(raf);
-      clearTimeout(t1);
-      clearTimeout(t2);
-    };
+    return () => cancelAnimationFrame(raf);
   }, [slug]);
 
   // Chercher d'abord dans projectsData par slug
@@ -90,7 +95,7 @@ export default function ProjectDetail() {
           title={`${projectData.title} | ${t('projects.title')} | Nukleo`}
           description={description}
         />
-        <main className="min-h-screen">
+        <main className="min-h-screen pt-20">
           {/* ═══ Hero ═══ */}
           <section style={{ padding: 'clamp(5rem, 12vh, 8rem) 6% 4rem' }}>
             <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.2fr] gap-8 lg:gap-12 max-w-[1400px] mx-auto items-start">
@@ -104,15 +109,16 @@ export default function ProjectDetail() {
                   color: '#9ca3af',
                   marginBottom: 12,
                 }}>
-                  projet
+                  {t('projects.projectLabel')}
                 </p>
                 <h1 style={{
                   fontFamily: "'Plus Jakarta Sans', sans-serif",
                   fontWeight: 700,
                   fontSize: 'clamp(2rem, 4vw, 3.5rem)',
-                  lineHeight: 1.1,
+                  lineHeight: 1.25,
                   letterSpacing: '-0.02em',
                   margin: '0 0 0.5rem 0',
+                  paddingBottom: '0.12em',
                   display: 'inline-block',
                   background: 'linear-gradient(to right, #6B1817, #5636AD)',
                   backgroundClip: 'text',
@@ -168,6 +174,27 @@ export default function ProjectDetail() {
                 }}>
                   {description}
                 </p>
+                {projectData.websiteUrl && (
+                  <a
+                    href={projectData.websiteUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    style={{
+                      fontFamily: "'Plus Jakarta Sans', sans-serif",
+                      fontSize: '0.95rem',
+                      fontWeight: 600,
+                      color: BORDEAUX,
+                      marginTop: '1rem',
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      gap: 6,
+                      textDecoration: 'none',
+                    }}
+                  >
+                    {t('projects.visitWebsite')}
+                    <span aria-hidden>→</span>
+                  </a>
+                )}
               </div>
             </div>
           </section>
@@ -222,7 +249,7 @@ export default function ProjectDetail() {
                   gap: 8,
                 }}
               >
-                ← {t('projects.backToList') || 'Retour aux projets'}
+                ← {t('projects.backToList')}
               </Link>
             </div>
           </section>
@@ -239,9 +266,9 @@ export default function ProjectDetail() {
       <PageLayout>
         <div className="min-h-screen flex items-center justify-center">
           <div className="text-center" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
-            <p className="text-gray-600 mb-4">{t('projects.notFound') || 'Projet non trouvé.'}</p>
+            <p className="text-gray-600 mb-4">{t('projects.notFound')}</p>
             <Link href={getLocalizedPath('/projects')} className="text-purple-600 hover:underline font-medium">
-              {t('projects.backToList') || 'Retour aux projets'}
+              {t('projects.backToList')}
             </Link>
           </div>
         </div>
@@ -265,10 +292,11 @@ export default function ProjectDetail() {
     category: projectByKey?.category,
     description: projectByKey
       ? (language === 'fr' ? projectByKey.description.fr : projectByKey.description.en)
-      : 'Description du projet à venir.',
+      : t('projects.descriptionFallback'),
     client: projectByKey?.client ?? '—',
     services: projectByKey?.services ?? '—',
     year: projectByKey?.year ?? new Date().getFullYear().toString(),
+    websiteUrl: projectByKey?.websiteUrl,
   };
 
   return (
@@ -277,20 +305,21 @@ export default function ProjectDetail() {
         title={`${meta.title} | ${t('projects.title')} | Nukleo`}
         description={meta.description}
       />
-      <main className="min-h-screen">
+      <main className="min-h-screen pt-20">
         <section style={{ padding: 'clamp(5rem, 12vh, 8rem) 6% 4rem' }}>
           <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.2fr] gap-8 lg:gap-12 max-w-[1400px] mx-auto items-start">
             <div>
               <p style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: '0.75rem', fontWeight: 600, letterSpacing: '0.15em', textTransform: 'uppercase', color: '#9ca3af', marginBottom: 12 }}>
-                projet
+                {t('projects.projectLabel')}
               </p>
               <h1 style={{
                 fontFamily: "'Plus Jakarta Sans', sans-serif",
                 fontWeight: 700,
                 fontSize: 'clamp(2rem, 4vw, 3.5rem)',
-                lineHeight: 1.1,
+                lineHeight: 1.25,
                 letterSpacing: '-0.02em',
                 margin: '0 0 0.5rem 0',
+                paddingBottom: '0.12em',
                 display: 'inline-block',
                 background: 'linear-gradient(to right, #6B1817, #5636AD)',
                 backgroundClip: 'text',
@@ -335,6 +364,27 @@ export default function ProjectDetail() {
               <p style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: '1rem', lineHeight: 1.8, color: '#374151', margin: 0, textAlign: 'justify' }}>
                 {meta.description}
               </p>
+              {meta.websiteUrl && (
+                <a
+                  href={meta.websiteUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{
+                    fontFamily: "'Plus Jakarta Sans', sans-serif",
+                    fontSize: '0.95rem',
+                    fontWeight: 600,
+                    color: BORDEAUX,
+                    marginTop: '1rem',
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    gap: 6,
+                    textDecoration: 'none',
+                  }}
+                >
+                  {t('projects.visitWebsite')}
+                  <span aria-hidden>→</span>
+                </a>
+              )}
             </div>
           </div>
         </section>
@@ -369,7 +419,7 @@ export default function ProjectDetail() {
               href={getLocalizedPath('/projects')}
               style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: '0.9rem', color: BORDEAUX, fontWeight: 600, textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: 8 }}
             >
-              ← {t('projects.backToList') || 'Retour aux projets'}
+              ← {t('projects.backToList')}
             </Link>
           </div>
         </section>

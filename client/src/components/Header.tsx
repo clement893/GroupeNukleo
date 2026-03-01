@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback, memo } from 'react';
+import { useState, useEffect, useCallback, useRef, memo } from 'react';
 import { Menu, X } from 'lucide-react';
 import { Link } from 'wouter';
 import { SplitCTAButton } from '@/components/SplitCTAButton';
@@ -11,24 +11,21 @@ import { MOBILE_BREAKPOINT, ANIMATIONS } from '@/lib/constants';
 
 /**
  * Composant Header principal de l'application.
- * 
+ *
  * Affiche le logo, le tagline, le bouton CTA et le menu burger.
- * S'adapte au scroll avec un effet glass et cache le tagline quand on scroll.
- * 
- * @returns Le composant Header avec logo, navigation et menu
+ * S'adapte au scroll : cache le header en scrollant vers le bas, le réaffiche en scrollant vers le haut.
+ * En haut de page, le header reste visible avec effet glass et tagline masqué après 50px.
  */
 function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isHeaderVisible, setIsHeaderVisible] = useState(true);
+  const lastScrollY = useRef(0);
+  const headerRef = useRef<HTMLElement>(null);
   const { playHover, playClick } = useSound();
   const { t, language, setLanguage } = useLanguage();
   const getLocalizedPath = useLocalizedPath();
   const isMobile = useIsMobile(MOBILE_BREAKPOINT);
-  
-  // Optimize animation duration for mobile
-  const animationDuration = isMobile 
-    ? ANIMATIONS.DEFAULT_DURATION - ANIMATIONS.MOBILE_DURATION_REDUCTION
-    : ANIMATIONS.DEFAULT_DURATION;
   
   // Memoize handlers to prevent re-renders
   /**
@@ -47,30 +44,53 @@ function Header() {
   }, []);
 
   useEffect(() => {
-    // Optimize scroll handler for mobile - use passive listener and throttle
-    let ticking = false;
-    let lastScrollY = 0;
-    const handleScroll = () => {
-      const currentScrollY = window.scrollY;
-      // Skip if scroll change is minimal to reduce updates
-      if (Math.abs(currentScrollY - lastScrollY) < 10 && ticking) return;
-      
-      if (!ticking) {
-        window.requestAnimationFrame(() => {
-          setIsScrolled(currentScrollY > 50);
-          lastScrollY = currentScrollY;
-          ticking = false;
-        });
-        ticking = true;
-      }
+    lastScrollY.current = typeof window !== 'undefined' ? window.scrollY : 0;
+  }, []);
+
+  useEffect(() => {
+    const SCROLL_THRESHOLD = 8;
+    const TOP_THRESHOLD = 60;
+    const POLL_MS = 120;
+
+    const getScrollY = (): number => {
+      if (typeof window === 'undefined') return 0;
+      return window.scrollY ?? document.documentElement?.scrollTop ?? 0;
     };
 
-    // Use passive listener for better scroll performance
-    // Store handler reference for proper cleanup
-    const scrollOptions = { passive: true } as AddEventListenerOptions;
-    window.addEventListener('scroll', handleScroll, scrollOptions);
+    const applyVisibility = (visible: boolean) => {
+      setIsHeaderVisible(visible);
+      headerRef.current?.classList.toggle('header-hidden', !visible);
+    };
+
+    const tick = () => {
+      const currentScrollY = getScrollY();
+      const delta = currentScrollY - lastScrollY.current;
+
+      if (currentScrollY <= TOP_THRESHOLD) {
+        applyVisibility(true);
+        setIsScrolled(currentScrollY > 50);
+      } else if (delta > SCROLL_THRESHOLD) {
+        applyVisibility(false);
+        setIsScrolled(true);
+      } else if (delta < -SCROLL_THRESHOLD) {
+        applyVisibility(true);
+        setIsScrolled(true);
+      }
+
+      lastScrollY.current = currentScrollY;
+    };
+
+    tick();
+    const id = setInterval(tick, POLL_MS);
+    window.addEventListener('scroll', tick, { passive: true });
+    window.addEventListener('wheel', tick, { passive: true });
+    window.addEventListener('touchmove', tick, { passive: true });
+
     return () => {
-      window.removeEventListener('scroll', handleScroll, scrollOptions);
+      clearInterval(id);
+      window.removeEventListener('scroll', tick);
+      window.removeEventListener('wheel', tick);
+      window.removeEventListener('touchmove', tick);
     };
   }, []);
 
@@ -81,14 +101,15 @@ function Header() {
   return (
     <>
       <header
+        ref={headerRef}
         className={`
-          fixed top-0 left-0 right-0 z-50
-          transition-all ${isMobile ? `duration-${animationDuration}` : 'duration-300 sm:duration-700'} ease-[cubic-bezier(0.16,1,0.3,1)]
+          header-scroll-transform fixed top-0 left-0 right-0 z-50
           ${isScrolled ? 'px-4 sm:px-6 md:px-12 pt-3 sm:pt-4' : 'px-4 sm:px-6 md:px-12 pt-6 sm:pt-8'}
+          ${!isHeaderVisible ? 'header-hidden' : ''}
         `}
         style={{
           background: 'transparent',
-          ...(isMobile && ANIMATIONS.USE_WILL_CHANGE ? { willChange: 'transform, opacity' } : {}),
+          ...(isMobile && ANIMATIONS.USE_WILL_CHANGE ? { willChange: 'transform' } : {}),
         }}
       >
         <div 
@@ -96,7 +117,6 @@ function Header() {
           style={{
             background: 'transparent',
             borderRadius: 0,
-            boxShadow: isScrolled ? '0 4px 24px rgba(0,0,0,0.08)' : 'none',
           }}
         >
           <div className="flex items-center justify-between gap-2 sm:gap-4">

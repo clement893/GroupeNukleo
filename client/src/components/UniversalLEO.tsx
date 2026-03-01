@@ -444,34 +444,31 @@ export default function UniversalLEO({ pageContext = 'default' }: UniversalLEOPr
       {!isOpen && (
         <button
           onClick={handleOpen}
-          className="fixed bottom-6 right-6 z-50 group"
+          className="fixed bottom-4 right-4 z-50 group opacity-80 hover:opacity-100 transition-opacity"
           aria-label="Open LEO chat"
         >
           <div className="relative">
-            {/* Pulsing ring */}
-            <div className="absolute inset-0 rounded-full bg-gradient-to-r from-cyan-500 to-purple-500 opacity-75 animate-ping" />
-            
-            {/* Main button with LEO avatar */}
-            <div className="relative w-16 h-16 rounded-full bg-gradient-to-r from-cyan-500 to-purple-500 flex items-center justify-center shadow-2xl hover:shadow-cyan-500/50 transition-all duration-300 hover:scale-110">
+            {/* Main button with LEO avatar - subtle, no pulse */}
+            <div className="relative w-12 h-12 rounded-full bg-gradient-to-r from-cyan-500/90 to-purple-500/90 flex items-center justify-center shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 border border-white/20">
               <img 
                 src={getAvatarSrc(currentEmotion)} 
                 alt="LEO - AI Assistant" 
-                width="48"
-                height="48"
+                width="40"
+                height="40"
                 fetchPriority="high"
-                className={`w-12 h-12 rounded-full object-cover avatar-${currentEmotion}`}
+                className={`w-8 h-8 rounded-full object-cover avatar-${currentEmotion}`}
               />
             </div>
 
-            {/* Online indicator */}
-            <span className="absolute top-0 right-0 w-4 h-4 bg-green-500 rounded-full border-2 border-white animate-pulse"></span>
+            {/* Online indicator - static, no pulse */}
+            <span className="absolute top-0 right-0 w-2.5 h-2.5 bg-green-500 rounded-full border-2 border-white"></span>
           </div>
         </button>
       )}
 
       {/* Chat Window */}
       {isOpen && (
-        <div className="fixed bottom-6 right-6 z-50 w-[400px] max-w-[calc(100vw-3rem)] bg-gradient-to-br from-[oklch(0.35_0.15_300)] via-[oklch(0.40_0.15_320)] to-[oklch(0.35_0.15_340)] border border-cyan-500/30 rounded-2xl shadow-2xl overflow-hidden flex flex-col" style={{ height: '600px', maxHeight: 'calc(100vh - 3rem)' }}>
+        <div className="fixed bottom-4 right-4 z-50 w-[400px] max-w-[calc(100vw-3rem)] bg-gradient-to-br from-[oklch(0.35_0.15_300)] via-[oklch(0.40_0.15_320)] to-[oklch(0.35_0.15_340)] border border-cyan-500/30 rounded-2xl shadow-2xl overflow-hidden flex flex-col" style={{ height: '600px', maxHeight: 'calc(100vh - 3rem)' }}>
           {/* Header */}
           <div className="bg-white/10 backdrop-blur-md border-b border-white/10 p-4 flex items-center justify-between flex-shrink-0">
             <div className="flex items-center gap-3">
@@ -485,7 +482,7 @@ export default function UniversalLEO({ pageContext = 'default' }: UniversalLEOPr
               <div>
                 <h3 className="font-bold text-white">LEO</h3>
                 <div className="flex items-center gap-2">
-                  <div className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
+                  <div className="w-2 h-2 rounded-full bg-green-400" />
                   <span className="text-xs text-white/60">AI Online</span>
                 </div>
               </div>

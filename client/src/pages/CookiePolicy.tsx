@@ -1,114 +1,229 @@
 import PageLayout from '@/components/PageLayout';
 import SEO from '@/components/SEO';
+import { useLanguage } from '@/contexts/LanguageContext';
+
+const OFF_WHITE = '#EFE8E8';
+const BORDEAUX = '#5A1E29';
+const LINK_COLOR = '#5636AD';
+
+const content = {
+  fr: {
+    seoTitle: 'Politique des cookies | Nukleo Digital',
+    seoDescription: 'Comment Nukleo Digital utilise les cookies et technologies similaires pour améliorer votre navigation et analyser le trafic.',
+    legal: 'Mentions légales',
+    title: 'Politique des cookies',
+    lastUpdated: 'Dernière mise à jour : 9 décembre 2024',
+    whatAre: 'Qu\'est-ce qu\'un cookie ?',
+    whatAreText: 'Les cookies sont de petits fichiers texte déposés sur votre appareil lorsque vous visitez notre site. Ils nous permettent de vous offrir une meilleure expérience en mémorisant vos préférences et en comprenant comment vous utilisez le site.',
+    howWeUse: 'Comment nous utilisons les cookies',
+    howWeUseIntro: 'Nous utilisons les cookies pour :',
+    howWeUseList: [
+      'Cookies essentiels : nécessaires au bon fonctionnement du site',
+      'Cookies d\'analyse : comprendre comment les visiteurs utilisent le site',
+      'Cookies fonctionnels : mémoriser vos préférences et paramètres',
+      'Cookies de performance : améliorer la vitesse et les performances du site',
+    ],
+    typesTitle: 'Types de cookies utilisés',
+    sessionTitle: 'Cookies de session',
+    sessionText: 'Cookies temporaires qui expirent à la fermeture du navigateur. Ils sont essentiels pour maintenir votre session lors de la navigation.',
+    persistentTitle: 'Cookies persistants',
+    persistentText: 'Ils restent sur votre appareil pendant une durée définie ou jusqu\'à suppression. Ils nous aident à mémoriser vos préférences pour vos prochaines visites.',
+    thirdPartyTitle: 'Cookies tiers',
+    thirdPartyText: 'Déposés par des services tiers que nous utilisons (analytics). Ils nous aident à comprendre l\'usage du site et à améliorer nos services.',
+    managingTitle: 'Gérer les cookies',
+    managingIntro: 'Vous pouvez contrôler les cookies de plusieurs façons :',
+    managingList: [
+      'La plupart des navigateurs permettent de refuser ou accepter les cookies',
+      'Vous pouvez supprimer les cookies déjà enregistrés',
+      'Vous pouvez configurer le navigateur pour être averti lors de l\'envoi de cookies',
+      'Certaines fonctionnalités du site peuvent ne plus fonctionner correctement si vous désactivez les cookies',
+    ],
+    browserTitle: 'Paramètres du navigateur',
+    browserIntro: 'Pour gérer les cookies, modifiez les paramètres de votre navigateur :',
+    browserList: [
+      'Chrome : Paramètres → Confidentialité et sécurité → Cookies et autres données des sites',
+      'Firefox : Paramètres → Vie privée et sécurité → Cookies et données des sites',
+      'Safari : Préférences → Confidentialité → Cookies et données de sites',
+      'Edge : Paramètres → Cookies et autorisations des sites → Cookies et données des sites',
+    ],
+    updatesTitle: 'Modifications de cette politique',
+    updatesText: 'Nous pouvons mettre à jour cette politique des cookies pour refléter l\'évolution de nos pratiques ou pour des raisons opérationnelles, juridiques ou réglementaires. Consultez cette page régulièrement pour rester informé.',
+    contactTitle: 'Nous contacter',
+    contactText: 'Pour toute question sur notre utilisation des cookies, contactez-nous à',
+  },
+  en: {
+    seoTitle: 'Cookie Policy | Nukleo Digital',
+    seoDescription: 'Learn about how Nukleo Digital uses cookies and similar technologies to improve your browsing experience and analyze site traffic.',
+    legal: 'Legal',
+    title: 'Cookie Policy',
+    lastUpdated: 'Last updated: December 9, 2024',
+    whatAre: 'What Are Cookies?',
+    whatAreText: 'Cookies are small text files that are placed on your device when you visit our website. They help us provide you with a better experience by remembering your preferences and understanding how you use our site.',
+    howWeUse: 'How We Use Cookies',
+    howWeUseIntro: 'We use cookies for several purposes:',
+    howWeUseList: [
+      'Essential Cookies: Required for the website to function properly',
+      'Analytics Cookies: Help us understand how visitors interact with our website',
+      'Functional Cookies: Remember your preferences and settings',
+      'Performance Cookies: Improve website speed and performance',
+    ],
+    typesTitle: 'Types of Cookies We Use',
+    sessionTitle: 'Session Cookies',
+    sessionText: 'Temporary cookies that expire when you close your browser. These are essential for maintaining your session while navigating our website.',
+    persistentTitle: 'Persistent Cookies',
+    persistentText: 'Remain on your device for a set period or until you delete them. These help us remember your preferences for future visits.',
+    thirdPartyTitle: 'Third-Party Cookies',
+    thirdPartyText: 'Set by third-party services we use, such as analytics providers. These help us understand how our website is being used and improve our services.',
+    managingTitle: 'Managing Cookies',
+    managingIntro: 'You can control and manage cookies in several ways:',
+    managingList: [
+      'Most browsers allow you to refuse or accept cookies',
+      'You can delete cookies that have already been set',
+      'You can set your browser to notify you when cookies are being sent',
+      'Some features of our website may not function properly if you disable cookies',
+    ],
+    browserTitle: 'Browser Settings',
+    browserIntro: 'To manage cookies, you can adjust your browser settings:',
+    browserList: [
+      'Chrome: Settings → Privacy and security → Cookies and other site data',
+      'Firefox: Settings → Privacy & Security → Cookies and Site Data',
+      'Safari: Preferences → Privacy → Cookies and website data',
+      'Edge: Settings → Cookies and site permissions → Cookies and site data',
+    ],
+    updatesTitle: 'Updates to This Policy',
+    updatesText: 'We may update this Cookie Policy from time to time to reflect changes in our practices or for other operational, legal, or regulatory reasons. Please revisit this page periodically to stay informed about our use of cookies.',
+    contactTitle: 'Contact Us',
+    contactText: 'If you have any questions about our use of cookies, please contact us at',
+  },
+} as const;
+
+function Section({ title, children }: { title: string; children: React.ReactNode }) {
+  return (
+    <div style={{
+      background: '#fff',
+      borderRadius: 20,
+      padding: '1.75rem 2rem',
+      boxShadow: '0 4px 24px rgba(0,0,0,0.06)',
+      marginBottom: '1.5rem',
+    }}>
+      <h2 style={{
+        fontFamily: "'Plus Jakarta Sans', sans-serif",
+        fontWeight: 700,
+        fontSize: '1.35rem',
+        color: BORDEAUX,
+        margin: '0 0 1rem 0',
+      }}>
+        {title}
+      </h2>
+      <div style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: '0.9375rem', color: '#4b5563', lineHeight: 1.65 }}>
+        {children}
+      </div>
+    </div>
+  );
+}
 
 export default function CookiePolicy() {
+  const { language } = useLanguage();
+  const isFr = language === 'fr';
+  const c = content[isFr ? 'fr' : 'en'];
+
   return (
     <PageLayout>
-      <SEO 
-        title="Cookie Policy | How We Use Cookies"
-        description="Learn about how Nukleo Digital uses cookies and similar technologies to improve your browsing experience and analyze site traffic."
-        keywords="cookie policy, cookies, tracking, web analytics, browser storage"
+      <SEO
+        title={c.seoTitle}
+        description={c.seoDescription}
+        keywords="cookie policy, cookies, tracking, web analytics, politique des cookies"
       />
-      
-      <div className="min-h-screen bg-gradient-to-br from-violet-950 via-fuchsia-950 to-rose-950">
-        <div className="container mx-auto px-4 py-32 max-w-4xl">
-          <h1 className="text-5xl md:text-6xl font-bold text-white mb-8">
-            Cookie Policy
-          </h1>
-          
-          <p className="text-white/70 mb-12">
-            Last updated: December 9, 2024
-          </p>
-
-          <div className="prose prose-invert prose-lg max-w-none space-y-8">
-            <div className="bg-white/5 backdrop-blur-lg border border-white/10 rounded-2xl p-8">
-              <h2 className="text-2xl font-bold text-white mb-4">What Are Cookies?</h2>
-              <p className="text-white/70 leading-relaxed">
-                Cookies are small text files that are placed on your device when you visit our website. They help us provide you with a better experience by remembering your preferences and understanding how you use our site.
-              </p>
-            </div>
-
-            <div className="bg-white/5 backdrop-blur-lg border border-white/10 rounded-2xl p-8">
-              <h2 className="text-2xl font-bold text-white mb-4">How We Use Cookies</h2>
-              <p className="text-white/70 leading-relaxed mb-4">
-                We use cookies for several purposes:
-              </p>
-              <ul className="list-disc list-inside text-white/70 space-y-2">
-                <li><strong className="text-white">Essential Cookies:</strong> Required for the website to function properly</li>
-                <li><strong className="text-white">Analytics Cookies:</strong> Help us understand how visitors interact with our website</li>
-                <li><strong className="text-white">Functional Cookies:</strong> Remember your preferences and settings</li>
-                <li><strong className="text-white">Performance Cookies:</strong> Improve website speed and performance</li>
-              </ul>
-            </div>
-
-            <div className="bg-white/5 backdrop-blur-lg border border-white/10 rounded-2xl p-8">
-              <h2 className="text-2xl font-bold text-white mb-4">Types of Cookies We Use</h2>
-              
-              <div className="space-y-6">
-                <div>
-                  <h3 className="text-xl font-semibold text-white mb-2">Session Cookies</h3>
-                  <p className="text-white/70">
-                    Temporary cookies that expire when you close your browser. These are essential for maintaining your session while navigating our website.
-                  </p>
-                </div>
-                
-                <div>
-                  <h3 className="text-xl font-semibold text-white mb-2">Persistent Cookies</h3>
-                  <p className="text-white/70">
-                    Remain on your device for a set period or until you delete them. These help us remember your preferences for future visits.
-                  </p>
-                </div>
-                
-                <div>
-                  <h3 className="text-xl font-semibold text-white mb-2">Third-Party Cookies</h3>
-                  <p className="text-white/70">
-                    Set by third-party services we use, such as analytics providers. These help us understand how our website is being used and improve our services.
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            <div className="bg-white/5 backdrop-blur-lg border border-white/10 rounded-2xl p-8">
-              <h2 className="text-2xl font-bold text-white mb-4">Managing Cookies</h2>
-              <p className="text-white/70 leading-relaxed mb-4">
-                You can control and manage cookies in several ways:
-              </p>
-              <ul className="list-disc list-inside text-white/70 space-y-2">
-                <li>Most browsers allow you to refuse or accept cookies</li>
-                <li>You can delete cookies that have already been set</li>
-                <li>You can set your browser to notify you when cookies are being sent</li>
-                <li>Some features of our website may not function properly if you disable cookies</li>
-              </ul>
-            </div>
-
-            <div className="bg-white/5 backdrop-blur-lg border border-white/10 rounded-2xl p-8">
-              <h2 className="text-2xl font-bold text-white mb-4">Browser Settings</h2>
-              <p className="text-white/70 leading-relaxed mb-4">
-                To manage cookies, you can adjust your browser settings:
-              </p>
-              <ul className="list-disc list-inside text-white/70 space-y-2">
-                <li><strong className="text-white">Chrome:</strong> Settings → Privacy and security → Cookies and other site data</li>
-                <li><strong className="text-white">Firefox:</strong> Settings → Privacy & Security → Cookies and Site Data</li>
-                <li><strong className="text-white">Safari:</strong> Preferences → Privacy → Cookies and website data</li>
-                <li><strong className="text-white">Edge:</strong> Settings → Cookies and site permissions → Cookies and site data</li>
-              </ul>
-            </div>
-
-            <div className="bg-white/5 backdrop-blur-lg border border-white/10 rounded-2xl p-8">
-              <h2 className="text-2xl font-bold text-white mb-4">Updates to This Policy</h2>
-              <p className="text-white/70 leading-relaxed">
-                We may update this Cookie Policy from time to time to reflect changes in our practices or for other operational, legal, or regulatory reasons. Please revisit this page periodically to stay informed about our use of cookies.
-              </p>
-            </div>
-
-            <div className="bg-white/5 backdrop-blur-lg border border-white/10 rounded-2xl p-8">
-              <h2 className="text-2xl font-bold text-white mb-4">Contact Us</h2>
-              <p className="text-white/70 leading-relaxed">
-                If you have any questions about our use of cookies, please contact us at <a href="mailto:hello@nukleo.com" className="text-cyan-400 hover:underline">hello@nukleo.com</a>.
-              </p>
-            </div>
+      <div style={{ minHeight: '100vh', background: OFF_WHITE, fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
+        {/* Hero */}
+        <section style={{ padding: 'clamp(5rem, 10vh, 7rem) 6% 0' }}>
+          <div style={{ maxWidth: 800, margin: '0 auto' }}>
+            <p style={{
+              fontFamily: "'Plus Jakarta Sans', sans-serif",
+              fontWeight: 700,
+              fontSize: '0.75rem',
+              letterSpacing: '0.2em',
+              color: '#6b7280',
+              marginBottom: 16,
+              textTransform: 'uppercase',
+            }}>
+              {c.legal}
+            </p>
+            <h1
+              style={{
+                fontFamily: "'Plus Jakarta Sans', sans-serif",
+                fontWeight: 700,
+                fontSize: 'clamp(2rem, 4.5vw, 3.5rem)',
+                lineHeight: 1.15,
+                letterSpacing: '-0.03em',
+                margin: '0 0 0.5rem 0',
+                background: 'linear-gradient(to right, #6B1817, #5636AD)',
+                backgroundClip: 'text',
+                WebkitBackgroundClip: 'text',
+                color: 'transparent',
+              }}
+            >
+              {c.title}
+            </h1>
+            <p style={{ fontSize: '0.875rem', color: '#9ca3af', margin: 0 }}>{c.lastUpdated}</p>
           </div>
-        </div>
+        </section>
+
+        {/* Content */}
+        <section style={{ padding: '2rem 6% 4rem' }}>
+          <div style={{ maxWidth: 800, margin: '0 auto' }}>
+            <Section title={c.whatAre}>
+              <p style={{ margin: 0 }}>{c.whatAreText}</p>
+            </Section>
+
+            <Section title={c.howWeUse}>
+              <p style={{ margin: '0 0 0.5rem 0' }}>{c.howWeUseIntro}</p>
+              <ul style={{ margin: 0, paddingLeft: '1.25rem' }}>
+                {c.howWeUseList.map((item, i) => (
+                  <li key={i} style={{ marginBottom: '0.35rem' }}>{item}</li>
+                ))}
+              </ul>
+            </Section>
+
+            <Section title={c.typesTitle}>
+              <p style={{ margin: '0 0 0.5rem 0', fontWeight: 600, color: BORDEAUX }}>{c.sessionTitle}</p>
+              <p style={{ margin: '0 0 1rem 0' }}>{c.sessionText}</p>
+              <p style={{ margin: '0 0 0.5rem 0', fontWeight: 600, color: BORDEAUX }}>{c.persistentTitle}</p>
+              <p style={{ margin: '0 0 1rem 0' }}>{c.persistentText}</p>
+              <p style={{ margin: '0 0 0.5rem 0', fontWeight: 600, color: BORDEAUX }}>{c.thirdPartyTitle}</p>
+              <p style={{ margin: 0 }}>{c.thirdPartyText}</p>
+            </Section>
+
+            <Section title={c.managingTitle}>
+              <p style={{ margin: '0 0 0.5rem 0' }}>{c.managingIntro}</p>
+              <ul style={{ margin: 0, paddingLeft: '1.25rem' }}>
+                {c.managingList.map((item, i) => (
+                  <li key={i} style={{ marginBottom: '0.35rem' }}>{item}</li>
+                ))}
+              </ul>
+            </Section>
+
+            <Section title={c.browserTitle}>
+              <p style={{ margin: '0 0 0.5rem 0' }}>{c.browserIntro}</p>
+              <ul style={{ margin: 0, paddingLeft: '1.25rem' }}>
+                {c.browserList.map((item, i) => (
+                  <li key={i} style={{ marginBottom: '0.35rem' }}>{item}</li>
+                ))}
+              </ul>
+            </Section>
+
+            <Section title={c.updatesTitle}>
+              <p style={{ margin: 0 }}>{c.updatesText}</p>
+            </Section>
+
+            <Section title={c.contactTitle}>
+              <p style={{ margin: 0 }}>
+                {c.contactText}{' '}
+                <a href="mailto:hello@nukleo.com" style={{ color: LINK_COLOR, fontWeight: 600 }}>hello@nukleo.com</a>.
+              </p>
+            </Section>
+          </div>
+        </section>
       </div>
     </PageLayout>
   );

@@ -8,8 +8,8 @@ interface RecommendationsSectionProps {
 }
 
 export default function RecommendationsSection({ results }: RecommendationsSectionProps) {
-  const { t } = useLanguage();
-  const recommendations = getRecommendationsForLevel(results.maturityLevel);
+  const { t, language } = useLanguage();
+  const recommendations = getRecommendationsForLevel(results.maturityLevel, language);
 
   const getImpactColor = (impact: string) => {
     switch (impact) {

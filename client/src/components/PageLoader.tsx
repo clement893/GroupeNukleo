@@ -7,13 +7,12 @@ import SafeHTML from "@/components/SafeHTML";
 
 // Preload critical resources during loader display
 function preloadResources() {
-  // Preload critical images
+  // Preload only assets used immediately by the loader UI (avoid "preloaded but not used" warning)
   const criticalImages = [
-    '/Nukleo_blanc_RVB.svg',
-    '/leo-avatar.webp',
     '/nukleo-arrow.svg',
+    '/leo-avatar.webp',
   ];
-  
+  // Nukleo_blanc_RVB.svg not preloaded here - used only after loader or on admin; load on demand to avoid console warning
   criticalImages.forEach(src => {
     const link = document.createElement('link');
     link.rel = 'preload';

@@ -1,5 +1,6 @@
 import { MaturityLevel } from './scoring';
 import { Dimension } from './questions';
+import { RECOMMENDATIONS_BY_LEVEL_EN } from './recommendationsEn';
 
 export interface Recommendation {
   title: string;
@@ -303,7 +304,10 @@ export const RECOMMENDATIONS_BY_LEVEL: Record<MaturityLevel, MaturityRecommendat
   },
 };
 
-export function getRecommendationsForLevel(level: MaturityLevel): MaturityRecommendations {
+export function getRecommendationsForLevel(level: MaturityLevel, lang?: 'fr' | 'en'): MaturityRecommendations {
+  if (lang === 'en') {
+    return RECOMMENDATIONS_BY_LEVEL_EN[level];
+  }
   return RECOMMENDATIONS_BY_LEVEL[level];
 }
 

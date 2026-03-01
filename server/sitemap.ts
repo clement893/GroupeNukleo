@@ -1,160 +1,166 @@
-import { Router } from 'express';
-import { allTerms } from '../client/src/data/glossary';
+import { Router, Request } from 'express';
 
 const router = Router();
 
+// Paths without language prefix (used to generate both / and /fr/*)
+const STATIC_PATHS: { path: string; priority: string; changefreq: string }[] = [
+  { path: '', priority: '1.0', changefreq: 'weekly' },
+  { path: '/about', priority: '0.9', changefreq: 'monthly' },
+  { path: '/approche', priority: '0.8', changefreq: 'monthly' },
+  { path: '/projects', priority: '0.8', changefreq: 'weekly' },
+  { path: '/resources', priority: '0.9', changefreq: 'weekly' },
+  { path: '/contact', priority: '0.7', changefreq: 'monthly' },
+  { path: '/leo', priority: '0.7', changefreq: 'monthly' },
+  { path: '/services', priority: '0.9', changefreq: 'weekly' },
+  { path: '/services/tech', priority: '0.8', changefreq: 'monthly' },
+  { path: '/services/studio', priority: '0.8', changefreq: 'monthly' },
+  { path: '/services/agency', priority: '0.8', changefreq: 'monthly' },
+  { path: '/services/consulting', priority: '0.8', changefreq: 'monthly' },
+  { path: '/privacy-policy', priority: '0.4', changefreq: 'yearly' },
+  { path: '/nukleo-time-privacy', priority: '0.4', changefreq: 'yearly' },
+  { path: '/terms-of-service', priority: '0.4', changefreq: 'yearly' },
+  { path: '/cookie-policy', priority: '0.4', changefreq: 'yearly' },
+  { path: '/faq', priority: '0.6', changefreq: 'monthly' },
+];
+
+const RESOURCE_ARTICLE_IDS = [
+  'agentic-ai-playbook',
+  'pilot-to-scale',
+  'agentic-marketing',
+  'building-agentic-systems',
+  'roi-ai-investment',
+];
+
+function getBaseUrl(req: Request): string {
+  const siteUrl = process.env.SITE_URL;
+  if (siteUrl) return siteUrl.replace(/\/$/, '');
+  const host = req.get('host');
+  const protocol = req.get('x-forwarded-proto') || req.protocol || 'http';
+  return host ? `${protocol}://${host}` : 'https://nukleo.digital';
+}
+
 // Generate sitemap.xml
 router.get('/sitemap.xml', (req, res) => {
-  const baseUrl = process.env.SITE_URL || 'https://nukleo.digital';
+  const baseUrl = getBaseUrl(req);
   const currentDate = new Date().toISOString().split('T')[0];
 
+  const urls: string[] = [];
+
+  // Static pages: one <url> per path with loc (EN), alternates EN/FR and x-default
+  for (const { path, priority, changefreq } of STATIC_PATHS) {
+    const enPath = path || '/';
+    const frPath = path ? `/fr${path}` : '/fr';
+    const locEn = `${baseUrl}${enPath}`;
+    const locFr = `${baseUrl}${frPath}`;
+
+    urls.push(`  <url>
+    <loc>${locEn}</loc>
+    <lastmod>${currentDate}</lastmod>
+    <changefreq>${changefreq}</changefreq>
+    <priority>${priority}</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="${locEn}"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="${locFr}"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="${locEn}"/>
+  </url>`);
+
+    urls.push(`  <url>
+    <loc>${locFr}</loc>
+    <lastmod>${currentDate}</lastmod>
+    <changefreq>${changefreq}</changefreq>
+    <priority>${priority}</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="${locEn}"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="${locFr}"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="${locEn}"/>
+  </url>`);
+  }
+
   // Resource articles
-  const resourceArticles = [
-    'agentic-ai-playbook',
-    'pilot-to-scale',
-    'agentic-marketing',
-    'building-agentic-systems',
-    'roi-ai-investment',
-  ];
+  for (const id of RESOURCE_ARTICLE_IDS) {
+    const enPath = `/resources/${id}`;
+    const frPath = `/fr/resources/${id}`;
+    const locEn = `${baseUrl}${enPath}`;
+    const locFr = `${baseUrl}${frPath}`;
 
-  // Static pages (English)
-  const staticPagesEn = [
-    { url: '', priority: '1.0', changefreq: 'weekly' },
-    { url: '/about', priority: '0.8', changefreq: 'monthly' },
-    { url: '/expertise', priority: '0.8', changefreq: 'monthly' },
-    { url: '/projects', priority: '0.7', changefreq: 'weekly' },
-    { url: '/resources', priority: '0.9', changefreq: 'weekly' },
-    { url: '/glossary', priority: '0.9', changefreq: 'weekly' },
-    { url: '/radar', priority: '0.8', changefreq: 'monthly' },
-    { url: '/ai-readiness', priority: '0.7', changefreq: 'monthly' },
-    { url: '/contact', priority: '0.6', changefreq: 'monthly' },
-    { url: '/manifesto', priority: '0.7', changefreq: 'monthly' },
-    { url: '/services', priority: '0.9', changefreq: 'weekly' },
-    { url: '/services/ai-strategy-marketing', priority: '0.8', changefreq: 'monthly' },
-    { url: '/services/digital-platforms', priority: '0.8', changefreq: 'monthly' },
-    { url: '/services/intelligent-operations', priority: '0.8', changefreq: 'monthly' },
-    { url: '/services/agentic-ai', priority: '0.8', changefreq: 'monthly' },
-    { url: '/services/digital-transformation', priority: '0.8', changefreq: 'monthly' },
-  ];
+    urls.push(`  <url>
+    <loc>${locEn}</loc>
+    <lastmod>${currentDate}</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="${locEn}"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="${locFr}"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="${locEn}"/>
+  </url>`);
 
-  // Static pages (French)
-  const staticPagesFr = [
-    { url: '/fr', priority: '1.0', changefreq: 'weekly' },
-    { url: '/fr/about', priority: '0.8', changefreq: 'monthly' },
-    { url: '/fr/expertise', priority: '0.8', changefreq: 'monthly' },
-    { url: '/fr/projects', priority: '0.7', changefreq: 'weekly' },
-    { url: '/fr/resources', priority: '0.9', changefreq: 'weekly' },
-    { url: '/fr/glossary', priority: '0.9', changefreq: 'weekly' },
-    { url: '/fr/radar', priority: '0.8', changefreq: 'monthly' },
-    { url: '/fr/ai-readiness', priority: '0.7', changefreq: 'monthly' },
-    { url: '/fr/contact', priority: '0.6', changefreq: 'monthly' },
-    { url: '/fr/manifesto', priority: '0.7', changefreq: 'monthly' },
-    { url: '/fr/services', priority: '0.9', changefreq: 'weekly' },
-    { url: '/fr/services/ai-strategy-marketing', priority: '0.8', changefreq: 'monthly' },
-    { url: '/fr/services/digital-platforms', priority: '0.8', changefreq: 'monthly' },
-    { url: '/fr/services/intelligent-operations', priority: '0.8', changefreq: 'monthly' },
-    { url: '/fr/services/agentic-ai', priority: '0.8', changefreq: 'monthly' },
-    { url: '/fr/services/digital-transformation', priority: '0.8', changefreq: 'monthly' },
-    { url: '/fr/clients', priority: '0.7', changefreq: 'monthly' },
-    { url: '/fr/testimonials', priority: '0.7', changefreq: 'monthly' },
-    { url: '/fr/faq', priority: '0.6', changefreq: 'monthly' },
-    { url: '/fr/leo', priority: '0.7', changefreq: 'monthly' },
-  ];
+    urls.push(`  <url>
+    <loc>${locFr}</loc>
+    <lastmod>${currentDate}</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="${locEn}"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="${locFr}"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="${locEn}"/>
+  </url>`);
+  }
 
-  // Resource articles (English)
-  const resourcePagesEn = resourceArticles.map(id => ({
-    url: `/resources/${id}`,
-    priority: '0.8',
-    changefreq: 'monthly',
-  }));
+  // Project detail pages (slugs from projectsData)
+  try {
+    const { PROJECTS_DATA } = require('../client/src/data/projectsData') as { PROJECTS_DATA: { slug: string }[] };
+    for (const project of PROJECTS_DATA) {
+      const enPath = `/projects/${project.slug}`;
+      const frPath = `/fr/projects/${project.slug}`;
+      const locEn = `${baseUrl}${enPath}`;
+      const locFr = `${baseUrl}${frPath}`;
 
-  // Resource articles (French)
-  const resourcePagesFr = resourceArticles.map(id => ({
-    url: `/fr/resources/${id}`,
-    priority: '0.8',
-    changefreq: 'monthly',
-  }));
+      urls.push(`  <url>
+    <loc>${locEn}</loc>
+    <lastmod>${currentDate}</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="${locEn}"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="${locFr}"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="${locEn}"/>
+  </url>`);
 
-  // Glossary term pages (English)
-  const glossaryPagesEn = allTerms.map(term => ({
-    url: `/glossary/${term.id}`,
-    priority: '0.8',
-    changefreq: 'monthly',
-  }));
-
-  // Glossary term pages (French)
-  const glossaryPagesFr = allTerms.map(term => ({
-    url: `/fr/glossary/${term.id}`,
-    priority: '0.8',
-    changefreq: 'monthly',
-  }));
-
-  const allPages = [
-    ...staticPagesEn,
-    ...staticPagesFr,
-    ...resourcePagesEn,
-    ...resourcePagesFr,
-    ...glossaryPagesEn,
-    ...glossaryPagesFr,
-  ];
+      urls.push(`  <url>
+    <loc>${locFr}</loc>
+    <lastmod>${currentDate}</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="${locEn}"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="${locFr}"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="${locEn}"/>
+  </url>`);
+    }
+  } catch {
+    // Skip project detail URLs if data not available (e.g. build without client)
+  }
 
   const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
         xmlns:xhtml="http://www.w3.org/1999/xhtml">
-${allPages
-  .map(
-    page => {
-      // Determine alternate language URL
-      const isFr = page.url.startsWith('/fr');
-      const enUrl = isFr ? (page.url.replace('/fr', '') || '/') : page.url;
-      const frUrl = isFr ? page.url : `/fr${page.url}`;
-      
-      // Ensure URLs are properly formatted (no double slashes)
-      const cleanEnUrl = enUrl === '/' ? '' : enUrl;
-      const cleanFrUrl = frUrl === '/fr' ? '/fr' : frUrl;
-      
-      return `  <url>
-    <loc>${baseUrl}${page.url}</loc>
-    <lastmod>${currentDate}</lastmod>
-    <changefreq>${page.changefreq}</changefreq>
-    <priority>${page.priority}</priority>
-    <xhtml:link rel="alternate" hreflang="${isFr ? 'fr' : 'en'}" href="${baseUrl}${page.url}" />
-    <xhtml:link rel="alternate" hreflang="${isFr ? 'en' : 'fr'}" href="${baseUrl}${isFr ? cleanEnUrl : cleanFrUrl}" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="${baseUrl}${cleanEnUrl || '/'}" />
-  </url>`;
-    }
-  )
-  .join('\n')}
+${urls.join('\n')}
 </urlset>`;
 
-  res.header('Content-Type', 'application/xml; charset=utf-8');
-  res.header('Cache-Control', 'public, max-age=3600'); // Cache for 1 hour
+  res.setHeader('Content-Type', 'application/xml; charset=utf-8');
+  res.setHeader('Cache-Control', 'public, max-age=3600');
   res.send(sitemap);
 });
 
-// Generate robots.txt
+// robots.txt
 router.get('/robots.txt', (req, res) => {
-  const baseUrl = process.env.SITE_URL || 'https://nukleo.digital';
-  
-  const robots = `# Nukleo Digital - Robots.txt
+  const baseUrl = getBaseUrl(req);
+
+  const robots = `# Nukleo Digital
 User-agent: *
 Allow: /
 Disallow: /admin/
 Disallow: /api/
 
-# Sitemaps
 Sitemap: ${baseUrl}/sitemap.xml
-
-# Crawl-delay for bots
-User-agent: *
-Crawl-delay: 1
-
-# Block specific bots if needed
-# User-agent: BadBot
-# Disallow: /
 `;
 
-  res.header('Content-Type', 'text/plain');
+  res.setHeader('Content-Type', 'text/plain; charset=utf-8');
+  res.setHeader('Cache-Control', 'public, max-age=86400');
   res.send(robots);
 });
 

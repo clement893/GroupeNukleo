@@ -1,99 +1,226 @@
+import { Link } from 'wouter';
 import PageLayout from '@/components/PageLayout';
 import SEO from '@/components/SEO';
+import { useLanguage } from '@/contexts/LanguageContext';
+import { useLocalizedPath } from '@/hooks/useLocalizedPath';
+
+const OFF_WHITE = '#EFE8E8';
+const BORDEAUX = '#5A1E29';
+const LINK_COLOR = '#5636AD';
+
+const content = {
+  fr: {
+    seoTitle: 'Politique de confidentialité | Nukleo Digital',
+    seoDescription: 'Comment Nukleo Digital collecte, utilise et protège vos données personnelles. Notre engagement en matière de confidentialité et de sécurité.',
+    legal: 'Mentions légales',
+    title: 'Politique de confidentialité',
+    lastUpdated: 'Dernière mise à jour : 9 décembre 2024',
+    section1Title: '1. Informations que nous collectons',
+    section1Text: 'Nous collectons les informations que vous nous fournissez directement : création de compte, utilisation de nos services, communications, enquêtes. Cela peut inclure votre nom, adresse e-mail, informations sur votre entreprise et toute autre information que vous choisissez de nous communiquer.',
+    section2Title: '2. Utilisation des informations',
+    section2Intro: 'Nous utilisons les informations collectées pour :',
+    section2List: [
+      'Fournir, maintenir et améliorer nos services',
+      'Traiter les transactions et envoyer les informations associées',
+      'Vous envoyer des avis techniques, mises à jour et messages de support',
+      'Répondre à vos commentaires et questions',
+      'Analyser les tendances et modes d\'utilisation',
+      'Protéger contre les activités frauduleuses ou illégales',
+    ],
+    section3Title: '3. Partage des informations',
+    section3Text: 'Nous ne vendons, n\'échangeons ni ne louons vos données personnelles à des tiers. Nous pouvons les partager avec des prestataires de confiance qui nous aident à faire fonctionner le site et notre activité, dans la mesure où ils s\'engagent à les garder confidentielles.',
+    section4Title: '4. Sécurité des données',
+    section4Text: 'Nous mettons en œuvre des mesures techniques et organisationnelles appropriées pour protéger vos données contre l\'accès non autorisé, la modification, la divulgation ou la destruction. Aucune transmission sur Internet n\'est toutefois totalement sécurisée.',
+    section5Title: '5. Vos droits',
+    section5Intro: 'Vous avez le droit de :',
+    section5List: [
+      'Accéder aux données personnelles que nous détenons sur vous',
+      'Demander la correction des informations inexactes',
+      'Demander la suppression de vos données personnelles',
+      'Vous opposer au traitement de vos données',
+      'Demander la limitation du traitement',
+      'À la portabilité des données',
+    ],
+    section6Title: '6. Cookies',
+    section6Text: 'Nous utilisons des cookies et technologies similaires pour suivre l\'activité sur notre service. Vous pouvez configurer votre navigateur pour refuser les cookies ou signaler leur envoi. Consultez notre',
+    section6Link: 'Politique des cookies',
+    section6Suffix: 'pour plus d\'informations.',
+    section7Title: '7. Modifications de cette politique',
+    section7Text: 'Nous pouvons mettre à jour notre politique de confidentialité. Nous vous informerons en publiant la nouvelle version sur cette page et en mettant à jour la date « Dernière mise à jour ».',
+    section8Title: '8. Nous contacter',
+    section8Text: 'Pour toute question concernant cette politique de confidentialité, contactez-nous à',
+  },
+  en: {
+    seoTitle: 'Privacy Policy | Nukleo Digital',
+    seoDescription: 'Learn how Nukleo Digital collects, uses, and protects your personal information. Our commitment to data privacy and security.',
+    legal: 'Legal',
+    title: 'Privacy Policy',
+    lastUpdated: 'Last updated: December 9, 2024',
+    section1Title: '1. Information We Collect',
+    section1Text: 'We collect information that you provide directly to us, including when you create an account, use our services, communicate with us, or participate in surveys. This may include your name, email address, company information, and any other information you choose to provide.',
+    section2Title: '2. How We Use Your Information',
+    section2Intro: 'We use the information we collect to:',
+    section2List: [
+      'Provide, maintain, and improve our services',
+      'Process transactions and send related information',
+      'Send you technical notices, updates, and support messages',
+      'Respond to your comments and questions',
+      'Analyze usage patterns and trends',
+      'Protect against fraudulent or illegal activity',
+    ],
+    section3Title: '3. Information Sharing',
+    section3Text: 'We do not sell, trade, or rent your personal information to third parties. We may share your information with trusted service providers who assist us in operating our website and conducting our business, as long as they agree to keep this information confidential.',
+    section4Title: '4. Data Security',
+    section4Text: 'We implement appropriate technical and organizational measures to protect your personal information against unauthorized access, alteration, disclosure, or destruction. However, no method of transmission over the Internet is 100% secure.',
+    section5Title: '5. Your Rights',
+    section5Intro: 'You have the right to:',
+    section5List: [
+      'Access the personal information we hold about you',
+      'Request correction of inaccurate information',
+      'Request deletion of your personal information',
+      'Object to processing of your personal information',
+      'Request restriction of processing',
+      'Data portability',
+    ],
+    section6Title: '6. Cookies',
+    section6Text: 'We use cookies and similar tracking technologies to track activity on our service. You can instruct your browser to refuse all cookies or to indicate when a cookie is being sent. See our',
+    section6Link: 'Cookie Policy',
+    section6Suffix: 'for more information.',
+    section7Title: '7. Changes to This Policy',
+    section7Text: 'We may update our Privacy Policy from time to time. We will notify you of any changes by posting the new Privacy Policy on this page and updating the "Last updated" date.',
+    section8Title: '8. Contact Us',
+    section8Text: 'If you have any questions about this Privacy Policy, please contact us at',
+  },
+} as const;
+
+function Section({ title, children }: { title: string; children: React.ReactNode }) {
+  return (
+    <div style={{
+      background: '#fff',
+      borderRadius: 20,
+      padding: '1.75rem 2rem',
+      boxShadow: '0 4px 24px rgba(0,0,0,0.06)',
+      marginBottom: '1.5rem',
+    }}>
+      <h2 style={{
+        fontFamily: "'Plus Jakarta Sans', sans-serif",
+        fontWeight: 700,
+        fontSize: '1.35rem',
+        color: BORDEAUX,
+        margin: '0 0 1rem 0',
+      }}>
+        {title}
+      </h2>
+      <div style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: '0.9375rem', color: '#4b5563', lineHeight: 1.65 }}>
+        {children}
+      </div>
+    </div>
+  );
+}
 
 export default function PrivacyPolicy() {
+  const { language } = useLanguage();
+  const getLocalizedPath = useLocalizedPath();
+  const isFr = language === 'fr';
+  const c = content[isFr ? 'fr' : 'en'];
+
   return (
     <PageLayout>
-      <SEO 
-        title="Privacy Policy | Your Data Protection"
-        description="Learn how Nukleo Digital collects, uses, and protects your personal information. Our commitment to data privacy and security."
-        keywords="privacy policy, data protection, GDPR, personal information, data security"
+      <SEO
+        title={c.seoTitle}
+        description={c.seoDescription}
+        keywords="privacy policy, data protection, GDPR, personal information, data security, politique de confidentialité"
       />
-      
-      <div className="min-h-screen bg-gradient-to-br from-violet-950 via-fuchsia-950 to-rose-950">
-        <div className="container mx-auto px-4 py-32 max-w-4xl">
-          <h1 className="text-5xl md:text-6xl font-bold text-white mb-8">
-            Privacy Policy
-          </h1>
-          
-          <p className="text-white/70 mb-12">
-            Last updated: December 9, 2024
-          </p>
-
-          <div className="prose prose-invert prose-lg max-w-none space-y-8">
-            <div className="bg-white/5 backdrop-blur-lg border border-white/10 rounded-2xl p-8">
-              <h2 className="text-2xl font-bold text-white mb-4">1. Information We Collect</h2>
-              <p className="text-white/70 leading-relaxed">
-                We collect information that you provide directly to us, including when you create an account, use our services, communicate with us, or participate in surveys. This may include your name, email address, company information, and any other information you choose to provide.
-              </p>
-            </div>
-
-            <div className="bg-white/5 backdrop-blur-lg border border-white/10 rounded-2xl p-8">
-              <h2 className="text-2xl font-bold text-white mb-4">2. How We Use Your Information</h2>
-              <p className="text-white/70 leading-relaxed mb-4">
-                We use the information we collect to:
-              </p>
-              <ul className="list-disc list-inside text-white/70 space-y-2">
-                <li>Provide, maintain, and improve our services</li>
-                <li>Process transactions and send related information</li>
-                <li>Send you technical notices, updates, and support messages</li>
-                <li>Respond to your comments and questions</li>
-                <li>Analyze usage patterns and trends</li>
-                <li>Protect against fraudulent or illegal activity</li>
-              </ul>
-            </div>
-
-            <div className="bg-white/5 backdrop-blur-lg border border-white/10 rounded-2xl p-8">
-              <h2 className="text-2xl font-bold text-white mb-4">3. Information Sharing</h2>
-              <p className="text-white/70 leading-relaxed">
-                We do not sell, trade, or rent your personal information to third parties. We may share your information with trusted service providers who assist us in operating our website and conducting our business, as long as they agree to keep this information confidential.
-              </p>
-            </div>
-
-            <div className="bg-white/5 backdrop-blur-lg border border-white/10 rounded-2xl p-8">
-              <h2 className="text-2xl font-bold text-white mb-4">4. Data Security</h2>
-              <p className="text-white/70 leading-relaxed">
-                We implement appropriate technical and organizational measures to protect your personal information against unauthorized access, alteration, disclosure, or destruction. However, no method of transmission over the Internet is 100% secure.
-              </p>
-            </div>
-
-            <div className="bg-white/5 backdrop-blur-lg border border-white/10 rounded-2xl p-8">
-              <h2 className="text-2xl font-bold text-white mb-4">5. Your Rights</h2>
-              <p className="text-white/70 leading-relaxed mb-4">
-                You have the right to:
-              </p>
-              <ul className="list-disc list-inside text-white/70 space-y-2">
-                <li>Access the personal information we hold about you</li>
-                <li>Request correction of inaccurate information</li>
-                <li>Request deletion of your personal information</li>
-                <li>Object to processing of your personal information</li>
-                <li>Request restriction of processing</li>
-                <li>Data portability</li>
-              </ul>
-            </div>
-
-            <div className="bg-white/5 backdrop-blur-lg border border-white/10 rounded-2xl p-8">
-              <h2 className="text-2xl font-bold text-white mb-4">6. Cookies</h2>
-              <p className="text-white/70 leading-relaxed">
-                We use cookies and similar tracking technologies to track activity on our service and hold certain information. You can instruct your browser to refuse all cookies or to indicate when a cookie is being sent. See our <a href="/cookie-policy" className="text-cyan-400 hover:underline">Cookie Policy</a> for more information.
-              </p>
-            </div>
-
-            <div className="bg-white/5 backdrop-blur-lg border border-white/10 rounded-2xl p-8">
-              <h2 className="text-2xl font-bold text-white mb-4">7. Changes to This Policy</h2>
-              <p className="text-white/70 leading-relaxed">
-                We may update our Privacy Policy from time to time. We will notify you of any changes by posting the new Privacy Policy on this page and updating the "Last updated" date.
-              </p>
-            </div>
-
-            <div className="bg-white/5 backdrop-blur-lg border border-white/10 rounded-2xl p-8">
-              <h2 className="text-2xl font-bold text-white mb-4">8. Contact Us</h2>
-              <p className="text-white/70 leading-relaxed">
-                If you have any questions about this Privacy Policy, please contact us at <a href="mailto:hello@nukleo.com" className="text-cyan-400 hover:underline">hello@nukleo.com</a>.
-              </p>
-            </div>
+      <div style={{ minHeight: '100vh', background: OFF_WHITE, fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
+        {/* Hero */}
+        <section style={{ padding: 'clamp(5rem, 10vh, 7rem) 6% 0' }}>
+          <div style={{ maxWidth: 800, margin: '0 auto' }}>
+            <p style={{
+              fontFamily: "'Plus Jakarta Sans', sans-serif",
+              fontWeight: 700,
+              fontSize: '0.75rem',
+              letterSpacing: '0.2em',
+              color: '#6b7280',
+              marginBottom: 16,
+              textTransform: 'uppercase',
+            }}>
+              {c.legal}
+            </p>
+            <h1
+              style={{
+                fontFamily: "'Plus Jakarta Sans', sans-serif",
+                fontWeight: 700,
+                fontSize: 'clamp(2rem, 4.5vw, 3.5rem)',
+                lineHeight: 1.15,
+                letterSpacing: '-0.03em',
+                margin: '0 0 0.5rem 0',
+                background: 'linear-gradient(to right, #6B1817, #5636AD)',
+                backgroundClip: 'text',
+                WebkitBackgroundClip: 'text',
+                color: 'transparent',
+              }}
+            >
+              {c.title}
+            </h1>
+            <p style={{ fontSize: '0.875rem', color: '#9ca3af', margin: 0 }}>{c.lastUpdated}</p>
           </div>
-        </div>
+        </section>
+
+        {/* Content */}
+        <section style={{ padding: '2rem 6% 4rem' }}>
+          <div style={{ maxWidth: 800, margin: '0 auto' }}>
+            <Section title={c.section1Title}>
+              <p style={{ margin: 0 }}>{c.section1Text}</p>
+            </Section>
+
+            <Section title={c.section2Title}>
+              <p style={{ margin: '0 0 0.5rem 0' }}>{c.section2Intro}</p>
+              <ul style={{ margin: 0, paddingLeft: '1.25rem' }}>
+                {c.section2List.map((item, i) => (
+                  <li key={i} style={{ marginBottom: '0.35rem' }}>{item}</li>
+                ))}
+              </ul>
+            </Section>
+
+            <Section title={c.section3Title}>
+              <p style={{ margin: 0 }}>{c.section3Text}</p>
+            </Section>
+
+            <Section title={c.section4Title}>
+              <p style={{ margin: 0 }}>{c.section4Text}</p>
+            </Section>
+
+            <Section title={c.section5Title}>
+              <p style={{ margin: '0 0 0.5rem 0' }}>{c.section5Intro}</p>
+              <ul style={{ margin: 0, paddingLeft: '1.25rem' }}>
+                {c.section5List.map((item, i) => (
+                  <li key={i} style={{ marginBottom: '0.35rem' }}>{item}</li>
+                ))}
+              </ul>
+            </Section>
+
+            <Section title={c.section6Title}>
+              <p style={{ margin: 0 }}>
+                {c.section6Text}{' '}
+                <Link href={getLocalizedPath('/cookie-policy')} style={{ color: LINK_COLOR, fontWeight: 600 }}>
+                  {c.section6Link}
+                </Link>{' '}
+                {c.section6Suffix}
+              </p>
+            </Section>
+
+            <Section title={c.section7Title}>
+              <p style={{ margin: 0 }}>{c.section7Text}</p>
+            </Section>
+
+            <Section title={c.section8Title}>
+              <p style={{ margin: 0 }}>
+                {c.section8Text}{' '}
+                <a href="mailto:hello@nukleo.com" style={{ color: LINK_COLOR, fontWeight: 600 }}>hello@nukleo.com</a>.
+              </p>
+            </Section>
+          </div>
+        </section>
       </div>
     </PageLayout>
   );

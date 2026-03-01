@@ -50,6 +50,16 @@
   display: none;
 }
 
+/* Header hide/show on scroll - transition must not be overridden by mobile * rule */
+header.header-scroll-transform,
+.header-scroll-transform {
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  transform: translateY(0) !important;
+}
+.header-scroll-transform.header-hidden {
+  transform: translateY(-100%) !important;
+}
+
 /* Glass Dark Effect for Header */
 .glass-dark {
   background: rgba(0, 0, 0, 0.2);

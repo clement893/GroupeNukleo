@@ -13,6 +13,7 @@ import ArrowBackground from "./components/ArrowBackground";
 import AnalyticsLoader from "./components/AnalyticsLoader";
 import GoogleAnalytics from "./components/GoogleAnalytics";
 import { FloatingLanguageToggle } from "./components/FloatingLanguageToggle";
+import CookieConsent from "./components/CookieConsent";
 import { usePageTransition } from "./hooks/usePageTransition";
 import { usePageBackground } from "./hooks/usePageBackground";
 import { usePrefetch } from "./hooks/usePrefetch";
@@ -101,6 +102,7 @@ const RunMigration = lazy(() => import("./pages/admin/RunMigration"));
 const AdminLoaderMigration = lazy(() => import("./pages/admin/AdminLoaderMigration"));
 const AdminHome = lazy(() => import("./pages/admin/AdminHome"));
 const AdminProjectsImages = lazy(() => import("./pages/admin/AdminProjectsImages"));
+const AdminCarouselLogos = lazy(() => import("./pages/admin/AdminCarouselLogos"));
 
 import { ProtectedAdminRoute } from "./components/ProtectedAdminRoute";
 import { withPageVisibility } from "./components/ProtectedRoute";
@@ -124,6 +126,7 @@ function App() {
           <AnalyticsLoader />
           <FloatingLanguageToggle />
           <GlobalLEO />
+          <CookieConsent />
           <Suspense fallback={null}>
             <Switch>
               {/* ===== ROUTES FRANÇAISES ===== */}
@@ -213,6 +216,9 @@ function App() {
               </Route>
               <Route path="/admin/projects-images">
                 <ProtectedAdminRoute><AdminProjectsImages /></ProtectedAdminRoute>
+              </Route>
+              <Route path="/admin/carousel-logos">
+                <ProtectedAdminRoute><AdminCarouselLogos /></ProtectedAdminRoute>
               </Route>
               <Route path="/admin">
                 <ProtectedAdminRoute><AdminHome /></ProtectedAdminRoute>
