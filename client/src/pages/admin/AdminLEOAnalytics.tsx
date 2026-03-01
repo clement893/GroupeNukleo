@@ -1,7 +1,8 @@
 import { trpc } from '@/lib/trpc';
+import { useIsAdminSession } from '@/hooks/useIsAdminSession';
 import { Card } from '@/components/ui/card';
 import { Loader2, TrendingUp, Users, MessageSquare, Clock, Mail } from 'lucide-react';
-import { AdminHeader } from "@/components/AdminHeader";
+import { AdminLayout } from "@/components/AdminLayout";
 import { Line, Bar } from 'react-chartjs-2';
 import {
   Chart as ChartJS,
@@ -30,21 +31,28 @@ ChartJS.register(
 );
 
 export default function AdminLeoAnalytics() {
-  const { data: analytics, isLoading } = trpc.leoAnalytics.getAnalytics.useQuery();
+  const { isAdmin, isLoading: authLoading } = useIsAdminSession();
+  const { data: analytics, isLoading } = trpc.leoAnalytics.getAnalytics.useQuery(undefined, {
+    enabled: isAdmin,
+  });
 
-  if (isLoading) {
+  if (authLoading || isLoading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-[oklch(0.25_0.05_300)] to-[oklch(0.15_0.05_340)] flex items-center justify-center">
-        <Loader2 className="w-8 h-8 text-cyan-400 animate-spin" />
-      </div>
+      <AdminLayout>
+        <div className="min-h-[50vh] flex items-center justify-center">
+          <Loader2 className="w-8 h-8 text-cyan-400 animate-spin" />
+        </div>
+      </AdminLayout>
     );
   }
 
   if (!analytics) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-[oklch(0.25_0.05_300)] to-[oklch(0.15_0.05_340)] flex items-center justify-center">
-        <p className="text-white">No analytics data available</p>
-      </div>
+      <AdminLayout>
+        <div className="min-h-[50vh] flex items-center justify-center">
+          <p className="text-white">No analytics data available</p>
+        </div>
+      </AdminLayout>
     );
   }
 
@@ -138,8 +146,8 @@ export default function AdminLeoAnalytics() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[oklch(0.25_0.05_300)] to-[oklch(0.15_0.05_340)] p-8">
-      <div className="max-w-7xl mx-auto">
+    <AdminLayout>
+      <div className="p-6 lg:p-8 max-w-7xl mx-auto">
         {/* Header */}
         <div className="mb-8">
           <h1 className="text-4xl font-bold text-white mb-2">LEO Analytics Dashboard</h1>
@@ -272,6 +280,6 @@ export default function AdminLeoAnalytics() {
           </div>
         </Card>
       </div>
-    </div>
+    </AdminLayout>
   );
 }

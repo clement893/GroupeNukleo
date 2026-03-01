@@ -1,11 +1,13 @@
 import { useState } from "react";
 import { trpc } from "@/lib/trpc";
+import { useIsAdminSession } from "@/hooks/useIsAdminSession";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { RefreshCw, CheckCircle2, XCircle, Loader2, MessageSquare } from "lucide-react";
-import { AdminHeader } from "@/components/AdminHeader";
+import { AdminLayout } from "@/components/AdminLayout";
 
 export default function AdminTestimonials() {
+  const { isAdmin } = useIsAdminSession();
   const [isSyncing, setIsSyncing] = useState(false);
   const [syncResult, setSyncResult] = useState<{
     success: boolean;
@@ -45,12 +47,10 @@ export default function AdminTestimonials() {
   };
 
   return (
-    <>
-      <AdminHeader />
-      <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 p-8">
-        <div className="max-w-7xl mx-auto space-y-8">
-          {/* Header */}
-          <div className="flex items-center justify-between">
+    <AdminLayout>
+      <div className="p-6 lg:p-8 max-w-7xl mx-auto space-y-8">
+        {/* Header */}
+        <div className="flex items-center justify-between">
             <div>
               <h1 className="text-4xl font-bold text-white mb-2">Gestion des Témoignages</h1>
               <p className="text-gray-300">Synchroniser les témoignages depuis la plateforme interne</p>
@@ -72,7 +72,7 @@ export default function AdminTestimonials() {
               <div className="flex items-center gap-4">
                 <Button
                   onClick={handleSync}
-                  disabled={isSyncing}
+                  disabled={isSyncing || !isAdmin}
                   className="bg-violet-600 hover:bg-violet-700 text-white"
                 >
                   {isSyncing ? (
@@ -185,7 +185,6 @@ export default function AdminTestimonials() {
             </CardContent>
           </Card>
         </div>
-      </div>
-    </>
+      </AdminLayout>
   );
 }

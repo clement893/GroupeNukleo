@@ -1,5 +1,6 @@
 import { trpc } from '@/lib/trpc';
-import { AdminHeader } from "@/components/AdminHeader";
+import { useIsAdminSession } from '@/hooks/useIsAdminSession';
+import { AdminLayout } from "@/components/AdminLayout";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { useState, useRef } from 'react';
@@ -8,7 +9,10 @@ import { toast } from 'sonner';
 import { formatDistanceToNow } from 'date-fns';
 
 export default function AdminProjectsImages() {
-  const { data: images, isLoading, refetch } = trpc.projectsImages.listAdmin.useQuery();
+  const { isAdmin, isLoading: authLoading } = useIsAdminSession();
+  const { data: images, isLoading, refetch } = trpc.projectsImages.listAdmin.useQuery(undefined, {
+    enabled: isAdmin,
+  });
   const deleteMutation = trpc.projectsImages.delete.useMutation();
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [uploading, setUploading] = useState(false);
@@ -92,22 +96,25 @@ export default function AdminProjectsImages() {
   };
 
   return (
-    <div className="min-h-screen bg-background">
-      <AdminHeader />
-      
-      <div className="container mx-auto py-8 px-4">
+    <AdminLayout>
+      <div className="p-6 lg:p-8 container mx-auto max-w-5xl">
         <div className="mb-8">
-          <h1 className="text-3xl font-bold mb-2">Projects Images</h1>
-          <p className="text-muted-foreground">
+          <h1 className="text-3xl font-bold text-white mb-2">Projects Images</h1>
+          <p className="text-gray-400">
             Upload and manage images for the projects page
           </p>
         </div>
 
-        {/* Upload Section */}
-        <Card className="mb-8">
+        {authLoading ? (
+          <div className="flex items-center justify-center py-12">
+            <Loader2 className="w-8 h-8 animate-spin text-gray-400" />
+          </div>
+        ) : (
+        <>
+        <Card className="mb-8 bg-white/10 backdrop-blur-sm border-white/20">
           <CardHeader>
-            <CardTitle>Upload Images</CardTitle>
-            <CardDescription>
+            <CardTitle className="text-white">Upload Images</CardTitle>
+            <CardDescription className="text-gray-400">
               Upload image files (JPG, PNG, GIF, WebP). Maximum file size: 10MB
             </CardDescription>
           </CardHeader>
@@ -152,20 +159,20 @@ export default function AdminProjectsImages() {
         </Card>
 
         {/* Images Grid */}
-        <Card>
+        <Card className="bg-white/10 backdrop-blur-sm border-white/20">
           <CardHeader>
-            <CardTitle>Uploaded Images</CardTitle>
-            <CardDescription>
-              All images are stored in <code className="text-xs bg-muted px-1 py-0.5 rounded">/projects/</code>
+            <CardTitle className="text-white">Uploaded Images</CardTitle>
+            <CardDescription className="text-gray-400">
+              All images are stored in <code className="text-xs bg-white/10 px-1 py-0.5 rounded text-gray-300">/projects/</code>
             </CardDescription>
           </CardHeader>
           <CardContent>
             {isLoading ? (
               <div className="flex items-center justify-center py-12">
-                <Loader2 className="w-6 h-6 animate-spin text-muted-foreground" />
+                <Loader2 className="w-6 h-6 animate-spin text-gray-400" />
               </div>
             ) : !images || images.length === 0 ? (
-              <div className="text-center py-12 text-muted-foreground">
+              <div className="text-center py-12 text-gray-400">
                 <ImageIcon className="w-12 h-12 mx-auto mb-4 opacity-50" />
                 <p>No images uploaded yet</p>
                 <p className="text-sm mt-2">Upload your first image to get started</p>
@@ -175,10 +182,10 @@ export default function AdminProjectsImages() {
                 {images && Array.isArray(images) ? images.map((image) => (
                   <div
                     key={image.name}
-                    className="group relative border rounded-lg overflow-hidden bg-muted/50 hover:bg-muted transition-colors"
+                    className="group relative border border-white/10 rounded-lg overflow-hidden bg-white/5 hover:bg-white/10 transition-colors"
                   >
                     {/* Image Preview */}
-                    <div className="aspect-square relative bg-muted">
+                    <div className="aspect-square relative bg-white/5">
                       <img
                         src={`/projects/${image.name}`}
                         alt={image.name}
@@ -204,10 +211,10 @@ export default function AdminProjectsImages() {
                     
                     {/* Image Info */}
                     <div className="p-3">
-                      <p className="text-sm font-medium truncate mb-1" title={image.name}>
+                      <p className="text-sm font-medium text-white truncate mb-1" title={image.name}>
                         {image.name}
                       </p>
-                      <div className="flex items-center justify-between text-xs text-muted-foreground">
+                      <div className="flex items-center justify-between text-xs text-gray-400">
                         <span>{formatFileSize(image.size)}</span>
                         <span>
                           {formatDistanceToNow(new Date(image.modified), { addSuffix: true })}
@@ -218,10 +225,12 @@ export default function AdminProjectsImages() {
                 )) : null}
               </div>
             )}
-          </CardContent>
+            </CardContent>
         </Card>
+        </>
+        )}
       </div>
-    </div>
+    </AdminLayout>
   );
 }
 
