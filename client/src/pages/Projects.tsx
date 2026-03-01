@@ -90,7 +90,7 @@ export default function Projects() {
       logger.tagged('Projects').log('tRPC success:', data?.length, 'images');
     },
   });
-  const { data: apiProjects } = trpc.projects.list.useQuery(undefined, { staleTime: 5 * 60 * 1000 });
+  const { data: apiProjects } = trpc.projects.list.useQuery(undefined, { staleTime: 60 * 1000, refetchOnWindowFocus: true });
 
   const [images, setImages] = useState<string[]>([]);
   const [filter, setFilter] = useState<ProjectFilterValue>('Tous');

@@ -87,6 +87,56 @@ function flattenObj(obj: Record<string, unknown>, prefix = ""): Record<string, s
 
 type TextRow = { id: number; key: string; textEn: string; textFr: string };
 
+/** Labels pour les sections (premier segment des clés) = pages/sections actives du site */
+const PAGE_SECTION_LABELS: Record<string, string> = {
+  home: "Accueil",
+  services: "Services",
+  about: "À propos",
+  contact: "Contact",
+  projects: "Projets",
+  approche: "Approche",
+  resources: "Ressources",
+  faq: "FAQ",
+  leo: "Leo",
+  expertise: "Expertise",
+  nav: "Navigation",
+  header: "En-tête",
+  menu: "Menu",
+  footer: "Pied de page",
+  preFooter: "Pré-footer",
+  common: "Commun (boutons, labels)",
+  notFound: "Page 404",
+  alt: "Textes alternatifs",
+  hero: "Hero",
+  capabilities: "Capacités",
+  manifesto: "Manifeste",
+  trinity: "Trinity",
+  cta: "Appels à l'action",
+  testimonials: "Témoignages",
+  whoWeServe: "Public cible",
+  clients: "Clients",
+  startProject: "Démarrer un projet",
+  artsCulture: "Arts & Culture",
+  agencies: "Agences",
+  media: "Média",
+  lab: "Lab",
+  bureau: "Bureau",
+  studio: "Studio",
+  artsCultureCommitment: "Engagement Arts & Culture",
+  assessment: "Évaluation",
+  seo: "SEO",
+  pwa: "PWA",
+  other: "Autres",
+};
+/** Ordre d’affichage des sections (pages du site en premier) */
+const PAGE_SECTION_ORDER = [
+  "home", "services", "about", "contact", "projects", "approche", "resources", "faq", "leo",
+  "expertise", "nav", "header", "menu", "footer", "preFooter", "common", "notFound", "alt",
+  "hero", "capabilities", "manifesto", "trinity", "cta", "testimonials", "whoWeServe", "clients",
+  "startProject", "artsCulture", "agencies", "media", "lab", "bureau", "studio",
+  "artsCultureCommitment", "assessment", "seo", "pwa",
+];
+
 export default function AdminPageTexts() {
   const queryClient = useQueryClient();
   const {
@@ -159,7 +209,16 @@ export default function AdminPageTexts() {
       const section = t.key.split(".")[0] ?? "other";
       sectionSet.add(section);
     }
-    return Array.from(sectionSet).sort((a, b) => a.localeCompare(b));
+    const list = Array.from(sectionSet);
+    list.sort((a, b) => {
+      const ia = PAGE_SECTION_ORDER.indexOf(a);
+      const ib = PAGE_SECTION_ORDER.indexOf(b);
+      if (ia !== -1 && ib !== -1) return ia - ib;
+      if (ia !== -1) return -1;
+      if (ib !== -1) return 1;
+      return a.localeCompare(b);
+    });
+    return list;
   }, [texts]);
 
   const selectedPageKey = selectedPage ?? (pages[0] ?? null);
@@ -201,7 +260,7 @@ export default function AdminPageTexts() {
     return (
       <AdminLayout>
         <div className="min-h-[50vh] flex items-center justify-center">
-          <Loader2 className="w-8 h-8 text-cyan-400 animate-spin" />
+          <Loader2 className="w-8 h-8 text-cyan-600 animate-spin" />
         </div>
       </AdminLayout>
     );
@@ -216,23 +275,23 @@ export default function AdminPageTexts() {
     return (
       <AdminLayout>
         <div className="p-6 lg:p-8 max-w-2xl mx-auto">
-          <Card className="bg-white/10 border-white/20">
+          <Card className="bg-white dark:bg-[var(--admin-card)] border-[var(--admin-border)]">
             <CardHeader>
-              <CardTitle className="text-red-400 flex items-center gap-2">
+              <CardTitle className="text-red-600 dark:text-red-400 flex items-center gap-2">
                 <AlertCircle className="w-5 h-5" />
                 Erreur de chargement
               </CardTitle>
-              <CardDescription className="text-white/60">
+              <CardDescription className="text-[var(--admin-muted)]">
                 {isForbidden
                   ? "La session admin n'est pas reconnue pour cette requête. Essayez de rafraîchir la page ou de vous reconnecter."
                   : "Les textes des pages n'ont pas pu être chargés depuis la base de données."}
               </CardDescription>
             </CardHeader>
             <CardContent>
-              <p className="text-white/80 mb-4">{err.message || "Une erreur est survenue"}</p>
+              <p className="text-[var(--admin-foreground)] mb-4">{err.message || "Une erreur est survenue"}</p>
               {!isForbidden && (
-                <p className="text-sm text-white/50 mb-4">
-                  Vérifiez que la table <code className="bg-white/10 px-1 rounded">page_texts</code> existe (exécutez la migration DB depuis l&apos;admin).
+                <p className="text-sm text-[var(--admin-muted)] mb-4">
+                  Vérifiez que la table <code className="bg-gray-100 dark:bg-gray-800 px-1 rounded">page_texts</code> existe (exécutez la migration DB depuis l&apos;admin).
                 </p>
               )}
               <Button onClick={() => refetch()} className="bg-cyan-600 hover:bg-cyan-700 text-white">
@@ -249,24 +308,24 @@ export default function AdminPageTexts() {
     <AdminLayout>
       <div className="p-6 lg:p-8 max-w-7xl mx-auto">
         <div className="mb-6">
-          <h1 className="text-3xl font-bold text-white mb-1 flex items-center gap-3" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
-            <FileText className="w-7 h-7 text-cyan-400" />
+          <h1 className="text-3xl font-bold text-[var(--admin-foreground)] mb-1 flex items-center gap-3" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
+            <FileText className="w-7 h-7 text-cyan-600" />
             Textes des pages (EN / FR)
           </h1>
-          <p className="text-white/60" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
-            Sélectionnez une page à gauche, modifiez les textes à droite. Données en base de données.
+          <p className="text-[var(--admin-muted)]" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
+            Sélectionnez une page à gauche, modifiez les textes à droite. Données en base de données. Pour que les textes correspondent aux pages actives du site, synchronisez avec les fichiers du site (bouton « Tout depuis le site » ci-dessous).
           </p>
         </div>
 
         {(!texts || texts.length === 0) && !isLoading && (
-          <Card className="mb-6 border-cyan-500/50 bg-cyan-500/10">
+          <Card className="mb-6 border-cyan-500/50 bg-cyan-50 dark:bg-cyan-950/30 dark:border-cyan-500/30">
             <CardHeader>
-              <CardTitle className="text-white flex items-center gap-2" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
-                <Download className="w-5 h-5 text-cyan-400" />
+              <CardTitle className="text-[var(--admin-foreground)] flex items-center gap-2" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
+                <Download className="w-5 h-5 text-cyan-600" />
                 Importer tout le contenu du site
               </CardTitle>
-              <CardDescription className="text-white/70" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
-                Les textes du site (en.json / fr.json) seront importés dans la base. Toutes les pages et clés apparaîtront ici pour édition.
+              <CardDescription className="text-[var(--admin-muted)]" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
+                Les textes du site (en.json / fr.json) seront importés dans la base. Les mêmes clés que le site public (accueil, services, contact, etc.) apparaîtront ici pour édition.
               </CardDescription>
             </CardHeader>
             <CardContent>
@@ -291,20 +350,20 @@ export default function AdminPageTexts() {
 
         <div className="flex flex-col lg:flex-row gap-6">
           {/* Left: page selector */}
-          <Card className="lg:w-56 shrink-0 bg-white/10 border-white/20">
+          <Card className="lg:w-56 shrink-0 bg-white dark:bg-[var(--admin-card)] border-[var(--admin-border)]">
             <CardHeader className="pb-2">
-              <CardTitle className="text-white text-sm font-medium">Pages</CardTitle>
-              <CardDescription className="text-white/50 text-xs">
+              <CardTitle className="text-[var(--admin-foreground)] text-sm font-medium">Pages</CardTitle>
+              <CardDescription className="text-[var(--admin-muted)] text-xs">
                 {texts?.length ?? 0} clés
               </CardDescription>
             </CardHeader>
             <CardContent className="pt-0">
               {isLoading ? (
                 <div className="flex items-center justify-center py-8">
-                  <Loader2 className="w-6 h-6 text-cyan-400 animate-spin" />
+                  <Loader2 className="w-6 h-6 text-cyan-600 animate-spin" />
                 </div>
               ) : pages.length === 0 ? (
-                <p className="text-white/50 text-sm py-4">Aucune page. Ajoutez une clé ou importez.</p>
+                <p className="text-[var(--admin-muted)] text-sm py-4">Aucune page. Ajoutez une clé ou importez.</p>
               ) : (
                 <nav className="space-y-0.5">
                   {pages.map((page) => (
@@ -314,12 +373,12 @@ export default function AdminPageTexts() {
                       onClick={() => setSelectedPage(page)}
                       className={`w-full flex items-center gap-2 px-3 py-2.5 rounded-lg text-left text-sm transition-colors ${
                         selectedPageKey === page
-                          ? "bg-cyan-600/80 text-white"
-                          : "text-white/80 hover:bg-white/10"
+                          ? "bg-cyan-600 text-white"
+                          : "text-[var(--admin-foreground)] hover:bg-gray-100 dark:hover:bg-gray-800"
                       }`}
                     >
                       <ChevronRight className="w-4 h-4 shrink-0" />
-                      {page}
+                      {PAGE_SECTION_LABELS[page] ?? page}
                     </button>
                   ))}
                 </nav>
@@ -331,18 +390,18 @@ export default function AdminPageTexts() {
           <div className="flex-1 min-w-0 space-y-6">
             {selectedPageKey && (
               <>
-                <Card className="bg-white/10 border-white/20">
+                <Card className="bg-white dark:bg-[var(--admin-card)] border-[var(--admin-border)]">
                   <CardHeader>
-                    <CardTitle className="text-white" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
-                      Contenu — {selectedPageKey}
+                    <CardTitle className="text-[var(--admin-foreground)]" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
+                      Contenu — {PAGE_SECTION_LABELS[selectedPageKey] ?? selectedPageKey}
                     </CardTitle>
-                    <CardDescription className="text-white/60" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
+                    <CardDescription className="text-[var(--admin-muted)]" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
                       Modifiez les valeurs puis enregistrez pour chaque ligne.
                     </CardDescription>
                   </CardHeader>
                   <CardContent>
                     {itemsForPage.length === 0 ? (
-                      <p className="text-white/50 py-8 text-center">
+                      <p className="text-[var(--admin-muted)] py-8 text-center">
                         Aucune clé pour cette page. Ajoutez une clé ci-dessous (ex. {selectedPageKey}.maCle).
                       </p>
                     ) : (
@@ -353,12 +412,12 @@ export default function AdminPageTexts() {
                           return (
                             <div
                               key={row.id}
-                              className="p-4 rounded-lg bg-white/5 border border-white/10 space-y-3"
+                              className="p-4 rounded-lg bg-gray-50 dark:bg-gray-800/50 border border-gray-200 dark:border-gray-700 space-y-3"
                             >
-                              <div className="font-mono text-sm text-cyan-300/90">{row.key}</div>
+                              <div className="font-mono text-sm text-[var(--admin-foreground)]">{row.key}</div>
                               <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                                 <div>
-                                  <Label className="text-xs text-white/50">EN</Label>
+                                  <Label className="text-xs text-[var(--admin-muted)]">EN</Label>
                                   <Input
                                     value={local.textEn}
                                     onChange={(e) =>
@@ -367,11 +426,11 @@ export default function AdminPageTexts() {
                                         [row.id]: { ...local, textEn: e.target.value },
                                       }))
                                     }
-                                    className="mt-1 bg-white/10 border-white/20 text-white placeholder:text-white/40"
+                                    className="mt-1 bg-white dark:bg-gray-800 border-gray-300 dark:border-gray-600 text-gray-900 dark:text-gray-100 placeholder:text-gray-500"
                                   />
                                 </div>
                                 <div>
-                                  <Label className="text-xs text-white/50">FR</Label>
+                                  <Label className="text-xs text-[var(--admin-muted)]">FR</Label>
                                   <Input
                                     value={local.textFr}
                                     onChange={(e) =>
@@ -380,7 +439,7 @@ export default function AdminPageTexts() {
                                         [row.id]: { ...local, textFr: e.target.value },
                                       }))
                                     }
-                                    className="mt-1 bg-white/10 border-white/20 text-white placeholder:text-white/40"
+                                    className="mt-1 bg-white dark:bg-gray-800 border-gray-300 dark:border-gray-600 text-gray-900 dark:text-gray-100 placeholder:text-gray-500"
                                   />
                                 </div>
                               </div>
@@ -408,43 +467,43 @@ export default function AdminPageTexts() {
                 </Card>
 
                 {/* Add key */}
-                <Card className="bg-white/10 border-white/20">
+                <Card className="bg-white dark:bg-[var(--admin-card)] border-[var(--admin-border)]">
                   <CardHeader>
-                    <CardTitle className="text-white text-base flex items-center gap-2">
+                    <CardTitle className="text-[var(--admin-foreground)] text-base flex items-center gap-2">
                       <Plus className="w-4 h-4" />
                       Ajouter une clé
                     </CardTitle>
-                    <CardDescription className="text-white/60 text-sm">
+                    <CardDescription className="text-[var(--admin-muted)] text-sm">
                       Ex. {selectedPageKey}.maCle
                     </CardDescription>
                   </CardHeader>
                   <CardContent className="space-y-3">
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
                       <div>
-                        <Label className="text-white/70 text-sm">Clé</Label>
+                        <Label className="text-[var(--admin-muted)] text-sm">Clé</Label>
                         <Input
                           placeholder={`${selectedPageKey}.maCle`}
                           value={newKey}
                           onChange={(e) => setNewKey(e.target.value)}
-                          className="mt-1 bg-white/10 border-white/20 text-white font-mono text-sm"
+                          className="mt-1 bg-white dark:bg-gray-800 border-gray-300 dark:border-gray-600 text-gray-900 dark:text-gray-100 font-mono text-sm"
                         />
                       </div>
                       <div>
-                        <Label className="text-white/70 text-sm">EN</Label>
+                        <Label className="text-[var(--admin-muted)] text-sm">EN</Label>
                         <Input
                           placeholder="English"
                           value={newEn}
                           onChange={(e) => setNewEn(e.target.value)}
-                          className="mt-1 bg-white/10 border-white/20 text-white"
+                          className="mt-1 bg-white dark:bg-gray-800 border-gray-300 dark:border-gray-600 text-gray-900 dark:text-gray-100"
                         />
                       </div>
                       <div>
-                        <Label className="text-white/70 text-sm">FR</Label>
+                        <Label className="text-[var(--admin-muted)] text-sm">FR</Label>
                         <Input
                           placeholder="Français"
                           value={newFr}
                           onChange={(e) => setNewFr(e.target.value)}
-                          className="mt-1 bg-white/10 border-white/20 text-white"
+                          className="mt-1 bg-white dark:bg-gray-800 border-gray-300 dark:border-gray-600 text-gray-900 dark:text-gray-100"
                         />
                       </div>
                     </div>
@@ -460,20 +519,20 @@ export default function AdminPageTexts() {
                 </Card>
 
                 {/* Import from JSON */}
-                <Card className="bg-white/10 border-white/20">
+                <Card className="bg-white dark:bg-[var(--admin-card)] border-[var(--admin-border)]">
                   <CardHeader>
                     <div className="flex items-center justify-between">
                       <div>
-                        <CardTitle className="text-white text-base flex items-center gap-2">
+                        <CardTitle className="text-[var(--admin-foreground)] text-base flex items-center gap-2">
                           <Globe className="w-4 h-4" />
                           Importer depuis JSON (en / fr)
                         </CardTitle>
-                        <CardDescription className="text-white/60 text-sm mt-1">
+                        <CardDescription className="text-[var(--admin-muted)] text-sm mt-1">
                           Collez le contenu des fichiers locales ; les clés seront aplaties. Ou importez directement depuis les fichiers du site.
                         </CardDescription>
                       </div>
                       <div className="flex gap-2">
-                        <Button variant="outline" size="sm" onClick={() => setShowImport(!showImport)} className="border-white/30 text-white">
+                        <Button variant="outline" size="sm" onClick={() => setShowImport(!showImport)} className="border-[var(--admin-border)] text-[var(--admin-foreground)]">
                           {showImport ? "Masquer" : "Afficher"}
                         </Button>
                         <Button
@@ -492,18 +551,18 @@ export default function AdminPageTexts() {
                     <CardContent className="space-y-3">
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                         <div>
-                          <Label className="text-white/70 text-sm">en.json</Label>
+                          <Label className="text-[var(--admin-muted)] text-sm">en.json</Label>
                           <textarea
-                            className="mt-1 w-full h-32 font-mono text-xs rounded border border-white/20 bg-white/10 text-white p-2 placeholder:text-white/40"
+                            className="mt-1 w-full h-32 font-mono text-xs rounded border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 p-2 placeholder:text-gray-500"
                             placeholder='{ "common": { "loading": "Loading..." } }'
                             value={importEn}
                             onChange={(e) => setImportEn(e.target.value)}
                           />
                         </div>
                         <div>
-                          <Label className="text-white/70 text-sm">fr.json</Label>
+                          <Label className="text-[var(--admin-muted)] text-sm">fr.json</Label>
                           <textarea
-                            className="mt-1 w-full h-32 font-mono text-xs rounded border border-white/20 bg-white/10 text-white p-2 placeholder:text-white/40"
+                            className="mt-1 w-full h-32 font-mono text-xs rounded border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 p-2 placeholder:text-gray-500"
                             placeholder='{ "common": { "loading": "Chargement..." } }'
                             value={importFr}
                             onChange={(e) => setImportFr(e.target.value)}
@@ -514,7 +573,7 @@ export default function AdminPageTexts() {
                         onClick={handleImport}
                         disabled={importMutation.isPending || !importEn.trim() || !importFr.trim()}
                         variant="secondary"
-                        className="bg-white/10 text-white border-white/20 hover:bg-white/20"
+                        className="bg-gray-100 dark:bg-gray-800 text-[var(--admin-foreground)] border border-gray-300 dark:border-gray-600 hover:bg-gray-200 dark:hover:bg-gray-700"
                       >
                         {importMutation.isPending ? <Loader2 className="w-4 h-4 animate-spin mr-2" /> : null}
                         Importer
@@ -526,8 +585,8 @@ export default function AdminPageTexts() {
             )}
 
             {!selectedPageKey && !isLoading && (
-              <Card className="bg-white/10 border-white/20">
-                <CardContent className="py-12 text-center text-white/60">
+              <Card className="bg-white dark:bg-[var(--admin-card)] border-[var(--admin-border)]">
+                <CardContent className="py-12 text-center text-[var(--admin-muted)]">
                   Aucune page pour l’instant. Ajoutez une clé (ex. common.loading) ou importez depuis les JSON pour créer les premières entrées.
                 </CardContent>
               </Card>

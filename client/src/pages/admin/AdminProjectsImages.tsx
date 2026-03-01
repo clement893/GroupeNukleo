@@ -3,6 +3,12 @@ import { useIsAdminSession } from '@/hooks/useIsAdminSession';
 import { AdminLayout } from '@/components/AdminLayout';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+} from '@/components/ui/dialog';
 import { useState, useRef, useMemo, useEffect } from 'react';
 import { Link } from 'wouter';
 import {
@@ -52,19 +58,24 @@ function projectToRecord(p: ProjectData) {
 
 export default function AdminProjectsImages() {
   const { isAdmin, isLoading: authLoading } = useIsAdminSession();
+  const utils = trpc.useUtils();
   const { data: apiProjects, isLoading: projectsLoading, refetch: refetchProjects } =
     trpc.projects.listAdmin.useQuery(undefined, { enabled: isAdmin });
   const initMutation = trpc.projects.initFromClient.useMutation({
     onSuccess: () => {
       toast.success('Projets initialisés');
       refetchProjects();
+      utils.projects.list.invalidate();
     },
     onError: (e) => toast.error(e.message),
   });
   const setTriptychMutation = trpc.projects.setTriptychSlugs.useMutation({
     onSuccess: () => {
-      toast.success('Triptyques enregistrés');
+      toast.success('Triptyques enregistrés', {
+        description: 'La sélection des 3 projets (accueil et page Projets) a bien été enregistrée.',
+      });
       refetchProjects();
+      utils.projects.list.invalidate();
     },
     onError: (e) => toast.error(e.message),
   });
@@ -72,6 +83,7 @@ export default function AdminProjectsImages() {
     onSuccess: () => {
       toast.success('Carousel accueil enregistré');
       refetchProjects();
+      utils.projects.list.invalidate();
     },
     onError: (e) => toast.error(e.message),
   });
@@ -126,6 +138,7 @@ export default function AdminProjectsImages() {
   }, [projects]);
   const [homeTriptychImageBySlug, setHomeTriptychImageBySlug] = useState<Record<string, string>>(() => defaultHomeTriptychImageBySlug);
   const [projectsTriptychImageBySlug, setProjectsTriptychImageBySlug] = useState<Record<string, string>>(() => defaultProjectsTriptychImageBySlug);
+  const [triptychImagePicker, setTriptychImagePicker] = useState<{ type: 'home' | 'projects'; index: number } | null>(null);
   useEffect(() => {
     setHomeTriptychSlugs(defaultHomeSlugs);
     setProjectsTriptychSlugs(defaultProjectsSlugs);
@@ -275,15 +288,28 @@ export default function AdminProjectsImages() {
                             ))}
                           </select>
                           {slug && images.length > 0 && (
-                            <select
-                              value={selectedImg}
-                              onChange={(e) => setHomeTriptychImageBySlug((prev) => ({ ...prev, [slug]: e.target.value }))}
-                              className="w-full h-8 rounded border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 px-2 py-0.5 text-xs font-mono mt-1"
-                            >
-                              {images.map((img) => (
-                                <option key={img} value={img}>{img}</option>
-                              ))}
-                            </select>
+                            <div className="mt-2 flex items-center gap-2 flex-wrap">
+                              {selectedImg ? (
+                                <div className="w-16 h-16 rounded-lg overflow-hidden border border-gray-300 dark:border-gray-600 flex-shrink-0 bg-gray-100 dark:bg-gray-800">
+                                  <img
+                                    src={`/projects/${selectedImg}`}
+                                    alt=""
+                                    className="w-full h-full object-cover"
+                                    onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }}
+                                  />
+                                </div>
+                              ) : null}
+                              <Button
+                                type="button"
+                                variant="outline"
+                                size="sm"
+                                className="shrink-0 border-[var(--admin-border)] text-[var(--admin-foreground)]"
+                                onClick={() => setTriptychImagePicker({ type: 'home', index: i })}
+                              >
+                                <ImageIcon className="w-3.5 h-3.5 mr-1" />
+                                Choisir l&apos;image
+                              </Button>
+                            </div>
                           )}
                         </div>
                       );
@@ -326,15 +352,28 @@ export default function AdminProjectsImages() {
                             ))}
                           </select>
                           {slug && images.length > 0 && (
-                            <select
-                              value={selectedImg}
-                              onChange={(e) => setProjectsTriptychImageBySlug((prev) => ({ ...prev, [slug]: e.target.value }))}
-                              className="w-full h-8 rounded border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 px-2 py-0.5 text-xs font-mono mt-1"
-                            >
-                              {images.map((img) => (
-                                <option key={img} value={img}>{img}</option>
-                              ))}
-                            </select>
+                            <div className="mt-2 flex items-center gap-2 flex-wrap">
+                              {selectedImg ? (
+                                <div className="w-16 h-16 rounded-lg overflow-hidden border border-gray-300 dark:border-gray-600 flex-shrink-0 bg-gray-100 dark:bg-gray-800">
+                                  <img
+                                    src={`/projects/${selectedImg}`}
+                                    alt=""
+                                    className="w-full h-full object-cover"
+                                    onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }}
+                                  />
+                                </div>
+                              ) : null}
+                              <Button
+                                type="button"
+                                variant="outline"
+                                size="sm"
+                                className="shrink-0 border-[var(--admin-border)] text-[var(--admin-foreground)]"
+                                onClick={() => setTriptychImagePicker({ type: 'projects', index: i })}
+                              >
+                                <ImageIcon className="w-3.5 h-3.5 mr-1" />
+                                Choisir l&apos;image
+                              </Button>
+                            </div>
                           )}
                         </div>
                       );
@@ -369,6 +408,68 @@ export default function AdminProjectsImages() {
                 </Button>
               </CardContent>
             </Card>
+
+            {/* Popup choix d'image pour triptyques */}
+            <Dialog open={!!triptychImagePicker} onOpenChange={(open) => !open && setTriptychImagePicker(null)}>
+              <DialogContent className="sm:max-w-2xl bg-white dark:bg-[var(--admin-card)] border-[var(--admin-border)]">
+                <DialogHeader>
+                  <DialogTitle className="text-[var(--admin-foreground)]">
+                    Choisir l&apos;image
+                    {triptychImagePicker && (() => {
+                      const slug = triptychImagePicker.type === 'home'
+                        ? homeTriptychSlugs[triptychImagePicker.index]
+                        : projectsTriptychSlugs[triptychImagePicker.index];
+                      const proj = projects.find((p) => p.slug === slug);
+                      return proj ? ` — ${proj.title} (position ${triptychImagePicker.index + 1})` : '';
+                    })()}
+                  </DialogTitle>
+                </DialogHeader>
+                {triptychImagePicker && (() => {
+                  const slug = triptychImagePicker.type === 'home'
+                    ? homeTriptychSlugs[triptychImagePicker.index]
+                    : projectsTriptychSlugs[triptychImagePicker.index];
+                  const proj = projects.find((p) => p.slug === slug);
+                  const images = proj?.images ?? [];
+                  const currentImg = triptychImagePicker.type === 'home'
+                    ? (homeTriptychImageBySlug[slug] || proj?.images?.[0] || '')
+                    : (projectsTriptychImageBySlug[slug] || proj?.images?.[0] || '');
+                  const setImage = (img: string) => {
+                    if (!slug) return;
+                    if (triptychImagePicker.type === 'home') {
+                      setHomeTriptychImageBySlug((prev) => ({ ...prev, [slug]: img }));
+                    } else {
+                      setProjectsTriptychImageBySlug((prev) => ({ ...prev, [slug]: img }));
+                    }
+                    setTriptychImagePicker(null);
+                  };
+                  return (
+                    <div className="grid grid-cols-3 sm:grid-cols-4 gap-3 max-h-[60vh] overflow-y-auto py-2">
+                      {images.length === 0 ? (
+                        <p className="text-[var(--admin-muted)] col-span-full py-4 text-center">Aucune image pour ce projet.</p>
+                      ) : (
+                        images.map((img) => (
+                        <button
+                          key={img}
+                          type="button"
+                          onClick={() => setImage(img)}
+                          className={`rounded-lg overflow-hidden border-2 focus:outline-none aspect-square bg-gray-100 dark:bg-gray-800 ${
+                            img === currentImg ? 'border-cyan-500 ring-2 ring-cyan-500/30' : 'border-transparent hover:border-cyan-500 focus:border-cyan-500'
+                          }`}
+                        >
+                          <img
+                            src={`/projects/${img}`}
+                            alt=""
+                            className="w-full h-full object-cover"
+                            onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }}
+                          />
+                          </button>
+                        ))
+                      )}
+                    </div>
+                  );
+                })()}
+              </DialogContent>
+            </Dialog>
 
             {/* Carousel accueil (HOME) : jusqu'à 6 projets + image choisie pour chaque */}
             <Card className="mb-8 bg-white dark:bg-[var(--admin-card)] border-[var(--admin-border)] shadow-sm">

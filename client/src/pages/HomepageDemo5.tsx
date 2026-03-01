@@ -531,7 +531,7 @@ export default function HomepageDemo5() {
     { label: t('nav.contact'), href: '/contact' },
   ];
 
-  const { data: apiProjects } = trpc.projects.list.useQuery(undefined, { staleTime: 2 * 60 * 1000 });
+  const { data: apiProjects } = trpc.projects.list.useQuery(undefined, { staleTime: 60 * 1000, refetchOnWindowFocus: true });
   const homeCarouselProjects = useMemo(() => {
     const featured = (apiProjects || []).filter((p: { featuredOnHomeCarousel?: boolean }) => p.featuredOnHomeCarousel);
     return mapApiProjectsToHome(featured, 6, 0, 'homeCarouselImage');
