@@ -1,6 +1,8 @@
 import fs from "fs/promises";
 import path from "path";
 import { z } from "zod";
+import { getDb } from "./db";
+import { sql } from "drizzle-orm";
 
 // Allow Railway etc. to point to a persistent volume (e.g. DATA_PATH=/tmp/data or a mounted volume)
 const DATA_DIR = process.env.DATA_PATH
@@ -54,6 +56,26 @@ export const projectSchema = z.object({
 export type ProjectRecord = z.infer<typeof projectSchema>;
 
 export async function readProjects(): Promise<ProjectRecord[]> {
+  const db = await getDb();
+  if (db) {
+    try {
+      const result = await db.execute(sql`SELECT value FROM projects_store WHERE key = 'projects' LIMIT 1`);
+      const rows = Array.isArray(result) ? result : (result as { rows?: unknown[] })?.rows ?? [];
+      const row = rows[0] as { value?: string } | undefined;
+      if (row?.value) {
+        const data = JSON.parse(row.value) as { projects?: unknown[] };
+        const projects = Array.isArray(data?.projects) ? data.projects : [];
+        const parsed = projects
+          .map((p: unknown) => projectSchema.safeParse(p))
+          .filter((r): r is z.SafeParseSuccess<ProjectRecord> => r.success)
+          .map((r) => r.data);
+        return parsed;
+      }
+    } catch {
+      // Table might not exist yet
+    }
+  }
+
   try {
     const raw = await fs.readFile(PROJECTS_FILE, "utf-8");
     const data = JSON.parse(raw);
@@ -80,13 +102,23 @@ export async function readProjects(): Promise<ProjectRecord[]> {
 }
 
 async function writeProjects(projects: ProjectRecord[]): Promise<void> {
+  const payload = JSON.stringify({ projects }, null, 2);
+
   await fs.mkdir(DATA_DIR, { recursive: true });
-  await fs.writeFile(
-    PROJECTS_FILE,
-    JSON.stringify({ projects }, null, 2),
-    "utf-8"
-  );
+  await fs.writeFile(PROJECTS_FILE, payload, "utf-8");
+
+  const db = await getDb();
+  if (db) {
+    try {
+      await db.execute(
+        sql`INSERT INTO projects_store (key, value, "updatedAt") VALUES ('projects', ${payload}, NOW()) ON CONFLICT (key) DO UPDATE SET value = ${payload}, "updatedAt" = NOW()`
+      );
+    } catch {
+      // Table might not exist yet
+    }
+  }
 }
+
 
 export async function initProjects(projects: ProjectRecord[]): Promise<ProjectRecord[]> {
   const parsed = projects

@@ -315,6 +315,15 @@ export async function initDatabase(req: Request, res: Response) {
       CREATE INDEX IF NOT EXISTS idx_carousel_logos_display_order ON carousel_logos(display_order);
     `);
 
+    // Create projects_store table (persist projects + triptych/carousel selection across deploys)
+    await db.execute(sql`
+      CREATE TABLE IF NOT EXISTS projects_store (
+        key VARCHAR(64) PRIMARY KEY DEFAULT 'projects',
+        value TEXT NOT NULL,
+        "updatedAt" TIMESTAMP DEFAULT NOW() NOT NULL
+      );
+    `);
+
     res.json({ 
       message: "Database initialized successfully! All tables created.",
       tables: [
@@ -335,7 +344,8 @@ export async function initDatabase(req: Request, res: Response) {
         "testimonials",
         "analytics",
         "page_texts",
-        "carousel_logos"
+        "carousel_logos",
+        "projects_store"
       ]
     });
   } catch (error) {

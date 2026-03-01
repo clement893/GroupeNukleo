@@ -285,7 +285,7 @@ export default function AdminProjectsImages() {
               </CardHeader>
               <CardContent className="space-y-6">
                 {!isFromApi && (
-                  <p className="text-sm text-amber-700 dark:text-amber-300 bg-amber-500/10 border border-amber-500/30 rounded-lg p-3">
+                  <p className="text-sm text-amber-900 dark:text-amber-100 bg-amber-100 dark:bg-amber-900/50 border border-amber-400 dark:border-amber-600 rounded-lg p-3">
                     Si les projets ne sont pas encore enregistrés, cliquez sur « Enregistrer » : les projets seront initialisés puis la sélection des triptyques sera enregistrée.
                   </p>
                 )}
@@ -570,7 +570,7 @@ export default function AdminProjectsImages() {
               </CardHeader>
               <CardContent className="space-y-4">
                 {!isFromApi && (
-                  <p className="text-sm text-amber-700 dark:text-amber-300 bg-amber-500/10 border border-amber-500/30 rounded-lg p-3">
+                  <p className="text-sm text-amber-900 dark:text-amber-100 bg-amber-100 dark:bg-amber-900/50 border border-amber-400 dark:border-amber-600 rounded-lg p-3">
                     Si les projets ne sont pas encore enregistrés, cliquez sur « Enregistrer » : les projets seront initialisés puis le carousel sera enregistré.
                   </p>
                 )}
@@ -642,9 +642,9 @@ export default function AdminProjectsImages() {
             </Card>
 
             {!isFromApi && (
-              <Card className="mb-6 bg-amber-500/10 border-amber-500/30">
+              <Card className="mb-6 bg-amber-100 dark:bg-amber-900/50 border-amber-400 dark:border-amber-600">
                 <CardContent className="py-4 flex items-center justify-between flex-wrap gap-3">
-                  <p className="text-amber-800 dark:text-amber-200 text-sm">
+                  <p className="text-amber-900 dark:text-amber-100 text-sm">
                     Les projets affichés viennent du code (projectsData). Enregistrez-les une fois pour pouvoir les modifier ici.
                   </p>
                   <Button
