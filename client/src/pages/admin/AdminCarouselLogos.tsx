@@ -299,7 +299,11 @@ export default function AdminCarouselLogos() {
                         variant="ghost"
                         size="icon"
                         className="text-red-400 hover:text-red-300 hover:bg-red-500/20 shrink-0"
-                        onClick={() => handleRemove(logo.id, logo.alt)}
+                        onClick={(e) => {
+                          e.preventDefault();
+                          e.stopPropagation();
+                          handleRemove(logo.id, logo.alt);
+                        }}
                         disabled={removeMutation.isPending}
                       >
                         <Trash2 className="w-4 h-4" />

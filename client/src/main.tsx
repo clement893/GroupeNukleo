@@ -65,7 +65,8 @@ queryClient.getQueryCache().subscribe(event => {
 queryClient.getMutationCache().subscribe(event => {
   if (event.type === "updated" && event.action.type === "error") {
     const error = event.mutation.state.error;
-    redirectToLoginIfUnauthorized(error);
+    // Ne pas rediriger sur erreur de mutation (403 admin) : l'utilisateur reste sur la page
+    // et voit le toast d'erreur ; évite que "supprimer un logo" ramène à l'accueil admin.
     if (isDev && error instanceof TRPCClientError && error.message !== NOT_ADMIN_ERR_MSG) {
       logger.tagged('API').error("Mutation Error", error);
     }
