@@ -4,6 +4,7 @@ import {
   readProjects,
   initProjects,
   updateProject,
+  setTriptychSlugs,
   projectSchema,
 } from "../projectsApi";
 
@@ -19,4 +20,13 @@ export const projectsRouter = router({
   update: adminProcedure
     .input(projectSchema)
     .mutation(({ input }) => updateProject(input)),
+
+  setTriptychSlugs: adminProcedure
+    .input(
+      z.object({
+        homeTriptychSlugs: z.array(z.string()).max(3),
+        projectsTriptychSlugs: z.array(z.string()).max(3),
+      })
+    )
+    .mutation(({ input }) => setTriptychSlugs(input)),
 });

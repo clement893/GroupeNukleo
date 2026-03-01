@@ -3,17 +3,8 @@ import { useIsAdminSession } from '@/hooks/useIsAdminSession';
 import { AdminLayout } from '@/components/AdminLayout';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { Textarea } from '@/components/ui/textarea';
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-  DialogFooter,
-} from '@/components/ui/dialog';
-import { useState, useRef } from 'react';
+import { useState, useRef, useMemo, useEffect } from 'react';
+import { Link } from 'wouter';
 import {
   Upload,
   Trash2,
@@ -69,10 +60,9 @@ export default function AdminProjectsImages() {
     },
     onError: (e) => toast.error(e.message),
   });
-  const updateMutation = trpc.projects.update.useMutation({
+  const setTriptychMutation = trpc.projects.setTriptychSlugs.useMutation({
     onSuccess: () => {
-      toast.success('Projet enregistré');
-      setEditing(null);
+      toast.success('Triptyques enregistrés');
       refetchProjects();
     },
     onError: (e) => toast.error(e.message),
@@ -83,7 +73,6 @@ export default function AdminProjectsImages() {
   const deleteMutation = trpc.projectsImages.delete.useMutation();
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [uploading, setUploading] = useState(false);
-  const [editing, setEditing] = useState<typeof apiProjects[0] | null>(null);
 
   const projects = (apiProjects && apiProjects.length > 0 ? apiProjects : PROJECTS_DATA.map(projectToRecord)) as Array<{
     slug: string;
@@ -101,6 +90,21 @@ export default function AdminProjectsImages() {
     featuredOnHomeCarousel?: boolean;
   }>;
   const isFromApi = Boolean(apiProjects && apiProjects.length > 0);
+
+  const defaultHomeSlugs = useMemo(
+    () => projects.filter((p) => p.featuredOnHomeTriptych).slice(0, 3).map((p) => p.slug),
+    [projects]
+  );
+  const defaultProjectsSlugs = useMemo(
+    () => projects.filter((p) => p.featuredOnProjectsTriptych).slice(0, 3).map((p) => p.slug),
+    [projects]
+  );
+  const [homeTriptychSlugs, setHomeTriptychSlugs] = useState<string[]>(() => defaultHomeSlugs);
+  const [projectsTriptychSlugs, setProjectsTriptychSlugs] = useState<string[]>(() => defaultProjectsSlugs);
+  useEffect(() => {
+    setHomeTriptychSlugs(defaultHomeSlugs);
+    setProjectsTriptychSlugs(defaultProjectsSlugs);
+  }, [defaultHomeSlugs.join(','), defaultProjectsSlugs.join(',')]);
 
   const handleFileSelect = async (event: React.ChangeEvent<HTMLInputElement>) => {
     const files = event.target.files;
@@ -193,6 +197,95 @@ export default function AdminProjectsImages() {
               </Card>
             )}
 
+            {/* Triptyques : choisir les 3 projets */}
+            {isFromApi && (
+              <Card className="mb-8 bg-white dark:bg-[var(--admin-card)] border-[var(--admin-border)] shadow-sm">
+                <CardHeader>
+                  <CardTitle className="text-[var(--admin-foreground)]">Triptyques</CardTitle>
+                  <CardDescription className="text-[var(--admin-muted)]">
+                    Choisissez les 3 projets affichés dans le triptyque de la page d&apos;accueil et les 3 de la page Projets (ordre = position 1, 2, 3).
+                  </CardDescription>
+                </CardHeader>
+                <CardContent className="space-y-6">
+                  <div>
+                    <p className="text-sm font-medium text-[var(--admin-foreground)] mb-2 flex items-center gap-2">
+                      <LayoutPanelTop className="w-4 h-4 text-amber-600" />
+                      Triptyque page d&apos;accueil
+                    </p>
+                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                      {[0, 1, 2].map((i) => (
+                        <div key={i}>
+                          <label className="text-xs text-[var(--admin-muted)] block mb-1">Position {i + 1}</label>
+                          <select
+                            value={homeTriptychSlugs[i] ?? ''}
+                            onChange={(e) => {
+                              const v = e.target.value;
+                              setHomeTriptychSlugs((prev) => {
+                                const next = [...prev];
+                                next[i] = v;
+                                return next.slice(0, 3);
+                              });
+                            }}
+                            className="w-full h-9 rounded-md border border-input bg-background px-3 py-1 text-sm text-[var(--admin-foreground)]"
+                          >
+                            <option value="">— Aucun —</option>
+                            {projects.map((p) => (
+                              <option key={p.slug} value={p.slug}>{p.title}</option>
+                            ))}
+                          </select>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                  <div>
+                    <p className="text-sm font-medium text-[var(--admin-foreground)] mb-2 flex items-center gap-2">
+                      <LayoutGrid className="w-4 h-4 text-violet-600" />
+                      Triptyque page Projets
+                    </p>
+                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                      {[0, 1, 2].map((i) => (
+                        <div key={i}>
+                          <label className="text-xs text-[var(--admin-muted)] block mb-1">Position {i + 1}</label>
+                          <select
+                            value={projectsTriptychSlugs[i] ?? ''}
+                            onChange={(e) => {
+                              const v = e.target.value;
+                              setProjectsTriptychSlugs((prev) => {
+                                const next = [...prev];
+                                next[i] = v;
+                                return next.slice(0, 3);
+                              });
+                            }}
+                            className="w-full h-9 rounded-md border border-input bg-background px-3 py-1 text-sm text-[var(--admin-foreground)]"
+                          >
+                            <option value="">— Aucun —</option>
+                            {projects.map((p) => (
+                              <option key={p.slug} value={p.slug}>{p.title}</option>
+                            ))}
+                          </select>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                  <Button
+                    onClick={() =>
+                      setTriptychMutation.mutate({
+                        homeTriptychSlugs: homeTriptychSlugs.filter(Boolean),
+                        projectsTriptychSlugs: projectsTriptychSlugs.filter(Boolean),
+                      })
+                    }
+                    disabled={setTriptychMutation.isPending}
+                    className="gap-2"
+                  >
+                    {setTriptychMutation.isPending ? (
+                      <Loader2 className="w-4 h-4 animate-spin" />
+                    ) : null}
+                    Enregistrer la sélection des triptyques
+                  </Button>
+                </CardContent>
+              </Card>
+            )}
+
             {/* Liste des projets */}
             <Card className="mb-8 bg-white border-[var(--admin-border)] shadow-sm">
               <CardHeader>
@@ -270,11 +363,13 @@ export default function AdminProjectsImages() {
                         <Button
                           variant="outline"
                           size="sm"
-                          className="shrink-0 text-gray-900 border-gray-300 hover:bg-gray-100 hover:text-gray-900"
-                          onClick={() => setEditing(project)}
+                          className="shrink-0 text-[var(--admin-foreground)] border-[var(--admin-border)] hover:bg-muted hover:text-[var(--admin-foreground)]"
+                          asChild
                         >
-                          <Pencil className="w-4 h-4 mr-2" />
-                          Modifier
+                          <Link href={`/admin/projects-images/edit/${project.slug}`}>
+                            <Pencil className="w-4 h-4 mr-2" />
+                            Modifier
+                          </Link>
                         </Button>
                       </div>
                     ))}
@@ -388,185 +483,6 @@ export default function AdminProjectsImages() {
             </Card>
           </>
         )}
-
-        {/* Dialog d'édition */}
-        <Dialog open={!!editing} onOpenChange={(open) => !open && setEditing(null)}>
-          <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
-            <DialogHeader>
-              <DialogTitle>Modifier le projet</DialogTitle>
-            </DialogHeader>
-            {editing && (
-              <form
-                className="space-y-4"
-                onSubmit={(e) => {
-                  e.preventDefault();
-                  if (!isFromApi) {
-                    toast.error('Initialisez d\'abord les projets avec le bouton « Initialiser depuis le site » pour pouvoir enregistrer.');
-                    return;
-                  }
-                  updateMutation.mutate(editing);
-                }}
-              >
-                {!isFromApi && (
-                  <p className="text-sm text-amber-700 dark:text-amber-300 bg-amber-500/10 border border-amber-500/30 rounded-lg p-3">
-                    Les projets ne sont pas encore enregistrés en base. Cliquez sur « Initialiser depuis le site » sur la page pour pouvoir enregistrer vos modifications.
-                  </p>
-                )}
-                <div className="grid grid-cols-2 gap-4">
-                  <div>
-                    <Label>Slug</Label>
-                    <Input
-                      value={editing.slug}
-                      onChange={(e) => setEditing({ ...editing, slug: e.target.value })}
-                      className="mt-1"
-                    />
-                  </div>
-                  <div>
-                    <Label>Key</Label>
-                    <Input
-                      value={editing.key}
-                      onChange={(e) => setEditing({ ...editing, key: e.target.value })}
-                      className="mt-1"
-                    />
-                  </div>
-                </div>
-                <div>
-                  <Label>Titre</Label>
-                  <Input
-                    value={editing.title}
-                    onChange={(e) => setEditing({ ...editing, title: e.target.value })}
-                    className="mt-1"
-                  />
-                </div>
-                <div className="grid grid-cols-2 gap-4">
-                  <div>
-                    <Label>Client</Label>
-                    <Input
-                      value={editing.client}
-                      onChange={(e) => setEditing({ ...editing, client: e.target.value })}
-                      className="mt-1"
-                    />
-                  </div>
-                  <div>
-                    <Label>Année</Label>
-                    <Input
-                      value={editing.year}
-                      onChange={(e) => setEditing({ ...editing, year: e.target.value })}
-                      className="mt-1"
-                    />
-                  </div>
-                </div>
-                <div>
-                  <Label>Catégorie</Label>
-                  <select
-                    value={editing.category}
-                    onChange={(e) => setEditing({ ...editing, category: e.target.value as ProjectFilterCategory })}
-                    className="w-full mt-1 h-9 rounded-md border border-input bg-background px-3 py-1 text-sm"
-                  >
-                    {CATEGORIES.map((c) => (
-                      <option key={c} value={c}>{c}</option>
-                    ))}
-                  </select>
-                </div>
-                <div>
-                  <Label>Services</Label>
-                  <Input
-                    value={editing.services}
-                    onChange={(e) => setEditing({ ...editing, services: e.target.value })}
-                    className="mt-1"
-                  />
-                </div>
-                <div>
-                  <Label>Lien site (URL)</Label>
-                  <Input
-                    value={editing.websiteUrl ?? ''}
-                    onChange={(e) => setEditing({ ...editing, websiteUrl: e.target.value || undefined })}
-                    placeholder="https://..."
-                    className="mt-1"
-                  />
-                </div>
-                <div>
-                  <Label>Description (FR)</Label>
-                  <Textarea
-                    value={editing.description.fr}
-                    onChange={(e) => setEditing({ ...editing, description: { ...editing.description, fr: e.target.value } })}
-                    rows={4}
-                    className="mt-1"
-                  />
-                </div>
-                <div>
-                  <Label>Description (EN)</Label>
-                  <Textarea
-                    value={editing.description.en}
-                    onChange={(e) => setEditing({ ...editing, description: { ...editing.description, en: e.target.value } })}
-                    rows={4}
-                    className="mt-1"
-                  />
-                </div>
-                <div>
-                  <Label>Images (noms de fichiers, un par ligne ou séparés par des virgules)</Label>
-                  <Textarea
-                    value={editing.images.join('\n')}
-                    onChange={(e) => {
-                      const raw = e.target.value;
-                      const list = raw.split(/[\n,]/).map((s) => s.trim()).filter(Boolean);
-                      setEditing({ ...editing, images: list });
-                    }}
-                    rows={3}
-                    placeholder="Projet_1.jpg&#10;Projet_2.png"
-                    className="mt-1 font-mono text-sm"
-                  />
-                </div>
-                <div className="space-y-3 rounded-lg border border-gray-200 dark:border-gray-700 p-4 bg-gray-50/50 dark:bg-gray-900/30">
-                  <Label className="text-base">Mise en avant sur le site</Label>
-                  <p className="text-sm text-[var(--admin-muted)]">
-                    Choisissez où ce projet apparaît : triptyque page d&apos;accueil, triptyque page Projets, carrousel « Latest project » en haut de l&apos;accueil.
-                  </p>
-                  <div className="flex flex-wrap gap-6">
-                    <label className="flex items-center gap-2 cursor-pointer">
-                      <input
-                        type="checkbox"
-                        checked={editing.featuredOnHomeTriptych ?? false}
-                        onChange={(e) => setEditing({ ...editing, featuredOnHomeTriptych: e.target.checked })}
-                        className="rounded border-gray-300"
-                      />
-                      <span className="text-sm">Triptyque page d&apos;accueil</span>
-                    </label>
-                    <label className="flex items-center gap-2 cursor-pointer">
-                      <input
-                        type="checkbox"
-                        checked={editing.featuredOnProjectsTriptych ?? false}
-                        onChange={(e) => setEditing({ ...editing, featuredOnProjectsTriptych: e.target.checked })}
-                        className="rounded border-gray-300"
-                      />
-                      <span className="text-sm">Triptyque page Projets</span>
-                    </label>
-                    <label className="flex items-center gap-2 cursor-pointer">
-                      <input
-                        type="checkbox"
-                        checked={editing.featuredOnHomeCarousel ?? false}
-                        onChange={(e) => setEditing({ ...editing, featuredOnHomeCarousel: e.target.checked })}
-                        className="rounded border-gray-300"
-                      />
-                      <span className="text-sm">Carousel « Latest » (accueil)</span>
-                    </label>
-                  </div>
-                </div>
-                <DialogFooter>
-                  <Button type="button" variant="outline" onClick={() => setEditing(null)}>
-                    Annuler
-                  </Button>
-                  <Button type="submit" disabled={!isFromApi || updateMutation.isPending}>
-                    {updateMutation.isPending ? (
-                      <Loader2 className="w-4 h-4 animate-spin mr-2" />
-                    ) : null}
-                    Enregistrer
-                  </Button>
-                </DialogFooter>
-              </form>
-            )}
-          </DialogContent>
-        </Dialog>
       </div>
     </AdminLayout>
   );

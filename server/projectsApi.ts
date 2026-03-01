@@ -81,3 +81,31 @@ export async function updateProject(input: ProjectRecord): Promise<ProjectRecord
   await writeProjects(projects);
   return input;
 }
+
+/** Set which 3 projects appear in each triptych (and their order). Reorders projects so home triptych are first, then projects triptych, then rest. */
+export async function setTriptychSlugs(input: {
+  homeTriptychSlugs: string[];
+  projectsTriptychSlugs: string[];
+}): Promise<ProjectRecord[]> {
+  const projects = await readProjects();
+  const homeSlugs = input.homeTriptychSlugs.slice(0, 3);
+  const projectsSlugs = input.projectsTriptychSlugs.slice(0, 3);
+
+  const updated = projects.map((p) => ({
+    ...p,
+    featuredOnHomeTriptych: homeSlugs.includes(p.slug),
+    featuredOnProjectsTriptych: projectsSlugs.includes(p.slug),
+  }));
+
+  const homeSet = new Set(homeSlugs);
+  const homeOrder = homeSlugs.map((s) => updated.find((p) => p.slug === s)).filter(Boolean) as ProjectRecord[];
+  const projectsOrder = projectsSlugs
+    .filter((s) => !homeSet.has(s))
+    .map((s) => updated.find((p) => p.slug === s))
+    .filter(Boolean) as ProjectRecord[];
+  const rest = updated.filter((p) => !homeSlugs.includes(p.slug) && !projectsSlugs.includes(p.slug));
+  const reordered = [...homeOrder, ...projectsOrder, ...rest];
+
+  await writeProjects(reordered);
+  return reordered;
+}
