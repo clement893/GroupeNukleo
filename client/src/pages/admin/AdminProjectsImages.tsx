@@ -22,6 +22,9 @@ import {
   Pencil,
   ExternalLink,
   FolderInput,
+  LayoutGrid,
+  LayoutPanelTop,
+  Layers,
 } from 'lucide-react';
 import { toast } from 'sonner';
 import { formatDistanceToNow } from 'date-fns';
@@ -49,6 +52,9 @@ function projectToRecord(p: ProjectData) {
     websiteUrl: p.websiteUrl ?? '',
     description: { fr: p.description.fr, en: p.description.en },
     images: p.images,
+    featuredOnHomeTriptych: (p as any).featuredOnHomeTriptych ?? false,
+    featuredOnProjectsTriptych: (p as any).featuredOnProjectsTriptych ?? false,
+    featuredOnHomeCarousel: (p as any).featuredOnHomeCarousel ?? false,
   };
 }
 
@@ -90,6 +96,9 @@ export default function AdminProjectsImages() {
     websiteUrl?: string;
     description: { fr: string; en: string };
     images: string[];
+    featuredOnHomeTriptych?: boolean;
+    featuredOnProjectsTriptych?: boolean;
+    featuredOnHomeCarousel?: boolean;
   }>;
   const isFromApi = Boolean(apiProjects && apiProjects.length > 0);
 
@@ -223,8 +232,25 @@ export default function AdminProjectsImages() {
                         </div>
                         <div className="min-w-0 flex-1">
                           <div className="font-semibold text-[var(--admin-foreground)]">{project.title}</div>
-                          <div className="text-sm text-[var(--admin-muted)]">
-                            {project.client} · {project.year} · {project.category}
+                          <div className="flex flex-wrap items-center gap-2 mt-1">
+                            <span className="text-sm text-[var(--admin-muted)]">
+                              {project.client} · {project.year} · {project.category}
+                            </span>
+                            {project.featuredOnHomeTriptych && (
+                              <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-medium bg-amber-500/20 text-amber-700 dark:text-amber-300 border border-amber-500/40">
+                                <LayoutPanelTop className="w-3 h-3" /> Triptyque accueil
+                              </span>
+                            )}
+                            {project.featuredOnProjectsTriptych && (
+                              <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-medium bg-violet-500/20 text-violet-700 dark:text-violet-300 border border-violet-500/40">
+                                <LayoutGrid className="w-3 h-3" /> Triptyque Projets
+                              </span>
+                            )}
+                            {project.featuredOnHomeCarousel && (
+                              <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-medium bg-cyan-500/20 text-cyan-700 dark:text-cyan-300 border border-cyan-500/40">
+                                <Layers className="w-3 h-3" /> Carousel accueil
+                              </span>
+                            )}
                           </div>
                           <p className="text-sm text-gray-600 mt-1 line-clamp-2">
                             {project.description.fr || project.description.en}
@@ -482,6 +508,41 @@ export default function AdminProjectsImages() {
                     placeholder="Projet_1.jpg&#10;Projet_2.png"
                     className="mt-1 font-mono text-sm"
                   />
+                </div>
+                <div className="space-y-3 rounded-lg border border-gray-200 dark:border-gray-700 p-4 bg-gray-50/50 dark:bg-gray-900/30">
+                  <Label className="text-base">Mise en avant sur le site</Label>
+                  <p className="text-sm text-[var(--admin-muted)]">
+                    Choisissez où ce projet apparaît : triptyque page d&apos;accueil, triptyque page Projets, carrousel « Latest project » en haut de l&apos;accueil.
+                  </p>
+                  <div className="flex flex-wrap gap-6">
+                    <label className="flex items-center gap-2 cursor-pointer">
+                      <input
+                        type="checkbox"
+                        checked={editing.featuredOnHomeTriptych ?? false}
+                        onChange={(e) => setEditing({ ...editing, featuredOnHomeTriptych: e.target.checked })}
+                        className="rounded border-gray-300"
+                      />
+                      <span className="text-sm">Triptyque page d&apos;accueil</span>
+                    </label>
+                    <label className="flex items-center gap-2 cursor-pointer">
+                      <input
+                        type="checkbox"
+                        checked={editing.featuredOnProjectsTriptych ?? false}
+                        onChange={(e) => setEditing({ ...editing, featuredOnProjectsTriptych: e.target.checked })}
+                        className="rounded border-gray-300"
+                      />
+                      <span className="text-sm">Triptyque page Projets</span>
+                    </label>
+                    <label className="flex items-center gap-2 cursor-pointer">
+                      <input
+                        type="checkbox"
+                        checked={editing.featuredOnHomeCarousel ?? false}
+                        onChange={(e) => setEditing({ ...editing, featuredOnHomeCarousel: e.target.checked })}
+                        className="rounded border-gray-300"
+                      />
+                      <span className="text-sm">Carousel « Latest » (accueil)</span>
+                    </label>
+                  </div>
                 </div>
                 <DialogFooter>
                   <Button type="button" variant="outline" onClick={() => setEditing(null)}>

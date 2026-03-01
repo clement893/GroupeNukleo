@@ -1,5 +1,5 @@
 import SEO from '@/components/SEO';
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect, useMemo } from 'react';
 import { Loader2 } from 'lucide-react';
 import { Link } from 'wouter';
 import PageLayout from '@/components/PageLayout';
@@ -90,6 +90,7 @@ export default function Projects() {
       logger.tagged('Projects').log('tRPC success:', data?.length, 'images');
     },
   });
+  const { data: apiProjects } = trpc.projects.list.useQuery(undefined, { staleTime: 5 * 60 * 1000 });
 
   const [images, setImages] = useState<string[]>([]);
   const [filter, setFilter] = useState<ProjectFilterValue>('Tous');
@@ -97,6 +98,13 @@ export default function Projects() {
   const imageRefs = useRef<(HTMLDivElement | null)[]>([]);
 
   const filteredImages = filterImagesByCategory(images, filter);
+
+  const heroImages = useMemo(() => {
+    const featured = (apiProjects || []).filter((p: { featuredOnProjectsTriptych?: boolean }) => p.featuredOnProjectsTriptych);
+    const fromFeatured = featured.slice(0, 3).flatMap((p: { images?: string[] }) => (p.images && p.images[0] ? [p.images[0]] : [])).filter(Boolean) as string[];
+    if (fromFeatured.length >= 3) return fromFeatured;
+    return filteredImages.length > 0 ? filteredImages.slice(0, 3) : fromFeatured;
+  }, [apiProjects, filteredImages]);
 
   // Preload first images so they start loading before paint (faster LCP)
   useEffect(() => {
@@ -167,7 +175,7 @@ export default function Projects() {
         <ProjectsHero
           headline={t('projects.heroHeadline')}
           description={t('projects.description')}
-          heroImages={filteredImages}
+          heroImages={heroImages}
           getProjectUrl={(name) => getLocalizedPath(`/projects/${imageNameToSlug(name)}`)}
           viewProjectLabel={t('projects.viewProject')}
         />

@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, useCallback } from 'react';
+import { useState, useEffect, useRef, useCallback, useMemo } from 'react';
 import { Link } from 'wouter';
 import { useLocalizedPath } from '@/hooks/useLocalizedPath';
 import { useLanguage } from '@/contexts/LanguageContext';
@@ -8,6 +8,7 @@ import { SplitCTAButton } from '@/components/SplitCTAButton';
 import { WeatherWidget } from '@/components/WeatherWidget';
 import PageLayout from '@/components/PageLayout';
 import { HOME_SERVICES } from '@/data/homeServices';
+import { trpc } from '@/lib/trpc';
 
 // ─── Constantes ──────────────────────────────────────────────────────────────
 const PURPLE = '#7c3aed';
@@ -18,14 +19,36 @@ const DARK = '#0A0A0A';
 const WORK1 = '/demo/work1.jpg';
 const WORK2 = '/demo/work2.jpg';
 const WORK3 = '/demo/work3.jpg';
-const PROJECTS = [
+const FALLBACK_PROJECTS = [
   { num: '01', name: 'MBAM', category: 'Brand & Digital', tagline: 'Redefining cultural engagement online.', result: '+240% digital reach', img: WORK1, color: '#2563eb' },
   { num: '02', name: 'SummitLaw', category: 'Brand & Creative', tagline: 'A law firm that finally looks like its ambition.', result: '+180% qualified leads', img: WORK2, color: PURPLE },
   { num: '03', name: 'QueerTech', category: 'AI & Platform', tagline: 'Technology built for belonging.', result: '+220% member engagement', img: WORK3, color: '#059669' },
 ];
 
-// ─── Carrousel Projets Hero — style "une de journal" ──────────────────────────
-function NewsCarousel() {
+type HomeProjectItem = { num: string; name: string; category: string; tagline: string; result: string; img: string; color: string };
+const CAROUSEL_COLORS = ['#2563eb', PURPLE, '#059669', '#dc2626', '#7c2d12'];
+
+function mapApiProjectsToHome(apiProjects: Array<{ title: string; category: string; description: { fr: string; en: string }; images: string[]; slug?: string }>, max: number, startIndex: number): HomeProjectItem[] {
+  if (!apiProjects?.length) return [];
+  return apiProjects.slice(0, max).map((p, i) => {
+    const tagline = (p.description?.fr || p.description?.en || '').slice(0, 70);
+    const img = p.images?.[0] ? `/projects/${p.images[0]}` : WORK1;
+    const num = String(startIndex + i + 1).padStart(2, '0');
+    return {
+      num,
+      name: p.title || p.slug || 'Projet',
+      category: p.category || 'Projet',
+      tagline: tagline ? `${tagline}${tagline.length >= 70 ? '…' : ''}` : 'Découvrez ce projet.',
+      result: '',
+      img,
+      color: CAROUSEL_COLORS[i % CAROUSEL_COLORS.length],
+    };
+  });
+}
+
+// ─── Carrousel Projets Hero — style "une de journal" (Latest project en haut de l'accueil)
+function NewsCarousel({ projects: projectsProp }: { projects?: HomeProjectItem[] }) {
+  const PROJECTS = projectsProp && projectsProp.length > 0 ? projectsProp : FALLBACK_PROJECTS;
   const { t } = useLanguage();
   const [active, setActive] = useState(0);
   const [isHovered, setIsHovered] = useState(false);
@@ -128,6 +151,7 @@ function NewsCarousel() {
 
 // ─── Ancien Carrousel Projets Hero ───────────────────────────────────────────
 function HeroProjectsCarousel() {
+  const PROJECTS = FALLBACK_PROJECTS;
   const { t } = useLanguage();
   const [active, setActive] = useState(0);
   const [isHovered, setIsHovered] = useState(false);
@@ -270,6 +294,7 @@ function HeroProjectsCarousel() {
 
 // ─── ProjectsCarousel (identique à demo4) ───────────────────────────────────
 function ProjectsCarousel() {
+  const PROJECTS = FALLBACK_PROJECTS;
   const [active, setActive] = useState(0);
   const getLocalizedPath = useLocalizedPath();
 
@@ -375,7 +400,8 @@ function ProjectsCarousel() {
 }
 
 // ─── Triptyque projets (sans fond, blocs fermés à 8%, hauteur +15%) ─────────────────
-function Triptych() {
+function Triptych({ projects: projectsProp }: { projects?: HomeProjectItem[] }) {
+  const PROJECTS = projectsProp && projectsProp.length > 0 ? projectsProp : FALLBACK_PROJECTS;
   const [active, setActive] = useState(0);
   const getLocalizedPath = useLocalizedPath();
   const { t } = useLanguage();
@@ -498,6 +524,16 @@ export default function HomepageDemo5() {
     { label: t('nav.contact'), href: '/contact' },
   ];
 
+  const { data: apiProjects } = trpc.projects.list.useQuery(undefined, { staleTime: 2 * 60 * 1000 });
+  const homeCarouselProjects = useMemo(() => {
+    const featured = (apiProjects || []).filter((p: { featuredOnHomeCarousel?: boolean }) => p.featuredOnHomeCarousel);
+    return mapApiProjectsToHome(featured, 6, 0);
+  }, [apiProjects]);
+  const homeTriptychProjects = useMemo(() => {
+    const featured = (apiProjects || []).filter((p: { featuredOnHomeTriptych?: boolean }) => p.featuredOnHomeTriptych);
+    return mapApiProjectsToHome(featured, 3, 0);
+  }, [apiProjects]);
+
   return (
     <PageLayout>
       <div
@@ -555,7 +591,7 @@ export default function HomepageDemo5() {
           <div style={{ display: 'grid', gridTemplateColumns: '3fr 2fr', gap: 'clamp(1rem, 1.5vw, 1.5rem)', marginTop: 2.5 * 16, alignItems: 'start', minHeight: '52vh' }}>
 
             {/* Colonne Our Latest Work — News Carrousel (gauche) */}
-            <NewsCarousel />
+            <NewsCarousel projects={homeCarouselProjects} />
 
             {/* Grille 6 cartes (2 + 1 + 1 + 2) — droite */}
             <div style={{
@@ -886,7 +922,7 @@ export default function HomepageDemo5() {
           paddingRight: '6%',
           background: 'transparent',
         }}>
-          <Triptych />
+          <Triptych projects={homeTriptychProjects} />
         </div>
 
         {/* ════════════════════════════════════════════════════════════════════

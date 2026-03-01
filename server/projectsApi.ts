@@ -28,6 +28,12 @@ export const projectSchema = z.object({
     en: z.string(),
   }),
   images: z.array(z.string()),
+  /** Afficher dans le triptyque de la page d'accueil */
+  featuredOnHomeTriptych: z.boolean().optional(),
+  /** Afficher dans le triptyque de la page Projets */
+  featuredOnProjectsTriptych: z.boolean().optional(),
+  /** Afficher dans le carrousel "Latest project" en haut de la page d'accueil */
+  featuredOnHomeCarousel: z.boolean().optional(),
 });
 
 export type ProjectRecord = z.infer<typeof projectSchema>;
