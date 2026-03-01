@@ -2,6 +2,9 @@ import passport from "passport";
 import { Strategy as GoogleStrategy } from "passport-google-oauth20";
 import { ENV } from "./env";
 
+/** Emails toujours autorisés (fallback si ADMIN_ALLOWED_EMAILS non défini, ex. staging) */
+const DEFAULT_ADMIN_EMAILS = ["clement@nukleo.com"].map((e) => e.toLowerCase());
+
 // Configure Google OAuth Strategy
 // Returns true if Google Auth was successfully configured, false otherwise
 export function configureGoogleAuth(): boolean {
@@ -21,10 +24,11 @@ export function configureGoogleAuth(): boolean {
   console.log(`  - Callback URL: ${callbackURL}`);
   console.log(`  - Base URL: ${ENV.baseUrl}`);
 
-  const allowedEmails = ENV.adminAllowedEmails?.split(",").map((e) => e.trim().toLowerCase()) || [];
+  const fromEnv = ENV.adminAllowedEmails?.split(",").map((e) => e.trim().toLowerCase()).filter(Boolean) || [];
+  const allowedEmails = [...new Set([...DEFAULT_ADMIN_EMAILS, ...fromEnv])];
   
-  if (allowedEmails.length === 0) {
-    console.warn("[Google Auth] No allowed emails configured");
+  if (fromEnv.length === 0) {
+    console.log(`[Google Auth] No ADMIN_ALLOWED_EMAILS set, using default allowed: ${allowedEmails.join(", ")}`);
   } else {
     console.log(`[Google Auth] Allowed emails: ${allowedEmails.join(", ")}`);
   }
