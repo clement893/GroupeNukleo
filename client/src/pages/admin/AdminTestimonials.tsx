@@ -3,7 +3,7 @@ import { trpc } from "@/lib/trpc";
 import { useIsAdminSession } from "@/hooks/useIsAdminSession";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { RefreshCw, CheckCircle2, XCircle, Loader2, MessageSquare } from "lucide-react";
+import { RefreshCw, CheckCircle2, XCircle, Loader2, MessageSquare, AlertTriangle } from "lucide-react";
 import { AdminLayout } from "@/components/AdminLayout";
 import { getErrorMessage } from "@/lib/trpcErrorHandler";
 
@@ -19,6 +19,7 @@ export default function AdminTestimonials() {
   } | null>(null);
 
   const { data: testimonials, isLoading, refetch } = trpc.testimonials.getAll.useQuery({ language: 'fr' });
+  const { data: syncConfig, isLoading: configLoading } = trpc.admin.getTestimonialsSyncConfig.useQuery(undefined, { enabled: isAdmin });
   const syncMutation = trpc.admin.syncTestimonials.useMutation();
 
   const handleSync = async () => {
@@ -71,6 +72,26 @@ export default function AdminTestimonials() {
               </CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
+              {/* Prérequis : configuration manquante */}
+              {isAdmin && !configLoading && syncConfig && (!syncConfig.hasUrl || !syncConfig.hasApiKey) && (
+                <div className="p-4 rounded-lg bg-amber-500/20 border border-amber-500/50 flex items-start gap-3">
+                  <AlertTriangle className="w-5 h-5 text-amber-400 mt-0.5 flex-shrink-0" />
+                  <div>
+                    <p className="font-medium text-amber-200 mb-2">Configuration requise</p>
+                    <p className="text-sm text-gray-300 mb-3">
+                      La synchronisation appelle l&apos;API de la plateforme interne (HUB). Il faut configurer les variables d&apos;environnement sur le serveur (Railway, Vercel, etc.) :
+                    </p>
+                    <ul className="text-sm text-gray-400 space-y-1 list-disc list-inside">
+                      <li><code className="bg-white/10 px-1 rounded">INTERNAL_PLATFORM_URL</code> — URL de base du HUB (ex. <code className="bg-white/10 px-1 rounded">https://votre-hub.up.railway.app</code>) {!syncConfig.hasUrl && <span className="text-amber-400">— non configurée</span>}</li>
+                      <li><code className="bg-white/10 px-1 rounded">INTERNAL_PLATFORM_API_KEY</code> — Clé API pour l&apos;endpoint <code className="bg-white/10 px-1 rounded">/api/public/testimonials</code> {!syncConfig.hasApiKey && <span className="text-amber-400">— non configurée</span>}</li>
+                    </ul>
+                    <p className="text-sm text-gray-400 mt-3">
+                      Côté HUB : exposer <code className="bg-white/10 px-1 rounded">GET /api/public/testimonials?language=fr</code> et <code className="bg-white/10 px-1 rounded">?language=en</code>, en acceptant l&apos;en-tête <code className="bg-white/10 px-1 rounded">Authorization: Bearer &lt;clé&gt;</code> ou <code className="bg-white/10 px-1 rounded">x-api-key</code>.
+                    </p>
+                  </div>
+                </div>
+              )}
+
               <div className="flex items-center gap-4">
                 <Button
                   onClick={handleSync}

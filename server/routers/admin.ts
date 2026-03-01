@@ -162,6 +162,12 @@ export const adminRouter = router({
     }
   }),
 
+  // Statut de configuration pour la synchro témoignages (admin uniquement, pas de valeur sensible)
+  getTestimonialsSyncConfig: adminProcedure.query(() => ({
+    hasUrl: Boolean(ENV.internalPlatformUrl?.trim()),
+    hasApiKey: Boolean(ENV.internalPlatformApiKey?.trim()),
+  })),
+
   // Synchroniser les témoignages depuis la plateforme interne
   syncTestimonials: adminProcedure.mutation(async () => {
     if (!ENV.internalPlatformUrl) {
