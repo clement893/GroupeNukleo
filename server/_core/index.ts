@@ -21,7 +21,8 @@ import session from "express-session";
 import connectPgSimple from "connect-pg-simple";
 import passport from "passport";
 import { configureGoogleAuth, requireAdminAuth } from "./googleAuth";
-import { getDb, getAllAgencyLeads, getLeoAnalytics, getLeoContacts } from "../db";
+import { getDb, getAllAgencyLeads, getLeoAnalytics, getLeoContacts, getAdminStats } from "../db";
+import { getAllPageTexts, updatePageText, createPageText, importPageTextsFromJson } from "../pageTextsApi";
 import { addLogo, updateLogo, removeLogo, reorderLogos } from "../carouselLogosApi";
 import { analytics } from "../../drizzle/schema";
 import { eq } from "drizzle-orm";
@@ -386,6 +387,16 @@ async function startServer() {
     }
   });
 
+  app.get("/api/admin/stats", requireAdminAuth, async (req, res) => {
+    try {
+      const stats = await getAdminStats();
+      res.json(stats);
+    } catch (e) {
+      console.error("[Admin] stats error", e);
+      res.status(500).json({ error: "Failed to fetch stats" });
+    }
+  });
+
   // Admin: carousel logos mutations (REST, same auth — so delete/add/update/reorder work on Railway)
   app.post("/api/admin/carousel-logos", requireAdminAuth, async (req, res) => {
     try {
@@ -510,6 +521,56 @@ async function startServer() {
     } catch (e) {
       console.error("[Admin] leo-contacts error", e);
       res.status(500).json({ error: "Failed to fetch LEO contacts" });
+    }
+  });
+
+  // Admin: page texts (REST, same auth — avoids tRPC session issues on Railway)
+  app.get("/api/admin/page-texts", requireAdminAuth, async (req, res) => {
+    try {
+      const texts = await getAllPageTexts();
+      res.json(texts);
+    } catch (e) {
+      console.error("[Admin] page-texts getAll error", e);
+      res.status(500).json({ error: "Failed to fetch page texts" });
+    }
+  });
+  app.patch("/api/admin/page-texts", requireAdminAuth, async (req, res) => {
+    try {
+      const { id, textEn, textFr } = req.body || {};
+      if (id == null || typeof textEn !== "string" || typeof textFr !== "string") {
+        return res.status(400).json({ error: "id, textEn, textFr required" });
+      }
+      await updatePageText(Number(id), textEn, textFr);
+      res.json({ success: true });
+    } catch (e) {
+      console.error("[Admin] page-texts update error", e);
+      res.status(500).json({ error: e instanceof Error ? e.message : "Update failed" });
+    }
+  });
+  app.post("/api/admin/page-texts", requireAdminAuth, async (req, res) => {
+    try {
+      const { key, textEn, textFr } = req.body || {};
+      if (!key || typeof key !== "string" || typeof textEn !== "string" || typeof textFr !== "string") {
+        return res.status(400).json({ error: "key, textEn, textFr required" });
+      }
+      const row = await createPageText(key.trim(), textEn, textFr);
+      res.json(row);
+    } catch (e) {
+      console.error("[Admin] page-texts create error", e);
+      res.status(500).json({ error: e instanceof Error ? e.message : "Create failed" });
+    }
+  });
+  app.post("/api/admin/page-texts/import", requireAdminAuth, async (req, res) => {
+    try {
+      const { en, fr } = req.body || {};
+      if (!en || typeof en !== "object" || !fr || typeof fr !== "object") {
+        return res.status(400).json({ error: "en and fr objects required" });
+      }
+      const result = await importPageTextsFromJson(en, fr);
+      res.json(result);
+    } catch (e) {
+      console.error("[Admin] page-texts import error", e);
+      res.status(500).json({ error: e instanceof Error ? e.message : "Import failed" });
     }
   });
 

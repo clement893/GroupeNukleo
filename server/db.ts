@@ -1,8 +1,8 @@
-import { eq, desc } from "drizzle-orm";
+import { eq, desc, count } from "drizzle-orm";
 import { sql } from "drizzle-orm";
 import { drizzle } from "drizzle-orm/postgres-js";
 import postgres from "postgres";
-import { InsertUser, users, leoContacts, InsertLeoContact, leoSessions, InsertLeoSession, agencyLeads, InsertAgencyLead, adminUsers, InsertAdminUser, testimonials, InsertTestimonial } from "../drizzle/schema";
+import { InsertUser, users, leoContacts, InsertLeoContact, leoSessions, InsertLeoSession, agencyLeads, InsertAgencyLead, adminUsers, InsertAdminUser, testimonials, InsertTestimonial, aiAssessments, mediaAssets } from "../drizzle/schema";
 import bcrypt from "bcrypt";
 import { ENV } from './_core/env';
 
@@ -20,6 +20,34 @@ export async function getDb() {
     }
   }
   return _db;
+}
+
+export async function getAdminStats() {
+  const db = await getDb();
+  if (!db) {
+    return { agencyLeads: 0, leoSessions: 0, aiAssessments: 0, leoContacts: 0, mediaAssets: 0, totalUsers: 0 };
+  }
+  try {
+    const [agencyLeadsCount, leoSessionsCount, aiAssessmentsCount, leoContactsCount, mediaAssetsCount, usersCount] = await Promise.all([
+      db.select({ count: count() }).from(agencyLeads),
+      db.select({ count: count() }).from(leoSessions),
+      db.select({ count: count() }).from(aiAssessments),
+      db.select({ count: count() }).from(leoContacts),
+      db.select({ count: count() }).from(mediaAssets),
+      db.select({ count: count() }).from(users),
+    ]);
+    return {
+      agencyLeads: agencyLeadsCount[0]?.count ?? 0,
+      leoSessions: leoSessionsCount[0]?.count ?? 0,
+      aiAssessments: aiAssessmentsCount[0]?.count ?? 0,
+      leoContacts: leoContactsCount[0]?.count ?? 0,
+      mediaAssets: mediaAssetsCount[0]?.count ?? 0,
+      totalUsers: usersCount[0]?.count ?? 0,
+    };
+  } catch (error) {
+    console.error("[Database] getAdminStats error:", error);
+    return { agencyLeads: 0, leoSessions: 0, aiAssessments: 0, leoContacts: 0, mediaAssets: 0, totalUsers: 0 };
+  }
 }
 
 // Agency Leads functions

@@ -1,5 +1,5 @@
 import { useState, useMemo } from "react";
-import { trpc } from "@/lib/trpc";
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -7,6 +7,56 @@ import { Label } from "@/components/ui/label";
 import { Loader2, Save, Plus, FileText, Globe, ChevronRight, AlertCircle } from "lucide-react";
 import { AdminLayout } from "@/components/AdminLayout";
 import { toast } from "sonner";
+
+const credentials = { credentials: "include" as RequestCredentials };
+
+async function fetchPageTexts() {
+  const res = await fetch("/api/admin/page-texts", credentials);
+  if (!res.ok) throw new Error(res.status === 401 ? "Non autorisé" : await res.text());
+  return res.json();
+}
+
+async function updatePageText(id: number, textEn: string, textFr: string) {
+  const res = await fetch("/api/admin/page-texts", {
+    method: "PATCH",
+    headers: { "Content-Type": "application/json" },
+    ...credentials,
+    body: JSON.stringify({ id, textEn, textFr }),
+  });
+  if (!res.ok) {
+    const err = await res.json().catch(() => ({}));
+    throw new Error(err.error || res.statusText);
+  }
+  return res.json();
+}
+
+async function createPageText(key: string, textEn: string, textFr: string) {
+  const res = await fetch("/api/admin/page-texts", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    ...credentials,
+    body: JSON.stringify({ key, textEn, textFr }),
+  });
+  if (!res.ok) {
+    const err = await res.json().catch(() => ({}));
+    throw new Error(err.error || res.statusText);
+  }
+  return res.json();
+}
+
+async function importPageTexts(en: Record<string, string>, fr: Record<string, string>) {
+  const res = await fetch("/api/admin/page-texts/import", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    ...credentials,
+    body: JSON.stringify({ en, fr }),
+  });
+  if (!res.ok) {
+    const err = await res.json().catch(() => ({}));
+    throw new Error(err.error || res.statusText);
+  }
+  return res.json();
+}
 
 function flattenObj(obj: Record<string, unknown>, prefix = ""): Record<string, string> {
   const out: Record<string, string> = {};
@@ -26,42 +76,51 @@ function flattenObj(obj: Record<string, unknown>, prefix = ""): Record<string, s
 type TextRow = { id: number; key: string; textEn: string; textFr: string };
 
 export default function AdminPageTexts() {
+  const queryClient = useQueryClient();
   const {
     data: texts,
     isLoading,
     error,
     refetch,
-  } = trpc.pageTexts.getAll.useQuery(undefined, {
+  } = useQuery({
+    queryKey: ["admin", "page-texts"],
+    queryFn: fetchPageTexts,
     retry: false,
     refetchOnWindowFocus: false,
   });
 
-  const updateMutation = trpc.pageTexts.update.useMutation({
+  const updateMutation = useMutation({
+    mutationFn: ({ id, textEn, textFr }: { id: number; textEn: string; textFr: string }) =>
+      updatePageText(id, textEn, textFr),
     onSuccess: () => {
       toast.success("Texte enregistré");
-      refetch();
+      queryClient.invalidateQueries({ queryKey: ["admin", "page-texts"] });
     },
-    onError: (e) => toast.error(e.message),
+    onError: (e: Error) => toast.error(e.message),
   });
-  const createMutation = trpc.pageTexts.create.useMutation({
+  const createMutation = useMutation({
+    mutationFn: ({ key, textEn, textFr }: { key: string; textEn: string; textFr: string }) =>
+      createPageText(key, textEn, textFr),
     onSuccess: () => {
       toast.success("Clé ajoutée");
       setNewKey("");
       setNewEn("");
       setNewFr("");
-      refetch();
+      queryClient.invalidateQueries({ queryKey: ["admin", "page-texts"] });
     },
-    onError: (e) => toast.error(e.message),
+    onError: (e: Error) => toast.error(e.message),
   });
-  const importMutation = trpc.pageTexts.importFromJson.useMutation({
-    onSuccess: (r) => {
+  const importMutation = useMutation({
+    mutationFn: ({ en, fr }: { en: Record<string, string>; fr: Record<string, string> }) =>
+      importPageTexts(en, fr),
+    onSuccess: (r: { created: number; updated: number }) => {
       toast.success(`Import: ${r.created} créés, ${r.updated} mis à jour`);
       setShowImport(false);
       setImportEn("");
       setImportFr("");
-      refetch();
+      queryClient.invalidateQueries({ queryKey: ["admin", "page-texts"] });
     },
-    onError: (e) => toast.error(e.message),
+    onError: (e: Error) => toast.error(e.message),
   });
 
   const [selectedPage, setSelectedPage] = useState<string | null>(null);
@@ -129,7 +188,11 @@ export default function AdminPageTexts() {
   }
 
   if (error) {
-    const isForbidden = error.data?.code === "FORBIDDEN" || error.message?.toLowerCase().includes("admin");
+    const err = error as Error;
+    const isForbidden =
+      err.message?.toLowerCase().includes("autorisé") ||
+      err.message?.toLowerCase().includes("admin") ||
+      err.message?.toLowerCase().includes("permission");
     return (
       <AdminLayout>
         <div className="p-6 lg:p-8 max-w-2xl mx-auto">
@@ -146,7 +209,7 @@ export default function AdminPageTexts() {
               </CardDescription>
             </CardHeader>
             <CardContent>
-              <p className="text-white/80 mb-4">{error.message || "Une erreur est survenue"}</p>
+              <p className="text-white/80 mb-4">{err.message || "Une erreur est survenue"}</p>
               {!isForbidden && (
                 <p className="text-sm text-white/50 mb-4">
                   Vérifiez que la table <code className="bg-white/10 px-1 rounded">page_texts</code> existe (exécutez la migration DB depuis l&apos;admin).

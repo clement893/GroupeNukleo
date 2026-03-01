@@ -1,21 +1,28 @@
-import { trpc } from "@/lib/trpc";
+import { useQuery } from "@tanstack/react-query";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Users, MessageSquare, FileText, TrendingUp, Activity, Database, BarChart3, Settings } from "lucide-react";
-import AdminRoute from "@/components/AdminRoute";
 import { AdminLayout } from "@/components/AdminLayout";
 
+async function fetchAdminStats() {
+  const res = await fetch("/api/admin/stats", { credentials: "include" });
+  if (!res.ok) throw new Error(res.status === 401 ? "Non autorisé" : "Failed to load stats");
+  return res.json();
+}
+
 export default function AdminDashboard() {
-  const { data: stats, isLoading } = trpc.admin.getStats.useQuery();
+  const { data: stats, isLoading } = useQuery({
+    queryKey: ["admin", "stats"],
+    queryFn: fetchAdminStats,
+    retry: 1,
+  });
 
   if (isLoading) {
     return (
-      <AdminRoute>
-        <AdminLayout>
-          <div className="p-6 lg:p-8 max-w-7xl mx-auto">
-            <div className="text-gray-600 text-lg" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>Loading dashboard...</div>
-          </div>
-        </AdminLayout>
-      </AdminRoute>
+      <AdminLayout>
+        <div className="p-6 lg:p-8 max-w-7xl mx-auto">
+          <div className="text-gray-600 text-lg" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>Loading dashboard...</div>
+        </div>
+      </AdminLayout>
     );
   }
 
@@ -58,8 +65,7 @@ export default function AdminDashboard() {
   ];
 
   return (
-    <AdminRoute>
-      <AdminLayout>
+    <AdminLayout>
         <div className="p-6 lg:p-8 max-w-7xl mx-auto space-y-8">
           {/* Header */}
           <div className="flex items-center justify-between">
@@ -227,6 +233,5 @@ export default function AdminDashboard() {
           </Card>
         </div>
       </AdminLayout>
-    </AdminRoute>
   );
 }
