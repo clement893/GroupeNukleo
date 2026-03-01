@@ -1,9 +1,21 @@
 import { Fragment, useState } from 'react';
-import { trpc } from '@/lib/trpc';
+import { useQuery } from '@tanstack/react-query';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Loader2, Mail, User, Calendar, MessageSquare, Download, RefreshCw, MessageCircle } from 'lucide-react';
+import { Loader2, Mail, User, MessageSquare, Download, RefreshCw, MessageCircle } from 'lucide-react';
 import { AdminLayout } from "@/components/AdminLayout";
 import { Button } from '@/components/ui/button';
+
+async function fetchLeoContacts() {
+  const res = await fetch('/api/admin/leo-contacts', { credentials: 'include' });
+  if (!res.ok) throw new Error(res.status === 401 ? 'Non autorisé' : 'Erreur de chargement');
+  return res.json();
+}
+
+async function fetchLeoAnalytics() {
+  const res = await fetch('/api/admin/leo-analytics', { credentials: 'include' });
+  if (!res.ok) throw new Error(res.status === 401 ? 'Non autorisé' : 'Erreur de chargement');
+  return res.json();
+}
 
 export default function AdminLEOContacts() {
   const [expandedId, setExpandedId] = useState<number | null>(null);
@@ -13,14 +25,21 @@ export default function AdminLEOContacts() {
     isLoading: contactsLoading,
     isError: contactsError,
     refetch: refetchContacts,
-  } = trpc.admin.getLeoContacts.useQuery(undefined, { retry: 1 });
+  } = useQuery({
+    queryKey: ['admin', 'leo-contacts'],
+    queryFn: fetchLeoContacts,
+    retry: 1,
+  });
 
   const {
     data: analytics,
     isLoading: analyticsLoading,
-    isError: analyticsError,
     refetch: refetchAnalytics,
-  } = trpc.leoAnalytics.getAnalytics.useQuery(undefined, { retry: 1 });
+  } = useQuery({
+    queryKey: ['admin', 'leo-analytics'],
+    queryFn: fetchLeoAnalytics,
+    retry: 1,
+  });
 
   const sessions = analytics?.recentSessions ?? [];
   const isLoading = contactsLoading;

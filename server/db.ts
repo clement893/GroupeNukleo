@@ -38,6 +38,21 @@ export async function getAllAgencyLeads() {
   }
 }
 
+export async function getLeoContacts() {
+  const db = await getDb();
+  if (!db) {
+    console.warn("[Database] Cannot get LEO contacts: database not available");
+    return [];
+  }
+
+  try {
+    return await db.select().from(leoContacts).orderBy(desc(leoContacts.createdAt));
+  } catch (error) {
+    console.error("[Database] Error getting LEO contacts:", error);
+    return [];
+  }
+}
+
 export async function saveAgencyLead(lead: InsertAgencyLead): Promise<void> {
   const db = await getDb();
   if (!db) {

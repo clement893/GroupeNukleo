@@ -85,7 +85,6 @@ const NukleoAgency = lazyWithRetry(() => import("./pages/services/NukleoAgency")
 const Approche = lazyWithRetry(() => import("./pages/Approche"));
 
 // Admin pages
-const AdminAgencyLeads = lazy(() => import("./pages/admin/AdminAgencyLeads"));
 const AdminLEOAnalytics = lazy(() => import("./pages/admin/AdminLEOAnalytics"));
 const AdminLEOContacts = lazy(() => import("./pages/admin/AdminLEOContacts"));
 const AdminLogin = lazy(() => import("./pages/admin/AdminLogin"));
@@ -101,6 +100,7 @@ const AdminTestimonials = lazy(() => import("./pages/admin/AdminTestimonials"));
 const RunMigration = lazy(() => import("./pages/admin/RunMigration"));
 const AdminHome = lazy(() => import("./pages/admin/AdminHome"));
 const AdminProjectsImages = lazy(() => import("./pages/admin/AdminProjectsImages"));
+const AdminProjectEdit = lazy(() => import("./pages/admin/AdminProjectEdit"));
 const AdminCarouselLogos = lazy(() => import("./pages/admin/AdminCarouselLogos"));
 
 import { ProtectedAdminRoute } from "./components/ProtectedAdminRoute";
@@ -174,9 +174,6 @@ function App() {
 
               {/* ===== ROUTES ADMIN ===== */}
               <Route path="/admin/login" component={AdminLogin} />
-              <Route path="/admin/agency-leads">
-                <ProtectedAdminRoute><AdminAgencyLeads /></ProtectedAdminRoute>
-              </Route>
               <Route path="/admin/leo-analytics">
                 <ProtectedAdminRoute><AdminLEOAnalytics /></ProtectedAdminRoute>
               </Route>
@@ -209,6 +206,9 @@ function App() {
               </Route>
               <Route path="/admin/run-migration">
                 <ProtectedAdminRoute><RunMigration /></ProtectedAdminRoute>
+              </Route>
+              <Route path="/admin/projects-images/edit/:slug">
+                <ProtectedAdminRoute><AdminProjectEdit /></ProtectedAdminRoute>
               </Route>
               <Route path="/admin/projects-images">
                 <ProtectedAdminRoute><AdminProjectsImages /></ProtectedAdminRoute>

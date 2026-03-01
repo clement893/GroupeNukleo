@@ -21,13 +21,6 @@ export default function AdminDashboard() {
 
   const statCards = [
     {
-      title: "Total Agency Leads",
-      value: stats?.agencyLeads || 0,
-      icon: Users,
-      description: "Leads from agency contact form",
-      color: "from-cyan-500 to-blue-500",
-    },
-    {
       title: "LEO Sessions",
       value: stats?.leoSessions || 0,
       icon: MessageSquare,
@@ -150,13 +143,6 @@ export default function AdminDashboard() {
                 >
                   <div className="text-gray-900 font-medium" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>LEO Contacts</div>
                   <div className="text-gray-500 text-sm" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>View emails captured by LEO chatbot</div>
-                </a>
-                <a
-                  href="/admin/agency-leads"
-                  className="block p-3 rounded-lg bg-gray-50 hover:bg-gray-100 transition-colors text-gray-700 hover:text-gray-900"
-                >
-                  <div className="text-gray-900 font-medium" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>Agency Leads</div>
-                  <div className="text-gray-500 text-sm" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>Manage agency contact submissions</div>
                 </a>
                 <a
                   href="/admin/contact-messages"

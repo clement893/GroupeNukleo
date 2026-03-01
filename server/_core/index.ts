@@ -21,7 +21,7 @@ import session from "express-session";
 import connectPgSimple from "connect-pg-simple";
 import passport from "passport";
 import { configureGoogleAuth, requireAdminAuth } from "./googleAuth";
-import { getDb, getAllAgencyLeads, getLeoAnalytics } from "../db";
+import { getDb, getAllAgencyLeads, getLeoAnalytics, getLeoContacts } from "../db";
 import { addLogo, updateLogo, removeLogo, reorderLogos } from "../carouselLogosApi";
 import { analytics } from "../../drizzle/schema";
 import { eq } from "drizzle-orm";
@@ -31,6 +31,8 @@ import multer from "multer";
 import { promises as fs } from "fs";
 import { existsSync, mkdirSync, readdirSync } from "fs";
 import { csrfTokenMiddleware, validateCSRF } from "./csrf";
+import jwt from "jsonwebtoken";
+import { ENV } from "./env";
 
 /**
  * Vérifie si un port est disponible pour l'écoute.
@@ -302,6 +304,27 @@ async function startServer() {
               console.error('[Google Auth] Login error:', loginErr);
               return res.redirect(`/admin/login?error=${encodeURIComponent(loginErr.message || 'login_failed')}`);
             }
+            // Set admin_session JWT cookie so tRPC context recognizes admin (fixes Railway session not sent with tRPC)
+            const ADMIN_COOKIE_NAME = "admin_session";
+            const ADMIN_JWT_SECRET = (ENV.cookieSecret || "") + "-admin";
+            if (ADMIN_JWT_SECRET && ADMIN_JWT_SECRET !== "-admin") {
+              try {
+                const token = jwt.sign(
+                  { id: 1, username: user.name || user.email, email: user.email },
+                  ADMIN_JWT_SECRET,
+                  { expiresIn: "24h" }
+                );
+                res.cookie(ADMIN_COOKIE_NAME, token, {
+                  httpOnly: true,
+                  secure: process.env.NODE_ENV === "production",
+                  sameSite: "lax",
+                  maxAge: 24 * 60 * 60 * 1000,
+                  path: "/",
+                });
+              } catch (e) {
+                console.error("[Google Auth] Failed to set admin_session cookie:", e);
+              }
+            }
             console.log(`[Google Auth] User logged in successfully: ${user.email}`);
             return res.redirect('/admin');
           });
@@ -327,6 +350,14 @@ async function startServer() {
   
   // Logout route
   app.post('/api/auth/logout', (req, res) => {
+    // Clear admin_session JWT cookie so tRPC no longer sees admin
+    const ADMIN_COOKIE_NAME = "admin_session";
+    res.clearCookie(ADMIN_COOKIE_NAME, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: "lax",
+      path: "/",
+    });
     req.logout((err) => {
       if (err) {
         return res.status(500).json({ error: 'Logout failed' });
@@ -468,6 +499,17 @@ async function startServer() {
     } catch (e) {
       console.error("[Admin] analytics-config PUT error", e);
       res.status(500).json({ error: "Failed to update analytics config" });
+    }
+  });
+
+  // Admin: LEO contacts (REST, same auth — avoids tRPC session issues on Railway)
+  app.get("/api/admin/leo-contacts", requireAdminAuth, async (req, res) => {
+    try {
+      const contacts = await getLeoContacts();
+      res.json(contacts);
+    } catch (e) {
+      console.error("[Admin] leo-contacts error", e);
+      res.status(500).json({ error: "Failed to fetch LEO contacts" });
     }
   });
 

@@ -5,7 +5,6 @@ import {
   LayoutDashboard,
   BarChart3,
   MessageSquare,
-  Building2,
   Settings,
   ArrowRight,
   Volume2,
@@ -67,7 +66,6 @@ const ADMIN_CATEGORIES = [
     description: "Contacts, leads et messages",
     sections: [
       { title: "LEO Contacts", description: "Contacts et conversations LEO", icon: <MessageSquare className="h-5 w-5" />, href: "/admin/leo-contacts" },
-      { title: "Agency Leads", description: "Leads et demandes des agences", icon: <Building2 className="h-5 w-5" />, href: "/admin/agency-leads" },
       { title: "Contact Messages", description: "Messages du formulaire de contact", icon: <MessageSquare className="h-5 w-5" />, href: "/admin/contact-messages" },
       { title: "Start Project Submissions", description: "Demandes de projets Start Project", icon: <FileText className="h-5 w-5" />, href: "/admin/start-project-submissions" },
       { title: "Témoignages", description: "Synchroniser les témoignages", icon: <MessageSquare className="h-5 w-5" />, href: "/admin/testimonials" },

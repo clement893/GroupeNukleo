@@ -3,7 +3,6 @@ import {
   LayoutDashboard,
   BarChart3,
   MessageSquare,
-  Building2,
   FileText,
   Globe,
   Volume2,
@@ -28,7 +27,6 @@ const NAV_GROUPS = [
     label: "Contacts & Leads",
     items: [
       { label: "LEO Contacts", href: "/admin/leo-contacts", icon: MessageSquare },
-      { label: "Agency Leads", href: "/admin/agency-leads", icon: Building2 },
       { label: "Contact Messages", href: "/admin/contact-messages", icon: MessageSquare },
       { label: "Start Project", href: "/admin/start-project-submissions", icon: FileText },
       { label: "Témoignages", href: "/admin/testimonials", icon: MessageSquare },
