@@ -5,6 +5,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Button } from "@/components/ui/button";
 import { RefreshCw, CheckCircle2, XCircle, Loader2, MessageSquare } from "lucide-react";
 import { AdminLayout } from "@/components/AdminLayout";
+import { getErrorMessage } from "@/lib/trpcErrorHandler";
 
 export default function AdminTestimonials() {
   const { isAdmin } = useIsAdminSession();
@@ -36,10 +37,11 @@ export default function AdminTestimonials() {
       
       // Rafraîchir la liste des témoignages après synchronisation
       await refetch();
-    } catch (error: any) {
+    } catch (error: unknown) {
+      const message = getErrorMessage(error, "Erreur lors de la synchronisation");
       setSyncResult({
         success: false,
-        message: error.message || "Erreur lors de la synchronisation",
+        message,
       });
     } finally {
       setIsSyncing(false);
@@ -110,6 +112,11 @@ export default function AdminTestimonials() {
                     >
                       {syncResult.message}
                     </p>
+                    {!syncResult.success && (
+                      <p className="mt-2 text-sm text-gray-400">
+                        Vérifiez que les variables d&apos;environnement <code className="bg-white/10 px-1 rounded">INTERNAL_PLATFORM_URL</code> et <code className="bg-white/10 px-1 rounded">INTERNAL_PLATFORM_API_KEY</code> sont configurées sur le serveur (ex. Railway).
+                      </p>
+                    )}
                     {syncResult.success && syncResult.synced !== undefined && (
                       <div className="mt-2 text-sm text-gray-300 space-y-1">
                         <p>• {syncResult.synced} témoignage(s) synchronisé(s)</p>

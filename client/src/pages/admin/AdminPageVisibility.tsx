@@ -9,7 +9,7 @@ import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
 import { toast } from 'sonner';
 
-// Liste de toutes les pages du site avec leurs chemins
+// Liste de toutes les pages du site avec leurs chemins (alignée sur App.tsx + Footer)
 const ALL_PAGES = [
   { path: '/', label: 'Accueil', description: 'Page d\'accueil principale' },
   { path: '/fr', label: 'Accueil (FR)', description: 'Page d\'accueil en français' },
@@ -17,36 +17,34 @@ const ALL_PAGES = [
   { path: '/fr/projects', label: 'Projets (FR)', description: 'Page des projets en français' },
   { path: '/about', label: 'À propos', description: 'Page à propos' },
   { path: '/fr/about', label: 'À propos (FR)', description: 'Page à propos en français' },
-  { path: '/expertise', label: 'Expertise', description: 'Page expertise' },
-  { path: '/fr/expertise', label: 'Expertise (FR)', description: 'Page expertise en français' },
+  { path: '/approche', label: 'Approche', description: 'Page approche / expertise' },
+  { path: '/fr/approche', label: 'Approche (FR)', description: 'Page approche en français' },
   { path: '/resources', label: 'Ressources', description: 'Page ressources' },
   { path: '/fr/resources', label: 'Ressources (FR)', description: 'Page ressources en français' },
   { path: '/contact', label: 'Contact', description: 'Page de contact' },
   { path: '/fr/contact', label: 'Contact (FR)', description: 'Page de contact en français' },
   { path: '/leo', label: 'LEO', description: 'Page LEO' },
   { path: '/fr/leo', label: 'LEO (FR)', description: 'Page LEO en français' },
-  { path: '/manifesto', label: 'Manifeste', description: 'Page manifeste' },
-  { path: '/fr/manifesto', label: 'Manifeste (FR)', description: 'Page manifeste en français' },
-  { path: '/radar', label: 'Radar IA', description: 'Page radar des tendances IA' },
-  { path: '/fr/radar', label: 'Radar IA (FR)', description: 'Page radar des tendances IA en français' },
   { path: '/services', label: 'Services', description: 'Page services' },
   { path: '/fr/services', label: 'Services (FR)', description: 'Page services en français' },
-  { path: '/clients', label: 'Clients', description: 'Page clients' },
-  { path: '/fr/clients', label: 'Clients (FR)', description: 'Page clients en français' },
-  { path: '/testimonials', label: 'Témoignages', description: 'Page témoignages' },
-  { path: '/fr/testimonials', label: 'Témoignages (FR)', description: 'Page témoignages en français' },
-  { path: '/glossary', label: 'Glossaire', description: 'Page glossaire' },
-  { path: '/fr/glossary', label: 'Glossaire (FR)', description: 'Page glossaire en français' },
-  { path: '/privacy', label: 'Confidentialité', description: 'Page confidentialité' },
-  { path: '/fr/privacy', label: 'Confidentialité (FR)', description: 'Page confidentialité en français' },
-  { path: '/terms', label: 'Conditions', description: 'Page conditions d\'utilisation' },
-  { path: '/fr/terms', label: 'Conditions (FR)', description: 'Page conditions d\'utilisation en français' },
-  { path: '/cookies', label: 'Cookies', description: 'Page politique des cookies' },
-  { path: '/fr/cookies', label: 'Cookies (FR)', description: 'Page politique des cookies en français' },
+  { path: '/services/tech', label: 'Services Tech', description: 'Page Nukleo Tech' },
+  { path: '/fr/services/tech', label: 'Services Tech (FR)', description: 'Page Nukleo Tech en français' },
+  { path: '/services/consulting', label: 'Services Consulting', description: 'Page Nukleo Consulting' },
+  { path: '/fr/services/consulting', label: 'Services Consulting (FR)', description: 'Page Nukleo Consulting en français' },
+  { path: '/services/studio', label: 'Services Studio', description: 'Page Nukleo Studio' },
+  { path: '/fr/services/studio', label: 'Services Studio (FR)', description: 'Page Nukleo Studio en français' },
+  { path: '/services/agency', label: 'Services Agency', description: 'Page Nukleo Agency' },
+  { path: '/fr/services/agency', label: 'Services Agency (FR)', description: 'Page Nukleo Agency en français' },
+  { path: '/privacy-policy', label: 'Confidentialité', description: 'Page politique de confidentialité' },
+  { path: '/fr/privacy-policy', label: 'Confidentialité (FR)', description: 'Page confidentialité en français' },
+  { path: '/nukleo-time-privacy', label: 'Nukleo.TIME Confidentialité', description: 'Page confidentialité Nukleo.TIME' },
+  { path: '/fr/nukleo-time-privacy', label: 'Nukleo.TIME Confidentialité (FR)', description: 'Page Nukleo.TIME confidentialité en français' },
+  { path: '/terms-of-service', label: 'Conditions d\'utilisation', description: 'Page conditions d\'utilisation' },
+  { path: '/fr/terms-of-service', label: 'Conditions (FR)', description: 'Page conditions en français' },
+  { path: '/cookie-policy', label: 'Cookies', description: 'Page politique des cookies' },
+  { path: '/fr/cookie-policy', label: 'Cookies (FR)', description: 'Page politique des cookies en français' },
   { path: '/faq', label: 'FAQ', description: 'Page FAQ' },
   { path: '/fr/faq', label: 'FAQ (FR)', description: 'Page FAQ en français' },
-  { path: '/agencies', label: 'Agences', description: 'Page agences' },
-  { path: '/fr/agencies', label: 'Agences (FR)', description: 'Page agences en français' },
 ];
 
 export default function AdminPageVisibility() {
@@ -62,6 +60,15 @@ export default function AdminPageVisibility() {
   const updateMutation = trpc.pageVisibility.updateVisibility.useMutation({
     onSuccess: () => {
       toast.success('Visibilité mise à jour avec succès');
+      refetch();
+    },
+    onError: (error) => {
+      toast.error(`Erreur: ${error.message}`);
+    },
+  });
+  const bulkUpdateMutation = trpc.pageVisibility.bulkUpdate.useMutation({
+    onSuccess: () => {
+      toast.success('Toutes les visibilités ont été enregistrées');
       refetch();
     },
     onError: (error) => {
@@ -96,14 +103,6 @@ export default function AdminPageVisibility() {
     }
   }, [pagesVisibility, isLoading, error]);
 
-  const toggleVisibility = (path: string) => {
-    setLocalVisibility((prev) => {
-      const newState = { ...prev, [path]: !prev[path] };
-      setHasChanges(true);
-      return newState;
-    });
-  };
-
   const saveAll = async () => {
     const updates = ALL_PAGES.map((page) => ({
       path: page.path,
@@ -112,17 +111,7 @@ export default function AdminPageVisibility() {
     }));
 
     try {
-      await updateMutation.mutateAsync({
-        path: updates[0].path,
-        isVisible: updates[0].isVisible,
-        description: updates[0].description,
-      });
-
-      // Update remaining pages one by one (or use bulk update if available)
-      for (let i = 1; i < updates.length; i++) {
-        await updateMutation.mutateAsync(updates[i]);
-      }
-
+      await bulkUpdateMutation.mutateAsync(updates);
       setHasChanges(false);
     } catch (error) {
       console.error('Error saving visibility:', error);
@@ -203,11 +192,11 @@ export default function AdminPageVisibility() {
             {hasChanges && (
               <Button
                 onClick={saveAll}
-                disabled={updateMutation.isPending}
+                disabled={updateMutation.isPending || bulkUpdateMutation.isPending}
                 className="bg-cyan-500 hover:bg-cyan-600 text-white"
               >
                 <Save className="w-4 h-4 mr-2" />
-                {updateMutation.isPending ? 'Enregistrement...' : 'Enregistrer tout'}
+                {bulkUpdateMutation.isPending ? 'Enregistrement...' : 'Enregistrer tout'}
               </Button>
             )}
           </div>
@@ -283,17 +272,14 @@ export default function AdminPageVisibility() {
                             id={`switch-${page.path}`}
                             checked={isVisible}
                             onCheckedChange={() => {
-                              toggleVisibility(page.path);
-                              // Auto-save individual page
-                              setTimeout(() => {
-                                const newValue = !isVisible;
-                                setLocalVisibility((prev) => ({ ...prev, [page.path]: newValue }));
-                                updateMutation.mutate({
-                                  path: page.path,
-                                  isVisible: newValue,
-                                  description: page.description,
-                                });
-                              }, 0);
+                              const newValue = !isVisible;
+                              setLocalVisibility((prev) => ({ ...prev, [page.path]: newValue }));
+                              setHasChanges(true);
+                              updateMutation.mutate({
+                                path: page.path,
+                                isVisible: newValue,
+                                description: page.description,
+                              });
                             }}
                           />
                           <Label
