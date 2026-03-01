@@ -129,7 +129,7 @@ const PAGE_SECTION_LABELS: Record<string, string> = {
 };
 /** Ordre d’affichage des sections (pages du site en premier) */
 const PAGE_SECTION_ORDER = [
-  "home", "services", "about", "contact", "projects", "resources", "faq", "leo",
+  "home", "services", "about", "contact", "projects", "approche", "resources", "faq", "leo",
   "expertise", "nav", "header", "menu", "footer", "preFooter", "common", "notFound", "alt",
   "hero", "capabilities", "manifesto", "trinity", "cta", "testimonials", "whoWeServe", "clients",
   "startProject", "artsCulture", "agencies", "media", "lab", "bureau", "studio",
@@ -202,21 +202,18 @@ export default function AdminPageTexts() {
   const [dirty, setDirty] = useState<Record<number, { textEn: string; textFr: string }>>({});
 
   const pages = useMemo(() => {
-    if (!texts?.length) return [];
-    const sectionSet = new Set<string>();
-    for (const t of texts) {
-      const section = t.key.split(".")[0] ?? "other";
-      sectionSet.add(section);
+    const fromDb = new Set<string>();
+    if (texts?.length) {
+      for (const t of texts) {
+        const section = t.key.split(".")[0] ?? "other";
+        fromDb.add(section);
+      }
     }
-    const list = Array.from(sectionSet);
-    list.sort((a, b) => {
-      const ia = PAGE_SECTION_ORDER.indexOf(a);
-      const ib = PAGE_SECTION_ORDER.indexOf(b);
-      if (ia !== -1 && ib !== -1) return ia - ib;
-      if (ia !== -1) return -1;
-      if (ib !== -1) return 1;
-      return a.localeCompare(b);
-    });
+    // Toujours afficher les pages du site actuel en premier (source de vérité = site, pas la BDD)
+    const list = [...PAGE_SECTION_ORDER];
+    for (const s of fromDb) {
+      if (!PAGE_SECTION_ORDER.includes(s) && !list.includes(s)) list.push(s);
+    }
     return list;
   }, [texts]);
 
