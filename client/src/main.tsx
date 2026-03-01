@@ -56,7 +56,8 @@ const isDev = process.env.NODE_ENV === 'development';
 queryClient.getQueryCache().subscribe(event => {
   if (event.type === "updated" && event.action.type === "error") {
     const error = event.query.state.error;
-    redirectToLoginIfUnauthorized(error);
+    // Ne pas rediriger ici sur 403 admin : les guards (ProtectedAdminRoute / AdminRoute) gèrent l'auth.
+    // Une redirection globale provoquait un clignotement infini (analytics, etc.) en boucle avec /admin/login.
     if (isDev && error instanceof TRPCClientError && error.message !== NOT_ADMIN_ERR_MSG) {
       logger.tagged('API').error("Query Error", error);
     }

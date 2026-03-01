@@ -1,289 +1,295 @@
-import { trpc } from '@/lib/trpc';
-import AdminRoute from '@/components/AdminRoute';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Loader2, Save, BarChart3, Facebook, Linkedin, CheckCircle2, XCircle } from 'lucide-react';
+import { useState, useEffect } from "react";
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { AdminLayout } from "@/components/AdminLayout";
-import { Button } from '@/components/ui/button';
-import { useState, useEffect } from 'react';
-import { Switch } from '@/components/ui/switch';
-import { Label } from '@/components/ui/label';
-import { Input } from '@/components/ui/input';
-import { toast } from 'sonner';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Switch } from "@/components/ui/switch";
+import { Loader2, Save, BarChart3, Facebook, Linkedin, CheckCircle2, TrendingUp } from "lucide-react";
+import { toast } from "sonner";
 
-// Configuration des providers analytics
-const ANALYTICS_PROVIDERS = [
+const PROVIDERS = [
   {
-    id: 'google-analytics',
-    name: 'Google Analytics 4',
+    id: "google-analytics",
+    name: "Google Analytics 4",
     icon: BarChart3,
-    description: 'Suivi des visiteurs et conversions avec Google Analytics 4',
-    trackingIdLabel: 'Measurement ID (G-XXXXXXXXXX)',
-    trackingIdPlaceholder: 'G-XXXXXXXXXX',
-    helpText: 'Trouvez votre Measurement ID dans Google Analytics > Admin > Data Streams',
-    color: 'from-blue-500 to-blue-600',
+    description: "Suivi des visiteurs et conversions avec GA4",
+    trackingLabel: "Measurement ID (G-XXXXXXXXXX)",
+    placeholder: "G-XXXXXXXXXX",
+    help: "Google Analytics > Admin > Data Streams",
+    color: "from-blue-500 to-blue-600",
   },
   {
-    id: 'facebook-pixel',
-    name: 'Facebook Pixel',
+    id: "facebook-pixel",
+    name: "Facebook Pixel",
     icon: Facebook,
-    description: 'Suivi des conversions et publicités Facebook',
-    trackingIdLabel: 'Pixel ID',
-    trackingIdPlaceholder: '123456789012345',
-    helpText: 'Trouvez votre Pixel ID dans Facebook Events Manager',
-    color: 'from-blue-600 to-blue-700',
+    description: "Conversions et publicités Facebook",
+    trackingLabel: "Pixel ID",
+    placeholder: "123456789012345",
+    help: "Facebook Events Manager",
+    color: "from-blue-600 to-blue-700",
   },
   {
-    id: 'linkedin-insight',
-    name: 'LinkedIn Insight Tag',
+    id: "linkedin-insight",
+    name: "LinkedIn Insight Tag",
     icon: Linkedin,
-    description: 'Suivi des conversions et publicités LinkedIn',
-    trackingIdLabel: 'Partner ID',
-    trackingIdPlaceholder: '123456',
-    helpText: 'Trouvez votre Partner ID dans LinkedIn Campaign Manager',
-    color: 'from-blue-700 to-blue-800',
+    description: "Conversions et publicités LinkedIn",
+    trackingLabel: "Partner ID",
+    placeholder: "123456",
+    help: "LinkedIn Campaign Manager",
+    color: "from-blue-700 to-blue-800",
   },
-];
+] as const;
+
+type ProviderId = (typeof PROVIDERS)[number]["id"];
+
+interface ConfigState {
+  isEnabled: boolean;
+  trackingId: string;
+}
 
 export default function AdminAnalytics() {
-  const { data: analyticsConfigs, isLoading, refetch } = trpc.analytics.getAll.useQuery();
-  const upsertMutation = trpc.analytics.upsert.useMutation({
-    onSuccess: () => {
-      toast.success('Configuration analytics mise à jour avec succès');
-      refetch();
+  const queryClient = useQueryClient();
+  const { data: configs, isLoading, isError, error, refetch } = useQuery({
+    queryKey: ["admin", "analytics-config"],
+    queryFn: async () => {
+      const res = await fetch("/api/admin/analytics-config", { credentials: "include" });
+      if (!res.ok) throw new Error(res.status === 401 ? "Connexion requise" : "Erreur chargement");
+      return res.json();
     },
-    onError: (error) => {
-      toast.error(`Erreur: ${error.message}`);
-    },
+    retry: false,
+    refetchOnWindowFocus: false,
   });
 
-  const [localConfigs, setLocalConfigs] = useState<Record<string, {
-    isEnabled: boolean;
-    trackingId: string;
-  }>>({});
+  const [local, setLocal] = useState<Record<ProviderId, ConfigState>>({
+    "google-analytics": { isEnabled: false, trackingId: "" },
+    "facebook-pixel": { isEnabled: false, trackingId: "" },
+    "linkedin-insight": { isEnabled: false, trackingId: "" },
+  });
 
-  // Initialize local state from server data
   useEffect(() => {
-    if (analyticsConfigs && Array.isArray(analyticsConfigs)) {
-      const configs: Record<string, { isEnabled: boolean; trackingId: string }> = {};
-      ANALYTICS_PROVIDERS.forEach(provider => {
-        const config = analyticsConfigs.find(c => c.provider === provider.id);
-        configs[provider.id] = {
-          isEnabled: config?.isEnabled || false,
-          trackingId: config?.trackingId || '',
+    if (configs && Array.isArray(configs)) {
+      const next: Record<ProviderId, ConfigState> = {} as Record<ProviderId, ConfigState>;
+      PROVIDERS.forEach((p) => {
+        const c = configs.find((x: { provider: string }) => x.provider === p.id);
+        next[p.id] = {
+          isEnabled: c?.isEnabled ?? false,
+          trackingId: c?.trackingId ?? "",
         };
       });
-      setLocalConfigs(configs);
+      setLocal(next);
     }
-  }, [analyticsConfigs]);
+  }, [configs]);
 
-  const handleToggle = (providerId: string) => {
-    setLocalConfigs(prev => ({
-      ...prev,
-      [providerId]: {
-        ...prev[providerId],
-        isEnabled: !prev[providerId]?.isEnabled,
-      },
-    }));
-  };
+  const upsertMutation = useMutation({
+    mutationFn: async ({ provider, isEnabled, trackingId }: { provider: ProviderId; isEnabled: boolean; trackingId?: string }) => {
+      const res = await fetch("/api/admin/analytics-config", {
+        method: "PUT",
+        credentials: "include",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ provider, isEnabled, trackingId: trackingId || undefined }),
+      });
+      if (!res.ok) {
+        const err = await res.json().catch(() => ({}));
+        throw new Error(err?.error || "Erreur sauvegarde");
+      }
+      return res.json();
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["admin", "analytics-config"] });
+      toast.success("Configuration enregistrée");
+    },
+    onError: (e: Error) => toast.error(e.message),
+  });
 
-  const handleTrackingIdChange = (providerId: string, value: string) => {
-    setLocalConfigs(prev => ({
-      ...prev,
-      [providerId]: {
-        ...prev[providerId],
-        trackingId: value,
-      },
-    }));
-  };
-
-  const handleSave = async (providerId: string) => {
-    const config = localConfigs[providerId];
-    if (!config) return;
-
-    // Validate tracking ID if enabled
-    if (config.isEnabled && !config.trackingId.trim()) {
-      toast.error('Veuillez entrer un ID de suivi pour activer ce provider');
+  const handleSave = (providerId: ProviderId) => {
+    const c = local[providerId];
+    if (!c) return;
+    if (c.isEnabled && !c.trackingId.trim()) {
+      toast.error("Indiquez un ID de suivi pour activer ce provider");
       return;
     }
-
-    await upsertMutation.mutateAsync({
-      provider: providerId as 'google-analytics' | 'facebook-pixel' | 'linkedin-insight',
-      isEnabled: config.isEnabled,
-      trackingId: config.trackingId.trim() || undefined,
+    upsertMutation.mutate({
+      provider: providerId,
+      isEnabled: c.isEnabled,
+      trackingId: c.trackingId.trim() || undefined,
     });
   };
 
-  const handleSaveAll = async () => {
-    for (const provider of ANALYTICS_PROVIDERS) {
-      const config = localConfigs[provider.id];
-      if (config) {
-        if (config.isEnabled && !config.trackingId.trim()) {
-          toast.error(`Veuillez entrer un ID de suivi pour ${provider.name}`);
-          return;
-        }
-        await upsertMutation.mutateAsync({
-          provider: provider.id as 'google-analytics' | 'facebook-pixel' | 'linkedin-insight',
-          isEnabled: config.isEnabled,
-          trackingId: config.trackingId.trim() || undefined,
-        });
+  const handleSaveAll = () => {
+    for (const p of PROVIDERS) {
+      const c = local[p.id];
+      if (c?.isEnabled && !c.trackingId.trim()) {
+        toast.error(`ID de suivi requis pour ${p.name}`);
+        return;
       }
     }
-    toast.success('Toutes les configurations ont été sauvegardées');
+    Promise.all(
+      PROVIDERS.map((p) => {
+        const c = local[p.id];
+        return fetch("/api/admin/analytics-config", {
+          method: "PUT",
+          credentials: "include",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            provider: p.id,
+            isEnabled: c?.isEnabled ?? false,
+            trackingId: (c?.trackingId ?? "").trim() || undefined,
+          }),
+        });
+      })
+    ).then(() => {
+      queryClient.invalidateQueries({ queryKey: ["admin", "analytics-config"] });
+      toast.success("Toutes les configurations ont été enregistrées");
+    });
   };
 
   if (isLoading) {
     return (
-      <AdminRoute>
-        <AdminLayout>
-          <div className="p-6 lg:p-8 max-w-7xl mx-auto">
-            <div className="flex items-center gap-2 text-white text-lg">
-              <Loader2 className="w-5 h-5 animate-spin" />
-              Chargement des configurations analytics...
-            </div>
-          </div>
-        </AdminLayout>
-      </AdminRoute>
+      <AdminLayout>
+        <div className="p-6 lg:p-8 max-w-4xl mx-auto flex items-center justify-center min-h-[40vh]">
+          <Loader2 className="w-8 h-8 text-violet-500 animate-spin" />
+        </div>
+      </AdminLayout>
+    );
+  }
+
+  if (isError) {
+    return (
+      <AdminLayout>
+        <div className="p-6 lg:p-8 max-w-4xl mx-auto text-center py-12">
+          <p className="text-red-600 mb-4">{error instanceof Error ? error.message : "Erreur"}</p>
+          <Button onClick={() => refetch()} className="bg-violet-600 hover:bg-violet-700 text-white">
+            Réessayer
+          </Button>
+        </div>
+      </AdminLayout>
     );
   }
 
   return (
-    <AdminRoute>
-      <AdminLayout>
-        <div className="p-6 lg:p-8 max-w-7xl mx-auto">
-          <div className="mb-8">
-            <h1 className="text-4xl font-bold text-white mb-2">Gestion des Analytics et Tracking</h1>
-            <p className="text-gray-400">Configurez les outils de suivi et analytics pour votre site</p>
-          </div>
-
-          <div className="space-y-6">
-            {ANALYTICS_PROVIDERS.map((provider) => {
-              const Icon = provider.icon;
-              const config = localConfigs[provider.id];
-              const isActive = config?.isEnabled && config?.trackingId;
-
-              return (
-                <Card key={provider.id} className="bg-slate-800/50 border-slate-700">
-                  <CardHeader>
-                    <div className="flex items-start justify-between">
-                      <div className="flex items-center gap-4">
-                        <div className={`p-3 rounded-lg bg-gradient-to-br ${provider.color}`}>
-                          <Icon className="w-6 h-6 text-white" />
-                        </div>
-                        <div>
-                          <CardTitle className="text-white flex items-center gap-2">
-                            {provider.name}
-                            {isActive && (
-                              <CheckCircle2 className="w-5 h-5 text-green-500" />
-                            )}
-                          </CardTitle>
-                          <CardDescription className="text-slate-400 mt-1">
-                            {provider.description}
-                          </CardDescription>
-                        </div>
-                      </div>
-                      <div className="flex items-center gap-3">
-                        <div className="flex items-center gap-2">
-                          <Switch
-                            id={`enable-${provider.id}`}
-                            checked={config?.isEnabled || false}
-                            onCheckedChange={() => handleToggle(provider.id)}
-                          />
-                          <Label htmlFor={`enable-${provider.id}`} className="text-white cursor-pointer">
-                            {config?.isEnabled ? 'Activé' : 'Désactivé'}
-                          </Label>
-                        </div>
-                      </div>
-                    </div>
-                  </CardHeader>
-                  <CardContent>
-                    <div className="space-y-4">
-                      <div>
-                        <Label htmlFor={`tracking-${provider.id}`} className="text-white">
-                          {provider.trackingIdLabel}
-                        </Label>
-                        <Input
-                          id={`tracking-${provider.id}`}
-                          value={config?.trackingId || ''}
-                          onChange={(e) => handleTrackingIdChange(provider.id, e.target.value)}
-                          placeholder={provider.trackingIdPlaceholder}
-                          className="mt-2 bg-slate-700 border-slate-600 text-white placeholder:text-slate-400"
-                          disabled={!config?.isEnabled}
-                        />
-                        <p className="text-xs text-slate-400 mt-1">
-                          {provider.helpText}
-                        </p>
-                      </div>
-
-                      {config?.isEnabled && !config?.trackingId && (
-                        <div className="p-3 bg-yellow-500/10 border border-yellow-500/20 rounded-lg">
-                          <p className="text-sm text-yellow-400">
-                            ⚠️ Veuillez entrer un ID de suivi pour activer ce provider
-                          </p>
-                        </div>
-                      )}
-
-                      <div className="flex justify-end">
-                        <Button
-                          onClick={() => handleSave(provider.id)}
-                          disabled={upsertMutation.isPending}
-                          className="bg-gradient-to-r from-purple-600 to-purple-700 hover:from-purple-700 hover:to-purple-800"
-                        >
-                          {upsertMutation.isPending ? (
-                            <>
-                              <Loader2 className="w-4 h-4 mr-2 animate-spin" />
-                              Sauvegarde...
-                            </>
-                          ) : (
-                            <>
-                              <Save className="w-4 h-4 mr-2" />
-                              Sauvegarder
-                            </>
-                          )}
-                        </Button>
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
-              );
-            })}
-          </div>
-
-          <div className="mt-8 flex justify-end">
-            <Button
-              onClick={handleSaveAll}
-              disabled={upsertMutation.isPending}
-              className="bg-gradient-to-r from-purple-600 to-purple-700 hover:from-purple-700 hover:to-purple-800"
-              size="lg"
-            >
-              {upsertMutation.isPending ? (
-                <>
-                  <Loader2 className="w-4 h-4 mr-2 animate-spin" />
-                  Sauvegarde...
-                </>
-              ) : (
-                <>
-                  <Save className="w-4 h-4 mr-2" />
-                  Sauvegarder toutes les configurations
-                </>
-              )}
-            </Button>
-          </div>
-
-          <Card className="mt-8 bg-slate-800/50 border-slate-700">
-            <CardHeader>
-              <CardTitle className="text-white">Informations importantes</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <ul className="space-y-2 text-slate-300 text-sm">
-                <li>• Les scripts analytics sont chargés automatiquement sur toutes les pages du site</li>
-                <li>• Les conversions sont suivies automatiquement pour les formulaires de contact et de projet</li>
-                <li>• Assurez-vous de respecter les politiques de confidentialité et d'obtenir le consentement des utilisateurs</li>
-                <li>• Les modifications prennent effet immédiatement après la sauvegarde</li>
-              </ul>
-            </CardContent>
-          </Card>
+    <AdminLayout>
+      <div className="p-6 lg:p-8 max-w-4xl mx-auto space-y-8">
+        <div>
+          <h1 className="text-3xl font-bold text-[var(--admin-foreground)] mb-1 flex items-center gap-2">
+            <TrendingUp className="w-8 h-8 text-violet-500" />
+            Analytics &amp; tracking
+          </h1>
+          <p className="text-[var(--admin-muted)]">
+            Configurez Google Analytics, Facebook Pixel et LinkedIn Insight Tag. Les scripts sont chargés sur tout le site.
+          </p>
         </div>
-      </AdminLayout>
-    </AdminRoute>
+
+        <div className="space-y-6">
+          {PROVIDERS.map((provider) => {
+            const Icon = provider.icon;
+            const c = local[provider.id];
+            const isActive = c?.isEnabled && c?.trackingId;
+
+            return (
+              <Card key={provider.id} className="bg-white border-[var(--admin-border)] shadow-sm">
+                <CardHeader>
+                  <div className="flex flex-wrap items-start justify-between gap-4">
+                    <div className="flex items-center gap-4">
+                      <div className={`p-3 rounded-xl bg-gradient-to-br ${provider.color}`}>
+                        <Icon className="w-6 h-6 text-white" />
+                      </div>
+                      <div>
+                        <CardTitle className="text-[var(--admin-foreground)] flex items-center gap-2">
+                          {provider.name}
+                          {isActive && <CheckCircle2 className="w-5 h-5 text-green-500" />}
+                        </CardTitle>
+                        <CardDescription className="text-[var(--admin-muted)] mt-0.5">
+                          {provider.description}
+                        </CardDescription>
+                      </div>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <Switch
+                        id={`enable-${provider.id}`}
+                        checked={c?.isEnabled ?? false}
+                        onCheckedChange={() =>
+                          setLocal((prev) => ({
+                            ...prev,
+                            [provider.id]: { ...prev[provider.id], isEnabled: !prev[provider.id]?.isEnabled },
+                          }))
+                        }
+                      />
+                      <Label htmlFor={`enable-${provider.id}`} className="text-[var(--admin-foreground)] cursor-pointer">
+                        {c?.isEnabled ? "Activé" : "Désactivé"}
+                      </Label>
+                    </div>
+                  </div>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                  <div>
+                    <Label htmlFor={`tracking-${provider.id}`} className="text-[var(--admin-foreground)]">
+                      {provider.trackingLabel}
+                    </Label>
+                    <Input
+                      id={`tracking-${provider.id}`}
+                      value={c?.trackingId ?? ""}
+                      onChange={(e) =>
+                        setLocal((prev) => ({
+                          ...prev,
+                          [provider.id]: { ...prev[provider.id], trackingId: e.target.value },
+                        }))
+                      }
+                      placeholder={provider.placeholder}
+                      className="mt-2 bg-[var(--admin-bg)] border-[var(--admin-border)] text-[var(--admin-foreground)]"
+                      disabled={!c?.isEnabled}
+                    />
+                    <p className="text-xs text-[var(--admin-muted)] mt-1">{provider.help}</p>
+                  </div>
+                  {c?.isEnabled && !c?.trackingId?.trim() && (
+                    <p className="text-sm text-amber-600">Entrez un ID de suivi pour activer ce provider.</p>
+                  )}
+                  <div className="flex justify-end">
+                    <Button
+                      onClick={() => handleSave(provider.id)}
+                      disabled={upsertMutation.isPending}
+                      className="bg-violet-600 hover:bg-violet-700 text-white"
+                    >
+                      {upsertMutation.isPending ? (
+                        <Loader2 className="w-4 h-4 animate-spin mr-2" />
+                      ) : (
+                        <Save className="w-4 h-4 mr-2" />
+                      )}
+                      Enregistrer
+                    </Button>
+                  </div>
+                </CardContent>
+              </Card>
+            );
+          })}
+        </div>
+
+        <div className="flex justify-end">
+          <Button
+            onClick={handleSaveAll}
+            disabled={upsertMutation.isPending}
+            className="bg-violet-600 hover:bg-violet-700 text-white"
+            size="lg"
+          >
+            <Save className="w-4 h-4 mr-2" />
+            Enregistrer toutes les configurations
+          </Button>
+        </div>
+
+        <Card className="bg-white border-[var(--admin-border)] shadow-sm">
+          <CardHeader>
+            <CardTitle className="text-[var(--admin-foreground)]">À savoir</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <ul className="space-y-2 text-sm text-[var(--admin-muted)]">
+              <li>• Les scripts sont chargés sur toutes les pages après sauvegarde.</li>
+              <li>• Les conversions (formulaires contact, projet) sont suivies automatiquement.</li>
+              <li>• Respectez la réglementation (consentement, politique de confidentialité).</li>
+            </ul>
+          </CardContent>
+        </Card>
+      </div>
+    </AdminLayout>
   );
 }
