@@ -591,7 +591,7 @@ async function startServer() {
       console.error("[Admin] page-texts seed-from-locales error", e);
       res.status(500).json({
         error: e instanceof Error ? e.message : "Seed failed",
-        hint: "Ensure client/src/locales/en.json and fr.json exist (e.g. run from repo root).",
+        hint: "Set LOCALES_DIR to the folder containing en.json and fr.json, or ensure dist/locales exists (run build with copy-locales).",
       });
     }
   });

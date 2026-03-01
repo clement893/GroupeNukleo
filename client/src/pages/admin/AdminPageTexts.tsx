@@ -110,11 +110,12 @@ export default function AdminPageTexts() {
 
   const seedMutation = useMutation({
     mutationFn: seedFromSite,
-    onSuccess: (r: { created?: number; updated?: number; total?: number }) => {
+    onSuccess: (r: { created?: number; updated?: number; total?: number; source?: string }) => {
       const created = r.created ?? 0;
       const updated = r.updated ?? 0;
       const total = r.total ?? created + updated;
-      toast.success(`Synchronisé : ${created} créés, ${updated} mis à jour (${total} clés)`);
+      const src = r.source ? ` (fichier: ${r.source})` : "";
+      toast.success(`Synchronisé : ${created} créés, ${updated} mis à jour (${total} clés)${src}`);
       queryClient.invalidateQueries({ queryKey: ["admin", "page-texts"] });
       queryClient.invalidateQueries({ queryKey: ["admin", "page-texts", "sections"] });
     },

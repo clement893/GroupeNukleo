@@ -3,6 +3,35 @@ import { pageTexts } from "../drizzle/schema";
 import { eq, asc } from "drizzle-orm";
 import { readFile } from "fs/promises";
 import path from "path";
+import { fileURLToPath } from "url";
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+
+/** Résout le répertoire des fichiers locales (en.json / fr.json) — même source que le site. */
+function getLocalesDir(): string[] {
+  const candidates: string[] = [];
+  if (process.env.LOCALES_DIR) {
+    candidates.push(path.resolve(process.env.LOCALES_DIR));
+  }
+  const cwd = process.cwd();
+  candidates.push(
+    path.join(cwd, "dist", "locales"),
+    path.join(cwd, "locales"),
+    path.join(cwd, "client", "src", "locales")
+  );
+  if (__dirname) {
+    candidates.push(path.join(__dirname, "locales"), path.join(__dirname, "..", "locales"));
+  }
+  return candidates;
+}
+
+function getLocaleFilePaths(): { en: string; fr: string }[] {
+  const dirs = getLocalesDir();
+  return dirs.map((dir) => ({
+    en: path.join(dir, "en.json"),
+    fr: path.join(dir, "fr.json"),
+  }));
+}
 
 function flattenObj(obj: Record<string, unknown>, prefix = ""): Record<string, string> {
   const out: Record<string, string> = {};
@@ -79,29 +108,28 @@ export async function importPageTextsFromJson(en: Record<string, string>, fr: Re
   return { created, updated, total: keys.size };
 }
 
-/** Read locale JSON files from disk, flatten, and import into page_texts. Tries dist/locales (production) then client/src/locales (dev). */
+/** Read locale JSON files from disk, flatten, and import into page_texts. Uses same resolution as getLocaleSections (LOCALES_DIR, dist/locales, bundle dir, etc.). */
 export async function seedFromLocaleFiles(
   enPath?: string,
   frPath?: string
-) {
-  const candidates = [
-    enPath && frPath ? [enPath, frPath] as const : null,
-    [path.join(process.cwd(), "dist", "locales", "en.json"), path.join(process.cwd(), "dist", "locales", "fr.json")] as const,
-    [path.join(process.cwd(), "locales", "en.json"), path.join(process.cwd(), "locales", "fr.json")] as const,
-    [path.join(process.cwd(), "client", "src", "locales", "en.json"), path.join(process.cwd(), "client", "src", "locales", "fr.json")] as const,
-  ].filter(Boolean) as [string, string][];
+): Promise<{ created: number; updated: number; total: number; source?: string }> {
+  const candidates: [string, string][] = [];
+  if (enPath && frPath) {
+    candidates.push([enPath, frPath]);
+  }
+  for (const { en: enP, fr: frP } of getLocaleFilePaths()) {
+    if (!candidates.some(([a, b]) => a === enP && b === frP)) candidates.push([enP, frP]);
+  }
 
-  let enRaw: string;
-  let frRaw: string;
   let lastErr: Error | null = null;
-
   for (const [enP, frP] of candidates) {
     try {
-      enRaw = await readFile(enP, "utf-8");
-      frRaw = await readFile(frP, "utf-8");
+      const enRaw = await readFile(enP, "utf-8");
+      const frRaw = await readFile(frP, "utf-8");
       const en = flattenObj(JSON.parse(enRaw) as Record<string, unknown>);
       const fr = flattenObj(JSON.parse(frRaw) as Record<string, unknown>);
-      return importPageTextsFromJson(en, fr);
+      const result = await importPageTextsFromJson(en, fr);
+      return { ...result, source: enP };
     } catch (e) {
       lastErr = e instanceof Error ? e : new Error(String(e));
       continue;
@@ -109,7 +137,7 @@ export async function seedFromLocaleFiles(
   }
 
   throw new Error(
-    `Could not read locale files. Tried: dist/locales, locales, client/src/locales. Last error: ${lastErr?.message ?? "unknown"}. Ensure build has run (copies locales to dist/locales).`
+    `Could not read locale files. Tried: ${candidates.map(([p]) => p).join("; ")}. Last error: ${lastErr?.message ?? "unknown"}. Set LOCALES_DIR to the folder containing en.json and fr.json if needed.`
   );
 }
 
@@ -125,13 +153,7 @@ const HIDDEN_SECTIONS = new Set(["approche"]);
 
 /** Returns the list of section keys (first segment of locale keys) from the site’s locale files. Used by admin to show the right pages. */
 export async function getLocaleSections(): Promise<string[]> {
-  const candidates = [
-    [path.join(process.cwd(), "dist", "locales", "fr.json"), path.join(process.cwd(), "dist", "locales", "en.json")] as const,
-    [path.join(process.cwd(), "locales", "fr.json"), path.join(process.cwd(), "locales", "en.json")] as const,
-    [path.join(process.cwd(), "client", "src", "locales", "fr.json"), path.join(process.cwd(), "client", "src", "locales", "en.json")] as const,
-  ] as const;
-
-  for (const [frP] of candidates) {
+  for (const { fr: frP } of getLocaleFilePaths()) {
     try {
       const raw = await readFile(frP, "utf-8");
       const data = JSON.parse(raw) as Record<string, unknown>;
