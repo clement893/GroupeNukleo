@@ -284,6 +284,21 @@ export async function initDatabase(req: Request, res: Response) {
       CREATE INDEX IF NOT EXISTS idx_analytics_enabled ON analytics("isEnabled");
     `);
 
+    // Create page_texts table (site copy EN/FR for admin editing)
+    await db.execute(sql`
+      CREATE TABLE IF NOT EXISTS page_texts (
+        id SERIAL PRIMARY KEY,
+        key VARCHAR(512) NOT NULL UNIQUE,
+        text_en TEXT NOT NULL,
+        text_fr TEXT NOT NULL,
+        created_at TIMESTAMP DEFAULT NOW() NOT NULL,
+        updated_at TIMESTAMP DEFAULT NOW() NOT NULL
+      );
+    `);
+    await db.execute(sql`
+      CREATE INDEX IF NOT EXISTS idx_page_texts_key ON page_texts(key);
+    `);
+
     res.json({ 
       message: "Database initialized successfully! All tables created.",
       tables: [
@@ -302,7 +317,8 @@ export async function initDatabase(req: Request, res: Response) {
         "start_project_submissions",
         "contact_messages",
         "testimonials",
-        "analytics"
+        "analytics",
+        "page_texts"
       ]
     });
   } catch (error) {

@@ -278,6 +278,19 @@ export const pageVisibility = pgTable("page_visibility", {
 export type PageVisibility = typeof pageVisibility.$inferSelect;
 export type InsertPageVisibility = typeof pageVisibility.$inferInsert;
 
+// Page texts table for managing all site copy in EN/FR (overrides or supplements locale JSON)
+export const pageTexts = pgTable("page_texts", {
+  id: integer("id").primaryKey().generatedAlwaysAsIdentity(),
+  key: varchar("key", { length: 512 }).notNull().unique(), // e.g. "common.loading", "nav.home"
+  textEn: text("text_en").notNull(), // English text
+  textFr: text("text_fr").notNull(), // French text
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+  updatedAt: timestamp("updated_at").defaultNow().notNull(),
+});
+
+export type PageText = typeof pageTexts.$inferSelect;
+export type InsertPageText = typeof pageTexts.$inferInsert;
+
 // Analytics Configuration table for managing tracking scripts
 export const analytics = pgTable("analytics", {
   id: integer("id").primaryKey().generatedAlwaysAsIdentity(),

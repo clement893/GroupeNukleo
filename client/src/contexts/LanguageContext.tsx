@@ -1,5 +1,6 @@
 import { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 import { useLocation } from 'wouter';
+import { trpc } from '@/lib/trpc';
 
 // Preload translations synchronously for better performance - prevents FCP/LCP delays
 import enTranslations from '../locales/en.json';
@@ -71,6 +72,11 @@ interface LanguageProviderProps {
 export function LanguageProvider({ children }: LanguageProviderProps) {
   const [location, setLocation] = useLocation();
   const [language, setLanguageState] = useState<Language>(detectLanguageFromURL);
+  // Override translations from DB (admin-edited page texts)
+  const { data: dbOverlay } = trpc.pageTexts.getTranslations.useQuery(
+    { lang: language },
+    { staleTime: 60_000, refetchOnWindowFocus: false }
+  );
   // Use preloaded translations immediately - no async loading needed for better performance
   const [translations, setTranslations] = useState<Record<string, any>>(
     preloadedTranslations[language] || preloadedTranslations.en
@@ -125,10 +131,22 @@ export function LanguageProvider({ children }: LanguageProviderProps) {
   };
 
   // Translation function with nested key support (e.g., "hero.title")
+  // DB overlay (admin-edited texts) takes precedence over static JSON
   const t = (key: string, params?: Record<string, string | number> | { returnObjects?: boolean }): string | any => {
     // Check if returnObjects is requested
     const returnObjects = params && typeof params === 'object' && 'returnObjects' in params && params.returnObjects === true;
     const actualParams = returnObjects ? undefined : params as Record<string, string | number> | undefined;
+
+    // Admin-edited text from DB overrides static (only for string keys, not returnObjects)
+    if (!returnObjects && dbOverlay && key in dbOverlay) {
+      let translation = dbOverlay[key];
+      if (actualParams) {
+        Object.entries(actualParams).forEach(([paramKey, paramValue]) => {
+          translation = translation.replace(new RegExp(`{{${paramKey}}}`, 'g'), String(paramValue));
+        });
+      }
+      return translation;
+    }
     
     // Support nested keys like "hero.title"
     const keys = key.split('.');

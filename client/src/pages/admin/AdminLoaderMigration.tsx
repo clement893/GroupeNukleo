@@ -1,20 +1,34 @@
 import { trpc } from '@/lib/trpc';
-import AdminRoute from '@/components/AdminRoute';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Loader2, Database, CheckCircle2, XCircle, AlertTriangle, RefreshCw } from 'lucide-react';
 import { AdminLayout } from "@/components/AdminLayout";
 import { Button } from '@/components/ui/button';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
+
+const CHECK_TIMEOUT_MS = 8000;
 
 export default function AdminLoaderMigration() {
   const [isRunning, setIsRunning] = useState(false);
   const [migrationResult, setMigrationResult] = useState<{ success: boolean; message: string } | null>(null);
+  const [checkTimedOut, setCheckTimedOut] = useState(false);
 
-  // Vérifier l'état des loaders
-  const { data: checkResult, isLoading: isChecking, refetch: refetchCheck } = trpc.loaders.checkAll.useQuery(undefined, {
+  // Vérifier l'état des loaders (retry: false pour éviter chargement infini si 403 ou erreur)
+  const { data: checkResult, isLoading: isChecking, isError: isCheckError, refetch: refetchCheck } = trpc.loaders.checkAll.useQuery(undefined, {
     refetchOnWindowFocus: false,
+    retry: false,
+    staleTime: 60_000,
   });
+
+  // Si la vérification prend trop de temps, débloquer la page
+  useEffect(() => {
+    if (!isChecking) {
+      setCheckTimedOut(false);
+      return;
+    }
+    const t = setTimeout(() => setCheckTimedOut(true), CHECK_TIMEOUT_MS);
+    return () => clearTimeout(t);
+  }, [isChecking]);
 
   // Mutation pour exécuter la migration
   const migrateMutation = trpc.loaders.migrateAll.useMutation({
@@ -60,8 +74,7 @@ export default function AdminLoaderMigration() {
   };
 
   return (
-    <AdminRoute>
-      <AdminLayout>
+    <AdminLayout>
         <div className="p-6 lg:p-8 max-w-4xl mx-auto">
           <div className="mb-8">
             <h1 className="text-4xl font-bold text-white mb-2 flex items-center gap-3">
@@ -94,10 +107,29 @@ export default function AdminLoaderMigration() {
               </CardDescription>
             </CardHeader>
             <CardContent>
-              {isChecking ? (
+              {isChecking && !checkTimedOut ? (
                 <div className="flex items-center justify-center py-8">
                   <Loader2 className="w-6 h-6 text-cyan-400 animate-spin mr-3" />
                   <span className="text-white">Vérification en cours...</span>
+                </div>
+              ) : checkTimedOut || isCheckError ? (
+                <div className="py-6 text-center space-y-3">
+                  <p className="text-white/80">
+                    {checkTimedOut
+                      ? "La vérification a pris trop de temps. Vérifiez votre connexion ou réessayez."
+                      : "Impossible de charger l'état des loaders. Vérifiez votre connexion ou réessayez."}
+                  </p>
+                  <Button
+                    variant="outline"
+                    onClick={() => {
+                      setCheckTimedOut(false);
+                      refetchCheck();
+                    }}
+                    className="text-white border-white/30 hover:bg-white/10"
+                  >
+                    <RefreshCw className="w-4 h-4 mr-2" />
+                    Réessayer
+                  </Button>
                 </div>
               ) : checkResult ? (
                 <div className="space-y-4">
@@ -276,6 +308,5 @@ export default function AdminLoaderMigration() {
           </Card>
         </div>
       </AdminLayout>
-    </AdminRoute>
   );
 }

@@ -40,6 +40,7 @@ const NAV_GROUPS = [
   {
     label: "Configuration",
     items: [
+      { label: "Textes des pages (EN/FR)", href: "/admin/page-texts", icon: FileText },
       { label: "Visibilité des pages", href: "/admin/page-visibility", icon: Globe },
       { label: "Loaders", href: "/admin/loader-migration", icon: Loader2 },
       { label: "Sons", href: "/admin/sounds", icon: Volume2 },

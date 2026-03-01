@@ -1,15 +1,84 @@
+import { Fragment, useState } from 'react';
 import { trpc } from '@/lib/trpc';
 import AdminRoute from '@/components/AdminRoute';
-import { Card } from '@/components/ui/card';
-import { Loader2, Mail, User, Calendar, MessageSquare, Download } from 'lucide-react';
-import AdminRoute from '@/components/AdminRoute';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Loader2, Mail, User, Calendar, MessageSquare, Download, RefreshCw, MessageCircle } from 'lucide-react';
 import { AdminLayout } from "@/components/AdminLayout";
 import { Button } from '@/components/ui/button';
-import { useState } from 'react';
 
 export default function AdminLEOContacts() {
-  const { data: contacts, isLoading, refetch } = trpc.admin.getLeoContacts.useQuery();
   const [expandedId, setExpandedId] = useState<number | null>(null);
+
+  const {
+    data: contacts,
+    isLoading: contactsLoading,
+    isError: contactsError,
+    refetch: refetchContacts,
+  } = trpc.admin.getLeoContacts.useQuery(undefined, { retry: 1 });
+
+  const {
+    data: analytics,
+    isLoading: analyticsLoading,
+    isError: analyticsError,
+    refetch: refetchAnalytics,
+  } = trpc.leoAnalytics.getAnalytics.useQuery(undefined, { retry: 1 });
+
+  const sessions = analytics?.recentSessions ?? [];
+  const isLoading = contactsLoading;
+  const isError = contactsError;
+
+  const exportToCSV = () => {
+    if (!contacts || !Array.isArray(contacts) || contacts.length === 0) return;
+    const headers = ['ID', 'Email', 'Name', 'Created At', 'Context'];
+    const rows = contacts.map((c: { id: number; email: string; name?: string | null; createdAt: Date; conversationContext?: string | null }) => [
+      c.id,
+      c.email,
+      c.name ?? '',
+      new Date(c.createdAt).toISOString(),
+      (c.conversationContext ?? '').substring(0, 200),
+    ]);
+    const csvContent = [
+      headers.join(','),
+      ...rows.map((row: (string | number)[]) => row.map((cell) => `"${String(cell).replace(/"/g, '""')}"`).join(',')),
+    ].join('\n');
+    const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8' });
+    const url = window.URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `leo-contacts-${new Date().toISOString().split('T')[0]}.csv`;
+    a.click();
+    window.URL.revokeObjectURL(url);
+  };
+
+  const refetchAll = () => {
+    refetchContacts();
+    refetchAnalytics();
+  };
+
+  if (isError) {
+    return (
+      <AdminRoute>
+        <AdminLayout>
+          <div className="p-6 lg:p-8 max-w-7xl mx-auto">
+            <Card className="bg-white/10 backdrop-blur-md border-white/20">
+              <CardHeader>
+                <CardTitle className="text-red-400">Erreur de chargement</CardTitle>
+                <CardDescription className="text-white/60">
+                  Impossible de charger les contacts LEO. Vérifiez la connexion à la base de données.
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <Button onClick={() => refetchAll()} className="bg-cyan-500 hover:bg-cyan-600 text-white">
+                  <RefreshCw className="w-4 h-4 mr-2" />
+                  Réessayer
+                </Button>
+              </CardContent>
+            </Card>
+          </div>
+        </AdminLayout>
+      </AdminRoute>
+    );
+  }
 
   if (isLoading) {
     return (
@@ -23,209 +92,225 @@ export default function AdminLEOContacts() {
     );
   }
 
-  const exportToCSV = () => {
-    if (!contacts || !Array.isArray(contacts) || contacts.length === 0) return;
-
-    const headers = ['ID', 'Email', 'Name', 'Created At', 'Context'];
-    const rows = contacts.map((contact: any) => [
-      contact.id,
-      contact.email,
-      contact.name || '',
-      new Date(contact.createdAt).toISOString(),
-      contact.conversationContext ? JSON.stringify(contact.conversationContext).substring(0, 100) : '',
-    ]);
-
-    const csvContent = [
-      headers.join(','),
-      ...rows.map((row: any[]) => row.map((cell: string | number) => `"${cell}"`).join(','))
-    ].join('\n');
-
-    const blob = new Blob([csvContent], { type: 'text/csv' });
-    const url = window.URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = `leo-contacts-${new Date().toISOString().split('T')[0]}.csv`;
-    a.click();
-    window.URL.revokeObjectURL(url);
-  };
+  const contactList = Array.isArray(contacts) ? contacts : [];
+  const today = new Date().toDateString();
 
   return (
     <AdminRoute>
       <AdminLayout>
         <div className="p-6 lg:p-8 max-w-7xl mx-auto">
-          {/* Header */}
           <div className="flex items-center justify-between mb-8">
             <div>
-              <h1 className="text-4xl font-bold text-white mb-2">LEO Contacts</h1>
-              <p className="text-white/60">Emails captured by LEO chatbot</p>
+              <h1 className="text-4xl font-bold text-gray-900 mb-2" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
+                Discussions avec Léo
+              </h1>
+              <p className="text-gray-600" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
+                Contacts (emails capturés) et sessions de discussion avec le chatbot LEO
+              </p>
             </div>
             <div className="flex gap-3">
-              <Button
-                onClick={exportToCSV}
-                variant="outline"
-                className="bg-white/10 border-white/20 text-white hover:bg-white/20"
-              >
+              <Button onClick={exportToCSV} variant="outline" disabled={contactList.length === 0}>
                 <Download className="w-4 h-4 mr-2" />
-                Export CSV
+                Exporter CSV
               </Button>
-              <Button
-                onClick={() => refetch()}
-                variant="outline"
-                className="bg-white/10 border-white/20 text-white hover:bg-white/20"
-              >
-                Refresh
+              <Button onClick={refetchAll} variant="outline">
+                <RefreshCw className="w-4 h-4 mr-2" />
+                Actualiser
               </Button>
             </div>
           </div>
 
-          {/* Stats Cards */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-            <Card className="bg-white/10 backdrop-blur-md border-white/20 p-6">
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="text-white/60 text-sm mb-1">Total Contacts</p>
-                  <p className="text-3xl font-bold text-white">{contacts?.length || 0}</p>
+            <Card className="bg-white border border-gray-200 shadow-sm">
+              <CardContent className="p-6">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <p className="text-gray-500 text-sm mb-1">Contacts (emails)</p>
+                    <p className="text-3xl font-bold text-gray-900">{contactList.length}</p>
+                  </div>
+                  <div className="h-12 w-12 rounded-full bg-cyan-100 flex items-center justify-center">
+                    <Mail className="w-6 h-6 text-cyan-600" />
+                  </div>
                 </div>
-                <div className="h-12 w-12 rounded-full bg-gradient-to-r from-cyan-500 to-blue-500 flex items-center justify-center">
-                  <Mail className="w-6 h-6 text-white" />
-                </div>
-              </div>
+              </CardContent>
             </Card>
-
-            <Card className="bg-white/10 backdrop-blur-md border-white/20 p-6">
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="text-white/60 text-sm mb-1">With Names</p>
-                  <p className="text-3xl font-bold text-white">
-                    {contacts?.filter((c: any) => c.name).length || 0}
-                  </p>
+            <Card className="bg-white border border-gray-200 shadow-sm">
+              <CardContent className="p-6">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <p className="text-gray-500 text-sm mb-1">Avec nom</p>
+                    <p className="text-3xl font-bold text-gray-900">
+                      {contactList.filter((c: { name?: string | null }) => c.name).length}
+                    </p>
+                  </div>
+                  <div className="h-12 w-12 rounded-full bg-purple-100 flex items-center justify-center">
+                    <User className="w-6 h-6 text-purple-600" />
+                  </div>
                 </div>
-                <div className="h-12 w-12 rounded-full bg-gradient-to-r from-purple-500 to-pink-500 flex items-center justify-center">
-                  <User className="w-6 h-6 text-white" />
-                </div>
-              </div>
+              </CardContent>
             </Card>
-
-            <Card className="bg-white/10 backdrop-blur-md border-white/20 p-6">
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="text-white/60 text-sm mb-1">Today</p>
-                  <p className="text-3xl font-bold text-white">
-                    {contacts?.filter((c: any) => {
-                      const today = new Date();
-                      const contactDate = new Date(c.createdAt);
-                      return contactDate.toDateString() === today.toDateString();
-                    }).length || 0}
-                  </p>
+            <Card className="bg-white border border-gray-200 shadow-sm">
+              <CardContent className="p-6">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <p className="text-gray-500 text-sm mb-1">Sessions LEO</p>
+                    <p className="text-3xl font-bold text-gray-900">{sessions.length}</p>
+                  </div>
+                  <div className="h-12 w-12 rounded-full bg-green-100 flex items-center justify-center">
+                    <MessageCircle className="w-6 h-6 text-green-600" />
+                  </div>
                 </div>
-                <div className="h-12 w-12 rounded-full bg-gradient-to-r from-green-500 to-teal-500 flex items-center justify-center">
-                  <Calendar className="w-6 h-6 text-white" />
-                </div>
-              </div>
+              </CardContent>
             </Card>
           </div>
 
-          {/* Contacts Table */}
-          <Card className="bg-white/10 backdrop-blur-md border-white/20 p-6">
-            <h2 className="text-2xl font-bold text-white mb-6">All Contacts</h2>
-            
-            {!contacts || contacts.length === 0 ? (
-              <div className="text-center py-12">
-                <Mail className="w-16 h-16 text-white/20 mx-auto mb-4" />
-                <p className="text-white/60 text-lg">No contacts captured yet</p>
-                <p className="text-white/40 text-sm mt-2">Contacts will appear here when users share their email with LEO</p>
-              </div>
-            ) : (
-              <div className="overflow-x-auto">
-                <table className="w-full">
-                  <thead>
-                    <tr className="border-b border-white/20">
-                      <th className="text-left text-white/60 py-3 px-4 font-medium">ID</th>
-                      <th className="text-left text-white/60 py-3 px-4 font-medium">Email</th>
-                      <th className="text-left text-white/60 py-3 px-4 font-medium">Name</th>
-                      <th className="text-left text-white/60 py-3 px-4 font-medium">Created</th>
-                      <th className="text-center text-white/60 py-3 px-4 font-medium">Context</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {contacts && Array.isArray(contacts) ? contacts.map((contact: any) => (
-                      <>
-                        <tr 
-                          key={contact.id} 
-                          className="border-b border-white/10 hover:bg-white/5 transition-colors"
-                        >
-                          <td className="text-white/80 py-4 px-4 font-mono text-sm">
-                            #{contact.id}
-                          </td>
-                          <td className="text-white py-4 px-4">
-                            <div className="flex items-center gap-2">
-                              <Mail className="w-4 h-4 text-cyan-400" />
-                              <a 
-                                href={`mailto:${contact.email}`}
-                                className="hover:text-cyan-400 transition-colors"
-                              >
-                                {contact.email}
+          {/* Sessions / Discussions */}
+          <Card className="bg-white border border-gray-200 shadow-sm mb-8">
+            <CardHeader>
+              <CardTitle className="text-gray-900 flex items-center gap-2" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
+                <MessageCircle className="w-5 h-5" />
+                Sessions de discussion (Léo)
+              </CardTitle>
+              <CardDescription className="text-gray-500" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
+                Dernières sessions avec le chatbot, par page et avec email capturé si applicable
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              {analyticsLoading ? (
+                <div className="flex items-center justify-center py-12">
+                  <Loader2 className="w-8 h-8 text-cyan-500 animate-spin" />
+                </div>
+              ) : !sessions.length ? (
+                <div className="text-center py-12 text-gray-500">
+                  <MessageCircle className="w-12 h-12 mx-auto mb-3 opacity-40" />
+                  <p>Aucune session pour le moment</p>
+                </div>
+              ) : (
+                <div className="overflow-x-auto">
+                  <table className="w-full">
+                    <thead>
+                      <tr className="border-b border-gray-200">
+                        <th className="text-left text-gray-500 py-3 px-4 font-medium">Page</th>
+                        <th className="text-left text-gray-500 py-3 px-4 font-medium">Messages</th>
+                        <th className="text-left text-gray-500 py-3 px-4 font-medium">Email capturé</th>
+                        <th className="text-left text-gray-500 py-3 px-4 font-medium">Début</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {sessions.map((session: { id: number; pageContext: string; messageCount: number; emailCaptured: number; capturedEmail?: string | null; startedAt: Date }) => (
+                        <tr key={session.id} className="border-b border-gray-100 hover:bg-gray-50">
+                          <td className="py-3 px-4 font-medium text-gray-900">{session.pageContext}</td>
+                          <td className="py-3 px-4 text-gray-600">{session.messageCount ?? 0}</td>
+                          <td className="py-3 px-4">
+                            {session.emailCaptured === 1 && session.capturedEmail ? (
+                              <a href={`mailto:${session.capturedEmail}`} className="text-cyan-600 hover:underline">
+                                {session.capturedEmail}
                               </a>
-                            </div>
-                          </td>
-                          <td className="text-white py-4 px-4">
-                            {contact.name ? (
-                              <div className="flex items-center gap-2">
-                                <User className="w-4 h-4 text-purple-400" />
-                                {contact.name}
-                              </div>
                             ) : (
-                              <span className="text-white/40 italic">No name</span>
+                              <span className="text-gray-400">—</span>
                             )}
                           </td>
-                          <td className="text-white/80 py-4 px-4">
-                            <div className="flex items-center gap-2">
-                              <Calendar className="w-4 h-4 text-green-400" />
+                          <td className="py-3 px-4 text-gray-600">
+                            {new Date(session.startedAt).toLocaleString('fr-FR', {
+                              day: 'numeric',
+                              month: 'short',
+                              year: 'numeric',
+                              hour: '2-digit',
+                              minute: '2-digit',
+                            })}
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              )}
+            </CardContent>
+          </Card>
+
+          {/* Contacts (emails capturés) */}
+          <Card className="bg-white border border-gray-200 shadow-sm">
+            <CardHeader>
+              <CardTitle className="text-gray-900" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
+                Contacts (emails laissés à Léo)
+              </CardTitle>
+              <CardDescription className="text-gray-500" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
+                Liste des personnes ayant partagé leur email lors d’une discussion avec Léo
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              {contactList.length === 0 ? (
+                <div className="text-center py-12 text-gray-500">
+                  <Mail className="w-16 h-16 mx-auto mb-4 opacity-40" />
+                  <p className="text-lg">Aucun contact pour le moment</p>
+                  <p className="text-sm mt-2">Les contacts apparaîtront ici lorsque des visiteurs partageront leur email avec Léo</p>
+                </div>
+              ) : (
+                <div className="overflow-x-auto">
+                  <table className="w-full">
+                    <thead>
+                      <tr className="border-b border-gray-200">
+                        <th className="text-left text-gray-500 py-3 px-4 font-medium">ID</th>
+                        <th className="text-left text-gray-500 py-3 px-4 font-medium">Email</th>
+                        <th className="text-left text-gray-500 py-3 px-4 font-medium">Nom</th>
+                        <th className="text-left text-gray-500 py-3 px-4 font-medium">Date</th>
+                        <th className="text-center text-gray-500 py-3 px-4 font-medium">Contexte</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {contactList.map((contact: { id: number; email: string; name?: string | null; createdAt: Date; conversationContext?: string | null }) => (
+                        <Fragment key={contact.id}>
+                          <tr className="border-b border-gray-100 hover:bg-gray-50">
+                            <td className="py-4 px-4 font-mono text-sm text-gray-600">#{contact.id}</td>
+                            <td className="py-4 px-4">
+                              <a href={`mailto:${contact.email}`} className="text-cyan-600 hover:underline font-medium">
+                                {contact.email}
+                              </a>
+                            </td>
+                            <td className="py-4 px-4 text-gray-900">{contact.name ?? <span className="text-gray-400 italic">—</span>}</td>
+                            <td className="py-4 px-4 text-gray-600">
                               {new Date(contact.createdAt).toLocaleString('fr-FR', {
-                                year: 'numeric',
-                                month: 'short',
                                 day: 'numeric',
+                                month: 'short',
+                                year: 'numeric',
                                 hour: '2-digit',
                                 minute: '2-digit',
                               })}
-                            </div>
-                          </td>
-                          <td className="text-center py-4 px-4">
-                            {contact.conversationContext ? (
-                              <Button
-                                onClick={() => setExpandedId(expandedId === contact.id ? null : contact.id)}
-                                variant="ghost"
-                                size="sm"
-                                className="text-white/60 hover:text-white hover:bg-white/10"
-                              >
-                                <MessageSquare className="w-4 h-4 mr-1" />
-                                {expandedId === contact.id ? 'Hide' : 'View'}
-                              </Button>
-                            ) : (
-                              <span className="text-white/40 italic text-sm">No context</span>
-                            )}
-                          </td>
-                        </tr>
-                        {expandedId === contact.id && contact.conversationContext && (
-                          <tr className="bg-white/5">
-                            <td colSpan={5} className="py-4 px-4">
-                              <div className="max-w-4xl">
-                                <p className="text-white/60 text-sm font-semibold mb-2">Conversation Context:</p>
-                                <div className="bg-black/20 rounded-lg p-4 text-white/80 text-sm whitespace-pre-wrap font-mono">
-                                  {typeof contact.conversationContext === 'string' 
-                                    ? contact.conversationContext 
-                                    : JSON.stringify(contact.conversationContext, null, 2)}
-                                </div>
-                              </div>
+                            </td>
+                            <td className="text-center py-4 px-4">
+                              {contact.conversationContext ? (
+                                <Button
+                                  variant="ghost"
+                                  size="sm"
+                                  onClick={() => setExpandedId(expandedId === contact.id ? null : contact.id)}
+                                >
+                                  <MessageSquare className="w-4 h-4 mr-1" />
+                                  {expandedId === contact.id ? 'Masquer' : 'Voir'}
+                                </Button>
+                              ) : (
+                                <span className="text-gray-400 text-sm">—</span>
+                              )}
                             </td>
                           </tr>
-                        )}
-                      </>
-                    )) : null}
-                  </tbody>
-                </table>
-              </div>
-            )}
+                          {expandedId === contact.id && contact.conversationContext && (
+                            <tr className="bg-gray-50">
+                              <td colSpan={5} className="py-4 px-4">
+                                <p className="text-gray-500 text-sm font-medium mb-2">Contexte de la conversation</p>
+                                <div className="bg-white border border-gray-200 rounded-lg p-4 text-gray-700 text-sm whitespace-pre-wrap font-mono max-w-4xl">
+                                  {typeof contact.conversationContext === 'string'
+                                    ? contact.conversationContext
+                                    : JSON.stringify(contact.conversationContext, null, 2)}
+                                </div>
+                              </td>
+                            </tr>
+                          )}
+                        </Fragment>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              )}
+            </CardContent>
           </Card>
         </div>
       </AdminLayout>

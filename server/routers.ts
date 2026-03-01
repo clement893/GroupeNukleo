@@ -19,6 +19,7 @@ import { radarRouter } from "./routers/radar";
 import { pageVisibilityRouter } from "./routers/pageVisibility";
 import { analyticsRouter } from "./routers/analytics";
 import { migrateRouter } from "./routers/migrate";
+import { pageTextsRouter } from "./routers/pageTexts";
 import { projectsImagesRouter } from "./routers/projectsImages";
 import { projectsRouter } from "./routers/projects";
 import { carouselLogosRouter } from "./routers/carouselLogos";
@@ -40,6 +41,7 @@ export const appRouter = router({
   pageVisibility: pageVisibilityRouter,
   analytics: analyticsRouter,
   migrate: migrateRouter,
+  pageTexts: pageTextsRouter,
   projectsImages: projectsImagesRouter,
   projects: projectsRouter,
   carouselLogos: carouselLogosRouter,

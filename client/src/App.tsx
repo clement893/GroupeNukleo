@@ -96,6 +96,7 @@ const AdminStartProjectSubmissions = lazy(() => import("./pages/admin/AdminStart
 const AdminContactMessages = lazy(() => import("./pages/admin/AdminContactMessages"));
 const AdminSounds = lazy(() => import("./pages/admin/AdminSounds"));
 const AdminPageVisibility = lazy(() => import("./pages/admin/AdminPageVisibility"));
+const AdminPageTexts = lazy(() => import("./pages/admin/AdminPageTexts"));
 const AdminAnalytics = lazy(() => import("./pages/admin/AdminAnalytics"));
 const AdminTestimonials = lazy(() => import("./pages/admin/AdminTestimonials"));
 const RunMigration = lazy(() => import("./pages/admin/RunMigration"));
@@ -201,6 +202,9 @@ function App() {
               </Route>
               <Route path="/admin/page-visibility">
                 <ProtectedAdminRoute><AdminPageVisibility /></ProtectedAdminRoute>
+              </Route>
+              <Route path="/admin/page-texts">
+                <ProtectedAdminRoute><AdminPageTexts /></ProtectedAdminRoute>
               </Route>
               <Route path="/admin/analytics">
                 <ProtectedAdminRoute><AdminAnalytics /></ProtectedAdminRoute>

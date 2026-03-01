@@ -380,7 +380,11 @@ export default function AdminCarouselLogos() {
               ) : isError ? (
                 <div className="text-center py-12 space-y-4">
                   <p className="text-red-300">
-                    Impossible de charger les logos. {error?.message || "Erreur réseau ou session expirée."}
+                    {error?.message?.includes("Too many") ||
+                    error?.message?.includes("429") ||
+                    (error?.message?.includes("not valid JSON") && error?.message?.includes("Too many r"))
+                      ? "Trop de requêtes envoyées. Veuillez patienter quelques instants puis réessayer."
+                      : `Impossible de charger les logos. ${error?.message || "Erreur réseau ou session expirée."}`}
                   </p>
                   <p className="text-gray-400 text-sm">
                     Si la page vous renvoie à l&apos;accueil admin, reconnectez-vous puis réessayez.

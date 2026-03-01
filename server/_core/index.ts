@@ -192,22 +192,30 @@ async function startServer() {
     allowedHeaders: ['Content-Type', 'Authorization', 'Cookie'],
   }));
   
-  // Security: Rate limiting - General (100 req/15min)
+  // Security: Rate limiting - General (200 req/15min for API batch calls)
   const generalLimiter = rateLimit({
     windowMs: 15 * 60 * 1000,
-    max: 100,
-    message: 'Too many requests from this IP, please try again later.',
+    max: 200,
     standardHeaders: true,
     legacyHeaders: false,
+    handler: (req, res) => {
+      res.status(429).setHeader('Content-Type', 'application/json').send(
+        JSON.stringify({ error: 'Too many requests from this IP, please try again later.' })
+      );
+    },
   });
   
   // Security: Rate limiting - Auth (20 req/15min)
   const authLimiter = rateLimit({
     windowMs: 15 * 60 * 1000,
     max: 20,
-    message: 'Too many authentication attempts, please try again later.',
     standardHeaders: true,
     legacyHeaders: false,
+    handler: (req, res) => {
+      res.status(429).setHeader('Content-Type', 'application/json').send(
+        JSON.stringify({ error: 'Too many authentication attempts, please try again later.' })
+      );
+    },
   });
   
   // Configure body parser with larger size limit for file uploads

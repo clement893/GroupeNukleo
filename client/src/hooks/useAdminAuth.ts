@@ -49,11 +49,14 @@ export function useAdminAuth() {
   }, []);
 
   const checkAuth = async () => {
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 10000); // 10s timeout
     try {
       const response = await fetch("/api/auth/me", {
         credentials: "include",
+        signal: controller.signal,
       });
-      
+      clearTimeout(timeoutId);
       if (response.ok) {
         const data = await response.json();
         setUser(data.user);
@@ -61,6 +64,7 @@ export function useAdminAuth() {
         setUser(null);
       }
     } catch (error) {
+      clearTimeout(timeoutId);
       console.error("Auth check failed:", error);
       setUser(null);
     } finally {

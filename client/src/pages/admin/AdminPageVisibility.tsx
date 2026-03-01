@@ -134,23 +134,25 @@ export default function AdminPageVisibility() {
   };
 
   // Show error state if query failed
+  const isRateLimited = error?.message?.includes('Too many') || error?.message?.includes('429');
   if (error) {
     return (
       <AdminLayout>
         <div className="min-h-[50vh] flex items-center justify-center p-8">
-          <Card className="bg-white/5 backdrop-blur-md border-white/10 max-w-md">
+          <Card className="bg-white border border-gray-200 shadow-sm max-w-md">
             <CardHeader>
-              <CardTitle className="text-red-400">Erreur de chargement</CardTitle>
-              <CardDescription className="text-white/60">
-                Impossible de charger les données de visibilité des pages
+              <CardTitle className="text-red-600">Erreur de chargement</CardTitle>
+              <CardDescription className="text-gray-500">
+                {isRateLimited
+                  ? 'Trop de requêtes envoyées. Veuillez patienter quelques instants puis réessayer.'
+                  : 'Impossible de charger les données de visibilité des pages'}
               </CardDescription>
             </CardHeader>
             <CardContent>
-              <p className="text-white/80 mb-4">{error.message || 'Une erreur est survenue'}</p>
-              <Button
-                onClick={() => refetch()}
-                className="bg-cyan-500 hover:bg-cyan-600 text-white"
-              >
+              {!isRateLimited && (
+                <p className="text-gray-600 mb-4 text-sm">{error.message || 'Une erreur est survenue'}</p>
+              )}
+              <Button onClick={() => refetch()} className="bg-cyan-600 hover:bg-cyan-700 text-white">
                 Réessayer
               </Button>
             </CardContent>
