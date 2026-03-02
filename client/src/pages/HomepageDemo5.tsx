@@ -566,14 +566,14 @@ export default function HomepageDemo5() {
         }}
       >
         {/* ── Contenu principal ─────────────────────────────────────────────── */}
-        <div style={{ position: 'relative', zIndex: 10, paddingTop: 80 }}>
+        <div style={{ position: 'relative', zIndex: 10, paddingTop: 112 }}>
 
         {/* ════════════════════════════════════════════════════════════════════
             SECTION HERO — L'agence numérique des PME et des OBNL
         ════════════════════════════════════════════════════════════════════ */}
         <section style={{
           minHeight: '27.5vh',
-          paddingTop: 'clamp(2.5rem, 6.25vh, 5rem)',
+          paddingTop: 'clamp(3.5rem, 8.75vh, 7rem)',
           paddingBottom: 'clamp(3rem, 7.5vh, 6rem)',
           paddingLeft: '6%',
           paddingRight: '6%',
