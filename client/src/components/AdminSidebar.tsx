@@ -35,7 +35,6 @@ const NAV_GROUPS = [
   {
     label: "Configuration",
     items: [
-      { label: "Textes des pages (EN/FR)", href: "/admin/page-texts", icon: FileText },
       { label: "Visibilité des pages", href: "/admin/page-visibility", icon: Globe },
       { label: "Sons", href: "/admin/sounds", icon: Volume2 },
       { label: "Projets", href: "/admin/projects-images", icon: ImageIcon },

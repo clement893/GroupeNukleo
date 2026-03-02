@@ -173,13 +173,6 @@ export default function AdminDashboard() {
               </CardHeader>
               <CardContent className="space-y-2">
                 <a
-                  href="/admin/page-texts"
-                  className="block p-3 rounded-lg bg-gray-50 hover:bg-gray-100 transition-colors text-gray-700 hover:text-gray-900"
-                >
-                  <div className="text-gray-900 font-medium" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>Textes des pages (EN/FR)</div>
-                  <div className="text-gray-500 text-sm" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>Gérer les textes du site en anglais et français</div>
-                </a>
-                <a
                   href="/admin/page-visibility"
                   className="block p-3 rounded-lg bg-gray-50 hover:bg-gray-100 transition-colors text-gray-700 hover:text-gray-900"
                 >
