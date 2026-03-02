@@ -100,6 +100,7 @@ const AdminHome = lazy(() => import("./pages/admin/AdminHome"));
 const AdminProjectsImages = lazy(() => import("./pages/admin/AdminProjectsImages"));
 const AdminProjectEdit = lazy(() => import("./pages/admin/AdminProjectEdit"));
 const AdminCarouselLogos = lazy(() => import("./pages/admin/AdminCarouselLogos"));
+const AdminPageTexts = lazy(() => import("./pages/admin/AdminPageTexts"));
 
 import { ProtectedAdminRoute } from "./components/ProtectedAdminRoute";
 import { withPageVisibility } from "./components/ProtectedRoute";
@@ -208,6 +209,9 @@ function App() {
               </Route>
               <Route path="/admin/carousel-logos">
                 <ProtectedAdminRoute><AdminCarouselLogos /></ProtectedAdminRoute>
+              </Route>
+              <Route path="/admin/page-texts">
+                <ProtectedAdminRoute><AdminPageTexts /></ProtectedAdminRoute>
               </Route>
               <Route path="/admin">
                 <ProtectedAdminRoute><AdminHome /></ProtectedAdminRoute>

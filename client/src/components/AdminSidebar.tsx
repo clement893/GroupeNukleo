@@ -11,6 +11,7 @@ import {
   TrendingUp,
   ChevronRight,
   LayoutGrid,
+  Languages,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -36,6 +37,7 @@ const NAV_GROUPS = [
     label: "Configuration",
     items: [
       { label: "Visibilité des pages", href: "/admin/page-visibility", icon: Globe },
+      { label: "Textes FR/EN", href: "/admin/page-texts", icon: Languages },
       { label: "Sons", href: "/admin/sounds", icon: Volume2 },
       { label: "Projets", href: "/admin/projects-images", icon: ImageIcon },
       { label: "Logos carousel", href: "/admin/carousel-logos", icon: LayoutGrid },
