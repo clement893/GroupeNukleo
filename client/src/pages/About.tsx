@@ -60,7 +60,7 @@ export default function About() {
                 fontSize: 'clamp(1.5rem, 8vw, 9rem)',
                 lineHeight: 1.05,
                 letterSpacing: '-0.04em',
-                margin: '0 0 0.5rem 0',
+                margin: '0 0 0.25rem 0',
                 paddingBottom: '0.18em',
                 display: 'inline-block',
                 overflow: 'visible',

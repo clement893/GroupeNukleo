@@ -16,7 +16,7 @@ const TEAM_MEMBERS = [
     role: 'Creative Director',
     tagline: 'Créative dans l\'âme.\nExigeante dans l\'exécution.\nLeader en design.',
     img: TEAM_IMGS[1],
-    color: '#f97316',
+    color: '#8b5cf6',
     bio: 'Directrice créative, Marie-Ève donne vie aux marques à travers des expériences visuelles mémorables. Elle dirige le Studio Nukleo avec une vision forte et un sens aigu de l\'esthétique.',
   },
   {
@@ -32,7 +32,7 @@ const TEAM_MEMBERS = [
     role: 'Strategy Lead',
     tagline: 'Stratège numérique.\nOrientée résultats.\nPassionnée de données.',
     img: TEAM_IMGS[3],
-    color: '#059669',
+    color: '#523DCB',
     bio: 'Stratège digitale, Sophie accompagne les organisations dans leur transformation numérique. Elle conçoit des feuilles de route claires, mesurables et alignées sur les objectifs d\'affaires.',
   },
 ];
@@ -88,7 +88,7 @@ export function TeamRow() {
             lineHeight: 1.05,
             letterSpacing: '-0.03em',
             color: '#0A0A0A',
-            marginBottom: 4,
+            marginBottom: 8,
           }}>
             {m.name}
           </h3>
@@ -99,12 +99,11 @@ export function TeamRow() {
             letterSpacing: '0.2em',
             textTransform: 'uppercase',
             color: m.color,
-            margin: '0 0 16px 0',
+            margin: '0 0 32px 0',
             transition: 'color 0.4s',
           }}>
             {m.role}
           </p>
-          <div style={{ width: 40, height: 2.5, background: m.color, borderRadius: 999, marginBottom: 20, transition: 'background 0.4s' }} />
           <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', gap: 8 }}>
             {m.tagline.split('\n').filter(Boolean).map((tag) => (
               <span
@@ -116,7 +115,7 @@ export function TeamRow() {
                   backdropFilter: 'blur(16px) saturate(180%)',
                   WebkitBackdropFilter: 'blur(16px) saturate(180%)',
                   border: '1px solid rgba(255, 255, 255, 0.8)',
-                  borderRadius: 999,
+                  borderRadius: 12,
                   padding: '0.35rem 0.75rem',
                   boxShadow: '0 4px 24px rgba(0,0,0,0.06), inset 0 1px 0 rgba(255,255,255,0.85)',
                   fontFamily: "'Plus Jakarta Sans', sans-serif",

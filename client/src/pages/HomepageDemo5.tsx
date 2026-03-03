@@ -20,14 +20,15 @@ const DARK = '#0A0A0A';
 const WORK1 = '/demo/work1.jpg';
 const WORK2 = '/demo/work2.jpg';
 const WORK3 = '/demo/work3.jpg';
+const SITE_MAUVE = '#5D43CD';
 const FALLBACK_PROJECTS = [
-  { num: '01', name: 'MBAM', category: 'Brand & Digital', tagline: 'Redefining cultural engagement online.', result: '+240% digital reach', img: WORK1, color: '#2563eb' },
+  { num: '01', name: 'MBAM', category: 'Brand & Digital', tagline: 'Redefining cultural engagement online.', result: '+240% digital reach', img: WORK1, color: SITE_MAUVE },
   { num: '02', name: 'SummitLaw', category: 'Brand & Creative', tagline: 'A law firm that finally looks like its ambition.', result: '+180% qualified leads', img: WORK2, color: PURPLE },
   { num: '03', name: 'QueerTech', category: 'AI & Platform', tagline: 'Technology built for belonging.', result: '+220% member engagement', img: WORK3, color: '#059669' },
 ];
 
 type HomeProjectItem = { num: string; name: string; category: string; tagline: string; result: string; img: string; color: string };
-const CAROUSEL_COLORS = ['#2563eb', PURPLE, '#059669', '#dc2626', '#7c2d12'];
+const CAROUSEL_COLORS = [SITE_MAUVE, PURPLE, '#059669', '#dc2626', '#7c2d12'];
 
 function mapApiProjectsToHome(
   apiProjects: Array<{ title: string; category: string; description: { fr: string; en: string }; images: string[]; slug?: string; homeCarouselImage?: string; homeTriptychImage?: string }>,
@@ -461,7 +462,7 @@ function Triptych({ projects: projectsProp }: { projects?: HomeProjectItem[] }) 
                 fontFamily: "'Plus Jakarta Sans', sans-serif",
                 fontSize: 'clamp(2rem, 4vw, 3.5rem)',
                 fontWeight: 700,
-                color: isActive ? 'rgba(167,139,250,0.9)' : '#ffffff',
+                color: '#ffffff',
                 opacity: 0.92,
                 lineHeight: 1,
                 letterSpacing: '-0.04em',

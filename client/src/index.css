@@ -248,6 +248,29 @@ header.header-scroll-transform,
     transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
+  /* Projets galerie — tags filtres : glassmorphism, hover blanc + mauve */
+  .projects-filter-tag--default {
+    background: rgba(255, 255, 255, 0.4);
+    backdrop-filter: blur(12px) saturate(180%);
+    -webkit-backdrop-filter: blur(12px) saturate(180%);
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
+    color: #374151;
+  }
+  .projects-filter-tag--default:hover {
+    background: rgba(255, 255, 255, 1) !important;
+    color: #5D43CD !important;
+    border-color: rgba(255, 255, 255, 0.9) !important;
+  }
+  .projects-filter-tag--selected {
+    background: rgba(255, 255, 255, 1) !important;
+    backdrop-filter: blur(12px) saturate(180%);
+    -webkit-backdrop-filter: blur(12px) saturate(180%);
+    border: 1px solid rgba(255, 255, 255, 0.9) !important;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+    color: #5D43CD !important;
+  }
+
   /* Projets hero — bouton "Voir le projet" : hover plus opaque + texte/flèche mauve */
   .projects-view-btn:hover {
     background: rgba(255, 255, 255, 0.55) !important;

@@ -17,6 +17,8 @@ export interface ServiceTabContent {
 export interface ServiceDetailLayoutProps {
   pageTitle: string;
   tagline: string;
+  /** Badge au-dessus du titre (style "Ils nous font confiance"). Si fourni, affiché au-dessus du pageTitle. */
+  heroBadge?: string;
   heroImage?: string;
   heroImageAlt?: string;
   /** Si fourni, affiche la section à onglets (gauche: onglets, droite: contenu dynamique). Sinon, affiche nav + bloc mainTitle/mainDescription. */
@@ -53,6 +55,7 @@ export default function ServiceDetailLayout(props: ServiceDetailLayoutProps) {
   const {
     pageTitle,
     tagline,
+    heroBadge,
     heroImage,
     heroImageAlt = '',
     tabs,
@@ -97,35 +100,65 @@ export default function ServiceDetailLayout(props: ServiceDetailLayoutProps) {
       className="min-h-screen"
       style={{ background: 'transparent' }}
     >
-      {/* Hero : fond transparent pour laisser voir le dégradé global (navbar + hero) */}
+      {/* Hero — même style et hauteur que page À propos (titre, texte gris, espacements, image) */}
       <section
-        className="relative pt-24 pb-8 lg:pt-28 lg:pb-12"
-        style={{ background: 'transparent', overflow: 'visible' }}
+        className="relative"
+        style={{
+          padding: 'clamp(14rem, calc(8rem + 12vh), 16rem) 0 clamp(2rem, 4vw, 4rem)',
+          background: 'transparent',
+          overflow: 'visible',
+        }}
       >
         <div className="container relative" style={{ overflow: 'visible' }}>
-          <h1
-            className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-3"
-            style={{
-              background: heroTitleGradient,
-              WebkitBackgroundClip: 'text',
-              backgroundClip: 'text',
-              WebkitTextFillColor: 'transparent',
-              color: 'transparent',
-              fontFamily: "'Plus Jakarta Sans', sans-serif",
-              lineHeight: 1.25,
-              paddingBottom: '0.28em',
-              overflow: 'visible',
-            }}
-          >
-            {pageTitle}
-          </h1>
-          <p className="text-base lg:text-lg text-gray-700 max-w-2xl mb-8 lg:mb-10 leading-relaxed" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
-            {tagline}
-          </p>
+          <div style={{ marginBottom: 'clamp(2rem, 4vw, 3.5rem)', overflow: 'visible' }}>
+            {heroBadge && (
+              <p
+                className="text-xs font-medium tracking-[0.35em] uppercase mb-4 text-gray-500"
+                style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 700 }}
+              >
+                {heroBadge}
+              </p>
+            )}
+            <h1
+              style={{
+                fontFamily: "'Plus Jakarta Sans', sans-serif",
+                fontWeight: 700,
+                fontSize: 'clamp(1.5rem, 8vw, 9rem)',
+                lineHeight: 1.05,
+                letterSpacing: '-0.04em',
+                margin: '0 0 0.25rem 0',
+                paddingBottom: '0.18em',
+                display: 'inline-block',
+                overflow: 'visible',
+                background: heroTitleGradient,
+                WebkitBackgroundClip: 'text',
+                backgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                color: 'transparent',
+              }}
+            >
+              {pageTitle}
+            </h1>
+            {tagline ? (
+              <p
+                style={{
+                  fontFamily: "'Plus Jakarta Sans', sans-serif",
+                  fontWeight: 400,
+                  fontSize: 'clamp(1rem, 1.5vw, 1.25rem)',
+                  color: '#6b7280',
+                  lineHeight: 1.5,
+                  margin: 0,
+                }}
+              >
+                {tagline}
+              </p>
+            ) : null}
+          </div>
           {heroImage && (
             <div
-              className="rounded-t-[1.75rem] rounded-b-2xl overflow-hidden bg-gray-100 aspect-[21/9] min-h-[200px] max-h-[420px] w-full"
+              className="rounded-xl overflow-hidden bg-gray-100 w-full"
               style={{
+                height: 'clamp(320px, 50vh, 520px)',
                 boxShadow: '0 4px 24px rgba(93, 67, 205, 0.08), 0 1px 0 rgba(93, 67, 205, 0.06) inset',
               }}
             >
@@ -142,7 +175,7 @@ export default function ServiceDetailLayout(props: ServiceDetailLayoutProps) {
       {/* Bloc 2 colonnes : onglets glassmorphisme (gauche) + infos service (droite) */}
       <section className="pb-16 lg:pb-24">
         <div className="container">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 lg:min-h-[420px]">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-6 lg:min-h-[420px]">
             {/* Gauche : onglets glassmorphisme (frosted glass) */}
             <aside className="lg:col-span-3 flex flex-col p-4 lg:p-0 order-2 lg:order-1">
               {hasTabs ? (
@@ -160,30 +193,23 @@ export default function ServiceDetailLayout(props: ServiceDetailLayoutProps) {
                       aria-controls={`service-tabpanel-${tab.id}`}
                       id={`service-tab-${tab.id}`}
                       onClick={() => setActiveTabIndex(index)}
-                      className="w-full text-left py-3 px-4 text-base font-normal transition-all duration-200 rounded-xl"
-                      style={
-                        activeTabIndex === index
-                          ? {
-                              background: 'rgba(255, 255, 255, 0.65)',
-                              border: '1px solid rgba(255, 255, 255, 0.8)',
-                              boxShadow: '0 4px 24px rgba(0, 0, 0, 0.06), inset 0 1px 0 rgba(255, 255, 255, 0.8)',
-                              WebkitBackdropFilter: 'blur(16px) saturate(180%)',
-                              backdropFilter: 'blur(16px) saturate(180%)',
-                              color: '#111827',
-                              isolation: 'isolate',
-                              fontFamily: "'Plus Jakarta Sans', sans-serif",
-                            }
-                          : {
-                              background: 'rgba(255, 255, 255, 0.4)',
-                              border: '1px solid rgba(255, 255, 255, 0.6)',
-                              boxShadow: '0 2px 16px rgba(0, 0, 0, 0.04)',
-                              WebkitBackdropFilter: 'blur(16px) saturate(180%)',
-                              backdropFilter: 'blur(16px) saturate(180%)',
-                              color: '#374151',
-                              isolation: 'isolate',
-                              fontFamily: "'Plus Jakarta Sans', sans-serif",
-                            }
-                      }
+                      className="w-full text-left font-normal transition-all duration-200"
+                      style={{
+                        display: 'block',
+                        width: 'fit-content',
+                        background: activeTabIndex === index ? 'rgba(255, 255, 255, 0.65)' : 'rgba(255, 255, 255, 0.4)',
+                        backdropFilter: 'blur(16px) saturate(180%)',
+                        WebkitBackdropFilter: 'blur(16px) saturate(180%)',
+                        border: '1px solid rgba(255, 255, 255, 0.8)',
+                        borderRadius: 12,
+                        padding: '0.35rem 0.75rem',
+                        boxShadow: '0 4px 24px rgba(0,0,0,0.06), inset 0 1px 0 rgba(255,255,255,0.85)',
+                        fontFamily: "'Plus Jakarta Sans', sans-serif",
+                        fontWeight: 400,
+                        fontSize: '0.6rem',
+                        color: activeTabIndex === index ? '#111827' : '#374151',
+                        isolation: 'isolate',
+                      }}
                     >
                       {tab.label}
                     </button>
@@ -197,30 +223,23 @@ export default function ServiceDetailLayout(props: ServiceDetailLayoutProps) {
                         <button
                           type="button"
                           onClick={() => setActiveTabIndex(index)}
-                          className="w-full text-left py-3 px-4 text-base font-normal transition-all duration-200 rounded-xl"
-                          style={
-                            activeTabIndex === index
-                              ? {
-                                  background: 'rgba(255, 255, 255, 0.65)',
-                                  border: '1px solid rgba(255, 255, 255, 0.8)',
-                                  boxShadow: '0 4px 24px rgba(0, 0, 0, 0.06), inset 0 1px 0 rgba(255, 255, 255, 0.8)',
-                                  WebkitBackdropFilter: 'blur(16px) saturate(180%)',
-                                  backdropFilter: 'blur(16px) saturate(180%)',
-                                  color: '#111827',
-                                  isolation: 'isolate',
-                                  fontFamily: "'Plus Jakarta Sans', sans-serif",
-                                }
-                              : {
-                                  background: 'rgba(255, 255, 255, 0.4)',
-                                  border: '1px solid rgba(255, 255, 255, 0.6)',
-                                  boxShadow: '0 2px 16px rgba(0, 0, 0, 0.04)',
-                                  WebkitBackdropFilter: 'blur(16px) saturate(180%)',
-                                  backdropFilter: 'blur(16px) saturate(180%)',
-                                  color: '#374151',
-                                  isolation: 'isolate',
-                                  fontFamily: "'Plus Jakarta Sans', sans-serif",
-                                }
-                          }
+                          className="w-full text-left font-normal transition-all duration-200"
+                          style={{
+                            display: 'inline-block',
+                            width: 'fit-content',
+                            background: activeTabIndex === index ? 'rgba(255, 255, 255, 0.65)' : 'rgba(255, 255, 255, 0.4)',
+                            backdropFilter: 'blur(16px) saturate(180%)',
+                            WebkitBackdropFilter: 'blur(16px) saturate(180%)',
+                            border: '1px solid rgba(255, 255, 255, 0.8)',
+                            borderRadius: 12,
+                            padding: '0.35rem 0.75rem',
+                            boxShadow: '0 4px 24px rgba(0,0,0,0.06), inset 0 1px 0 rgba(255,255,255,0.85)',
+                            fontFamily: "'Plus Jakarta Sans', sans-serif",
+                            fontWeight: 400,
+                            fontSize: '0.6rem',
+                            color: activeTabIndex === index ? '#111827' : '#374151',
+                            isolation: 'isolate',
+                          }}
                         >
                           {item.label}
                         </button>
@@ -239,37 +258,27 @@ export default function ServiceDetailLayout(props: ServiceDetailLayoutProps) {
             >
               {hasTabs && activeTab ? (
                 <div>
-                  <h2 className="text-3xl lg:text-4xl font-bold mb-1" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 'clamp(1.75rem, 4vw, 2.5rem)', display: 'inline-block', background: heroTitleGradient, WebkitBackgroundClip: 'text', backgroundClip: 'text', color: 'transparent' }}>
-                    {activeTab.title}
-                  </h2>
                   {activeTab.subtitle && (
-                    <p className="text-2xl lg:text-3xl font-bold mb-6" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 'clamp(1.5rem, 3vw, 1.875rem)', display: 'inline-block', background: heroTitleGradient, WebkitBackgroundClip: 'text', backgroundClip: 'text', color: 'transparent' }}>
+                    <p style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 700, fontSize: '0.75rem', letterSpacing: '0.2em', textTransform: 'uppercase', color: '#6b7280', marginBottom: 24, textAlign: 'left' }}>
                       {activeTab.subtitle}
                     </p>
                   )}
+                  <h2 className="text-3xl lg:text-4xl font-bold mb-4" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 'clamp(1.75rem, 4vw, 2.5rem)', display: 'inline-block', background: heroTitleGradient, WebkitBackgroundClip: 'text', backgroundClip: 'text', color: 'transparent' }}>
+                    {activeTab.title}
+                  </h2>
                   <p className="text-lg text-gray-600 leading-relaxed mb-10 max-w-3xl" style={{ color: '#555555', fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
                     {activeTab.description}
                   </p>
-                  <ul className="space-y-4">
+                  <div className="mb-10">
                     {activeTab.benefits.map((benefit, i) => (
-                      <li key={i}>
-                        <div
-                          className="p-5 rounded-xl text-base leading-relaxed text-gray-600"
-                          style={{
-                            background: 'rgba(255, 255, 255, 0.55)',
-                            border: '1px solid rgba(255, 255, 255, 0.75)',
-                            boxShadow: '0 4px 24px rgba(0, 0, 0, 0.06), inset 0 1px 0 rgba(255, 255, 255, 0.9)',
-                            WebkitBackdropFilter: 'blur(16px) saturate(180%)',
-                            backdropFilter: 'blur(16px) saturate(180%)',
-                            isolation: 'isolate',
-                            fontFamily: "'Plus Jakarta Sans', sans-serif",
-                          }}
-                        >
+                      <div key={i}>
+                        <p className="text-base leading-relaxed text-gray-600 py-3" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", margin: 0 }}>
                           {benefit}
-                        </div>
-                      </li>
+                        </p>
+                        <div style={{ height: 1, background: 'rgba(33, 36, 46, 0.2)', margin: 0 }} />
+                      </div>
                     ))}
-                  </ul>
+                  </div>
                 </div>
               ) : (
                 <div className="space-y-10">
@@ -400,7 +409,7 @@ export default function ServiceDetailLayout(props: ServiceDetailLayoutProps) {
                         isolation: 'isolate',
                       }}
                     >
-                      <h3 className="font-bold text-gray-900 mb-1.5" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>{item.title}</h3>
+                      <h3 className="text-base font-bold text-gray-900 mb-1.5" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>{item.title}</h3>
                       <p className="text-gray-600 text-sm leading-relaxed" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>{item.description}</p>
                     </div>
                   ))}

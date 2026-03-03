@@ -617,7 +617,9 @@
     "detail": {
       "studio": {
         "pageTitle": "Creative Studio",
-        "tagline": "Creativity, amplified. Design & Brand Experiences.",
+        "heroBadge": "Design & Brand Experiences",
+        "heroTitle": "Your creative studio",
+        "tagline": "Design & Brand Experiences.",
         "heroImageAlt": "Creative at work with tablet and stylus, design and creation environment.",
         "navItems": [
           "Design & Brand Experiences",
@@ -630,7 +632,7 @@
           {
             "id": "image-marque",
             "label": "Brand image",
-            "title": "Creativity, amplified.",
+            "title": "Creativity, amplified",
             "subtitle": "Design & Brand Experiences",
             "description": "Passionate creatives who bring your ideas to life. We design memorable brand identities and digital experiences that make an impact — with the best tools to go faster and further.",
             "benefits": [
@@ -1726,9 +1728,11 @@
     "noProjects": "No projects found",
     "projectLabel": "project",
     "descriptionFallback": "Project description coming soon.",
+    "galleryTitle": "Discover our latest projects",
     "filterAriaLabel": "Filter projects by category",
     "noProjectsInCategory": "No projects in this category.",
     "viewProject": "View project →",
+    "voirPlus": "View more",
     "filters": {
       "all": "All",
       "aiPlatforms": "AI Platforms",

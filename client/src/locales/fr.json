@@ -720,11 +720,13 @@
     "detail": {
       "studio": {
         "pageTitle": "Studio créatif",
-        "tagline": "La créativité, amplifiée. Design & expériences de marque.",
+        "heroBadge": "Design & Brand Experiences",
+        "heroTitle": "Votre studio créatif",
+        "tagline": "Design & expériences de marque.",
         "heroImageAlt": "Créatif au travail avec tablette et stylet, environnement de design et création.",
         "navItems": ["Design & expériences de marque", "Web & UI/UX", "Motion Design", "Production visuelle", "Stratégie de contenu"],
         "tabs": [
-          { "id": "image-marque", "label": "Image de marque", "title": "La créativité, amplifiée.", "subtitle": "Design & Brand Experiences", "description": "Des créatifs passionnés qui donnent vie à vos idées. Nous concevons des identités de marque mémorables et des expériences digitales qui marquent les esprits — avec les meilleurs outils pour aller plus vite et plus loin.", "benefits": ["Vous avez besoin d'une identité de marque forte et distinctive", "Vous voulez une expérience utilisateur fluide et engageante", "Vous cherchez des campagnes créatives qui se démarquent", "Vous avez besoin de contenus visuels de qualité, à grande échelle"] },
+          { "id": "image-marque", "label": "Image de marque", "title": "La créativité, amplifiée", "subtitle": "Design & Brand Experiences", "description": "Des créatifs passionnés qui donnent vie à vos idées. Nous concevons des identités de marque mémorables et des expériences digitales qui marquent les esprits — avec les meilleurs outils pour aller plus vite et plus loin.", "benefits": ["Vous avez besoin d'une identité de marque forte et distinctive", "Vous voulez une expérience utilisateur fluide et engageante", "Vous cherchez des campagnes créatives qui se démarquent", "Vous avez besoin de contenus visuels de qualité, à grande échelle"] },
           { "id": "ux-ui", "label": "UX/UI", "title": "Interfaces qui convertissent.", "subtitle": "Web & expérience utilisateur", "description": "Nous concevons des interfaces intuitives et des parcours utilisateur qui transforment les visiteurs en clients. Recherche utilisateur, wireframes, maquettes haute fidélité et design systems.", "benefits": ["Vous lancez un nouveau site ou une application", "Vous voulez améliorer l'ergonomie de votre plateforme", "Vous avez besoin d'un design system cohérent", "Vous visez une expérience mobile irréprochable"] },
           { "id": "impressions", "label": "Impressions", "title": "Print & supports physiques.", "subtitle": "Brochures, affiches, packaging", "description": "De la carte de visite au packaging, nous créons des supports imprimés qui renforcent votre marque. Mise en page, choix des matériaux et suivi de production.", "benefits": ["Vous avez besoin de supports print pour un événement", "Vous lancez une nouvelle gamme de produits", "Vous voulez une identité cohérente du digital au print", "Vous cherchez un partenaire pour vos campagnes d'affichage"] },
           { "id": "supports-visuels", "label": "Supports visuels", "title": "Contenus visuels à grande échelle.", "subtitle": "Photographie, vidéo, illustration", "description": "Visuels de campagne, contenus pour les réseaux sociaux, visuels de marque et assets pour vos canaux. Nous produisons des contenus visuels de qualité, alignés avec votre stratégie.", "benefits": ["Vous devez produire beaucoup de contenus visuels", "Vous voulez une direction artistique claire", "Vous cherchez des visuels qui se démarquent", "Vous avez besoin de cohérence entre tous vos supports"] },
@@ -1421,9 +1423,11 @@
     "noProjects": "Aucun projet trouvé",
     "projectLabel": "projet",
     "descriptionFallback": "Description du projet à venir.",
+    "galleryTitle": "Découvrez nos derniers projets",
     "filterAriaLabel": "Filtrer les projets par catégorie",
     "noProjectsInCategory": "Aucun projet dans cette catégorie.",
     "viewProject": "Voir le projet →",
+    "voirPlus": "Voir plus",
     "filters": {
       "all": "Tout",
       "aiPlatforms": "Plateformes IA",

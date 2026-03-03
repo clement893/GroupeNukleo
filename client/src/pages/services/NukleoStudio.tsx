@@ -66,8 +66,8 @@ export default function NukleoStudio() {
         keywords="design marque, UX UI design, branding, identité visuelle, motion design, copywriting, direction artistique"
       />
       <ServiceDetailLayout
-        pageTitle={t(`${NS}.pageTitle`)}
-        tagline={t(`${NS}.tagline`)}
+        pageTitle={t(`${NS}.heroTitle`)}
+        tagline=""
         heroImage="/demo/dept-studio.jpg"
         heroImageAlt={t(`${NS}.heroImageAlt`)}
         tabs={tabs}

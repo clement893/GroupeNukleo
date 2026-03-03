@@ -98,10 +98,13 @@ export default function Projects() {
 
   const [images, setImages] = useState<string[]>([]);
   const [filter, setFilter] = useState<ProjectFilterValue>('Tous');
+  const [visibleCount, setVisibleCount] = useState(9);
   const [visibleImages, setVisibleImages] = useState<Set<number>>(new Set());
   const imageRefs = useRef<(HTMLDivElement | null)[]>([]);
 
   const filteredImages = filterImagesByCategory(images, filter);
+  const displayedImages = filteredImages.slice(0, visibleCount);
+  const hasMore = filteredImages.length > visibleCount;
 
   const heroImages = useMemo(() => {
     const featured = (apiProjects || []).filter((p: { featuredOnProjectsTriptych?: boolean }) => p.featuredOnProjectsTriptych);
@@ -148,7 +151,11 @@ export default function Projects() {
   }, [uploadedImages, isLoadingImages, imagesError]);
 
   useEffect(() => {
-    if (images.length === 0) return;
+    setVisibleCount(9);
+  }, [filter]);
+
+  useEffect(() => {
+    if (displayedImages.length === 0) return;
     const isMobile = typeof window !== 'undefined' && window.innerWidth < MOBILE_BREAKPOINT;
     const observer = new IntersectionObserver(
       (entries) => {
@@ -165,14 +172,14 @@ export default function Projects() {
     );
     imageRefs.current.forEach((ref) => ref && observer.observe(ref));
     return () => observer.disconnect();
-  }, [filteredImages]);
+  }, [visibleCount, filteredImages]);
 
   useEffect(() => {
-    if (filteredImages.length === 0) return;
+    if (displayedImages.length === 0) return;
     const isMobile = typeof window !== 'undefined' && window.innerWidth < MOBILE_BREAKPOINT;
-    const n = isMobile ? Math.min(2, filteredImages.length) : Math.min(3, filteredImages.length);
+    const n = isMobile ? Math.min(2, displayedImages.length) : Math.min(3, displayedImages.length);
     setVisibleImages(new Set(Array.from({ length: n }, (_, i) => i)));
-  }, [filteredImages.length]);
+  }, [displayedImages.length]);
 
   return (
     <PageLayout>
@@ -192,10 +199,29 @@ export default function Projects() {
           viewProjectLabel={t('projects.viewProject')}
         />
 
-        {/* Filtres par catégorie — sous le triptyque */}
-        <section className="container pt-2 pb-6 lg:pb-8">
+        {/* Filtres par catégorie — sous le triptyque (glassmorphism, alignés à gauche) */}
+        <section className="container pt-12 pb-6 lg:pb-8" style={{ overflow: 'visible' }}>
+          <h2
+            style={{
+              fontFamily: "'Plus Jakarta Sans', sans-serif",
+              fontWeight: 700,
+              fontSize: 'clamp(0.75rem, 4vw, 4.5rem)',
+              lineHeight: 1.05,
+              letterSpacing: '-0.04em',
+              margin: '0 0 1rem 0',
+              paddingBottom: '0.18em',
+              display: 'inline-block',
+              overflow: 'visible',
+              background: 'linear-gradient(to right, #6B1817, #5636AD)',
+              backgroundClip: 'text',
+              WebkitBackgroundClip: 'text',
+              color: 'transparent',
+            }}
+          >
+            {t('projects.galleryTitle')}
+          </h2>
           <div
-            className="flex flex-wrap items-center justify-center gap-2 lg:gap-3"
+            className="flex flex-wrap items-center justify-start gap-2 lg:gap-3"
             role="tablist"
             aria-label={t('projects.filterAriaLabel')}
           >
@@ -206,13 +232,9 @@ export default function Projects() {
                 role="tab"
                 aria-selected={filter === label}
                 onClick={() => setFilter(label)}
-                className={`
-                  px-4 py-2 rounded-full text-sm font-medium transition-all duration-200
-                  ${filter === label
-                    ? 'bg-[#5A1E29] text-white shadow-md'
-                    : 'bg-white/90 text-gray-700 border border-gray-200 hover:border-gray-300 hover:bg-gray-50'
-                  }
-                `}
+                className={`projects-filter-tag px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 ${
+                  filter === label ? 'projects-filter-tag--selected' : 'projects-filter-tag--default'
+                }`}
                 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}
               >
                 {label}
@@ -244,8 +266,9 @@ export default function Projects() {
                 {t('projects.noProjectsInCategory')}
               </p>
             ) : (
+              <>
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-6">
-                {filteredImages.map((image, index) => {
+                {displayedImages.map((image, index) => {
                   const isVisible = visibleImages.has(index);
                   const imageAlt = image.replace(/[-_]/g, ' ').replace(/\.(jpg|png|jpeg)$/i, '').replace(/\d+$/, '').trim();
                   const bgColor = GRID_BG_COLORS[index % GRID_BG_COLORS.length];
@@ -306,6 +329,19 @@ export default function Projects() {
                   );
                 })}
               </div>
+              {hasMore && (
+                <div className="flex justify-center mt-10">
+                  <button
+                    type="button"
+                    onClick={() => setVisibleCount((c) => c + 9)}
+                    className="projects-filter-tag px-6 py-3 rounded-lg text-base font-medium transition-all duration-200 projects-filter-tag--default"
+                    style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}
+                  >
+                    {t('projects.voirPlus')}
+                  </button>
+                </div>
+              )}
+              </>
             )}
           </div>
         </section>
