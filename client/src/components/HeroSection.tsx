@@ -96,9 +96,9 @@ function HeroSection() {
   }, [isMobile]);
   
   return (
-    <section className="relative min-h-screen flex items-center justify-center pt-20 px-4 sm:px-6 lg:px-8">
+    <section className="relative min-h-screen flex items-center justify-center pt-20 site-margin-x">
 
-      <div className="container relative z-10 px-4 sm:px-6 lg:px-8">
+      <div className="container relative z-10">
         <div className="flex items-center justify-center">
           {/* Main Title */}
           <div className="max-w-6xl lg:max-w-7xl xl:max-w-[90%] w-full">

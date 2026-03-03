@@ -25,7 +25,7 @@ export default function PreFooter() {
     <section
       aria-label={t('preFooter.ariaLabel') || 'Signature Nukleo'}
       style={{
-        padding: 'clamp(0.2rem, 0.5vw, 0.4rem) 6% clamp(0.5rem, 1.5vw, 1rem)',
+        padding: 'clamp(0.2rem, 0.5vw, 0.4rem) var(--site-margin, 3%) clamp(0.125rem, 0.375vw, 0.25rem)',
         background: '#EFE8E8',
         display: 'flex',
         alignItems: 'center',

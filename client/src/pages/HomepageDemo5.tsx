@@ -7,7 +7,8 @@ import { ArrowUpRight, HelpCircle } from 'lucide-react';
 import { SplitCTAButton } from '@/components/SplitCTAButton';
 import { WeatherWidget } from '@/components/WeatherWidget';
 import PageLayout from '@/components/PageLayout';
-import { HOME_SERVICES } from '@/data/homeServices';
+import HomeServicesSection from '@/components/HomeServicesSection';
+import CTAPerformSection from '@/components/CTAPerformSection';
 import { trpc } from '@/lib/trpc';
 
 // ─── Constantes ──────────────────────────────────────────────────────────────
@@ -444,11 +445,11 @@ function Triptych({ projects: projectsProp }: { projects?: HomeProjectItem[] }) 
               style={{
                 position: 'absolute', inset: 0, width: '100%', height: '100%',
                 objectFit: 'cover',
-                filter: isActive ? 'grayscale(0) brightness(0.7)' : 'grayscale(1) brightness(0.55)',
+                filter: isActive ? 'none' : 'grayscale(1) brightness(0.55)',
                 transition: 'filter 0.5s ease',
               }}
             />
-            <div style={{ position: 'absolute', inset: 0, background: isActive ? 'linear-gradient(to top, rgba(0,0,0,0.88) 0%, rgba(0,0,0,0.15) 55%, transparent 100%)' : 'rgba(0,0,0,0.22)', transition: 'background 0.5s ease' }} />
+            <div style={{ position: 'absolute', inset: 0, background: isActive ? 'linear-gradient(to top, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.08) 25%, transparent 33%)' : 'rgba(0,0,0,0.22)', transition: 'background 0.5s ease' }} />
 
             {/* Numéro 01 / 02 / 03 — Plus Jakarta Sans Bold, un peu de transparence */}
             <div
@@ -566,7 +567,7 @@ export default function HomepageDemo5() {
         }}
       >
         {/* ── Contenu principal ─────────────────────────────────────────────── */}
-        <div style={{ position: 'relative', zIndex: 10, paddingTop: 112 }}>
+        <div style={{ position: 'relative', zIndex: 10, paddingTop: 128 }}>
 
         {/* ════════════════════════════════════════════════════════════════════
             SECTION HERO — L'agence numérique des PME et des OBNL
@@ -574,9 +575,9 @@ export default function HomepageDemo5() {
         <section style={{
           minHeight: '27.5vh',
           paddingTop: 'clamp(3.5rem, 8.75vh, 7rem)',
-          paddingBottom: 'clamp(3rem, 7.5vh, 6rem)',
-          paddingLeft: '6%',
-          paddingRight: '6%',
+          paddingBottom: 'clamp(2rem, 5vh, 4rem)',
+          paddingLeft: '3%',
+          paddingRight: '3%',
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'flex-start',
@@ -610,20 +611,26 @@ export default function HomepageDemo5() {
         {/* ════════════════════════════════════════════════════════════════════
             SECTION 1 — LOGO MASSIF + HERO WIDGETS (fond blanc)
         ════════════════════════════════════════════════════════════════════ */}
-        <div style={{ padding: '0 6%', marginBottom: 5 * 16 }}>
-          {/* Hero grid : 60% Our Latest Work (gauche) + 40% widgets (droite) */}
-          <div style={{ display: 'grid', gridTemplateColumns: '3fr 2fr', gap: 'clamp(1rem, 1.5vw, 1.5rem)', marginTop: 2.5 * 16, alignItems: 'start', minHeight: '52vh' }}>
+        <div style={{ padding: '0 3%', marginBottom: 5 * 16 }}>
+          {/* Hero grid : photo (gauche) = référence, blocs droite alignés sur sa hauteur */}
+          <div style={{ display: 'grid', gridTemplateColumns: '3fr 2fr', gap: 'clamp(1rem, 1.5vw, 1.5rem)', marginTop: 1.5 * 16, alignItems: 'stretch', height: '52vh', minHeight: 640 }}>
 
-            {/* Colonne Our Latest Work — News Carrousel (gauche) */}
-            <NewsCarousel projects={homeCarouselProjects} />
+            {/* Colonne Our Latest Work — News Carrousel (gauche), taille fixe */}
+            <div style={{ height: '100%', minHeight: 0 }}>
+              <NewsCarousel projects={homeCarouselProjects} />
+            </div>
 
-            {/* Grille 6 cartes (2 + 1 + 1 + 2) — droite */}
+            {/* Grille 6 cartes (2 + 1 + 1 + 2) — droite, hauteur totale = photo */}
             <div style={{
               display: 'grid',
               gridTemplateColumns: '1fr 1fr',
+              gridTemplateRows: 'minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr)',
               gap: 'clamp(0.5rem, 1.2vw, 1rem)',
               padding: 'clamp(0.75rem, 1.5vw, 1.25rem)',
               borderRadius: 28,
+              height: '100%',
+              alignSelf: 'stretch',
+              overflow: 'hidden',
             }}>
               {/* 1. Météo — verre dépoli (style météo/date) */}
               <WeatherWidget className="glass-widget-weather-date" />
@@ -635,13 +642,14 @@ export default function HomepageDemo5() {
                 const dayNum = d.getDate();
                 const monthYear = d.toLocaleDateString('fr-FR', { month: 'long', year: 'numeric' });
                 return (
-                  <div className="glass-widget-weather-date" style={{
-                    padding: 'clamp(0.9rem, 1.2vw, 1.35rem) clamp(0.9rem, 1.3vw, 1.5rem)',
-                    display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 'clamp(0.35rem, 0.6vw, 0.6rem)', textAlign: 'center',
+                  <div className="glass-widget-weather-date" style={{ minHeight: 0,
+                    padding: 'clamp(2.7rem, 3.6vw, 4.05rem) clamp(2.7rem, 3.9vw, 4.5rem)',
+                    display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 'clamp(0.525rem, 0.9vw, 0.9rem)', textAlign: 'center',
+                    height: '100%',
                   }}>
-                    <div style={{ fontSize: 'clamp(0.7rem, 0.85vw, 0.95rem)', color: '#6b7280' }}>Bon {dayName} <span style={{ color: PURPLE }}>♥</span></div>
-                    <div style={{ fontFamily: "'Figtree', sans-serif", fontWeight: 700, fontSize: 'clamp(1.75rem, 2.2vw, 2.75rem)', lineHeight: 1, color: DARK }}>{dayNum}</div>
-                    <div style={{ fontSize: 'clamp(0.7rem, 0.85vw, 0.95rem)', color: '#6b7280' }}>{monthYear}</div>
+                    <div style={{ fontSize: 'clamp(1.05rem, 1.275vw, 1.425rem)', fontWeight: 700, color: '#6b7280' }}>Bon {dayName} <span style={{ color: PURPLE }}>♥</span></div>
+                    <div style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 700, fontSize: 'clamp(5.25rem, 6.6vw, 8.25rem)', lineHeight: 1, color: DARK }}>{dayNum}</div>
+                    <div style={{ fontSize: 'clamp(0.75rem, 0.9vw, 1rem)', color: '#6b7280' }}>{monthYear}</div>
                   </div>
                 );
               })()}
@@ -650,9 +658,12 @@ export default function HomepageDemo5() {
               <div className="glass-widget-culture" style={{
                 gridColumn: '1 / -1',
                 padding: 'clamp(1rem, 1.5vw, 1.75rem) clamp(1rem, 1.5vw, 1.75rem)',
+                minHeight: 0,
+                display: 'flex',
+                flexDirection: 'column',
               }}>
                 <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: 'clamp(0.4rem, 0.8vw, 0.75rem)', marginBottom: 'clamp(0.5rem, 0.8vw, 0.9rem)' }}>
-                  <h3 style={{ fontFamily: "'Figtree', sans-serif", fontWeight: 700, fontSize: 'clamp(0.95rem, 1.15vw, 1.35rem)', color: DARK, margin: 0 }}>
+                  <h3 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 700, fontSize: 'clamp(0.95rem, 1.15vw, 1.35rem)', color: DARK, margin: 0 }}>
                     Nous soutenons le monde culturel
                   </h3>
                   <button type="button" aria-label={t('home.moreInfo')} style={{ width: 24, height: 24, borderRadius: '50%', background: DARK, color: '#fff', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
@@ -665,7 +676,7 @@ export default function HomepageDemo5() {
                 <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', borderTop: '1px dashed rgba(0,0,0,0.1)', paddingTop: 12 }}>
                   <span style={{ fontSize: 'clamp(0.72rem, 0.85vw, 0.95rem)', color: '#6b7280' }}>Montant donné</span>
                   <span className="glass-badge-purple" style={{
-                    fontFamily: "'Figtree', sans-serif", fontWeight: 700, fontSize: 'clamp(0.9rem, 1.05vw, 1.2rem)',
+                    fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 700, fontSize: 'clamp(0.9rem, 1.05vw, 1.2rem)',
                     padding: 'clamp(4px, 0.5vw, 8px) clamp(10px, 1.2vw, 14px)',
                   }}>+456.000$</span>
                 </div>
@@ -679,6 +690,8 @@ export default function HomepageDemo5() {
                 gridTemplateColumns: 'minmax(100px, 1fr) 1.5fr',
                 gap: 'clamp(1rem, 1.5vw, 1.5rem)',
                 alignItems: 'center',
+                minHeight: 0,
+                overflow: 'hidden',
               }}>
                 <div style={{ position: 'relative', minHeight: 120 }}>
                   {/* 3 images / écrans avec fonds pâles (style référence) */}
@@ -698,7 +711,7 @@ export default function HomepageDemo5() {
                   </div>
                 </div>
                 <div>
-                  <div style={{ fontFamily: "'Figtree', sans-serif", fontWeight: 700, fontSize: 'clamp(1.75rem, 2.5vw, 3rem)', lineHeight: 1, color: DARK, marginBottom: 8 }}>481k$</div>
+                  <div style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 700, fontSize: 'clamp(1.75rem, 2.5vw, 3rem)', lineHeight: 1, color: DARK, marginBottom: 8 }}>481k$</div>
                   <p style={{ fontSize: 'clamp(0.8rem, 1vw, 1.1rem)', color: '#4b5563', lineHeight: 1.5, margin: 0 }}>
                     amassés lors de notre dernière campagne pour le Défi 28 jours sans alcool
                   </p>
@@ -708,16 +721,18 @@ export default function HomepageDemo5() {
               {/* 5. 2022 — L'agence fête ses 4 ans — glassmorphism */}
               <div className="glass-widget-stats" style={{
                 padding: 'clamp(0.9rem, 1.2vw, 1.4rem)',
+                minHeight: 0,
               }}>
-                <div style={{ fontFamily: "'Figtree', sans-serif", fontWeight: 700, fontSize: 'clamp(1.75rem, 2.2vw, 2.75rem)', lineHeight: 1, color: DARK, marginBottom: 8 }}>2022</div>
+                <div style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 700, fontSize: 'clamp(1.75rem, 2.2vw, 2.75rem)', lineHeight: 1, color: DARK, marginBottom: 8 }}>2022</div>
                 <p style={{ fontSize: 'clamp(0.75rem, 0.9vw, 1rem)', color: '#4b5563', lineHeight: 1.4, margin: 0 }}>L'agence fête ses 4 ans</p>
               </div>
 
               {/* 6. +20 entreprises — glassmorphism */}
               <div className="glass-widget-stats" style={{
                 padding: 'clamp(0.9rem, 1.2vw, 1.4rem)',
+                minHeight: 0,
               }}>
-                <div style={{ fontFamily: "'Figtree', sans-serif", fontWeight: 700, fontSize: 'clamp(1.75rem, 2.2vw, 2.75rem)', lineHeight: 1, color: DARK, marginBottom: 8 }}>+20</div>
+                <div style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 700, fontSize: 'clamp(1.75rem, 2.2vw, 2.75rem)', lineHeight: 1, color: DARK, marginBottom: 8 }}>+20</div>
                 <p style={{ fontSize: 'clamp(0.75rem, 0.9vw, 1rem)', color: '#4b5563', lineHeight: 1.4, margin: 0 }}>entreprises accompagnées dans leur transformation numérique</p>
               </div>
             </div>
@@ -728,7 +743,7 @@ export default function HomepageDemo5() {
             SECTION 2 — SOYONS AUDACIEUX + CTA
         ════════════════════════════════════════════════════════════════════ */}
         <section style={{
-          padding: '5rem 6% 6rem',
+          padding: '5rem 3% 6rem',
           marginBottom: 0,
           textAlign: 'center',
         }}>
@@ -786,7 +801,7 @@ export default function HomepageDemo5() {
             SECTION 3 — ON … L'IA (fond #EFE8E8, glass pill + dégradé texte)
             Ratio : visuel 45% | texte 55%
         ════════════════════════════════════════════════════════════════════ */}
-        <section style={{ padding: '5rem 6%', marginBottom: 5 * 16, background: '#EFE8E8', position: 'relative' }}>
+        <section style={{ padding: '5rem 3%', marginBottom: 5 * 16, background: '#EFE8E8', position: 'relative' }}>
           {/* Fond léger derrière le texte pour que le backdrop-filter du pill soit visible */}
           <div
             aria-hidden
@@ -842,98 +857,9 @@ export default function HomepageDemo5() {
         </section>
 
         {/* ════════════════════════════════════════════════════════════════════
-            SECTION 4 — SERVICES (4 cartes, fond blanc)
+            SECTION 4 — SERVICES (4 cartes : Lab tech, Studio, Agence, Transition)
         ════════════════════════════════════════════════════════════════════ */}
-        <section style={{ padding: '5rem 6% 6rem', marginBottom: 5 * 16 }}>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-10">
-            {HOME_SERVICES.map((service) => (
-              <Link
-                key={service.title}
-                href={getLocalizedPath(service.path)}
-                aria-label={`Voir ${service.title}`}
-                style={{ textDecoration: 'none', color: 'inherit' }}
-                className="group"
-              >
-                <article
-                  style={{
-                    borderRadius: 20,
-                    overflow: 'hidden',
-                    boxShadow: '0 4px 24px rgba(0,0,0,0.06)',
-                    display: 'flex',
-                    flexDirection: 'column',
-                    cursor: 'pointer',
-                    transition: 'box-shadow 0.2s ease, transform 0.2s ease',
-                  }}
-                  className="group-hover:shadow-lg"
-                >
-                  {/* Zone image + icône ↗ */}
-                  <div style={{ position: 'relative', paddingTop: '60%', background: service.imageBg }}>
-                    <div style={{ position: 'absolute', inset: 0 }} />
-                    <span
-                      style={{
-                        position: 'absolute',
-                        top: 12,
-                        right: 12,
-                        width: 36,
-                        height: 36,
-                        borderRadius: 10,
-                        background: DARK,
-                        color: '#fff',
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        pointerEvents: 'none',
-                      }}
-                      aria-hidden
-                    >
-                      <ArrowUpRight size={18} strokeWidth={2.5} />
-                    </span>
-                  </div>
-                  {/* Titre */}
-                  <h3 style={{
-                    fontFamily: "'Plus Jakarta Sans', sans-serif",
-                    fontWeight: 700,
-                    fontSize: '1.1rem',
-                    color: DARK,
-                    margin: 0,
-                    padding: '1.25rem 1.25rem 0.5rem',
-                  }}>
-                    {service.title}
-                  </h3>
-                  {/* Description */}
-                  <p style={{
-                    fontSize: '0.8rem',
-                    color: '#6b7280',
-                    lineHeight: 1.55,
-                    margin: 0,
-                    padding: '0 1.25rem',
-                    flex: 1,
-                  }}>
-                    {service.description}
-                  </p>
-                  {/* Tags */}
-                  <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, padding: '1rem 1.25rem 1.25rem', fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 400 }}>
-                    {service.tags.map((tag) => (
-                      <span
-                        key={tag}
-                        style={{
-                          fontSize: '0.7rem',
-                          color: '#4b5563',
-                          background: '#f3f4f6',
-                          padding: '4px 10px',
-                          borderRadius: 8,
-                          fontWeight: 500,
-                        }}
-                      >
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
-                </article>
-              </Link>
-            ))}
-          </div>
-        </section>
+        <HomeServicesSection />
 
         {/* ════════════════════════════════════════════════════════════════════
             SECTION 5 — TRIPTYQUE PROJETS
@@ -942,60 +868,17 @@ export default function HomepageDemo5() {
           marginBottom: 5 * 16,
           paddingTop: 4 * 16,
           paddingBottom: 5 * 16,
-          paddingLeft: '6%',
-          paddingRight: '6%',
+          paddingLeft: '3%',
+          paddingRight: '3%',
           background: 'transparent',
         }}>
           <Triptych projects={homeTriptychProjects} />
         </div>
 
         {/* ════════════════════════════════════════════════════════════════════
-            SECTION 7 — PRÊT.E À PERFORMER? (CTA type neumorphic)
+            SECTION 7 — PRÊT.E À PERFORMER? (composant partagé)
         ════════════════════════════════════════════════════════════════════ */}
-        <div style={{ padding: 'clamp(5rem, 10vh, 8rem) 6%', marginBottom: 5 * 16, background: 'transparent' }}>
-          <div style={{
-            maxWidth: 'min(90vw, 1200px)',
-            margin: '0 auto',
-            borderRadius: 28,
-            padding: 'clamp(3.5rem, 6vw, 5rem) clamp(2.5rem, 4vw, 4rem)',
-            textAlign: 'center',
-          }}>
-          <h2
-            className="lg:whitespace-nowrap"
-            style={{
-              fontFamily: "'Plus Jakarta Sans', sans-serif",
-              fontWeight: 700,
-              fontSize: 'clamp(2.5rem, 5.5vw, 4.5rem)',
-              lineHeight: 1.3,
-              letterSpacing: '-0.03em',
-              margin: '0 0 1.5rem 0',
-              paddingBottom: '0.08em',
-              display: 'inline-block',
-              width: 'fit-content',
-              background: 'linear-gradient(to right, #6B1817, #5636AD)',
-              backgroundClip: 'text',
-              WebkitBackgroundClip: 'text',
-              color: 'transparent',
-            }}
-          >
-              {t('home.ctaPerform.title')}
-            </h2>
-            <p style={{
-              fontFamily: "'Plus Jakarta Sans', sans-serif",
-              fontSize: 'clamp(1.05rem, 1.35vw, 1.35rem)',
-              color: '#374151',
-              lineHeight: 1.65,
-              margin: '0 0 2.5rem 0',
-              width: '100%',
-              maxWidth: '40vw',
-              marginLeft: 'auto',
-              marginRight: 'auto',
-            }}>
-              {t('home.ctaPerform.paragraph')}
-            </p>
-            <SplitCTAButton href="/contact" label={t('home.ctaPerform.button')} ariaLabel={t('home.ctaPerform.button')} />
-          </div>
-        </div>
+        <CTAPerformSection />
 
         </div>
       </div>

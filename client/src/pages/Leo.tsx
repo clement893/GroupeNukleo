@@ -511,7 +511,7 @@ export default function Leo() {
       />
       <div className="min-h-screen flex flex-col" style={{ background: 'transparent', fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
       {/* Toolbar */}
-      <div className="fixed top-20 sm:top-24 left-0 right-0 z-40 bg-white/95 backdrop-blur-md border-b border-gray-200 px-4 py-2">
+      <div className="fixed top-20 sm:top-24 left-0 right-0 z-40 bg-white/95 backdrop-blur-md border-b border-gray-200 site-margin-x py-2">
         <div className="container">
           <div className="flex items-center justify-between gap-2 sm:gap-4">
             <button

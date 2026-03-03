@@ -113,7 +113,7 @@ export default function Resources() {
       <StructuredData data={resourcesCollectionSchema} />
       <div className="min-h-screen" style={{ background: 'transparent' }}>
         {/* Hero */}
-        <section style={{ padding: 'clamp(5rem, 10vh, 7rem) 6% clamp(3rem, 6vh, 5rem)' }}>
+        <section style={{ padding: 'clamp(5rem, 10vh, 7rem) 0 clamp(3rem, 6vh, 5rem)' }}>
           <div className="container">
             <h1
               style={{
@@ -152,7 +152,7 @@ export default function Resources() {
 
         {/* Tools — masqué tant qu’aucun outil n’est proposé */}
         {tools.length > 0 && (
-        <section style={{ padding: '0 6% 4rem' }}>
+        <section style={{ padding: '0 0 4rem' }}>
           <div className="container">
             <div style={{ marginBottom: '2rem' }}>
               <span style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: '0.75rem', fontWeight: 600, letterSpacing: '0.12em', textTransform: 'uppercase', color: '#6b7280' }}>
@@ -178,7 +178,7 @@ export default function Resources() {
                 {t('resources.tools.description')}
               </p>
             </div>
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 max-w-4xl">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 w-full">
               {tools.map((tool, index) => (
                 <div
                   key={index}
@@ -234,7 +234,7 @@ export default function Resources() {
         )}
 
         {/* Filter */}
-        <section style={{ padding: '0 6% 1.5rem' }}>
+        <section style={{ padding: '0 0 1.5rem' }}>
           <div className="container">
             <div className="flex flex-wrap items-center gap-2">
               <div className="flex items-center gap-2 text-gray-700" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
@@ -262,7 +262,7 @@ export default function Resources() {
         </section>
 
         {/* Resources grid */}
-        <section style={{ padding: '0 6% 5rem' }}>
+        <section style={{ padding: '0 0 5rem' }}>
           <div className="container">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {filteredResources.map((resource) => {
@@ -297,9 +297,9 @@ export default function Resources() {
         </section>
 
         {/* Newsletter CTA */}
-        <section style={{ padding: '4rem 6% 5rem' }}>
+        <section style={{ padding: '4rem 0 5rem' }}>
           <div className="container">
-            <div style={{ maxWidth: 640, margin: '0 auto', textAlign: 'center' }}>
+            <div className="w-full text-center">
               <SafeHTML
                 html={t('resources.newsletter.title')}
                 tag="h2"

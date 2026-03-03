@@ -254,7 +254,7 @@ export default function FAQ() {
 
         {/* FAQ by category */}
         <section className="pb-16 lg:pb-24">
-          <div className="container max-w-4xl">
+          <div className="container">
             <div className="space-y-12">
               {faqs.map((category, categoryIndex) => (
                 <div key={categoryIndex} className="space-y-4">
@@ -290,7 +290,7 @@ export default function FAQ() {
 
         {/* CTA */}
         <section className="pb-20 lg:pb-28">
-          <div className="container max-w-2xl">
+          <div className="container">
             <div className="p-8 md:p-12 text-center">
               <h3
                 className="text-2xl md:text-3xl font-bold mb-4"

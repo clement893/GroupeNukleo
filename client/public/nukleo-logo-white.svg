@@ -4,7 +4,7 @@
     <style>
       .nukleo-text {
         fill: #ffffff;
-        font-family: 'Aktiv Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
         font-weight: 700;
         font-size: 100px;
         letter-spacing: -0.03em;

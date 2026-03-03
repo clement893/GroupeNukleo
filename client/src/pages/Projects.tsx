@@ -182,8 +182,8 @@ export default function Projects() {
         keywords="portfolio, projects, branding, web design, digital agency, creative work"
       />
 
-      {/* Fond unifié avec le reste du site (PageLayout) */}
-      <div className="min-h-screen">
+      {/* Fond unifié avec le reste du site (PageLayout) — même structure hero que About/Accueil */}
+      <div className="min-h-screen" style={{ paddingTop: 128 }}>
         <ProjectsHero
           headline={t('projects.heroHeadline')}
           description={t('projects.description')}

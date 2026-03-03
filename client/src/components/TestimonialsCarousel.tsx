@@ -62,7 +62,7 @@ export default function TestimonialsCarousel() {
       {/* Background */}
       <div className="absolute inset-0 bg-gradient-to-br from-purple-900/30 via-purple-800/20 to-blue-900/30" />
       
-      <div className="container px-6 md:px-12 relative z-10">
+      <div className="container relative z-10">
         {/* Header */}
         <div className="text-center mb-16">
           <div className="inline-block px-4 py-2 rounded-full bg-white/5 border border-white/10 backdrop-blur-sm mb-6">
@@ -77,7 +77,7 @@ export default function TestimonialsCarousel() {
         </div>
 
         {/* Carousel */}
-        <div className="max-w-5xl mx-auto">
+        <div className="w-full">
           <div className="
             relative
             p-12 md:p-16

@@ -23,7 +23,7 @@ function Header() {
   const lastScrollY = useRef(0);
   const headerRef = useRef<HTMLElement>(null);
   const { playHover, playClick } = useSound();
-  const { t, language, setLanguage } = useLanguage();
+  const { t } = useLanguage();
   const getLocalizedPath = useLocalizedPath();
   const isMobile = useIsMobile(MOBILE_BREAKPOINT);
   
@@ -103,8 +103,8 @@ function Header() {
       <header
         ref={headerRef}
         className={`
-          header-scroll-transform fixed top-0 left-0 right-0 z-50
-          ${isScrolled ? 'px-4 sm:px-6 md:px-12 pt-3 sm:pt-4' : 'px-4 sm:px-6 md:px-12 pt-6 sm:pt-8'}
+          header-scroll-transform fixed top-0 left-0 right-0 z-50 site-margin-x
+          ${isScrolled ? 'pt-2 sm:pt-3' : 'pt-4 sm:pt-5'}
           ${!isHeaderVisible ? 'header-hidden' : ''}
         `}
         style={{
@@ -113,7 +113,7 @@ function Header() {
         }}
       >
         <div 
-          className="transition-all duration-300 sm:duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] px-4 sm:px-6 md:px-8 py-3 sm:py-4"
+          className="transition-all duration-300 sm:duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] py-3 sm:py-4"
           style={{
             background: 'transparent',
             borderRadius: 0,
@@ -136,36 +136,8 @@ function Header() {
               <span className="font-bold tracking-tight" style={{ color: logoCommaPurple, fontFamily: 'var(--font-heading, sans-serif)', fontSize: 'clamp(1.35rem, 3.5vw, 2.75rem)' }}>,</span>
             </Link>
 
-            {/* Right: Lang switcher (ENG / FR) + CTA split + Burger */}
+            {/* Right: CTA split + Menu */}
             <div className="flex items-center gap-2 sm:gap-3">
-              {/* ENG / FR — switcher compact */}
-              <nav className="flex items-center gap-0.5 text-sm font-medium" aria-label={t('header.langSwitch')}>
-                <button
-                  type="button"
-                  onClick={() => setLanguage('en')}
-                  className={`px-2 py-1 rounded transition-colors touch-manipulation ${
-                    language === 'en'
-                      ? 'text-gray-900 font-semibold bg-white/20'
-                      : 'text-white/70 hover:text-white'
-                  }`}
-                  aria-current={language === 'en' ? 'true' : undefined}
-                >
-                  ENG
-                </button>
-                <span className="text-white/50 select-none" aria-hidden="true">/</span>
-                <button
-                  type="button"
-                  onClick={() => setLanguage('fr')}
-                  className={`px-2 py-1 rounded transition-colors touch-manipulation ${
-                    language === 'fr'
-                      ? 'text-gray-900 font-semibold bg-white/20'
-                      : 'text-white/70 hover:text-white'
-                  }`}
-                  aria-current={language === 'fr' ? 'true' : undefined}
-                >
-                  FR
-                </button>
-              </nav>
               <SplitCTAButton
                 href="/contact"
                 label={t('nav.contact') || 'Contactez-nous'}
@@ -176,28 +148,33 @@ function Header() {
                 onMouseEnter={playHover}
               />
 
-              {/* Burger : cercle blanc, icône hamburger — scale sur grands écrans */}
+              {/* Bouton Menu — glassmorphisme + icône burger à droite */}
               <button
                 onClick={isMenuOpen ? handleMenuClose : handleMenuOpen}
                 onMouseEnter={playHover}
-                className="flex items-center justify-center rounded-full bg-white text-gray-800 hover:bg-gray-50 active:scale-95 transition-all duration-300 touch-manipulation flex-shrink-0"
-                style={{ width: 'clamp(2.75rem, 4vw, 3.5rem)', height: 'clamp(2.75rem, 4vw, 3.5rem)' }}
+                className="header-menu-btn flex items-center justify-center gap-2 rounded-full text-gray-800 active:scale-95 transition-all duration-300 touch-manipulation flex-shrink-0 px-4 sm:px-5"
+                style={{
+                  height: 'clamp(2.75rem, 4vw, 3.5rem)',
+                  fontFamily: "'Plus Jakarta Sans', sans-serif",
+                  fontWeight: 600,
+                  fontSize: 'clamp(0.9rem, 1vw, 1.05rem)',
+                  background: 'rgba(255, 255, 255, 0.35)',
+                  backdropFilter: 'blur(16px) saturate(180%)',
+                  WebkitBackdropFilter: 'blur(16px) saturate(180%)',
+                  border: '1px solid rgba(255, 255, 255, 0.7)',
+                  boxShadow: '0 4px 24px rgba(0, 0, 0, 0.06), inset 0 1px 0 rgba(255, 255, 255, 0.85)',
+                  transition: 'background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease',
+                }}
                 aria-label={isMenuOpen ? t('header.closeMenu') : t('header.openMenu')}
               >
-                <div className="relative" style={{ width: 'clamp(1.25rem, 1.5vw, 1.5rem)', height: 'clamp(1.25rem, 1.5vw, 1.5rem)' }}>
-                  <Menu 
-                    className={`absolute inset-0 w-full h-full text-gray-800 transition-all duration-300 ease-in-out ${
-                      isMenuOpen ? 'opacity-0 rotate-90 scale-0' : 'opacity-100 rotate-0 scale-100'
-                    }`}
-                    strokeWidth={2}
-                  />
-                  <X 
-                    className={`absolute inset-0 w-full h-full text-gray-800 transition-all duration-300 ease-in-out ${
-                      isMenuOpen ? 'opacity-100 rotate-0 scale-100' : 'opacity-0 rotate-90 scale-0'
-                    }`}
-                    strokeWidth={2}
-                  />
-                </div>
+                {isMenuOpen ? (
+                  <X className="w-5 h-5" strokeWidth={2} />
+                ) : (
+                  <>
+                    {t('header.menu')}
+                    <Menu className="w-4 h-4 sm:w-[1.1em] sm:h-[1.1em]" strokeWidth={2} />
+                  </>
+                )}
               </button>
             </div>
           </div>

@@ -224,13 +224,13 @@ export default function Services() {
         }}
       >
         {/* Breadcrumb */}
-        <div className="container max-w-6xl mx-auto pt-24 pb-4 px-4">
+        <div className="container pt-24 pb-4">
           <Breadcrumb items={[{ name: t('nav.services') || 'Services', url: '/services' }]} />
         </div>
         
         {/* Hero Section */}
-        <section className="pt-8 pb-16 lg:pb-20 px-4">
-          <div className="container max-w-6xl mx-auto">
+        <section className="pt-8 pb-16 lg:pb-20">
+          <div className="container">
             <p className="text-sm font-medium text-gray-500 mb-6">
               {ourServices}
             </p>
@@ -259,8 +259,8 @@ export default function Services() {
         </section>
 
         {/* Four Departments Grid */}
-        <section className="py-16 lg:py-20 px-4">
-          <div className="container max-w-7xl mx-auto">
+        <section className="py-16 lg:py-20">
+          <div className="container">
             <div className="grid lg:grid-cols-2 xl:grid-cols-4 gap-8">
               {entities.map((entity) => {
                 const EntityIcon = entity.icon;
@@ -312,8 +312,8 @@ export default function Services() {
         </section>
 
         {/* Service Levels Section */}
-        <section className="py-16 lg:py-20 px-4">
-          <div className="container max-w-6xl mx-auto">
+        <section className="py-16 lg:py-20">
+          <div className="container">
             <div className="text-center mb-12">
               <p className="text-sm font-medium text-gray-500 mb-6">
                 {t('services.serviceLevels.sectionLabel') || 'Nos niveaux de service'}
@@ -350,8 +350,8 @@ export default function Services() {
         </section>
 
         {/* How It Works Section */}
-        <section className="py-16 lg:py-20 px-4">
-          <div className="container max-w-6xl mx-auto">
+        <section className="py-16 lg:py-20">
+          <div className="container">
             <div className="text-center mb-12">
               <h2 className="text-4xl md:text-5xl font-bold mb-6" style={{ color: '#5A1E29', fontFamily: 'var(--font-heading, sans-serif)' }}>
                 {howItWorksTitle}
@@ -392,8 +392,8 @@ export default function Services() {
         </section>
 
         {/* CTA Section */}
-        <section className="py-20 lg:py-24 px-4">
-          <div className="container max-w-4xl mx-auto text-center">
+        <section className="py-20 lg:py-24">
+          <div className="container text-center">
             <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6" style={{ color: '#5A1E29', fontFamily: 'var(--font-heading, sans-serif)' }}>
               {ctaTitle}
             </h2>

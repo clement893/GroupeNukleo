@@ -24,7 +24,7 @@ const TEAM_MEMBERS = [
     role: 'Head of Tech',
     tagline: 'Architecte technique.\nIntégrateur d\'IA.\nBâtisseur de produits.',
     img: TEAM_IMGS[2],
-    color: '#2563eb',
+    color: '#6d28d9',
     bio: 'Architecte technique, Alexandre pilote les solutions digitales et intègre l\'IA au cœur des produits Nukleo. Il conçoit des systèmes robustes, scalables et orientés performance.',
   },
   {
@@ -39,8 +39,9 @@ const TEAM_MEMBERS = [
 
 // Constantes pile
 const CARD_W = 520;
-const CARD_H = 720;
-const STACK_OVERFLOW = 80;
+const SITE_PURPLE = '#5636AD';
+const CARD_H = 360;
+const STACK_OVERFLOW = 40;
 
 export function TeamRow() {
   const [active, setActive] = useState(0);
@@ -67,7 +68,8 @@ export function TeamRow() {
 
   return (
     <div
-      style={{ padding: '64px 6%', marginBottom: 48 }}
+      className="site-margin-x"
+      style={{ paddingTop: 32, paddingBottom: 64, marginBottom: 48 }}
     >
       {/* Grille 3 colonnes */}
       <div style={{
@@ -78,43 +80,53 @@ export function TeamRow() {
       }}>
 
         {/* ── COLONNE GAUCHE : nom + tagline ── */}
-        <div>
+        <div style={{ textAlign: 'left' }}>
           <h3 style={{
             fontFamily: "'Plus Jakarta Sans', sans-serif",
             fontWeight: 700,
-            fontSize: 'clamp(1.6rem, 2.6vw, 2.6rem)',
+            fontSize: 'clamp(1.4rem, 2.2vw, 2.2rem)',
             lineHeight: 1.05,
             letterSpacing: '-0.03em',
             color: '#0A0A0A',
-            marginBottom: 16,
+            marginBottom: 4,
           }}>
             {m.name}
           </h3>
-          <div style={{ width: 40, height: 2.5, background: m.color, borderRadius: 999, marginBottom: 20, transition: 'background 0.4s' }} />
           <p style={{
             fontFamily: "'Plus Jakarta Sans', sans-serif",
             fontWeight: 400,
-            fontSize: '0.9rem',
-            color: '#374151',
-            lineHeight: 1.9,
-            whiteSpace: 'pre-line',
+            fontSize: '0.72rem',
+            letterSpacing: '0.2em',
+            textTransform: 'uppercase',
+            color: m.color,
+            margin: '0 0 16px 0',
+            transition: 'color 0.4s',
           }}>
-            {m.tagline}
+            {m.role}
           </p>
-
-          {/* Dots */}
-          <div style={{ display: 'flex', gap: 8, marginTop: 36 }}>
-            {TEAM_MEMBERS.map((_, i) => (
-              <button
-                key={i}
-                onClick={() => setActive(i)}
+          <div style={{ width: 40, height: 2.5, background: m.color, borderRadius: 999, marginBottom: 20, transition: 'background 0.4s' }} />
+          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', gap: 8 }}>
+            {m.tagline.split('\n').filter(Boolean).map((tag) => (
+              <span
+                key={tag}
                 style={{
-                  width: i === active ? 28 : 8, height: 8, borderRadius: 999,
-                  padding: 0, border: 'none', cursor: 'pointer',
-                  background: i === active ? m.color : '#d1d5db',
-                  transition: 'all 0.35s ease',
+                  display: 'inline-block',
+                  width: 'fit-content',
+                  background: 'rgba(255, 255, 255, 0.4)',
+                  backdropFilter: 'blur(16px) saturate(180%)',
+                  WebkitBackdropFilter: 'blur(16px) saturate(180%)',
+                  border: '1px solid rgba(255, 255, 255, 0.8)',
+                  borderRadius: 999,
+                  padding: '0.35rem 0.75rem',
+                  boxShadow: '0 4px 24px rgba(0,0,0,0.06), inset 0 1px 0 rgba(255,255,255,0.85)',
+                  fontFamily: "'Plus Jakarta Sans', sans-serif",
+                  fontWeight: 400,
+                  fontSize: '0.6rem',
+                  color: '#374151',
                 }}
-              />
+              >
+                {tag.trim()}
+              </span>
             ))}
           </div>
         </div>
@@ -140,8 +152,8 @@ export function TeamRow() {
             const translateY = isActive
               ? '0px'
               : isBelow
-              ? `${offset * 18}px`
-              : `${offset * 180}px`;
+              ? `${offset * 9}px`
+              : `${offset * 90}px`;
             const translateZ = isActive ? '0px' : isBelow ? `${-offset * 50}px` : '0px';
             const scale = isActive ? 1 : isBelow ? Math.max(0.78, 1 - offset * 0.07) : 0.95;
             const opacity = isAbove ? 0 : isBelow ? Math.max(0.1, 1 - offset * 0.32) : 1;
@@ -174,7 +186,7 @@ export function TeamRow() {
                   alt={member.name}
                   style={{
                     width: '100%', height: '100%',
-                    objectFit: 'cover', objectPosition: 'top center',
+                    objectFit: 'cover', objectPosition: 'center center',
                     filter: isActive ? 'grayscale(0)' : 'grayscale(0.6) brightness(0.7)',
                     transition: 'filter 0.5s ease',
                   }}
@@ -196,68 +208,44 @@ export function TeamRow() {
             );
           })}
 
-          {/* Flèches ↑↓ */}
+          {/* Bullets */}
           <div style={{
             position: 'absolute',
-            bottom: -48,
+            bottom: -36,
             left: '50%',
             transform: 'translateX(-50%)',
             display: 'flex',
             gap: 8,
           }}>
-            <button
-              onClick={prev}
-              disabled={active === 0}
-              style={{
-                width: 34, height: 34, borderRadius: '50%',
-                border: '1.5px solid #d1d5db', background: '#fff',
-                cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center',
-                opacity: active === 0 ? 0.3 : 1, transition: 'opacity 0.2s',
-              }}
-            >
-              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#0A0A0A" strokeWidth="2.5">
-                <polyline points="18 15 12 9 6 15" />
-              </svg>
-            </button>
-            <button
-              onClick={next}
-              disabled={active === TEAM_MEMBERS.length - 1}
-              style={{
-                width: 34, height: 34, borderRadius: '50%',
-                border: '1.5px solid #d1d5db', background: '#fff',
-                cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center',
-                opacity: active === TEAM_MEMBERS.length - 1 ? 0.3 : 1, transition: 'opacity 0.2s',
-              }}
-            >
-              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#0A0A0A" strokeWidth="2.5">
-                <polyline points="6 9 12 15 18 9" />
-              </svg>
-            </button>
+            {TEAM_MEMBERS.map((_, i) => (
+              <button
+                key={i}
+                onClick={() => setActive(i)}
+                style={{
+                  width: i === active ? 24 : 8,
+                  height: 8,
+                  borderRadius: 999,
+                  padding: 0,
+                  border: 'none',
+                  cursor: 'pointer',
+                  background: i === active ? SITE_PURPLE : '#d1d5db',
+                  transition: 'all 0.35s ease',
+                }}
+              />
+            ))}
           </div>
         </div>
 
         {/* ── COLONNE DROITE : bio ── */}
-        <div>
+        <div style={{ textAlign: 'left' }}>
           <p style={{
             fontFamily: "'Plus Jakarta Sans', sans-serif",
             fontWeight: 400,
             fontSize: 'clamp(0.88rem, 1.05vw, 1rem)',
             color: '#4b5563',
-            lineHeight: 1.85,
+            lineHeight: 1.6,
           }}>
             {m.bio}
-          </p>
-          <p style={{
-            fontFamily: "'Plus Jakarta Sans', sans-serif",
-            fontWeight: 400,
-            marginTop: 24,
-            fontSize: '0.72rem',
-            letterSpacing: '0.2em',
-            textTransform: 'uppercase',
-            color: m.color,
-            transition: 'color 0.4s',
-          }}>
-            {m.role}
           </p>
         </div>
 

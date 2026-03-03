@@ -71,10 +71,7 @@
     <link rel="manifest" href="/manifest.json" />
     <meta name="theme-color" content="#7c3aed" />
     
-    <!-- Preload critical fonts for LCP - load early to reduce Resource Load Delay -->
-    <link rel="preload" href="/fonts/AktivGrotesk-Light.woff2" as="font" type="font/woff2" crossorigin="anonymous" fetchpriority="high" />
-    <link rel="preload" href="/fonts/AktivGrotesk-Regular.woff2" as="font" type="font/woff2" crossorigin="anonymous" fetchpriority="high" />
-    <link rel="preload" href="/fonts/AktivGrotesk-Bold.woff2" as="font" type="font/woff2" crossorigin="anonymous" fetchpriority="high" />
+    <!-- Plus Jakarta Sans chargé via Google Fonts (preload du CSS ci-dessous) -->
     
     <!-- Preload critical LCP image - arrow SVG is the LCP element -->
     <link rel="preload" href="/nukleo-arrow.svg" as="image" type="image/svg+xml" fetchpriority="high" />
@@ -98,40 +95,14 @@
     <link rel="prefetch" href="/radar" />
     <link rel="prefetch" href="/fr/radar" />
     
-    <!-- Inline critical font-face for instant rendering -->
-    <style>
-      /* Aktiv Grotesk Light 300 - Primary body text (critical) */
-      @font-face {
-        font-family: 'Aktiv Grotesk';
-        src: url('/fonts/AktivGrotesk-Light.woff2') format('woff2');
-        font-weight: 300;
-        font-style: normal;
-        font-display: swap;
-      }
-      /* Aktiv Grotesk Regular 400 - Used in headings */
-      @font-face {
-        font-family: 'Aktiv Grotesk';
-        src: url('/fonts/AktivGrotesk-Regular.woff2') format('woff2');
-        font-weight: 400;
-        font-style: normal;
-        font-display: swap;
-      }
-      /* Aktiv Grotesk Bold 700 - Used in headings */
-      @font-face {
-        font-family: 'Aktiv Grotesk';
-        src: url('/fonts/AktivGrotesk-Bold.woff2') format('woff2');
-        font-weight: 700;
-        font-style: normal;
-        font-display: swap;
-      }
-    </style>
+    <!-- Plus Jakarta Sans chargé via Google Fonts (stylesheet ci-dessous) -->
     
     <!-- Defer Google Fonts - load after critical content -->
     <!-- Load asynchronously using external script to avoid CSP violation -->
-    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Figtree:wght@400&family=Plus+Jakarta+Sans:wght@400;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" as="style" />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:wght@400&family=Plus+Jakarta+Sans:wght@400;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" media="print" id="google-fonts-stylesheet" />
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500;600;700&display=swap" as="style" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500;600;700&display=swap" media="print" id="google-fonts-stylesheet" />
     <script src="/load-google-fonts.js" defer></script>
-    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:wght@400&family=Plus+Jakarta+Sans:wght@400;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" /></noscript>
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500;600;700&display=swap" /></noscript>
     
     <!-- Structured Data JSON-LD -->
     <script type="application/ld+json">

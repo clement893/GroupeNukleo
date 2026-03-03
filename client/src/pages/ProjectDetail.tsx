@@ -106,8 +106,8 @@ export default function ProjectDetail() {
         />
         <main className="min-h-screen pt-20">
           {/* ═══ Hero ═══ */}
-          <section style={{ padding: 'clamp(5rem, 12vh, 8rem) 6% 4rem' }}>
-            <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.2fr] gap-8 lg:gap-12 max-w-[1400px] mx-auto items-start">
+          <section style={{ padding: 'clamp(5rem, 12vh, 8rem) 3% 4rem' }}>
+            <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.2fr] gap-8 lg:gap-12 w-full items-start">
               <div>
                 <p style={{
                   fontFamily: "'Plus Jakarta Sans', sans-serif",
@@ -162,8 +162,8 @@ export default function ProjectDetail() {
           </section>
 
           {/* ═══ Métadonnées + description ═══ */}
-          <section style={{ padding: '0 6% 5rem' }}>
-            <div className="grid grid-cols-1 lg:grid-cols-[minmax(140px,200px)_1fr] gap-8 lg:gap-12 max-w-[1400px] mx-auto items-start">
+          <section style={{ padding: '0 3% 5rem' }}>
+            <div className="grid grid-cols-1 lg:grid-cols-[minmax(140px,200px)_1fr] gap-8 lg:gap-12 w-full items-start">
               <div style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: '0.8rem', color: '#6b7280', lineHeight: 1.8 }}>
                 <p style={{ margin: '0 0 0.5rem 0' }}><strong>Client :</strong></p>
                 <p style={{ margin: '0 0 1.25rem 0' }}>{projectData.client}</p>
@@ -210,8 +210,8 @@ export default function ProjectDetail() {
 
           {/* ═══ Galerie ═══ */}
           {galleryImages.length > 1 && (
-            <section style={{ background: 'transparent', padding: '3rem 6% 4rem' }}>
-              <div style={{ maxWidth: 1400, margin: '0 auto' }}>
+            <section style={{ background: 'transparent', padding: '3rem 3% 4rem' }}>
+              <div className="w-full">
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                   {galleryImages.map((name, idx) => {
                     const src = `/projects/${name}`;
@@ -243,8 +243,8 @@ export default function ProjectDetail() {
           )}
 
           {/* ═══ Navigation retour ═══ */}
-          <section style={{ padding: '2rem 6% 5rem' }}>
-            <div style={{ maxWidth: 1400, margin: '0 auto' }}>
+          <section style={{ padding: '2rem 3% 5rem' }}>
+            <div className="w-full">
               <Link
                 href={getLocalizedPath('/projects')}
                 style={{
@@ -315,8 +315,8 @@ export default function ProjectDetail() {
         description={meta.description}
       />
       <main className="min-h-screen pt-20">
-        <section style={{ padding: 'clamp(5rem, 12vh, 8rem) 6% 4rem' }}>
-          <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.2fr] gap-8 lg:gap-12 max-w-[1400px] mx-auto items-start">
+        <section style={{ padding: 'clamp(5rem, 12vh, 8rem) 3% 4rem' }}>
+          <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.2fr] gap-8 lg:gap-12 w-full items-start">
             <div>
               <p style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: '0.75rem', fontWeight: 600, letterSpacing: '0.15em', textTransform: 'uppercase', color: '#9ca3af', marginBottom: 12 }}>
                 {t('projects.projectLabel')}
@@ -359,8 +359,8 @@ export default function ProjectDetail() {
           </div>
         </section>
 
-        <section style={{ padding: '0 6% 5rem' }}>
-          <div className="grid grid-cols-1 lg:grid-cols-[minmax(140px,200px)_1fr] gap-8 lg:gap-12 max-w-[1400px] mx-auto items-start">
+        <section style={{ padding: '0 3% 5rem' }}>
+          <div className="grid grid-cols-1 lg:grid-cols-[minmax(140px,200px)_1fr] gap-8 lg:gap-12 w-full items-start">
             <div style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: '0.8rem', color: '#6b7280', lineHeight: 1.8 }}>
               <p style={{ margin: '0 0 0.5rem 0' }}><strong>Client :</strong></p>
               <p style={{ margin: '0 0 1.25rem 0' }}>{meta.client}</p>
@@ -398,8 +398,8 @@ export default function ProjectDetail() {
           </div>
         </section>
 
-        <section style={{ background: 'transparent', padding: '3rem 6% 4rem' }}>
-          <div style={{ maxWidth: 1400, margin: '0 auto' }}>
+        <section style={{ background: 'transparent', padding: '3rem 3% 4rem' }}>
+          <div className="w-full">
             {projectImages.length > 0 ? (
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                 {projectImages.map((name, idx) => {
@@ -422,8 +422,8 @@ export default function ProjectDetail() {
           </div>
         </section>
 
-        <section style={{ padding: '2rem 6% 5rem' }}>
-          <div style={{ maxWidth: 1400, margin: '0 auto' }}>
+        <section style={{ padding: '2rem 3% 5rem' }}>
+          <div className="w-full">
             <Link
               href={getLocalizedPath('/projects')}
               style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: '0.9rem', color: BORDEAUX, fontWeight: 600, textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: 8 }}

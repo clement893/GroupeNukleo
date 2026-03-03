@@ -88,7 +88,7 @@ export default function ResourceArticle() {
       <StructuredData data={articleSchema} />
       <div className="min-h-screen" style={{ background: 'transparent' }}>
         {/* Hero */}
-        <section style={{ padding: 'clamp(5rem, 10vh, 7rem) 6% 2rem' }}>
+        <section style={{ padding: 'clamp(5rem, 10vh, 7rem) 0 2rem' }}>
           <div className="container">
             <Link href={getLocalizedPath('/resources')} className="inline-flex items-center gap-2 text-gray-600 hover:text-gray-900 mb-8 transition-colors group" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: '0.9rem', fontWeight: 500 }}>
                 <ArrowLeft className="w-4 h-4 group-hover:-translate-x-0.5 transition-transform" />
@@ -144,9 +144,9 @@ export default function ResourceArticle() {
         </section>
 
         {/* Article content */}
-        <section style={{ padding: '0 6% 4rem' }}>
+        <section style={{ padding: '0 0 4rem' }}>
           <div className="container">
-            <div style={{ maxWidth: 800, margin: '0 auto' }}>
+            <div className="w-full">
               <article
                 style={{
                   background: '#fff',

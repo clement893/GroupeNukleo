@@ -2,44 +2,7 @@
 /* Google Fonts loaded async in index.html to avoid render blocking */
 /* @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap'); */
 
-/* Aktiv Grotesk Font Family - Complete System */
-
-/* Thin 100 - Load on demand to avoid blocking critical path */
-/* Not critical for initial render - moved to lazy load */
-
-/* Hairline 200 - Load on demand to avoid blocking critical path */
-/* Moved to lazy load - not critical for initial render */
-
-/* CRITICAL FONTS ONLY - Loaded in initial CSS for LCP */
-/* Light 300 - Primary body text (CRITICAL) */
-@font-face {
-  font-family: 'Aktiv Grotesk';
-  src: url('/fonts/AktivGrotesk-Light.woff2') format('woff2');
-  font-weight: 300;
-  font-style: normal;
-  font-display: swap;
-}
-
-/* Regular 400 - Standard body text (CRITICAL) */
-@font-face {
-  font-family: 'Aktiv Grotesk';
-  src: url('/fonts/AktivGrotesk-Regular.woff2') format('woff2');
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-
-/* Bold 700 - Headings & navigation (CRITICAL) */
-@font-face {
-  font-family: 'Aktiv Grotesk';
-  src: url('/fonts/AktivGrotesk-Bold.woff2') format('woff2');
-  font-weight: 700;
-  font-style: normal;
-  font-display: swap;
-}
-
-/* NON-CRITICAL FONTS - Loaded on demand via lazy CSS */
-/* Medium, XBold, Black, and italic variants are loaded dynamically when needed */
+/* Plus Jakarta Sans chargé via Google Fonts (index.html) */
 
 /* Hide scrollbar while allowing scroll */
 .scrollbar-hide {
@@ -72,9 +35,12 @@ header.header-scroll-transform,
 @import "tailwindcss";
 
 @theme {
-  /* Typography - Font Families */
-  --font-sans: "Aktiv Grotesk", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  --font-heading: "Aktiv Grotesk", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  /* Site margins - marges latérales uniformes sur tout le site */
+  --site-margin: 3%;
+
+  /* Typography - Font Families - Plus Jakarta Sans partout */
+  --font-sans: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-heading: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   --font-mono: "JetBrains Mono", "Courier New", monospace;
 
   /* OKLCH Color System - Nukleo Design */
@@ -97,6 +63,10 @@ header.header-scroll-transform,
 }
 
 @layer base {
+  :root {
+    --site-margin: 3%;
+  }
+
   * {
     @apply border-border;
   }
@@ -197,21 +167,7 @@ header.header-scroll-transform,
     background-attachment: fixed;
   }
 
-  /* Grain texture overlay (réduit ~20%) */
-  body::before {
-    content: '';
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-    z-index: 1;
-    opacity: 0.6;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='3.5' numOctaves='5' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
-    background-size: 200px 200px;
-    mix-blend-mode: overlay;
-  }
+  /* Grain texture overlay désactivé — créait un bloc blanc qui masquait le texte (ex. "Prêt.e à performer ?") */
 
   /* Grain overlay class for specific pages */
   .grain-overlay {
@@ -256,23 +212,14 @@ header.header-scroll-transform,
     width: 100%;
     margin-left: auto;
     margin-right: auto;
-    padding-left: 1rem;
-    padding-right: 1rem;
+    padding-left: var(--site-margin, 3%);
+    padding-right: var(--site-margin, 3%);
   }
 
-  @media (min-width: 640px) {
-    .container {
-      padding-left: 1.5rem;
-      padding-right: 1.5rem;
-    }
-  }
-
-  @media (min-width: 1024px) {
-    .container {
-      padding-left: 2rem;
-      padding-right: 2rem;
-      max-width: 1536px;
-    }
+  /* Marges latérales alignées sur le container (pour header, sections full-width, etc.) */
+  .site-margin-x {
+    padding-left: var(--site-margin, 3%);
+    padding-right: var(--site-margin, 3%);
   }
 
   .flex {
@@ -292,6 +239,13 @@ header.header-scroll-transform,
       0 4px 24px -2px rgba(0, 0, 0, 0.12),
       0 2px 8px -1px rgba(0, 0, 0, 0.08);
     transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  /* Header bouton Menu — hover : fond blanc 100% */
+  .header-menu-btn:hover {
+    background: rgba(255, 255, 255, 1) !important;
+    border-color: rgba(255, 255, 255, 1) !important;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08), inset 0 1px 0 rgba(255, 255, 255, 1) !important;
   }
 
   .glass:hover {
@@ -356,7 +310,7 @@ header.header-scroll-transform,
     box-shadow:
       0 4px 24px rgba(0, 0, 0, 0.06),
       inset 0 1px 0 rgba(255, 255, 255, 0.85);
-    font-family: 'Figtree', sans-serif;
+    font-family: 'Plus Jakarta Sans', sans-serif;
   }
 
   /* Carte "Nous soutenons le monde culturel" */
@@ -371,7 +325,7 @@ header.header-scroll-transform,
     box-shadow:
       0 8px 32px rgba(0, 0, 0, 0.08),
       inset 0 1px 0 rgba(255, 255, 255, 0.9);
-    font-family: 'Figtree', sans-serif;
+    font-family: 'Plus Jakarta Sans', sans-serif;
   }
 
   /* Badge violet "+456.000$" */
@@ -397,7 +351,7 @@ header.header-scroll-transform,
     box-shadow:
       0 8px 32px rgba(0, 0, 0, 0.08),
       inset 0 1px 0 rgba(255, 255, 255, 0.9);
-    font-family: 'Figtree', sans-serif;
+    font-family: 'Plus Jakarta Sans', sans-serif;
   }
 
   /* Cartes stats "2022" et "+20" */
@@ -412,7 +366,7 @@ header.header-scroll-transform,
     box-shadow:
       0 4px 24px rgba(0, 0, 0, 0.06),
       inset 0 1px 0 rgba(255, 255, 255, 0.8);
-    font-family: 'Figtree', sans-serif;
+    font-family: 'Plus Jakarta Sans', sans-serif;
   }
 
   /* ─── Section "On [verbe] l'IA" — glass pill + couleurs image ─── */

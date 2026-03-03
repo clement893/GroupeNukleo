@@ -133,8 +133,8 @@ export default function PrivacyPolicy() {
       />
       <div style={{ minHeight: '100vh', background: OFF_WHITE, fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
         {/* Hero */}
-        <section style={{ padding: 'clamp(5rem, 10vh, 7rem) 6% 0' }}>
-          <div style={{ maxWidth: 800, margin: '0 auto' }}>
+        <section style={{ padding: 'clamp(5rem, 10vh, 7rem) 0 0' }}>
+          <div className="w-full">
             <p style={{
               fontFamily: "'Plus Jakarta Sans', sans-serif",
               fontWeight: 700,
@@ -167,8 +167,8 @@ export default function PrivacyPolicy() {
         </section>
 
         {/* Content */}
-        <section style={{ padding: '2rem 6% 4rem' }}>
-          <div style={{ maxWidth: 800, margin: '0 auto' }}>
+        <section style={{ padding: '2rem 0 4rem' }}>
+          <div className="w-full">
             <Section title={c.section1Title}>
               <p style={{ margin: 0 }}>{c.section1Text}</p>
             </Section>

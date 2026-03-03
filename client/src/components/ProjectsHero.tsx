@@ -28,26 +28,39 @@ export default function ProjectsHero({ headline, description, heroImages, getPro
   const triptychImages = getTriptychImages(heroImages);
 
   return (
-    <section className="pt-24 pb-12 lg:pt-32 lg:pb-16">
+    <section style={{ padding: 'clamp(6rem, 12vh, 8rem) 0 clamp(2rem, 4vw, 4rem)', overflow: 'visible' }}>
       <div className="container">
-        <div className="max-w-4xl mb-10 lg:mb-14">
+        {/* Titre + sous-titre — même disposition que page d'accueil et À propos */}
+        <div style={{ marginBottom: 'clamp(2rem, 4vw, 3.5rem)', overflow: 'visible' }}>
           <h1
-            className="font-bold mb-4 w-fit"
             style={{
               fontFamily: "'Plus Jakarta Sans', sans-serif",
+              fontWeight: 700,
+              fontSize: 'clamp(1.5rem, 8vw, 9rem)',
+              lineHeight: 1.05,
+              letterSpacing: '-0.04em',
+              margin: '0 0 0.5rem 0',
+              paddingBottom: '0.18em',
               display: 'inline-block',
+              overflow: 'visible',
               background: 'linear-gradient(to right, #6B1817, #5636AD)',
               backgroundClip: 'text',
               WebkitBackgroundClip: 'text',
               color: 'transparent',
-              fontSize: 'clamp(2.5rem, 8vw, 7rem)',
-              lineHeight: 1.05,
-              letterSpacing: '-0.03em',
             }}
           >
             {headline}
           </h1>
-          <p className="text-lg lg:text-xl text-gray-600 max-w-2xl" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
+          <p
+            style={{
+              fontFamily: "'Plus Jakarta Sans', sans-serif",
+              fontWeight: 400,
+              fontSize: 'clamp(1rem, 1.5vw, 1.25rem)',
+              color: '#6b7280',
+              lineHeight: 1.5,
+              margin: 0,
+            }}
+          >
             {description}
           </p>
         </div>

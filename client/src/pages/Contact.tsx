@@ -107,36 +107,49 @@ export default function Contact() {
       <StructuredData data={montrealOfficeSchema} />
       <StructuredData data={halifaxOfficeSchema} />
 
-      <div className="min-h-screen" style={{ background: 'transparent', fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
-        {/* Titre + formulaire à gauche, carte à droite */}
-        <section className="pt-24 pb-3 lg:pt-28 lg:pb-4">
-          <div className="w-full px-4 sm:px-6 lg:px-8">
-            {/* Titre + sous-texte */}
-            <div className="mb-2">
-                <h2
-                  className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold leading-tight mb-2 w-fit"
-                  style={{
-                    fontFamily: "'Plus Jakarta Sans', sans-serif",
-                    background: 'linear-gradient(to right, #6B1817, #5636AD)',
-                    WebkitBackgroundClip: 'text',
-                    WebkitTextFillColor: 'transparent',
-                    backgroundClip: 'text',
-                  }}
-                >
-                  Performez maintenant
-                </h2>
-              <p
-                className="text-base md:text-lg text-gray-600 leading-relaxed"
-                style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 400, color: '#444' }}
+      <div className="min-h-screen" style={{ background: 'transparent', fontFamily: "'Plus Jakarta Sans', sans-serif", paddingTop: 128 }}>
+        {/* Hero — même disposition que page d'accueil et À propos */}
+        <section style={{ padding: 'clamp(6rem, 12vh, 8rem) 3% clamp(2rem, 4vw, 4rem)', overflow: 'visible' }}>
+          <div className="w-full">
+            {/* Titre + sous-titre — alignés à gauche comme About/Accueil */}
+            <div style={{ marginBottom: 'clamp(4rem, 8vw, 7rem)', overflow: 'visible' }}>
+              <h1
+                style={{
+                  fontFamily: "'Plus Jakarta Sans', sans-serif",
+                  fontWeight: 700,
+                  fontSize: 'clamp(1.5rem, 8vw, 9rem)',
+                  lineHeight: 1.05,
+                  letterSpacing: '-0.04em',
+                  margin: '0 0 0.5rem 0',
+                  paddingBottom: '0.18em',
+                  display: 'inline-block',
+                  overflow: 'visible',
+                  background: 'linear-gradient(to right, #6B1817, #5636AD)',
+                  backgroundClip: 'text',
+                  WebkitBackgroundClip: 'text',
+                  color: 'transparent',
+                }}
               >
-                Choisissez la transformation numérique et contactez-nous
+                {t('contact.heroTitleNew')}
+              </h1>
+              <p
+                style={{
+                  fontFamily: "'Plus Jakarta Sans', sans-serif",
+                  fontWeight: 400,
+                  fontSize: 'clamp(1rem, 1.5vw, 1.25rem)',
+                  color: '#6b7280',
+                  lineHeight: 1.5,
+                  margin: 0,
+                }}
+              >
+                {t('contact.heroSubtitle')}
               </p>
             </div>
 
             <div className="grid grid-cols-1 lg:grid-cols-[1fr_1fr] gap-8 lg:gap-12 items-stretch">
               {/* Gauche : formulaire */}
-              <div className="glass-panel w-full rounded-2xl p-8 lg:p-12 h-full flex flex-col">
-              <div className="max-w-xl">
+              <div className="glass-panel w-full rounded-lg p-8 lg:p-12 h-full flex flex-col">
+              <div className="w-full">
               <h2 className="text-2xl lg:text-3xl font-bold mb-6" style={{ color: BORDEAUX, fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
                 {t('contact.sendMessage')}
               </h2>
@@ -276,7 +289,7 @@ export default function Contact() {
               </div>
 
               {/* Droite : villes au-dessus de la carte, adresse affichée sur la carte au clic */}
-              <div className="flex flex-col h-full rounded-2xl overflow-hidden shadow-lg bg-white/80 backdrop-blur border border-white/40 min-h-[320px]">
+              <div className="flex flex-col h-full rounded-lg overflow-hidden shadow-lg bg-white/80 backdrop-blur border border-white/40 min-h-[320px]">
                 {/* Onglets villes */}
                 <div className="flex border-b border-gray-200/60">
                   <button

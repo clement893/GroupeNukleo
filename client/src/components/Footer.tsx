@@ -72,11 +72,11 @@ function Footer() {
 
   return (
     <footer
-      className="relative w-full"
+      className="relative w-full site-margin-x"
       style={{
         background: '#EFE8E8',
-        padding: 'clamp(3rem, 8vw, 5rem) clamp(2rem, 5vw, 4rem) clamp(3rem, 6vw, 4rem)',
-        paddingBottom: 96,
+        paddingTop: 'clamp(0.75rem, 2vw, 1.25rem)',
+        paddingBottom: 48,
         fontFamily: "'Plus Jakarta Sans', sans-serif",
         fontWeight: 400,
       }}

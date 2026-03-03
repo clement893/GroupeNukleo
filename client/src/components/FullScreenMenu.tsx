@@ -82,7 +82,7 @@ export default function FullScreenMenu({ isOpen, onClose }: FullScreenMenuProps)
 
       {/* Logo en couleur — lien vers accueil */}
       <div className="flex-shrink-0 px-8 sm:px-12 md:px-16 lg:px-20 pt-8 pb-4">
-        <Link href={getLocalizedPath('/')} onClick={handleLinkClick} className="inline-flex items-baseline touch-manipulation" aria-label="Nukleo - Accueil">
+        <Link href={getLocalizedPath('/')} onClick={handleLinkClick} onMouseEnter={playHover} className="group inline-flex items-baseline touch-manipulation transition-opacity hover:opacity-90 duration-300" aria-label="Nukleo - Accueil">
           <span
             className="tracking-tight"
             style={{
@@ -101,17 +101,18 @@ export default function FullScreenMenu({ isOpen, onClose }: FullScreenMenuProps)
 
       {/* Navigation principale — texte très grand, plein écran comme sur l'image */}
       <nav className="flex-1 flex flex-col justify-center px-8 sm:px-12 md:px-16 lg:px-20 pt-4 pb-8">
-        <ul className="space-y-6 sm:space-y-8 md:space-y-10">
+        <ul className="space-y-4 sm:space-y-6 md:space-y-8">
           {MAIN_LINKS.map(({ labelKey, labelFr, path }) => (
             <li key={path}>
-              <Link href={getLocalizedPath(path)} onClick={handleLinkClick}>
+              <Link href={getLocalizedPath(path)} onClick={handleLinkClick} className="group block">
                 <span
                   onMouseEnter={playHover}
-                  className="block py-2 text-white hover:opacity-90 transition-opacity touch-manipulation"
+                  className="block py-1.5 text-white transition-all duration-300 ease-out touch-manipulation
+                    group-hover:opacity-95 group-hover:translate-x-2 group-hover:scale-[1.02]"
                   style={{
                     fontFamily: "'Plus Jakarta Sans', sans-serif",
                     fontWeight: 700,
-                    fontSize: 'clamp(2.5rem, 10vw, 5rem)',
+                    fontSize: 'clamp(2rem, 8vw, 4rem)',
                     lineHeight: 1.1,
                   }}
                 >
@@ -130,10 +131,11 @@ export default function FullScreenMenu({ isOpen, onClose }: FullScreenMenuProps)
       <div className="px-8 sm:px-12 md:px-16 lg:px-20 py-6 sm:py-8 flex-shrink-0">
         <div className="flex flex-wrap justify-between gap-x-8 gap-y-4 text-white/80 text-base sm:text-lg" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 700 }}>
           {SERVICE_LINKS.map(({ labelKey, path }) => (
-            <Link key={labelKey} href={getLocalizedPath(path)} onClick={handleLinkClick}>
+            <Link key={labelKey} href={getLocalizedPath(path)} onClick={handleLinkClick} className="group inline-block">
               <span
                 onMouseEnter={playHover}
-                className="hover:text-white transition-colors touch-manipulation"
+                className="transition-all duration-300 ease-out touch-manipulation
+                  group-hover:text-white group-hover:underline group-hover:underline-offset-4 group-hover:scale-105"
               >
                 {tLabel(labelKey, labelKey)}
               </span>
