@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { ArrowRight } from 'lucide-react';
 import OptimizedImage from '@/components/OptimizedImage';
 
 interface ProjectsHeroProps {
@@ -26,6 +27,7 @@ function getTriptychImages(heroImages: string[]): string[] {
 export default function ProjectsHero({ headline, description, heroImages, getProjectUrl, viewProjectLabel = 'Voir le projet →' }: ProjectsHeroProps) {
   const [active, setActive] = useState(0);
   const triptychImages = getTriptychImages(heroImages);
+  const labelText = viewProjectLabel.replace(/\s*[→]\s*$/u, '').trim() || viewProjectLabel;
 
   return (
     <section style={{ padding: 'clamp(6rem, 12vh, 8rem) 0 clamp(2rem, 4vw, 4rem)', overflow: 'visible' }}>
@@ -70,7 +72,7 @@ export default function ProjectsHero({ headline, description, heroImages, getPro
           <div
             className="w-full overflow-hidden relative rounded-xl"
             style={{
-              height: 'clamp(320px, 55vh, 580px)',
+              height: 'clamp(480px, 82vh, 870px)',
               display: 'flex',
               gap: 21,
             }}
@@ -114,26 +116,26 @@ export default function ProjectsHero({ headline, description, heroImages, getPro
                       sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 33vw"
                       className="w-full h-full transition-[filter] duration-500 ease-out object-cover"
                       style={{
-                        filter: isActive ? 'grayscale(0) brightness(0.7)' : 'grayscale(1) brightness(0.55)',
+                        filter: isActive ? 'grayscale(0)' : 'grayscale(1) brightness(0.55)',
                         objectPosition: isActive ? 'center' : 'top',
                       }}
                     />
                   </div>
-                  <div style={{ position: 'absolute', inset: 0, background: isActive ? 'linear-gradient(to top, rgba(0,0,0,0.88) 0%, rgba(0,0,0,0.15) 55%, transparent 100%)' : 'rgba(0,0,0,0.22)', transition: 'background 0.5s ease' }} />
+                  <div style={{ position: 'absolute', inset: 0, background: isActive ? 'linear-gradient(to top, rgba(0,0,0,0.35) 0%, transparent 25%)' : 'rgba(0,0,0,0.22)', transition: 'background 0.5s ease' }} />
 
                   <div
                     style={{
                       position: 'absolute',
                       bottom: 24,
-                      right: 24,
+                      ...(isActive ? { right: 24 } : { left: '50%', transform: 'translateX(-50%)' }),
                       fontFamily: "'Plus Jakarta Sans', sans-serif",
                       fontSize: 'clamp(2rem, 4vw, 3.5rem)',
                       fontWeight: 700,
-                      color: isActive ? 'rgba(167,139,250,0.9)' : 'rgba(167,139,250,0.4)',
+                      color: isActive ? 'rgba(167,139,250,0.9)' : '#ffffff',
                       opacity: 0.92,
                       lineHeight: 1,
                       letterSpacing: '-0.04em',
-                      transition: 'color 0.4s ease',
+                      transition: 'color 0.4s ease, left 0.4s ease, right 0.4s ease, transform 0.4s ease',
                       textShadow: '0 2px 20px rgba(0,0,0,0.2)',
                     }}
                   >
@@ -144,17 +146,27 @@ export default function ProjectsHero({ headline, description, heroImages, getPro
                     <div style={{ position: 'absolute', bottom: 24, left: 28 }}>
                       <a
                         href={projectUrl}
+                        className="projects-view-btn"
                         style={{
-                          color: 'rgba(255,255,255,0.85)',
+                          display: 'inline-flex',
+                          alignItems: 'center',
+                          gap: '1rem',
+                          color: 'rgba(255,255,255,0.95)',
                           fontSize: '0.8rem',
                           fontWeight: 600,
-                          borderBottom: '1px solid rgba(255,255,255,0.4)',
-                          paddingBottom: 2,
                           textDecoration: 'none',
                           fontFamily: "'Plus Jakarta Sans', sans-serif",
+                          padding: '0.5rem 1rem',
+                          borderRadius: 9999,
+                          background: 'rgba(255, 255, 255, 0.25)',
+                          backdropFilter: 'blur(16px) saturate(180%)',
+                          WebkitBackdropFilter: 'blur(16px) saturate(180%)',
+                          boxShadow: '0 4px 24px rgba(0, 0, 0, 0.12)',
+                          transition: 'background 0.3s ease, box-shadow 0.3s ease, color 0.3s ease',
                         }}
                       >
-                        {viewProjectLabel}
+                        <span>{labelText}</span>
+                        <ArrowRight className="projects-view-btn-arrow" strokeWidth={2.5} size={18} style={{ flexShrink: 0 }} />
                       </a>
                     </div>
                   )}

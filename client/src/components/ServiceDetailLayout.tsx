@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
-import { SplitCTAButton } from '@/components/SplitCTAButton';
 import { Sparkles } from 'lucide-react';
+import CTAPerformSection from '@/components/CTAPerformSection';
 
 const BORDEAUX = '#5A1E29';
 const PURPLE = '#5D43CD';
@@ -39,9 +39,6 @@ export interface ServiceDetailLayoutProps {
   teamDescription: string;
   /** Membres de l'équipe du département (photo, nom, rôle). Si fourni, affiche une grille de cartes au lieu du seul texte. */
   teamMembers?: { name: string; role: string; image: string; imageAlt?: string }[];
-  ctaTitle: string;
-  ctaButtonText: string;
-  ctaHref: string;
   /** Section « carte visuelle + texte & 4 cartes glass » (affichée après le bloc onglets si fournie) */
   sectionVisualImage?: string;
   sectionVisualAlt?: string;
@@ -75,9 +72,6 @@ export default function ServiceDetailLayout(props: ServiceDetailLayoutProps) {
     teamTitle,
     teamDescription,
     teamMembers,
-    ctaTitle,
-    ctaButtonText,
-    ctaHref,
     sectionVisualImage,
     sectionVisualAlt = '',
     sectionVisualTitle,
@@ -515,20 +509,8 @@ export default function ServiceDetailLayout(props: ServiceDetailLayoutProps) {
         </div>
       </section>
 
-      {/* CTA — encadré fond gris clair comme maquette */}
-      <section className="py-16 lg:py-24">
-        <div className="container">
-          <div className="max-w-2xl mx-auto text-center rounded-2xl border border-gray-200 py-12 px-8" style={{ background: 'rgba(248,248,248,0.95)' }}>
-            <h2
-              className="text-2xl lg:text-3xl font-bold mb-6 text-gray-800"
-              style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}
-            >
-              {ctaTitle}
-            </h2>
-            <SplitCTAButton href={ctaHref} label={ctaButtonText} variant="purple" ariaLabel={ctaButtonText} />
-          </div>
-        </div>
-      </section>
+      {/* CTA — composant partagé (identique Homepage, About, Lab, Agence, Studio, etc.) */}
+      <CTAPerformSection />
     </main>
   );
 }

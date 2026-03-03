@@ -3,7 +3,7 @@ import { Link } from 'wouter';
 import { useLocalizedPath } from '@/hooks/useLocalizedPath';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { TeamScrollCards, DoubleLogoCarousel } from '@/components/demo3';
-import { ArrowUpRight, HelpCircle } from 'lucide-react';
+import { ArrowUpRight, ArrowRight, HelpCircle } from 'lucide-react';
 import { SplitCTAButton } from '@/components/SplitCTAButton';
 import { WeatherWidget } from '@/components/WeatherWidget';
 import PageLayout from '@/components/PageLayout';
@@ -415,9 +415,9 @@ function Triptych({ projects: projectsProp }: { projects?: HomeProjectItem[] }) 
   const { t } = useLanguage();
   return (
     <div
-      className="w-full overflow-hidden relative"
+      className="w-full overflow-hidden relative rounded-xl"
       style={{
-        height: 'clamp(483px, 82vh, 960px)',
+        height: 'clamp(480px, 82vh, 870px)',
         display: 'flex',
         gap: 21,
       }}
@@ -438,33 +438,34 @@ function Triptych({ projects: projectsProp }: { projects?: HomeProjectItem[] }) 
               borderRadius: 12,
             }}
           >
-            {/* Image (panneau actif en premier plan) */}
+            {/* Image (panneau actif en premier plan) — design aligné Projects hero */}
             <img
               src={p.img}
               alt={p.name}
               style={{
                 position: 'absolute', inset: 0, width: '100%', height: '100%',
                 objectFit: 'cover',
-                filter: isActive ? 'none' : 'grayscale(1) brightness(0.55)',
+                objectPosition: isActive ? 'center' : 'top',
+                filter: isActive ? 'grayscale(0)' : 'grayscale(1) brightness(0.55)',
                 transition: 'filter 0.5s ease',
               }}
             />
-            <div style={{ position: 'absolute', inset: 0, background: isActive ? 'linear-gradient(to top, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.08) 25%, transparent 33%)' : 'rgba(0,0,0,0.22)', transition: 'background 0.5s ease' }} />
+            <div style={{ position: 'absolute', inset: 0, background: isActive ? 'linear-gradient(to top, rgba(0,0,0,0.35) 0%, transparent 25%)' : 'rgba(0,0,0,0.22)', transition: 'background 0.5s ease' }} />
 
-            {/* Numéro 01 / 02 / 03 — Plus Jakarta Sans Bold, un peu de transparence */}
+            {/* Numéro 01 / 02 / 03 — design Projects : inactif = centré + blanc, actif = droite + mauve */}
             <div
               style={{
                 position: 'absolute',
                 bottom: 24,
-                right: 24,
+                ...(isActive ? { right: 24 } : { left: '50%', transform: 'translateX(-50%)' }),
                 fontFamily: "'Plus Jakarta Sans', sans-serif",
-                fontSize: 'clamp(2.5rem, 5vw, 4.5rem)',
+                fontSize: 'clamp(2rem, 4vw, 3.5rem)',
                 fontWeight: 700,
-                color: isActive ? 'rgba(167,139,250,0.9)' : 'rgba(167,139,250,0.4)',
+                color: isActive ? 'rgba(167,139,250,0.9)' : '#ffffff',
                 opacity: 0.92,
                 lineHeight: 1,
                 letterSpacing: '-0.04em',
-                transition: 'color 0.4s ease',
+                transition: 'color 0.4s ease, left 0.4s ease, right 0.4s ease, transform 0.4s ease',
                 textShadow: '0 2px 20px rgba(0,0,0,0.2)',
               }}
             >
@@ -497,9 +498,27 @@ function Triptych({ projects: projectsProp }: { projects?: HomeProjectItem[] }) 
                   <div style={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap' }}>
                     <Link
                       href={getLocalizedPath('/projects')}
-                      style={{ color: 'rgba(255,255,255,0.7)', fontSize: '0.75rem', fontWeight: 600, borderBottom: '1px solid rgba(255,255,255,0.3)', paddingBottom: 2, textDecoration: 'none' }}
+                      className="projects-view-btn"
+                      style={{
+                        display: 'inline-flex',
+                        alignItems: 'center',
+                        gap: '1rem',
+                        color: 'rgba(255,255,255,0.95)',
+                        fontSize: '0.8rem',
+                        fontWeight: 600,
+                        textDecoration: 'none',
+                        fontFamily: "'Plus Jakarta Sans', sans-serif",
+                        padding: '0.5rem 1rem',
+                        borderRadius: 9999,
+                        background: 'rgba(255, 255, 255, 0.25)',
+                        backdropFilter: 'blur(16px) saturate(180%)',
+                        WebkitBackdropFilter: 'blur(16px) saturate(180%)',
+                        boxShadow: '0 4px 24px rgba(0, 0, 0, 0.12)',
+                        transition: 'background 0.3s ease, box-shadow 0.3s ease, color 0.3s ease',
+                      }}
                     >
-                      {t('home.caseStudy')}
+                      <span>{t('home.caseStudy')}</span>
+                      <ArrowRight className="projects-view-btn-arrow" strokeWidth={2.5} size={18} style={{ flexShrink: 0 }} />
                     </Link>
                   </div>
                 </div>

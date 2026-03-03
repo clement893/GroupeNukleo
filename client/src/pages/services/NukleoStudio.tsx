@@ -2,7 +2,6 @@ import PageLayout from '@/components/PageLayout';
 import SEO from '@/components/SEO';
 import ServiceDetailLayout, { type ServiceTabContent } from '@/components/ServiceDetailLayout';
 import { useLanguage } from '@/contexts/LanguageContext';
-import { useLocalizedPath } from '@/hooks/useLocalizedPath';
 
 const NS = 'services.detail.studio';
 
@@ -20,7 +19,6 @@ function normalizeTabs(raw: unknown): ServiceTabContent[] | undefined {
 
 export default function NukleoStudio() {
   const { t } = useLanguage();
-  const getLocalizedPath = useLocalizedPath();
 
   const rawTabs = t(`${NS}.tabs`, { returnObjects: true });
   const tabs = normalizeTabs(rawTabs);
@@ -87,9 +85,6 @@ export default function NukleoStudio() {
         teamTitle={t(`${NS}.teamTitle`)}
         teamDescription={t(`${NS}.teamDescription`)}
         teamMembers={teamMembers.length > 0 ? teamMembers : undefined}
-        ctaTitle={t(`${NS}.ctaTitle`)}
-        ctaButtonText={t(`${NS}.ctaButtonText`)}
-        ctaHref={getLocalizedPath('/contact')}
         sectionVisualTitle={t(`${NS}.sectionVisualTitle`)}
         sectionVisualSubtitle={t(`${NS}.sectionVisualSubtitle`)}
         sectionVisualDescription={t(`${NS}.sectionVisualDescription`)}

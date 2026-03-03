@@ -266,7 +266,7 @@ export default function Projects() {
                     >
                       <div
                         ref={(el) => { imageRefs.current[index] = el; }}
-                        className="block group cursor-pointer overflow-hidden rounded-xl min-h-[240px] sm:min-h-[280px] lg:min-h-[320px] relative"
+                        className="block group cursor-pointer overflow-hidden rounded-md min-h-[240px] sm:min-h-[280px] lg:min-h-[320px] relative"
                         style={{ backgroundColor: bgColor }}
                       >
                         {!isVisible ? (

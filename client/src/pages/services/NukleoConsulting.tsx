@@ -2,13 +2,11 @@ import PageLayout from '@/components/PageLayout';
 import SEO from '@/components/SEO';
 import ServiceDetailLayout from '@/components/ServiceDetailLayout';
 import { useLanguage } from '@/contexts/LanguageContext';
-import { useLocalizedPath } from '@/hooks/useLocalizedPath';
 
 const NS = 'services.detail.consulting';
 
 export default function NukleoConsulting() {
   const { t } = useLanguage();
-  const getLocalizedPath = useLocalizedPath();
 
   const navItems = (t(`${NS}.navItems`, { returnObjects: true }) as string[]) || [];
   const mainTags = (t(`${NS}.mainTags`, { returnObjects: true }) as string[]) || [];
@@ -43,9 +41,6 @@ export default function NukleoConsulting() {
         gridItems={gridItems}
         teamTitle={t(`${NS}.teamTitle`)}
         teamDescription={t(`${NS}.teamDescription`)}
-        ctaTitle={t(`${NS}.ctaTitle`)}
-        ctaButtonText={t(`${NS}.ctaButtonText`)}
-        ctaHref={getLocalizedPath('/contact')}
       />
     </PageLayout>
   );

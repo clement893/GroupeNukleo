@@ -216,6 +216,13 @@ header.header-scroll-transform,
     padding-right: var(--site-margin, 3%);
   }
 
+  /* Bloc CTA "Prêt.e à performer ?" — rendu identique sur toutes les pages */
+  .cta-perform-section {
+    padding: 4rem 3% 8rem;
+    background: transparent;
+    text-align: center;
+  }
+
   /* Marges latérales alignées sur le container (pour header, sections full-width, etc.) */
   .site-margin-x {
     padding-left: var(--site-margin, 3%);
@@ -239,6 +246,16 @@ header.header-scroll-transform,
       0 4px 24px -2px rgba(0, 0, 0, 0.12),
       0 2px 8px -1px rgba(0, 0, 0, 0.08);
     transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  /* Projets hero — bouton "Voir le projet" : hover plus opaque + texte/flèche mauve */
+  .projects-view-btn:hover {
+    background: rgba(255, 255, 255, 0.55) !important;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.4) !important;
+    color: #5D43CD !important;
+  }
+  .projects-view-btn:hover .projects-view-btn-arrow {
+    color: #5D43CD !important;
   }
 
   /* Header bouton Menu — hover : fond blanc 100% */
