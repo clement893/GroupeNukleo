@@ -399,7 +399,7 @@ export default function ServiceDetailLayout(props: ServiceDetailLayoutProps) {
                   {sectionHighlights!.slice(0, 4).map((item, index) => (
                     <div
                       key={index}
-                      className="p-5 rounded-xl"
+                      className="p-5 rounded-md"
                       style={{
                         background: 'rgba(255, 255, 255, 0.55)',
                         border: '1px solid rgba(255, 255, 255, 0.75)',

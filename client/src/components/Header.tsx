@@ -94,10 +94,6 @@ function Header() {
     };
   }, []);
 
-  const btnPurple = '#5B21B6';
-  const logoBordeaux = '#712D3A';
-  const logoCommaPurple = '#7e3e9d';
-
   return (
     <>
       <header
@@ -120,20 +116,14 @@ function Header() {
           }}
         >
           <div className="flex items-center justify-between gap-2 sm:gap-4">
-            {/* Logo en couleur : nukleo (bordeaux) + chevron (violet) + virgule (violet), comme sur l'image */}
-            <Link href={getLocalizedPath('/')} className="inline-flex items-baseline cursor-pointer touch-manipulation" aria-label={t('alt.logo') || 'Nukleo Digital - Accueil'}>
-              <span
-                className="font-bold tracking-tight"
-                style={{
-                  fontFamily: 'var(--font-heading, sans-serif)',
-                  fontSize: 'clamp(1.35rem, 3.5vw, 2.75rem)',
-                  color: logoBordeaux,
-                }}
-              >
-                nukleo
-              </span>
-              <span className="ml-0.5" style={{ color: logoCommaPurple, fontSize: '0.9em' }} aria-hidden="true">→</span>
-              <span className="font-bold tracking-tight" style={{ color: logoCommaPurple, fontFamily: 'var(--font-heading, sans-serif)', fontSize: 'clamp(1.35rem, 3.5vw, 2.75rem)' }}>,</span>
+            {/* Logo Nukleo RVB (nukleo,→) */}
+            <Link href={getLocalizedPath('/')} className="inline-flex items-center cursor-pointer touch-manipulation" aria-label={t('alt.logo') || 'Nukleo Digital - Accueil'}>
+              <img
+                src="/nukleo-logo-rvb.png"
+                alt="Nukleo"
+                className="w-auto object-contain"
+                style={{ height: 'clamp(1.5rem, 4vw, 2.5rem)' }}
+              />
             </Link>
 
             {/* Right: CTA split + Menu */}

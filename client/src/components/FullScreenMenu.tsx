@@ -82,20 +82,13 @@ export default function FullScreenMenu({ isOpen, onClose }: FullScreenMenuProps)
 
       {/* Logo en couleur — lien vers accueil */}
       <div className="flex-shrink-0 px-8 sm:px-12 md:px-16 lg:px-20 pt-8 pb-4">
-        <Link href={getLocalizedPath('/')} onClick={handleLinkClick} onMouseEnter={playHover} className="group inline-flex items-baseline touch-manipulation transition-opacity hover:opacity-90 duration-300" aria-label="Nukleo - Accueil">
-          <span
-            className="tracking-tight"
-            style={{
-              fontFamily: "'Plus Jakarta Sans', sans-serif",
-              fontWeight: 700,
-              fontSize: 'clamp(1.5rem, 4vw, 2.25rem)',
-              color: '#712D3A',
-            }}
-          >
-            nukleo
-          </span>
-          <span className="ml-0.5" style={{ color: '#c4b5fd', fontSize: '0.9em' }} aria-hidden="true">→</span>
-          <span className="tracking-tight" style={{ color: '#712D3A', fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 700, fontSize: 'clamp(1.5rem, 4vw, 2.25rem)' }}>,</span>
+        <Link href={getLocalizedPath('/')} onClick={handleLinkClick} onMouseEnter={playHover} className="group inline-flex items-center touch-manipulation transition-opacity hover:opacity-90 duration-300" aria-label="Nukleo - Accueil">
+          <img
+            src="/nukleo-logo-rvb.png"
+            alt="Nukleo"
+            className="w-auto object-contain"
+            style={{ height: 'clamp(1.5rem, 4vw, 2.25rem)' }}
+          />
         </Link>
       </div>
 
