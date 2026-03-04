@@ -2,7 +2,7 @@ import PageLayout from '@/components/PageLayout';
 import SEO from '@/components/SEO';
 import ServiceDetailLayout from '@/components/ServiceDetailLayout';
 import { useLanguage } from '@/contexts/LanguageContext';
-import { EXPERTISE_3D_ICONS } from '@/components/Expertise3DIcons';
+import { AGENCY_EXPERTISE_3D_ICONS } from '@/components/AgencyExpertise3DIcons';
 
 const NS = 'services.detail.agency';
 
@@ -50,7 +50,7 @@ export default function NukleoAgency() {
         extensionsDescription={t(`${NS}.extensionsDescription`)}
         extensionsTags={extensionsTags}
         extensionsHighlightListStyle={true}
-        expertiseIconComponents={EXPERTISE_3D_ICONS}
+        expertiseIconComponents={AGENCY_EXPERTISE_3D_ICONS}
         expertiseSectionTitle={t(`${NS}.expertiseSectionTitle`)}
         expertiseSectionDescription={t(`${NS}.expertiseSectionDescription`) || undefined}
         gridItems={gridItems}

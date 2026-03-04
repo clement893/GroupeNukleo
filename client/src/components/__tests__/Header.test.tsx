@@ -49,10 +49,8 @@ describe('Header', () => {
     
     const logo = screen.getByAltText(/Logo Nukleo Digital/i);
     expect(logo).toBeTruthy();
-    
-    // Tagline should be visible initially
-    const tagline = screen.queryByText(/CHOOSE INTELLIGENCE/i);
-    expect(tagline).toBeTruthy();
+    // Tagline is included in the logo image alt
+    expect(logo.getAttribute('alt')).toMatch(/Choisissez l'intelligence/i);
   });
 
   it('should toggle menu when burger button is clicked', () => {

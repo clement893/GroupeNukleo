@@ -2,7 +2,7 @@ import PageLayout from '@/components/PageLayout';
 import SEO from '@/components/SEO';
 import ServiceDetailLayout from '@/components/ServiceDetailLayout';
 import { useLanguage } from '@/contexts/LanguageContext';
-import { EXPERTISE_3D_ICONS } from '@/components/Expertise3DIcons';
+import { CONSULTING_EXPERTISE_3D_ICONS } from '@/components/ConsultingExpertise3DIcons';
 
 const NS = 'services.detail.consulting';
 
@@ -40,6 +40,7 @@ export default function NukleoConsulting() {
       <ServiceDetailLayout
         pageTitle={t(`${NS}.pageTitle`)}
         tagline={t(`${NS}.tagline`)}
+        heroVideo="/demo/consulting-hero.mov"
         heroImage="/demo/dept-consulting.jpg"
         heroImageAlt={t(`${NS}.heroImageAlt`)}
         navItems={navItems.map((label, id) => ({ id: String(id), label }))}
@@ -50,13 +51,14 @@ export default function NukleoConsulting() {
         extensionsDescription={t(`${NS}.extensionsDescription`)}
         extensionsTags={extensionsTags}
         extensionsHighlightListStyle={true}
-        expertiseIconComponents={EXPERTISE_3D_ICONS}
+        expertiseIconComponents={CONSULTING_EXPERTISE_3D_ICONS}
         expertiseSectionTitle={t(`${NS}.expertiseSectionTitle`)}
         expertiseSectionDescription={t(`${NS}.expertiseSectionDescription`) || undefined}
         gridItems={gridItems}
         teamTitle={t(`${NS}.teamTitle`)}
         teamDescription={t(`${NS}.teamDescription`)}
         teamMembers={teamMembers}
+        sectionVisualVideo="/demo/consulting-visual.mp4"
         sectionVisualImage="/demo/dept-consulting.jpg"
         sectionVisualTitle={t(`${NS}.sectionVisualTitle`)}
         sectionVisualSubtitle={t(`${NS}.sectionVisualSubtitle`)}

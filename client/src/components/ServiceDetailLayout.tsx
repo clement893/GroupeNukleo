@@ -18,12 +18,16 @@ export interface ServiceTabContent {
 export interface ServiceDetailLayoutProps {
   pageTitle: string;
   tagline: string;
+  /** Paragraphe sous le titre (body du hero). Si fourni, affiché sous le tagline. */
+  heroDescription?: string;
   /** Badge au-dessus du titre (style "Ils nous font confiance"). Si fourni, affiché au-dessus du pageTitle. */
   heroBadge?: string;
   heroImage?: string;
   heroImageAlt?: string;
   /** Si fourni, affiche une vidéo à la place de l'image hero (même taille, mêmes coins arrondis) */
   heroVideo?: string;
+  /** Hauteur du bloc hero (ex. "clamp(384px, 60vh, 624px)"). Par défaut clamp(320px, 50vh, 520px). */
+  heroHeight?: string;
   /** Si fourni, affiche la section à onglets (gauche: onglets, droite: contenu dynamique). Sinon, affiche nav + bloc mainTitle/mainDescription. */
   tabs?: ServiceTabContent[];
   navItems: { id: string; label: string }[];
@@ -66,10 +70,12 @@ export default function ServiceDetailLayout(props: ServiceDetailLayoutProps) {
   const {
     pageTitle,
     tagline,
+    heroDescription,
     heroBadge,
     heroImage,
     heroImageAlt = '',
     heroVideo,
+    heroHeight,
     tabs,
     navItems,
     mainTitle,
@@ -193,12 +199,27 @@ export default function ServiceDetailLayout(props: ServiceDetailLayoutProps) {
                 {tagline}
               </p>
             ) : null}
+            {heroDescription ? (
+              <p
+                style={{
+                  fontFamily: "'Plus Jakarta Sans', sans-serif",
+                  fontWeight: 400,
+                  fontSize: 'clamp(0.95rem, 1.4vw, 1.15rem)',
+                  color: '#4b5563',
+                  lineHeight: 1.6,
+                  margin: '0.75rem 0 0',
+                  maxWidth: '42ch',
+                }}
+              >
+                {heroDescription}
+              </p>
+            ) : null}
           </div>
           {(heroVideo || heroImage) && (
             <div
               className="rounded-xl overflow-hidden bg-gray-100 w-full"
               style={{
-                height: 'clamp(320px, 50vh, 520px)',
+                height: heroHeight ?? 'clamp(320px, 50vh, 520px)',
                 boxShadow: '0 4px 24px rgba(93, 67, 205, 0.08), 0 1px 0 rgba(93, 67, 205, 0.06) inset',
               }}
             >
@@ -401,8 +422,8 @@ export default function ServiceDetailLayout(props: ServiceDetailLayoutProps) {
                 ref={leftVisualRef}
               >
                 <div
-                  className="w-full h-full overflow-hidden rounded-xl lg:h-auto lg:w-full lg:max-w-full lg:aspect-[16/11]"
-                  style={{ minHeight: 0, height: rightHeight ?? undefined }}
+                  className={`w-full h-full overflow-hidden rounded-xl lg:w-full lg:max-w-full ${rightHeight != null ? 'lg:h-full' : 'lg:h-auto lg:aspect-[16/11]'}`}
+                  style={{ minHeight: 0, ...(rightHeight != null ? { height: rightHeight } : {}) }}
                 >
                   {sectionVisualVideo ? (
                     <video

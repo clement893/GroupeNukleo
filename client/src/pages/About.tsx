@@ -80,15 +80,19 @@ export default function About() {
               {t('about.heroNewSubtitle') || 'Choisissez la transformation numérique dès maintenant.'}
             </p>
           </div>
-          {/* Image hero — 4 téléphones sur fond coral, centrée en hauteur */}
+          {/* Vidéo hero — même que page Studio créatif */}
           <div
             className="rounded-lg overflow-hidden"
             style={{ width: '100%', aspectRatio: '16/9', minHeight: 500, marginBottom: '4rem' }}
           >
-            <img
-              src="/about-hero.png"
-              alt="Applications mobiles"
+            <video
+              src="/demo/studio-creatif-hero.mp4"
+              autoPlay
+              loop
+              muted
+              playsInline
               className="w-full h-full object-cover object-center"
+              aria-label="Vidéo Nukleo Digital"
             />
           </div>
         </section>

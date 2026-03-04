@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 150" width="500" height="150">
+  <defs>
+    <style>
+      .nukleo-text {
+        fill: #ffffff;
+        font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        font-weight: 700;
+        font-size: 100px;
+        letter-spacing: -0.03em;
+      }
+      .chevron {
+        fill: #ffffff;
+      }
+    </style>
+  </defs>
+  <!-- nukleo text -->
+  <text x="0" y="110" class="nukleo-text">nukleo</text>
+  <!-- Chevron (>) -->
+  <path class="chevron" d="M 380 30 L 450 75 L 380 120 L 410 120 L 470 75 L 410 30 Z"/>
+</svg>

@@ -105,48 +105,46 @@ export default function ProjectDetail() {
           description={description}
         />
         <main className="min-h-screen pt-20">
-          {/* ═══ Hero ═══ */}
-          <section style={{ padding: 'clamp(5rem, 12vh, 8rem) 3% 4rem' }}>
-            <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.2fr] gap-8 lg:gap-12 w-full items-start">
-              <div>
-                <p style={{
+          {/* ═══ En-tête : Retour discret, Titre, Client, Image (mise en page type fiche projet) ═══ */}
+          <section style={{ padding: 'clamp(3rem, 8vh, 5rem) 3% 0' }}>
+            <div className="w-full max-w-5xl mx-auto">
+              <Link
+                href={getLocalizedPath('/projects')}
+                style={{
                   fontFamily: "'Plus Jakarta Sans', sans-serif",
-                  fontSize: '0.75rem',
-                  fontWeight: 600,
-                  letterSpacing: '0.15em',
-                  textTransform: 'uppercase',
-                  color: '#9ca3af',
-                  marginBottom: 12,
-                }}>
-                  {t('projects.projectLabel')}
-                </p>
-                <h1 style={{
-                  fontFamily: "'Plus Jakarta Sans', sans-serif",
-                  fontWeight: 700,
-                  fontSize: 'clamp(2rem, 4vw, 3.5rem)',
-                  lineHeight: 1.25,
-                  letterSpacing: '-0.02em',
-                  margin: '0 0 0.5rem 0',
-                  paddingBottom: '0.12em',
-                  display: 'inline-block',
-                  background: 'linear-gradient(to right, #6B1817, #5636AD)',
-                  backgroundClip: 'text',
-                  WebkitBackgroundClip: 'text',
-                  color: 'transparent',
-                }}>
-                  {projectData.title}
-                </h1>
-                <p style={{
-                  fontFamily: "'Plus Jakarta Sans', sans-serif",
-                  fontSize: '0.95rem',
-                  color: '#6b7280',
-                  margin: 0,
-                }}>
-                  {projectData.category}
-                </p>
-              </div>
-              <div style={{ borderRadius: 12, overflow: 'hidden' }} className="lg:mt-0 mt-6">
-                <div style={{ aspectRatio: '21/9', minHeight: 220, maxHeight: 420, background: '#e5e7eb' }}>
+                  fontSize: '0.9rem',
+                  color: '#374151',
+                  fontWeight: 500,
+                  textDecoration: 'none',
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: 6,
+                  marginBottom: '1.25rem',
+                }}
+              >
+                ← {t('projects.backToList')}
+              </Link>
+              <h1 style={{
+                fontFamily: "'Plus Jakarta Sans', sans-serif",
+                fontWeight: 700,
+                fontSize: 'clamp(1.75rem, 4vw, 3.25rem)',
+                lineHeight: 1.2,
+                letterSpacing: '-0.02em',
+                margin: '0 0 0.5rem 0',
+                color: BORDEAUX,
+              }}>
+                {projectData.title}
+              </h1>
+              <p style={{
+                fontFamily: "'Plus Jakarta Sans', sans-serif",
+                fontSize: '1rem',
+                color: '#111',
+                margin: '0 0 2rem 0',
+              }}>
+                {projectData.client}
+              </p>
+              <div style={{ borderRadius: 14, overflow: 'hidden', width: '100%' }}>
+                <div style={{ aspectRatio: '21/9', minHeight: 240, background: '#e5e7eb' }}>
                   <OptimizedImage
                     src={heroImageUrl}
                     alt={projectData.title}
@@ -242,26 +240,6 @@ export default function ProjectDetail() {
             </section>
           )}
 
-          {/* ═══ Navigation retour ═══ */}
-          <section style={{ padding: '2rem 3% 5rem' }}>
-            <div className="w-full">
-              <Link
-                href={getLocalizedPath('/projects')}
-                style={{
-                  fontFamily: "'Plus Jakarta Sans', sans-serif",
-                  fontSize: '0.9rem',
-                  color: BORDEAUX,
-                  fontWeight: 600,
-                  textDecoration: 'none',
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  gap: 8,
-                }}
-              >
-                ← {t('projects.backToList')}
-              </Link>
-            </div>
-          </section>
         </main>
       </PageLayout>
     );
@@ -315,36 +293,45 @@ export default function ProjectDetail() {
         description={meta.description}
       />
       <main className="min-h-screen pt-20">
-        <section style={{ padding: 'clamp(5rem, 12vh, 8rem) 3% 4rem' }}>
-          <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.2fr] gap-8 lg:gap-12 w-full items-start">
-            <div>
-              <p style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: '0.75rem', fontWeight: 600, letterSpacing: '0.15em', textTransform: 'uppercase', color: '#9ca3af', marginBottom: 12 }}>
-                {t('projects.projectLabel')}
-              </p>
-              <h1 style={{
+        <section style={{ padding: 'clamp(3rem, 8vh, 5rem) 3% 0' }}>
+          <div className="w-full max-w-5xl mx-auto">
+            <Link
+              href={getLocalizedPath('/projects')}
+              style={{
                 fontFamily: "'Plus Jakarta Sans', sans-serif",
-                fontWeight: 700,
-                fontSize: 'clamp(2rem, 4vw, 3.5rem)',
-                lineHeight: 1.25,
-                letterSpacing: '-0.02em',
-                margin: '0 0 0.5rem 0',
-                paddingBottom: '0.12em',
-                display: 'inline-block',
-                background: 'linear-gradient(to right, #6B1817, #5636AD)',
-                backgroundClip: 'text',
-                WebkitBackgroundClip: 'text',
-                color: 'transparent',
-              }}>
-                {meta.title}
-              </h1>
-              {meta.category && (
-                <p style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: '0.95rem', color: '#6b7280', margin: 0 }}>
-                  {meta.category}
-                </p>
-              )}
-            </div>
-            <div style={{ borderRadius: 12, overflow: 'hidden' }} className="lg:mt-0 mt-6">
-              <div style={{ aspectRatio: '21/9', minHeight: 220, maxHeight: 420, background: '#e5e7eb' }}>
+                fontSize: '0.9rem',
+                color: '#374151',
+                fontWeight: 500,
+                textDecoration: 'none',
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: 6,
+                marginBottom: '1.25rem',
+              }}
+            >
+              ← {t('projects.backToList')}
+            </Link>
+            <h1 style={{
+              fontFamily: "'Plus Jakarta Sans', sans-serif",
+              fontWeight: 700,
+              fontSize: 'clamp(1.75rem, 4vw, 3.25rem)',
+              lineHeight: 1.2,
+              letterSpacing: '-0.02em',
+              margin: '0 0 0.5rem 0',
+              color: BORDEAUX,
+            }}>
+              {meta.title}
+            </h1>
+            <p style={{
+              fontFamily: "'Plus Jakarta Sans', sans-serif",
+              fontSize: '1rem',
+              color: '#111',
+              margin: '0 0 2rem 0',
+            }}>
+              {meta.client}
+            </p>
+            <div style={{ borderRadius: 14, overflow: 'hidden', width: '100%' }}>
+              <div style={{ aspectRatio: '21/9', minHeight: 240, background: '#e5e7eb' }}>
                 <OptimizedImage
                   src={heroImageUrl}
                   alt={meta.title}
@@ -422,16 +409,6 @@ export default function ProjectDetail() {
           </div>
         </section>
 
-        <section style={{ padding: '2rem 3% 5rem' }}>
-          <div className="w-full">
-            <Link
-              href={getLocalizedPath('/projects')}
-              style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: '0.9rem', color: BORDEAUX, fontWeight: 600, textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: 8 }}
-            >
-              ← {t('projects.backToList')}
-            </Link>
-          </div>
-        </section>
       </main>
     </PageLayout>
   );

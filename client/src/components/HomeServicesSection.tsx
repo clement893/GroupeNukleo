@@ -36,8 +36,26 @@ export default function HomeServicesSection() {
               }}
               className="group-hover:shadow-lg"
             >
-              {/* Zone image + icône ↗ */}
-              <div style={{ position: 'relative', paddingTop: '60%', background: service.imageBg }}>
+              {/* Zone image / vidéo + icône ↗ */}
+              <div style={{ position: 'relative', paddingTop: '60%', background: service.imageBg, overflow: 'hidden' }}>
+                {service.heroVideo ? (
+                  <video
+                    src={service.heroVideo}
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                    className="absolute inset-0 w-full h-full object-cover"
+                    aria-hidden
+                  />
+                ) : service.heroImage ? (
+                  <img
+                    src={service.heroImage}
+                    alt=""
+                    className="absolute inset-0 w-full h-full object-cover"
+                    aria-hidden
+                  />
+                ) : null}
                 <span
                   className="absolute top-3 right-3 w-9 h-9 rounded-[10px] flex items-center justify-center pointer-events-none
                     bg-white/40 backdrop-blur-[12px] border border-white/60 shadow-sm

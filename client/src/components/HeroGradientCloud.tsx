@@ -11,22 +11,34 @@ import { createPortal } from 'react-dom';
 
 const HEIGHT_MAX = 256; // 320 - 20%
 const HEIGHT_MIN = Math.round(HEIGHT_MAX * 0.7); // ~179px au scroll
+/** Décalage vertical pour "monter" un peu les ellipses */
+const ELLIPSE_OFFSET_UP = 14;
+/** Opacité min au scroll pour garder les ellipses encore un tout petit peu visibles */
+const OPACITY_MIN = 0.22;
+/** Au-delà de ce scroll (px), opacité = OPACITY_MIN */
+const SCROLL_OPACITY_DISTANCE = 200;
 
 export default function HeroGradientCloud() {
   const [height, setHeight] = useState(HEIGHT_MAX);
+  const [scrollY, setScrollY] = useState(0);
 
   useEffect(() => {
     const onScroll = () => {
-      const scrollY = typeof window !== 'undefined' ? window.scrollY : 0;
-      setHeight(Math.max(HEIGHT_MIN, HEIGHT_MAX - scrollY * 0.96));
+      const y = typeof window !== 'undefined' ? window.scrollY : 0;
+      setScrollY(y);
+      setHeight(Math.max(HEIGHT_MIN, HEIGHT_MAX - y * 0.96));
     };
     onScroll();
     window.addEventListener('scroll', onScroll, { passive: true });
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
+  // Au scroll : ellipses moins visibles, mais encore un tout petit peu
+  const opacity = Math.max(OPACITY_MIN, 1 - (scrollY / SCROLL_OPACITY_DISTANCE) * (1 - OPACITY_MIN));
+
   /**
    * Ellipses nuageuses (courbe douce, plusieurs paliers) ; rouge très diffus pour ne pas marquer le bleu.
+   * Bleu gauche 21%, centre rouge 50%, bleu droite 79%.
    */
   const background =
     'radial-gradient(ellipse 28% 52.5% at 21% 0%, rgba(102, 72, 180, 1) 0%, rgba(102, 72, 180, 0.82) 28%, rgba(102, 72, 180, 0.48) 55%, rgba(102, 72, 180, 0.12) 82%, transparent 100%), radial-gradient(ellipse 26% 30% at 50% 0%, rgba(128, 70, 81, 1) 0%, rgba(128, 70, 81, 0.5) 32%, rgba(128, 70, 81, 0.18) 55%, rgba(128, 70, 81, 0.04) 78%, transparent 100%), radial-gradient(ellipse 28% 52.5% at 79% 0%, rgba(96, 70, 176, 1) 0%, rgba(96, 70, 176, 0.82) 28%, rgba(96, 70, 176, 0.48) 55%, rgba(96, 70, 176, 0.12) 82%, transparent 100%), linear-gradient(to bottom, #e8e0f0 0px, #f5f2f8 60px, transparent 160px), transparent';
@@ -52,7 +64,9 @@ export default function HeroGradientCloud() {
         backgroundRepeat: 'no-repeat',
         backgroundPosition: 'center',
         boxSizing: 'border-box',
-        transition: 'height 0.15s ease-out',
+        transition: 'height 0.15s ease-out, opacity 0.2s ease-out',
+        transform: `translateY(-${ELLIPSE_OFFSET_UP}px)`,
+        opacity,
       }}
     />
   );

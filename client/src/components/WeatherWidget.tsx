@@ -57,7 +57,7 @@ export function WeatherWidget({ className }: { className?: string }) {
         className={loading ? `weather-widget-loading ${className ?? ''}`.trim() : className}
         style={{
           borderRadius: 14,
-          padding: 'clamp(2.7rem, 3.6vw, 4.05rem) clamp(2.7rem, 3.9vw, 4.5rem)',
+          padding: 'clamp(1.5rem, 2.2vw, 2.5rem) clamp(1.5rem, 2.4vw, 2.75rem)',
           background: 'rgba(255,255,255,0.38)',
           backdropFilter: 'blur(16px) saturate(180%)',
           WebkitBackdropFilter: 'blur(16px) saturate(180%)',
@@ -67,24 +67,24 @@ export function WeatherWidget({ className }: { className?: string }) {
           flexDirection: 'column',
           alignItems: 'center',
           justifyContent: 'center',
-          gap: 'clamp(0.525rem, 0.75vw, 0.9rem)',
+          gap: 'clamp(0.35rem, 0.5vw, 0.6rem)',
           fontFamily: "'Plus Jakarta Sans', sans-serif",
           height: '100%',
         }}
       >
         {/* Icône au-dessus, température centrée en dessous */}
-        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 'clamp(0.5rem, 0.8vw, 1rem)' }}>
+        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 'clamp(0.35rem, 0.5vw, 0.65rem)' }}>
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
-            <Icon size={78} strokeWidth={1.5} color={iconColor} />
+            <Icon size={52} strokeWidth={1.5} color={iconColor} />
           </div>
           <div
             className={loading ? 'weather-placeholder' : undefined}
-            style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 700, fontSize: 'clamp(5.25rem, 6.6vw, 8.25rem)', lineHeight: 1, color: DARK, textAlign: 'center' }}
+            style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 700, fontSize: 'clamp(3.5rem, 4.4vw, 5.5rem)', lineHeight: 1, color: DARK, textAlign: 'center' }}
           >
-            {tempDisplay} <span style={{ fontSize: 'clamp(2.55rem, 3vw, 3.45rem)', verticalAlign: 'super' }}>°C</span>
+            {tempDisplay} <span style={{ fontSize: 'clamp(1.7rem, 2vw, 2.3rem)', verticalAlign: 'super' }}>°C</span>
           </div>
         </div>
-        <div className={loading ? 'weather-placeholder' : undefined} style={{ fontSize: 'clamp(0.75rem, 0.9vw, 1rem)', color: '#6b7280', textAlign: 'center' }}>
+        <div className={loading ? 'weather-placeholder' : undefined} style={{ fontSize: 'clamp(0.65rem, 0.8vw, 0.85rem)', color: '#6b7280', textAlign: 'center' }}>
           {locationDisplay}
         </div>
       </div>

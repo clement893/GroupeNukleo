@@ -68,8 +68,9 @@ export default function NukleoStudio() {
       />
       <ServiceDetailLayout
         pageTitle={t(`${NS}.heroTitle`)}
-        tagline=""
-        heroVideo="/demo/designer-studio-hero.mp4"
+        tagline={t(`${NS}.tagline`)}
+        heroDescription={t(`${NS}.heroDescription`)}
+        heroVideo="/demo/studio-creatif-hero.mp4"
         heroImageAlt={t(`${NS}.heroImageAlt`)}
         tabs={tabs}
         navItems={navItems.map((label, id) => ({ id: String(id), label }))}

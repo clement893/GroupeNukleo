@@ -1,0 +1,2741 @@
+{
+  "common": {
+    "loading": "Chargement...",
+    "error": "Erreur",
+    "close": "Fermer",
+    "cancel": "Annuler",
+    "save": "Enregistrer",
+    "delete": "Supprimer",
+    "edit": "Modifier",
+    "search": "Rechercher",
+    "submit": "Soumettre",
+    "back": "Retour",
+    "next": "Suivant",
+    "previous": "Précédent",
+    "closePreview": "Fermer la prévisualisation"
+  },
+  "nav": {
+    "home": "Accueil",
+    "about": "À propos",
+    "services": "Services",
+    "projects": "Projets",
+    "expertise": "Expertise",
+    "resources": "Ressources",
+    "contact": "Contact",
+    "startProject": "Démarrer un projet",
+    "talkToLeo": "Parler à Leo",
+    "leo": "Parler à Leo",
+    "artsCulture": "Arts & Culture",
+    "faq": "FAQ",
+    "approche": "Notre approche"
+  },
+  "header": {
+    "tagline": "CHOISIR L'INTELLIGENCE",
+    "menu": "Menu",
+    "openMenu": "Ouvrir le menu",
+    "closeMenu": "Fermer le menu",
+    "langSwitch": "Changer la langue"
+  },
+  "menu": {
+    "serviceTech": "Lab technologique",
+    "serviceStudio": "Studio créatif",
+    "serviceAgency": "Agence Comm & Marketing",
+    "serviceConsulting": "Transition numérique",
+    "ariaLabel": "Menu principal"
+  },
+  "approche": {
+    "seoTitle": "Notre approche — Méthodologie Nukleo | Nukleo",
+    "seoDescription": "Découverte, stratégie, implémentation, performance. La méthode Nukleo en 4 phases pour garantir des résultats mesurables et durables sur chaque projet.",
+    "seoKeywords": "méthodologie Nukleo, approche agile, co-création, transformation numérique, méthode projet IA",
+    "heroBadge": "Notre approche",
+    "heroTitle1": "La méthode qui",
+    "heroTitle2": "garantit les résultats.",
+    "heroParagraph": "Chaque projet Nukleo suit une méthodologie éprouvée en quatre phases. Pas d'improvisation, pas de promesses vides — une approche structurée qui transforme votre vision en performance mesurable.",
+    "phasesLabel": "La méthode en 4 phases",
+    "phasesTitle1": "De la découverte",
+    "phasesTitle2": "à la performance.",
+    "phase1Title": "Découverte",
+    "phase1Subtitle": "Comprendre avant d'agir",
+    "phase1Description": "Avant d'écrire la première ligne de code ou de proposer une stratégie, nous prenons le temps de comprendre votre organisation, vos enjeux, vos contraintes et vos ambitions. Cette phase est non négociable.",
+    "phase1Activities": ["Entretiens avec les parties prenantes clés", "Audit de l'existant (systèmes, processus, données)", "Analyse de la concurrence et du marché", "Définition des objectifs et indicateurs de succès"],
+    "phase1Duration": "1–2 semaines",
+    "phase2Title": "Stratégie",
+    "phase2Subtitle": "Concevoir avec rigueur",
+    "phase2Description": "Sur la base de la découverte, nous co-construisons avec vous une stratégie claire : architecture technique, plan d'action, priorisation des initiatives et feuille de route. Rien n'est imposé — tout est co-créé.",
+    "phase2Activities": ["Ateliers de co-création avec vos équipes", "Définition de l'architecture et des choix technologiques", "Priorisation des initiatives selon l'impact et l'effort", "Validation de la feuille de route et des jalons"],
+    "phase2Duration": "1–3 semaines",
+    "phase3Title": "Implémentation",
+    "phase3Subtitle": "Exécuter avec excellence",
+    "phase3Description": "L'exécution est au cœur de ce que nous faisons. Sprints de deux semaines, démos régulières, ajustements continus. Nous livrons de la valeur à chaque itération, pas seulement en fin de projet.",
+    "phase3Activities": ["Développement itératif en sprints de 2 semaines", "Démos et retours à chaque sprint", "Tests continus et assurance qualité", "Documentation et transfert de connaissances"],
+    "phase3Duration": "4–16 semaines",
+    "phase4Title": "Performance",
+    "phase4Subtitle": "Mesurer et optimiser",
+    "phase4Description": "Un projet livré n'est pas un projet terminé. Nous suivons les indicateurs de performance, analysons les données et optimisons en continu pour garantir que votre investissement génère des résultats durables.",
+    "phase4Activities": ["Mise en place des tableaux de bord de performance", "Analyse des données et identification des opportunités", "Optimisation continue des systèmes déployés", "Revues trimestrielles et ajustements stratégiques"],
+    "phase4Duration": "Continu",
+    "principlesLabel": "Nos principes",
+    "principlesTitle1": "Ce qui ne change jamais,",
+    "principlesTitle2": "quel que soit le projet.",
+    "principle1Title": "La co-création comme fondement",
+    "principle1Description": "Nous ne travaillons pas pour vous — nous travaillons avec vous. Chaque décision importante est prise ensemble. Vos équipes sont impliquées à chaque étape pour garantir l'adoption et la durabilité des solutions.",
+    "principle2Title": "L'impact avant la technologie",
+    "principle2Description": "La technologie n'est pas une fin en soi. Nous choisissons les outils en fonction des résultats à atteindre, pas l'inverse. Si une solution simple résout votre problème, nous la recommandons.",
+    "principle3Title": "La transparence totale",
+    "principle3Description": "Pas de boîte noire. Vous avez accès à tout : code, données, décisions, métriques. Nous documentons tout et nous assurons que vos équipes comprennent ce que nous construisons.",
+    "principle4Title": "La vitesse avec la rigueur",
+    "principle4Description": "Nous allons vite, mais pas au détriment de la qualité. Notre processus itératif permet de livrer de la valeur rapidement tout en maintenant des standards élevés à chaque étape.",
+    "principle5Title": "Les résultats comme seule mesure",
+    "principle5Description": "Notre succès se mesure au vôtre. Nous définissons des indicateurs clairs dès le départ et nous nous tenons responsables de les atteindre.",
+    "principle6Title": "L'IA comme levier, pas comme gadget",
+    "principle6Description": "Nous intégrons l'IA là où elle crée une valeur réelle et mesurable. Pas pour suivre une tendance, mais pour vous donner un avantage concurrentiel durable.",
+    "ctaTitle": "Prêt à travailler avec méthode ?",
+    "ctaParagraph": "Découvrez comment notre approche peut s'appliquer à votre contexte spécifique.",
+    "ctaStartProject": "Démarrer un projet",
+    "ctaViewDepartments": "Voir nos départements"
+  },
+  "preFooter": {
+    "words": ["Audacieux.", "Assumé.", "Fort.", "Intelligents."],
+    "ariaLabel": "Signature Nukleo"
+  },
+  "notFound": {
+    "title": "Page introuvable",
+    "message": "La page que vous recherchez n'existe pas ou a été déplacée. Remettons-vous sur la bonne voie.",
+    "backToHome": "Retour à l'accueil",
+    "stillLost": "Toujours perdu ?",
+    "contactUs": "Contactez-nous",
+    "stillLostEnd": "et nous vous aiderons à trouver ce qu'il vous faut.",
+    "quickLinks": {
+      "home": "Accueil",
+      "homeDesc": "Retour à l'accueil",
+      "expertise": "Expertise",
+      "expertiseDesc": "Découvrir nos services",
+      "services": "Services",
+      "servicesDesc": "Voir nos services",
+      "contact": "Contact",
+      "contactDesc": "Nous contacter"
+    }
+  },
+  "alt": {
+    "logo": "Logo Nukleo Digital - Agence de transformation IA",
+    "clientLogo": "Logo {{name}}",
+    "teamMember": "{{name}} - {{role}} chez Nukleo Digital",
+    "office": "Bureau Nukleo Digital à {{city}}",
+    "iconAILab": "Icône The AI Lab",
+    "iconStrategicBureau": "Icône The Strategic Bureau",
+    "iconCreativeStudio": "Icône The Creative Studio"
+  },
+  "hero": {
+    "title": "La performance par ",
+    "titleHighlight": "l'excellence numérique.",
+    "subtitle": "Votre partenaire 360 pour prendre le lead dans l'économie numérique et IA.",
+    "cta": "Choisissez l'intelligence.",
+    "services": [
+      "Nukleo.Agency",
+      "Nukleo.Studio",
+      "Nukleo.Tech",
+      "Nukleo.Consulting",
+      "Marketing numérique",
+      "Transformation numérique",
+      "Développement IA",
+      "Design & UX/UI",
+      "Communication",
+      "Stratégie digitale",
+      "Achat média",
+      "Développement web"
+    ]
+  },
+  "footer": {
+    "description": "La performance par l'excellence numérique. Choisissez l'intelligence.",
+    "ariaLabel": "Pied de page Nukleo Digital",
+    "links": {
+      "about": "À propos",
+      "services": "Services",
+      "projects": "Projets",
+      "contact": "Contact",
+      "privacy": "Confidentialité",
+      "nukleoTimePrivacy": "Confidentialité Nukleo.TIME",
+      "terms": "Conditions",
+      "cookies": "Cookies"
+    },
+    "copyright": "© {{year}} Nukleo. Tous droits réservés.",
+    "backToTop": "Retour en haut",
+    "sitemap": "Plan du site",
+    "navigation": "Navigation",
+    "services": {
+      "agency": "Nukleo.Agency — Marketing & Communication",
+      "studio": "Nukleo.Studio — Design & Création",
+      "tech": "Nukleo.Tech — Développement & IA",
+      "consulting": "Nukleo.Consulting — Transformation numérique"
+    },
+    "servicesLabel": "Services",
+    "contact": "Contact",
+    "newsletterTitle": "Restez à l'avant-garde du numérique",
+    "newsletterDescription": "Abonnez-vous pour recevoir nos dernières analyses, guides techniques et études de l'industrie.",
+    "newsletterPlaceholder": "Entrez votre email",
+    "newsletterButton": "S'abonner",
+    "nav": {
+      "manifesto": "Manifeste",
+      "clients": "Clients",
+      "media": "Médias",
+      "agencies": "Agences"
+    }
+  },
+  "home": {
+    "beyondAI": "Au-delà du numérique",
+    "beyondAIDescription": "Nous créons des écosystèmes de performance complets. De la stratégie à l'exécution, du design à la technologie, de la communication à la transformation numérique — tout orchestré et augmenté par l'IA.",
+    "ctaPerform": {
+      "title": "Prêt.e à performer?",
+      "paragraph": "Stratégie, créativité et technologie au service de votre croissance : nous vous accompagnons de l'idéation à la mise en œuvre. Que vous ayez un projet précis ou une ambition à clarifier, parlons de la suite. Ensemble, passons à l'action et donnons forme à votre prochain cap.",
+      "button": "Contactez-nous"
+    },
+    "latestWork": "Notre dernier travail",
+    "caseStudy": "Voir l'étude de cas →",
+    "audacious": "SOYONS AUDACIEUX.",
+    "audaciousSub": "Stratégie. Créativité. Technologie. Une seule équipe pour prendre le lead.",
+    "performNow": "Performez maintenant",
+    "trustedBy": "Ils nous font confiance",
+    "moreInfo": "Plus d'infos",
+    "audaciousLine1": "Un seul partenaire.",
+    "audaciousLine2": "Une intelligence intégrée.",
+    "audaciousLine3": "Des résultats mesurables.",
+    "audaciousParagraph": "L'excellence numérique ne devrait pas être réservée aux grandes entreprises.",
+    "team": {
+      "sectionLabel": "NOTRE ÉQUIPE",
+      "title": "Rencontrez notre équipe",
+      "description": "Des experts passionnés qui transforment votre vision en réalité.",
+      "cta": "Voir toute l'équipe"
+    }
+  },
+  "capabilities": {
+    "sectionLabel": "Capacités",
+    "title": "L'excellence numérique<br /><span class=\"text-white/70\">augmentée par l'IA</span>",
+    "description": "Nous ne construisons pas seulement des sites web ou des applications. Nous créons des écosystèmes de performance où chaque levier numérique est orchestré et augmenté par l'IA pour livrer des résultats mesurables.",
+    "aiWebsites": {
+      "title": "Sites web basés sur l'IA",
+      "description": "Expériences web auto-optimisées qui s'adaptent en temps réel au comportement et aux intentions de vos utilisateurs."
+    },
+    "intelligentPlatforms": {
+      "title": "Plateformes intelligentes",
+      "description": "Outils SaaS et internes construits sur une architecture agentique, automatisant les flux de travail complexes et la prise de décision."
+    },
+    "nextGenApps": {
+      "title": "Applications de nouvelle génération",
+      "description": "Applications mobiles et de bureau avec des cœurs IA intégrés, offrant des fonctionnalités prédictives et des interfaces en langage naturel."
+    },
+    "automatedMarketing": {
+      "title": "Marketing automatisé",
+      "description": "Gestion de campagnes de bout en bout par des agents IA de la génération de contenu à l'achat de publicité et à l'analyse des performances."
+    }
+  },
+  "manifesto": {
+    "seoTitle": "Notre manifeste | Passez de l'expérimentation à la mise en œuvre",
+    "seoDescription": "Manifeste Nukleo : vision transformation IA au-delà des pilotes. Solutions production-ready, évolutives. Approche stratégique succès IA pour entreprises.",
+    "seoKeywords": "manifeste transformation IA, vision IA, philosophie IA, approche IA, mise à l'échelle solutions IA",
+    "sectionLabel": "Notre vision",
+    "title": "Prendre le lead<br /><span class=\"text-white/70\">dans l'économie numérique.</span>",
+    "description": "L'écart se creuse. Pendant que certains hésitent, les organisations ambitieuses prennent le lead dans l'économie numérique et IA. Nukleo est leur partenaire.",
+    "readMore": "Lire le manifeste complet",
+    "card1": {
+      "title": "Co-créateurs de performance",
+      "description": "Nous ne livrons pas des services. Nous co-créons votre performance numérique, engagés sur vos résultats."
+    },
+    "card2": {
+      "title": "L'excellence, augmentée par l'IA",
+      "description": "L'IA est notre ADN opérationnel. Elle nous permet de livrer plus, plus vite, à un coût juste — sans jamais sacrifier la qualité."
+    },
+    "page": {
+      "eraOver": {
+        "title": "L'ère de l'expérimentation est révolue",
+        "paragraph1": "Nous avons passé les deux dernières années à tester des chatbots, générer du contenu et explorer les possibilités de l'IA. Ces expériences ont été précieuses, mais elles ne suffisent plus.",
+        "paragraph2": "Aujourd'hui, la question n'est plus \"Comment puis-je utiliser l'IA ?\" mais \"Comment puis-je réinventer mon organisation autour de l'IA ?\""
+      },
+      "newParadigm": {
+        "title": "Le nouveau paradigme",
+        "description": "Les agents IA autonomes représentent un changement fondamental dans la façon dont nous concevons le travail. Il ne s'agit plus d'outils que nous utilisons, mais d'agents autonomes qui collaborent avec nous, apprennent de nous et exécutent des tâches complexes de manière indépendante.",
+        "before": "Avant",
+        "beforeItems": [
+          "Outils passifs",
+          "Processus manuels",
+          "Décisions uniquement humaines",
+          "Échelle limitée"
+        ],
+        "now": "Maintenant",
+        "nowItems": [
+          "Agents autonomes",
+          "Automatisation intelligente",
+          "Décisions augmentées par l'IA",
+          "Échelle exponentielle"
+        ]
+      },
+      "vision": {
+        "title": "Notre vision",
+        "paragraph1": "Chez Nukleo, nous croyons que chaque organisation ambitieuse mérite un partenaire numérique à la hauteur de ses ambitions. Notre mission : démocratiser l'excellence numérique pour les PME et les OBNL du monde entier.",
+        "paragraph2": "Nous ne construisons pas simplement des sites web ou des applications. Nous créons des écosystèmes de performance où chaque levier numérique — stratégie, technologie, design, communication — est orchestré et augmenté par l'IA pour livrer des résultats mesurables."
+      },
+      "principles": {
+        "title": "Nos principes",
+        "leader": {
+          "title": "1. Leader, pas suiveur",
+          "description": "Intégrez l'IA agentique pour tripler votre ROI, votre vitesse et votre productivité."
+        },
+        "reinvented": {
+          "title": "2. Opérations réinventées",
+          "description": "Restructurez vos processus autour d'agents intelligents qui automatisent et optimisent continuellement."
+        },
+        "limitless": {
+          "title": "3. Échelle illimitée",
+          "description": "Créez des systèmes qui grandissent avec vous, sans les contraintes traditionnelles des ressources humaines ou du temps."
+        },
+        "humanCentered": {
+          "title": "4. Centré sur l'humain",
+          "description": "L'IA ne remplace pas les humains, elle les augmente. Nos solutions libèrent votre équipe pour se concentrer sur ce qui compte vraiment : la stratégie, la créativité et l'innovation."
+        }
+      },
+      "cta": {
+        "title": "Prêt à passer à l'échelle ?",
+        "description": "L'ère du marketing agentique est arrivée. Définissez votre feuille de route pour devenir un leader IA.",
+        "button": "Démarrer votre transformation"
+      },
+      "quote": {
+        "text": "\"La performance par l'excellence numérique. Choisissez l'intelligence.\"",
+        "author": "L'équipe Nukleo"
+      }
+    }
+  },
+  "trinity": {
+    "sectionLabel": "Nos départements",
+    "title": "Nos<br />Départements",
+    "description": "Quatre départements spécialisés, un seul objectif : votre performance numérique.",
+    "lab": {
+      "title": "Nukleo.Tech",
+      "subtitle": "Développement & Intelligence artificielle",
+      "description": "Nous concevons et développons les outils numériques qui propulsent votre performance. Développement web, applications mobiles, intégrations IA, automatisation et développement d'agents IA sur mesure."
+    },
+    "bureau": {
+      "title": "Nukleo.Consulting",
+      "subtitle": "Transformation numérique & Conseil",
+      "description": "Nous accompagnons votre organisation dans sa transformation numérique. Audit, stratégie, conseil IA, accompagnement au changement et formation — de la vision à l'exécution."
+    },
+    "studio": {
+      "title": "Nukleo.Studio",
+      "subtitle": "Design & Création",
+      "description": "Nous créons des expériences visuelles et créatives qui rendent votre performance visible et désirable. Design graphique, UX/UI, branding, direction artistique et production créative."
+    },
+    "explore": "Explorer",
+    "agency": {
+      "title": "Nukleo.Agency",
+      "subtitle": "Marketing & Communication 360",
+      "description": "Nous activons et amplifions votre présence numérique. Marketing numérique, gestion des médias sociaux, achat média, stratégie de contenu, infolettres et campagnes de performance — augmentés par l'IA."
+    }
+  },
+  "cta": {
+    "title": "Prêt à prendre le lead ?",
+    "description": "Choisissez l'intelligence. Démarrons ensemble.",
+    "button": "Démarrons ensemble"
+  },
+  "testimonials": {
+    "seoTitle": "Témoignages clients | Nukleo Digital",
+    "seoDescription": "Témoignages clients transformation IA. Leaders industrie partagent leur succès transformation digitale avec Nukleo Digital. Expertise reconnue.",
+    "seoKeywords": "témoignages clients IA, avis Nukleo Digital, études de cas IA, succès clients transformation numérique",
+    "title": "Ce que nos<br /><span class=\"text-white/70\">clients disent</span>",
+    "description": "Nous sommes fiers de nous associer à des organisations visionnaires pour repousser les limites de ce qui est possible avec l'IA."
+  },
+  "whoWeServe": {
+    "sectionLabel": "Partenaire des organisations ambitieuses",
+    "title": "Qui nous<br /><span class=\"text-white/70\">servons</span>",
+    "description": "Parce que chaque organisation ambitieuse mérite un partenaire numérique à la hauteur de ses ambitions. Nous démocratisons l'excellence numérique pour les PME, les OBNL et les organisations qui veulent prendre le lead dans l'économie numérique et IA.",
+    "startups": {
+      "title": "Startups & Scale-ups",
+      "description": "Propulsez votre croissance avec un écosystème numérique complet, augmenté par l'IA. De la stratégie au lancement, nous construisons les fondations de votre avantage concurrentiel."
+    },
+    "smbs": {
+      "title": "PME & entreprises en croissance",
+      "description": "Accédez à l'excellence numérique sans les budgets des grandes entreprises. Notre modèle augmenté par l'IA vous permet de performer comme les leaders de votre secteur, à un coût juste."
+    },
+    "nonProfits": {
+      "title": "OBNL & organisations à mission",
+      "description": "Amplifiez votre impact avec des outils numériques qui vous permettent de servir plus de personnes, de mobiliser votre communauté et de raconter votre mission avec puissance.",
+      "highlights": [
+        "IA axée sur la mission",
+        "Outils d'engagement des donateurs",
+        "Efficacité opérationnelle"
+      ]
+    },
+    "cta": {
+      "title": "Prêt à prendre le lead ?",
+      "subtitle": "Démarrons ensemble",
+      "button": "Démarrons ensemble"
+    }
+  },
+  "clients": {
+    "seoTitle": "Nos clients | Leaders de l'industrie et innovateurs",
+    "seoDescription": "Découvrez les entreprises visionnaires qui nous font confiance pour leur transformation IA. Des startups aux grandes entreprises, nous sommes fiers de nos partenariats.",
+    "seoKeywords": "clients Nukleo Digital, partenaires IA, études de cas clients, portfolio IA",
+    "trustedBy": "Approuvé par les leaders de l'industrie",
+    "title": "Nos<br /><span class=\"text-white/70\">clients</span>",
+    "description": "Des musées aux startups technologiques, nous avons aidé des organisations de divers secteurs à transformer leurs opérations avec des solutions alimentées par l'IA. Voici quelques-unes des entreprises incroyables avec lesquelles nous avons eu le privilège de travailler.",
+    "trustedClients": "Clients de confiance",
+    "industriesServed": "Secteurs desservis",
+    "avgROI": "Augmentation moyenne du ROI",
+    "servicesProvided": "Services fournis",
+    "keyResults": "Résultats clés",
+    "cta": {
+      "title": "Prêt à les rejoindre ?",
+      "description": "Discutons de la manière dont nos services d'IA peuvent transformer votre entreprise et accélérer votre croissance.",
+      "button": "Démarrer votre transformation",
+      "buttonSecondary": "Démarrer un projet"
+    }
+  },
+  "expertise": {
+    "seo": {
+      "title": "Notre expertise en écosystèmes IA | Nukleo Digital",
+      "description": "De la stratégie à la production, nous créons des écosystèmes IA complets qui intègrent votre web, vos communications et vos systèmes internes pour une transformation durable.",
+      "keywords": "écosystèmes IA, expertise IA, stratégie IA, systèmes internes IA, communication IA"
+    },
+    "heroTitle": "Architectes de votre",
+    "heroSubtitle": "Écosystème IA",
+    "description": "Chez Nukleo, nous allons au-delà des solutions ponctuelles. Nous concevons, construisons et gérons des écosystèmes d'intelligence artificielle complets qui unifient votre présence web, vos communications et vos systèmes internes. Notre approche holistique assure une transformation cohérente, durable et alignée sur vos objectifs d'affaires.",
+    "areas": {
+      "agenticAI": {
+        "title": "Systèmes d'agents IA",
+        "description": "Nous développons des agents IA autonomes qui automatisent vos processus, de la gestion de la relation client à l'optimisation de vos opérations internes, créant une colonne vertébrale intelligente pour votre organisation.",
+        "capabilities": [
+          "Automatisation des processus métier (BPA)",
+          "Intégration CRM et ERP",
+          "Optimisation de la chaîne d'approvisionnement",
+          "Support client autonome"
+        ]
+      },
+      "aiNative": {
+        "title": "Plateformes web intelligentes",
+        "description": "Votre site web devient un agent de conversion. Nous créons des plateformes qui personnalisent l'expérience utilisateur en temps réel, anticipent les besoins et guident activement les visiteurs vers leurs objectifs.",
+        "capabilities": [
+          "Sites web auto-optimisants (CRO)",
+          "Personnalisation de contenu en temps réel",
+          "Moteurs de recherche sémantique",
+          "Analytique prédictive du comportement utilisateur"
+        ]
+      },
+      "transformation": {
+        "title": "Communication et marketing augmentés",
+        "description": "Nous unifions votre message sur tous les canaux. Nos systèmes IA génèrent du contenu pertinent, gèrent vos campagnes publicitaires et analysent la performance pour un impact maximal et une voix de marque cohérente.",
+        "capabilities": [
+          "Génération de contenu multi-canal",
+          "Gestion de campagnes publicitaires autonomes",
+          "Analyse de sentiment et veille de marque",
+          "Optimisation de l'engagement sur les réseaux sociaux"
+        ]
+      },
+      "creativeStudio": {
+        "title": "Studio créatif",
+        "description": "Notre studio créatif utilise l'IA pour produire des expériences de marque et du contenu à une échelle et une pertinence inégalées. De la création de contenu augmenté aux campagnes marketing agentiques.",
+        "capabilities": [
+          "Création de contenu augmenté",
+          "Campagnes marketing agentiques",
+          "Identité de marque dynamique",
+          "Production vidéo assistée par IA"
+        ]
+      },
+      "dataPlatforms": {
+        "title": "Plateformes de données intelligentes",
+        "description": "Nous construisons la fondation de données robuste et flexible pour l'intégration de l'IA. Des plateformes de données intelligentes aux agents IA sur mesure et à l'automatisation des processus intelligents.",
+        "capabilities": [
+          "Architecture de pipeline de données",
+          "Bases de données vectorielles et RAG",
+          "Traitement de flux en temps réel",
+          "Gouvernance et qualité des données"
+        ]
+      },
+      "aiConsulting": {
+        "title": "Consultation en IA",
+        "description": "Nous définissons la stratégie, pilotons la transformation et mesurons l'impact de l'IA. Des audits de maturité à la stratégie de transformation agentique et à la gouvernance de l'IA.",
+        "capabilities": [
+          "Audit de maturité IA",
+          "Feuille de route de transformation IA",
+          "Gouvernance et éthique de l'IA",
+          "Analyse de rentabilité de l'IA"
+        ]
+      }
+    },
+    "process": {
+      "title": "Notre approche de la transformation",
+      "description": "Nous suivons un processus en quatre étapes pour assurer le succès de votre transformation, de la découverte à l'échelle.",
+      "steps": {
+        "discover": {
+          "title": "Découverte",
+          "description": "Nous plongeons dans votre organisation pour comprendre vos défis, vos objectifs et vos opportunités."
+        },
+        "design": {
+          "title": "Conception",
+          "description": "Nous concevons une feuille de route stratégique et une architecture technique pour votre écosystème IA."
+        },
+        "develop": {
+          "title": "Développement",
+          "description": "Nous construisons, testons et intégrons chaque composant de votre écosystème avec une agilité rigoureuse."
+        },
+        "deploy": {
+          "title": "Déploiement & Évolution",
+          "description": "Nous déployons la solution et assurons son évolution continue pour maximiser votre retour sur investissement."
+        }
+      }
+    },
+    "cta": {
+      "title": "Prêt à construire votre écosystème ?",
+      "description": "Discutons de la manière dont une approche intégrée de l'IA peut unifier et transformer votre entreprise.",
+      "viewServices": "Voir nos services",
+      "getInTouch": "Prendre contact"
+    }
+  },
+  "about": {
+    "seoTitle": "À propos de nous | L'équipe derrière Nukleo Digital",
+    "seoDescription": "Équipe experts IA, stratèges et créatifs Nukleo Digital. Mission, valeurs, approche transformation IA. Montréal et Halifax.",
+    "seoKeywords": "équipe Nukleo Digital, à propos de Nukleo, experts IA, mission Nukleo, valeurs agence IA",
+    "heroTitle": "Co-créateurs de votre performance numérique.",
+    "heroDescription": "Une équipe de stratèges, de créatifs et d'ingénieurs unis par une mission : démocratiser l'excellence numérique pour les organisations ambitieuses du monde entier.",
+    "heroNewTitle": "Choisissez l'intelligence",
+    "heroNewSubtitle": "Choisissez la transformation numérique dès maintenant.",
+    "aboutUs": "À PROPOS DE NOUS",
+    "heroTitle1": "Stratégie.",
+    "heroTitle2": "Créativité.",
+    "heroTitle3": "Technologie.",
+    "manifesto": "MANIFESTE",
+    "nukleoSpirit": "L'esprit Nukleo",
+    "nukleoSpiritText": "Chez <strong>Nukleo</strong>, nous croyons que chaque organisation ambitieuse mérite un partenaire numérique à la hauteur de ses ambitions. Notre mission : démocratiser l'excellence numérique pour les PME et les OBNL du monde entier — en rendant accessible ce qui était réservé aux grandes entreprises.",
+    "ourApproach": "Notre approche",
+    "ourApproachText": "Nous ne livrons pas des services. Nous co-créons votre performance numérique, engagés sur vos résultats. De la stratégie à l'exécution, du design à la technologie, de la communication à la transformation numérique — tout orchestré et augmenté par l'IA pour livrer plus, plus vite, à un coût juste.",
+    "whatSetsUsApart": "Ce qui nous distingue",
+    "whatSetsUsApartText": "L'IA est notre ADN opérationnel. Elle nous permet de livrer l'excellence numérique à un coût démocratisé, sans jamais sacrifier la qualité. Nos quatre départements — Nukleo.Agency, Nukleo.Studio, Nukleo.Tech et Nukleo.Consulting — travaillent main dans la main pour vous offrir un écosystème de performance complet.",
+    "ourTeam": "NOTRE ÉQUIPE",
+    "missionLabel": "Notre mission",
+    "missionTitle": "Faire rayonner les petites et moyennes entreprises dans leur croissance numérique.",
+    "missionDescription": "Nam libero tempore cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime.",
+    "ctaSubtitle": "Propulsez votre croissance digitale avec une stratégie sur mesure conçue pour durer.",
+    "storyTitle": "Notre Histoire",
+    "storyDescription1": "Nukleo Digital est né de la fusion de deux expertises : la stratégie numérique et l'ingénierie IA. Frustrés par l'approche en silo qui domine l'industrie, nous avons décidé de créer une agence qui pense en termes d'écosystèmes, pas de projets isolés.",
+    "storyDescription2": "Depuis notre création, nous avons aidé des dizaines d'entreprises à naviguer dans la complexité de la transformation numérique, en livrant des solutions qui ne sont pas seulement technologiquement avancées, mais aussi profondément alignées avec leurs objectifs commerciaux.",
+    "valuesTitle": "Nos valeurs",
+    "valuesLabel": "NOS VALEURS",
+    "valuesSubtitle": "Les valeurs que nous défendons pour un travail accompli",
+    "values": {
+      "authenticity": {
+        "title": "Authenticité",
+        "description": "Nous disons les choses comme elles sont. Transparence totale, honnêteté radicale, et authenticité dans chaque interaction. Avec nos clients, avec nos partenaires, et entre nous."
+      },
+      "excellence": {
+        "title": "Excellence",
+        "description": "Nous ne nous contentons pas du « bien ». Nous visons l'excellence dans chaque livrable, chaque stratégie, chaque ligne de code. L'excellence n'est pas un luxe — c'est notre standard."
+      },
+      "ownership": {
+        "title": "Ownership",
+        "description": "Nous prenons possession de chaque projet comme si c'était le nôtre. Nous sommes engagés sur vos résultats, pas seulement sur la livraison. Votre succès est notre succès."
+      },
+      "bienveillance": {
+        "title": "La bienveillance",
+        "description": "Nous cultivons un environnement où la confiance et le respect mutuel permettent à chacun de donner le meilleur. La bienveillance guide nos relations clients et internes."
+      }
+    },
+    "team": {
+      "clement": {
+        "role": "Fondateur & CEO",
+        "roleAbout": "Président et fondateur de Nukleo",
+        "bio": "Clément pilote la vision et la stratégie de Nukleo. Passionné par la transformation numérique des PME et des OBNL, il s'assure que chaque client bénéficie d'un partenaire à l'écoute, exigeant et orienté résultats."
+      },
+      "alexei": {
+        "role": "Co-fondateur & CTO"
+      },
+      "antoine": {
+        "role": "Développeur Full-Stack"
+      },
+      "margaux": {
+        "role": "Designer UX/UI"
+      },
+      "camille": {
+        "role": "Stratège Marketing"
+      },
+      "timothe": {
+        "role": "Développeur IA"
+      },
+      "sarah": {
+        "role": "Chef de Projet"
+      },
+      "severine": {
+        "role": "Designer Graphique"
+      },
+      "maxime": {
+        "role": "Développeur Backend"
+      },
+      "meriem": {
+        "role": "Analyste Données"
+      },
+      "jeanFrancois": {
+        "role": "Développeur Senior"
+      },
+      "hind": {
+        "role": "Stratège Numérique"
+      },
+      "omar": {
+        "role": "Architecte Solutions"
+      },
+      "ricardo": {
+        "role": "Expert IA"
+      },
+      "marieClaire": {
+        "role": "Consultante Transformation"
+      }
+    },
+    "teamTitle": "Rencontrez l'équipe",
+    "teamDescription": "Une fusion unique de talents créatifs, stratégiques et techniques.",
+    "officesTitle": "Nos Bureaux",
+    "officesDescription": "Basés à Montréal et Halifax, nous servons des clients partout en Amérique du Nord.",
+    "ourOffices": "NOS BUREAUX",
+    "montreal": "MONTRÉAL",
+    "montrealDescription": "Au cœur de la Petite Italie, nous serions ravis de vous rencontrer au marché Jean-Talon pour discuter !",
+    "halifax": "HALIFAX",
+    "halifaxDescription": "Au cœur du centre-ville de Halifax, nous serions heureux de vous rencontrer près du front de mer pour discuter !",
+    "remote": "DISTANCE",
+    "remoteDescription": "Notre équipe travaille à distance partout en Amérique du Nord. Nous sommes toujours disponibles pour des réunions virtuelles et des consultations.",
+    "remoteLocation": "Disponible partout dans le monde via vidéoconférence",
+    "letsTalk": "Parlons-en",
+    "ctaTitle": "Rejoignez notre équipe",
+    "ctaDescription": "Nous sommes toujours à la recherche de talents passionnés pour rejoindre notre mission. Consultez nos offres d'emploi et aidez-nous à construire l'avenir.",
+    "ctaButton": "Voir les carrières",
+    "groupSection": {
+      "title": "L'écosystème Nukleo",
+      "description": "Nukleo est la marque phare d'un écosystème plus large.",
+      "nukleoGroup": {
+        "name": "Nukleo.Group",
+        "description": "La holding stratégique qui pilote les acquisitions et la croissance du groupe. Nukleo.Group est le cadre institutionnel qui permet à Nukleo et à ses marques partenaires de croître ensemble."
+      },
+      "rougeOnBlue": {
+        "name": "Rouge on Blue",
+        "description": "Pour les transformations d'envergure qui requièrent le plus haut niveau de stratégie et de créativité. Rouge on Blue est la marque du groupe pour les mandats de grande transformation, portés par une vision audacieuse."
+      }
+    }
+  },
+  "services": {
+    "creativeStudio": {
+      "badge": "STUDIO",
+      "heroTitle": "La créativité,",
+      "heroTitleHighlight": "amplifiée.",
+      "heroSubtitle": "Design & Brand Experiences",
+      "heroDescription": "Des créatifs passionnés qui donnent vie à vos idées. Nous concevons des identités de marque mémorables et des expériences digitales qui marquent les esprits — avec les meilleurs outils pour aller plus vite et plus loin.",
+      "clientNeeds": {
+        "title": "Besoins clients",
+        "items": [
+          "Vous avez besoin d'une identité de marque forte et distinctive",
+          "Vous voulez une expérience utilisateur fluide et engageante",
+          "Vous cherchez des campagnes créatives qui se démarquent",
+          "Vous avez besoin de contenus visuels de qualité, à grande échelle"
+        ]
+      },
+      "approachTitle": "Créativité humaine, outils modernes",
+      "approachDescription": "Chaque projet commence par une idée humaine. Nos directeurs artistiques, designers et créatifs imaginent, conçoivent et peaufinent chaque détail. Nous utilisons les meilleurs outils — y compris l'IA — pour explorer plus de pistes, itérer plus vite et livrer une qualité irréprochable. Mais la vision reste humaine.",
+      "pillars": {
+        "title": "4 piliers",
+        "vision": {
+          "number": "01",
+          "title": "Vision stratégique",
+          "description": "Chaque création sert un objectif business clair"
+        },
+        "craft": {
+          "number": "02",
+          "title": "Craft & détail",
+          "description": "Une exécution soignée jusqu'au dernier pixel"
+        },
+        "coherence": {
+          "number": "03",
+          "title": "Cohérence",
+          "description": "Une identité forte sur tous les points de contact"
+        },
+        "impact": {
+          "number": "04",
+          "title": "Impact",
+          "description": "Des créations qui génèrent des résultats"
+        }
+      },
+      "expertiseTitle": "Ce que nous créons",
+      "expertise": {
+        "branding": {
+          "title": "Branding & Identité",
+          "description": "Nous créons des marques mémorables qui racontent votre histoire et connectent avec votre audience.",
+          "deliverables": "Logo, charte graphique, brand guidelines, naming, storytelling"
+        },
+        "uiux": {
+          "title": "UX/UI Design",
+          "description": "Nous concevons des interfaces intuitives et esthétiques qui transforment les utilisateurs en clients fidèles.",
+          "deliverables": "Wireframes, prototypes, design systems, interfaces web & mobile"
+        },
+        "artDirection": {
+          "title": "Direction Artistique",
+          "description": "Nous définissons l'univers visuel de vos projets et campagnes pour une cohérence impactante.",
+          "deliverables": "Concepts créatifs, moodboards, guidelines visuelles"
+        },
+        "campaigns": {
+          "title": "Design de Campagnes",
+          "description": "Nous créons les visuels et assets de vos campagnes publicitaires sur tous les canaux.",
+          "deliverables": "Bannières, visuels social, print, affichage, vidéo"
+        },
+        "motion": {
+          "title": "Motion Design",
+          "description": "Nous donnons vie à vos messages avec des animations et vidéos qui captent l'attention.",
+          "deliverables": "Animations, vidéos explicatives, intros, contenus social"
+        },
+        "production": {
+          "title": "Production Visuelle",
+          "description": "Nous produisons les contenus visuels dont vous avez besoin : photos, illustrations, assets.",
+          "deliverables": "Shooting photo, illustrations, retouches, assets digitaux"
+        }
+      },
+      "teamTitle": "Les créatifs derrière vos projets",
+      "teamDescription": "Directeurs artistiques, designers UI/UX, graphistes, motion designers — une équipe créative passionnée qui transforme vos idées en réalité. Basés à Montréal et Halifax, nous travaillons main dans la main avec nos clients.",
+      "processTitle": "Processus",
+      "process": {
+        "discovery": {
+          "step": "01",
+          "title": "Discovery",
+          "description": "Comprendre votre marque, vos objectifs et votre audience"
+        },
+        "concept": {
+          "step": "02",
+          "title": "Concept",
+          "description": "Explorer les directions créatives et définir la vision"
+        },
+        "design": {
+          "step": "03",
+          "title": "Design",
+          "description": "Créer, itérer et peaufiner jusqu'à la perfection"
+        },
+        "delivery": {
+          "step": "04",
+          "title": "Livraison",
+          "description": "Décliner sur tous les supports et formats nécessaires"
+        }
+      },
+      "ctaTitle": "Prêt à donner vie à votre vision ?",
+      "ctaDescription": "Discutons de votre projet et créons ensemble quelque chose de mémorable.",
+      "ctaButton1": "Démarrer un projet",
+      "ctaButton2": "Voir nos réalisations"
+    },
+    "detail": {
+      "studio": {
+        "pageTitle": "Studio créatif",
+        "heroBadge": "Design & Brand Experiences",
+        "heroTitle": "La créativité, amplifiée.",
+        "tagline": "Design & expériences de marque.",
+        "heroImageAlt": "Créatif au travail avec tablette et stylet, environnement de design et création.",
+        "navItems": ["Design & expériences de marque", "Web & UI/UX", "Motion Design", "Production visuelle", "Stratégie de contenu"],
+        "tabs": [
+          { "id": "image-marque", "label": "Image de marque", "title": "La créativité, amplifiée.", "subtitle": "Design & Brand Experiences", "description": "Des créatifs passionnés qui donnent vie à vos idées. Nous concevons des identités de marque mémorables et des expériences digitales qui marquent les esprits — avec les meilleurs outils pour aller plus vite et plus loin.", "benefits": ["Vous avez besoin d'une identité de marque forte et distinctive", "Vous voulez une expérience utilisateur fluide et engageante", "Vous cherchez des campagnes créatives qui se démarquent", "Vous avez besoin de contenus visuels de qualité, à grande échelle"] },
+          { "id": "ux-ui", "label": "UX/UI", "title": "Interfaces qui convertissent.", "subtitle": "Web & expérience utilisateur", "description": "Nous concevons des interfaces intuitives et des parcours utilisateur qui transforment les visiteurs en clients. Recherche utilisateur, wireframes, maquettes haute fidélité et design systems.", "benefits": ["Vous lancez un nouveau site ou une application", "Vous voulez améliorer l'ergonomie de votre plateforme", "Vous avez besoin d'un design system cohérent", "Vous visez une expérience mobile irréprochable"] },
+          { "id": "impressions", "label": "Impressions", "title": "Print & supports physiques.", "subtitle": "Brochures, affiches, packaging", "description": "De la carte de visite au packaging, nous créons des supports imprimés qui renforcent votre marque. Mise en page, choix des matériaux et suivi de production.", "benefits": ["Vous avez besoin de supports print pour un événement", "Vous lancez une nouvelle gamme de produits", "Vous voulez une identité cohérente du digital au print", "Vous cherchez un partenaire pour vos campagnes d'affichage"] },
+          { "id": "supports-visuels", "label": "Supports visuels", "title": "Contenus visuels à grande échelle.", "subtitle": "Photographie, vidéo, illustration", "description": "Visuels de campagne, contenus pour les réseaux sociaux, visuels de marque et assets pour vos canaux. Nous produisons des contenus visuels de qualité, alignés avec votre stratégie.", "benefits": ["Vous devez produire beaucoup de contenus visuels", "Vous voulez une direction artistique claire", "Vous cherchez des visuels qui se démarquent", "Vous avez besoin de cohérence entre tous vos supports"] },
+          { "id": "refonte-marque", "label": "Refonte de marque", "title": "Une marque qui évolue avec vous.", "subtitle": "Stratégie de marque & identité", "description": "Audit de marque, repositionnement, nouvelle identité visuelle et charte graphique. Nous accompagnons les entreprises qui souhaitent moderniser ou faire évoluer leur image.", "benefits": ["Votre marque ne reflète plus votre positionnement", "Vous fusionnez ou lancez une nouvelle offre", "Vous voulez rajeunir votre image", "Vous avez besoin d'une charte graphique actionnable"] },
+          { "id": "reseaux-sociaux", "label": "Supports pour les réseaux sociaux", "title": "Du scroll à l'engagement.", "subtitle": "Contenus sociaux & formats courts", "description": "Création de contenus adaptés aux réseaux sociaux : visuels, stories, carrousels et formats courts. Une esthétique de marque qui performe sur chaque plateforme.", "benefits": ["Vous voulez une présence sociale professionnelle", "Vous avez besoin de contenus réguliers et cohérents", "Vous cherchez à augmenter l'engagement", "Vous lancez une campagne sur les réseaux sociaux"] },
+          { "id": "ideation-campagne", "label": "Idéation de campagne de communication", "title": "Des idées qui marquent les esprits.", "subtitle": "Stratégie créative & campagnes", "description": "De la stratégie créative au concept de campagne, nous vous accompagnons pour des lancements et des campagnes qui captent l'attention et génèrent des résultats.", "benefits": ["Vous lancez un produit ou un service", "Vous avez besoin d'un concept de campagne fort", "Vous voulez aligner créatif et objectifs business", "Vous cherchez un partenaire pour toute la chaîne créative"] }
+        ],
+        "mainTitle": "La créativité, amplifiée. Design & expériences de marque.",
+        "mainDescription": "Nous créons des sites web, des applications mobiles et des interfaces intuitives qui captivent et génèrent des résultats. Une approche centrée utilisateur alliant esthétique, ergonomie et innovation.",
+        "mainTags": ["Création de sites web", "Applications mobiles", "Design d'interfaces"],
+        "extensionsTitle": "Extensions créatives",
+        "extensionsDescription": "Nous élevons les marques avec des extensions créatives : de la création de contenus visuels à la stratégie de marque, nous donnons vie à votre vision avec des solutions innovantes et percutantes.",
+        "extensionsTags": ["Conseil stratégique", "Direction artistique", "Campagnes publicitaires", "Identité visuelle"],
+        "grid0Title": "Branding & Identité",
+        "grid0Description": "Nous créons des marques mémorables qui racontent votre histoire et connectent avec votre audience.",
+        "grid0Deliverables": "Logo, charte graphique, brand guidelines, naming, storytelling",
+        "grid1Title": "UX/UI Design",
+        "grid1Description": "Nous concevons des interfaces intuitives et esthétiques qui transforment les utilisateurs en clients fidèles.",
+        "grid1Deliverables": "Wireframes, prototypes, design systems, interfaces web & mobile",
+        "grid2Title": "Direction Artistique",
+        "grid2Description": "Nous définissons l'univers visuel de vos projets et campagnes pour une cohérence impactante.",
+        "grid2Deliverables": "Concepts créatifs, moodboards, guidelines visuelles",
+        "grid3Title": "Design de Campagnes",
+        "grid3Description": "Nous créons les visuels et assets de vos campagnes publicitaires sur tous les canaux.",
+        "grid3Deliverables": "Bannières, visuels social, print, affichage, vidéo",
+        "grid4Title": "Motion Design",
+        "grid4Description": "Nous donnons vie à vos messages avec des animations et vidéos qui captent l'attention.",
+        "grid4Deliverables": "Animations, vidéos explicatives, intros, contenus social",
+        "grid5Title": "Production Visuelle",
+        "grid5Description": "Nous produisons les contenus visuels dont vous avez besoin : photos, illustrations, assets.",
+        "grid5Deliverables": "Shooting photo, illustrations, retouches, assets digitaux",
+        "expertiseSectionTitle": "CE QUE NOUS CRÉONS",
+        "deliverablesLabel": "Livrables : ",
+        "expertiseSectionDescription": "",
+        "teamTitle": "Les créatifs derrière vos projets",
+        "processSectionTitle": "Processus",
+        "teamDescription": "Directeurs artistiques, designers UI/UX, graphistes, motion designers — une équipe créative passionnée qui transforme vos idées en réalité. Basés à Montréal et Halifax, nous travaillons main dans la main avec nos clients.",
+        "teamMember0Name": "Margaux",
+        "teamMember0Role": "Directrice artistique",
+        "teamMember0Image": "/team/Margaux.webp",
+        "teamMember0ImageAlt": "Margaux — Directrice artistique chez Nukleo Digital",
+        "teamMember1Name": "Camille",
+        "teamMember1Role": "Designer UX/UI",
+        "teamMember1Image": "/team/Camille.webp",
+        "teamMember1ImageAlt": "Camille — Designer UX/UI chez Nukleo Digital",
+        "teamMember2Name": "Sarah",
+        "teamMember2Role": "Design & contenu",
+        "teamMember2Image": "/team/Sarah.webp",
+        "teamMember2ImageAlt": "Sarah — Design & contenu chez Nukleo Digital",
+        "teamMember3Name": "Séverine",
+        "teamMember3Role": "Direction de création",
+        "teamMember3Image": "/team/Severine.webp",
+        "teamMember3ImageAlt": "Séverine — Direction de création chez Nukleo Digital",
+        "process0Title": "Discovery",
+        "process0Description": "Comprendre vos besoins, analyser le marché et définir les objectifs.",
+        "process1Title": "Concept",
+        "process1Description": "Développer des idées créatives, élaborer des stratégies et créer des maquettes.",
+        "process2Title": "Design",
+        "process2Description": "Concevoir les visuels, les interfaces et les expériences utilisateur.",
+        "process3Title": "Livraison",
+        "process3Description": "Finaliser le projet, assurer la mise en œuvre et le suivi.",
+        "ctaTitle": "Prêt à performer ?",
+        "ctaButtonText": "Contactez-nous",
+        "sectionVisualTitle": "Créativité humaine, outils modernes",
+        "sectionVisualSubtitle": "Chaque projet commence par une idée humaine.",
+        "sectionVisualDescription": "Nos directeurs artistiques et designers donnent le cap ; l'IA nous aide à affiner les détails et à livrer plus vite, sans jamais sacrifier la qualité. Du concept à la livraison, la vision reste humaine.",
+        "sectionHighlight0Title": "Vision stratégique",
+        "sectionHighlight0Description": "Chaque création sert un objectif business clair",
+        "sectionHighlight1Title": "Craft & détail",
+        "sectionHighlight1Description": "Une exécution soignée jusqu'au dernier pixel",
+        "sectionHighlight2Title": "Cohérence",
+        "sectionHighlight2Description": "Une identité forte sur tous les points de contact",
+        "sectionHighlight3Title": "Impact",
+        "sectionHighlight3Description": "Des créations qui génèrent des résultats"
+      },
+      "tech": {
+        "pageTitle": "Lab technologique",
+        "tagline": "Du code, des résultats. Développement & technologie.",
+        "heroImageAlt": "Environnement de développement et technologie.",
+        "navItems": ["Développement sur mesure", "Applications web & mobiles", "Architecture data & IA", "Intégrations & APIs", "Déploiement & DevOps"],
+        "mainTitle": "Du code, des résultats. Développement sur mesure.",
+        "mainDescription": "Nous construisons les solutions numériques qui font tourner votre activité. Applications web et mobiles, plateformes sur mesure, intégrations et automatisation — une équipe de développeurs seniors qui livre du code propre et des produits qui marchent.",
+        "mainTags": ["Applications web", "Applications mobiles", "APIs", "Architecture"],
+        "extensionsTitle": "Solutions IA & data",
+        "extensionsDescription": "Nous concevons l'infrastructure data et les systèmes IA qui propulsent votre performance : pipelines de données, agents autonomes, déploiement scalable et optimisation continue.",
+        "extensionsTags": ["Agents IA", "Data pipelines", "Cloud", "DevOps"],
+        "grid0Title": "Applications Web",
+        "grid0Description": "Plateformes web robustes et scalables adaptées à vos objectifs.",
+        "grid1Title": "Applications Mobiles",
+        "grid1Description": "Apps natives et cross-platform avec une expérience utilisateur exceptionnelle.",
+        "grid2Title": "Architecture Data & IA",
+        "grid2Description": "Infrastructure de données et modèles IA pour des systèmes intelligents.",
+        "grid3Title": "Intégrations & APIs",
+        "grid3Description": "Connexion de vos outils (CRM, ERP, marketing) en un écosystème fluide.",
+        "grid4Title": "Déploiement & DevOps",
+        "grid4Description": "Mise en production sécurisée, CI/CD et monitoring.",
+        "grid5Title": "Applications IA propriétaires",
+        "grid5Description": "Assistants, moteurs de recommandation, analyse prédictive sur mesure.",
+        "expertiseSectionTitle": "Ce que nous faisons",
+        "expertiseSectionDescription": "",
+        "teamTitle": "Les développeurs derrière vos produits",
+        "processSectionTitle": "Processus",
+        "teamDescription": "Développeurs full-stack, ingénieurs mobile, data engineers, DevOps — une équipe technique senior qui code, teste et livre. Nous avons construit des produits pour des startups et des grandes entreprises.",
+        "process0Title": "Cadrage",
+        "process0Description": "Comprendre le besoin, définir le périmètre et les contraintes techniques.",
+        "process1Title": "Prototype",
+        "process1Description": "Valider rapidement avec un MVP ou une preuve de concept.",
+        "process2Title": "Développement",
+        "process2Description": "Construire par sprints avec des livrables réguliers et des démos.",
+        "process3Title": "Déploiement",
+        "process3Description": "Mise en production, formation et évolution continue.",
+        "ctaTitle": "Prêt à performer ?",
+        "ctaButtonText": "Contactez-nous"
+      },
+      "agency": {
+        "pageTitle": "Agence Comm & Marketing",
+        "tagline": "Stratégie claire, exécution concrète. Marketing & communication.",
+        "heroImageAlt": "Stratégie marketing et communication.",
+        "navItems": ["Stratégie marketing", "SEO & contenu organique", "Marketing de performance", "Social media & communauté", "Marketing automation"],
+        "mainTitle": "Stratégie claire, exécution concrète. Stratégie marketing.",
+        "mainDescription": "Nous pilotons votre visibilité et votre croissance. De la stratégie à l'exécution, nous déployons des campagnes qui génèrent des leads qualifiés et des résultats mesurables — SEO, publicité, contenu et automation, le tout orchestré pour performer.",
+        "mainTags": ["Stratégie", "SEO", "Publicité", "Automation"],
+        "extensionsTitle": "Communication & marque",
+        "extensionsDescription": "Nous structurons votre communication et renforçons votre marque employeur. Stratégie éditoriale, contenus, relations presse et community management pour une présence cohérente et impactante.",
+        "extensionsTags": ["Communication", "Branding", "RP", "Community management"],
+        "grid0Title": "Stratégie de croissance",
+        "grid0Description": "Positionnement, canaux et objectifs de croissance mesurables.",
+        "grid1Title": "SEO & contenu organique",
+        "grid1Description": "Stratégie de contenu et optimisation pour une présence organique durable.",
+        "grid2Title": "Marketing de performance",
+        "grid2Description": "Campagnes payantes optimisées ROI sur Google, Meta, LinkedIn.",
+        "grid3Title": "Marketing automation & CRM",
+        "grid3Description": "Séquences automatisées, nurturing de leads, optimisation du cycle de vente.",
+        "grid4Title": "Social media & communauté",
+        "grid4Description": "Gestion des réseaux, contenu engageant et développement de communauté.",
+        "grid5Title": "Analytics & intelligence",
+        "grid5Description": "Tableaux de bord, attribution et optimisation des décisions marketing.",
+        "expertiseSectionTitle": "Ce que nous faisons",
+        "expertiseSectionDescription": "",
+        "teamTitle": "Les stratèges derrière vos résultats",
+        "processSectionTitle": "Processus",
+        "teamDescription": "Consultants seniors, chefs de projet, experts marketing et communication — une équipe qui a vécu les transformations de l'intérieur. Nous avons accompagné des PME et des grands groupes dans leurs projets stratégiques.",
+        "process0Title": "Écouter",
+        "process0Description": "Comprendre votre contexte, vos enjeux et vos ambitions.",
+        "process1Title": "Diagnostiquer",
+        "process1Description": "Analyser votre situation et identifier les opportunités.",
+        "process2Title": "Planifier",
+        "process2Description": "Construire la stratégie et prioriser les actions.",
+        "process3Title": "Exécuter",
+        "process3Description": "Déployer les campagnes et piloter les résultats.",
+        "ctaTitle": "Prêt à performer ?",
+        "ctaButtonText": "Contactez-nous"
+      },
+      "consulting": {
+        "pageTitle": "Transition numérique",
+        "tagline": "Vous avancez avec clarté, pas avec l'hésitation. Conseil & accompagnement à l'ère de l'IA.",
+        "heroImageAlt": "Conseil et transformation numérique.",
+        "navItems": ["Audit & diagnostic", "Stratégie & feuille de route", "Transformation organisationnelle", "Gouvernance & éthique IA", "Performance & optimisation"],
+        "mainTitle": "Vous avancez avec clarté. Audit & diagnostic.",
+        "mainDescription": "Nous évaluons votre maturité numérique et IA, identifions les opportunités à fort impact et les risques à traiter en priorité. Un diagnostic clair pour une feuille de route actionnable et alignée avec vos objectifs business.",
+        "mainTags": ["Audit", "Maturité IA", "Feuille de route", "Priorisation"],
+        "extensionsTitle": "Accompagnement au changement",
+        "extensionsDescription": "Nous accompagnons vos équipes dans l'adoption des nouveaux outils et processus. Formation, conduite du changement et montée en compétences pour ancrer la transformation dans la durée.",
+        "extensionsTags": ["Change management", "Formation", "Culture IA", "Gouvernance"],
+        "grid0Title": "Audit & diagnostic numérique",
+        "grid0Description": "Évaluation de la maturité numérique et IA, identification des leviers.",
+        "grid1Title": "Stratégie & feuille de route",
+        "grid1Description": "Vision numérique et plan d'action séquencé sur 12–24 mois.",
+        "grid2Title": "Transformation organisationnelle",
+        "grid2Description": "Accompagnement au changement, formation et nouvelles pratiques.",
+        "grid3Title": "Performance & optimisation",
+        "grid3Description": "Analyse des processus et leviers d'optimisation par l'IA.",
+        "grid4Title": "Gouvernance & éthique IA",
+        "grid4Description": "Cadre de gouvernance IA responsable, conformité et gestion des risques.",
+        "grid5Title": "Co-construction avec vos équipes",
+        "grid5Description": "Ateliers, sprints stratégiques et alignement des parties prenantes.",
+        "expertiseSectionTitle": "Ce que nous faisons",
+        "expertiseSectionDescription": "",
+        "teamTitle": "Les consultants derrière votre transformation",
+        "processSectionTitle": "Processus",
+        "teamDescription": "Consultants en stratégie, chefs de projet transformation, experts IA et change management — une équipe qui guide les organisations vers l'excellence numérique avec méthode et rigueur.",
+        "process0Title": "Écouter",
+        "process0Description": "Comprendre vos enjeux, votre organisation et vos objectifs.",
+        "process1Title": "Diagnostiquer",
+        "process1Description": "Analyser la maturité actuelle et les opportunités IA.",
+        "process2Title": "Planifier",
+        "process2Description": "Définir la feuille de route et les priorités.",
+        "process3Title": "Accompagner",
+        "process3Description": "Déployer le plan, former les équipes et mesurer les résultats.",
+        "ctaTitle": "Prêt à performer ?",
+        "ctaButtonText": "Contactez-nous"
+      }
+    },
+    "strategicBureau": {
+      "badge": "BUREAU",
+      "heroTitle": "Stratégie claire,",
+      "heroTitleHighlight": "exécution concrète.",
+      "heroSubtitle": "Strategy, Transformation & Marketing",
+      "heroDescription": "Nous pilotons votre transformation digitale et orchestrons votre communication. De la stratégie à l'exécution, un accompagnement complet pour des résultats mesurables.",
+      "clientNeeds": {
+        "title": "Besoins clients",
+        "items": [
+          "Vous avez besoin d'une stratégie digitale claire et actionnable",
+          "Vous voulez structurer et professionnaliser votre communication",
+          "Vous cherchez à générer plus de leads et de visibilité",
+          "Vous avez besoin d'un partenaire qui pilote, pas juste qui conseille"
+        ]
+      },
+      "approachTitle": "Conseil + Exécution",
+      "approachDescription": "Nous ne sommes pas des consultants qui livrent des PowerPoints et disparaissent. On reste à vos côtés de la stratégie à l'exécution, avec un engagement sur les résultats. Notre équipe combine vision stratégique et expertise opérationnelle.",
+      "expertiseTitle": "Comment nous vous accompagnons",
+      "expertise": {
+        "digitalStrategy": {
+          "title": "Stratégie Digitale",
+          "description": "Nous définissons votre vision digitale et construisons la feuille de route pour y arriver.",
+          "deliverables": "Audit, vision, roadmap 12-36 mois"
+        },
+        "transformation": {
+          "title": "Transformation & Change",
+          "description": "Nous accompagnons vos équipes dans l'adoption des nouveaux outils et processus.",
+          "deliverables": "Plan de transformation, formation, conduite du changement"
+        },
+        "marketingStrategy": {
+          "title": "Stratégie Marketing",
+          "description": "Nous construisons votre stratégie d'acquisition et de fidélisation clients.",
+          "deliverables": "Personas, parcours client, plan marketing"
+        },
+        "communication": {
+          "title": "Communication",
+          "description": "Nous structurons votre communication et créons les contenus qui portent votre message.",
+          "deliverables": "Stratégie éditoriale, contenus, relations presse"
+        },
+        "digitalMarketing": {
+          "title": "Marketing Digital",
+          "description": "Nous déployons et optimisons vos campagnes sur tous les canaux digitaux.",
+          "deliverables": "SEO, SEA, Social Ads, Email, Analytics"
+        },
+        "communityManagement": {
+          "title": "Community Management",
+          "description": "Nous animons vos communautés et gérons votre présence sur les réseaux sociaux.",
+          "deliverables": "Calendrier éditorial, contenus, modération, reporting"
+        }
+      },
+      "teamTitle": "Des praticiens, pas des théoriciens",
+      "teamDescription": "Consultants seniors, chefs de projet, experts marketing et communication — une équipe qui a vécu les transformations de l'intérieur. On a accompagné des PME et des grands groupes dans leurs projets stratégiques.",
+      "processTitle": "Processus",
+      "process": {
+        "listen": {
+          "step": "01",
+          "title": "Écouter",
+          "description": "Comprendre votre contexte, vos enjeux, vos ambitions"
+        },
+        "diagnose": {
+          "step": "02",
+          "title": "Diagnostiquer",
+          "description": "Analyser votre situation et identifier les opportunités"
+        },
+        "plan": {
+          "step": "03",
+          "title": "Planifier",
+          "description": "Construire la stratégie et prioriser les actions"
+        },
+        "execute": {
+          "step": "04",
+          "title": "Exécuter",
+          "description": "Déployer les actions et piloter les projets"
+        },
+        "measure": {
+          "step": "05",
+          "title": "Mesurer",
+          "description": "Suivre les résultats et optimiser en continu"
+        }
+      },
+      "ctaTitle": "Prêt à passer à l'action ?",
+      "ctaDescription": "Discutons de vos enjeux et construisons ensemble la stratégie qui fera la différence.",
+      "ctaButton1": "Réserver un appel stratégique",
+      "ctaButton2": "Voir nos études de cas"
+    },
+    "aiLab": {
+      "badge": "LAB",
+      "heroTitle": "Du code,",
+      "heroTitleHighlight": "des résultats.",
+      "heroSubtitle": "Development & Technology",
+      "heroDescription": "Nous construisons les solutions digitales qui font tourner votre business. Applications mobiles, plateformes web, intégrations, automatisation — une équipe de développeurs seniors qui livre du code propre et des produits qui marchent.",
+      "clientNeeds": {
+        "title": "Besoins clients",
+        "items": [
+          "Vous avez besoin d'une application mobile iOS et/ou Android",
+          "Vous voulez une plateforme web sur mesure pour votre activité",
+          "Vous cherchez à automatiser des processus répétitifs",
+          "Vous avez besoin d'intégrer vos outils entre eux"
+        ]
+      },
+      "approachTitle": "Ingénierie pragmatique",
+      "approachDescription": "Nous ne construisons pas de la technologie pour la technologie. Chaque ligne de code est pensée pour résoudre un problème réel et créer de la valeur. Notre équipe combine expertise technique pointue et compréhension des enjeux métier. On parle votre langage, pas juste celui des machines.",
+      "expertiseTitle": "Ce que nous développons",
+      "expertise": {
+        "mobileApps": {
+          "title": "Applications Mobiles",
+          "description": "Nous développons des apps natives et cross-platform avec une UX exceptionnelle.",
+          "technologies": "iOS, Android, React Native, Flutter"
+        },
+        "webApps": {
+          "title": "Applications Web",
+          "description": "Nous construisons des plateformes web robustes et scalables adaptées à vos besoins.",
+          "technologies": "React, Node.js, Python, PostgreSQL"
+        },
+        "ecommerce": {
+          "title": "E-commerce",
+          "description": "Nous créons des boutiques en ligne performantes qui convertissent.",
+          "technologies": "Shopify, WooCommerce, solutions sur mesure"
+        },
+        "integrations": {
+          "title": "Intégrations & APIs",
+          "description": "Nous connectons vos outils entre eux — CRM, ERP, outils métier — pour un écosystème fluide.",
+          "technologies": "REST, GraphQL, webhooks, middleware"
+        },
+        "automation": {
+          "title": "Automatisation",
+          "description": "Nous automatisons vos tâches répétitives pour libérer du temps à vos équipes.",
+          "technologies": "Zapier, Make, n8n, scripts sur mesure"
+        },
+        "data": {
+          "title": "Data & Analytics",
+          "description": "Nous structurons vos données et créons les dashboards pour piloter votre activité.",
+          "technologies": "SQL, ETL, BI tools, data pipelines"
+        }
+      },
+      "teamTitle": "Des développeurs, pas des vendeurs",
+      "teamDescription": "Développeurs full-stack, ingénieurs mobile, data engineers, DevOps — une équipe technique senior qui code, teste et livre. On a construit des produits pour des startups et des grandes entreprises.",
+      "processTitle": "Processus",
+      "process": {
+        "scoping": {
+          "step": "01",
+          "title": "Cadrage",
+          "description": "Comprendre le besoin, définir le scope et les contraintes"
+        },
+        "prototype": {
+          "step": "02",
+          "title": "Prototype",
+          "description": "Valider rapidement avec un MVP ou POC"
+        },
+        "development": {
+          "step": "03",
+          "title": "Développement",
+          "description": "Construire par sprints avec des livrables réguliers"
+        },
+        "deployment": {
+          "step": "04",
+          "title": "Déploiement",
+          "description": "Mettre en production et former les utilisateurs"
+        },
+        "evolution": {
+          "step": "05",
+          "title": "Évolution",
+          "description": "Maintenir, optimiser et faire évoluer"
+        }
+      },
+      "ctaTitle": "Un projet à développer ?",
+      "ctaDescription": "Discutons de votre idée et construisons ensemble la solution adaptée.",
+      "ctaButton1": "Parler à un développeur",
+      "ctaButton2": "Voir nos réalisations"
+    },
+    "agenticAI": {
+      "title": "Systèmes d'agents IA autonomes",
+      "subtitle": "Intelligence Autonome",
+      "tagline": "Agents IA Autonomes",
+      "description": "Nous développons des agents IA autonomes qui automatisent vos processus, de la gestion de la relation client à l'optimisation de vos opérations internes, créant une colonne vertébrale intelligente pour votre organisation.",
+      "capabilities": [
+        "Automatisation des processus métier (BPA)",
+        "Intégration CRM et ERP",
+        "Optimisation de la chaîne d'approvisionnement",
+        "Support client autonome"
+      ],
+      "whatIs": {
+        "title": "Qu'est-ce que l'IA Agentic ?",
+        "description": "L'IA agentic représente un changement fondamental dans la façon dont nous concevons le travail. Il ne s'agit plus d'outils que nous utilisons, mais d'agents autonomes qui collaborent avec nous, apprennent de nous et exécutent des tâches complexes de manière indépendante. Ces systèmes peuvent décomposer des tâches complexes en sous-tâches, prendre des décisions et itérer jusqu'à ce que les objectifs soient atteints."
+      },
+      "useCases": {
+        "title": "Cas d'usage",
+        "customerSupport": {
+          "title": "Support Client Autonome",
+          "description": "Des agents IA qui gèrent les demandes clients, résolvent les problèmes et escaladent si nécessaire, offrant un support 24/7."
+        },
+        "processAutomation": {
+          "title": "Automatisation des Processus Métier",
+          "description": "Automatisez des flux de travail complexes, de la saisie de données à la prise de décision, réduisant le travail manuel et les erreurs."
+        },
+        "intelligentAnalytics": {
+          "title": "Analytique Intelligente",
+          "description": "Des agents IA qui analysent les données, génèrent des insights et font des recommandations de manière autonome."
+        },
+        "supplyChain": {
+          "title": "Optimisation de la Chaîne d'Approvisionnement",
+          "description": "Optimisez l'inventaire, la logistique et les approvisionnements avec des agents de prise de décision autonomes."
+        }
+      },
+      "benefits": {
+        "title": "Pourquoi choisir l'IA Agentic ?"
+      },
+      "cta": {
+        "title": "Prêt à transformer avec l'IA Agentic ?",
+        "description": "Discutons de la façon dont les agents IA autonomes peuvent révolutionner vos opérations.",
+        "button": "Commencer",
+        "explore": "Explorer tous les services"
+      }
+    },
+    "digitalTransformation": {
+      "title": "Transformation Numérique",
+      "description": "Conseil et accompagnement en transformation numérique à l'ère de l'IA. Nous guidons les organisations dans leur parcours de transformation numérique, en intégrant les technologies IA pour moderniser les processus, améliorer l'efficacité et stimuler l'innovation.",
+      "capabilities": [
+        "Stratégie & Feuille de route digitale",
+        "Intégration & Adoption de l'IA",
+        "Modernisation des processus",
+        "Gestion du changement & Formation"
+      ],
+      "heroTitle": "Transformation",
+      "heroTitleHighlight": "Numérique",
+      "heroSubtitle": "Conseil & Accompagnement à l'ère de l'IA",
+      "heroDescription": "Naviguez dans votre parcours de transformation numérique avec l'accompagnement d'experts. Nous aidons les organisations à moderniser leurs opérations, intégrer les technologies IA et construire des avantages concurrentiels durables à l'ère numérique.",
+      "clientNeeds": {
+        "title": "Vous pourriez avoir besoin de Transformation Numérique si...",
+        "items": [
+          "Vous cherchez à moderniser vos processus métier et opérations.",
+          "Vous avez besoin de conseils pour intégrer l'IA et les technologies numériques dans votre organisation.",
+          "Vous souhaitez améliorer l'efficacité et réduire les coûts opérationnels grâce à la digitalisation.",
+          "Vous faites face à des défis d'adaptation aux nouvelles exigences du marché et aux attentes des clients.",
+          "Vous avez besoin d'un partenaire stratégique pour guider votre parcours de transformation."
+        ]
+      },
+      "approachTitle": "Notre approche de Transformation Numérique",
+      "approachDescription": "Nous adoptons une approche holistique de la transformation numérique, combinant conseil stratégique et soutien à la mise en œuvre pratique. Notre méthodologie se concentre sur la compréhension de votre contexte unique, la définition d'objectifs clairs et l'exécution d'initiatives de transformation qui produisent des résultats mesurables tout en veillant à ce que votre équipe soit équipée pour maintenir le changement.",
+      "expertiseTitle": "Ce que nous offrons",
+      "expertise": {
+        "strategy": {
+          "title": "Stratégie & Feuille de route digitale",
+          "description": "Définissez votre vision digitale et créez une feuille de route complète alignée sur vos objectifs commerciaux et les opportunités du marché.",
+          "technologies": "Planification stratégique, Analyse de marché, Évaluation technologique, Développement de feuille de route"
+        },
+        "aiIntegration": {
+          "title": "Intégration & Adoption de l'IA",
+          "description": "Intégrez de manière transparente les technologies IA dans vos systèmes et flux de travail existants, en assurant une adoption fluide et une extraction maximale de valeur.",
+          "technologies": "Évaluation IA, Planification d'intégration, Sélection technologique, Soutien à la mise en œuvre"
+        },
+        "processModernization": {
+          "title": "Modernisation des processus",
+          "description": "Reconcevez et optimisez vos processus métier en utilisant des outils numériques et l'automatisation pour améliorer l'efficacité et réduire le travail manuel.",
+          "technologies": "Cartographie des processus, Automatisation, Optimisation des flux de travail, Outils numériques"
+        },
+        "changeManagement": {
+          "title": "Gestion du changement & Formation",
+          "description": "Soutenez vos équipes dans la transformation avec des formations complètes, des stratégies de gestion du changement et un soutien continu pour assurer une adoption réussie.",
+          "technologies": "Programmes de formation, Gestion du changement, Adoption utilisateur, Support & Maintenance"
+        },
+        "digitalCulture": {
+          "title": "Développement de la culture digitale",
+          "description": "Favorisez un état d'esprit axé sur le numérique au sein de votre organisation, en développant les capacités et les changements culturels nécessaires pour un succès numérique durable.",
+          "technologies": "Ateliers, Développement des capacités, Transformation culturelle, Transfert de connaissances"
+        },
+        "transformationGovernance": {
+          "title": "Gouvernance de la transformation",
+          "description": "Établissez des cadres de gouvernance et des métriques pour suivre les progrès de la transformation, gérer les risques et assurer l'alignement avec les objectifs stratégiques.",
+          "technologies": "Cadres de gouvernance, KPIs, Gestion des risques, Suivi des performances"
+        }
+      },
+      "teamTitle": "Notre équipe de Transformation Numérique",
+      "teamDescription": "Notre équipe de consultants en transformation, de stratèges digitaux et d'experts en gestion du changement apporte une expérience approfondie dans l'accompagnement des organisations à travers des transformations numériques complexes. Nous combinons la réflexion stratégique avec l'exécution pratique pour offrir des transformations qui perdurent.",
+      "processTitle": "Notre processus",
+      "process": {
+        "assessment": {
+          "step": "01",
+          "title": "Évaluation & Vision",
+          "description": "Comprendre votre état actuel, identifier les opportunités et définir votre vision de transformation numérique."
+        },
+        "strategy": {
+          "step": "02",
+          "title": "Stratégie & Planification",
+          "description": "Développer une stratégie de transformation complète et un plan de mise en œuvre détaillé."
+        },
+        "execution": {
+          "step": "03",
+          "title": "Exécution & Mise en œuvre",
+          "description": "Exécuter les initiatives de transformation avec un soutien pratique et des méthodologies agiles."
+        },
+        "adoption": {
+          "step": "04",
+          "title": "Adoption & Gestion du changement",
+          "description": "Soutenir vos équipes dans le changement avec formation, communication et soutien continu."
+        },
+        "optimization": {
+          "step": "05",
+          "title": "Optimisation & Mise à l'échelle",
+          "description": "Surveiller les résultats, optimiser les processus et mettre à l'échelle les initiatives réussies dans toute l'organisation."
+        }
+      },
+      "ctaTitle": "Prêt à transformer votre organisation ?",
+      "ctaDescription": "Discutons de la façon dont nous pouvons guider votre parcours de transformation numérique et vous aider à construire un avantage concurrentiel à l'ère de l'IA.",
+      "ctaButton1": "Planifier une consultation",
+      "ctaButton2": "Explorer nos services"
+    },
+    "heroTitle": "Quatre expertises,",
+    "heroSubtitle": "une performance.",
+    "heroSubtitleGradient": "Agency · Studio · Tech · Consulting",
+    "heroDescription": "Marketing, design, développement et transformation numérique — quatre départements complémentaires, augmentés par l'IA, pour prendre le lead dans l'économie numérique.",
+    "ourServices": "Nos Départements",
+    "lab": {
+      "number": "03",
+      "category": "Nukleo.Tech",
+      "tagline": "Développement & Intelligence artificielle",
+      "description": "Nous concevons et développons les outils numériques qui propulsent votre performance. Développement web, applications mobiles, intégrations IA, automatisation et agents IA sur mesure.",
+      "services": {
+        "mobileApps": {
+          "title": "Applications mobiles",
+          "description": "Apps iOS, Android et cross-platform avec une UX exceptionnelle"
+        },
+        "webApps": {
+          "title": "Développement web",
+          "description": "Sites web, plateformes et applications web robustes et scalables"
+        },
+        "integrations": {
+          "title": "Intégrations & APIs",
+          "description": "Connexion de vos outils pour un écosystème numérique fluide"
+        },
+        "automation": {
+          "title": "IA & Automatisation",
+          "description": "Agents IA sur mesure et automatisation des processus métier"
+        }
+      },
+      "cta": "Explorer Nukleo.Tech"
+    },
+    "studio": {
+      "number": "02",
+      "category": "Nukleo.Studio",
+      "tagline": "Design & Création",
+      "description": "Nous créons des expériences visuelles et créatives qui rendent votre performance visible et désirable. Design graphique, UX/UI, branding, direction artistique et production créative.",
+      "services": {
+        "branding": {
+          "title": "Branding & Identité",
+          "description": "Logos, chartes graphiques et univers de marque mémorables"
+        },
+        "uiuxDesign": {
+          "title": "UX/UI Design",
+          "description": "Interfaces intuitives qui transforment les visiteurs en clients"
+        },
+        "artDirection": {
+          "title": "Direction Artistique",
+          "description": "Concepts créatifs et cohérence visuelle sur tous vos supports"
+        },
+        "campaigns": {
+          "title": "Production créative",
+          "description": "Visuels de campagne, motion design et assets créatifs"
+        }
+      },
+      "cta": "Explorer Nukleo.Studio"
+    },
+    "bureau": {
+      "number": "04",
+      "category": "Nukleo.Consulting",
+      "tagline": "Transformation numérique & Conseil",
+      "description": "Nous accompagnons votre organisation dans sa transformation numérique. Audit, stratégie, conseil IA, accompagnement au changement et formation — de la vision à l'exécution.",
+      "services": {
+        "digitalStrategy": {
+          "title": "Stratégie numérique",
+          "description": "Vision claire, feuille de route actionnable et conseil IA"
+        },
+        "transformation": {
+          "title": "Transformation numérique",
+          "description": "Accompagnement au changement et adoption des outils numériques"
+        },
+        "digitalMarketing": {
+          "title": "Formation & Coaching",
+          "description": "Montée en compétences de vos équipes sur le numérique et l'IA"
+        },
+        "communication": {
+          "title": "Audit & Diagnostic",
+          "description": "Évaluation de votre maturité numérique et recommandations"
+        }
+      },
+      "cta": "Explorer Nukleo.Consulting"
+    },
+    "agency": {
+      "number": "01",
+      "category": "Nukleo.Agency",
+      "tagline": "Marketing & Communication 360",
+      "description": "Nous activons et amplifions votre présence numérique. Marketing numérique, gestion des médias sociaux, achat média, stratégie de contenu, infolettres et campagnes de performance — augmentés par l'IA.",
+      "services": {
+        "socialMedia": {
+          "title": "Médias sociaux",
+          "description": "Gestion de communauté, création de contenu et stratégie social media"
+        },
+        "seoSea": {
+          "title": "SEO & Publicité numérique",
+          "description": "Référencement naturel, Google Ads, Meta Ads et achat média"
+        },
+        "contentStrategy": {
+          "title": "Stratégie de contenu",
+          "description": "Infolettres, blogue, copywriting et stratégie éditoriale"
+        },
+        "analytics": {
+          "title": "Analytics & Performance",
+          "description": "Tableaux de bord, suivi des KPIs et optimisation continue"
+        }
+      },
+      "cta": "Explorer Nukleo.Agency"
+    },
+    "howItWorks": {
+      "title": "Une approche intégrée",
+      "description": "Nos quatre départements travaillent main dans la main. Selon votre projet, faites appel à un seul département ou combinez-les pour une solution 360 complète.",
+      "combinations": {
+        "brandLaunch": {
+          "project": "Lancement de marque",
+          "teams": "Agency + Studio",
+          "deliverables": "Identité visuelle + stratégie de lancement + campagne"
+        },
+        "mobileApp": {
+          "project": "Application mobile",
+          "teams": "Tech + Studio",
+          "deliverables": "Développement + UX/UI design"
+        },
+        "digitalOverhaul": {
+          "project": "Transformation numérique complète",
+          "teams": "Agency + Studio + Tech + Consulting",
+          "deliverables": "Nouvelle plateforme + branding + stratégie + accompagnement"
+        },
+        "marketingCampaign": {
+          "project": "Campagne marketing",
+          "teams": "Agency + Studio",
+          "deliverables": "Visuels + stratégie + déploiement"
+        }
+      }
+    },
+    "serviceLevels": {
+      "sectionLabel": "Nos niveaux de service",
+      "title": "Trois façons de travailler ensemble",
+      "description": "Quel que soit votre projet, votre budget ou votre niveau de maturité numérique, nous avons un modèle adapté à vos besoins.",
+      "alaCarte": {
+        "name": "À la carte",
+        "tagline": "Flexibilité maximale",
+        "description": "Commandez exactement ce dont vous avez besoin, quand vous en avez besoin. Idéal pour les projets ponctuels, les mandats spécifiques ou les organisations qui souhaitent tester notre approche.",
+        "highlights": [
+          "Projets ponctuels",
+          "Mandats spécifiques",
+          "Sans engagement"
+        ]
+      },
+      "enContinu": {
+        "name": "En continu",
+        "tagline": "Partenariat mensuel",
+        "description": "Un partenariat mensuel pour une présence numérique constante et une amélioration continue. Votre équipe numérique dédiée, à un coût prévisible.",
+        "highlights": [
+          "Équipe dédiée",
+          "Coût prévisible",
+          "Amélioration continue"
+        ]
+      },
+      "cocreation": {
+        "name": "Co-création",
+        "tagline": "Transformation profonde",
+        "description": "Pour les organisations qui souhaitent une transformation numérique profonde. Nous devenons votre partenaire stratégique intégré, engagés sur vos résultats à long terme.",
+        "highlights": [
+          "Partenariat stratégique",
+          "Engagement sur les résultats",
+          "Transformation profonde"
+        ]
+      }
+    },
+    "cta": {
+      "title": "Pas sûr de ce dont vous avez besoin ?",
+      "description": "Discutons de votre projet. Nous vous orienterons vers le bon département — ou la bonne combinaison.",
+      "buttonPrimary": "Parler à un expert",
+      "buttonSecondary": "Voir nos réalisations"
+    }
+  },
+  "projects": {
+    "title": "Projets",
+    "heroHeadline": "Brillez & innovez",
+    "heroTitle": "Nos Réalisations",
+    "heroSubtitle": "qui résonnent",
+    "description": "Une sélection de nos projets récents en branding, web, numérique et campagnes créatives.",
+    "tryMe": "Essayez-moi",
+    "loadingImages": "Chargement des images...",
+    "errorLoading": "Erreur lors du chargement des images depuis le serveur.",
+    "errorRefresh": "Veuillez essayer de rafraîchir la page.",
+    "noImages": "Aucune image trouvée.",
+    "noImagesAdmin": "Téléchargez des images via le panneau d'administration pour les voir ici.",
+    "notFound": "Projet non trouvé.",
+    "backToList": "Retour aux projets",
+    "visitWebsite": "Visiter le site",
+    "ctaTitle": "Prêt à Démarrer",
+    "ctaSubtitle": "Votre Projet ?",
+    "ctaDescription": "Discutons de la façon dont nous pouvons donner vie à votre vision.",
+    "ctaButton": "Démarrer Votre Projet",
+    "filterAll": "Tout",
+    "noProjects": "Aucun projet trouvé",
+    "projectLabel": "projet",
+    "descriptionFallback": "Description du projet à venir.",
+    "galleryTitle": "Découvrez nos derniers projets",
+    "filterAriaLabel": "Filtrer les projets par catégorie",
+    "noProjectsInCategory": "Aucun projet dans cette catégorie.",
+    "viewProject": "Voir le projet →",
+    "voirPlus": "Voir plus",
+    "filters": {
+      "all": "Tout",
+      "aiPlatforms": "Plateformes IA",
+      "marketing": "Marketing",
+      "webApps": "Applications Web",
+      "strategy": "Stratégie"
+    },
+    "items": {
+      "autonomousMarketing": {
+        "title": "Plateforme marketing autonome",
+        "category": "Plateformes IA",
+        "description": "Gestion de campagnes de bout en bout alimentée par des agents IA, de la génération de contenu à l'optimisation des performances."
+      },
+      "intelligentEcommerce": {
+        "title": "Écosystème E-Commerce Intelligent",
+        "category": "Applications Web",
+        "description": "Expérience d'achat auto-optimisante avec personnalisation alimentée par l'IA et gestion prédictive des stocks."
+      },
+      "enterpriseTransformation": {
+        "title": "Transformation IA d'entreprise",
+        "category": "Stratégie",
+        "description": "Refonte opérationnelle complète intégrant l'IA agentique dans tous les départements et flux de travail."
+      },
+      "contentGeneration": {
+        "title": "Moteur de génération de contenu",
+        "category": "Marketing",
+        "description": "Système de création de contenu automatisé produisant des campagnes personnalisées multi-canaux à grande échelle."
+      }
+    }
+  },
+  "contact": {
+    "seoTitle": "Contactez-nous | Démarrons votre projet IA",
+    "seoDescription": "Contactez nos experts transformation IA à Montréal et Halifax. Consultation gratuite pour votre projet. Formulaire contact ou appel direct.",
+    "seoKeywords": "contacter Nukleo Digital, contact agence IA, consultation IA Montréal, projet IA Halifax",
+    "heroTitle": "Commençons<br /><span class=\"text-white/70\">une conversation</span>",
+    "heroTitleNew": "Performez maintenant",
+    "heroSubtitle": "Choisissez la transformation numérique et contactez-nous.",
+    "heroDescription": "Que vous ayez une idée précise ou simplement une question, nous sommes là pour vous aider. Remplissez le formulaire ci-dessous ou contactez-nous directement.",
+    "whereToFindUs": "Où nous trouver",
+    "phoneLabel": "Un simple coup de fil",
+    "emailLabel": "Une question",
+    "formTitle": "Envoyez-nous un message",
+    "form": {
+      "firstName": "Prénom",
+      "lastName": "Nom",
+      "email": "Email",
+      "company": "Entreprise",
+      "message": "Message",
+      "submit": "Envoyer le message",
+      "success": "Merci ! Votre message a été envoyé. Nous vous répondrons sous peu.",
+      "error": "Une erreur s'est produite. Veuillez réessayer."
+    },
+    "sendMessage": "Envoyez-nous un message",
+    "successMessage": "✓ Message envoyé avec succès ! Nous vous répondrons dans les 24 heures.",
+    "errorMessage": "✗ Échec de l'envoi du message. Veuillez réessayer.",
+    "errorFix": "Veuillez corriger les erreurs ci-dessous.",
+    "firstNamePlaceholder": "Jean",
+    "lastNamePlaceholder": "Dupont",
+    "emailPlaceholder": "jean@entreprise.com",
+    "companyPlaceholder": "Votre entreprise",
+    "messagePlaceholder": "Parlez-nous de votre projet...",
+    "getInTouch": "Prendre contact",
+    "contactDescription": "Prêt à transformer votre entreprise avec l'IA ? Contactez-nous pour une consultation d'experts.",
+    "infoTitle": "Nos coordonnées",
+    "montreal": "Montréal",
+    "halifax": "Halifax",
+    "addressMontreal": "7236 Rue Waverly, Montréal, QC H2R 0C2",
+    "addressHalifax": "1800 Argyle St Unit 801, Halifax, NS B3J 3N8",
+    "email": "hello@nukleo.com",
+    "emailUs": "Envoyez-nous un email",
+    "phone": "Téléphone",
+    "send": "Envoyer",
+    "ourOffices": "Nos bureaux"
+  },
+  "startProject": {
+    "seoTitle": "Démarrer un projet | Nukleo Digital",
+    "seoDescription": "Lancez votre projet transformation IA. Formulaire détaillé pour partager vos besoins. Consultation gratuite avec nos experts IA.",
+    "seoKeywords": "démarrer projet IA, soumettre projet IA, consultation transformation IA, devis projet IA",
+    "title": "Donnons vie<br /><span class=\"text-white/70\">à votre projet</span>",
+    "description": "Ce formulaire nous aide à comprendre votre vision. Plus vous nous donnez de détails, mieux nous pourrons vous aider. Remplissez-le et nous vous contacterons pour planifier une première consultation.",
+    "backToHome": "Retour à l'accueil",
+    "pageTitle": "Démarrez votre parcours IA",
+    "pageDescription": "Parlez-nous de votre projet et construisons ensemble quelque chose d'extraordinaire.",
+    "form": {
+      "fullName": "Nom complet",
+      "fullNamePlaceholder": "Jean Dupont",
+      "emailAddress": "Adresse e-mail",
+      "emailPlaceholder": "jean@entreprise.com",
+      "companyName": "Nom de l'entreprise",
+      "companyPlaceholder": "Votre entreprise",
+      "projectType": "Type de projet",
+      "projectTypePlaceholder": "Sélectionnez un type de projet",
+      "projectTypes": {
+        "aiStrategy": "Stratégie et conseil IA",
+        "agenticAI": "Développement d'IA agentique",
+        "aiIntegration": "Intégration IA",
+        "aiTraining": "Formation et ateliers IA",
+        "other": "Autre"
+      },
+      "estimatedBudget": "Budget estimé",
+      "budgetPlaceholder": "Sélectionnez une fourchette de budget",
+      "budgetRanges": {
+        "10k25k": "10 000 $ - 25 000 $",
+        "25k50k": "25 000 $ - 50 000 $",
+        "50k100k": "50 000 $ - 100 000 $",
+        "100kPlus": "100 000 $ et plus",
+        "notSure": "Pas encore sûr"
+      },
+      "projectDescription": "Décrivez votre projet en quelques mots",
+      "projectDescriptionPlaceholder": "Parlez-nous de votre projet, de vos objectifs et de vos défis...",
+      "sending": "Envoi en cours...",
+      "submit": "Soumettre le projet",
+      "thankYou": "Merci !",
+      "successMessage": "Nous avons reçu votre demande de projet. Notre équipe vous contactera dans les 24 heures.",
+      "privacyNotice": "En soumettant ce formulaire, vous acceptez notre politique de confidentialité et nos conditions d'utilisation.",
+      "contactInfo": "Informations de contact",
+      "firstName": "Prénom",
+      "lastName": "Nom",
+      "email": "Email",
+      "company": "Entreprise",
+      "website": "Site web actuel (si applicable)",
+      "projectDetails": "Détails du projet",
+      "projectName": "Nom du projet",
+      "projectGoals": "Quels sont les principaux objectifs de ce projet ?",
+      "targetAudience": "Quelle est votre audience cible ?",
+      "services": "Quels services vous intéressent ?",
+      "servicesOptions": {
+        "agenticAI": "Systèmes d'agents IA",
+        "aiNative": "Plateformes web intelligentes",
+        "transformation": "Communication et marketing augmentés",
+        "creativeStudio": "Studio créatif",
+        "dataPlatforms": "Plateformes de données intelligentes",
+        "aiConsulting": "Consultation en IA"
+      },
+      "budget": "Quel est votre budget approximatif ?",
+      "budgetOptions": {
+        "lessThan10k": "Moins de 10 000 $",
+        "10kto25k": "10 000 $ - 25 000 $",
+        "25kto50k": "25 000 $ - 50 000 $",
+        "50kto100k": "50 000 $ - 100 000 $",
+        "moreThan100k": "Plus de 100 000 $"
+      },
+      "timeline": "Quel est votre calendrier souhaité ?",
+      "timelineOptions": {
+        "asap": "Dès que possible",
+        "1to3months": "1-3 mois",
+        "3to6months": "3-6 mois",
+        "moreThan6months": "Plus de 6 mois"
+      },
+      "additionalInfo": "Informations supplémentaires",
+      "howDidYouHear": "Comment avez-vous entendu parler de nous ?",
+      "success": "Merci ! Votre projet a été soumis. Nous vous contacterons dans les 48 heures.",
+      "error": "Une erreur s'est produite. Veuillez réessayer."
+    }
+  },
+  "resources": {
+    "seoTitle": "Ressources IA | Guides, Articles & Outils | Nukleo Digital",
+    "seoDescription": "Ressources transformation IA : articles, guides pratiques, outils. Centre de ressources Nukleo Digital. Restez à la pointe innovation IA.",
+    "seoKeywords": "ressources IA, articles IA, guides transformation IA, outils IA, blog Nukleo Digital",
+    "badge": "Base de connaissances",
+    "title": "Ressources",
+    "description": "Plongez dans nos analyses, guides et outils conçus pour vous aider à naviguer dans le paysage de l'IA et à prendre des décisions éclairées.",
+    "featured": "En vedette",
+    "categories": "Catégories",
+    "all": "Tout",
+    "articlesLabel": "Articles",
+    "guides": "Guides",
+    "tools": {
+      "sectionLabel": "Outils Interactifs",
+      "title": "Explorez nos outils IA",
+      "description": "Outils de diagnostic et de recherche gratuits pour accélérer votre parcours de transformation IA",
+      "aiReadiness": {
+        "badge": "Outil de Diagnostic",
+        "title": "Évaluation de Préparation IA",
+        "description": "Découvrez où vous en êtes dans votre parcours de transformation IA. Obtenez des insights personnalisés sur 6 dimensions clés avec des résultats instantanés.",
+        "tags": [
+          "20 Questions",
+          "5 Niveaux de Maturité",
+          "Résultats Instantanés"
+        ],
+        "buttonText": "Commencer l'Évaluation"
+      },
+      "radar": {
+        "badge": "Outil de Recherche",
+        "title": "Radar des tendances IA",
+        "description": "Explorez notre radar interactif des technologies IA émergentes et établies. Mises à jour mensuelles pour guider vos décisions d'investissement.",
+        "tags": [
+          "10+ Technologies",
+          "Mises à Jour Mensuelles",
+          "Carte Interactive"
+        ],
+        "buttonText": "Explorer le Radar"
+      },
+      "aiGlossary": {
+        "badge": "Base de Connaissances",
+        "title": "Glossaire IA",
+        "description": "Guide complet de la terminologie IA avec définitions essentielles, catégories et niveaux d'importance. Parfait pour comprendre les concepts clés de l'IA.",
+        "tags": [
+          "Termes essentiels",
+          "Par catégorie",
+          "Recherchable"
+        ],
+        "buttonText": "Parcourir le Glossaire"
+      }
+    },
+    "readMore": "Lire la suite",
+    "filter": {
+      "label": "Filtrer par :",
+      "all": "Tout",
+      "industryInsights": "Aperçus de l'industrie",
+      "technicalGuide": "Guide technique",
+      "strategy": "Stratégie",
+      "caseStudy": "Étude de cas"
+    },
+    "articles": {
+      "agenticPlaybook": {
+        "category": "Guide technique",
+        "title": "Le guide complet de l'IA agentique : de l'architecture au déploiement",
+        "description": "Découvrez comment implémenter des agents IA autonomes dans votre organisation avec notre guide complet. De l'architecture à la mise en production, maîtrisez l'IA agentique.",
+        "readTime": "15 min",
+        "content": "<p>L'intelligence artificielle agentique est en train de redéfinir les frontières de l'automatisation et de l'intelligence des systèmes. Contrairement aux modèles d'IA traditionnels qui nécessitent des instructions précises pour chaque tâche, les agents IA peuvent planifier, exécuter et s'adapter de manière autonome pour atteindre des objectifs complexes. Ce guide complet vous fournira un cadre pratique pour la mise en œuvre de solutions d'IA agentiques au sein de votre organisation, de la conception de l'architecture à la mise en production.</p><h2>Qu'est-ce que l'IA agentique et pourquoi est-elle une révolution ?</h2><p>L'IA agentique, ou Agentic AI, représente une avancée significative par rapport à l'IA conventionnelle. Ces systèmes ne se contentent pas de répondre à des requêtes ; ils sont capables de décomposer des problèmes complexes en sous-tâches, de prendre des décisions stratégiques et d'itérer jusqu'à l'atteinte de leurs objectifs. Cette autonomie est rendue possible par la combinaison de plusieurs technologies de pointe :</p><ul><li><strong>Les grands modèles de langage (LLM)</strong> : pour la compréhension et la génération du langage naturel.</li><li><strong>Les capacités de raisonnement</strong> : pour la planification et la résolution de problèmes.</li><li><strong>L'utilisation d'outils</strong> : pour interagir avec des systèmes externes et des API.</li><li><strong>Les systèmes de mémoire</strong> : pour apprendre de leurs expériences et s'améliorer continuellement.</li></ul><p>Cette combinaison unique permet aux agents IA de gérer des tâches complexes qui étaient auparavant hors de portée de l'automatisation, ouvrant la voie à des gains d'efficacité et d'innovation sans précédent.</p><h2>Le cadre d'implémentation de l'IA agentique en 4 phases</h2><p>Pour garantir le succès du déploiement de l'IA agentique, nous avons développé une approche en quatre phases, conçue pour vous guider à chaque étape du processus :</p><h3>1. Phase de découverte</h3><p>La première étape consiste à évaluer la maturité de votre organisation en matière d'IA et à identifier les cas d'usage les plus pertinents pour l'implémentation d'agents IA. Cette phase est cruciale pour aligner votre stratégie d'IA avec vos objectifs commerciaux.</p><h3>2. Phase de conception</h3><p>Une fois les cas d'usage identifiés, la phase de conception se concentre sur l'architecture du système. Cela inclut le choix des modèles de LLM, la conception des flux de travail des agents et l'intégration avec vos systèmes existants.</p><h3>3. Phase de développement</h3><p>C'est à cette étape que la construction et les tests des agents IA ont lieu. En utilisant des frameworks comme LangChain, nous développons des agents robustes et fiables, capables de répondre aux exigences de vos cas d'usage.</p><h3>4. Phase de déploiement</h3><p>La dernière phase consiste à déployer les agents IA à grande échelle et à optimiser leurs performances en continu. Cela inclut la mise en place d'une infrastructure de surveillance et de maintenance pour garantir la fiabilité et l'efficacité des agents sur le long terme.</p><h2>Les facteurs clés de succès pour votre projet d'IA agentique</h2><p>La réussite de la mise en œuvre de l'IA agentique ne dépend pas uniquement de la technologie. Plusieurs facteurs organisationnels et stratégiques sont tout aussi importants :</p><ul><li><strong>La qualité des données</strong> : Les agents IA sont aussi performants que les données sur lesquelles ils sont entraînés. Il est donc essentiel de garantir la qualité, la pertinence et la fraîcheur de vos données.</li><li><strong>La gouvernance</strong> : La mise en place d'un cadre de gouvernance solide est indispensable pour garantir une utilisation éthique et responsable de l'IA agentique. Cela inclut la définition de politiques claires en matière de sécurité, de confidentialité et de conformité.</li><li><strong>La gestion du changement</strong> : L'introduction de l'IA agentique peut avoir un impact significatif sur vos processus et vos équipes. Une stratégie de gestion du changement efficace est donc nécessaire pour accompagner vos collaborateurs et garantir une adoption réussie.</li><li><strong>La mesure du succès</strong> : Il est essentiel de définir des indicateurs de performance clés (KPI) clairs pour mesurer l'impact de l'IA agentique sur votre organisation. Cela vous permettra de démontrer la valeur de vos investissements et d'optimiser vos stratégies en continu.</li></ul><h2>Prêt à passer à l'action ?</h2><p>L'IA agentique offre des opportunités sans précédent pour transformer votre entreprise. Pour en savoir plus sur la manière dont nous pouvons vous aider à mettre en œuvre des solutions d'IA agentiques, contactez-nous dès aujourd'hui pour une consultation gratuite.</p>"
+      },
+      "pilotToScale": {
+        "category": "Stratégie",
+        "title": "De la preuve de concept à l'industrialisation : le guide pour réussir votre transformation IA",
+        "description": "Découvrez notre framework stratégique pour passer de l'expérimentation à l'adoption de l'IA à grande échelle. Un guide complet pour une transformation IA réussie et mesurable.",
+        "readTime": "20 min",
+        "content": "<p>De nombreuses organisations réussissent à mener des projets pilotes d'intelligence artificielle, mais peinent à les déployer à l'échelle de l'entreprise. Le passage d'un environnement contrôlé à une mise en production à grande échelle présente des défis uniques qui, s'ils ne sont pas correctement gérés, peuvent entraîner l'échec de projets prometteurs. Ce guide présente un cadre stratégique éprouvé pour surmonter ces obstacles et assurer une transition réussie de la preuve de concept (PoC) à une adoption généralisée de l'IA, avec des résultats mesurables.</p><h2>Le défi de la mise à l'échelle de l'IA : pourquoi les pilotes échouent-ils en production ?</h2><p>Les projets pilotes d'IA bénéficient souvent de conditions idéales : des équipes dédiées, des ensembles de données limités et des objectifs bien définis. Cependant, lors du passage à l'échelle, de nouveaux défis apparaissent :</p><ul><li><strong>Limitations de l'infrastructure technique</strong> : Les systèmes conçus pour des pilotes ne sont souvent pas assez robustes pour supporter une charge de travail à grande échelle.</li><li><strong>Résistance organisationnelle</strong> : Le changement peut être difficile à accepter pour les employés, surtout s'ils ne sont pas impliqués dès le début du processus.</li><li><strong>Manque de clarté sur le retour sur investissement (ROI)</strong> : Sans une mesure claire de la valeur ajoutée, il est difficile de justifier les investissements nécessaires à la mise à l'échelle.</li></ul><p>Notre framework a été conçu pour aborder systématiquement ces défis et garantir une transition en douceur vers une IA à l'échelle de l'entreprise.</p><h2>Les quatre piliers d'une mise à l'échelle réussie de l'IA</h2><p>Pour réussir la mise à l'échelle de vos initiatives d'IA, il est essentiel de vous appuyer sur quatre piliers fondamentaux :</p><h3>1. Infrastructure technique</h3><p>Vous devez disposer d'une architecture évolutive, capable de supporter des charges de travail importantes et de s'adapter à l'évolution de vos besoins. Cela inclut des plateformes de données robustes, des outils de MLOps et une infrastructure cloud flexible.</p><h3>2. Préparation organisationnelle</h3><p>La réussite de votre transformation IA dépend de l'adhésion de vos équipes. Il est donc crucial de mettre en place une stratégie de gestion du changement pour former, accompagner et impliquer vos collaborateurs à tous les niveaux de l'organisation.</p><h3>3. Gouvernance</h3><p>Un cadre de gouvernance clair est indispensable pour garantir une utilisation éthique, sécurisée et conforme de l'IA. Cela comprend des politiques de gestion des données, des modèles et des processus de validation.</p><h3>4. Mesure</h3><p>Pour justifier vos investissements et optimiser vos stratégies, vous devez être en mesure de suivre et de mesurer l'impact de l'IA sur votre entreprise. Cela passe par la définition d'indicateurs de performance clés (KPI) pertinents et le suivi du retour sur investissement (ROI) de chaque initiative.</p><h2>Feuille de route pour une transformation IA réussie en 12 mois</h2><p>Nous avons élaboré une feuille de route sur 12 mois pour vous guider à chaque étape de votre transformation IA, du succès de votre projet pilote à une adoption à l'échelle de l'entreprise. Cette feuille de route est jalonnée d'étapes claires et de critères de succès pour vous aider à rester sur la bonne voie.</p><ul><li><strong>Mois 1-3</strong> : Consolidation du pilote et planification de la mise à l'échelle.</li><li><strong>Mois 4-6</strong> : Développement de l'infrastructure et formation des équipes.</li><li><strong>Mois 7-9</strong> : Déploiement progressif et itération.</li><li><strong>Mois 10-12</strong> : Optimisation et adoption à grande échelle.</li></ul><h2>Prêt à passer à l'échelle supérieure ?</h2><p>La mise à l'échelle de l'IA est un défi complexe, mais avec le bon cadre et la bonne approche, il est possible de transformer votre organisation et de générer une valeur commerciale significative. Pour en savoir plus sur notre framework et sur la manière dont nous pouvons vous aider à réussir votre transformation IA, planifiez une consultation stratégique avec nos experts.</p>"
+      },
+      "agenticMarketing": {
+        "category": "Aperçus de l'industrie",
+        "title": "Le futur du marketing : comment l'IA agentique redéfinit les stratégies",
+        "description": "Découvrez comment les agents IA transforment le marketing, de l'automatisation des campagnes à la personnalisation de l'expérience client. Explorez l'avenir du marketing agentique.",
+        "readTime": "12 min",
+        "content": "<p>L'intelligence artificielle agentique est en train de provoquer une véritable révolution dans le monde du marketing. En permettant une gestion autonome des campagnes, une génération de contenu personnalisée et une optimisation en temps réel à une échelle sans précédent, l'IA agentique redéfinit les opérations marketing et l'expérience client. Cet article explore comment cette technologie de pointe est en train de façonner l'avenir du marketing et comment les entreprises peuvent en tirer parti pour obtenir un avantage concurrentiel durable.</p><h2>La révolution du marketing agentique : au-delà de l'automatisation traditionnelle</h2><p>Le marketing automation traditionnel, basé sur des règles prédéfinies, a longtemps été la norme. Cependant, l'IA agentique va bien au-delà. Au lieu de suivre des scénarios rigides, les systèmes de marketing agentiques peuvent adapter leurs stratégies en temps réel en fonction des données de performance, du comportement des clients et des conditions du marché. Cette capacité d'adaptation dynamique permet une personnalisation et une efficacité inégalées.</p><h2>Applications concrètes de l'IA agentique dans le marketing</h2><p>Les applications de l'IA agentique dans le marketing sont nombreuses et variées. Voici quelques exemples concrets qui illustrent comment cette technologie transforme les opérations marketing :</p><ul><li><strong>Génération de contenu à grande échelle</strong> : Les agents IA peuvent créer des milliers de variantes de textes publicitaires, d'e-mails et de publications sur les réseaux sociaux, personnalisées pour chaque segment d'audience.</li><li><strong>Optimisation des campagnes en temps réel</strong> : Les agents peuvent analyser en permanence les performances des campagnes et ajuster automatiquement les enchères, les ciblages et les créations pour maximiser le retour sur investissement.</li><li><strong>Segmentation client avancée</strong> : En analysant des ensembles de données complexes, les agents IA peuvent identifier des micro-segments de clientèle et proposer des expériences ultra-personnalisées.</li><li><strong>Analyse prédictive</strong> : Les agents peuvent anticiper les tendances du marché, prédire le comportement des clients et recommander des actions proactives pour améliorer les résultats.</li></ul><h2>Un retour sur investissement (ROI) sans précédent</h2><p>Les organisations qui ont adopté le marketing agentique constatent des améliorations spectaculaires de leurs performances. En moyenne, nous observons :</p><ul><li><strong>Une augmentation de 340 % du retour sur investissement (ROI)</strong> de leurs campagnes marketing.</li><li><strong>Une réduction de 75 % du temps de mise sur le marché</strong> pour les nouvelles campagnes.</li><li><strong>Une multiplication par 10 de la production de campagnes</strong>.</li></ul><p>Ces chiffres témoignent de la puissance de l'IA agentique pour transformer la fonction marketing et générer une croissance significative de l'entreprise.</p><h2>Préparez-vous pour l'avenir du marketing</h2><p>L'IA agentique n'est pas une tendance passagère, c'est l'avenir du marketing. Les entreprises qui sauront l'adopter rapidement et efficacement seront les leaders de demain. Pour découvrir comment l'IA agentique peut transformer votre stratégie marketing, demandez une démonstration personnalisée de nos solutions.</p>"
+      },
+      "buildingAgentic": {
+        "category": "Guide technique",
+        "title": "Construire des systèmes agentiques : le guide technique complet",
+        "description": "Un guide technique détaillé pour concevoir, construire et déployer des systèmes d'agents IA autonomes à grande échelle. Maîtrisez l'architecture, les outils et les meilleures pratiques.",
+        "readTime": "18 min",
+        "content": "<p>La construction de systèmes d'intelligence artificielle agentiques robustes et évolutifs est un défi technique complexe. Ce guide a pour objectif de fournir aux ingénieurs et aux architectes logiciels les connaissances et les outils nécessaires pour concevoir, développer et déployer des systèmes d'agents IA autonomes, prêts pour la production. Nous aborderons en détail l'architecture, les outils essentiels et les meilleures pratiques pour garantir le succès de vos projets d'IA agentique.</p><h2>L'architecture d'un système agentique : les composants clés</h2><p>Une architecture de système agentique bien conçue est la clé de la performance et de la fiabilité. Elle se compose de plusieurs couches interdépendantes :</p><ul><li><strong>Les grands modèles de langage (LLM)</strong> : Le cœur du système, responsable de la compréhension du langage naturel et de la génération de réponses.</li><li><strong>Les bases de données vectorielles</strong> : Elles servent de mémoire à long terme pour les agents, leur permettant de stocker et de récupérer des informations pertinentes.</li><li><strong>Les interfaces d'outils</strong> : Elles permettent aux agents d'interagir avec des systèmes externes, des API et des bases de données pour exécuter des tâches.</li><li><strong>La couche d'orchestration</strong> : Elle gère le flux de travail des agents, la décomposition des tâches et la coordination entre les différents composants.</li></ul><h2>La stack de développement pour les systèmes agentiques</h2><p>Le choix des bons outils et frameworks est essentiel pour accélérer le développement et garantir la qualité de vos systèmes agentiques. Voici notre sélection d'outils incontournables :</p><ul><li><strong>LangChain</strong> : Un framework d'orchestration puissant pour construire des applications basées sur les LLM, y compris des systèmes agentiques complexes.</li><li><strong>Bases de données vectorielles</strong> : Des solutions comme Pinecone, Weaviate ou Chroma sont essentielles pour la gestion de la mémoire des agents.</li><li><strong>Intégrations d'API</strong> : La capacité à se connecter à une multitude d'API est cruciale pour étendre les capacités de vos agents.</li><li><strong>Systèmes de monitoring</strong> : Des outils comme LangSmith ou Arize AI sont indispensables pour l'observabilité, le débogage et l'amélioration continue de vos agents.</li></ul><h2>Les meilleures pratiques pour le développement de systèmes agentiques</h2><p>Pour garantir la robustesse et la fiabilité de vos systèmes agentiques, il est important de suivre un certain nombre de bonnes pratiques :</p><ul><li><strong>L'ingénierie des prompts</strong> : La qualité des prompts que vous fournissez à vos agents a un impact direct sur leurs performances. Il est donc essentiel de consacrer du temps à la conception de prompts clairs, précis et efficaces.</li><li><strong>La gestion des erreurs</strong> : Les systèmes agentiques peuvent parfois échouer. Il est donc important de mettre en place des mécanismes de gestion des erreurs robustes pour garantir la résilience de vos systèmes.</li><li><strong>Les garde-fous de sécurité</strong> : Pour éviter les comportements indésirables, il est crucial de mettre en place des garde-fous de sécurité pour limiter les actions de vos agents et garantir une utilisation éthique.</li><li><strong>L'optimisation des performances</strong> : La performance des systèmes agentiques est un enjeu majeur. Il est donc important d'optimiser en permanence la vitesse, la précision et le coût de vos agents.</li></ul><h2>Stratégies de déploiement pour les systèmes agentiques</h2><p>Le passage d'un prototype à une mise en production à grande échelle nécessite une planification minutieuse. Voici quelques leçons apprises de nos déploiements en conditions réelles :</p><ul><li><strong>Infrastructure</strong> : Choisissez une infrastructure cloud scalable et flexible pour supporter la charge de travail de vos agents.</li><li><strong>Mise à l'échelle</strong> : Prévoyez une stratégie de mise à l'échelle progressive pour garantir une transition en douceur.</li><li><strong>Monitoring</strong> : Mettez en place un système de monitoring complet pour suivre les performances de vos agents en temps réel.</li><li><strong>Gestion des coûts</strong> : Optimisez en permanence les coûts de vos systèmes agentiques en choisissant les bons modèles et en optimisant vos prompts.</li></ul><h2>Passez à la vitesse supérieure avec l'IA agentique</h2><p>La construction de systèmes agentiques est un domaine passionnant et en pleine évolution. Avec les bons outils, la bonne architecture et les bonnes pratiques, vous pouvez créer des systèmes d'IA autonomes qui transformeront votre entreprise. Pour discuter de votre projet de système agentique avec nos experts, contactez-nous pour une consultation technique.</p>"
+      },
+      "roiInvestment": {
+        "category": "Stratégie",
+        "title": "Mesurer le ROI de l'IA : le guide complet pour évaluer vos investissements",
+        "description": "Découvrez comment mesurer le retour sur investissement (ROI) de vos projets d'IA avec notre guide complet. Un framework pratique pour évaluer la valeur de vos investissements en IA.",
+        "readTime": "10 min",
+        "content": "<p>Mesurer le retour sur investissement (ROI) de l'intelligence artificielle est un défi majeur pour de nombreuses organisations. Contrairement aux investissements traditionnels, la valeur de l'IA ne se limite pas à des gains de productivité ou à des réductions de coûts. Elle englobe également des avantages stratégiques plus difficiles à quantifier, tels que l'amélioration de l'expérience client, l'accélération de l'innovation et le renforcement de la position concurrentielle. Ce guide présente un cadre complet pour mesurer le ROI de l'IA, en capturant à la fois les bénéfices quantitatifs et qualitatifs de vos initiatives.</p><h2>Le défi de la mesure du ROI de l'IA : au-delà des calculs traditionnels</h2><p>Les méthodes traditionnelles de calcul du ROI se révèlent souvent insuffisantes pour évaluer l'impact réel de l'IA. Elles ont tendance à négliger la valeur stratégique à long terme et à se concentrer uniquement sur les gains financiers immédiats. Pour surmonter ce défi, nous proposons un cadre multidimensionnel qui prend en compte l'ensemble des bénéfices de l'IA.</p><h2>Les six dimensions clés pour mesurer le ROI de l'IA</h2><p>Notre framework s'articule autour de six dimensions clés pour une évaluation complète du ROI de l'IA :</p><ul><li><strong>Efficacité opérationnelle</strong> : Mesure des gains de productivité, de l'automatisation des tâches et de l'optimisation des processus.</li><li><strong>Impact sur les revenus</strong> : Évaluation de l'augmentation des ventes, de la génération de leads et de la valeur client.</li><li><strong>Réduction des coûts</strong> : Quantification des économies réalisées grâce à l'optimisation des ressources et à la réduction des erreurs.</li><li><strong>Amélioration de la qualité</strong> : Mesure de l'amélioration de la qualité des produits, des services et de l'expérience client.</li><li><strong>Positionnement stratégique</strong> : Évaluation de l'avantage concurrentiel, de la part de marché et de la réputation de la marque.</li><li><strong>Capacité d'innovation</strong> : Mesure de la capacité à développer de nouveaux produits, services et modèles d'affaires.</li></ul><h2>Le cadre de calcul du ROI de l'IA</h2><p>Pour chaque dimension, nous fournissons des formules pratiques et des outils pour calculer le ROI de vos investissements en IA. Cela inclut l'établissement de lignes de base, la définition d'intervalles de mesure et l'utilisation de méthodes d'attribution pour isoler l'impact de l'IA.</p><h2>Des études de cas concrètes : un ROI de 200 à 450 %</h2><p>Nos études de cas réels démontrent comment des organisations ont atteint des retours sur investissement de 200 à 450 % sur leurs projets d'IA. Nous vous présentons en détail comment ces retours ont été mesurés et atteints, avec des exemples concrets dans différents secteurs d'activité.</p><h2>Prenez des décisions d'investissement éclairées</h2><p>En adoptant une approche multidimensionnelle pour mesurer le ROI de l'IA, vous serez en mesure de prendre des décisions d'investissement plus éclairées, de justifier vos projets auprès de votre direction et de maximiser la valeur de l'IA pour votre entreprise. Pour en savoir plus sur notre framework de mesure du ROI de l'IA et sur la manière dont nous pouvons vous aider à évaluer vos investissements, contactez nos experts pour une consultation personnalisée.</p>"
+      }
+    },
+    "newsletter": {
+      "title": "RESTEZ À L'AVANT-GARDE<br />DE L'IA",
+      "description": "Abonnez-vous pour recevoir nos dernières analyses, guides techniques et études de l'industrie directement dans votre boîte de réception.",
+      "placeholder": "Entrez votre adresse email",
+      "subscribe": "S'abonner",
+      "subscribing": "Abonnement...",
+      "success": "✓ Abonnement réussi ! Vérifiez votre email pour confirmation.",
+      "error": "✗ Échec de l'abonnement. Veuillez réessayer."
+    },
+    "articleNotFound": "Article introuvable",
+    "backToResources": "Retour aux Ressources"
+  },
+  "faq": {
+    "seoTitle": "FAQ | Questions fréquentes sur la transformation IA",
+    "seoDescription": "FAQ transformation IA : réponses sur services, processus, tarifs Nukleo Digital. Questions fréquentes sur agence transformation IA.",
+    "seoKeywords": "FAQ IA, questions transformation IA, processus agence IA, tarifs IA",
+    "title": "Questions<br /><span class=\"text-white/70\">fréquentes</span>",
+    "description": "Nous avons rassemblé les questions les plus courantes que nous recevons pour vous aider à mieux comprendre ce que nous faisons et comment nous pouvons vous aider.",
+    "categories": {
+      "general": "Général",
+      "services": "Services",
+      "process": "Processus",
+      "pricing": "Tarifs"
+    }
+  },
+  "artsCulture": {
+    "seoTitle": "IA pour les arts et la culture | Nukleo Digital",
+    "seoDescription": "Découvrez comment l'IA transforme le secteur des arts et de la culture. De la création augmentée à l'engagement du public, explorez nos solutions pour les institutions culturelles.",
+    "seoKeywords": "IA arts et culture, IA musées, création artistique IA, engagement public IA",
+    "heroTitle": "L'IA au service<br /><span class=\"text-white/70\">de la culture</span>",
+    "heroDescription": "Nous croyons que l'intelligence artificielle a le pouvoir d'enrichir et de démocratiser l'accès à la culture. Nous collaborons avec des musées, des galeries et des institutions culturelles pour créer des expériences immersives, personnalisées et inoubliables.",
+    "challengeTitle": "Le défi : connecter avec une nouvelle génération",
+    "challengeDescription": "Les institutions culturelles font face à un défi majeur : comment engager un public habitué à des expériences numériques interactives et personnalisées ? Comment rester pertinent à l'ère de l'économie de l'attention ?",
+    "solutionTitle": "Notre solution : l'IA comme partenaire créatif",
+    "solutionDescription": "Nous utilisons l'IA non pas pour remplacer la créativité humaine, mais pour l'augmenter. Nos solutions permettent de :",
+    "solutions": {
+      "personalized": {
+        "title": "Créer des parcours de visite personnalisés",
+        "description": "Imaginez un guide de musée qui s'adapte en temps réel aux intérêts et au niveau de connaissance de chaque visiteur."
+      },
+      "interactive": {
+        "title": "Développer des installations interactives",
+        "description": "Créez des œuvres d'art qui réagissent au mouvement, à la voix ou même aux émotions des visiteurs."
+      },
+      "archives": {
+        "title": "Rendre les archives accessibles",
+        "description": "Utilisez l'IA pour numériser, cataloguer et rendre consultables des milliers d'heures d'archives vidéo, audio ou textuelles."
+      },
+      "engagement": {
+        "title": "Augmenter l'engagement en ligne",
+        "description": "Créez des campagnes de communication ciblées et du contenu personnalisé qui attirent un nouveau public et fidélisent les visiteurs existants."
+      }
+    },
+    "ctaTitle": "Prêt à réinventer l'expérience culturelle ?",
+    "ctaDescription": "Discutons de la manière dont l'IA peut vous aider à accomplir votre mission et à toucher un public plus large.",
+    "ctaButton": "Parler à un expert"
+  },
+  "agencies": {
+    "seoTitle": "Votre équipe IA & Digitale à la demande | Nukleo Digital",
+    "seoDescription": "Étendez votre agence avec l'équipe experte en IA & digitale de Nukleo. 40% d'économies, zéro tracas de recrutement, qualité premium garantie.",
+    "seoKeywords": "partenariat agence IA, équipe digitale à la demande, externalisation développement, agence augmentée",
+    "heroBadge": "Approuvé par 32+ Agences Européennes",
+    "heroTitle": "Votre",
+    "heroTitleHighlight": "Équipe IA & Digitale",
+    "heroSubtitle": "Sans les frais généraux",
+    "heroDescription": "Étendez votre agence instantanément avec notre équipe experte. Livrez plus de projets, augmentez les marges, gardez les clients heureux, tout cela sans les tracas du recrutement.",
+    "ctaButton1": "Démarrer votre premier projet",
+    "ctaButton2": "Réserver un appel stratégie",
+    "stats": {
+      "costSavings": "Économies de coûts",
+      "teamReady": "Équipe prête",
+      "onTimeDelivery": "Livraison à temps",
+      "insuredProjects": "Projets assurés"
+    },
+    "problemTitle": "Les agences sont coincées entre",
+    "problemTitleHighlight": "Croissance & Capacité",
+    "problemSubtitle": "Ça vous dit quelque chose ? Vous n'êtes pas seul.",
+    "problems": {
+      "hiring": {
+        "title": "Le recrutement est lent et coûteux",
+        "description": "3-6 mois pour recruter, salaires de 60K€+, risque élevé de turnover. Vous perdez des projets pendant le recrutement."
+      },
+      "demand": {
+        "title": "Les clients veulent plus, plus vite",
+        "description": "Les demandes en IA, automatisation, plateformes sur mesure explosent mais votre équipe est à saturation."
+      },
+      "margins": {
+        "title": "Les marges se rétrécissent",
+        "description": "Les coûts de développement locaux mangent les profits. Vous avez besoin d'une qualité premium à des prix nearshore."
+      }
+    },
+    "solutionBadge": "La Solution Nukleo",
+    "solutionTitle": "Votre",
+    "solutionTitleHighlight": "Puissance IA & Digitale Instantanée",
+    "solutionDescription": "Nous devenons votre colonne vertébrale technique, intégrée de manière transparente, instantanément évolutive, tarifée de manière transparente.",
+    "benefits": {
+      "deploy": {
+        "title": "Déploiement en 48 heures",
+        "description": "Pas de recrutement, pas de délais d'intégration. Équipe senior prête à commencer lundi.",
+        "highlight": "vs. 3-6 mois de recrutement"
+      },
+      "save": {
+        "title": "Économisez 40% sur les coûts de dev",
+        "description": "Talent canadien premium à prix nearshore. Meilleures marges, même qualité.",
+        "highlight": "60K€ → 36K€ par dev/an"
+      },
+      "scale": {
+        "title": "Évoluez instantanément à la hausse ou à la baisse",
+        "description": "Besoin de 3 devs ce mois-ci, 8 le mois prochain ? Aucun problème. Zéro frais généraux RH.",
+        "highlight": "Flexibilité totale"
+      },
+      "insurance": {
+        "title": "Assurance projet 1M€",
+        "description": "Chaque projet couvert. 98% de livraison à temps. 95% de satisfaction client garantie.",
+        "highlight": "Partenariat sans risque"
+      },
+      "experts": {
+        "title": "Experts IA & Automatisation",
+        "description": "Pas seulement des codeurs, des partenaires IA stratégiques qui comprennent la transformation métier.",
+        "highlight": "5+ ans d'expérience moyenne"
+      },
+      "hours": {
+        "title": "Heures européennes, base canadienne",
+        "description": "Équipe bilingue (français/anglais) alignée avec votre fuseau horaire et votre culture.",
+        "highlight": "Collaboration en temps réel"
+      }
+    },
+    "ctaHelp": "Découvrez comment nous pouvons aider votre agence",
+    "howItWorksTitle": "De la poignée de main à la",
+    "howItWorksTitleHighlight": "livraison en 3 étapes",
+    "howItWorksSubtitle": "Pas de complexité. Pas de bureaucratie. Juste des résultats.",
+    "steps": {
+      "discovery": {
+        "step": "01",
+        "title": "Appel de découverte",
+        "description": "Session stratégie de 30 min. Nous comprenons vos besoins, votre stack technique et votre pipeline de projets.",
+        "timeline": "Jour 1"
+      },
+      "assembly": {
+        "step": "02",
+        "title": "Assemblage de l'équipe",
+        "description": "Nous faisons correspondre des devs seniors à votre projet. Rencontrez votre équipe, examinez les profils, approuvez la composition.",
+        "timeline": "Jour 2-3"
+      },
+      "kickoff": {
+        "step": "03",
+        "title": "Lancement du projet",
+        "description": "Équipe intégrée dans votre flux de travail. Slack, GitHub, standups quotidiens, collaboration transparente.",
+        "timeline": "Jour 4+"
+      }
+    },
+    "servicesTitle": "Services complets",
+    "servicesTitleHighlight": "IA & Digitaux",
+    "servicesSubtitle": "De la stratégie au déploiement, nous gérons tout le parcours technique.",
+    "serviceCategories": {
+      "ai": {
+        "title": "IA & Machine Learning",
+        "services": [
+          "Modèles IA sur mesure",
+          "NLP & chatbots",
+          "Analyse prédictive",
+          "Vision par ordinateur",
+          "Conseil en stratégie IA"
+        ]
+      },
+      "web": {
+        "title": "Apps Web & Mobile",
+        "services": [
+          "React, Vue, Next.js",
+          "iOS & Android natif",
+          "Progressive Web Apps",
+          "Plateformes e-commerce",
+          "Produits SaaS"
+        ]
+      },
+      "cloud": {
+        "title": "Cloud & DevOps",
+        "services": [
+          "AWS, Azure, GCP",
+          "Pipelines CI/CD",
+          "Kubernetes & Docker",
+          "Infrastructure as Code",
+          "Sécurité & conformité"
+        ]
+      },
+      "data": {
+        "title": "Données & Automatisation",
+        "services": [
+          "Pipelines de données",
+          "Business intelligence",
+          "Automatisation de processus",
+          "Intégrations API",
+          "Workflows ETL"
+        ]
+      }
+    },
+    "pricingTitle": "Tarification",
+    "pricingTitleHighlight": "Transparente",
+    "pricingSubtitle": "Pas de frais cachés. Pas de surprises. Juste des tarifs honnêtes et compétitifs.",
+    "pricingPlans": {
+      "project": {
+        "name": "Par projet",
+        "price": "Devis fixe",
+        "description": "Parfait pour les projets à périmètre défini",
+        "features": [
+          "Livrables clairs",
+          "Calendrier fixe",
+          "Paiements par jalons",
+          "Gestion de projet complète"
+        ],
+        "cta": "Obtenir un devis"
+      },
+      "extension": {
+        "name": "Extension d'équipe",
+        "price": "3 500€/mois",
+        "description": "Par développeur senior",
+        "features": [
+          "Membres d'équipe dédiés",
+          "Évolutivité flexible",
+          "Votre gestion de projet",
+          "Facturation mensuelle"
+        ],
+        "cta": "Construire votre équipe",
+        "popular": true
+      },
+      "retainer": {
+        "name": "Abonnement",
+        "price": "Sur mesure",
+        "description": "Partenariat continu",
+        "features": [
+          "Support prioritaire",
+          "Capacité réservée",
+          "Conseil stratégique",
+          "Remises volume"
+        ],
+        "cta": "Discuter abonnement"
+      }
+    },
+    "pricingNote": "💰 Financement Export Canada : 75 000 CAD disponibles pour soutenir votre croissance",
+    "testimonialsTitle": "Les agences",
+    "testimonialsTitleHighlight": "adorent travailler avec nous",
+    "testimonials": {
+      "sophie": {
+        "quote": "Nukleo est devenu notre équipe IA du jour au lendemain. Nous sommes passés de refuser des projets IA à les mener.",
+        "author": "Sophie Laurent",
+        "role": "CEO, Digital Pulse Paris",
+        "metric": "3x capacité projet"
+      },
+      "marc": {
+        "quote": "40% d'économies sans compromettre la qualité. Nos marges se sont améliorées tandis que la satisfaction client augmentait.",
+        "author": "Marc Dubois",
+        "role": "COO, TechFlow Brussels",
+        "metric": "40% d'augmentation de marge"
+      },
+      "elena": {
+        "quote": "Plus de stress de recrutement. Nous montons en puissance pour les gros projets, nous réduisons quand c'est calme. Flexibilité totale.",
+        "author": "Elena Rodriguez",
+        "role": "Fondatrice, Innovate Madrid",
+        "metric": "Zéro risque de turnover"
+      }
+    },
+    "finalCtaBadge": "Prêt à évoluer ?",
+    "finalCtaTitle": "Construisons quelque chose",
+    "finalCtaTitleHighlight": "d'extraordinaire",
+    "finalCtaDescription": "Rejoignez 32+ agences qui ont transformé leur entreprise avec Nukleo. Réservez un appel stratégie gratuit aujourd'hui, sans engagement, juste des insights.",
+    "finalCtaButton1": "Réserver votre appel stratégie",
+    "finalCtaButton2": "Démarrer un projet",
+    "finalCtaFeatures": {
+      "free": "Consultation gratuite",
+      "noObligation": "Sans obligation",
+      "response": "Réponse sous 24h"
+    }
+  },
+  "media": {
+    "seoTitle": "Espace Média | Nukleo Digital",
+    "seoDescription": "Accédez à nos communiqués de presse, à notre kit média et aux dernières nouvelles de Nukleo Digital. Pour toute demande des médias, contactez notre équipe.",
+    "seoKeywords": "espace média Nukleo Digital, communiqués de presse IA, contact presse Nukleo, kit média agence IA",
+    "badge": "Médias",
+    "heroTitle": "Espace",
+    "heroTitleHighlight": "Média",
+    "heroDescription": "Retrouvez ici nos dernières annonces, nos communiqués de presse et les ressources pour les journalistes et les professionnels des médias.",
+    "contactForm": {
+      "title": "Formulaire de contact média",
+      "description": "Remplissez ce formulaire pour toute demande d'interview, d'information ou de collaboration.",
+      "firstName": "Prénom",
+      "lastName": "Nom",
+      "email": "Email",
+      "mediaOutlet": "Organe de presse",
+      "subject": "Sujet",
+      "message": "Message",
+      "submit": "Envoyer",
+      "success": "Merci ! Votre message a été envoyé. Nous vous répondrons dans les 24 heures.",
+      "error": "Une erreur s'est produite. Veuillez réessayer."
+    },
+    "mediaContact": {
+      "title": "Contact média",
+      "description": "Pour toute demande d'interview, d'information ou de collaboration, contactez notre équipe des relations avec les médias.",
+      "email": "presse@nukleo.digital",
+      "responseTime": "Nous répondons généralement dans les 24 heures"
+    },
+    "pressArticles": {
+      "title": "Articles de presse",
+      "description": "Découvrez les articles et couvertures médiatiques sur Nukleo Digital"
+    },
+    "linkedinFeed": {
+      "title": "Actualités LinkedIn",
+      "description": "Suivez nos dernières actualités et publications sur LinkedIn",
+      "followUs": "Suivez-nous sur LinkedIn"
+    }
+  },
+  "lab": {
+    "title": "Le laboratoire IA",
+    "subtitle": "Fondation technologique",
+    "heroDescription": "Nous construisons la fondation technologique robuste et flexible qui alimente votre transformation IA. Des plateformes de données intelligentes aux agents IA sur mesure, nous créons l'infrastructure qui rend les opérations natives IA possibles.",
+    "mission": "Notre Mission",
+    "missionText": "Construire la colonne vertébrale technologique qui permet à votre organisation d'opérer comme une <strong>entreprise native IA</strong>. Nous n'implémentons pas simplement des outils, nous architecturons des systèmes qui apprennent, s'adaptent et évoluent avec vos ambitions.",
+    "capabilities": {
+      "title": "Capacités principales",
+      "dataPlatforms": {
+        "title": "Plateformes de données intelligentes",
+        "description": "Unifier et préparer votre écosystème de données pour l'IA. Nous construisons des architectures de données robustes qui servent de fondation pour les systèmes intelligents, garantissant la qualité, l'accessibilité et la gouvernance des données."
+      },
+      "customAgents": {
+        "title": "Développement d'agents IA sur mesure",
+        "description": "Créer des agents autonomes adaptés à vos besoins commerciaux spécifiques. Des bots de service client aux assistants de processus intelligents, nous développons des agents IA qui apprennent, s'adaptent et livrent de la valeur en continu."
+      },
+      "integration": {
+        "title": "Intégration IA tiers",
+        "description": "Orchestrer les meilleurs modèles et services IA du marché. Nous intégrons les solutions leaders d'OpenAI, Anthropic, Mistral et d'autres pour créer une stack IA puissante personnalisée pour vos opérations."
+      },
+      "automation": {
+        "title": "Automatisation intelligente des processus (IPA)",
+        "description": "Aller au-delà de la RPA simple avec des flux de travail adaptatifs. Nous implémentons une automatisation intelligente qui comprend le contexte, prend des décisions et s'optimise continuellement en fonction des résultats."
+      }
+    },
+    "approach": {
+      "title": "Notre approche",
+      "assess": {
+        "title": "Évaluer & concevoir",
+        "description": "Nous commençons par comprendre votre infrastructure actuelle, votre paysage de données et vos objectifs commerciaux. Ensuite, nous concevons une architecture IA qui s'aligne avec vos objectifs stratégiques."
+      },
+      "build": {
+        "title": "Construire & intégrer",
+        "description": "Nous développons des solutions IA sur mesure et intégrons les meilleurs services tiers, créant un écosystème cohérent qui fonctionne parfaitement avec vos systèmes existants."
+      },
+      "optimize": {
+        "title": "Optimiser & évoluer",
+        "description": "Nous surveillons, affinons et améliorons continuellement votre infrastructure IA, garantissant qu'elle évolue avec vos besoins et livre un ROI mesurable à chaque étape."
+      }
+    },
+    "cta": {
+      "title": "Prêt à construire votre fondation IA ?",
+      "description": "Discutons de la manière dont Le Laboratoire IA peut architecturer l'infrastructure technologique qui alimente votre transformation.",
+      "button": "Démarrer la Conversation"
+    }
+  },
+  "bureau": {
+    "title": "Le bureau stratégique",
+    "subtitle": "Pilotage de la transformation",
+    "heroDescription": "Nous définissons la stratégie, pilotons la transformation et mesurons l'impact de l'IA dans votre organisation. De la vision à l'exécution, nous orchestrons votre parcours de l'IA-curieux à l'IA-natif.",
+    "mission": "Notre Mission",
+    "missionText": "Guider votre organisation à travers le parcours complexe de la <strong>transformation IA</strong>. Nous ne créons pas simplement des stratégies, nous orchestrons le changement, alignons les parties prenantes et assurons que vos initiatives IA livrent une valeur commerciale mesurable à chaque étape.",
+    "services": {
+      "title": "Services stratégiques",
+      "aiMaturity": {
+        "title": "Audit de maturité IA & feuille de route",
+        "description": "Évaluer votre position actuelle dans le paysage IA et tracer un chemin clair vers le leadership IA. Nous évaluons vos capacités, identifions les écarts et créons une feuille de route de transformation de 9 à 12 mois."
+      },
+      "transformationStrategy": {
+        "title": "Stratégie de transformation agentique",
+        "description": "Redéfinir votre modèle opérationnel avec l'IA au centre. Nous vous aidons à passer de l'expérimentation à la transformation à l'échelle de l'entreprise, en intégrant l'IA agentique comme fondation de la croissance."
+      },
+      "governance": {
+        "title": "Gouvernance & éthique IA",
+        "description": "Implémenter les garde-fous pour une IA responsable et performante. Nous établissons des cadres pour l'utilisation éthique de l'IA, la conformité, la gestion des risques et la prise de décision transparente."
+      },
+      "performanceAnalysis": {
+        "title": "Analyse de performance & ROI",
+        "description": "Mesurer l'impact tangible de l'IA sur vos objectifs commerciaux. Nous suivons les KPI, analysons les résultats et optimisons continuellement vos investissements IA pour maximiser le retour et la valeur stratégique."
+      }
+    },
+    "journey": {
+      "title": "Le parcours de transformation",
+      "discovery": {
+        "title": "Découverte & évaluation",
+        "description": "Nous menons un audit complet de maturité IA, évaluant vos capacités actuelles, la préparation des données, la culture organisationnelle et le positionnement concurrentiel. Cette évaluation de base identifie les opportunités et les contraintes."
+      },
+      "strategy": {
+        "title": "Stratégie & feuille de route",
+        "description": "Nous concevons votre stratégie de transformation agentique, définissant des objectifs clairs, priorisant les cas d'usage et créant une feuille de route par phases. Cela inclut les cadres de gouvernance, la planification des ressources et les stratégies de gestion du changement."
+      },
+      "execution": {
+        "title": "Exécution & optimisation",
+        "description": "Nous orchestrons l'implémentation dans votre organisation, coordonnant avec Le Lab et Le Studio. Nous mesurons continuellement la performance, suivons le ROI et ajustons la stratégie pour maximiser l'impact commercial."
+      },
+      "scale": {
+        "title": "Évolution & leadership",
+        "description": "Nous vous aidons à faire évoluer les pilotes réussis à l'échelle de l'entreprise et à positionner votre organisation comme un leader IA dans votre industrie. Cela inclut le leadership d'opinion, les programmes d'innovation et le développement continu des capacités."
+      }
+    },
+    "impact": {
+      "title": "Impact attendu",
+      "roi": "ROI sur les investissements IA dans les 12 mois",
+      "timeToMarket": "Réduction du temps de mise sur le marché pour les nouvelles initiatives",
+      "efficiency": "Augmentation de l'efficacité opérationnelle"
+    },
+    "cta": {
+      "title": "Prêt à piloter votre transformation ?",
+      "description": "Discutons de la manière dont Le Bureau Stratégique peut orchestrer votre parcours de l'expérimentation IA à la transformation à l'échelle de l'entreprise.",
+      "button": "Commencer votre parcours"
+    }
+  },
+  "studio": {
+    "title": "Le studio créatif",
+    "subtitle": "Contenu & expériences augmentés",
+    "heroDescription": "Nous utilisons l'IA pour créer des expériences de marque et du contenu à une échelle et une pertinence sans précédent. Du contenu génératif aux campagnes marketing autonomes, nous vous aidons à vous connecter avec les audiences de manières auparavant impossibles.",
+    "mission": "Notre Mission",
+    "missionText": "Exploiter le pouvoir créatif de l'IA pour livrer des <strong>expériences hyper-personnalisées à grande échelle</strong>. Nous ne remplaçons pas la créativité humaine, nous l'amplifions, permettant à votre marque de créer des connexions significatives avec chaque client, à chaque instant.",
+    "capabilities": {
+      "title": "Capacités créatives",
+      "contentCreation": {
+        "title": "Création de contenu augmenté",
+        "description": "Produire du contenu (texte, image, vidéo) à une échelle sans précédent, personnalisé en temps réel. Nous tirons parti de l'IA générative pour créer du contenu aligné avec la marque qui résonne avec chaque segment d'audience."
+      },
+      "personalizedExperiences": {
+        "title": "Expériences client personnalisées par IA",
+        "description": "Créer des parcours clients uniques et dynamiques alimentés par l'IA. Des recommandations personnalisées aux interfaces adaptatives, nous concevons des expériences qui évoluent avec chaque interaction."
+      },
+      "agenticMarketing": {
+        "title": "Campagnes marketing agentiques",
+        "description": "Déployer des campagnes autonomes qui s'optimisent continuellement. Nos agents IA testent, apprennent et s'adaptent en temps réel, maximisant l'engagement et la conversion sur tous les canaux."
+      },
+      "brandIdentity": {
+        "title": "Identité de marque à l'ère de l'IA",
+        "description": "Définir comment votre marque interagit et est perçue dans un monde d'assistants et d'agents IA. Nous vous aidons à établir une voix et une présence distinctives dans les expériences médiées par l'IA."
+      }
+    },
+    "revolution": {
+      "title": "La révolution du marketing agentique",
+      "description": "Nous entrons dans l'ère du <strong>Marketing Agentique</strong> où les systèmes IA autonomes n'exécutent pas simplement des campagnes, ils apprennent, décident et agissent indépendamment pour atteindre vos objectifs commerciaux.",
+      "traditional": {
+        "title": "Marketing traditionnel",
+        "items": [
+          "Configuration manuelle des campagnes",
+          "Optimisation périodique",
+          "Messagerie unique pour tous",
+          "Insights retardés",
+          "Personnalisation limitée"
+        ]
+      },
+      "agentic": {
+        "title": "Marketing agentique",
+        "items": [
+          "Orchestration autonome des campagnes",
+          "Optimisation continue en temps réel",
+          "Hyper-personnalisation à grande échelle",
+          "Insights et actions instantanés",
+          "Adaptatif à chaque client"
+        ]
+      }
+    },
+    "useCases": {
+      "title": "Cas d'usage",
+      "dynamicContent": {
+        "title": "Génération de contenu dynamique",
+        "description": "Générer des milliers de descriptions de produits uniques, d'articles de blog et de contenu pour les réseaux sociaux adaptés à différents segments d'audience tout en maintenant la voix de marque et les standards de qualité."
+      },
+      "personalizedJourneys": {
+        "title": "Parcours client personnalisés",
+        "description": "Créer des expériences uniques pour chaque visiteur basées sur leur comportement, leurs préférences et leur contexte. Les agents IA adaptent le contenu, les recommandations et les interfaces en temps réel pour maximiser l'engagement et la conversion."
+      },
+      "autonomousOptimization": {
+        "title": "Optimisation autonome des campagnes",
+        "description": "Déployer des campagnes marketing qui testent, apprennent et s'optimisent continuellement sur tous les canaux. Les agents IA ajustent le message, le timing, le ciblage et l'allocation budgétaire pour maximiser le ROI sans intervention manuelle."
+      }
+    },
+    "cta": {
+      "title": "Prêt à amplifier votre créativité ?",
+      "description": "Explorons comment Le Studio Créatif peut vous aider à créer des expériences et du contenu qui captivent les audiences à une échelle sans précédent.",
+      "button": "Créons Ensemble"
+    }
+  },
+  "leo": {
+    "seoTitle": "Chat avec LEO - Assistant IA | Consultation IA Instantanée",
+    "seoDescription": "LEO assistant IA Nukleo Digital. Réponses instantanées transformation IA, stratégie, implémentation. Chatbot consultation IA gratuit.",
+    "seoKeywords": "chatbot IA, assistant IA, consultation IA, stratégie IA, aide transformation IA, guide implémentation IA, consultation IA gratuite, conseiller IA",
+    "welcomeMessage": "Je suis là pour vous aider à architecturer votre transformation IA. Pour commencer, comment dois-je vous appeler ?",
+    "newChat": "Nouvelle Conversation",
+    "startProject": "DÉMARRER UN PROJET",
+    "home": "ACCUEIL",
+    "chatWithLeo": "PARLER À LEO",
+    "aiOnline": "IA En Ligne",
+    "leoLabel": "LEO",
+    "youLabel": "VOUS",
+    "skip": "Passer",
+    "saving": "Enregistrement...",
+    "send": "Envoyer",
+    "namePlaceholder": "Votre nom (optionnel)",
+    "emailPlaceholder": "votre@email.com",
+    "emailPrompt": "Avant de continuer, j'aimerais vous envoyer des insights personnalisés ! Pourriez-vous partager votre email ?",
+    "emailSuccess": "Parfait ! Merci {{name}} ! 🎉 J'enverrai des insights personnalisés à {{email}}. Maintenant, continuons notre conversation !",
+    "emailSkip": "Pas de problème ! Continuons notre conversation. 😊",
+    "emailFormHint": "Complétez le formulaire ci-dessus pour continuer.",
+    "errorMessage": "Désolé, j'ai des difficultés à me connecter en ce moment. Veuillez réessayer ! 🔄",
+    "suggestionsPrompt": "Ou choisissez un sujet pour commencer :",
+    "inputPlaceholder": "Tapez votre réponse...",
+    "privacyPolicy": "Politique de Confidentialité",
+    "expertMode": "Expert",
+    "standardMode": "Standard",
+    "switchToExpert": "Passer en Mode Expert",
+    "switchToStandard": "Passer en Mode Standard",
+    "suggestions": {
+      "initial": [
+        "Comment l'IA peut transformer mes opérations commerciales ?",
+        "Quel est le délai de ROI pour l'implémentation de l'IA ?",
+        "Aidez-moi à construire une feuille de route stratégique IA",
+        "Quels sont les meilleurs cas d'usage IA pour mon industrie ?"
+      ],
+      "strategy": [
+        "Comment créer un plan d'implémentation IA par phases ?",
+        "Quels sont les facteurs clés de succès pour la transformation IA ?",
+        "Comment structurer mon équipe IA ?",
+        "Quel est le délai typique pour l'adoption de l'IA ?"
+      ],
+      "implementation": [
+        "Quelle stack technologique dois-je choisir pour l'IA ?",
+        "Comment assurer la qualité des données pour les modèles IA ?",
+        "Quels sont les pièges courants dans l'implémentation IA ?",
+        "Comment intégrer l'IA avec les systèmes existants ?"
+      ],
+      "roi": [
+        "Combien de temps avant de voir le ROI des investissements IA ?",
+        "Quelles métriques dois-je suivre pour le succès IA ?",
+        "Comment calculer la valeur commerciale de l'IA ?",
+        "Quelles sont les attentes de coût réalistes pour les projets IA ?"
+      ],
+      "team": [
+        "Quelles compétences dois-je recruter pour les projets IA ?",
+        "Comment former mon équipe existante à l'IA ?",
+        "Dois-je construire en interne ou m'associer pour l'IA ?",
+        "Comment créer une culture axée sur l'IA ?"
+      ]
+    },
+    "expertSuggestions": {
+      "initial": [
+        "Quelle est votre approche du MLOps et de la gouvernance des modèles ?",
+        "Comment architecturer des systèmes d'agents IA multi-agents ?",
+        "Quel est votre cadre pour l'évaluation et l'atténuation des risques IA ?",
+        "Comment gérez-vous la dérive des données et les pipelines de réentraînement des modèles ?"
+      ],
+      "strategy": [
+        "Quelle est votre méthodologie pour l'évaluation de la maturité IA ?",
+        "Comment concevez-vous des architectures d'apprentissage fédéré ?",
+        "Quelle est votre approche des cadres d'éthique IA et de la détection des biais ?",
+        "Comment structurez-vous un centre d'excellence pour l'IA ?"
+      ],
+      "implementation": [
+        "Quelle est votre stack technologique pour l'inférence en temps réel à grande échelle ?",
+        "Comment implémentez-vous le versioning des modèles et les tests A/B ?",
+        "Quelle est votre approche de l'automatisation de l'ingénierie des caractéristiques ?",
+        "Comment gérez-vous l'explicabilité et l'interprétabilité des modèles ?"
+      ],
+      "roi": [
+        "Comment calculez-vous le TCO pour l'infrastructure IA ?",
+        "Quelles métriques utilisez-vous pour la performance des modèles vs les KPI commerciaux ?",
+        "Comment quantifiez-vous la valeur des améliorations de qualité des données ?",
+        "Quel est votre cadre pour l'optimisation du portefeuille d'investissements IA ?"
+      ],
+      "team": [
+        "Quel est votre cadre de recrutement pour les ingénieurs ML vs les scientifiques de données ?",
+        "Comment structurez-vous les équipes IA (centralisées vs intégrées) ?",
+        "Quelles certifications et compétences comptent pour les praticiens IA ?",
+        "Comment construisez-vous des communautés de pratique IA internes ?"
+      ]
+    }
+  },
+  "artsCultureCommitment": {
+    "seoTitle": "Arts & Culture | Nukleo Digital",
+    "seoDescription": "Notre engagement à soutenir les arts et la culture. Découvrez comment Nukleo investit dans l'innovation culturelle et soutient les artistes et les institutions.",
+    "seoKeywords": "arts et culture, soutien culturel, soutien aux artistes, innovation culturelle, engagement Nukleo",
+    "hero": {
+      "badge": "NUKLEO.ART",
+      "title": "La culture est notre",
+      "titleHighlight": "battement de cœur",
+      "subtitle": "Une histoire d'<span class=\"italic text-white/80\">engagement</span>, d'<span class=\"italic text-white/80\">action</span> et d'<span class=\"italic text-white/80\">impact</span>"
+    },
+    "act1": {
+      "label": "ACTE I",
+      "title": "Le",
+      "titleHighlight": "Défi",
+      "subtitle": "La culture fait face à des défis sans précédent",
+      "budgetCuts": {
+        "title": "Coupes budgétaires",
+        "description": "Les réductions drastiques de financement forcent les artistes et les institutions culturelles à faire des <span class=\"text-white/90 font-medium\">choix impossibles</span> entre la survie et la création.",
+        "hover": "→ Il faut que ça change"
+      },
+      "precariousConditions": {
+        "title": "Conditions précaires",
+        "description": "Les artistes font face à des revenus instables, un manque d'avantages sociaux et des avenirs incertains, ce qui rend plus difficile de se concentrer sur ce qu'ils font de mieux : <span class=\"text-white/90 font-medium\">créer</span>.",
+        "hover": "→ Les artistes méritent mieux"
+      },
+      "quote": "\"La fragilité du secteur culturel québécois nécessite des <span class=\"font-semibold not-italic text-white\">efforts concrets</span> pour assurer son accessibilité et encourager son innovation.\""
+    },
+    "act2": {
+      "label": "ACTE II",
+      "title": "Notre",
+      "titleHighlight": "Croyance",
+      "subtitle": "Chez Nukleo, nous croyons que la culture est le <span class=\"text-white/80 font-medium\">cœur battant</span> de la société",
+      "heritage": {
+        "title": "Patrimoine",
+        "description": "La culture préserve notre <span class=\"text-white/90\">histoire</span> et notre <span class=\"text-white/90\">identité</span> pour les générations futures."
+      },
+      "creativity": {
+        "title": "Créativité",
+        "description": "La culture inspire l'<span class=\"text-white/90\">éducation</span> et stimule l'<span class=\"text-white/90\">innovation</span>."
+      },
+      "community": {
+        "title": "Communauté",
+        "description": "La culture crée des <span class=\"text-white/90\">connexions</span> et favorise l'<span class=\"text-white/90\">appartenance</span>."
+      },
+      "quote": "\"Nous croyons qu'il est impératif d'orienter nos investissements avec <span class=\"font-semibold not-italic text-white\">discernement</span> pour renforcer notre croissance culturelle, car le secteur culturel est un <span class=\"font-semibold not-italic text-white\">moteur économique</span> et un pilier de notre identité collective.\""
+    },
+    "act3": {
+      "label": "ACTE III",
+      "title": "Notre",
+      "titleHighlight": "Action",
+      "subtitle": "Nous ne faisons pas que <span class=\"line-through text-white/40\">parler</span> de soutenir la culture, nous <span class=\"text-white/80 font-semibold\">agissons</span> chaque jour.",
+      "affordablePricing": {
+        "title": "Tarifs abordables",
+        "description": "Nous offrons une <span class=\"inline-flex items-baseline gap-1\"><strong class=\"text-3xl font-bold text-green-300\">réduction de 40%</strong><span class=\"text-white/90\">sur nos services</span></span> pour les organisations culturelles, rendant la transformation numérique accessible à ceux qui en ont le plus besoin.",
+        "hover": "→ Parce que l'accès ne devrait pas être une barrière"
+      },
+      "financialSupport": {
+        "title": "Soutien financier",
+        "description": "Nous consacrons <span class=\"inline-flex items-baseline gap-1\"><strong class=\"text-3xl font-bold text-red-300\">1%</strong><span class=\"text-white/90\">de nos revenus annuels</span></span> en dons directs aux organisations culturelles, et mobilisons d'autres entrepreneurs à nous rejoindre.",
+        "hover": "→ Petit pourcentage, grand impact"
+      },
+      "liveCulture": {
+        "title": "Vivre la culture",
+        "description": "Chaque membre de l'équipe reçoit <span class=\"inline-flex items-baseline gap-1\"><strong class=\"text-3xl font-bold text-blue-300\">350$</strong><span class=\"text-white/90\">par année</span></span> pour des sorties culturelles canadiennes. Parce que soutenir la culture commence par la <span class=\"text-white/90 font-medium\">vivre</span>.",
+        "hover": "→ Pratiquer ce que nous prêchons"
+      },
+      "raiseAwareness": {
+        "title": "Sensibiliser",
+        "description": "Nous promouvons activement les arts et la culture au sein de notre entreprise, parmi nos partenaires et dans notre communauté, en restant <span class=\"text-white/90 font-medium\">informés</span> et <span class=\"text-white/90 font-medium\">engagés</span> avec les enjeux culturels contemporains.",
+        "hover": "→ Amplifier les voix qui comptent"
+      }
+    },
+    "act4": {
+      "label": "ACTE IV",
+      "title": "L'",
+      "titleHighlight": "Impact",
+      "subtitle": "Rejoignez-nous pour faire une <span class=\"text-white/80 font-semibold\">vraie</span> différence",
+      "stats": {
+        "discount": "Réduction pour projets culturels",
+        "donations": "Des revenus annuels en dons",
+        "perEmployee": "Par employé pour la culture"
+      },
+      "cta": {
+        "title": "Faisons grandir la culture",
+        "titleHighlight": "ensemble",
+        "description": "Que vous soyez artiste, organisation culturelle ou entrepreneur, rejoignez-nous pour faire une vraie différence.",
+        "button": "Commencer la Conversation"
+      }
+    }
+  },
+  "assessment": {
+    "seo": {
+      "title": "Évaluation Gratuite de Préparation IA | Évaluez Votre Potentiel IA",
+      "description": "Passez notre évaluation gratuite de 5 minutes sur la préparation IA. Obtenez des insights personnalisés sur la maturité IA de votre organisation, les écarts et les opportunités. Commencez votre parcours IA aujourd'hui.",
+      "keywords": "évaluation de préparation IA, évaluation de maturité IA, évaluation IA, score de préparation IA, évaluation IA gratuite"
+    },
+    "intro": {
+      "badge": "ÉVALUATION GRATUITE DE PRÉPARATION IA",
+      "title": "Découvrez Votre",
+      "titleHighlight": "Préparation à la Transformation IA",
+      "subtitle": "Passez notre évaluation complète de 20 questions pour comprendre où vous en êtes dans votre parcours IA et obtenez une feuille de route personnalisée pour accélérer votre transformation.",
+      "startButton": "Commencer l'Évaluation",
+      "benefits": {
+        "identify": {
+          "title": "Identifiez Votre Maturité IA",
+          "description": "Évaluez votre organisation sur 6 dimensions clés"
+        },
+        "benchmark": {
+          "title": "Comparez-vous aux Leaders",
+          "description": "Voyez comment vous vous comparez aux organisations matures en IA"
+        },
+        "recommendations": {
+          "title": "Obtenez des Recommandations Actionnables",
+          "description": "Recevez une feuille de route détaillée adaptée à votre niveau"
+        },
+        "fast": {
+          "title": "Rapide & Complet",
+          "description": "Complété en 5-7 minutes, obtenez des résultats instantanés"
+        }
+      },
+      "whatYouGet": {
+        "title": "Ce Que Vous Recevrez",
+        "overallScore": "Score de Maturité Global",
+        "dimensionScores": "Scores par Dimension",
+        "recommendations": "Recommandations Personnalisées"
+      },
+      "trustIndicators": "✓ Aucune carte de crédit requise  •  ✓ Prend 5-7 minutes  •  ✓ Résultats instantanés"
+    },
+    "quiz": {
+      "previous": "Précédent"
+    },
+    "emailCapture": {
+      "title": "Presque Terminé !",
+      "description": "Entrez vos coordonnées pour recevoir votre rapport personnalisé de Préparation IA"
+    },
+    "results": {
+      "title": "Votre Rapport de Préparation IA",
+      "subtitle": "Voici votre évaluation complète sur 6 dimensions clés",
+      "cta": {
+        "title": "Prêt pour Votre Feuille de Route Détaillée ?",
+        "description": "Obtenez un rapport PDF complet avec des recommandations personnalisées, un calendrier de mise en œuvre et les prochaines étapes adaptées à votre niveau de maturité.",
+        "button": "Obtenez Votre Rapport Complet",
+        "saved": "Rapport Enregistré ! Vérifiez votre email."
+      }
+    },
+    "errors": {
+      "saveFailed": "Échec de l'enregistrement de l'évaluation. Veuillez réessayer."
+    },
+    "questions": {
+      "1": {
+        "question": "Quelle est la vision de votre organisation concernant l'IA ?",
+        "options": {
+          "0": "Aucune vision formalisée",
+          "25": "Vision en cours de définition",
+          "50": "Vision documentée mais non communiquée",
+          "75": "Vision claire communiquée à l'équipe dirigeante",
+          "100": "Vision IA intégrée à la stratégie d'entreprise et communiquée à tous"
+        }
+      },
+      "2": {
+        "question": "Avez-vous identifié des cas d'usage prioritaires en IA ?",
+        "options": {
+          "0": "Non, aucune identification",
+          "25": "Quelques idées informelles",
+          "50": "Liste de cas d'usage potentiels",
+          "75": "Cas d'usage priorisés avec ROI estimé",
+          "100": "Feuille de route détaillée avec cas d'usage validés et budgétisés"
+        }
+      },
+      "3": {
+        "question": "Quel est le niveau d'engagement de la direction envers l'IA ?",
+        "options": {
+          "0": "Aucun intérêt ou scepticisme",
+          "25": "Curiosité passive",
+          "50": "Intérêt actif mais aucun budget alloué",
+          "75": "Sponsor exécutif identifié avec budget exploratoire",
+          "100": "Champion C-level avec budget stratégique et KPIs"
+        }
+      },
+      "4": {
+        "question": "Quelle est la qualité de vos données ?",
+        "options": {
+          "0": "Données fragmentées, non structurées, qualité inconnue",
+          "25": "Données partiellement structurées, qualité variable",
+          "50": "Données structurées mais silos départementaux",
+          "75": "Données centralisées avec gouvernance de base",
+          "100": "Data lake/warehouse unifié avec surveillance de la qualité des données"
+        }
+      },
+      "5": {
+        "question": "Avez-vous une infrastructure de données moderne ?",
+        "options": {
+          "0": "Systèmes legacy, pas de cloud",
+          "25": "Migration cloud en cours, infrastructure hybride",
+          "50": "Infrastructure cloud mais non optimisée pour l'IA",
+          "75": "Infrastructure cloud avec capacités ML",
+          "100": "Plateforme de données moderne (Snowflake, Databricks, etc.) + MLOps"
+        }
+      },
+      "6": {
+        "question": "Collectez-vous et stockez-vous des données en temps réel ?",
+        "options": {
+          "0": "Non, données par lots uniquement",
+          "25": "Quelques flux temps réel ad hoc",
+          "50": "Données en streaming pour certains cas d'usage",
+          "75": "Infrastructure de streaming robuste (Kafka, etc.)",
+          "100": "Plateforme de données temps réel avec architecture événementielle"
+        }
+      },
+      "7": {
+        "question": "Avez-vous déjà déployé des solutions IA/ML en production ?",
+        "options": {
+          "0": "Non, aucune expérience",
+          "25": "Projets pilotes ou POCs uniquement",
+          "50": "1-2 modèles en production",
+          "75": "3-5 modèles en production avec surveillance",
+          "100": "5+ modèles en production avec MLOps mature"
+        }
+      },
+      "8": {
+        "question": "Quelle est votre capacité d'intégration technologique ?",
+        "options": {
+          "0": "Systèmes monolithiques difficiles à intégrer",
+          "25": "APIs limitées, intégrations manuelles",
+          "50": "Architecture SOA avec APIs documentées",
+          "75": "Microservices avec gestion d'API",
+          "100": "Architecture cloud-native avec patterns événementiels"
+        }
+      },
+      "9": {
+        "question": "Utilisez-vous des outils d'IA générative (GPT, Claude, etc.) ?",
+        "options": {
+          "0": "Non, aucune utilisation",
+          "25": "Utilisation individuelle non structurée",
+          "50": "Pilotes départementaux avec lignes directrices",
+          "75": "Déploiement organisationnel avec gouvernance",
+          "100": "Plateforme GenAI d'entreprise avec fine-tuning et RAG"
+        }
+      },
+      "10": {
+        "question": "Quelle est la maturité de votre infrastructure cloud ?",
+        "options": {
+          "0": "On-premise uniquement, pas de stratégie cloud",
+          "25": "Adoption cloud de base (IaaS)",
+          "50": "Cloud-first avec services PaaS",
+          "75": "Multi-cloud avec orchestration",
+          "100": "Cloud-native avec serverless et conteneurs"
+        }
+      },
+      "11": {
+        "question": "Avez-vous des compétences IA/ML en interne ?",
+        "options": {
+          "0": "Aucune compétence IA",
+          "25": "1-2 personnes avec connaissances de base",
+          "50": "Petite équipe de science des données (3-5 personnes)",
+          "75": "Équipe IA structurée (data scientists, ingénieurs ML)",
+          "100": "Centre d'excellence IA avec spécialistes multidisciplinaires"
+        }
+      },
+      "12": {
+        "question": "Investissez-vous dans la formation IA ?",
+        "options": {
+          "0": "Aucune formation",
+          "25": "Formation ad hoc pour quelques personnes",
+          "50": "Programme de formation pour l'équipe technique",
+          "75": "Programme de formation étendu (business + tech)",
+          "100": "Académie IA interne avec certifications et développement continu"
+        }
+      },
+      "13": {
+        "question": "Collaborez-vous avec des partenaires IA externes ?",
+        "options": {
+          "0": "Non, aucun partenariat",
+          "25": "Consultations occasionnelles",
+          "50": "Partenariat avec 1 fournisseur",
+          "75": "Écosystème de partenaires (consultants, vendeurs, universités)",
+          "100": "Partenariats stratégiques avec co-innovation"
+        }
+      },
+      "14": {
+        "question": "Avez-vous des processus de gouvernance IA ?",
+        "options": {
+          "0": "Aucune gouvernance",
+          "25": "Lignes directrices informelles",
+          "50": "Politiques documentées mais non appliquées",
+          "75": "Cadre de gouvernance avec comité IA",
+          "100": "Gouvernance mature avec audits réguliers et conformité"
+        }
+      },
+      "15": {
+        "question": "Comment gérez-vous l'éthique et les biais de l'IA ?",
+        "options": {
+          "0": "Aucune considération éthique",
+          "25": "Conscience de base",
+          "50": "Principes éthiques documentés",
+          "75": "Processus d'examen éthique pour les projets IA",
+          "100": "Cadre éthique complet avec tests de biais et audits"
+        }
+      },
+      "16": {
+        "question": "Avez-vous des processus MLOps ?",
+        "options": {
+          "0": "Déploiements manuels ad hoc",
+          "25": "Scripts de déploiement de base",
+          "50": "CI/CD pour modèles ML",
+          "75": "MLOps avec surveillance et réentraînement",
+          "100": "Plateforme MLOps mature (Kubeflow, MLflow, etc.)"
+        }
+      },
+      "17": {
+        "question": "Quelle est l'attitude de vos employés envers l'IA ?",
+        "options": {
+          "0": "Résistance ou peur généralisée",
+          "25": "Scepticisme ou indifférence",
+          "50": "Curiosité mais attentisme",
+          "75": "Intérêt actif et volonté d'expérimenter",
+          "100": "Enthousiasme et culture d'innovation IA"
+        }
+      },
+      "18": {
+        "question": "Encouragez-vous l'expérimentation IA ?",
+        "options": {
+          "0": "Non, culture averse au risque",
+          "25": "Expérimentation tolérée mais non encouragée",
+          "50": "Budget d'innovation limité",
+          "75": "Programme d'innovation avec temps dédié",
+          "100": "Culture \"fail fast\" avec hackathons et sandbox IA"
+        }
+      },
+      "19": {
+        "question": "Communiquez-vous sur vos initiatives IA ?",
+        "options": {
+          "0": "Aucune communication",
+          "25": "Communication ad hoc",
+          "50": "Mises à jour régulières à l'équipe dirigeante",
+          "75": "Communication interne régulière (newsletters, townhalls)",
+          "100": "Communication interne + externe (blog, conférences, études de cas)"
+        }
+      },
+      "20": {
+        "question": "Avez-vous une stratégie de gestion du changement pour l'adoption IA ?",
+        "options": {
+          "0": "Aucune gestion du changement",
+          "25": "Plan de communication de base",
+          "50": "Gestion du changement structurée pour projets clés",
+          "75": "Gestion du changement complète avec formation et soutien",
+          "100": "Gestion du changement proactive avec réseau de champions et feedback continu"
+        }
+      }
+    },
+    "dimensions": {
+      "strategy": "Stratégie & Vision",
+      "data": "Infrastructure de Données",
+      "technology": "Capacités Technologiques",
+      "talent": "Talents & Compétences",
+      "governance": "Processus & Gouvernance",
+      "culture": "Culture & Changement"
+    },
+    "maturityLevels": {
+      "Explorer": {
+        "label": "Explorateur",
+        "description": "Aucune initiative IA formelle. Données fragmentées. Aucune compétence IA. Culture traditionnelle."
+      },
+      "Experimenter": {
+        "label": "Expérimentateur",
+        "description": "Projets pilotes en cours. Données partiellement structurées. 1-2 personnes avec compétences IA. Intérêt croissant."
+      },
+      "Adopter": {
+        "label": "Adopteur",
+        "description": "1-2 solutions IA en production. Infrastructure cloud établie. Équipe de science des données en place."
+      },
+      "Integrator": {
+        "label": "Intégrateur",
+        "description": "3-5 solutions IA en production. Plateforme de données mature. Équipe IA multidisciplinaire. Gouvernance établie."
+      },
+      "AI Leader": {
+        "label": "Leader IA",
+        "description": "5+ solutions IA en production. Architecture IA-native. Centre d'excellence mature. Culture d'innovation."
+      }
+    },
+    "resultsSummary": {
+      "yourScore": "Votre Score de Préparation IA",
+      "whatThisMeans": "Ce Que Cela Signifie",
+      "dimensionScores": "Scores par Dimension"
+    },
+    "recommendations": {
+      "characteristics": "Caractéristiques de votre niveau",
+      "topRecommendations": "Recommandations prioritaires",
+      "nextSteps": "Prochaines étapes",
+      "timeline": "Timeline",
+      "impact": {
+        "label": "Impact",
+        "high": "Élevé",
+        "medium": "Moyen",
+        "low": "Faible"
+      },
+      "effort": {
+        "label": "Effort",
+        "low": "Faible",
+        "medium": "Moyen",
+        "high": "Élevé"
+      }
+    }
+  },
+  "seo": {
+    "home": {
+      "title": "La performance par l'excellence numérique — Nukleo",
+      "description": "Nukleo est votre partenaire 360 pour prendre le lead dans l'économie numérique et IA. Marketing, design, développement et transformation numérique — augmentés par l'IA. Montréal & international."
+    },
+    "manifesto": {
+      "title": "Passer du Pilote à l'Échelle - Manifeste Transformation IA - Nukleo",
+      "description": "Le manifeste de Nukleo : passez du pilote à l'échelle avec une transformation IA complète. Réarchitecturez vos opérations autour d'agents IA autonomes."
+    },
+    "about": {
+      "title": "Stratégie. Créativité. Technologie. - Notre Équipe - Nukleo",
+      "description": "Découvrez l'équipe de Nukleo : experts en transformation IA et digitale basés à Montréal et Halifax. Nous construisons des écosystèmes numériques complets."
+    },
+    "expertise": {
+      "title": "Notre Expertise en Transformation IA & Digitale - Nukleo",
+      "description": "Explorez notre expertise en transformation IA, stratégie digitale, développement d'agents autonomes et implémentation de solutions IA d'entreprise."
+    },
+    "clients": {
+      "title": "Nos Clients | Leaders de l'Industrie - Nukleo",
+      "description": "Clients de confiance : MBAM, Summit Law, Affilia, GoCoupons & plus. Découvrez comment nous avons transformé les opérations dans 8+ industries avec l'IA."
+    },
+    "resources": {
+      "title": "Ressources & Guides - Transformation IA & Digitale - Nukleo",
+      "description": "Accédez à nos ressources gratuites : guides, articles et documentation sur la transformation IA, les agents autonomes et les stratégies digitales."
+    },
+    "services": {
+      "title": "Nos services — Nukleo.Agency, Studio, Tech, Consulting",
+      "description": "Découvrez l'offre complète de Nukleo : marketing numérique, design, développement web et IA, transformation numérique. Un écosystème 360 augmenté par l'IA."
+    },
+    "contact": {
+      "title": "Nous Contacter - Devis Gratuit & Consultation - Nukleo",
+      "description": "Contactez Nukleo pour une consultation gratuite sur votre transformation IA. Bureaux à Montréal et Halifax. Réponse rapide garantie."
+    },
+    "faq": {
+      "title": "FAQ - Questions Fréquentes sur la Transformation IA - Nukleo",
+      "description": "Trouvez les réponses à vos questions sur la transformation IA, les agents autonomes, les coûts et la mise en œuvre. FAQ complète de Nukleo."
+    },
+    "projects": {
+      "title": "Nos Projets de Transformation IA - Cas d'Usage & Solutions - Nukleo",
+      "description": "Découvrez nos projets de transformation IA réussis. Agents autonomes, plateformes intelligentes, marketing automation et solutions IA intégrées."
+    },
+    "assessment": {
+      "title": "Audit de Maturité IA Gratuit - Assessment - Nukleo",
+      "description": "Évaluez votre maturité IA avec notre audit gratuit. Diagnostic complet de votre transformation digitale et recommandations personnalisées."
+    },
+    "radar": {
+      "title": "Radar IA - Tendances & Innovations - Nukleo",
+      "description": "Radar IA : suivez les dernières tendances, innovations et technologies émergentes en intelligence artificielle et transformation digitale."
+    },
+    "glossary": {
+      "title": "Glossaire IA - Définitions & Terminologie - Nukleo",
+      "description": "Glossaire complet des termes IA et transformation digitale. Définitions claires et explications pour comprendre l'IA et ses applications."
+    },
+    "artsCulture": {
+      "title": "Arts & Culture - Créativité IA - Nukleo",
+      "description": "Explorez l'intersection entre l'art, la culture et l'IA. Découvrez comment l'IA transforme la créativité et l'expression artistique."
+    },
+    "privacy": {
+      "title": "Politique de Confidentialité - Nukleo",
+      "description": "Politique de confidentialité de Nukleo Digital. Apprenez comment nous protégeons et utilisons vos données personnelles."
+    },
+    "terms": {
+      "title": "Conditions d'Utilisation - Nukleo",
+      "description": "Conditions d'utilisation de Nukleo Digital. Conditions régissant l'utilisation de nos services et site web."
+    },
+    "cookies": {
+      "title": "Politique de Cookies - Nukleo",
+      "description": "Politique de cookies de Nukleo Digital. Apprenez quels cookies nous utilisons et comment les gérer."
+    }
+  },
+  "pwa": {
+    "install": {
+      "title": "Installer Nukleo Digital",
+      "description": "Installez notre application pour une expérience plus rapide et plus pratique.",
+      "button": "Installer",
+      "dismiss": "Plus tard",
+      "close": "Fermer"
+    }
+  }
+}

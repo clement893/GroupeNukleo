@@ -3,7 +3,7 @@ import { Link } from 'wouter';
 import { useLocalizedPath } from '@/hooks/useLocalizedPath';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { TeamScrollCards, DoubleLogoCarousel } from '@/components/demo3';
-import { ArrowUpRight, ArrowRight, HelpCircle } from 'lucide-react';
+import { ArrowUpRight, ArrowRight } from 'lucide-react';
 import { SplitCTAButton } from '@/components/SplitCTAButton';
 import { WeatherWidget } from '@/components/WeatherWidget';
 import PageLayout from '@/components/PageLayout';
@@ -111,16 +111,14 @@ function NewsCarousel({ projects: projectsProp }: { projects?: HomeProjectItem[]
               padding: '2rem 2.2rem',
               zIndex: 2,
             }}>
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: '0.6rem' }}>
+              <div style={{ marginBottom: '0.6rem' }}>
                 <span style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 900, fontSize: 'clamp(2rem, 4vw, 4rem)', lineHeight: 1, color: 'rgba(255,255,255,0.15)', letterSpacing: '-0.04em' }}>{p.num}</span>
-                <span style={{ fontSize: '0.58rem', fontWeight: 700, letterSpacing: '0.25em', textTransform: 'uppercase', color: p.color }}>{p.category}</span>
               </div>
               <h3 style={{
                 fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 700,
                 fontSize: 'clamp(1.5rem, 2.5vw, 2.5rem)', lineHeight: 1.1,
-                letterSpacing: '-0.02em', color: '#fff', marginBottom: '0.5rem',
+                letterSpacing: '-0.02em', color: '#fff', marginBottom: '1rem',
               }}>{p.name}</h3>
-              <p style={{ fontSize: '0.78rem', color: 'rgba(255,255,255,0.5)', lineHeight: 1.5, marginBottom: '1rem', maxWidth: 340 }}>{p.tagline}</p>
               <Link
                 href={getLocalizedPath('/projects')}
                 style={{
@@ -532,48 +530,51 @@ export default function HomepageDemo5() {
           {/* Hero grid : photo (gauche) = référence, blocs droite alignés sur sa hauteur */}
           <div style={{ display: 'grid', gridTemplateColumns: '3fr 2fr', gap: 'clamp(1rem, 1.5vw, 1.5rem)', marginTop: 1.5 * 16, alignItems: 'stretch', height: '52vh', minHeight: 640 }}>
 
-            {/* Colonne Our Latest Work — News Carrousel (gauche), taille fixe */}
+            {/* Colonne Our Latest Work — News Carrousel (gauche) */}
             <div style={{ height: '100%', minHeight: 0 }}>
               <NewsCarousel projects={homeCarouselProjects} />
             </div>
 
-            {/* Grille 6 cartes (2 + 1 + 1 + 2) — droite, hauteur totale = photo */}
+            {/* Grille section droite : ligne 1 (météo + date) plus haute, ligne 4 (2022) plus basse */}
             <div style={{
               display: 'grid',
               gridTemplateColumns: '1fr 1fr',
-              gridTemplateRows: 'minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr)',
-              gap: 'clamp(0.5rem, 1.2vw, 1rem)',
+              gridTemplateRows: 'minmax(0, 1.35fr) minmax(0, 1fr) minmax(0, 1fr) minmax(0, 0.55fr)',
+              gap: 'clamp(0.6rem, 1.2vw, 1.1rem)',
               padding: 'clamp(0.75rem, 1.5vw, 1.25rem)',
               borderRadius: 28,
               height: '100%',
               alignSelf: 'stretch',
               overflow: 'hidden',
             }}>
-              {/* 1. Météo — verre dépoli (style météo/date) */}
+              {/* 1. Météo — même hauteur que date, coins arrondis */}
               <WeatherWidget className="glass-widget-weather-date" />
 
-              {/* 2. Date — verre dépoli (même style que météo) */}
+              {/* 2. Date — même style et proportions que météo */}
               {(() => {
                 const d = new Date();
                 const dayName = d.toLocaleDateString('fr-FR', { weekday: 'long' });
                 const dayNum = d.getDate();
                 const monthYear = d.toLocaleDateString('fr-FR', { month: 'long', year: 'numeric' });
                 return (
-                  <div className="glass-widget-weather-date" style={{ minHeight: 0,
-                    padding: 'clamp(2.7rem, 3.6vw, 4.05rem) clamp(2.7rem, 3.9vw, 4.5rem)',
-                    display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 'clamp(0.525rem, 0.9vw, 0.9rem)', textAlign: 'center',
-                    height: '100%',
+                  <div className="glass-widget-weather-date" style={{
+                    minHeight: 0,
+                    borderRadius: 14,
+                    padding: 'clamp(1.5rem, 2.2vw, 2.5rem) clamp(1.5rem, 2.4vw, 2.75rem)',
+                    display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
+                    gap: 'clamp(0.35rem, 0.5vw, 0.6rem)', textAlign: 'center', height: '100%',
                   }}>
-                    <div style={{ fontSize: 'clamp(1.05rem, 1.275vw, 1.425rem)', fontWeight: 700, color: '#6b7280' }}>Bon {dayName} <span style={{ color: PURPLE }}>♥</span></div>
-                    <div style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 700, fontSize: 'clamp(5.25rem, 6.6vw, 8.25rem)', lineHeight: 1, color: DARK }}>{dayNum}</div>
-                    <div style={{ fontSize: 'clamp(0.75rem, 0.9vw, 1rem)', color: '#6b7280' }}>{monthYear}</div>
+                    <div style={{ fontSize: 'clamp(1rem, 1.2vw, 1.3rem)', fontWeight: 700, color: '#6b7280' }}>Bon {dayName} <span style={{ color: PURPLE }}>♥</span></div>
+                    <div style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 700, fontSize: 'clamp(3.5rem, 4.4vw, 5.5rem)', lineHeight: 1, color: DARK }}>{dayNum}</div>
+                    <div style={{ fontSize: 'clamp(0.65rem, 0.8vw, 0.85rem)', color: '#6b7280' }}>{monthYear}</div>
                   </div>
                 );
               })()}
 
-              {/* 3. Nous soutenons le monde culturel — glassmorphism */}
+              {/* 3. Nous soutenons le monde culturel — pleine largeur, bouton flèche en haut à droite */}
               <div className="glass-widget-culture" style={{
                 gridColumn: '1 / -1',
+                borderRadius: 14,
                 padding: 'clamp(1rem, 1.5vw, 1.75rem) clamp(1rem, 1.5vw, 1.75rem)',
                 minHeight: 0,
                 display: 'flex',
@@ -583,14 +584,33 @@ export default function HomepageDemo5() {
                   <h3 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 700, fontSize: 'clamp(0.95rem, 1.15vw, 1.35rem)', color: DARK, margin: 0 }}>
                     Nous soutenons le monde culturel
                   </h3>
-                  <button type="button" aria-label={t('home.moreInfo')} style={{ width: 24, height: 24, borderRadius: '50%', background: DARK, color: '#fff', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
-                    <HelpCircle size={14} />
+                  <button
+                    type="button"
+                    aria-label={t('home.moreInfo')}
+                    style={{
+                      width: 36,
+                      height: 36,
+                      borderRadius: 10,
+                      background: 'rgba(255, 255, 255, 0.4)',
+                      backdropFilter: 'blur(12px) saturate(180%)',
+                      WebkitBackdropFilter: 'blur(12px) saturate(180%)',
+                      border: '1px solid rgba(255, 255, 255, 0.6)',
+                      boxShadow: '0 2px 12px rgba(0,0,0,0.06)',
+                      color: SITE_MAUVE,
+                      cursor: 'pointer',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      flexShrink: 0,
+                    }}
+                  >
+                    <ArrowUpRight size={18} strokeWidth={2.5} />
                   </button>
                 </div>
                 <p style={{ fontSize: 'clamp(0.8rem, 1vw, 1.1rem)', color: '#4b5563', lineHeight: 1.6, margin: '0 0 1.25rem 0' }}>
                   Nous donnons 1% de tous nos revenus; nous faisons des dons; nos employés sont membres du Musée.
                 </p>
-                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', borderTop: '1px dashed rgba(0,0,0,0.1)', paddingTop: 12 }}>
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', paddingTop: 12 }}>
                   <span style={{ fontSize: 'clamp(0.72rem, 0.85vw, 0.95rem)', color: '#6b7280' }}>Montant donné</span>
                   <span className="glass-badge-purple" style={{
                     fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 700, fontSize: 'clamp(0.9rem, 1.05vw, 1.2rem)',
@@ -599,33 +619,64 @@ export default function HomepageDemo5() {
                 </div>
               </div>
 
-              {/* 4. Campagne 481k$ — glassmorphism */}
+              {/* 4. Campagne 481k$ — flèche en haut à droite du bloc, image à gauche, texte à droite */}
               <div className="glass-widget-481k" style={{
+                position: 'relative',
                 gridColumn: '1 / -1',
+                borderRadius: 14,
                 padding: 'clamp(1rem, 1.5vw, 1.75rem) clamp(1rem, 1.5vw, 1.75rem)',
                 display: 'grid',
                 gridTemplateColumns: 'minmax(100px, 1fr) 1.5fr',
                 gap: 'clamp(1rem, 1.5vw, 1.5rem)',
                 alignItems: 'center',
+                alignContent: 'center',
                 minHeight: 0,
                 overflow: 'hidden',
               }}>
-                <div style={{ position: 'relative', minHeight: 120 }}>
-                  {/* 3 images / écrans avec fonds pâles (style référence) */}
-                  <div style={{ position: 'relative', height: 100 }}>
-                    <div style={{ position: 'absolute', left: 0, top: 8, width: 44, height: 72, borderRadius: 10, background: 'rgba(240, 248, 255, 0.95)', boxShadow: '0 2px 12px rgba(0,0,0,0.06)', border: '1px solid rgba(255,255,255,0.8)', transform: 'rotate(-12deg)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                      <span style={{ fontSize: 'clamp(0.4rem, 0.5vw, 0.55rem)', color: '#94a3b8', textAlign: 'center', padding: 4 }}>Écran</span>
-                    </div>
-                    <div style={{ position: 'absolute', left: 28, top: 0, width: 44, height: 72, borderRadius: 10, background: 'rgba(255, 240, 245, 0.95)', boxShadow: '0 2px 12px rgba(0,0,0,0.06)', border: '1px solid rgba(255,255,255,0.8)', transform: 'rotate(4deg)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                      <span style={{ fontSize: 'clamp(0.4rem, 0.5vw, 0.55rem)', color: '#94a3b8', textAlign: 'center', padding: 4 }}>Transformez la donne</span>
-                    </div>
-                    <div style={{ position: 'absolute', left: 56, top: 12, width: 44, height: 72, borderRadius: 10, background: 'rgba(236, 254, 255, 0.95)', boxShadow: '0 2px 12px rgba(0,0,0,0.06)', border: '1px solid rgba(255,255,255,0.8)', transform: 'rotate(14deg)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                      <span style={{ fontSize: 'clamp(0.4rem, 0.5vw, 0.55rem)', color: '#94a3b8', textAlign: 'center', padding: 4 }}>Écran</span>
-                    </div>
-                  </div>
-                  <div style={{ position: 'absolute', top: 0, right: 8, width: 28, height: 28, borderRadius: 6, background: DARK, color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                    <ArrowUpRight size={14} />
-                  </div>
+                <span
+                  style={{
+                    position: 'absolute',
+                    top: 'clamp(1rem, 1.5vw, 1.75rem)',
+                    right: 'clamp(1rem, 1.5vw, 1.75rem)',
+                    width: 36,
+                    height: 36,
+                    borderRadius: 10,
+                    background: 'rgba(255, 255, 255, 0.4)',
+                    backdropFilter: 'blur(12px) saturate(180%)',
+                    WebkitBackdropFilter: 'blur(12px) saturate(180%)',
+                    border: '1px solid rgba(255, 255, 255, 0.6)',
+                    boxShadow: '0 2px 12px rgba(0,0,0,0.06)',
+                    color: SITE_MAUVE,
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    zIndex: 1,
+                  }}
+                  aria-hidden
+                >
+                  <ArrowUpRight size={18} strokeWidth={2.5} />
+                </span>
+                <div style={{
+                  minHeight: 120,
+                  width: '100%',
+                  height: '100%',
+                  minWidth: 0,
+                  borderRadius: 14,
+                  overflow: 'hidden',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                }}>
+                  <img
+                    src="/demo/phone-mockup-481k.png"
+                    alt="Campagne Défi 28 jours sans alcool — Fondation Jean Lapointe"
+                    style={{
+                      width: '100%',
+                      height: '100%',
+                      objectFit: 'cover',
+                      objectPosition: 'center',
+                    }}
+                  />
                 </div>
                 <div>
                   <div style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 700, fontSize: 'clamp(1.75rem, 2.5vw, 3rem)', lineHeight: 1, color: DARK, marginBottom: 8 }}>481k$</div>
@@ -635,22 +686,19 @@ export default function HomepageDemo5() {
                 </div>
               </div>
 
-              {/* 5. 2022 — L'agence fête ses 4 ans — glassmorphism */}
+              {/* 5. 2022 — L'agence fête ses 4 ans (pleine largeur : 2022 à gauche, texte à droite) */}
               <div className="glass-widget-stats" style={{
+                gridColumn: '1 / -1',
+                borderRadius: 14,
                 padding: 'clamp(0.9rem, 1.2vw, 1.4rem)',
                 minHeight: 0,
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'space-between',
+                gap: '1rem',
               }}>
-                <div style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 700, fontSize: 'clamp(1.75rem, 2.2vw, 2.75rem)', lineHeight: 1, color: DARK, marginBottom: 8 }}>2022</div>
-                <p style={{ fontSize: 'clamp(0.75rem, 0.9vw, 1rem)', color: '#4b5563', lineHeight: 1.4, margin: 0 }}>L'agence fête ses 4 ans</p>
-              </div>
-
-              {/* 6. +20 entreprises — glassmorphism */}
-              <div className="glass-widget-stats" style={{
-                padding: 'clamp(0.9rem, 1.2vw, 1.4rem)',
-                minHeight: 0,
-              }}>
-                <div style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 700, fontSize: 'clamp(1.75rem, 2.2vw, 2.75rem)', lineHeight: 1, color: DARK, marginBottom: 8 }}>+20</div>
-                <p style={{ fontSize: 'clamp(0.75rem, 0.9vw, 1rem)', color: '#4b5563', lineHeight: 1.4, margin: 0 }}>entreprises accompagnées dans leur transformation numérique</p>
+                <div style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 700, fontSize: 'clamp(1.75rem, 2.2vw, 2.75rem)', lineHeight: 1, color: DARK }}>2022</div>
+                <p style={{ fontSize: 'clamp(0.75rem, 0.9vw, 1rem)', color: '#4b5563', lineHeight: 1.4, margin: 0, textAlign: 'right' }}>L'agence fête ses 4 ans</p>
               </div>
             </div>
           </div>

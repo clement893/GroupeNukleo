@@ -60,8 +60,10 @@ export default function NukleoTech() {
       <ServiceDetailLayout
         pageTitle={t(`${NS}.pageTitle`)}
         tagline={t(`${NS}.tagline`)}
+        heroVideo="/demo/tech-hero.mov"
         heroImage="/demo/dept-tech.jpg"
         heroImageAlt={t(`${NS}.heroImageAlt`)}
+        heroHeight="clamp(384px, 60vh, 624px)"
         navItems={navItems.map((label, id) => ({ id: String(id), label }))}
         mainTitle={t(`${NS}.mainTitle`)}
         mainDescription={t(`${NS}.mainDescription`)}
