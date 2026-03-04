@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import type { ComponentType } from 'react';
 import { Sparkles, type LucideIcon } from 'lucide-react';
 import CTAPerformSection from '@/components/CTAPerformSection';
@@ -33,6 +33,8 @@ export interface ServiceDetailLayoutProps {
   extensionsTitle: string;
   extensionsDescription: string;
   extensionsTags: string[];
+  /** Si true, affiche les 4 points (highlightItems) en liste avec filets, style Studio créatif. Sinon grille 2x2. */
+  extensionsHighlightListStyle?: boolean;
   extensionsImage?: string;
   extensionsImageAlt?: string;
   gridItems: { title: string; description: string; deliverables?: string | string[] }[];
@@ -76,6 +78,7 @@ export default function ServiceDetailLayout(props: ServiceDetailLayoutProps) {
     extensionsTitle,
     extensionsDescription,
     extensionsTags,
+    extensionsHighlightListStyle = false,
     extensionsImage,
     extensionsImageAlt = '',
     gridItems,
@@ -101,10 +104,34 @@ export default function ServiceDetailLayout(props: ServiceDetailLayoutProps) {
   const activeTab = hasTabs ? tabs![activeTabIndex] : null;
   const highlightItems = gridItems.slice(0, 4);
   const expertiseItems = gridItems;
+  const leftVisualRef = useRef<HTMLDivElement | null>(null);
+  const rightVisualRef = useRef<HTMLDivElement | null>(null);
+  const [rightHeight, setRightHeight] = useState<number | null>(null);
 
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+
+  useEffect(() => {
+    if (!showVisualSection) return;
+
+    const updateHeight = () => {
+      if (!rightVisualRef.current) return;
+      const measured = rightVisualRef.current.offsetHeight;
+      setRightHeight(measured || null);
+    };
+
+    updateHeight();
+
+    if (typeof window !== 'undefined') {
+      window.addEventListener('resize', updateHeight);
+      return () => {
+        window.removeEventListener('resize', updateHeight);
+      };
+    }
+
+    return;
+  }, [showVisualSection, sectionVisualSubtitle, sectionVisualTitle, sectionVisualDescription, sectionHighlights]);
 
   const heroTitleGradient = 'linear-gradient(to right, #6B1817, #5636AD)';
 
@@ -242,7 +269,7 @@ export default function ServiceDetailLayout(props: ServiceDetailLayoutProps) {
                 </div>
               ) : (
                 <nav aria-label="Sections du service" className="lg:sticky lg:top-28 space-y-2">
-                  <ul className="space-y-0">
+                  <ul className="space-y-2">
                     {navItems.map((item, index) => (
                       <li key={item.id}>
                         <button
@@ -324,31 +351,35 @@ export default function ServiceDetailLayout(props: ServiceDetailLayoutProps) {
                       ))}
                     </div>
                     <div className="flex flex-col md:flex-row gap-8 mb-8">
-                      <div
-                        className="flex-shrink-0 flex items-center justify-center rounded-2xl overflow-hidden"
-                        style={{
-                          width: 240,
-                          height: 240,
-                          background: `linear-gradient(135deg, ${PURPLE} 0%, #7C3AED 100%)`,
-                          boxShadow: '0 8px 32px rgba(93,67,205,0.35)',
-                        }}
-                      >
-                        <Sparkles className="w-16 h-16 text-white/95" strokeWidth={1.5} />
-                      </div>
                       <div className="flex-1 flex flex-col justify-center">
                         <p className="text-gray-700 leading-relaxed mb-6" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>{extensionsDescription}</p>
-                        <div className="grid grid-cols-2 gap-3">
-                          {highlightItems.map((item, index) => (
-                            <div
-                              key={index}
-                              className="p-4 rounded-xl border border-gray-200 shadow-sm"
-                              style={{ background: 'rgba(255,255,255,0.95)', fontFamily: "'Plus Jakarta Sans', sans-serif" }}
-                            >
-                              <h3 className="font-bold mb-1 text-gray-900 text-sm">{item.title}</h3>
-                              <p className="text-gray-600 text-xs leading-relaxed line-clamp-2">{item.description}</p>
-                            </div>
-                          ))}
-                        </div>
+                        {extensionsHighlightListStyle ? (
+                          <div className="mb-10">
+                            {highlightItems.map((item, index) => (
+                              <div key={index}>
+                                <p className="text-base leading-relaxed text-gray-600 py-3" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", margin: 0 }}>
+                                  <span className="font-semibold text-gray-900">{item.title}</span>
+                                  {' — '}
+                                  {item.description}
+                                </p>
+                                <div style={{ height: 1, background: 'rgba(33, 36, 46, 0.2)', margin: 0 }} />
+                              </div>
+                            ))}
+                          </div>
+                        ) : (
+                          <div className="grid grid-cols-2 gap-3">
+                            {highlightItems.map((item, index) => (
+                              <div
+                                key={index}
+                                className="p-4 rounded-xl border border-gray-200 shadow-sm"
+                                style={{ background: 'rgba(255,255,255,0.95)', fontFamily: "'Plus Jakarta Sans', sans-serif" }}
+                              >
+                                <h3 className="font-bold mb-1 text-gray-900 text-sm">{item.title}</h3>
+                                <p className="text-gray-600 text-xs leading-relaxed line-clamp-2">{item.description}</p>
+                              </div>
+                            ))}
+                          </div>
+                        )}
                       </div>
                     </div>
                   </div>
@@ -363,10 +394,16 @@ export default function ServiceDetailLayout(props: ServiceDetailLayoutProps) {
       {showVisualSection && (
         <section className="pb-24 lg:pb-36">
           <div className="container">
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 lg:gap-1 items-stretch" style={{ gridAutoRows: 'minmax(0, auto)' }}>
-              {/* Gauche : vidéo (hauteur réduite, alignée au bas de la section droite) */}
-              <div className="lg:col-span-5 order-2 lg:order-1 min-h-[200px] lg:min-h-0 lg:overflow-hidden lg:self-end">
-                <div className="h-full w-full overflow-hidden rounded-xl lg:aspect-[4/3] lg:w-full lg:max-w-full" style={{ minHeight: 0 }}>
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 lg:gap-0.5 items-stretch" style={{ gridAutoRows: 'minmax(0, auto)' }}>
+              {/* Gauche : vidéo hauteur alignée du sous-titre aux blocs Cohérence/Impact */}
+              <div
+                className="lg:col-span-5 order-2 lg:order-1 min-h-[200px] lg:min-h-0 lg:overflow-hidden lg:self-stretch"
+                ref={leftVisualRef}
+              >
+                <div
+                  className="w-full h-full overflow-hidden rounded-xl lg:h-auto lg:w-full lg:max-w-full lg:aspect-[16/11]"
+                  style={{ minHeight: 0, height: rightHeight ?? undefined }}
+                >
                   {sectionVisualVideo ? (
                     <video
                       src={sectionVisualVideo}
@@ -374,14 +411,14 @@ export default function ServiceDetailLayout(props: ServiceDetailLayoutProps) {
                       loop
                       muted
                       playsInline
-                      className="w-full h-full object-cover object-bottom"
+                      className="w-full h-full object-cover object-center rounded-xl"
                       aria-label={sectionVisualAlt || 'Vidéo créativité humaine'}
                     />
                   ) : sectionVisualImage ? (
                     <img
                       src={sectionVisualImage}
                       alt={sectionVisualAlt}
-                      className="w-full h-full object-cover object-bottom"
+                      className="w-full h-full object-cover object-center rounded-xl"
                     />
                   ) : (
                     <div className="w-full h-full flex items-center justify-center">
@@ -399,7 +436,10 @@ export default function ServiceDetailLayout(props: ServiceDetailLayoutProps) {
                 </div>
               </div>
               {/* Droite : sous-titre aligné au haut de l'image, titre, paragraphe, grille 2×2 */}
-              <div className="lg:col-span-7 order-1 lg:order-2 px-12 pt-0 pb-0 lg:px-20 lg:pt-0 lg:pb-0 flex flex-col justify-start">
+              <div
+                className="lg:col-span-7 order-1 lg:order-2 px-12 pt-0 pb-0 lg:pl-10 lg:pr-20 lg:pt-0 lg:pb-0 flex flex-col justify-start"
+                ref={rightVisualRef}
+              >
                 {sectionVisualSubtitle && (
                   <p
                     style={{
@@ -454,7 +494,7 @@ export default function ServiceDetailLayout(props: ServiceDetailLayoutProps) {
       {/* Section "CE QUE NOUS CRÉONS" — titre centré majuscules + grille 6 cartes glassmorphisme + livrables */}
       <section className="pb-24 lg:pb-36">
         <div className="container">
-          <div className="text-center max-w-2xl mx-auto mb-12">
+          <div className="text-center max-w-2xl mx-auto mb-8">
             <p
               style={{
                 fontFamily: "'Plus Jakarta Sans', sans-serif",
@@ -472,7 +512,7 @@ export default function ServiceDetailLayout(props: ServiceDetailLayoutProps) {
               <p className="text-gray-600 leading-relaxed" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>{expertiseSectionDescription}</p>
             )}
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-4xl mx-auto">
             {expertiseItems.map((item, index) => {
               const deliverablesText = item.deliverables
                 ? Array.isArray(item.deliverables)
@@ -482,43 +522,65 @@ export default function ServiceDetailLayout(props: ServiceDetailLayoutProps) {
               return (
                 <div
                   key={index}
-                  className="p-6 rounded-lg aspect-[3/2] flex flex-col"
+                  className="p-4 rounded-lg min-h-[260px] flex flex-col items-start"
                   style={{
-                    background: 'rgba(255, 255, 255, 0.55)',
-                    border: '1px solid rgba(255, 255, 255, 0.75)',
-                    boxShadow: '0 4px 24px rgba(0, 0, 0, 0.06), inset 0 1px 0 rgba(255, 255, 255, 0.9)',
+                    background: 'rgba(255, 255, 255, 0.35)',
+                    border: '1px solid rgba(255, 255, 255, 0.6)',
+                    boxShadow: '0 4px 24px rgba(0, 0, 0, 0.06), inset 0 1px 0 rgba(255, 255, 255, 0.5)',
                     WebkitBackdropFilter: 'blur(16px) saturate(180%)',
                     backdropFilter: 'blur(16px) saturate(180%)',
                     isolation: 'isolate',
                   }}
                 >
-                  <h3 className="text-lg font-bold mb-2 text-gray-900 flex items-center gap-2" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
+                  <div className="mb-3 w-[96px] flex-shrink-0">
                     {expertiseIconComponents?.[index] ? (
-                      <span className="flex-shrink-0 flex items-center justify-center" style={{ width: 48, height: 48 }}>
+                      <span
+                        className="flex items-center justify-center"
+                        style={{ width: 96, height: 96 }}
+                      >
                         {(() => {
                           const IconComponent = expertiseIconComponents[index]!;
                           return <IconComponent />;
                         })()}
                       </span>
                     ) : expertiseIcons?.[index] ? (
-                      <span className="flex-shrink-0 w-8 h-8 rounded-lg flex items-center justify-center" style={{ background: 'rgba(93, 67, 205, 0.12)', color: PURPLE }}>
+                      <span
+                        className="w-24 h-24 rounded-lg flex items-center justify-center"
+                        style={{ background: 'rgba(93, 67, 205, 0.12)', color: PURPLE }}
+                      >
                         {(() => {
                           const Icon = expertiseIcons[index]!;
-                          return <Icon size={18} strokeWidth={2} />;
+                          return <Icon size={40} strokeWidth={2} />;
                         })()}
                       </span>
                     ) : null}
-                    {item.title}
-                  </h3>
-                  <p className="text-gray-600 text-sm leading-relaxed mb-3 flex-1" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>{item.description}</p>
-                  {deliverablesText && (
-                    <div className="pt-3 mt-auto border-t border-gray-200/60">
-                      <p className="text-xs text-gray-500 leading-relaxed" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
-                        <span className="font-medium">{expertiseDeliverablesLabel ?? 'Livrables : '}</span>
-                        {deliverablesText}
-                      </p>
-                    </div>
-                  )}
+                  </div>
+
+                  <div className="flex-1 flex flex-col justify-end w-full">
+                    <h3
+                      className="text-lg font-bold mb-2 text-gray-900"
+                      style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}
+                    >
+                      {item.title}
+                    </h3>
+                    <p
+                      className="text-gray-600 text-sm leading-relaxed mb-3"
+                      style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}
+                    >
+                      {item.description}
+                    </p>
+                    {deliverablesText && (
+                      <div className="pt-3 border-t border-gray-200/60">
+                        <p
+                          className="text-xs text-gray-500 leading-relaxed"
+                          style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}
+                        >
+                          <span className="font-medium">{expertiseDeliverablesLabel ?? 'Livrables : '}</span>
+                          {deliverablesText}
+                        </p>
+                      </div>
+                    )}
+                  </div>
                 </div>
               );
             })}

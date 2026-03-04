@@ -3,7 +3,7 @@
  * Style inspiré : volumétrique, dégradés, ombres douces, aspect glossy.
  */
 
-const ICON_SIZE = 48;
+const ICON_SIZE = 96;
 const SHADOW = '0 6px 16px rgba(0,0,0,0.12), 0 2px 6px rgba(0,0,0,0.08)';
 
 export function Icon3DBranding() {

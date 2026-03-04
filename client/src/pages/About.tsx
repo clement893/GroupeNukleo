@@ -1,7 +1,7 @@
 import PageLayout from '@/components/PageLayout';
 import SEO from '@/components/SEO';
 import StructuredData, { createPersonSchema } from '@/components/StructuredData';
-import { Trophy, Handshake, MessageCircle, HandHeart } from 'lucide-react';
+import { VALUES_3D_ICONS } from '@/components/Values3DIcons';
 import { TeamRow } from '@/components/demo3';
 import { useLanguage } from '@/contexts/LanguageContext';
 import HomeServicesSection from '@/components/HomeServicesSection';
@@ -20,12 +20,7 @@ const featuredMember = {
   bio: "Clément pilote la vision et la stratégie de Nukleo. Passionné par la transformation numérique des PME et des OBNL, il s'assure que chaque client bénéficie d'un partenaire à l'écoute, exigeant et orienté résultats.",
 };
 
-const VALUES = [
-  { key: 'excellence', icon: Trophy, iconColor: '#D4AF37' },
-  { key: 'ownership', icon: Handshake, iconColor: '#4B5563' },
-  { key: 'authenticity', icon: MessageCircle, iconColor: '#3B82F6' },
-  { key: 'bienveillance', icon: HandHeart, iconColor: '#EC4899' },
-];
+const VALUES_KEYS = ['excellence', 'ownership', 'authenticity', 'bienveillance'] as const;
 
 export default function About() {
   const { t } = useLanguage();
@@ -85,37 +80,16 @@ export default function About() {
               {t('about.heroNewSubtitle') || 'Choisissez la transformation numérique dès maintenant.'}
             </p>
           </div>
-          {/* Image / bloc visuel (dégradé + mockups) en dessous */}
+          {/* Image hero — 4 téléphones sur fond coral, centrée en hauteur */}
           <div
-            className="rounded-lg overflow-hidden min-h-[600px] flex items-center justify-center gap-4 p-6"
-            style={{ background: CORAL_BG, marginBottom: '4rem' }}
+            className="rounded-lg overflow-hidden"
+            style={{ width: '100%', aspectRatio: '16/9', minHeight: 500, marginBottom: '4rem' }}
           >
-            {/* 3 mockups téléphones */}
-            <div style={{ display: 'flex', gap: 24, alignItems: 'flex-end', flexWrap: 'wrap', justifyContent: 'center' }}>
-              <div style={{ width: 140, background: '#1f2937', borderRadius: 24, padding: 12, boxShadow: '0 20px 40px rgba(0,0,0,0.2)' }}>
-                <div style={{ background: '#fff', borderRadius: 12, height: 240, padding: 12, fontSize: 10, color: '#374151' }}>
-                  <div style={{ height: 8, background: '#e5e7eb', borderRadius: 4, marginBottom: 12 }} />
-                  {[1, 2, 3].map((i) => (
-                    <div key={i} style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 10 }}>
-                      <div style={{ width: 14, height: 14, border: '2px solid #9ca3af', borderRadius: 4 }} />
-                      <div style={{ flex: 1, height: 6, background: '#f3f4f6', borderRadius: 4 }} />
-                    </div>
-                  ))}
-                </div>
-              </div>
-              <div style={{ width: 140, background: '#1f2937', borderRadius: 24, padding: 12, boxShadow: '0 20px 40px rgba(0,0,0,0.2)' }}>
-                <div style={{ background: 'linear-gradient(180deg, #4b5563 0%, #1f2937 100%)', borderRadius: 12, height: 240, overflow: 'hidden' }}>
-                  <div style={{ width: '100%', height: '100%', background: 'repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(255,255,255,0.03) 2px, rgba(255,255,255,0.03) 4px)' }} />
-                </div>
-              </div>
-              <div style={{ width: 100, background: '#1f2937', borderRadius: 24, padding: 10, boxShadow: '0 20px 40px rgba(0,0,0,0.2)' }}>
-                <div style={{ display: 'flex', flexDirection: 'column', gap: 6, borderRadius: 12, height: 260, padding: 8, background: '#fff' }}>
-                  {[1, 2, 3, 4, 5].map((i) => (
-                    <div key={i} style={{ flex: 1, minHeight: 40, background: '#f3f4f6', borderRadius: 8 }} />
-                  ))}
-                </div>
-              </div>
-            </div>
+            <img
+              src="/about-hero.png"
+              alt="Applications mobiles"
+              className="w-full h-full object-cover object-center"
+            />
           </div>
         </section>
 
@@ -155,7 +129,9 @@ export default function About() {
             {t('about.valuesLabel') || 'NOS VALEURS'}
           </p>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 w-full">
-            {VALUES.map(({ key, icon: Icon, iconColor }) => (
+            {VALUES_KEYS.map((key) => {
+              const IconComponent = VALUES_3D_ICONS[key];
+              return (
               <div
                 key={key}
                 className="group transition-all duration-300 bg-white/25 backdrop-blur-md border border-white/40 cursor-default"
@@ -165,17 +141,18 @@ export default function About() {
                   boxShadow: '0 4px 24px rgba(0,0,0,0.06)',
                 }}
               >
-                <div style={{ width: 48, height: 48, borderRadius: 12, display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: 16, background: key === 'authenticity' ? '#EFF6FF' : `${iconColor}18` }}>
-                  <Icon size={26} color={iconColor} strokeWidth={2} />
+                <div style={{ width: 48, height: 48, display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: 16 }}>
+                  <IconComponent />
                 </div>
-                <h3 className="transition-all duration-300 group-hover:text-[2.2rem]" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 700, fontSize: '1.1rem', color: BORDEAUX, margin: '0 0 0.5rem 0' }}>
+                <h3 className="transition-all duration-300 group-hover:text-[2.5rem]" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 700, fontSize: '1.65rem', color: '#21242E', margin: '0 0 0.5rem 0' }}>
                   {t(`about.values.${key}.title`)}
                 </h3>
                 <p style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 400, fontSize: '0.875rem', lineHeight: 1.6, color: '#6b7280', margin: 0 }}>
                   {t(`about.values.${key}.description`)}
                 </p>
               </div>
-            ))}
+            );
+            })}
           </div>
         </section>
 
