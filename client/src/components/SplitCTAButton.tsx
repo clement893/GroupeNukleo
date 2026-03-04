@@ -1,4 +1,4 @@
-import { ArrowUpRight } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import { useLocalizedPath } from '@/hooks/useLocalizedPath';
 
 const BTN_PURPLE = '#5C32B7';
@@ -121,7 +121,7 @@ export function SplitCTAButton({
       <span style={styleText}>{label}</span>
       <span style={styleArrowWrapper} aria-hidden>
         <span style={styleArrow}>
-          <ArrowUpRight style={{ width: sz.iconSize, height: sz.iconSize }} strokeWidth={2.5} />
+          <ArrowRight style={{ width: sz.iconSize, height: sz.iconSize }} strokeWidth={2.5} />
         </span>
       </span>
     </a>

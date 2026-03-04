@@ -14,7 +14,7 @@ export default function HomeServicesSection() {
 
   return (
     <section style={{ padding: '5rem 3% 6rem', marginBottom: 5 * 16 }}>
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-10 items-stretch">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8 items-stretch">
         {HOME_SERVICES.map((service) => (
           <Link
             key={service.title}
@@ -39,19 +39,12 @@ export default function HomeServicesSection() {
               {/* Zone image + icône ↗ */}
               <div style={{ position: 'relative', paddingTop: '60%', background: service.imageBg }}>
                 <span
+                  className="absolute top-3 right-3 w-9 h-9 rounded-[10px] flex items-center justify-center pointer-events-none
+                    bg-white/40 backdrop-blur-[12px] border border-white/60 shadow-sm
+                    transition-all duration-300 group-hover:!bg-white/75 group-hover:!border-white/90"
                   style={{
-                    position: 'absolute',
-                    top: 12,
-                    right: 12,
-                    width: 36,
-                    height: 36,
-                    borderRadius: 10,
-                    background: DARK,
-                    color: '#fff',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    pointerEvents: 'none',
+                    color: '#5D43CD',
+                    WebkitBackdropFilter: 'blur(12px) saturate(180%)',
                   }}
                   aria-hidden
                 >
@@ -102,12 +95,19 @@ export default function HomeServicesSection() {
                     <span
                       key={tag}
                       style={{
-                        fontSize: '0.7rem',
-                        color: '#4b5563',
-                        background: '#f3f4f6',
-                        padding: '4px 10px',
-                        borderRadius: 8,
-                        fontWeight: 500,
+                        display: 'inline-block',
+                        width: 'fit-content',
+                        background: 'rgba(255, 255, 255, 0.4)',
+                        backdropFilter: 'blur(16px) saturate(180%)',
+                        WebkitBackdropFilter: 'blur(16px) saturate(180%)',
+                        border: '1px solid rgba(255, 255, 255, 0.8)',
+                        borderRadius: 12,
+                        padding: '0.35rem 0.75rem',
+                        boxShadow: '0 4px 24px rgba(0,0,0,0.06), inset 0 1px 0 rgba(255,255,255,0.85)',
+                        fontFamily: "'Plus Jakarta Sans', sans-serif",
+                        fontWeight: 400,
+                        fontSize: '0.6rem',
+                        color: '#374151',
                       }}
                     >
                       {tag}

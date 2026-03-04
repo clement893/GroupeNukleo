@@ -119,10 +119,10 @@ function Header() {
             {/* Logo Nukleo RVB (nukleo,→) */}
             <Link href={getLocalizedPath('/')} className="inline-flex items-center cursor-pointer touch-manipulation" aria-label={t('alt.logo') || 'Nukleo Digital - Accueil'}>
               <img
-                src="/nukleo-logo-rvb.png"
+                src="/demo/nukleo-logo-rvb.svg"
                 alt="Nukleo"
                 className="w-auto object-contain"
-                style={{ height: 'clamp(1.5rem, 4vw, 2.5rem)' }}
+                style={{ height: 'clamp(2.25rem, 6vw, 3.75rem)' }}
               />
             </Link>
 

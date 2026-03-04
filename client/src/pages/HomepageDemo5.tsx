@@ -9,6 +9,7 @@ import { WeatherWidget } from '@/components/WeatherWidget';
 import PageLayout from '@/components/PageLayout';
 import HomeServicesSection from '@/components/HomeServicesSection';
 import CTAPerformSection from '@/components/CTAPerformSection';
+import ProjectsHeroTriptych from '@/components/ProjectsHeroTriptych';
 import { trpc } from '@/lib/trpc';
 
 // ─── Constantes ──────────────────────────────────────────────────────────────
@@ -55,105 +56,104 @@ function mapApiProjectsToHome(
   });
 }
 
-// ─── Carrousel Projets Hero — style "une de journal" (Latest project en haut de l'accueil)
+// ─── Carrousel Projets Hero — slider régulier (une image à la fois)
 function NewsCarousel({ projects: projectsProp }: { projects?: HomeProjectItem[] }) {
   const PROJECTS = projectsProp && projectsProp.length > 0 ? projectsProp : FALLBACK_PROJECTS;
+  const SLIDES = PROJECTS.slice(0, 5);
   const { t } = useLanguage();
+  const getLocalizedPath = useLocalizedPath();
   const [active, setActive] = useState(0);
   const [isHovered, setIsHovered] = useState(false);
   const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
-  const next = useCallback(() => setActive(a => (a + 1) % PROJECTS.length), []);
-  const prev = useCallback(() => setActive(a => (a - 1 + PROJECTS.length) % PROJECTS.length), []);
+  const next = useCallback(() => setActive(a => (a + 1) % SLIDES.length), []);
 
   useEffect(() => {
-    if (!isHovered) timerRef.current = setInterval(next, 4000);
+    if (!isHovered && SLIDES.length > 1) {
+      timerRef.current = setInterval(next, 4500);
+    }
     return () => { if (timerRef.current) clearInterval(timerRef.current); };
-  }, [isHovered, next]);
-
-  const p = PROJECTS[active];
+  }, [isHovered, next, SLIDES.length]);
 
   return (
     <div
-      style={{ borderRadius: 20, overflow: 'hidden', position: 'relative', height: '100%', minHeight: 320 }}
+      style={{ borderRadius: 24, overflow: 'hidden', position: 'relative', height: '100%', minHeight: 0, isolation: 'isolate' }}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      {/* Images en fondu croisé */}
-      {PROJECTS.map((proj, i) => (
-        <img
-          key={proj.num}
-          src={proj.img}
-          alt={proj.name}
-          style={{
-            position: 'absolute', inset: 0, width: '100%', height: '100%',
-            objectFit: 'cover',
-            opacity: i === active ? 1 : 0,
-            transition: 'opacity 0.7s ease',
-          }}
-        />
-      ))}
-
-      {/* Overlay gradient bas */}
-      <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(0,0,0,0.82) 0%, rgba(0,0,0,0.15) 50%, transparent 100%)' }} />
-
-      {/* Label haut gauche */}
-      <div style={{ position: 'absolute', top: 16, left: 18, display: 'flex', alignItems: 'center', gap: 6 }}>
-        <span style={{ fontSize: 'clamp(0.58rem, 0.75vw, 0.9rem)', fontWeight: 800, letterSpacing: '0.18em', color: 'rgba(255,255,255,0.55)', textTransform: 'uppercase' }}>{t('home.latestWork')}</span>
-      </div>
-
-      {/* Compteur haut droite */}
-      <div style={{ position: 'absolute', top: 14, right: 18, fontSize: 'clamp(0.65rem, 0.8vw, 0.95rem)', fontWeight: 700, color: 'rgba(255,255,255,0.4)', fontFamily: 'var(--font-heading, sans-serif)' }}>
-        {String(active + 1).padStart(2, '0')} / {String(PROJECTS.length).padStart(2, '0')}
-      </div>
-
-      {/* Flèche gauche */}
-      <button
-        onClick={prev}
-        style={{
-          position: 'absolute', left: 14, top: '50%', transform: 'translateY(-50%)',
-          width: 36, height: 36, borderRadius: '50%',
-          background: 'rgba(255,255,255,0.12)', backdropFilter: 'blur(8px)',
-          border: '1px solid rgba(255,255,255,0.2)',
-          color: '#fff', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center',
-          transition: 'background 0.2s',
-        }}
-      >
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><polyline points="15 18 9 12 15 6" /></svg>
-      </button>
-
-      {/* Flèche droite */}
-      <button
-        onClick={next}
-        style={{
-          position: 'absolute', right: 14, top: '50%', transform: 'translateY(-50%)',
-          width: 36, height: 36, borderRadius: '50%',
-          background: 'rgba(255,255,255,0.12)', backdropFilter: 'blur(8px)',
-          border: '1px solid rgba(255,255,255,0.2)',
-          color: '#fff', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center',
-          transition: 'background 0.2s',
-        }}
-      >
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><polyline points="9 18 15 12 9 6" /></svg>
-      </button>
-
-      {/* Contenu bas */}
-      <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, padding: 'clamp(1rem, 1.4vw, 1.6rem) clamp(1rem, 1.5vw, 1.75rem)' }}>
-        {/* Titre */}
-        <div style={{ fontFamily: 'var(--font-heading, sans-serif)', fontWeight: 900, fontSize: 'clamp(1.2rem, 2.5vw, 1.9rem)', color: '#fff', lineHeight: 1.05, letterSpacing: '-0.02em', marginBottom: 10 }}>{p.name}</div>
-        {/* Tagline */}
-        <div style={{ fontSize: 'clamp(0.72rem, 0.95vw, 1.05rem)', color: 'rgba(255,255,255,0.65)', marginBottom: 22, lineHeight: 1.5 }}>{p.tagline}</div>
-        {/* Dots navigation */}
-        <div style={{ display: 'flex', justifyContent: 'flex-end', gap: 5 }}>
-          {PROJECTS.map((_, i) => (
+      {SLIDES.map((p, i) => {
+        const isA = i === active;
+        return (
+          <div
+            key={p.num}
+            style={{
+              position: 'absolute',
+              inset: 0,
+              opacity: isA ? 1 : 0,
+              transition: 'opacity 0.6s ease',
+              pointerEvents: isA ? 'auto' : 'none',
+            }}
+          >
+            <img
+              src={p.img}
+              alt={p.name}
+              style={{
+                position: 'absolute', inset: 0, width: '100%', height: '100%',
+                objectFit: 'cover',
+              }}
+            />
+            <div style={{
+              position: 'absolute', inset: 0,
+              background: 'linear-gradient(to top, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.2) 50%, transparent 100%)',
+            }} />
+            <div style={{
+              position: 'absolute', bottom: 0, left: 0, right: 0,
+              padding: '2rem 2.2rem',
+              zIndex: 2,
+            }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: '0.6rem' }}>
+                <span style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 900, fontSize: 'clamp(2rem, 4vw, 4rem)', lineHeight: 1, color: 'rgba(255,255,255,0.15)', letterSpacing: '-0.04em' }}>{p.num}</span>
+                <span style={{ fontSize: '0.58rem', fontWeight: 700, letterSpacing: '0.25em', textTransform: 'uppercase', color: p.color }}>{p.category}</span>
+              </div>
+              <h3 style={{
+                fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 700,
+                fontSize: 'clamp(1.5rem, 2.5vw, 2.5rem)', lineHeight: 1.1,
+                letterSpacing: '-0.02em', color: '#fff', marginBottom: '0.5rem',
+              }}>{p.name}</h3>
+              <p style={{ fontSize: '0.78rem', color: 'rgba(255,255,255,0.5)', lineHeight: 1.5, marginBottom: '1rem', maxWidth: 340 }}>{p.tagline}</p>
+              <Link
+                href={getLocalizedPath('/projects')}
+                style={{
+                  display: 'inline-flex', alignItems: 'center', gap: 8,
+                  color: '#fff', fontSize: '0.8rem', fontWeight: 600, textDecoration: 'none',
+                  background: 'rgba(255,255,255,0.2)', padding: '0.5rem 1rem', borderRadius: 999,
+                }}
+              >
+                {t('home.caseStudy')} <ArrowRight size={16} />
+              </Link>
+            </div>
+          </div>
+        );
+      })}
+      {SLIDES.length > 1 && (
+        <div style={{ position: 'absolute', bottom: 20, left: '50%', transform: 'translateX(-50%)', display: 'flex', gap: 8, zIndex: 3 }}>
+          {SLIDES.map((_, i) => (
             <button
               key={i}
+              type="button"
               onClick={() => setActive(i)}
-              style={{ width: i === active ? 18 : 5, height: 5, borderRadius: 999, background: i === active ? '#fff' : 'rgba(255,255,255,0.3)', border: 'none', cursor: 'pointer', transition: 'all 0.3s ease', padding: 0 }}
+              aria-label={`Slide ${i + 1}`}
+              style={{
+                border: 'none', cursor: 'pointer', padding: 0,
+                height: 6, borderRadius: 999,
+                width: i === active ? 24 : 6,
+                background: i === active ? '#fff' : 'rgba(255,255,255,0.4)',
+                transition: 'all 0.3s ease',
+              }}
             />
           ))}
         </div>
-      </div>
+      )}
     </div>
   );
 }
@@ -408,127 +408,24 @@ function ProjectsCarousel() {
   );
 }
 
-// ─── Triptyque projets (sans fond, blocs fermés à 8%, hauteur +15%) ─────────────────
+// ─── Triptyque projets — composant partagé identique à la page Projets
 function Triptych({ projects: projectsProp }: { projects?: HomeProjectItem[] }) {
   const PROJECTS = projectsProp && projectsProp.length > 0 ? projectsProp : FALLBACK_PROJECTS;
-  const [active, setActive] = useState(0);
-  const getLocalizedPath = useLocalizedPath();
   const { t } = useLanguage();
+  const getLocalizedPath = useLocalizedPath();
+
+  const items = PROJECTS.slice(0, 3).map((p) => ({
+    img: p.img,
+    title: p.name,
+    num: p.num,
+  }));
+
   return (
-    <div
-      className="w-full overflow-hidden relative rounded-xl"
-      style={{
-        height: 'clamp(480px, 82vh, 870px)',
-        display: 'flex',
-        gap: 21,
-      }}
-    >
-      {PROJECTS.map((p, i) => {
-        const isActive = i === active;
-        return (
-          <div
-            key={p.num}
-            onClick={() => setActive(i)}
-            style={{
-              flex: isActive ? '1 1 0' : '0 0 6.8%',
-              minWidth: isActive ? 0 : undefined,
-              transition: 'flex 0.6s cubic-bezier(0.77,0,0.175,1)',
-              position: 'relative',
-              cursor: isActive ? 'default' : 'pointer',
-              overflow: 'hidden',
-              borderRadius: 12,
-            }}
-          >
-            {/* Image (panneau actif en premier plan) — design aligné Projects hero */}
-            <img
-              src={p.img}
-              alt={p.name}
-              style={{
-                position: 'absolute', inset: 0, width: '100%', height: '100%',
-                objectFit: 'cover',
-                objectPosition: isActive ? 'center' : 'top',
-                filter: isActive ? 'grayscale(0)' : 'grayscale(1) brightness(0.55)',
-                transition: 'filter 0.5s ease',
-              }}
-            />
-            <div style={{ position: 'absolute', inset: 0, background: isActive ? 'linear-gradient(to top, rgba(0,0,0,0.35) 0%, transparent 25%)' : 'rgba(0,0,0,0.22)', transition: 'background 0.5s ease' }} />
-
-            {/* Numéro 01 / 02 / 03 — design Projects : inactif = centré + blanc, actif = droite + mauve */}
-            <div
-              style={{
-                position: 'absolute',
-                bottom: 24,
-                ...(isActive ? { right: 24 } : { left: '50%', transform: 'translateX(-50%)' }),
-                fontFamily: "'Plus Jakarta Sans', sans-serif",
-                fontSize: 'clamp(2rem, 4vw, 3.5rem)',
-                fontWeight: 700,
-                color: '#ffffff',
-                opacity: 0.92,
-                lineHeight: 1,
-                letterSpacing: '-0.04em',
-                transition: 'color 0.4s ease, left 0.4s ease, right 0.4s ease, transform 0.4s ease',
-                textShadow: '0 2px 20px rgba(0,0,0,0.2)',
-              }}
-            >
-              {p.num}
-            </div>
-
-            {/* Nom vertical (panneaux inactifs) */}
-            {!isActive && (
-              <div style={{
-                position: 'absolute', top: '50%', left: '50%',
-                transform: 'translate(-50%, -50%) rotate(-90deg)',
-                whiteSpace: 'nowrap',
-                color: 'rgba(255,255,255,0.5)',
-                fontSize: '0.7rem',
-                fontWeight: 700,
-                letterSpacing: '0.22em',
-                textTransform: 'uppercase',
-              }}>
-                {p.name}
-              </div>
-            )}
-
-            {/* Contenu panneau actif + titre projet & année en bas à gauche */}
-            {isActive && (
-              <>
-                <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, padding: '2rem 2.5rem 1.5rem 2.5rem' }}>
-                  <p style={{ color: p.color, fontSize: '0.65rem', fontWeight: 700, letterSpacing: '0.28em', textTransform: 'uppercase', marginBottom: '0.6rem' }}>{p.category}</p>
-                  <h3 style={{ color: '#fff', fontFamily: 'var(--font-heading, sans-serif)', fontWeight: 900, fontSize: 'clamp(1.75rem, 3.5vw, 4rem)', lineHeight: 0.92, letterSpacing: '-0.03em', marginBottom: '0.75rem' }}>{p.name}</h3>
-                  <p style={{ color: 'rgba(255,255,255,0.65)', fontSize: '0.85rem', marginBottom: '1.25rem', maxWidth: 340 }}>{p.tagline}</p>
-                  <div style={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap' }}>
-                    <Link
-                      href={getLocalizedPath('/projects')}
-                      className="projects-view-btn"
-                      style={{
-                        display: 'inline-flex',
-                        alignItems: 'center',
-                        gap: '1rem',
-                        color: 'rgba(255,255,255,0.95)',
-                        fontSize: '0.8rem',
-                        fontWeight: 600,
-                        textDecoration: 'none',
-                        fontFamily: "'Plus Jakarta Sans', sans-serif",
-                        padding: '0.5rem 1rem',
-                        borderRadius: 9999,
-                        background: 'rgba(255, 255, 255, 0.25)',
-                        backdropFilter: 'blur(16px) saturate(180%)',
-                        WebkitBackdropFilter: 'blur(16px) saturate(180%)',
-                        boxShadow: '0 4px 24px rgba(0, 0, 0, 0.12)',
-                        transition: 'background 0.3s ease, box-shadow 0.3s ease, color 0.3s ease',
-                      }}
-                    >
-                      <span>{t('home.caseStudy')}</span>
-                      <ArrowRight className="projects-view-btn-arrow" strokeWidth={2.5} size={18} style={{ flexShrink: 0 }} />
-                    </Link>
-                  </div>
-                </div>
-              </>
-            )}
-          </div>
-        );
-      })}
-    </div>
+    <ProjectsHeroTriptych
+      items={items}
+      projectUrl={getLocalizedPath('/projects')}
+      viewProjectLabel={t('home.caseStudy')}
+    />
   );
 }
 
@@ -836,21 +733,22 @@ export default function HomepageDemo5() {
             }}
           />
           <div className="grid grid-cols-1 lg:grid-cols-[9fr_11fr] gap-8 lg:gap-12 items-center" style={{ isolation: 'isolate', position: 'relative', zIndex: 1 }}>
-            {/* Gauche (~45%) : carte visuelle placeholder 3D */}
+            {/* Gauche (~45%) : vidéo On maîtrise l'IA */}
             <div style={{
               borderRadius: 28,
               overflow: 'hidden',
               aspectRatio: '4/3',
-              background: 'linear-gradient(135deg, rgba(107,33,168,0.28) 0%, rgba(123,29,58,0.22) 50%, rgba(59,130,246,0.22) 100%)',
               position: 'relative',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
             }}>
-              <div style={{ position: 'absolute', inset: 0, background: 'radial-gradient(circle at 30% 50%, rgba(255,255,255,0.15) 0%, transparent 50%)' }} />
-              <div style={{ position: 'absolute', width: 120, height: 120, borderRadius: '50%', background: 'rgba(255,255,255,0.12)', top: '50%', left: '50%', transform: 'translate(-50%, -50%)' }} />
-              <div style={{ position: 'absolute', width: 60, height: 60, borderRadius: '50%', background: 'rgba(147,51,234,0.3)', top: '30%', right: '25%' }} />
-              <div style={{ position: 'absolute', width: 40, height: 40, borderRadius: '50%', background: 'rgba(96,165,250,0.35)', bottom: '25%', left: '30%' }} />
+              <video
+                src="/demo/vido-balles.mp4"
+                autoPlay
+                loop
+                muted
+                playsInline
+                style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                aria-label="On maîtrise l'IA"
+              />
             </div>
             {/* Droite (~55%) : "On [verbe]" dans pill glass + "l'IA" en charcoal */}
             <div style={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap', gap: 0, justifyContent: 'center', minHeight: 200 }}>

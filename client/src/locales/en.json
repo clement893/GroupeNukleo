@@ -788,7 +788,7 @@
         "ctaButtonText": "Contact us",
         "sectionVisualTitle": "Human creativity, modern tools",
         "sectionVisualSubtitle": "Every project starts with a human idea.",
-        "sectionVisualDescription": "Our art directors and designers set the direction; AI helps us refine details and deliver faster, without ever sacrificing quality. From concept to delivery, the vision stays human.",
+        "sectionVisualDescription": "Our art directors, designers and creatives imagine, design and refine every detail. We use the best tools — including AI — to explore more avenues, iterate faster and deliver impeccable quality. But the vision remains human.",
         "sectionHighlight0Title": "Strategic vision",
         "sectionHighlight0Description": "Every creation serves a clear business objective",
         "sectionHighlight1Title": "Craft & detail",
@@ -1732,6 +1732,9 @@
     "filterAriaLabel": "Filter projects by category",
     "noProjectsInCategory": "No projects in this category.",
     "viewProject": "View project →",
+    "heroSlide0Title": "Succès Scolaire website redesign",
+    "heroSlide1Title": "Humankind B2B website design",
+    "heroSlide2Title": "Campaign ideation and production for Défi 28 jours sans alcool",
     "voirPlus": "View more",
     "filters": {
       "all": "All",

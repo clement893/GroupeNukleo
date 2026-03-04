@@ -2,6 +2,7 @@ import PageLayout from '@/components/PageLayout';
 import SEO from '@/components/SEO';
 import ServiceDetailLayout, { type ServiceTabContent } from '@/components/ServiceDetailLayout';
 import { useLanguage } from '@/contexts/LanguageContext';
+import { EXPERTISE_3D_ICONS } from '@/components/Expertise3DIcons';
 
 const NS = 'services.detail.studio';
 
@@ -68,7 +69,7 @@ export default function NukleoStudio() {
       <ServiceDetailLayout
         pageTitle={t(`${NS}.heroTitle`)}
         tagline=""
-        heroImage="/demo/dept-studio.jpg"
+        heroVideo="/demo/designer-studio-hero.mp4"
         heroImageAlt={t(`${NS}.heroImageAlt`)}
         tabs={tabs}
         navItems={navItems.map((label, id) => ({ id: String(id), label }))}
@@ -78,6 +79,7 @@ export default function NukleoStudio() {
         extensionsTitle={t(`${NS}.extensionsTitle`)}
         extensionsDescription={t(`${NS}.extensionsDescription`)}
         extensionsTags={extensionsTags}
+        expertiseIconComponents={EXPERTISE_3D_ICONS}
         expertiseSectionTitle={t(`${NS}.expertiseSectionTitle`)}
         expertiseSectionDescription={t(`${NS}.expertiseSectionDescription`) || undefined}
         expertiseDeliverablesLabel={t(`${NS}.deliverablesLabel`)}
@@ -85,6 +87,7 @@ export default function NukleoStudio() {
         teamTitle={t(`${NS}.teamTitle`)}
         teamDescription={t(`${NS}.teamDescription`)}
         teamMembers={teamMembers.length > 0 ? teamMembers : undefined}
+        sectionVisualVideo="/demo/vido-balles.mp4"
         sectionVisualTitle={t(`${NS}.sectionVisualTitle`)}
         sectionVisualSubtitle={t(`${NS}.sectionVisualSubtitle`)}
         sectionVisualDescription={t(`${NS}.sectionVisualDescription`)}

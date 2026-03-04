@@ -1,7 +1,7 @@
 import PageLayout from '@/components/PageLayout';
 import SEO from '@/components/SEO';
 import StructuredData, { createPersonSchema } from '@/components/StructuredData';
-import { Trophy, Handshake, Star, Heart } from 'lucide-react';
+import { Trophy, Handshake, MessageCircle, HandHeart } from 'lucide-react';
 import { TeamRow } from '@/components/demo3';
 import { useLanguage } from '@/contexts/LanguageContext';
 import HomeServicesSection from '@/components/HomeServicesSection';
@@ -23,8 +23,8 @@ const featuredMember = {
 const VALUES = [
   { key: 'excellence', icon: Trophy, iconColor: '#D4AF37' },
   { key: 'ownership', icon: Handshake, iconColor: '#4B5563' },
-  { key: 'authenticity', icon: Star, iconColor: '#3B82F6' },
-  { key: 'bienveillance', icon: Heart, iconColor: '#EC4899' },
+  { key: 'authenticity', icon: MessageCircle, iconColor: '#3B82F6' },
+  { key: 'bienveillance', icon: HandHeart, iconColor: '#EC4899' },
 ];
 
 export default function About() {
@@ -87,7 +87,7 @@ export default function About() {
           </div>
           {/* Image / bloc visuel (dégradé + mockups) en dessous */}
           <div
-            className="rounded-lg overflow-hidden min-h-[400px] flex items-center justify-center gap-4 p-6"
+            className="rounded-lg overflow-hidden min-h-[600px] flex items-center justify-center gap-4 p-6"
             style={{ background: CORAL_BG, marginBottom: '4rem' }}
           >
             {/* 3 mockups téléphones */}
@@ -181,7 +181,7 @@ export default function About() {
 
         {/* Section équipe — même bloc que la page d'accueil (TeamRow) */}
         <section style={{ padding: '4rem 3% 1rem', textAlign: 'center' }}>
-          <p style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 700, fontSize: '0.75rem', letterSpacing: '0.2em', textTransform: 'uppercase', color: '#6b7280', marginBottom: 12, textAlign: 'center' }}>
+          <p style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 700, fontSize: '0.75rem', letterSpacing: '0.2em', textTransform: 'uppercase', color: '#6b7280', marginBottom: '1rem', textAlign: 'center' }}>
             {t('about.teamTitle') || "Rencontrez l'équipe"}
           </p>
           <TeamRow />

@@ -792,7 +792,7 @@
         "ctaButtonText": "Contactez-nous",
         "sectionVisualTitle": "Créativité humaine, outils modernes",
         "sectionVisualSubtitle": "Chaque projet commence par une idée humaine.",
-        "sectionVisualDescription": "Nos directeurs artistiques et designers donnent le cap ; l'IA nous aide à affiner les détails et à livrer plus vite, sans jamais sacrifier la qualité. Du concept à la livraison, la vision reste humaine.",
+        "sectionVisualDescription": "Nos directeurs artistiques, designers et créatifs imaginent, conçoivent et peaufinent chaque détail. Nous utilisons les meilleurs outils — y compris l'IA — pour explorer plus de pistes, itérer plus vite et livrer une qualité irréprochable. Mais la vision reste humaine.",
         "sectionHighlight0Title": "Vision stratégique",
         "sectionHighlight0Description": "Chaque création sert un objectif business clair",
         "sectionHighlight1Title": "Craft & détail",
@@ -1427,6 +1427,9 @@
     "filterAriaLabel": "Filtrer les projets par catégorie",
     "noProjectsInCategory": "Aucun projet dans cette catégorie.",
     "viewProject": "Voir le projet →",
+    "heroSlide0Title": "Refonte du site de Succès Scolaire",
+    "heroSlide1Title": "Conception du site B2B Humankind",
+    "heroSlide2Title": "Idéation et production de la campagne pour le Défi 28 jours sans alcool",
     "voirPlus": "Voir plus",
     "filters": {
       "all": "Tout",

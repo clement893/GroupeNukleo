@@ -121,6 +121,22 @@ export default function Projects() {
     return filteredImages.length > 0 ? filteredImages.slice(0, 3) : fromFeatured;
   }, [apiProjects, filteredImages]);
 
+  const heroTitles = useMemo(() => {
+    const featured = (apiProjects || []).filter((p: { featuredOnProjectsTriptych?: boolean }) => p.featuredOnProjectsTriptych);
+    const sorted = [...featured].sort((a, b) => {
+      const orderA = (a as { projectsTriptychOrder?: number }).projectsTriptychOrder ?? 999;
+      const orderB = (b as { projectsTriptychOrder?: number }).projectsTriptychOrder ?? 999;
+      return orderA - orderB;
+    });
+    const titles = sorted.slice(0, 3).map((p: { title?: string }) => p.title || '');
+    if (titles.length >= 3 && titles.every(Boolean)) return titles;
+    return [
+      t('projects.heroSlide0Title'),
+      t('projects.heroSlide1Title'),
+      t('projects.heroSlide2Title'),
+    ];
+  }, [apiProjects, t]);
+
   // Preload first images so they start loading before paint (faster LCP)
   useEffect(() => {
     if (filteredImages.length === 0) return;
@@ -195,6 +211,7 @@ export default function Projects() {
           headline={t('projects.heroHeadline')}
           description={t('projects.description')}
           heroImages={heroImages}
+          heroTitles={heroTitles}
           getProjectUrl={(name) => getLocalizedPath(`/projects/${imageNameToSlug(name)}`)}
           viewProjectLabel={t('projects.viewProject')}
         />

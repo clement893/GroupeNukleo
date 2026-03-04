@@ -37,10 +37,10 @@ const TEAM_MEMBERS = [
   },
 ];
 
-// Constantes pile
-const CARD_W = 520;
+// Constantes pile — ratio 4:5 (largeur:hauteur), taille réduite x1
+const CARD_W = 390;
 const SITE_PURPLE = '#5636AD';
-const CARD_H = 360;
+const CARD_H = 487; // ratio 4:5 (390 * 5/4)
 const STACK_OVERFLOW = 40;
 
 export function TeamRow() {
@@ -69,18 +69,18 @@ export function TeamRow() {
   return (
     <div
       className="site-margin-x"
-      style={{ paddingTop: 32, paddingBottom: 64, marginBottom: 48 }}
+      style={{ paddingTop: '1rem', paddingBottom: '1rem', marginBottom: 48 }}
     >
       {/* Grille 3 colonnes */}
       <div style={{
         display: 'grid',
         gridTemplateColumns: '1fr auto 1fr',
-        gap: '5vw',
+        gap: 'clamp(1.5rem, 3vw, 2.5rem)',
         alignItems: 'center',
       }}>
 
-        {/* ── COLONNE GAUCHE : nom + tagline ── */}
-        <div style={{ textAlign: 'left' }}>
+        {/* ── COLONNE GAUCHE : nom + tagline (aligné à gauche, bloc poussé vers l'image pour espace égal) ── */}
+        <div style={{ textAlign: 'left', width: 'fit-content', justifySelf: 'end' }}>
           <h3 style={{
             fontFamily: "'Plus Jakarta Sans', sans-serif",
             fontWeight: 700,
@@ -210,7 +210,7 @@ export function TeamRow() {
           {/* Bullets */}
           <div style={{
             position: 'absolute',
-            bottom: -36,
+            bottom: -32,
             left: '50%',
             transform: 'translateX(-50%)',
             display: 'flex',

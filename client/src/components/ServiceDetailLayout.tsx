@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
-import { Sparkles } from 'lucide-react';
+import type { ComponentType } from 'react';
+import { Sparkles, type LucideIcon } from 'lucide-react';
 import CTAPerformSection from '@/components/CTAPerformSection';
 
 const BORDEAUX = '#5A1E29';
@@ -21,6 +22,8 @@ export interface ServiceDetailLayoutProps {
   heroBadge?: string;
   heroImage?: string;
   heroImageAlt?: string;
+  /** Si fourni, affiche une vidéo à la place de l'image hero (même taille, mêmes coins arrondis) */
+  heroVideo?: string;
   /** Si fourni, affiche la section à onglets (gauche: onglets, droite: contenu dynamique). Sinon, affiche nav + bloc mainTitle/mainDescription. */
   tabs?: ServiceTabContent[];
   navItems: { id: string; label: string }[];
@@ -33,6 +36,10 @@ export interface ServiceDetailLayoutProps {
   extensionsImage?: string;
   extensionsImageAlt?: string;
   gridItems: { title: string; description: string; deliverables?: string | string[] }[];
+  /** Icônes pour chaque bloc de la section CE QUE NOUS CRÉONS (6 max) */
+  expertiseIcons?: (LucideIcon | undefined)[];
+  /** Icônes 3D colorées (composants React). Prioritaire sur expertiseIcons si fourni. */
+  expertiseIconComponents?: readonly ComponentType[];
   expertiseSectionTitle?: string;
   expertiseSectionDescription?: string;
   /** Label pour la ligne livrables (ex. "Livrables : " / "Deliverables: ") */
@@ -44,6 +51,8 @@ export interface ServiceDetailLayoutProps {
   /** Section « carte visuelle + texte & 4 cartes glass » (affichée après le bloc onglets si fournie) */
   sectionVisualImage?: string;
   sectionVisualAlt?: string;
+  /** Si fourni, affiche une vidéo à la place de l'image (même taille, mêmes coins arrondis) */
+  sectionVisualVideo?: string;
   sectionVisualTitle?: string;
   sectionVisualSubtitle?: string;
   sectionVisualDescription?: string;
@@ -58,6 +67,7 @@ export default function ServiceDetailLayout(props: ServiceDetailLayoutProps) {
     heroBadge,
     heroImage,
     heroImageAlt = '',
+    heroVideo,
     tabs,
     navItems,
     mainTitle,
@@ -69,6 +79,8 @@ export default function ServiceDetailLayout(props: ServiceDetailLayoutProps) {
     extensionsImage,
     extensionsImageAlt = '',
     gridItems,
+    expertiseIcons,
+    expertiseIconComponents,
     expertiseSectionTitle = "Nos champs d'expertise",
     expertiseSectionDescription = '',
     expertiseDeliverablesLabel,
@@ -77,6 +89,7 @@ export default function ServiceDetailLayout(props: ServiceDetailLayoutProps) {
     teamMembers,
     sectionVisualImage,
     sectionVisualAlt = '',
+    sectionVisualVideo,
     sectionVisualTitle,
     sectionVisualSubtitle,
     sectionVisualDescription,
@@ -104,7 +117,7 @@ export default function ServiceDetailLayout(props: ServiceDetailLayoutProps) {
       <section
         className="relative"
         style={{
-          padding: 'clamp(14rem, calc(8rem + 12vh), 16rem) 0 clamp(2rem, 4vw, 4rem)',
+          padding: 'clamp(14rem, calc(8rem + 12vh), 16rem) 0 clamp(3rem, 6vw, 6rem)',
           background: 'transparent',
           overflow: 'visible',
         }}
@@ -154,7 +167,7 @@ export default function ServiceDetailLayout(props: ServiceDetailLayoutProps) {
               </p>
             ) : null}
           </div>
-          {heroImage && (
+          {(heroVideo || heroImage) && (
             <div
               className="rounded-xl overflow-hidden bg-gray-100 w-full"
               style={{
@@ -162,18 +175,30 @@ export default function ServiceDetailLayout(props: ServiceDetailLayoutProps) {
                 boxShadow: '0 4px 24px rgba(93, 67, 205, 0.08), 0 1px 0 rgba(93, 67, 205, 0.06) inset',
               }}
             >
-              <img
-                src={heroImage}
-                alt={heroImageAlt}
-                className="w-full h-full object-cover"
-              />
+              {heroVideo ? (
+                <video
+                  src={heroVideo}
+                  autoPlay
+                  loop
+                  muted
+                  playsInline
+                  className="w-full h-full object-cover"
+                  aria-label={heroImageAlt || 'Vidéo du studio créatif'}
+                />
+              ) : (
+                <img
+                  src={heroImage}
+                  alt={heroImageAlt}
+                  className="w-full h-full object-cover"
+                />
+              )}
             </div>
           )}
         </div>
       </section>
 
       {/* Bloc 2 colonnes : onglets glassmorphisme (gauche) + infos service (droite) */}
-      <section className="pb-16 lg:pb-24">
+      <section className="pb-24 lg:pb-36">
         <div className="container">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-6 lg:min-h-[420px]">
             {/* Gauche : onglets glassmorphisme (frosted glass) */}
@@ -334,37 +359,32 @@ export default function ServiceDetailLayout(props: ServiceDetailLayoutProps) {
         </div>
       </section>
 
-      {/* Section « Carte visuelle + Texte & 4 cartes glass » — même fond page */}
+      {/* Section « Créativité humaine, outils modernes » — layout référence : visuel gauche, texte droite, 4 cartes */}
       {showVisualSection && (
-        <section className="pb-16 lg:pb-24">
+        <section className="pb-24 lg:pb-36">
           <div className="container">
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-start">
-              {/* Gauche : grande carte illustrée (glassmorphisme) */}
-              <div className="lg:col-span-5 order-2 lg:order-1">
-                <div
-                  className="rounded-2xl lg:rounded-3xl overflow-hidden min-h-[280px] aspect-[4/3] lg:aspect-square lg:min-h-0"
-                  style={{
-                    background: 'rgba(255, 255, 255, 0.45)',
-                    border: '1px solid rgba(255, 255, 255, 0.75)',
-                    boxShadow: '0 8px 32px rgba(0, 0, 0, 0.06), inset 0 1px 0 rgba(255, 255, 255, 0.9)',
-                    WebkitBackdropFilter: 'blur(16px) saturate(180%)',
-                    backdropFilter: 'blur(16px) saturate(180%)',
-                    isolation: 'isolate',
-                  }}
-                >
-                  {sectionVisualImage ? (
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 lg:gap-1 items-stretch" style={{ gridAutoRows: 'minmax(0, auto)' }}>
+              {/* Gauche : vidéo (hauteur réduite, alignée au bas de la section droite) */}
+              <div className="lg:col-span-5 order-2 lg:order-1 min-h-[200px] lg:min-h-0 lg:overflow-hidden lg:self-end">
+                <div className="h-full w-full overflow-hidden rounded-xl lg:aspect-[4/3] lg:w-full lg:max-w-full" style={{ minHeight: 0 }}>
+                  {sectionVisualVideo ? (
+                    <video
+                      src={sectionVisualVideo}
+                      autoPlay
+                      loop
+                      muted
+                      playsInline
+                      className="w-full h-full object-cover object-bottom"
+                      aria-label={sectionVisualAlt || 'Vidéo créativité humaine'}
+                    />
+                  ) : sectionVisualImage ? (
                     <img
                       src={sectionVisualImage}
                       alt={sectionVisualAlt}
-                      className="w-full h-full object-cover object-center"
+                      className="w-full h-full object-cover object-bottom"
                     />
                   ) : (
-                    <div
-                      className="w-full h-full flex items-center justify-center"
-                      style={{
-                        background: 'linear-gradient(135deg, rgba(147, 112, 219, 0.25) 0%, rgba(93, 67, 205, 0.2) 40%, rgba(99, 102, 241, 0.2) 100%)',
-                      }}
-                    >
+                    <div className="w-full h-full flex items-center justify-center">
                       <div className="flex flex-col items-center gap-4">
                         <div className="w-24 h-24 rounded-full opacity-80" style={{ background: 'radial-gradient(circle, rgba(147, 197, 253, 0.9) 0%, rgba(99, 102, 241, 0.5) 100%)' }} />
                         <div className="flex gap-3">
@@ -378,38 +398,49 @@ export default function ServiceDetailLayout(props: ServiceDetailLayoutProps) {
                   )}
                 </div>
               </div>
-              {/* Droite : titre, sous-titre, paragraphe, grille 2×2 cartes glass */}
-              <div className="lg:col-span-7 order-1 lg:order-2 space-y-6">
-                {sectionVisualTitle && (
-                  <h2 className="text-2xl lg:text-3xl xl:text-4xl font-bold text-gray-900" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
-                    {sectionVisualTitle}
-                  </h2>
-                )}
+              {/* Droite : sous-titre aligné au haut de l'image, titre, paragraphe, grille 2×2 */}
+              <div className="lg:col-span-7 order-1 lg:order-2 px-12 pt-0 pb-0 lg:px-20 lg:pt-0 lg:pb-0 flex flex-col justify-start">
                 {sectionVisualSubtitle && (
-                  <p className="text-xl lg:text-2xl font-semibold text-gray-800" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
+                  <p
+                    style={{
+                      fontFamily: "'Plus Jakarta Sans', sans-serif",
+                      fontWeight: 700,
+                      fontSize: '0.7rem',
+                      letterSpacing: '0.22em',
+                      textTransform: 'uppercase',
+                      color: '#4b5563',
+                      margin: 0,
+                      marginBottom: '0.5rem',
+                    }}
+                  >
                     {sectionVisualSubtitle}
                   </p>
                 )}
+                {sectionVisualTitle && (
+                  <h2 className="text-2xl lg:text-3xl xl:text-4xl font-bold text-gray-900 mb-4" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
+                    {sectionVisualTitle}
+                  </h2>
+                )}
                 {sectionVisualDescription && (
-                  <p className="text-base lg:text-lg text-gray-600 leading-relaxed" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
+                  <p className="text-base text-gray-600 leading-relaxed mb-16" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", lineHeight: 1.7 }}>
                     {sectionVisualDescription}
                   </p>
                 )}
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div className="grid grid-cols-2 gap-4 lg:gap-5">
                   {sectionHighlights!.slice(0, 4).map((item, index) => (
                     <div
                       key={index}
-                      className="p-5 rounded-md"
+                      className="p-4 lg:p-5 rounded-md flex flex-col"
                       style={{
-                        background: 'rgba(255, 255, 255, 0.55)',
-                        border: '1px solid rgba(255, 255, 255, 0.75)',
-                        boxShadow: '0 4px 24px rgba(0, 0, 0, 0.06), inset 0 1px 0 rgba(255, 255, 255, 0.9)',
+                        background: 'rgba(255, 255, 255, 0.35)',
+                        border: '1px solid rgba(255, 255, 255, 0.6)',
+                        boxShadow: '0 4px 24px rgba(0, 0, 0, 0.06), inset 0 1px 0 rgba(255, 255, 255, 0.5)',
                         WebkitBackdropFilter: 'blur(16px) saturate(180%)',
                         backdropFilter: 'blur(16px) saturate(180%)',
                         isolation: 'isolate',
                       }}
                     >
-                      <h3 className="text-base font-bold text-gray-900 mb-1.5" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>{item.title}</h3>
+                      <h3 className="text-sm lg:text-base font-bold text-gray-900 mb-2" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>{item.title}</h3>
                       <p className="text-gray-600 text-sm leading-relaxed" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>{item.description}</p>
                     </div>
                   ))}
@@ -421,15 +452,22 @@ export default function ServiceDetailLayout(props: ServiceDetailLayoutProps) {
       )}
 
       {/* Section "CE QUE NOUS CRÉONS" — titre centré majuscules + grille 6 cartes glassmorphisme + livrables */}
-      <section className="pb-16 lg:pb-24">
+      <section className="pb-24 lg:pb-36">
         <div className="container">
           <div className="text-center max-w-2xl mx-auto mb-12">
-            <h2
-              className="text-lg lg:text-xl font-bold tracking-widest uppercase mb-4 text-gray-700"
-              style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}
+            <p
+              style={{
+                fontFamily: "'Plus Jakarta Sans', sans-serif",
+                fontWeight: 700,
+                fontSize: '0.75rem',
+                letterSpacing: '0.2em',
+                textTransform: 'uppercase',
+                color: '#6b7280',
+                margin: '0 0 1rem 0',
+              }}
             >
               {expertiseSectionTitle}
-            </h2>
+            </p>
             {expertiseSectionDescription && (
               <p className="text-gray-600 leading-relaxed" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>{expertiseSectionDescription}</p>
             )}
@@ -444,7 +482,7 @@ export default function ServiceDetailLayout(props: ServiceDetailLayoutProps) {
               return (
                 <div
                   key={index}
-                  className="p-6 rounded-2xl"
+                  className="p-6 rounded-lg aspect-[3/2] flex flex-col"
                   style={{
                     background: 'rgba(255, 255, 255, 0.55)',
                     border: '1px solid rgba(255, 255, 255, 0.75)',
@@ -454,15 +492,32 @@ export default function ServiceDetailLayout(props: ServiceDetailLayoutProps) {
                     isolation: 'isolate',
                   }}
                 >
-                  <h3 className="text-lg font-bold mb-2 text-gray-900" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
+                  <h3 className="text-lg font-bold mb-2 text-gray-900 flex items-center gap-2" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
+                    {expertiseIconComponents?.[index] ? (
+                      <span className="flex-shrink-0 flex items-center justify-center" style={{ width: 48, height: 48 }}>
+                        {(() => {
+                          const IconComponent = expertiseIconComponents[index]!;
+                          return <IconComponent />;
+                        })()}
+                      </span>
+                    ) : expertiseIcons?.[index] ? (
+                      <span className="flex-shrink-0 w-8 h-8 rounded-lg flex items-center justify-center" style={{ background: 'rgba(93, 67, 205, 0.12)', color: PURPLE }}>
+                        {(() => {
+                          const Icon = expertiseIcons[index]!;
+                          return <Icon size={18} strokeWidth={2} />;
+                        })()}
+                      </span>
+                    ) : null}
                     {item.title}
                   </h3>
-                  <p className="text-gray-600 text-sm leading-relaxed mb-3" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>{item.description}</p>
+                  <p className="text-gray-600 text-sm leading-relaxed mb-3 flex-1" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>{item.description}</p>
                   {deliverablesText && (
-                    <p className="text-xs text-gray-500 leading-relaxed" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
-                      <span className="font-medium">{expertiseDeliverablesLabel ?? 'Livrables : '}</span>
-                      {deliverablesText}
-                    </p>
+                    <div className="pt-3 mt-auto border-t border-gray-200/60">
+                      <p className="text-xs text-gray-500 leading-relaxed" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
+                        <span className="font-medium">{expertiseDeliverablesLabel ?? 'Livrables : '}</span>
+                        {deliverablesText}
+                      </p>
+                    </div>
                   )}
                 </div>
               );
@@ -472,15 +527,22 @@ export default function ServiceDetailLayout(props: ServiceDetailLayoutProps) {
       </section>
 
       {/* Section équipe (photos + noms/rôles) */}
-      <section className="pb-16 lg:pb-24">
+      <section className="pb-24 lg:pb-36">
         <div className="container">
           <div className="text-center max-w-2xl mx-auto mb-10">
-            <h2
-              className="text-2xl lg:text-3xl font-bold mb-4"
-              style={{ color: BORDEAUX, fontFamily: "'Plus Jakarta Sans', sans-serif" }}
+            <p
+              style={{
+                fontFamily: "'Plus Jakarta Sans', sans-serif",
+                fontWeight: 700,
+                fontSize: '0.75rem',
+                letterSpacing: '0.2em',
+                textTransform: 'uppercase',
+                color: '#6b7280',
+                margin: '0 0 1rem 0',
+              }}
             >
               {teamTitle}
-            </h2>
+            </p>
             <p className="text-gray-600 leading-relaxed mb-8" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>{teamDescription}</p>
           </div>
           {teamMembers && teamMembers.length > 0 ? (
@@ -488,28 +550,23 @@ export default function ServiceDetailLayout(props: ServiceDetailLayoutProps) {
               {teamMembers.map((member, index) => (
                 <article
                   key={index}
-                  className="rounded-2xl overflow-hidden text-center"
-                  style={{
-                    background: 'rgba(255, 255, 255, 0.55)',
-                    border: '1px solid rgba(255, 255, 255, 0.75)',
-                    boxShadow: '0 4px 24px rgba(0, 0, 0, 0.06), inset 0 1px 0 rgba(255, 255, 255, 0.9)',
-                    WebkitBackdropFilter: 'blur(16px) saturate(180%)',
-                    backdropFilter: 'blur(16px) saturate(180%)',
-                    isolation: 'isolate',
-                  }}
+                  className="rounded-lg overflow-hidden relative aspect-[3/4]"
                 >
-                  <div className="aspect-square w-full bg-gray-100">
-                    <img
-                      src={member.image}
-                      alt={member.imageAlt ?? `${member.name} - ${member.role}`}
-                      className="w-full h-full object-cover"
-                    />
-                  </div>
-                  <div className="p-4">
-                    <h3 className="font-bold text-gray-900" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
+                  <img
+                    src={member.image}
+                    alt={member.imageAlt ?? `${member.name} - ${member.role}`}
+                    className="absolute inset-0 w-full h-full object-cover"
+                  />
+                  <div
+                    className="absolute inset-x-0 bottom-0 pt-16 pb-4 px-4"
+                    style={{
+                      background: 'linear-gradient(to top, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.4) 50%, transparent 100%)',
+                    }}
+                  >
+                    <h3 className="font-bold text-white text-lg" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
                       {member.name}
                     </h3>
-                    <p className="text-sm text-gray-600 mt-0.5" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>{member.role}</p>
+                    <p className="text-sm text-white/90 mt-0.5" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>{member.role}</p>
                   </div>
                 </article>
               ))}
