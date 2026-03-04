@@ -107,7 +107,7 @@ export default function Contact() {
       <StructuredData data={montrealOfficeSchema} />
       <StructuredData data={halifaxOfficeSchema} />
 
-      <div className="min-h-screen" style={{ background: 'transparent', fontFamily: "'Plus Jakarta Sans', sans-serif", paddingTop: 128 }}>
+      <div className="min-h-screen" style={{ background: 'transparent', fontFamily: "'Google Sans Flex', sans-serif", paddingTop: 128 }}>
         {/* Hero — même disposition que page d'accueil et À propos */}
         <section style={{ padding: 'clamp(6rem, 12vh, 8rem) 3% clamp(2rem, 4vw, 4rem)', overflow: 'visible' }}>
           <div className="w-full">
@@ -115,7 +115,7 @@ export default function Contact() {
             <div style={{ marginBottom: 'clamp(4rem, 8vw, 7rem)', overflow: 'visible' }}>
               <h1
                 style={{
-                  fontFamily: "'Plus Jakarta Sans', sans-serif",
+                  fontFamily: "'Google Sans Flex', sans-serif",
                   fontWeight: 700,
                   fontSize: 'clamp(1.5rem, 8vw, 9rem)',
                   lineHeight: 1.05,
@@ -134,7 +134,7 @@ export default function Contact() {
               </h1>
               <p
                 style={{
-                  fontFamily: "'Plus Jakarta Sans', sans-serif",
+                  fontFamily: "'Google Sans Flex', sans-serif",
                   fontWeight: 400,
                   fontSize: 'clamp(1rem, 1.5vw, 1.25rem)',
                   color: '#6b7280',
@@ -154,7 +154,7 @@ export default function Contact() {
               <div
                 className="flex flex-col justify-center"
                 style={{
-                  fontFamily: "'Plus Jakarta Sans', sans-serif",
+                  fontFamily: "'Google Sans Flex', sans-serif",
                   color: '#374151',
                   gap: 'clamp(1.25rem, 2vw, 1.75rem)',
                 }}
@@ -191,7 +191,7 @@ export default function Contact() {
 
               {/* Droite : formulaire (hauteur réduite, largeur augmentée) */}
               <div className="glass-panel w-full rounded-md p-6 lg:p-8">
-                <h2 className="text-2xl lg:text-3xl font-bold mb-4" style={{ color: BORDEAUX, fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
+                <h2 className="text-2xl lg:text-3xl font-bold mb-4" style={{ color: BORDEAUX, fontFamily: "'Google Sans Flex', sans-serif" }}>
                   {t('contact.sendMessage')}
                 </h2>
                 {isSubmitted && (
@@ -331,13 +331,13 @@ className="w-full px-4 py-2 rounded-md border border-gray-200 bg-white text-gray
 
             {/* Section cartes : Montréal et Halifax */}
             <div className="mt-12 lg:mt-16">
-              <h2 className="text-xl lg:text-2xl font-bold mb-6" style={{ color: BORDEAUX, fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
+              <h2 className="text-xl lg:text-2xl font-bold mb-6" style={{ color: BORDEAUX, fontFamily: "'Google Sans Flex', sans-serif" }}>
                 {t('contact.whereToFindUs')}
               </h2>
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8">
                 {/* Carte Montréal */}
                 <div>
-                  <p className="font-semibold mb-3" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", color: SITE_BLACK }}>{t('contact.montreal')}</p>
+                  <p className="font-semibold mb-3" style={{ fontFamily: "'Google Sans Flex', sans-serif", color: SITE_BLACK }}>{t('contact.montreal')}</p>
                   <div
                     className="rounded-md overflow-hidden bg-gray-100 shadow-sm border border-gray-200/60"
                     style={{ borderRadius: 7, minHeight: 420 }}
@@ -357,7 +357,7 @@ className="w-full px-4 py-2 rounded-md border border-gray-200 bg-white text-gray
                 </div>
                 {/* Carte Halifax */}
                 <div>
-                  <p className="font-semibold mb-3" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", color: SITE_BLACK }}>{t('contact.halifax')}</p>
+                  <p className="font-semibold mb-3" style={{ fontFamily: "'Google Sans Flex', sans-serif", color: SITE_BLACK }}>{t('contact.halifax')}</p>
                   <div
                     className="rounded-md overflow-hidden bg-gray-100 shadow-sm border border-gray-200/60"
                     style={{ borderRadius: 7, minHeight: 420 }}

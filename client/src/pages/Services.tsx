@@ -237,7 +237,7 @@ export default function Services() {
             <h1
               className="text-5xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight"
               style={{
-                fontFamily: "'Plus Jakarta Sans', sans-serif",
+                fontFamily: "'Google Sans Flex', sans-serif",
                 display: 'inline-block',
                 background: 'linear-gradient(to right, #6B1817, #523DCB)',
                 WebkitBackgroundClip: 'text',
@@ -277,11 +277,11 @@ export default function Services() {
                         <EntityIcon className="w-7 h-7" style={{ color: '#5A1E29' }} />
                       </div>
                     </div>
-                    <h2 className="text-2xl md:text-3xl font-bold mb-2" style={{ color: '#5A1E29', fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 700 }}>
+                    <h2 className="text-2xl md:text-3xl font-bold mb-2" style={{ color: '#5A1E29', fontFamily: "'Google Sans Flex', sans-serif", fontWeight: 700 }}>
                       {entity.name}
                     </h2>
-                    <p className="font-semibold mb-6 text-base" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 400, color: '#4b5563' }}>{entity.tagline}</p>
-                    <p className="text-base leading-relaxed mb-8" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 400, color: '#4b5563' }}>
+                    <p className="font-semibold mb-6 text-base" style={{ fontFamily: "'Google Sans Flex', sans-serif", fontWeight: 400, color: '#4b5563' }}>{entity.tagline}</p>
+                    <p className="text-base leading-relaxed mb-8" style={{ fontFamily: "'Google Sans Flex', sans-serif", fontWeight: 400, color: '#4b5563' }}>
                       {entity.description}
                     </p>
                     <div className="space-y-5 mb-8 flex-grow">
@@ -293,8 +293,8 @@ export default function Services() {
                               <ServiceIcon className="w-5 h-5 text-gray-600" />
                             </div>
                             <div className="flex-1">
-                              <h3 className="mb-1 text-base" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 700, color: '#111827' }}>{service.title}</h3>
-                              <p className="text-sm leading-relaxed" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 400, color: '#6b7280' }}>{service.description}</p>
+                              <h3 className="mb-1 text-base" style={{ fontFamily: "'Google Sans Flex', sans-serif", fontWeight: 700, color: '#111827' }}>{service.title}</h3>
+                              <p className="text-sm leading-relaxed" style={{ fontFamily: "'Google Sans Flex', sans-serif", fontWeight: 400, color: '#6b7280' }}>{service.description}</p>
                             </div>
                           </div>
                         );

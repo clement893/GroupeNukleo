@@ -109,7 +109,7 @@ export default function ProjectsHeroTriptych({
                 position: 'absolute',
                 bottom: 24,
                 ...(isActive ? { right: 24 } : { left: '50%', transform: 'translateX(-50%)' }),
-                fontFamily: "'Plus Jakarta Sans', sans-serif",
+                fontFamily: "'Google Sans Flex', sans-serif",
                 fontSize: 'clamp(2rem, 4vw, 3.5rem)',
                 fontWeight: 700,
                 color: '#ffffff',
@@ -139,7 +139,7 @@ export default function ProjectsHeroTriptych({
                 {item.title && (
                   <h3
                     style={{
-                      fontFamily: "'Plus Jakarta Sans', sans-serif",
+                      fontFamily: "'Google Sans Flex', sans-serif",
                       fontWeight: 600,
                       fontSize: 'clamp(1.25rem, 2.5vw, 2rem)',
                       lineHeight: 1.15,
@@ -164,7 +164,7 @@ export default function ProjectsHeroTriptych({
                       fontSize: '0.8rem',
                       fontWeight: 600,
                       textDecoration: 'none',
-                      fontFamily: "'Plus Jakarta Sans', sans-serif",
+                      fontFamily: "'Google Sans Flex', sans-serif",
                       padding: '0.5rem 1rem',
                       borderRadius: 9999,
                       background: 'rgba(255, 255, 255, 0.25)',

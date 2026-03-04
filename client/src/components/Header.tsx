@@ -145,7 +145,7 @@ function Header() {
                 className="header-menu-btn flex items-center justify-center gap-2 rounded-full text-gray-800 active:scale-95 transition-all duration-300 touch-manipulation flex-shrink-0 px-4 sm:px-5"
                 style={{
                   height: 'clamp(2.75rem, 4vw, 3.5rem)',
-                  fontFamily: "'Plus Jakarta Sans', sans-serif",
+                  fontFamily: "'Google Sans Flex', sans-serif",
                   fontWeight: 600,
                   fontSize: 'clamp(0.9rem, 1vw, 1.05rem)',
                   background: 'rgba(255, 255, 255, 0.35)',

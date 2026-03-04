@@ -77,7 +77,7 @@ function Footer() {
         background: '#EFE8E8',
         paddingTop: 'clamp(0.75rem, 2vw, 1.25rem)',
         paddingBottom: 48,
-        fontFamily: "'Plus Jakarta Sans', sans-serif",
+        fontFamily: "'Google Sans Flex', sans-serif",
         fontWeight: 400,
       }}
       aria-label={t('footer.ariaLabel') || 'Pied de page Nukleo Digital'}
@@ -95,18 +95,20 @@ function Footer() {
             minHeight: 300,
           }}
         >
-          <Link href={getLocalizedPath('/')} className="block mb-8 lg:mb-10 touch-manipulation">
-            <span
-              className="tracking-tight lowercase"
+          <Link href={getLocalizedPath('/')} className="block mb-8 lg:mb-10 touch-manipulation w-full" style={{ textAlign: 'left' }}>
+            <img
+              src="/nukleo-logo-footer.png"
+              alt={t('alt.logo') || 'Nukleo Digital - Accueil'}
+              className="object-contain object-left"
               style={{
-                fontFamily: "'Plus Jakarta Sans', sans-serif",
-                fontWeight: 400,
-                fontSize: 'clamp(1.75rem, 4vw, 2.75rem)',
-                color: FOOTER_TEXT_WHITE,
+                height: 'clamp(7rem, 16vw, 11rem)',
+                width: 'auto',
+                display: 'block',
+                background: 'transparent',
+                mixBlendMode: 'lighten',
+                marginRight: 'auto',
               }}
-            >
-              nukleo,
-            </span>
+            />
           </Link>
           <div className="grid grid-cols-2 gap-x-12 sm:gap-x-16 gap-y-1">
             <ul className="space-y-3">

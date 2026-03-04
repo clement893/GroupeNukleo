@@ -22,7 +22,7 @@ export const HOME_SERVICES: HomeServiceCard[] = [
     tags: ['Application', 'Plateforme', 'Site web', 'Maintenance', 'Refonte'],
     imageBg: 'linear-gradient(135deg, rgba(230,228,245,0.9) 0%, rgba(210,205,230,0.95) 100%)',
     path: '/services/tech',
-    heroVideo: '/demo/tech-hero.mov',
+    heroImage: '/demo/lab-tech-cover.png',
   },
   {
     title: 'Studio créatif',
@@ -38,7 +38,7 @@ export const HOME_SERVICES: HomeServiceCard[] = [
     tags: ['Campagnes digitales', 'Gestion des réseaux sociaux', 'Stratégie'],
     imageBg: 'linear-gradient(135deg, rgba(240,238,250,0.9) 0%, rgba(225,220,240,0.95) 100%)',
     path: '/services/agency',
-    heroImage: '/demo/dept-agency.jpg',
+    heroImage: '/demo/agence-comm-cover.png',
   },
   {
     title: 'Transition numérique',
@@ -46,6 +46,6 @@ export const HOME_SERVICES: HomeServiceCard[] = [
     tags: ['Développement IA', 'Formation', 'Accompagnement', 'Stratégie IA'],
     imageBg: 'linear-gradient(135deg, rgba(200,180,220,0.4) 0%, rgba(120,100,180,0.5) 100%)',
     path: '/services/consulting',
-    heroVideo: '/demo/consulting-hero.mov',
+    heroImage: '/demo/transition-numerique-cover.png',
   },
 ];

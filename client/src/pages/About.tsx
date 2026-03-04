@@ -50,7 +50,7 @@ export default function About() {
           <div style={{ marginBottom: 'clamp(1rem, 3vw, 2rem)', overflow: 'visible' }}>
             <h1
               style={{
-                fontFamily: "'Plus Jakarta Sans', sans-serif",
+                fontFamily: "'Google Sans Flex', sans-serif",
                 fontWeight: 700,
                 fontSize: 'clamp(1.5rem, 8vw, 9rem)',
                 lineHeight: 1.05,
@@ -69,7 +69,7 @@ export default function About() {
             </h1>
             <p
               style={{
-                fontFamily: "'Plus Jakarta Sans', sans-serif",
+                fontFamily: "'Google Sans Flex', sans-serif",
                 fontWeight: 400,
                 fontSize: 'clamp(1rem, 1.5vw, 1.25rem)',
                 color: '#6b7280',
@@ -99,12 +99,12 @@ export default function About() {
 
         {/* NOTRE MISSION */}
         <section style={{ padding: '4rem 3%', textAlign: 'center' }}>
-          <p style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 700, fontSize: '0.75rem', letterSpacing: '0.2em', textTransform: 'uppercase', color: '#6b7280', marginBottom: 24, textAlign: 'center' }}>
+          <p style={{ fontFamily: "'Google Sans Flex', sans-serif", fontWeight: 700, fontSize: '0.75rem', letterSpacing: '0.2em', textTransform: 'uppercase', color: '#6b7280', marginBottom: 24, textAlign: 'center' }}>
             {t('about.missionLabel') || 'Notre mission'}
           </p>
           <h2
             style={{
-              fontFamily: "'Plus Jakarta Sans', sans-serif",
+              fontFamily: "'Google Sans Flex', sans-serif",
               fontWeight: 400,
               fontSize: 'clamp(2.25rem, 5vw, 3.75rem)',
               lineHeight: 1.1,
@@ -122,14 +122,14 @@ export default function About() {
           >
             {t('about.missionTitle') || 'Faire rayonner les petites et moyennes entreprises dans leur croissance numérique.'}
           </h2>
-          <p style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 400, fontSize: '1rem', lineHeight: 1.7, color: '#4b5563' }}>
+          <p style={{ fontFamily: "'Google Sans Flex', sans-serif", fontWeight: 400, fontSize: '1rem', lineHeight: 1.7, color: '#4b5563' }}>
             {t('about.missionDescription') || 'Nam libero tempore cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime.'}
           </p>
         </section>
 
         {/* NOS VALEURS */}
         <section style={{ padding: '4rem 3% 5rem' }}>
-          <p style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 700, fontSize: '0.75rem', letterSpacing: '0.2em', textTransform: 'uppercase', color: '#6b7280', marginBottom: 24, textAlign: 'center' }}>
+          <p style={{ fontFamily: "'Google Sans Flex', sans-serif", fontWeight: 700, fontSize: '0.75rem', letterSpacing: '0.2em', textTransform: 'uppercase', color: '#6b7280', marginBottom: 24, textAlign: 'center' }}>
             {t('about.valuesLabel') || 'NOS VALEURS'}
           </p>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 w-full">
@@ -148,10 +148,10 @@ export default function About() {
                 <div style={{ width: 48, height: 48, display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: 16 }}>
                   <IconComponent />
                 </div>
-                <h3 className="transition-all duration-300 group-hover:text-[2.5rem]" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 700, fontSize: '1.65rem', color: '#21242E', margin: '0 0 0.5rem 0' }}>
+                <h3 className="transition-all duration-300 group-hover:text-[2.5rem]" style={{ fontFamily: "'Google Sans Flex', sans-serif", fontWeight: 700, fontSize: '1.65rem', color: '#21242E', margin: '0 0 0.5rem 0' }}>
                   {t(`about.values.${key}.title`)}
                 </h3>
-                <p style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 400, fontSize: '0.875rem', lineHeight: 1.6, color: '#6b7280', margin: 0 }}>
+                <p style={{ fontFamily: "'Google Sans Flex', sans-serif", fontWeight: 400, fontSize: '0.875rem', lineHeight: 1.6, color: '#6b7280', margin: 0 }}>
                   {t(`about.values.${key}.description`)}
                 </p>
               </div>
@@ -162,7 +162,7 @@ export default function About() {
 
         {/* Section équipe — même bloc que la page d'accueil (TeamRow) */}
         <section style={{ padding: '4rem 3% 1rem', textAlign: 'center' }}>
-          <p style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 700, fontSize: '0.75rem', letterSpacing: '0.2em', textTransform: 'uppercase', color: '#6b7280', marginBottom: '1rem', textAlign: 'center' }}>
+          <p style={{ fontFamily: "'Google Sans Flex', sans-serif", fontWeight: 700, fontSize: '0.75rem', letterSpacing: '0.2em', textTransform: 'uppercase', color: '#6b7280', marginBottom: '1rem', textAlign: 'center' }}>
             {t('about.teamTitle') || "Rencontrez l'équipe"}
           </p>
           <TeamRow />

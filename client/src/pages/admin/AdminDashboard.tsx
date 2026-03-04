@@ -20,7 +20,7 @@ export default function AdminDashboard() {
     return (
       <AdminLayout>
         <div className="p-6 lg:p-8 max-w-7xl mx-auto">
-          <div className="text-gray-600 text-lg" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>Loading dashboard...</div>
+          <div className="text-gray-600 text-lg" style={{ fontFamily: "'Google Sans Flex', sans-serif" }}>Loading dashboard...</div>
         </div>
       </AdminLayout>
     );
@@ -70,8 +70,8 @@ export default function AdminDashboard() {
           {/* Header */}
           <div className="flex items-center justify-between">
             <div>
-              <h1 className="text-4xl font-bold text-gray-900 mb-2" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>Admin Dashboard</h1>
-              <p className="text-gray-600" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>Overview of all platform data and statistics</p>
+              <h1 className="text-4xl font-bold text-gray-900 mb-2" style={{ fontFamily: "'Google Sans Flex', sans-serif" }}>Admin Dashboard</h1>
+              <p className="text-gray-600" style={{ fontFamily: "'Google Sans Flex', sans-serif" }}>Overview of all platform data and statistics</p>
             </div>
           </div>
 
@@ -82,7 +82,7 @@ export default function AdminDashboard() {
               return (
                 <Card key={index} className="bg-white border border-gray-200 shadow-sm">
                   <CardHeader className="flex flex-row items-center justify-between pb-2">
-                    <CardTitle className="text-sm font-medium text-gray-600" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
+                    <CardTitle className="text-sm font-medium text-gray-600" style={{ fontFamily: "'Google Sans Flex', sans-serif" }}>
                       {stat.title}
                     </CardTitle>
                     <div className={`h-10 w-10 rounded-full bg-gradient-to-r ${stat.color} flex items-center justify-center`}>
@@ -90,8 +90,8 @@ export default function AdminDashboard() {
                     </div>
                   </CardHeader>
                   <CardContent>
-                    <div className="text-3xl font-bold text-gray-900 mb-1" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>{stat.value}</div>
-                    <CardDescription className="text-gray-500 text-sm" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
+                    <div className="text-3xl font-bold text-gray-900 mb-1" style={{ fontFamily: "'Google Sans Flex', sans-serif" }}>{stat.value}</div>
+                    <CardDescription className="text-gray-500 text-sm" style={{ fontFamily: "'Google Sans Flex', sans-serif" }}>
                       {stat.description}
                     </CardDescription>
                   </CardContent>
@@ -105,11 +105,11 @@ export default function AdminDashboard() {
             {/* Analytics & Tracking */}
             <Card className="bg-white border border-gray-200 shadow-sm">
               <CardHeader>
-                <CardTitle className="text-gray-900 flex items-center gap-2" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
+                <CardTitle className="text-gray-900 flex items-center gap-2" style={{ fontFamily: "'Google Sans Flex', sans-serif" }}>
                   <BarChart3 className="w-5 h-5" />
                   Analytics & Tracking
                 </CardTitle>
-                <CardDescription className="text-gray-500" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
+                <CardDescription className="text-gray-500" style={{ fontFamily: "'Google Sans Flex', sans-serif" }}>
                   Suivi et analyses
                 </CardDescription>
               </CardHeader>
@@ -118,15 +118,15 @@ export default function AdminDashboard() {
                   href="/admin/analytics"
                   className="block p-3 rounded-lg bg-gray-50 hover:bg-gray-100 transition-colors text-gray-700 hover:text-gray-900"
                 >
-                  <div className="text-gray-900 font-medium" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>Analytics & Tracking</div>
-                  <div className="text-gray-500 text-sm" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>Google Analytics, Facebook Pixel, LinkedIn</div>
+                  <div className="text-gray-900 font-medium" style={{ fontFamily: "'Google Sans Flex', sans-serif" }}>Analytics & Tracking</div>
+                  <div className="text-gray-500 text-sm" style={{ fontFamily: "'Google Sans Flex', sans-serif" }}>Google Analytics, Facebook Pixel, LinkedIn</div>
                 </a>
                 <a
                   href="/admin/leo-analytics"
                   className="block p-3 rounded-lg bg-gray-50 hover:bg-gray-100 transition-colors text-gray-700 hover:text-gray-900"
                 >
-                  <div className="text-gray-900 font-medium" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>LEO Analytics</div>
-                  <div className="text-gray-500 text-sm" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>View detailed LEO session data</div>
+                  <div className="text-gray-900 font-medium" style={{ fontFamily: "'Google Sans Flex', sans-serif" }}>LEO Analytics</div>
+                  <div className="text-gray-500 text-sm" style={{ fontFamily: "'Google Sans Flex', sans-serif" }}>View detailed LEO session data</div>
                 </a>
               </CardContent>
             </Card>
@@ -134,11 +134,11 @@ export default function AdminDashboard() {
             {/* Contacts & Leads */}
             <Card className="bg-white border border-gray-200 shadow-sm">
               <CardHeader>
-                <CardTitle className="text-gray-900 flex items-center gap-2" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
+                <CardTitle className="text-gray-900 flex items-center gap-2" style={{ fontFamily: "'Google Sans Flex', sans-serif" }}>
                   <MessageSquare className="w-5 h-5" />
                   Contacts & Leads
                 </CardTitle>
-                <CardDescription className="text-gray-500" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
+                <CardDescription className="text-gray-500" style={{ fontFamily: "'Google Sans Flex', sans-serif" }}>
                   Gestion des contacts
                 </CardDescription>
               </CardHeader>
@@ -147,15 +147,15 @@ export default function AdminDashboard() {
                   href="/admin/leo-contacts"
                   className="block p-3 rounded-lg bg-gray-50 hover:bg-gray-100 transition-colors text-gray-700 hover:text-gray-900"
                 >
-                  <div className="text-gray-900 font-medium" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>LEO Contacts</div>
-                  <div className="text-gray-500 text-sm" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>View emails captured by LEO chatbot</div>
+                  <div className="text-gray-900 font-medium" style={{ fontFamily: "'Google Sans Flex', sans-serif" }}>LEO Contacts</div>
+                  <div className="text-gray-500 text-sm" style={{ fontFamily: "'Google Sans Flex', sans-serif" }}>View emails captured by LEO chatbot</div>
                 </a>
                 <a
                   href="/admin/contact-messages"
                   className="block p-3 rounded-lg bg-gray-50 hover:bg-gray-100 transition-colors text-gray-700 hover:text-gray-900"
                 >
-                  <div className="text-gray-900 font-medium" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>Contact Messages</div>
-                  <div className="text-gray-500 text-sm" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>Manage contact form submissions</div>
+                  <div className="text-gray-900 font-medium" style={{ fontFamily: "'Google Sans Flex', sans-serif" }}>Contact Messages</div>
+                  <div className="text-gray-500 text-sm" style={{ fontFamily: "'Google Sans Flex', sans-serif" }}>Manage contact form submissions</div>
                 </a>
               </CardContent>
             </Card>
@@ -163,11 +163,11 @@ export default function AdminDashboard() {
             {/* Configuration */}
             <Card className="bg-white border border-gray-200 shadow-sm">
               <CardHeader>
-                <CardTitle className="text-gray-900 flex items-center gap-2" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
+                <CardTitle className="text-gray-900 flex items-center gap-2" style={{ fontFamily: "'Google Sans Flex', sans-serif" }}>
                   <Settings className="w-5 h-5" />
                   Configuration
                 </CardTitle>
-                <CardDescription className="text-gray-500" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
+                <CardDescription className="text-gray-500" style={{ fontFamily: "'Google Sans Flex', sans-serif" }}>
                   Paramètres du site
                 </CardDescription>
               </CardHeader>
@@ -176,15 +176,15 @@ export default function AdminDashboard() {
                   href="/admin/page-visibility"
                   className="block p-3 rounded-lg bg-gray-50 hover:bg-gray-100 transition-colors text-gray-700 hover:text-gray-900"
                 >
-                  <div className="text-gray-900 font-medium" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>Page Visibility</div>
-                  <div className="text-gray-500 text-sm" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>Manage page visibility settings</div>
+                  <div className="text-gray-900 font-medium" style={{ fontFamily: "'Google Sans Flex', sans-serif" }}>Page Visibility</div>
+                  <div className="text-gray-500 text-sm" style={{ fontFamily: "'Google Sans Flex', sans-serif" }}>Manage page visibility settings</div>
                 </a>
                 <a
                   href="/admin/sounds"
                   className="block p-3 rounded-lg bg-gray-50 hover:bg-gray-100 transition-colors text-gray-700 hover:text-gray-900"
                 >
-                  <div className="text-gray-900 font-medium" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>Sounds</div>
-                  <div className="text-gray-500 text-sm" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>Manage interface sounds</div>
+                  <div className="text-gray-900 font-medium" style={{ fontFamily: "'Google Sans Flex', sans-serif" }}>Sounds</div>
+                  <div className="text-gray-500 text-sm" style={{ fontFamily: "'Google Sans Flex', sans-serif" }}>Manage interface sounds</div>
                 </a>
               </CardContent>
             </Card>
@@ -193,8 +193,8 @@ export default function AdminDashboard() {
           {/* Recent Activity */}
           <Card className="bg-white border border-gray-200 shadow-sm">
             <CardHeader>
-              <CardTitle className="text-gray-900" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>Recent Activity</CardTitle>
-              <CardDescription className="text-gray-500" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
+              <CardTitle className="text-gray-900" style={{ fontFamily: "'Google Sans Flex', sans-serif" }}>Recent Activity</CardTitle>
+              <CardDescription className="text-gray-500" style={{ fontFamily: "'Google Sans Flex', sans-serif" }}>
                 Latest platform updates
               </CardDescription>
             </CardHeader>
@@ -203,22 +203,22 @@ export default function AdminDashboard() {
                 <div className="flex items-start gap-3">
                   <div className="h-2 w-2 rounded-full bg-green-500 mt-2" />
                   <div>
-                    <div className="text-gray-900 text-sm" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>System operational</div>
-                    <div className="text-gray-500 text-xs" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>All services running normally</div>
+                    <div className="text-gray-900 text-sm" style={{ fontFamily: "'Google Sans Flex', sans-serif" }}>System operational</div>
+                    <div className="text-gray-500 text-xs" style={{ fontFamily: "'Google Sans Flex', sans-serif" }}>All services running normally</div>
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
                   <div className="h-2 w-2 rounded-full bg-blue-500 mt-2" />
                   <div>
-                    <div className="text-gray-900 text-sm" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>Database connected</div>
-                    <div className="text-gray-500 text-xs" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>PostgreSQL on Railway</div>
+                    <div className="text-gray-900 text-sm" style={{ fontFamily: "'Google Sans Flex', sans-serif" }}>Database connected</div>
+                    <div className="text-gray-500 text-xs" style={{ fontFamily: "'Google Sans Flex', sans-serif" }}>PostgreSQL on Railway</div>
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
                   <div className="h-2 w-2 rounded-full bg-[#523DCB] mt-2" />
                   <div>
-                    <div className="text-gray-900 text-sm" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>LEO AI active</div>
-                    <div className="text-gray-500 text-xs" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>Chatbot responding to queries</div>
+                    <div className="text-gray-900 text-sm" style={{ fontFamily: "'Google Sans Flex', sans-serif" }}>LEO AI active</div>
+                    <div className="text-gray-500 text-xs" style={{ fontFamily: "'Google Sans Flex', sans-serif" }}>Chatbot responding to queries</div>
                   </div>
                 </div>
               </div>

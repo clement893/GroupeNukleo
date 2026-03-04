@@ -95,23 +95,14 @@ const content = {
 
 function Section({ title, children }: { title: string; children: React.ReactNode }) {
   return (
-    <div style={{
-      background: '#fff',
-      borderRadius: 20,
-      padding: '1.75rem 2rem',
-      boxShadow: '0 4px 24px rgba(0,0,0,0.06)',
-      marginBottom: '1.5rem',
-    }}>
-      <h2 style={{
-        fontFamily: "'Plus Jakarta Sans', sans-serif",
-        fontWeight: 700,
-        fontSize: '1.35rem',
-        color: BORDEAUX,
-        margin: '0 0 1rem 0',
-      }}>
+    <div className="glass-faq rounded-lg overflow-hidden px-6 py-5 mb-6">
+      <h2
+        className="text-xl md:text-2xl font-bold pb-2 border-b border-gray-200 mb-4"
+        style={{ color: BORDEAUX, fontFamily: 'var(--font-heading, sans-serif)' }}
+      >
         {title}
       </h2>
-      <div style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: '0.9375rem', color: '#4b5563', lineHeight: 1.65 }}>
+      <div className="text-gray-600 leading-relaxed text-base" style={{ fontFamily: 'var(--font-heading, sans-serif)' }}>
         {children}
       </div>
     </div>
@@ -131,12 +122,12 @@ export default function PrivacyPolicy() {
         description={c.seoDescription}
         keywords="privacy policy, data protection, GDPR, personal information, data security, politique de confidentialité"
       />
-      <div style={{ minHeight: '100vh', background: OFF_WHITE, fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
+      <div style={{ minHeight: '100vh', background: OFF_WHITE, fontFamily: "'Google Sans Flex', sans-serif" }}>
         {/* Hero */}
         <section style={{ padding: 'clamp(5rem, 10vh, 7rem) 0 0' }}>
-          <div className="w-full">
+          <div className="container">
             <p style={{
-              fontFamily: "'Plus Jakarta Sans', sans-serif",
+              fontFamily: "'Google Sans Flex', sans-serif",
               fontWeight: 700,
               fontSize: '0.75rem',
               letterSpacing: '0.2em',
@@ -148,7 +139,7 @@ export default function PrivacyPolicy() {
             </p>
             <h1
               style={{
-                fontFamily: "'Plus Jakarta Sans', sans-serif",
+                fontFamily: "'Google Sans Flex', sans-serif",
                 fontWeight: 700,
                 fontSize: 'clamp(2rem, 4.5vw, 3.5rem)',
                 lineHeight: 1.15,
@@ -168,7 +159,7 @@ export default function PrivacyPolicy() {
 
         {/* Content */}
         <section style={{ padding: '2rem 0 4rem' }}>
-          <div className="w-full">
+          <div className="container">
             <Section title={c.section1Title}>
               <p style={{ margin: 0 }}>{c.section1Text}</p>
             </Section>

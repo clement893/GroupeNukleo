@@ -148,7 +148,7 @@ if (typeof window !== 'undefined') {
         sessionStorage.removeItem(RELOAD_KEY);
         // Show a user-friendly error message
         document.body.innerHTML = `
-          <div style="display: flex; align-items: center; justify-content: center; min-height: 100vh; padding: 20px; text-align: center; font-family: 'Plus Jakarta Sans', sans-serif;">
+          <div style="display: flex; align-items: center; justify-content: center; min-height: 100vh; padding: 20px; text-align: center; font-family: 'Google Sans Flex', sans-serif;">
             <div>
               <h1 style="font-size: 24px; margin-bottom: 16px;">Une erreur s'est produite</h1>
               <p style="margin-bottom: 24px; color: #666;">Le chargement de la page a échoué. Veuillez réessayer.</p>

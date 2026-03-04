@@ -33,7 +33,7 @@ export default function ResourceArticle() {
     return (
       <PageLayout>
         <div className="min-h-screen flex items-center justify-center" style={{ background: 'transparent' }}>
-          <div className="text-center" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
+          <div className="text-center" style={{ fontFamily: "'Google Sans Flex', sans-serif" }}>
             <h1 className="text-2xl font-bold text-gray-900 mb-4">{t('resources.articleNotFound') || 'Article non trouvé'}</h1>
             <Link href={getLocalizedPath('/resources')} className="text-[#5A1E29] hover:underline font-medium">{t('resources.backToResources') || 'Retour aux ressources'}</Link>
           </div>
@@ -51,7 +51,7 @@ export default function ResourceArticle() {
     return (
       <PageLayout>
         <div className="min-h-screen flex items-center justify-center" style={{ background: 'transparent' }}>
-          <div className="text-center" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
+          <div className="text-center" style={{ fontFamily: "'Google Sans Flex', sans-serif" }}>
             <h1 className="text-2xl font-bold text-gray-900 mb-4">{t('resources.articleNotFound') || 'Article non trouvé'}</h1>
             <Link href={getLocalizedPath('/resources')} className="text-[#5A1E29] hover:underline font-medium">{t('resources.backToResources') || 'Retour aux ressources'}</Link>
           </div>
@@ -90,7 +90,7 @@ export default function ResourceArticle() {
         {/* Hero */}
         <section style={{ padding: 'clamp(5rem, 10vh, 7rem) 0 2rem' }}>
           <div className="container">
-            <Link href={getLocalizedPath('/resources')} className="inline-flex items-center gap-2 text-gray-600 hover:text-gray-900 mb-8 transition-colors group" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: '0.9rem', fontWeight: 500 }}>
+            <Link href={getLocalizedPath('/resources')} className="inline-flex items-center gap-2 text-gray-600 hover:text-gray-900 mb-8 transition-colors group" style={{ fontFamily: "'Google Sans Flex', sans-serif", fontSize: '0.9rem', fontWeight: 500 }}>
                 <ArrowLeft className="w-4 h-4 group-hover:-translate-x-0.5 transition-transform" />
                 {t('resources.backToResources') || 'Retour aux ressources'}
               </Link>
@@ -107,7 +107,7 @@ export default function ResourceArticle() {
                   textTransform: 'uppercase',
                   color: '#6b7280',
                   background: '#f3f4f6',
-                  fontFamily: "'Plus Jakarta Sans', sans-serif",
+                  fontFamily: "'Google Sans Flex', sans-serif",
                 }}
               >
                 {t(`resources.articles.${translationKey}.category`) || 'Article'}
@@ -116,7 +116,7 @@ export default function ResourceArticle() {
 
             <h1
               style={{
-                fontFamily: "'Plus Jakarta Sans', sans-serif",
+                fontFamily: "'Google Sans Flex', sans-serif",
                 fontWeight: 700,
                 fontSize: 'clamp(2rem, 4.5vw, 3.5rem)',
                 lineHeight: 1.2,
@@ -135,7 +135,7 @@ export default function ResourceArticle() {
               {title}
             </h1>
 
-            <div className="flex items-center gap-3 text-gray-500 text-sm" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
+            <div className="flex items-center gap-3 text-gray-500 text-sm" style={{ fontFamily: "'Google Sans Flex', sans-serif" }}>
               <span className="font-medium">{readTime}</span>
               <span>·</span>
               <span>{new Date(date).toLocaleDateString(language === 'fr' ? 'fr-FR' : 'en-US', { month: 'long', day: 'numeric', year: 'numeric' })}</span>
@@ -154,11 +154,11 @@ export default function ResourceArticle() {
                   borderRadius: 16,
                   boxShadow: '0 2px 12px rgba(0,0,0,0.04)',
                   padding: '2rem 1.75rem',
-                  fontFamily: "'Plus Jakarta Sans', sans-serif",
+                  fontFamily: "'Google Sans Flex', sans-serif",
                 }}
               >
                 <div className="mb-8 pb-8 border-b border-gray-200">
-                  <p className="text-lg text-gray-700 leading-relaxed m-0" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
+                  <p className="text-lg text-gray-700 leading-relaxed m-0" style={{ fontFamily: "'Google Sans Flex', sans-serif" }}>
                     {description}
                   </p>
                 </div>
@@ -167,7 +167,7 @@ export default function ResourceArticle() {
                   <>
                     <style>{`
                       .article-content-resources h2 {
-                        font-family: 'Plus Jakarta Sans', sans-serif;
+                        font-family: 'Google Sans Flex', sans-serif;
                         font-size: 1.5rem;
                         font-weight: 700;
                         color: #111827;
@@ -178,7 +178,7 @@ export default function ResourceArticle() {
                         border-image: linear-gradient(to right, #6B1817, #523DCB) 1;
                       }
                       .article-content-resources h3 {
-                        font-family: 'Plus Jakarta Sans', sans-serif;
+                        font-family: 'Google Sans Flex', sans-serif;
                         font-size: 1.25rem;
                         font-weight: 600;
                         color: #111827;
@@ -186,7 +186,7 @@ export default function ResourceArticle() {
                         margin-bottom: 0.75rem;
                       }
                       .article-content-resources h4 {
-                        font-family: 'Plus Jakarta Sans', sans-serif;
+                        font-family: 'Google Sans Flex', sans-serif;
                         font-size: 1.1rem;
                         font-weight: 600;
                         color: #374151;
@@ -194,7 +194,7 @@ export default function ResourceArticle() {
                         margin-bottom: 0.5rem;
                       }
                       .article-content-resources p {
-                        font-family: 'Plus Jakarta Sans', sans-serif;
+                        font-family: 'Google Sans Flex', sans-serif;
                         margin-bottom: 1.25rem;
                         line-height: 1.7;
                         color: #4b5563;
@@ -235,13 +235,13 @@ export default function ResourceArticle() {
                     <SafeHTML
                       html={content}
                       className="article-content-resources"
-                      style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}
+                      style={{ fontFamily: "'Google Sans Flex', sans-serif" }}
                     />
                   </>
                 )}
 
                 <div className="mt-12 pt-8 border-t border-gray-200">
-                  <h2 className="text-xl font-bold text-gray-900 mb-4" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
+                  <h2 className="text-xl font-bold text-gray-900 mb-4" style={{ fontFamily: "'Google Sans Flex', sans-serif" }}>
                     {t('resources.relatedArticles') || 'Articles similaires'}
                   </h2>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -251,7 +251,7 @@ export default function ResourceArticle() {
                       .map(([id, key]) => {
                         const relatedTitle = t(`resources.articles.${key}.title`);
                         return relatedTitle ? (
-                          <Link key={id} href={getLocalizedPath(`/resources/${id}`)} className="block p-4 rounded-xl border border-gray-200 bg-gray-50/50 hover:bg-gray-50 hover:border-gray-300 transition-all" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
+                          <Link key={id} href={getLocalizedPath(`/resources/${id}`)} className="block p-4 rounded-xl border border-gray-200 bg-gray-50/50 hover:bg-gray-50 hover:border-gray-300 transition-all" style={{ fontFamily: "'Google Sans Flex', sans-serif" }}>
                               <h3 className="font-semibold text-gray-900 hover:text-[#5A1E29] transition-colors mb-1">
                                 {relatedTitle}
                               </h3>

@@ -103,7 +103,7 @@ export default function FullScreenMenu({ isOpen, onClose }: FullScreenMenuProps)
                   className="block py-1.5 text-white transition-all duration-300 ease-out touch-manipulation
                     group-hover:opacity-95 group-hover:translate-x-2 group-hover:scale-[1.02]"
                   style={{
-                    fontFamily: "'Plus Jakarta Sans', sans-serif",
+                    fontFamily: "'Google Sans Flex', sans-serif",
                     fontWeight: 700,
                     fontSize: 'clamp(2rem, 8vw, 4rem)',
                     lineHeight: 1.1,
@@ -122,7 +122,7 @@ export default function FullScreenMenu({ isOpen, onClose }: FullScreenMenuProps)
 
       {/* Liens services — plus petits, en bas */}
       <div className="px-8 sm:px-12 md:px-16 lg:px-20 py-6 sm:py-8 flex-shrink-0">
-        <div className="flex flex-wrap justify-between gap-x-8 gap-y-4 text-white/80 text-base sm:text-lg" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 700 }}>
+        <div className="flex flex-wrap justify-between gap-x-8 gap-y-4 text-white/80 text-base sm:text-lg" style={{ fontFamily: "'Google Sans Flex', sans-serif", fontWeight: 700 }}>
           {SERVICE_LINKS.map(({ labelKey, path }) => (
             <Link key={labelKey} href={getLocalizedPath(path)} onClick={handleLinkClick} className="group inline-block">
               <span

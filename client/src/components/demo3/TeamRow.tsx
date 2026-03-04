@@ -82,7 +82,7 @@ export function TeamRow() {
         {/* ── COLONNE GAUCHE : nom + tagline (aligné à gauche, bloc poussé vers l'image pour espace égal) ── */}
         <div style={{ textAlign: 'left', width: 'fit-content', justifySelf: 'end' }}>
           <h3 style={{
-            fontFamily: "'Plus Jakarta Sans', sans-serif",
+            fontFamily: "'Google Sans Flex', sans-serif",
             fontWeight: 700,
             fontSize: 'clamp(1.4rem, 2.2vw, 2.2rem)',
             lineHeight: 1.05,
@@ -93,7 +93,7 @@ export function TeamRow() {
             {m.name}
           </h3>
           <p style={{
-            fontFamily: "'Plus Jakarta Sans', sans-serif",
+            fontFamily: "'Google Sans Flex', sans-serif",
             fontWeight: 400,
             fontSize: '0.72rem',
             letterSpacing: '0.2em',
@@ -118,7 +118,7 @@ export function TeamRow() {
                   borderRadius: 12,
                   padding: '0.35rem 0.75rem',
                   boxShadow: '0 4px 24px rgba(0,0,0,0.06), inset 0 1px 0 rgba(255,255,255,0.85)',
-                  fontFamily: "'Plus Jakarta Sans', sans-serif",
+                  fontFamily: "'Google Sans Flex', sans-serif",
                   fontWeight: 400,
                   fontSize: '0.6rem',
                   color: '#374151',
@@ -238,7 +238,7 @@ export function TeamRow() {
         {/* ── COLONNE DROITE : bio ── */}
         <div style={{ textAlign: 'left' }}>
           <p style={{
-            fontFamily: "'Plus Jakarta Sans', sans-serif",
+            fontFamily: "'Google Sans Flex', sans-serif",
             fontWeight: 400,
             fontSize: 'clamp(0.88rem, 1.05vw, 1rem)',
             color: '#4b5563',

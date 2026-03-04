@@ -108,7 +108,7 @@ export default function CookieConsent() {
         boxShadow: '0 8px 32px rgba(0,0,0,0.12)',
         border: '1px solid rgba(0,0,0,0.06)',
         padding: '14px 16px',
-        fontFamily: "'Plus Jakarta Sans', sans-serif",
+        fontFamily: "'Google Sans Flex', sans-serif",
       }}
     >
       <h3

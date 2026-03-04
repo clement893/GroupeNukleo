@@ -2,7 +2,7 @@
 /* Google Fonts loaded async in index.html to avoid render blocking */
 /* @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap'); */
 
-/* Plus Jakarta Sans chargé via Google Fonts (index.html) */
+/* Google Sans Flex chargé via Google Fonts (index.html) */
 
 /* Hide scrollbar while allowing scroll */
 .scrollbar-hide {
@@ -38,9 +38,9 @@ header.header-scroll-transform,
   /* Site margins - marges latérales uniformes sur tout le site */
   --site-margin: 3%;
 
-  /* Typography - Font Families - Plus Jakarta Sans partout */
-  --font-sans: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  --font-heading: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  /* Typography - Font Families - Google Sans Flex (test) */
+  --font-sans: "Google Sans Flex", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-heading: "Google Sans Flex", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   --font-mono: "JetBrains Mono", "Courier New", monospace;
 
   /* OKLCH Color System - Nukleo Design */
@@ -363,7 +363,7 @@ header.header-scroll-transform,
     box-shadow:
       0 4px 24px rgba(0, 0, 0, 0.06),
       inset 0 1px 0 rgba(255, 255, 255, 0.85);
-    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-family: 'Google Sans Flex', sans-serif;
   }
 
   /* Carte "Nous soutenons le monde culturel" */
@@ -378,7 +378,7 @@ header.header-scroll-transform,
     box-shadow:
       0 8px 32px rgba(0, 0, 0, 0.08),
       inset 0 1px 0 rgba(255, 255, 255, 0.9);
-    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-family: 'Google Sans Flex', sans-serif;
   }
 
   /* Badge violet "+456.000$" */
@@ -404,7 +404,7 @@ header.header-scroll-transform,
     box-shadow:
       0 8px 32px rgba(0, 0, 0, 0.08),
       inset 0 1px 0 rgba(255, 255, 255, 0.9);
-    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-family: 'Google Sans Flex', sans-serif;
   }
 
   /* Cartes stats "2022" et "+20" */
@@ -419,7 +419,7 @@ header.header-scroll-transform,
     box-shadow:
       0 4px 24px rgba(0, 0, 0, 0.06),
       inset 0 1px 0 rgba(255, 255, 255, 0.8);
-    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-family: 'Google Sans Flex', sans-serif;
   }
 
   /* ─── Section "On [verbe] l'IA" — glass pill + couleurs image ─── */
@@ -447,7 +447,7 @@ header.header-scroll-transform,
     background-clip: text;
     -webkit-text-fill-color: transparent;
     color: transparent;
-    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-family: 'Google Sans Flex', sans-serif;
     font-weight: 700;
     font-size: clamp(2.2rem, 4.4vw, 3rem);
     line-height: 1.1;

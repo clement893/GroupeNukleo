@@ -117,7 +117,7 @@ export default function Resources() {
           <div className="container">
             <h1
               style={{
-                fontFamily: "'Plus Jakarta Sans', sans-serif",
+                fontFamily: "'Google Sans Flex', sans-serif",
                 fontWeight: 700,
                 fontSize: 'clamp(2.5rem, 6vw, 4.5rem)',
                 lineHeight: 1.15,
@@ -137,7 +137,7 @@ export default function Resources() {
             </h1>
             <p
               style={{
-                fontFamily: "'Plus Jakarta Sans', sans-serif",
+                fontFamily: "'Google Sans Flex', sans-serif",
                 fontSize: 'clamp(1rem, 1.5vw, 1.25rem)',
                 color: '#6b7280',
                 lineHeight: 1.5,
@@ -155,12 +155,12 @@ export default function Resources() {
         <section style={{ padding: '0 0 4rem' }}>
           <div className="container">
             <div style={{ marginBottom: '2rem' }}>
-              <span style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: '0.75rem', fontWeight: 600, letterSpacing: '0.12em', textTransform: 'uppercase', color: '#6b7280' }}>
+              <span style={{ fontFamily: "'Google Sans Flex', sans-serif", fontSize: '0.75rem', fontWeight: 600, letterSpacing: '0.12em', textTransform: 'uppercase', color: '#6b7280' }}>
                 {t('resources.tools.sectionLabel')}
               </span>
               <h2
                 style={{
-                  fontFamily: "'Plus Jakarta Sans', sans-serif",
+                  fontFamily: "'Google Sans Flex', sans-serif",
                   fontWeight: 700,
                   fontSize: 'clamp(1.5rem, 3vw, 2.25rem)',
                   margin: '0.5rem 0 0.5rem 0',
@@ -174,7 +174,7 @@ export default function Resources() {
               >
                 {t('resources.tools.title')}
               </h2>
-              <p style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: '1rem', color: '#6b7280', margin: 0, maxWidth: 560 }}>
+              <p style={{ fontFamily: "'Google Sans Flex', sans-serif", fontSize: '1rem', color: '#6b7280', margin: 0, maxWidth: 560 }}>
                 {t('resources.tools.description')}
               </p>
             </div>
@@ -183,7 +183,7 @@ export default function Resources() {
                 <div
                   key={index}
                   style={{
-                    fontFamily: "'Plus Jakarta Sans', sans-serif",
+                    fontFamily: "'Google Sans Flex', sans-serif",
                     padding: '1.5rem 1.75rem',
                     borderRadius: 16,
                     border: '1px solid #e5e7eb',
@@ -194,7 +194,7 @@ export default function Resources() {
                   <span style={{ display: 'inline-block', fontSize: '0.7rem', fontWeight: 600, letterSpacing: '0.08em', textTransform: 'uppercase', color: '#6b7280', marginBottom: '0.75rem' }}>
                     {tool.badge}
                   </span>
-                  <h3 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 700, fontSize: '1.35rem', color: '#111827', margin: '0 0 0.5rem 0' }}>
+                  <h3 style={{ fontFamily: "'Google Sans Flex', sans-serif", fontWeight: 700, fontSize: '1.35rem', color: '#111827', margin: '0 0 0.5rem 0' }}>
                     {tool.title}
                   </h3>
                   <p style={{ fontSize: '0.9375rem', color: '#4b5563', lineHeight: 1.55, margin: '0 0 1rem 0' }}>
@@ -220,7 +220,7 @@ export default function Resources() {
                         fontWeight: 600,
                         fontSize: '0.9rem',
                         textDecoration: 'none',
-                        fontFamily: "'Plus Jakarta Sans', sans-serif",
+                        fontFamily: "'Google Sans Flex', sans-serif",
                       }}
                     >
                       {tool.buttonText}
@@ -237,7 +237,7 @@ export default function Resources() {
         <section style={{ padding: '0 0 1.5rem' }}>
           <div className="container">
             <div className="flex flex-wrap items-center gap-2">
-              <div className="flex items-center gap-2 text-gray-700" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
+              <div className="flex items-center gap-2 text-gray-700" style={{ fontFamily: "'Google Sans Flex', sans-serif" }}>
                 <Filter className="w-4 h-4" />
                 <span className="text-sm font-semibold uppercase tracking-wider">{t('resources.filter.label')}</span>
               </div>
@@ -248,7 +248,7 @@ export default function Resources() {
                   onClick={() => setSelectedCategory(category.key)}
                   className="px-4 py-2 rounded-full text-sm font-medium transition-all"
                   style={{
-                    fontFamily: "'Plus Jakarta Sans', sans-serif",
+                    fontFamily: "'Google Sans Flex', sans-serif",
                     background: selectedCategory === category.key ? '#5A1E29' : 'rgba(255,255,255,0.9)',
                     color: selectedCategory === category.key ? '#fff' : '#374151',
                     border: selectedCategory === category.key ? 'none' : '1px solid #e5e7eb',
@@ -271,16 +271,16 @@ export default function Resources() {
                   <Link key={resource.id} href={getLocalizedPath(`/resources/${resource.id}`)}>
                     <a
                       className="block h-full rounded-xl overflow-hidden border border-gray-200 bg-white hover:border-gray-300 hover:shadow-lg transition-all duration-300 group"
-                      style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}
+                      style={{ fontFamily: "'Google Sans Flex', sans-serif" }}
                     >
                       <div style={{ padding: '1.5rem 1.75rem' }}>
                         <span style={{ display: 'inline-block', fontSize: '0.7rem', fontWeight: 600, letterSpacing: '0.06em', textTransform: 'uppercase', color: '#6b7280', marginBottom: '0.75rem' }}>
                           {categoryLabel}
                         </span>
-                        <h3 className="text-xl font-bold text-gray-900 group-hover:text-[#5A1E29] transition-colors mb-2" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
+                        <h3 className="text-xl font-bold text-gray-900 group-hover:text-[#5A1E29] transition-colors mb-2" style={{ fontFamily: "'Google Sans Flex', sans-serif" }}>
                           {resource.title}
                         </h3>
-                        <p className="text-sm text-gray-600 leading-relaxed mb-4" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
+                        <p className="text-sm text-gray-600 leading-relaxed mb-4" style={{ fontFamily: "'Google Sans Flex', sans-serif" }}>
                           {resource.description}
                         </p>
                         <div className="flex items-center justify-between text-xs text-gray-500 pt-4 border-t border-gray-100">
@@ -305,7 +305,7 @@ export default function Resources() {
                 tag="h2"
                 className="mb-4"
                 style={{
-                  fontFamily: "'Plus Jakarta Sans', sans-serif",
+                  fontFamily: "'Google Sans Flex', sans-serif",
                   fontWeight: 700,
                   fontSize: 'clamp(1.75rem, 3vw, 2.5rem)',
                   lineHeight: 1.2,
@@ -317,18 +317,18 @@ export default function Resources() {
                   color: 'transparent',
                 }}
               />
-              <p style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: '1rem', color: '#6b7280', lineHeight: 1.5, marginBottom: '1.5rem' }}>
+              <p style={{ fontFamily: "'Google Sans Flex', sans-serif", fontSize: '1rem', color: '#6b7280', lineHeight: 1.5, marginBottom: '1.5rem' }}>
                 {t('resources.newsletter.description')}
               </p>
               {isSubmitted && (
                 <div style={{ marginBottom: '1rem', padding: '0.75rem 1rem', background: 'rgba(34,197,94,0.12)', border: '1px solid rgba(34,197,94,0.3)', borderRadius: 12 }}>
-                  <p style={{ color: '#15803d', fontWeight: 500, fontFamily: "'Plus Jakarta Sans', sans-serif" }}>{t('resources.newsletter.success')}</p>
+                  <p style={{ color: '#15803d', fontWeight: 500, fontFamily: "'Google Sans Flex', sans-serif" }}>{t('resources.newsletter.success')}</p>
                 </div>
               )}
               {errorMessage && (
                 <div style={{ marginBottom: '1rem', display: 'flex', alignItems: 'center', gap: 8, padding: '0.75rem 1rem', background: 'rgba(239,68,68,0.08)', border: '1px solid rgba(239,68,68,0.2)', borderRadius: 12 }}>
                   <AlertCircle className="w-5 h-5 text-red-500 flex-shrink-0" />
-                  <p style={{ color: '#b91c1c', fontWeight: 500, fontFamily: "'Plus Jakarta Sans', sans-serif", margin: 0 }}>{errorMessage}</p>
+                  <p style={{ color: '#b91c1c', fontWeight: 500, fontFamily: "'Google Sans Flex', sans-serif", margin: 0 }}>{errorMessage}</p>
                 </div>
               )}
               <form onSubmit={handleSubscribe} className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto" aria-label={t('resources.newsletter.title') || 'Newsletter'}>
@@ -341,13 +341,13 @@ export default function Resources() {
                   required
                   placeholder={t('resources.newsletter.placeholder')}
                   className="flex-1 px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:border-[#5A1E29] focus:ring-1 focus:ring-[#5A1E29] text-gray-900"
-                  style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}
+                  style={{ fontFamily: "'Google Sans Flex', sans-serif" }}
                 />
                 <button
                   type="submit"
                   disabled={isSubmitting || subscribe.isPending}
                   className="px-6 py-3 rounded-xl font-semibold text-white transition-all disabled:opacity-50"
-                  style={{ background: HERO_GRADIENT, fontFamily: "'Plus Jakarta Sans', sans-serif" }}
+                  style={{ background: HERO_GRADIENT, fontFamily: "'Google Sans Flex', sans-serif" }}
                 >
                   {isSubmitting || subscribe.isPending ? (t('resources.newsletter.subscribing') || '...') : t('resources.newsletter.subscribe')}
                 </button>

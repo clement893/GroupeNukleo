@@ -53,6 +53,7 @@ export default function HomeServicesSection() {
                     src={service.heroImage}
                     alt=""
                     className="absolute inset-0 w-full h-full object-cover"
+                    style={service.path === '/services/consulting' ? { objectPosition: '50% 35%' } : undefined}
                     aria-hidden
                   />
                 ) : null}
@@ -77,7 +78,7 @@ export default function HomeServicesSection() {
               >
                 <h3
                   style={{
-                    fontFamily: "'Plus Jakarta Sans', sans-serif",
+                    fontFamily: "'Google Sans Flex', sans-serif",
                     fontWeight: 700,
                     fontSize: '1.1rem',
                     color: DARK,
@@ -105,7 +106,7 @@ export default function HomeServicesSection() {
                     flexWrap: 'wrap',
                     gap: 8,
                     padding: '1rem 1.25rem 1.25rem',
-                    fontFamily: "'Plus Jakarta Sans', sans-serif",
+                    fontFamily: "'Google Sans Flex', sans-serif",
                     fontWeight: 400,
                   }}
                 >
@@ -122,7 +123,7 @@ export default function HomeServicesSection() {
                         borderRadius: 12,
                         padding: '0.35rem 0.75rem',
                         boxShadow: '0 4px 24px rgba(0,0,0,0.06), inset 0 1px 0 rgba(255,255,255,0.85)',
-                        fontFamily: "'Plus Jakarta Sans', sans-serif",
+                        fontFamily: "'Google Sans Flex', sans-serif",
                         fontWeight: 400,
                         fontSize: '0.6rem',
                         color: '#374151',

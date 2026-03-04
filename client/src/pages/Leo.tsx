@@ -509,7 +509,7 @@ export default function Leo() {
         keywords={t('leo.seoKeywords') || "AI chatbot, AI assistant, AI consultation, AI strategy, AI transformation help, AI implementation guide, free AI consultation, AI advisor"}
         ogImage="https://nukleodigital-production.up.railway.app/og-image.jpg"
       />
-      <div className="min-h-screen flex flex-col" style={{ background: 'transparent', fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
+      <div className="min-h-screen flex flex-col" style={{ background: 'transparent', fontFamily: "'Google Sans Flex', sans-serif" }}>
       {/* Toolbar */}
       <div className="fixed top-20 sm:top-24 left-0 right-0 z-40 bg-white/95 backdrop-blur-md border-b border-gray-200 site-margin-x py-2">
         <div className="container">
@@ -517,7 +517,7 @@ export default function Leo() {
             <button
               onClick={() => setIsExpertMode(!isExpertMode)}
               className="flex items-center gap-2 px-3 py-1.5 rounded-full border border-gray-200 text-gray-700 hover:bg-gray-50 transition-all text-sm font-medium"
-              style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}
+              style={{ fontFamily: "'Google Sans Flex', sans-serif" }}
               title={isExpertMode ? t('leo.switchToStandard') : t('leo.switchToExpert')}
             >
               {isExpertMode ? `🔬 ${t('leo.expertMode')}` : `💡 ${t('leo.standardMode')}`}
@@ -526,7 +526,7 @@ export default function Leo() {
               onClick={handleNewChat}
               variant="outline"
               className="border-gray-300 text-gray-700 hover:bg-gray-50 hover:text-gray-900"
-              style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}
+              style={{ fontFamily: "'Google Sans Flex', sans-serif" }}
             >
               {t('leo.newChat')}
             </Button>
@@ -538,7 +538,7 @@ export default function Leo() {
       <div className="container pt-32 sm:pt-36 pb-2">
         <h1
           style={{
-            fontFamily: "'Plus Jakarta Sans', sans-serif",
+            fontFamily: "'Google Sans Flex', sans-serif",
             fontWeight: 700,
             fontSize: 'clamp(2rem, 5vw, 3.5rem)',
             lineHeight: 1.15,
@@ -594,7 +594,7 @@ export default function Leo() {
                           onChange={(e) => setNameInput(e.target.value)}
                           onKeyDown={handleKeyDown}
                           className="w-full px-4 py-2 border border-gray-200 rounded-lg text-sm text-gray-900 placeholder-gray-400 focus:outline-none focus:border-[#5A1E29] focus:ring-1 focus:ring-[#5A1E29]"
-                          style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}
+                          style={{ fontFamily: "'Google Sans Flex', sans-serif" }}
                         />
                         <input
                           type="email"
@@ -603,7 +603,7 @@ export default function Leo() {
                           onChange={(e) => setEmailInput(e.target.value)}
                           onKeyDown={handleKeyDown}
                           className="w-full px-4 py-2 border border-gray-200 rounded-lg text-sm text-gray-900 placeholder-gray-400 focus:outline-none focus:border-[#5A1E29] focus:ring-1 focus:ring-[#5A1E29]"
-                          style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}
+                          style={{ fontFamily: "'Google Sans Flex', sans-serif" }}
                         />
                         <div className="flex gap-2">
                           <Button
@@ -612,7 +612,7 @@ export default function Leo() {
                             variant="outline"
                             size="sm"
                             className="flex-1 border-gray-300 text-gray-700 hover:bg-gray-50 text-xs font-medium"
-                            style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}
+                            style={{ fontFamily: "'Google Sans Flex', sans-serif" }}
                           >
                             {t('leo.skip')}
                           </Button>
@@ -622,7 +622,7 @@ export default function Leo() {
                             disabled={!emailInput.trim() || saveContactMutation.isPending}
                             size="sm"
                             className="flex-1 text-white hover:opacity-90 disabled:opacity-50 text-xs font-medium"
-                            style={{ background: HERO_GRADIENT, fontFamily: "'Plus Jakarta Sans', sans-serif" }}
+                            style={{ background: HERO_GRADIENT, fontFamily: "'Google Sans Flex', sans-serif" }}
                           >
                             {saveContactMutation.isPending ? t('leo.saving') : t('leo.send')}
                           </Button>
@@ -665,9 +665,9 @@ export default function Leo() {
                       }`}
                       style={message.role === 'user' ? { background: HERO_GRADIENT } : undefined}
                     >
-                      <p className="text-base leading-relaxed whitespace-pre-wrap" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>{message.content}</p>
+                      <p className="text-base leading-relaxed whitespace-pre-wrap" style={{ fontFamily: "'Google Sans Flex', sans-serif" }}>{message.content}</p>
                     </div>
-                    <span className="text-xs text-gray-400 mt-2" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
+                    <span className="text-xs text-gray-400 mt-2" style={{ fontFamily: "'Google Sans Flex', sans-serif" }}>
                       {message.timestamp.toLocaleTimeString('fr-FR', {
                         hour: '2-digit',
                         minute: '2-digit',
@@ -731,7 +731,7 @@ export default function Leo() {
               <div className="flex flex-col items-start max-w-[70%]">
                 <span className="text-xs text-gray-500 uppercase tracking-wider mb-2 font-medium">LEO</span>
                 <div className="px-6 py-4 rounded-2xl bg-white border border-gray-200 shadow-sm text-gray-900">
-                  <p className="text-base leading-relaxed whitespace-pre-wrap" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
+                  <p className="text-base leading-relaxed whitespace-pre-wrap" style={{ fontFamily: "'Google Sans Flex', sans-serif" }}>
                     {typingText}
                     <span className="inline-block w-0.5 h-4 bg-gray-500 ml-0.5 animate-pulse" />
                   </p>
@@ -743,14 +743,14 @@ export default function Leo() {
           {/* Suggestions */}
           {showSuggestions && messages.length <= 3 && (
             <div className="mt-8 space-y-4">
-              <p className="text-sm text-gray-500 text-center font-medium" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>{t('leo.suggestionsPrompt')}</p>
+              <p className="text-sm text-gray-500 text-center font-medium" style={{ fontFamily: "'Google Sans Flex', sans-serif" }}>{t('leo.suggestionsPrompt')}</p>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                 {safeSuggestions.map((suggestion, index) => (
                   <button
                     key={index}
                     onClick={() => handleSuggestionClick(suggestion)}
                     className="px-6 py-4 rounded-xl bg-white border border-gray-200 hover:border-gray-300 hover:shadow-md transition-all text-left text-gray-700 hover:text-gray-900 text-sm font-medium group"
-                    style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}
+                    style={{ fontFamily: "'Google Sans Flex', sans-serif" }}
                   >
                     <span className="block group-hover:translate-x-1 transition-transform">
                       {suggestion}
@@ -771,7 +771,7 @@ export default function Leo() {
             <div className="max-w-3xl mx-auto">
               <div className="flex gap-3 items-center bg-white border border-gray-200 rounded-full px-5 py-2.5 shadow-sm">
                 {showEmailForm ? (
-                  <p className="flex-1 text-sm text-gray-500 py-2 px-1" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
+                  <p className="flex-1 text-sm text-gray-500 py-2 px-1" style={{ fontFamily: "'Google Sans Flex', sans-serif" }}>
                     {t('leo.emailFormHint') || 'Complétez le formulaire ci-dessus pour continuer.'}
                   </p>
                 ) : (
@@ -783,7 +783,7 @@ export default function Leo() {
                       placeholder={t('leo.inputPlaceholder')}
                       disabled={isLoading}
                       className="flex-1 bg-transparent border-0 text-gray-900 placeholder:text-gray-400 focus-visible:ring-0 focus-visible:ring-offset-0 text-base min-w-0"
-                      style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}
+                      style={{ fontFamily: "'Google Sans Flex', sans-serif" }}
                     />
                     <button
                       type="button"
@@ -798,7 +798,7 @@ export default function Leo() {
                   </>
                 )}
               </div>
-              <div className="flex items-center justify-between mt-3 text-xs text-gray-500" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
+              <div className="flex items-center justify-between mt-3 text-xs text-gray-500" style={{ fontFamily: "'Google Sans Flex', sans-serif" }}>
                 <Link href={safeGetLocalizedPath('/privacy')} className="hover:text-gray-700 transition-colors uppercase tracking-wider font-medium">
                   {t('leo.privacyPolicy')}
                 </Link>

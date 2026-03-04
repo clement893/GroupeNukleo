@@ -76,7 +76,7 @@ export function SplitCTAButton({
     boxSizing: 'border-box' as const,
     background: bg,
     color,
-    fontFamily: "'Plus Jakarta Sans', sans-serif",
+    fontFamily: "'Google Sans Flex', sans-serif",
     fontWeight: 500,
     fontSize: sz.fontSize,
     border: 'none',

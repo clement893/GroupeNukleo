@@ -179,7 +179,7 @@ function HeroSection() {
                       <span 
                         key={`${setIndex}-${index}`}
                         className="text-white/40 active:text-white/60 sm:hover:text-white/80 text-sm sm:text-base md:text-lg lg:text-xl font-bold transition-colors duration-300 cursor-default touch-manipulation"
-                        style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}
+                        style={{ fontFamily: "'Google Sans Flex', sans-serif" }}
                       >
                         {service}
                       </span>
