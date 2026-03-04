@@ -528,7 +528,7 @@ export default function HomepageDemo5() {
         ════════════════════════════════════════════════════════════════════ */}
         <div style={{ padding: '0 3%', marginBottom: 5 * 16 }}>
           {/* Hero grid : photo (gauche) = référence, blocs droite alignés sur sa hauteur */}
-          <div style={{ display: 'grid', gridTemplateColumns: '3fr 2fr', gap: 'clamp(1rem, 1.5vw, 1.5rem)', marginTop: 1.5 * 16, alignItems: 'stretch', height: '52vh', minHeight: 640 }}>
+          <div style={{ display: 'grid', gridTemplateColumns: '3fr 2fr', gap: 'clamp(1rem, 1.5vw, 1.5rem)', marginTop: 1.5 * 16, alignItems: 'stretch', height: '62.4vh', minHeight: 768 }}>
 
             {/* Colonne Our Latest Work — News Carrousel (gauche) */}
             <div style={{ height: '100%', minHeight: 0 }}>
