@@ -60,7 +60,7 @@ export default function TestimonialsCarousel() {
   return (
     <section className="py-32 relative overflow-hidden">
       {/* Background */}
-      <div className="absolute inset-0 bg-gradient-to-br from-purple-900/30 via-purple-800/20 to-blue-900/30" />
+      <div className="absolute inset-0 bg-gradient-to-br from-[#523DCB]/30 via-[#523DCB]/20 to-[#523DCB]/30" />
       
       <div className="container relative z-10">
         {/* Header */}
@@ -103,7 +103,7 @@ export default function TestimonialsCarousel() {
 
               {/* Author */}
               <div className="flex items-center gap-4">
-                <div className="w-16 h-16 rounded-full bg-gradient-to-br from-purple-500 to-blue-600 flex items-center justify-center flex-shrink-0">
+                <div className="w-16 h-16 rounded-full bg-gradient-to-br from-[#523DCB] to-[#523DCB] flex items-center justify-center flex-shrink-0">
                   <span className="text-white font-bold text-xl">
                     {currentTestimonial.contact 
                       ? currentTestimonial.contact.split(' ').map(n => n[0]).join('').slice(0, 2)

@@ -355,7 +355,7 @@ export default function AdminProjectsImages() {
                 </div>
                 <div>
                   <p className="text-sm font-medium text-[var(--admin-foreground)] mb-2 flex items-center gap-2">
-                    <LayoutGrid className="w-4 h-4 text-violet-600" />
+                    <LayoutGrid className="w-4 h-4 text-[#523DCB]" />
                     Triptyque page Projets (3 projets)
                   </p>
                   <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
@@ -712,7 +712,7 @@ export default function AdminProjectsImages() {
                               </span>
                             )}
                             {project.featuredOnProjectsTriptych && (
-                              <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-medium bg-violet-500/20 text-violet-700 dark:text-violet-300 border border-violet-500/40">
+                              <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-medium bg-[#523DCB]/20 text-[#523DCB] dark:text-[#523DCB] border border-[#523DCB]/40">
                                 <LayoutGrid className="w-3 h-3" /> Triptyque Projets
                               </span>
                             )}
@@ -730,7 +730,7 @@ export default function AdminProjectsImages() {
                               href={project.websiteUrl}
                               target="_blank"
                               rel="noopener noreferrer"
-                              className="inline-flex items-center gap-1 text-sm text-purple-600 hover:underline mt-1"
+                              className="inline-flex items-center gap-1 text-sm text-[#523DCB] hover:underline mt-1"
                             >
                               <ExternalLink className="w-3 h-3" />
                               {project.websiteUrl}

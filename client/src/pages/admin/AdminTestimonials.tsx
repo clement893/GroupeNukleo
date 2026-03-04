@@ -96,7 +96,7 @@ export default function AdminTestimonials() {
                 <Button
                   onClick={handleSync}
                   disabled={isSyncing || !isAdmin}
-                  className="bg-violet-600 hover:bg-violet-700 text-white"
+                  className="bg-[#523DCB] hover:bg-[#4630b0] text-white"
                 >
                   {isSyncing ? (
                     <>

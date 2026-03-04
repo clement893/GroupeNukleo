@@ -146,7 +146,7 @@ export default function AgencyQualificationBot() {
           setIsOpen(true);
           setHasInteracted(true);
         }}
-        className="fixed bottom-6 right-6 w-16 h-16 rounded-full bg-gradient-to-r from-cyan-500 to-purple-600 hover:from-cyan-600 hover:to-purple-700 text-white shadow-lg flex items-center justify-center z-50 transition-transform hover:scale-110"
+        className="fixed bottom-6 right-6 w-16 h-16 rounded-full bg-gradient-to-r from-cyan-500 to-[#523DCB] hover:from-cyan-600 hover:to-[#4630b0] text-white shadow-lg flex items-center justify-center z-50 transition-transform hover:scale-110"
         aria-label="Open chat"
       >
         <MessageCircle className="w-6 h-6" />
@@ -157,7 +157,7 @@ export default function AgencyQualificationBot() {
   return (
     <div className="fixed bottom-6 right-6 w-96 bg-[oklch(0.15_0.05_320)] border border-white/20 rounded-lg shadow-2xl z-50 overflow-hidden">
       {/* Header */}
-      <div className="bg-gradient-to-r from-cyan-500 to-purple-600 p-4 flex items-center justify-between">
+      <div className="bg-gradient-to-r from-cyan-500 to-[#523DCB] p-4 flex items-center justify-between">
         <div className="flex items-center gap-3">
           <div className="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center">
             <MessageCircle className="w-5 h-5 text-white" />
@@ -183,7 +183,7 @@ export default function AgencyQualificationBot() {
             <div className="flex items-center gap-2 mb-4">
               <div className="flex-1 h-2 bg-white/10 rounded-full overflow-hidden">
                 <div
-                  className="h-full bg-gradient-to-r from-cyan-500 to-purple-600 transition-all duration-300"
+                  className="h-full bg-gradient-to-r from-cyan-500 to-[#523DCB] transition-all duration-300"
                   style={{ width: `${((currentQuestionIndex + 1) / questions.length) * 100}%` }}
                 />
               </div>
@@ -264,7 +264,7 @@ export default function AgencyQualificationBot() {
                 (currentQuestion.type === 'multiselect' && selectedOptions.length === 0) ||
                 saveLead.isPending
               }
-              className="w-full bg-gradient-to-r from-cyan-500 to-purple-600 hover:from-cyan-600 hover:to-purple-700 text-white"
+              className="w-full bg-gradient-to-r from-cyan-500 to-[#523DCB] hover:from-cyan-600 hover:to-[#4630b0] text-white"
             >
               {currentQuestionIndex === questions.length - 1 ? 'Submit' : 'Next'}
               <Send className="ml-2 w-4 h-4" />
@@ -281,7 +281,7 @@ export default function AgencyQualificationBot() {
             </p>
             <Button
               onClick={handleClose}
-              className="bg-gradient-to-r from-cyan-500 to-purple-600 hover:from-cyan-600 hover:to-purple-700 text-white"
+              className="bg-gradient-to-r from-cyan-500 to-[#523DCB] hover:from-cyan-600 hover:to-[#4630b0] text-white"
             >
               Close
             </Button>

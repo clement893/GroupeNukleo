@@ -319,7 +319,7 @@ function getMaturityColorHex(level: string): [number, number, number] {
     case 'Adopter': return [234, 179, 8]; // yellow
     case 'Integrator': return [132, 204, 22]; // lime
     case 'AI Leader': return [34, 197, 94]; // green
-    default: return [139, 92, 246]; // purple
+    default: return [82, 61, 203]; // #523DCB
   }
 }
 

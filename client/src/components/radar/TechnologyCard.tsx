@@ -73,7 +73,7 @@ export function TechnologyCard(tech: TechnologyCardProps) {
       {/* Footer */}
       <div className="flex justify-between items-center pt-4">
         <span className="text-sm text-white/60">{tech.implementationTime}</span>
-        <button className="text-purple-400 font-semibold text-sm hover:text-white transition-all duration-300 hover:translate-x-1">
+        <button className="text-[#523DCB] font-semibold text-sm hover:text-white transition-all duration-300 hover:translate-x-1">
           Learn More →
         </button>
       </div>

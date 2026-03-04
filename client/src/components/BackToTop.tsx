@@ -37,7 +37,7 @@ export default function BackToTop() {
   return (
     <button
       onClick={scrollToTop}
-      className="fixed bottom-8 right-8 z-50 p-3 sm:p-4 bg-violet-600 hover:bg-violet-700 text-white rounded-full shadow-lg hover:shadow-xl transition-all duration-300 touch-manipulation group"
+      className="fixed bottom-8 right-8 z-50 p-3 sm:p-4 bg-[#523DCB] hover:bg-[#4630b0] text-white rounded-full shadow-lg hover:shadow-xl transition-all duration-300 touch-manipulation group"
       aria-label={t('footer.backToTop') || 'Retour en haut'}
       title={t('footer.backToTop') || 'Retour en haut'}
     >

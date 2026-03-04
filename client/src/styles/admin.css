@@ -7,7 +7,7 @@
   --admin-foreground: #1a1a1a;
   --admin-muted: #6b7280;
   --admin-hover: rgba(107, 24, 23, 0.06);
-  --admin-accent: linear-gradient(to right, #6B1817, #5636AD);
+  --admin-accent: linear-gradient(to right, #6B1817, #523DCB);
   --admin-accent-foreground: #fff;
 }
 

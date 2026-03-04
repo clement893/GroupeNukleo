@@ -34,7 +34,7 @@ Référence : maquette « Studio créatif » (fond clair, titre + tagline, hero 
 - **Tagline** : gris `#6b7280`
 - **Labels / sous-titres** : bordeaux ou gris foncé
 - **Cartes** : fond blanc, coins arrondis, ombre légère
-- **CTA** : fond lavande `#F5F3F8`, bouton violet `#6B4BEA`
+- **CTA** : fond lavande `#F5F3F8`, bouton violet `#523DCB`
 - **Séparateur Fort.** : texte `#5A1E29`, très gros
 
 ---

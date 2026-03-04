@@ -147,7 +147,7 @@ export default function AdminContactMessages() {
                   <div className="flex items-start justify-between">
                     <div className="flex-1">
                       <CardTitle className="flex items-center gap-2 mb-2 text-white">
-                        <User className="w-5 h-5 text-purple-400" />
+                        <User className="w-5 h-5 text-[#523DCB]" />
                         {message.firstName} {message.lastName}
                       </CardTitle>
                       <CardDescription className="flex items-center gap-4 flex-wrap text-gray-400">

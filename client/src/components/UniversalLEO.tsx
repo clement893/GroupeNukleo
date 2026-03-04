@@ -449,7 +449,7 @@ export default function UniversalLEO({ pageContext = 'default' }: UniversalLEOPr
         >
           <div className="relative">
             {/* Main button with LEO avatar - subtle, no pulse */}
-            <div className="relative w-12 h-12 rounded-full bg-gradient-to-r from-cyan-500/90 to-purple-500/90 flex items-center justify-center shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 border border-white/20">
+            <div className="relative w-12 h-12 rounded-full bg-gradient-to-r from-cyan-500/90 to-[#523DCB]/90 flex items-center justify-center shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 border border-white/20">
               <img 
                 src={getAvatarSrc(currentEmotion)} 
                 alt="LEO - AI Assistant" 
@@ -542,7 +542,7 @@ export default function UniversalLEO({ pageContext = 'default' }: UniversalLEOPr
                             onClick={handleEmailSubmit}
                             disabled={!emailInput.trim()}
                             size="sm"
-                            className="flex-1 bg-white text-purple-900 hover:bg-white/90 disabled:opacity-50 text-xs"
+                            className="flex-1 bg-white text-[#523DCB] hover:bg-white/90 disabled:opacity-50 text-xs"
                           >
                             Send
                           </Button>
@@ -568,7 +568,7 @@ export default function UniversalLEO({ pageContext = 'default' }: UniversalLEOPr
                     <div
                       className={`max-w-[75%] rounded-2xl px-4 py-3 ${
                         message.role === 'user'
-                          ? 'bg-white text-purple-900'
+                          ? 'bg-white text-[#523DCB]'
                           : 'bg-white/10 backdrop-blur-md text-white border border-white/10'
                       }`}
                     >
@@ -622,7 +622,7 @@ export default function UniversalLEO({ pageContext = 'default' }: UniversalLEOPr
               <Button
                 onClick={handleSendMessage}
                 disabled={!inputValue.trim() || chatMutation.isPending || showEmailForm}
-                className="bg-white text-purple-900 hover:bg-white/90 disabled:opacity-50"
+                className="bg-white text-[#523DCB] hover:bg-white/90 disabled:opacity-50"
               >
                 <Send className="w-4 h-4" />
               </Button>

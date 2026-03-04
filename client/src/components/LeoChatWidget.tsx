@@ -157,7 +157,7 @@ export default function LeoChatWidget() {
                 console.warn('Failed to save badge state:', e);
               }
             }}
-            className="w-16 h-16 rounded-full bg-gradient-to-br from-purple-600 via-pink-500 to-cyan-400 shadow-lg hover:shadow-xl hover:scale-110 transition-all duration-300 flex items-center justify-center group"
+            className="w-16 h-16 rounded-full bg-gradient-to-br from-[#523DCB] via-pink-500 to-cyan-400 shadow-lg hover:shadow-xl hover:scale-110 transition-all duration-300 flex items-center justify-center group"
             aria-label="Chat with LEO"
           >
             <img
@@ -221,7 +221,7 @@ export default function LeoChatWidget() {
       {isOpen && (
         <div className="fixed bottom-6 right-6 z-50 w-[400px] h-[600px] bg-white/10 backdrop-blur-xl rounded-2xl shadow-2xl border border-white/20 flex flex-col overflow-hidden animate-in slide-in-from-bottom-4 duration-300">
           {/* Header */}
-          <div className="bg-gradient-to-r from-purple-600/20 via-pink-500/20 to-cyan-400/20 p-4 flex items-center justify-between border-b border-white/10">
+          <div className="bg-gradient-to-r from-[#523DCB]/20 via-pink-500/20 to-cyan-400/20 p-4 flex items-center justify-between border-b border-white/10">
             <div className="flex items-center gap-3">
               <img
                 src={getAvatarSrc()}
@@ -257,7 +257,7 @@ export default function LeoChatWidget() {
           <div className="flex-1 overflow-y-auto p-4 space-y-4">
             {messages.length === 0 && (
               <div className="text-center text-white/60 mt-8">
-                <Sparkles className="w-12 h-12 mx-auto mb-4 text-purple-400" />
+                <Sparkles className="w-12 h-12 mx-auto mb-4 text-[#523DCB]" />
                 <p className="text-sm">Hi! I'm LEO, your AI assistant.</p>
                 <p className="text-xs mt-2">How can I help you today?</p>
               </div>
@@ -281,7 +281,7 @@ export default function LeoChatWidget() {
                 <div
                   className={`max-w-[80%] rounded-2xl px-4 py-2 ${
                     msg.role === 'user'
-                      ? 'bg-gradient-to-r from-purple-600 to-pink-500 text-white'
+                      ? 'bg-gradient-to-r from-[#523DCB] to-pink-500 text-white'
                       : 'bg-white/10 text-white/90'
                   }`}
                 >
@@ -304,7 +304,7 @@ export default function LeoChatWidget() {
                 <div className="max-w-[80%] rounded-2xl px-4 py-2 bg-white/10 text-white/90">
                   <p className="text-sm whitespace-pre-wrap">
                     {typingText}
-                    <span className="inline-block w-0.5 h-4 bg-purple-400 ml-1 animate-blink"></span>
+                    <span className="inline-block w-0.5 h-4 bg-[#523DCB] ml-1 animate-blink"></span>
                   </p>
                 </div>
               </div>
@@ -321,7 +321,7 @@ export default function LeoChatWidget() {
                   className="w-8 h-8 rounded-full flex-shrink-0 animate-leo-thinking"
                 />
                 <div className="flex items-center gap-1 bg-white/10 rounded-2xl px-4 py-3">
-                  <div className="w-2 h-2 bg-purple-400 rounded-full animate-bounce" style={{ animationDelay: '0ms' }}></div>
+                  <div className="w-2 h-2 bg-[#523DCB] rounded-full animate-bounce" style={{ animationDelay: '0ms' }}></div>
                   <div className="w-2 h-2 bg-pink-400 rounded-full animate-bounce" style={{ animationDelay: '150ms' }}></div>
                   <div className="w-2 h-2 bg-cyan-400 rounded-full animate-bounce" style={{ animationDelay: '300ms' }}></div>
                 </div>
@@ -340,13 +340,13 @@ export default function LeoChatWidget() {
                 onChange={(e) => setInput(e.target.value)}
                 onKeyPress={(e) => e.key === 'Enter' && handleSend()}
                 placeholder="Ask me anything..."
-                className="flex-1 bg-white/10 text-white placeholder-white/40 rounded-xl px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-purple-500"
+                className="flex-1 bg-white/10 text-white placeholder-white/40 rounded-xl px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#523DCB]"
                 disabled={chatMutation.isPending}
               />
               <button
                 onClick={handleSend}
                 disabled={!input.trim() || chatMutation.isPending}
-                className="bg-gradient-to-r from-purple-600 to-pink-500 text-white rounded-xl px-4 py-2 hover:shadow-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                className="bg-gradient-to-r from-[#523DCB] to-pink-500 text-white rounded-xl px-4 py-2 hover:shadow-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed"
                 aria-label="Send message"
               >
                 <Send className="w-4 h-4" />

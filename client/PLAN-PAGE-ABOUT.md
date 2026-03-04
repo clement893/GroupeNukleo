@@ -133,7 +133,7 @@ Référence : maquette fournie (design light, fonds clairs, hero coral avec 3 t�
 - **Fond page** : off-white `#FAFAF9`, `#F5F3EF`.  
 - **Bloc hero** : coral / rose clair `#F5D5CC`, `#F0C9C4`.  
 - **Cartes** : fond blanc / off-white, ombre légère.  
-- **Bouton CTA** : violet `#6B4BEA` (aligné header).  
+- **Bouton CTA** : violet `#523DCB` (aligné header).  
 - **Footer** : fond gris foncé, texte blanc ; accent « Fort. » bordeaux/rouge.
 
 ---

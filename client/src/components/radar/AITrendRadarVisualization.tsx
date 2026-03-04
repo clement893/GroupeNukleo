@@ -66,7 +66,7 @@ export function AITrendRadarVisualization({ data, onTechnologyClick }: AITrendRa
 
   const getQuadrantColor = (quadrant: string): string => {
     switch (quadrant) {
-      case 'Explorateurs': return 'bg-purple-500/20 border-purple-500/50';
+      case 'Explorateurs': return 'bg-[#523DCB]/20 border-[#523DCB]/50';
       case 'Pionniers': return 'bg-cyan-500/20 border-cyan-500/50';
       case 'Consolidateurs': return 'bg-yellow-500/20 border-yellow-500/50';
       case 'Leaders': return 'bg-green-500/20 border-green-500/50';
@@ -174,7 +174,7 @@ export function AITrendRadarVisualization({ data, onTechnologyClick }: AITrendRa
                     cx={x}
                     cy={y}
                     r={isSelected ? 35 : 30}
-                    fill={isSelected ? '#8b5cf6' : '#a78bfa'}
+                    fill={isSelected ? '#523DCB' : '#523DCB'}
                     opacity="0.3"
                     className="pointer-events-none"
                   />
@@ -185,7 +185,7 @@ export function AITrendRadarVisualization({ data, onTechnologyClick }: AITrendRa
                   cx={x}
                   cy={y}
                   r={isSelected ? 22 : isHovered ? 18 : 16}
-                  fill={isSelected ? '#8b5cf6' : isHovered ? '#a78bfa' : '#c4b5fd'}
+                  fill={isSelected ? '#523DCB' : isHovered ? '#523DCB' : '#523DCB'}
                   stroke="white"
                   strokeWidth={isSelected ? 4 : isHovered ? 3 : 2.5}
                   opacity={isSelected ? 1 : isHovered ? 0.95 : 0.85}
@@ -282,7 +282,7 @@ export function AITrendRadarVisualization({ data, onTechnologyClick }: AITrendRa
               <p className="text-white/70 text-sm mb-2">{selectedTech.position.maturityLevel}</p>
               <div className="w-full bg-white/10 rounded-full h-2">
                 <div
-                  className="bg-purple-500 h-2 rounded-full"
+                  className="bg-[#523DCB] h-2 rounded-full"
                   style={{ width: `${selectedTech.position.maturityScore}%` }}
                 />
               </div>

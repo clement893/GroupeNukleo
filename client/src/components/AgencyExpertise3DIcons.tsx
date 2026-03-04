@@ -18,7 +18,7 @@ export function Icon3DStrategy() {
         </linearGradient>
         <linearGradient id={`${prefix}-target`} x1="0%" y1="0%" x2="100%" y2="100%">
           <stop offset="0%" stopColor="#6C5CE7" />
-          <stop offset="100%" stopColor="#5D43CD" />
+          <stop offset="100%" stopColor="#523DCB" />
         </linearGradient>
       </defs>
       <path d="M12 36 L12 28 L18 24 L24 30 L30 20 L36 26 L36 36 Z" fill={`url(#${prefix}-chart)`} stroke="rgba(255,255,255,0.4)" strokeWidth="1.5" />
@@ -123,7 +123,7 @@ export function Icon3DAnalytics() {
         </linearGradient>
         <linearGradient id={`${prefix}-bar2`} x1="0%" y1="100%" x2="0%" y2="0%">
           <stop offset="0%" stopColor="#6C5CE7" />
-          <stop offset="100%" stopColor="#5D43CD" />
+          <stop offset="100%" stopColor="#523DCB" />
         </linearGradient>
         <linearGradient id={`${prefix}-bar3`} x1="0%" y1="100%" x2="0%" y2="0%">
           <stop offset="0%" stopColor="#FDCB6E" />

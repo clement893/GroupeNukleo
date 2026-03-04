@@ -103,7 +103,7 @@ export default function AdminLEOAnalytics() {
           <Card className="bg-white border-[var(--admin-border)] shadow-sm">
             <CardContent className="pt-6">
               <div className="flex items-center justify-between mb-2">
-                <Mail className="w-8 h-8 text-violet-500" />
+                <Mail className="w-8 h-8 text-[#523DCB]" />
                 <span className="text-xs text-[var(--admin-muted)]">{overview?.completionRate?.toFixed(1) ?? 0} %</span>
               </div>
               <p className="text-2xl font-bold text-[var(--admin-foreground)]">{overview?.completedSessions ?? 0}</p>
@@ -152,7 +152,7 @@ export default function AdminLEOAnalytics() {
                 <p className="text-2xl font-bold text-[var(--admin-foreground)]">{funnel?.engaged ?? 0}</p>
                 <p className="text-xs text-[var(--admin-muted)]">Engagées (3+ msgs)</p>
               </div>
-              <div className="rounded-lg bg-violet-500/10 border border-violet-500/20 p-4 text-center">
+              <div className="rounded-lg bg-[#523DCB]/10 border border-[#523DCB]/20 p-4 text-center">
                 <p className="text-2xl font-bold text-[var(--admin-foreground)]">{funnel?.qualified ?? 0}</p>
                 <p className="text-xs text-[var(--admin-muted)]">Qualifiées (5+ msgs)</p>
               </div>

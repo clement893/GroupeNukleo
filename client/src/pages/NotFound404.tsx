@@ -31,7 +31,7 @@ export default function NotFound404() {
           {/* 404 Number */}
           <div className="mb-8">
             <h1 className="text-[12rem] md:text-[20rem] font-bold leading-none tracking-tighter">
-              <span className="bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-cyan-400 via-blue-500 to-[#523DCB] bg-clip-text text-transparent">
                 404
               </span>
             </h1>
@@ -50,7 +50,7 @@ export default function NotFound404() {
           {/* Back Button */}
           <div className="mb-16">
             <Link href={getLocalizedPath('/')}>
-              <button className="inline-flex items-center gap-3 px-8 py-4 bg-white text-purple-900 rounded-full font-bold hover:bg-white/90 transition-all duration-300 hover:scale-[1.045]">
+              <button className="inline-flex items-center gap-3 px-8 py-4 bg-white text-[#523DCB] rounded-full font-bold hover:bg-white/90 transition-all duration-300 hover:scale-[1.045]">
                 <ArrowLeft className="w-5 h-5" />
                 {t('notFound.backToHome')}
               </button>

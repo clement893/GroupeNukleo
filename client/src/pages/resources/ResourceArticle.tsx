@@ -8,7 +8,7 @@ import { useLocalizedPath } from '@/hooks/useLocalizedPath';
 import { ArrowLeft } from 'lucide-react';
 import { Link } from 'wouter';
 
-const HERO_GRADIENT = 'linear-gradient(to right, #6B1817, #5636AD)';
+const HERO_GRADIENT = 'linear-gradient(to right, #6B1817, #523DCB)';
 
 export default function ResourceArticle() {
   const [matchEn, paramsEn] = useRoute('/resources/:id');
@@ -175,7 +175,7 @@ export default function ResourceArticle() {
                         margin-bottom: 1rem;
                         padding-left: 1rem;
                         border-left: 4px solid transparent;
-                        border-image: linear-gradient(to right, #6B1817, #5636AD) 1;
+                        border-image: linear-gradient(to right, #6B1817, #523DCB) 1;
                       }
                       .article-content-resources h3 {
                         font-family: 'Plus Jakarta Sans', sans-serif;

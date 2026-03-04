@@ -194,7 +194,7 @@ export class EnhancedErrorBoundary extends Component<Props, State> {
             </p>
 
             {isRecovering && (
-              <div className="flex items-center gap-2 text-purple-300 mb-4">
+              <div className="flex items-center gap-2 text-[#523DCB]/80 mb-4">
                 <RefreshCw className="w-4 h-4 animate-spin" />
                 <span className="text-sm">Tentative de récupération...</span>
               </div>
@@ -234,7 +234,7 @@ export class EnhancedErrorBoundary extends Component<Props, State> {
                 onClick={this.handleReload}
                 className={cn(
                   "flex items-center gap-2 px-6 py-3 rounded-full",
-                  "bg-white text-purple-900",
+                  "bg-white text-[#523DCB]",
                   "hover:bg-white/90 transition-colors cursor-pointer font-semibold"
                 )}
               >

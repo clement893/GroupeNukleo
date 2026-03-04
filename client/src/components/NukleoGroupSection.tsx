@@ -21,8 +21,8 @@ export default function NukleoGroupSection() {
           <div className="p-10 lg:p-14 rounded-2xl bg-white/3 border border-white/8 flex flex-col justify-between min-h-[320px]">
             <div>
               <div className="flex items-center gap-3 mb-6">
-                <div className="w-2 h-2 rounded-full bg-purple-400" />
-                <span className="text-purple-400 text-sm font-medium tracking-widest uppercase">Digital Performance</span>
+                <div className="w-2 h-2 rounded-full bg-[#523DCB]" />
+                <span className="text-[#523DCB] text-sm font-medium tracking-widest uppercase">Digital Performance</span>
               </div>
               <h3 className="text-3xl lg:text-4xl font-bold text-white mb-4">Nukleo</h3>
               <p className="text-white/50 text-lg leading-relaxed">

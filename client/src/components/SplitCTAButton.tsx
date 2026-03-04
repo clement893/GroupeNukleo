@@ -1,7 +1,7 @@
 import { ArrowRight } from 'lucide-react';
 import { useLocalizedPath } from '@/hooks/useLocalizedPath';
 
-const BTN_PURPLE = '#5C32B7';
+const BTN_PURPLE = '#523DCB';
 
 export type SplitCTAButtonVariant = 'purple' | 'white';
 export type SplitCTAButtonSize = 'default' | 'small' | 'header';

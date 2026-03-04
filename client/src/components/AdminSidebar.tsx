@@ -79,7 +79,7 @@ export function AdminSidebar() {
                           ? "text-white"
                           : "text-[var(--admin-foreground)] hover:bg-[var(--admin-hover)]"
                       )}
-                      style={isActive ? { background: 'linear-gradient(to right, #6B1817, #5636AD)' } : undefined}
+                      style={isActive ? { background: 'linear-gradient(to right, #6B1817, #523DCB)' } : undefined}
                     >
                       <Icon className="h-4 w-4 shrink-0 opacity-80" />
                       <span className="truncate">{item.label}</span>

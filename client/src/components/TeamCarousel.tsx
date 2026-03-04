@@ -126,7 +126,7 @@ export default function TeamCarousel() {
   return (
     <section className="py-20 md:py-28 relative overflow-hidden">
       {/* Background gradient */}
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-purple-950/30 to-transparent" />
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#523DCB]/30 to-transparent" />
       
       <div className="container relative z-10">
         {/* Header */}
@@ -176,7 +176,7 @@ export default function TeamCarousel() {
               >
                 <div className="relative w-40 md:w-48">
                   {/* Image container */}
-                  <div className="relative aspect-[3/4] rounded-2xl overflow-hidden mb-4 bg-gradient-to-br from-purple-500/20 to-pink-500/20">
+                  <div className="relative aspect-[3/4] rounded-2xl overflow-hidden mb-4 bg-gradient-to-br from-[#523DCB]/20 to-pink-500/20">
                     {member.image === '/team/Ricardo.png' || member.image === '/team/Marie-Claire.png' ? (
                       <img
                         src={member.image}

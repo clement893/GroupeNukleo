@@ -156,8 +156,8 @@ export default function AdminLEOContacts() {
                       {contactList.filter((c: { name?: string | null }) => c.name).length}
                     </p>
                   </div>
-                  <div className="h-12 w-12 rounded-full bg-purple-100 flex items-center justify-center">
-                    <User className="w-6 h-6 text-purple-600" />
+                  <div className="h-12 w-12 rounded-full bg-[#523DCB]/10 flex items-center justify-center">
+                    <User className="w-6 h-6 text-[#523DCB]" />
                   </div>
                 </div>
               </CardContent>

@@ -65,7 +65,7 @@ export default function WhoWeServeSection() {
             return (
               <div
                 key={index}
-                className="group relative p-6 sm:p-6 lg:p-8 glass rounded-2xl overflow-hidden transition-all duration-500 hover:scale-[1.009] hover:shadow-xl hover:shadow-purple-500/10"
+                className="group relative p-6 sm:p-6 lg:p-8 glass rounded-2xl overflow-hidden transition-all duration-500 hover:scale-[1.009] hover:shadow-xl hover:shadow-[#523DCB]/10"
               >
                 {/* Glassmorphism overlay on hover */}
                 <div className="absolute inset-0 bg-gradient-to-br from-white/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
@@ -111,7 +111,7 @@ export default function WhoWeServeSection() {
           </p>
           <a
             href={getLocalizedPath('/contact')}
-            className="inline-flex items-center gap-3 px-10 py-5 rounded-full bg-white hover:bg-white/90 text-purple-900 font-bold text-lg transition-all duration-300 hover:scale-[1.05] shadow-xl shadow-purple-500/20"
+            className="inline-flex items-center gap-3 px-10 py-5 rounded-full bg-white hover:bg-white/90 text-[#523DCB] font-bold text-lg transition-all duration-300 hover:scale-[1.05] shadow-xl shadow-[#523DCB]/20"
           >
             {t('whoWeServe.cta.button')}
             <span className="text-xl">→</span>

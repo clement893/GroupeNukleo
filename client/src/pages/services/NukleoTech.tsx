@@ -24,30 +24,12 @@ export default function NukleoTech() {
   }));
 
   const teamMembers = [
-    {
-      name: 'Développeur·se 1',
-      role: 'Développeur·se full‑stack',
-      image: '/demo/team-1.jpg',
-      imageAlt: 'Développeur·se full‑stack chez Nukleo Digital',
-    },
-    {
-      name: 'Développeur·se 2',
-      role: 'Ingénieur·e backend',
-      image: '/demo/team-2.jpg',
-      imageAlt: 'Ingénieur·e backend chez Nukleo Digital',
-    },
-    {
-      name: 'Développeur·se 3',
-      role: 'Ingénieur·e IA & data',
-      image: '/demo/team-3.jpg',
-      imageAlt: 'Ingénieur·e IA & data chez Nukleo Digital',
-    },
-    {
-      name: 'Développeur·se 4',
-      role: 'DevOps & Cloud',
-      image: '/demo/team-4.jpg',
-      imageAlt: 'DevOps & Cloud chez Nukleo Digital',
-    },
+    { name: 'Alexei', role: 'VP des services web', image: '/team/Alexei.webp', imageAlt: 'Alexei — VP des services web chez Nukleo Digital' },
+    { name: 'Benoît', role: 'Directeur des services web', image: '/team/Benoit.png', imageAlt: 'Benoît — Directeur des services web chez Nukleo Digital' },
+    { name: 'Sarah', role: 'Développeuse Full Stack', image: '/team/Sarah.webp', imageAlt: 'Sarah — Développeuse Full Stack chez Nukleo Digital' },
+    { name: 'Tim', role: 'Développeur Full Stack', image: '/team/Tim.png', imageAlt: 'Tim — Développeur Full Stack chez Nukleo Digital' },
+    { name: 'Hind', role: 'Développeuse IA', image: '/team/Hind.webp', imageAlt: 'Hind — Développeuse IA chez Nukleo Digital' },
+    { name: 'Jean-François', role: 'Développeur Full Stack', image: '/team/Jean-Francois.png', imageAlt: 'Jean-François — Développeur Full Stack chez Nukleo Digital' },
   ];
 
   return (
@@ -79,6 +61,7 @@ export default function NukleoTech() {
         teamTitle={t(`${NS}.teamTitle`)}
         teamDescription={t(`${NS}.teamDescription`)}
         teamMembers={teamMembers}
+        teamLayout="slider"
         sectionVisualImage="/demo/dept-tech.jpg"
         sectionVisualTitle={t(`${NS}.sectionVisualTitle`)}
         sectionVisualSubtitle={t(`${NS}.sectionVisualSubtitle`)}

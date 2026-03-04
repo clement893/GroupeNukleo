@@ -187,7 +187,7 @@ export default function Services() {
       tagline: t('services.serviceLevels.enContinu.tagline') || 'Partenariat mensuel',
       description: t('services.serviceLevels.enContinu.description') || 'Un partenariat mensuel pour une présence numérique constante et une amélioration continue. Votre équipe numérique dédiée, à un coût prévisible.',
       highlights: (t('services.serviceLevels.enContinu.highlights') as unknown as string[]) || ['Équipe dédiée', 'Coût prévisible', 'Amélioration continue'],
-      gradient: 'from-blue-500/20 to-purple-500/20',
+      gradient: 'from-[#523DCB]/20 to-[#523DCB]/20',
       border: 'border-blue-500/30',
     },
     {
@@ -195,8 +195,8 @@ export default function Services() {
       tagline: t('services.serviceLevels.cocreation.tagline') || 'Transformation profonde',
       description: t('services.serviceLevels.cocreation.description') || 'Pour les organisations qui souhaitent une transformation numérique profonde. Nous devenons votre partenaire stratégique intégré, engagés sur vos résultats à long terme.',
       highlights: (t('services.serviceLevels.cocreation.highlights') as unknown as string[]) || ['Partenariat stratégique', 'Engagement sur les résultats', 'Transformation profonde'],
-      gradient: 'from-purple-500/20 to-pink-500/20',
-      border: 'border-purple-500/30',
+      gradient: 'from-[#523DCB]/20 to-pink-500/20',
+      border: 'border-[#523DCB]/30',
     },
   ];
 
@@ -239,7 +239,7 @@ export default function Services() {
               style={{
                 fontFamily: "'Plus Jakarta Sans', sans-serif",
                 display: 'inline-block',
-                background: 'linear-gradient(to right, #6B1817, #5636AD)',
+                background: 'linear-gradient(to right, #6B1817, #523DCB)',
                 WebkitBackgroundClip: 'text',
                 backgroundClip: 'text',
                 color: 'transparent',
@@ -300,7 +300,7 @@ export default function Services() {
                         );
                       })}
                     </div>
-                    <span className="mt-auto inline-flex items-center gap-2 font-semibold text-base transition-colors hover:opacity-90" style={{ color: '#5D43CD' }}>
+                    <span className="mt-auto inline-flex items-center gap-2 font-semibold text-base transition-colors hover:opacity-90" style={{ color: '#523DCB' }}>
                       {entity.cta}
                       <ArrowRight className="w-5 h-5" />
                     </span>
@@ -338,7 +338,7 @@ export default function Services() {
                   <ul className="space-y-2">
                     {Array.isArray(level.highlights) && level.highlights.map((highlight, hIdx) => (
                       <li key={hIdx} className="flex items-center gap-2 text-gray-700 text-sm">
-                        <span className="w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ background: '#5D43CD' }} />
+                        <span className="w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ background: '#523DCB' }} />
                         {highlight}
                       </li>
                     ))}

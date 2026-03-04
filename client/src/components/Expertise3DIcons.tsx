@@ -18,7 +18,7 @@ export function Icon3DBranding() {
         </linearGradient>
         <linearGradient id={`${prefix}-dot1`} x1="0%" y1="0%" x2="100%" y2="100%">
           <stop offset="0%" stopColor="#6C5CE7" />
-          <stop offset="100%" stopColor="#5D43CD" />
+          <stop offset="100%" stopColor="#523DCB" />
         </linearGradient>
         <linearGradient id={`${prefix}-dot2`} x1="0%" y1="0%" x2="100%" y2="0%">
           <stop offset="0%" stopColor="#00B894" />

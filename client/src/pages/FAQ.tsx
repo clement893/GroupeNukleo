@@ -2,7 +2,6 @@ import PageLayout from '@/components/PageLayout';
 import { SplitCTAButton } from '@/components/SplitCTAButton';
 import SEO from '@/components/SEO';
 import StructuredData, { createFAQSchema } from '@/components/StructuredData';
-import Breadcrumb from '@/components/Breadcrumb';
 import {
   Accordion,
   AccordionContent,
@@ -239,10 +238,16 @@ export default function FAQ() {
         {/* Hero */}
         <section className="pt-24 pb-10 lg:pt-32 lg:pb-14">
           <div className="container">
-            <Breadcrumb items={[{ name: t('nav.faq') || 'FAQ', url: '/faq' }]} />
             <h1
               className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-3"
-              style={{ color: BORDEAUX, fontFamily: 'var(--font-heading, sans-serif)' }}
+              style={{
+                fontFamily: 'var(--font-heading, sans-serif)',
+                background: 'linear-gradient(to right, #6B1817, #523DCB)',
+                WebkitBackgroundClip: 'text',
+                backgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                color: 'transparent',
+              }}
             >
               {currentContent.title}
             </h1>
@@ -264,7 +269,7 @@ export default function FAQ() {
                   >
                     {category.category}
                   </h2>
-                  <div className="bg-white rounded-2xl border border-gray-200 overflow-hidden shadow-sm">
+                  <div className="glass-faq rounded-lg overflow-hidden">
                     <Accordion type="single" collapsible className="w-full">
                       {category.questions.map((faq, faqIndex) => (
                         <AccordionItem

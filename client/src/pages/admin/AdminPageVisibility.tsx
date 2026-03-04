@@ -258,7 +258,7 @@ export default function AdminPageVisibility() {
                           <h3 className="text-lg font-semibold text-white">
                             {page.label}
                           </h3>
-                          <span className="px-2 py-1 bg-purple-500/20 border border-purple-500/50 rounded-full text-purple-300 text-xs font-mono">
+                          <span className="px-2 py-1 bg-[#523DCB]/20 border border-[#523DCB]/50 rounded-full text-[#523DCB]/90 text-xs font-mono">
                             {page.path}
                           </span>
                         </div>

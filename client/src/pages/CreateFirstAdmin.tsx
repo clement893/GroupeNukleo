@@ -22,7 +22,7 @@ export default function CreateFirstAdmin() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-900 via-purple-800 to-indigo-900 flex items-center justify-center p-4">
+    <div className="min-h-screen bg-gradient-to-br from-[#523DCB] via-[#523DCB] to-[#523DCB] flex items-center justify-center p-4">
       <div className="max-w-md w-full bg-white/10 backdrop-blur-lg rounded-2xl p-8 border border-white/20">
         <h1 className="text-3xl font-bold text-white mb-6">Create First Admin</h1>
         

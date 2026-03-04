@@ -12,7 +12,7 @@ import { logger } from '@/lib/logger';
 import { useLocalizedPath } from '@/hooks/useLocalizedPath';
 import PageLayout from '@/components/PageLayout';
 
-const HERO_GRADIENT = 'linear-gradient(to right, #6B1817, #5636AD)';
+const HERO_GRADIENT = 'linear-gradient(to right, #6B1817, #523DCB)';
 
 interface Message {
   role: 'user' | 'assistant' | 'system';

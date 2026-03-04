@@ -100,7 +100,7 @@ export default function RecommendationsSection({ results }: RecommendationsSecti
       </div>
 
       {/* Next Steps */}
-      <div className="p-6 bg-gradient-to-r from-violet-500/10 to-rose-500/10 backdrop-blur-xl border border-white/10 rounded-2xl">
+      <div className="p-6 bg-gradient-to-r from-[#523DCB]/10 to-rose-500/10 backdrop-blur-xl border border-white/10 rounded-2xl">
         <h3 className="text-white font-bold text-xl mb-4">{t('assessment.recommendations.nextSteps') || 'Prochaines étapes'}</h3>
         <div className="space-y-3">
           {recommendations.nextSteps.map((step, idx) => (

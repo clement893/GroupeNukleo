@@ -4,7 +4,7 @@ import { useLanguage } from '@/contexts/LanguageContext';
 
 const OFF_WHITE = '#EFE8E8';
 const BORDEAUX = '#5A1E29';
-const LINK_COLOR = '#5636AD';
+const LINK_COLOR = '#523DCB';
 
 const content = {
   fr: {
@@ -177,7 +177,7 @@ export default function PrivacyPolicyNukleoTime() {
                 lineHeight: 1.15,
                 letterSpacing: '-0.03em',
                 margin: '0 0 0.5rem 0',
-                background: 'linear-gradient(to right, #6B1817, #5636AD)',
+                background: 'linear-gradient(to right, #6B1817, #523DCB)',
                 backgroundClip: 'text',
                 WebkitBackgroundClip: 'text',
                 color: 'transparent',

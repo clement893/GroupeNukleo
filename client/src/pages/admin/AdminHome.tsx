@@ -31,7 +31,7 @@ function AdminCard({ title, description, icon, href }: AdminCardProps) {
         <CardHeader className="pb-4">
           <div className="flex items-start justify-between gap-3">
             <div className="flex items-center gap-3 min-w-0">
-              <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg text-white transition-colors group-hover:opacity-90" style={{ background: 'linear-gradient(to right, #6B1817, #5636AD)' }}>
+              <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg text-white transition-colors group-hover:opacity-90" style={{ background: 'linear-gradient(to right, #6B1817, #523DCB)' }}>
                 {icon}
               </div>
               <div className="min-w-0">

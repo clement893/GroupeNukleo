@@ -36,7 +36,7 @@ export function Icon3DRoadmap() {
       <defs>
         <linearGradient id={`${prefix}-path`} x1="0%" y1="0%" x2="100%" y2="0%">
           <stop offset="0%" stopColor="#6C5CE7" />
-          <stop offset="100%" stopColor="#5D43CD" />
+          <stop offset="100%" stopColor="#523DCB" />
         </linearGradient>
         <linearGradient id={`${prefix}-dot`} x1="0%" y1="0%" x2="100%" y2="100%">
           <stop offset="0%" stopColor="#FDCB6E" />
@@ -109,7 +109,7 @@ export function Icon3DGovernance() {
         </linearGradient>
         <linearGradient id={`${prefix}-pan`} x1="0%" y1="0%" x2="100%" y2="100%">
           <stop offset="0%" stopColor="#6C5CE7" />
-          <stop offset="100%" stopColor="#5D43CD" />
+          <stop offset="100%" stopColor="#523DCB" />
         </linearGradient>
       </defs>
       <path d="M24 8 L24 32 M14 14 L34 14 L34 26 L14 26 Z" stroke={`url(#${prefix}-scale)`} strokeWidth="2" fill="none" />

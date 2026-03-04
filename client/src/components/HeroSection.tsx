@@ -142,7 +142,7 @@ function HeroSection() {
                 <Button
                   onClick={playClick}
                   onMouseEnter={playHover}
-                  className="relative rounded-full text-sm sm:text-base md:text-lg px-6 sm:px-8 md:px-12 py-4 sm:py-6 md:py-8 bg-white text-purple-900 hover:bg-white active:bg-white/90 transition-all duration-300 font-bold tracking-wider active:scale-[0.98] sm:hover:scale-[1.045] sm:hover:shadow-xl sm:hover:shadow-purple-500/25 group overflow-hidden w-full sm:w-auto touch-manipulation"
+                  className="relative rounded-full text-sm sm:text-base md:text-lg px-6 sm:px-8 md:px-12 py-4 sm:py-6 md:py-8 bg-white text-[#523DCB] hover:bg-white active:bg-white/90 transition-all duration-300 font-bold tracking-wider active:scale-[0.98] sm:hover:scale-[1.045] sm:hover:shadow-xl sm:hover:shadow-[#523DCB]/25 group overflow-hidden w-full sm:w-auto touch-manipulation"
                 >
                   <span className="relative z-10">{t('hero.cta')}</span>
                   {/* Shimmer effect - disabled on mobile for performance */}

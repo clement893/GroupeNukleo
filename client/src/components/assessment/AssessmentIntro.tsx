@@ -49,7 +49,7 @@ export default function AssessmentIntro({ onStart }: AssessmentIntroProps) {
         <h1 className="text-4xl lg:text-6xl font-bold text-white mb-6 leading-tight">
           {t('assessment.intro.title')}
           <br />
-          <span className="bg-gradient-to-r from-violet-400 to-rose-400 bg-clip-text text-transparent">
+          <span className="bg-gradient-to-r from-[#523DCB] to-rose-400 bg-clip-text text-transparent">
             {t('assessment.intro.titleHighlight')}
           </span>
         </h1>
@@ -60,7 +60,7 @@ export default function AssessmentIntro({ onStart }: AssessmentIntroProps) {
 
         <button
           onClick={handleStart}
-          className="group inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-violet-500 to-rose-500 text-white font-bold rounded-full hover:shadow-[0_0_40px_rgba(139,92,246,0.5)] transition-all duration-300"
+          className="group inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-[#523DCB] to-rose-500 text-white font-bold rounded-full hover:shadow-[0_0_40px_rgba(82,61,203,0.5)] transition-all duration-300"
         >
           {t('assessment.intro.startButton')}
         </button>

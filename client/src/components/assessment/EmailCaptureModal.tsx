@@ -78,7 +78,7 @@ export default function EmailCaptureModal({ onSubmit, onClose, onSkip, showSkip 
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm">
-      <div className="w-full max-w-2xl bg-gradient-to-br from-slate-900 to-violet-950/50 border border-white/10 rounded-2xl p-8 relative max-h-[90vh] overflow-y-auto">
+      <div className="w-full max-w-2xl bg-gradient-to-br from-slate-900 to-[#523DCB]/50 border border-white/10 rounded-2xl p-8 relative max-h-[90vh] overflow-y-auto">
         {/* Close Button */}
         <button
           onClick={handleClose}
@@ -269,7 +269,7 @@ export default function EmailCaptureModal({ onSubmit, onClose, onSkip, showSkip 
           {/* Submit Button */}
           <button
             type="submit"
-            className="w-full py-4 bg-gradient-to-r from-violet-500 to-rose-500 text-white font-bold rounded-xl hover:shadow-[0_0_40px_rgba(139,92,246,0.5)] transition-all duration-300"
+            className="w-full py-4 bg-gradient-to-r from-[#523DCB] to-rose-500 text-white font-bold rounded-xl hover:shadow-[0_0_40px_rgba(82,61,203,0.5)] transition-all duration-300"
           >
             Get My Full Report
           </button>

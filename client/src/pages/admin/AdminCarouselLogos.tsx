@@ -249,14 +249,14 @@ export default function AdminCarouselLogos() {
       <div className="p-6 lg:p-8 max-w-5xl mx-auto space-y-8">
         <div>
             <h1 className="text-4xl font-bold text-white mb-2 flex items-center gap-3">
-              <LayoutGrid className="w-8 h-8 text-purple-400" />
+              <LayoutGrid className="w-8 h-8 text-[#523DCB]" />
               Logos du carrousel
             </h1>
             <p className="text-gray-300">
               Gérer les logos affichés dans le carrousel de la page d&apos;accueil. Ajoutez, supprimez et associez un lien vers le site du client.
             </p>
             {!isLoading && !isError && (
-              <p className="text-sm text-violet-300 mt-2 font-medium">
+              <p className="text-sm text-[#523DCB]/90 mt-2 font-medium">
                 {logos?.length ?? 0} logo{logos?.length !== 1 ? "s" : ""} au total
               </p>
             )}
@@ -266,7 +266,7 @@ export default function AdminCarouselLogos() {
           <div className="flex flex-wrap items-center gap-4">
             <Button
               onClick={() => setAddModalOpen(true)}
-              className="bg-violet-600 hover:bg-violet-700 text-white"
+              className="bg-[#523DCB] hover:bg-[#4630b0] text-white"
             >
               <Plus className="w-4 h-4 mr-2" />
               Ajouter un logo
@@ -277,7 +277,7 @@ export default function AdminCarouselLogos() {
             <DialogContent className="sm:max-w-md bg-[#1a1a2e] border-white/20 text-white">
               <DialogHeader>
                 <DialogTitle className="text-white flex items-center gap-2">
-                  <ImageIcon className="w-5 h-5 text-violet-400" />
+                  <ImageIcon className="w-5 h-5 text-[#523DCB]" />
                   Ajouter un logo
                 </DialogTitle>
                 <DialogDescription className="text-gray-400">
@@ -290,7 +290,7 @@ export default function AdminCarouselLogos() {
                   onDragLeave={() => setAddModalDragging(false)}
                   onDrop={onAddModalDrop}
                   className={`border-2 border-dashed rounded-xl p-8 text-center transition-colors ${
-                    addModalDragging ? "border-violet-500 bg-violet-500/10" : "border-white/30 bg-white/5"
+                    addModalDragging ? "border-[#523DCB] bg-[#523DCB]/10" : "border-white/30 bg-white/5"
                   }`}
                 >
                   <input
@@ -309,11 +309,11 @@ export default function AdminCarouselLogos() {
                           className="max-h-20 max-w-32 object-contain mx-auto rounded"
                         />
                         <span className="text-sm text-gray-400">{addModalFile.name}</span>
-                        <span className="text-xs text-violet-400">Cliquez ou déposez pour remplacer</span>
+                        <span className="text-xs text-[#523DCB]">Cliquez ou déposez pour remplacer</span>
                       </div>
                     ) : (
                       <div className="flex flex-col items-center gap-2">
-                        <Upload className="w-10 h-10 text-violet-400 mx-auto" />
+                        <Upload className="w-10 h-10 text-[#523DCB] mx-auto" />
                         <span className="text-gray-300">Glissez une image ici ou cliquez pour parcourir</span>
                         <span className="text-xs text-gray-500">PNG, JPG, WebP, SVG — 2 Mo max</span>
                       </div>
@@ -355,7 +355,7 @@ export default function AdminCarouselLogos() {
                 <Button
                   onClick={submitAddLogo}
                   disabled={addModalPending || !addModalAlt.trim() || (!addModalFile && !addModalPath.trim())}
-                  className="bg-violet-600 hover:bg-violet-700 text-white"
+                  className="bg-[#523DCB] hover:bg-[#4630b0] text-white"
                 >
                   {addModalPending ? <Loader2 className="w-4 h-4 animate-spin mr-2" /> : <Plus className="w-4 h-4 mr-2" />}
                   Ajouter
@@ -375,7 +375,7 @@ export default function AdminCarouselLogos() {
             <CardContent>
               {isLoading ? (
                 <div className="flex items-center justify-center py-12">
-                  <Loader2 className="w-8 h-8 text-purple-400 animate-spin" />
+                  <Loader2 className="w-8 h-8 text-[#523DCB] animate-spin" />
                 </div>
               ) : isError ? (
                 <div className="text-center py-12 space-y-4">
@@ -391,7 +391,7 @@ export default function AdminCarouselLogos() {
                   </p>
                   <Button
                     onClick={() => refetch()}
-                    className="bg-violet-600 hover:bg-violet-700 text-white"
+                    className="bg-[#523DCB] hover:bg-[#4630b0] text-white"
                   >
                     Réessayer
                   </Button>
@@ -473,7 +473,7 @@ export default function AdminCarouselLogos() {
                                 href={logo.url}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="text-sm text-violet-400 hover:underline flex items-center gap-1"
+                                className="text-sm text-[#523DCB] hover:underline flex items-center gap-1"
                               >
                                 <ExternalLink className="w-3 h-3" />
                                 {logo.url}

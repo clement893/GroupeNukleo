@@ -23,14 +23,24 @@ export default function HeroGradientCloud() {
   const [scrollY, setScrollY] = useState(0);
 
   useEffect(() => {
+    let rafId: number;
     const onScroll = () => {
-      const y = typeof window !== 'undefined' ? window.scrollY : 0;
-      setScrollY(y);
-      setHeight(Math.max(HEIGHT_MIN, HEIGHT_MAX - y * 0.96));
+      rafId = requestAnimationFrame(() => {
+        const y = typeof window !== 'undefined' ? window.scrollY : 0;
+        setScrollY(y);
+        setHeight(Math.max(HEIGHT_MIN, HEIGHT_MAX - y * 0.96));
+      });
     };
     onScroll();
     window.addEventListener('scroll', onScroll, { passive: true });
-    return () => window.removeEventListener('scroll', onScroll);
+    window.addEventListener('wheel', onScroll, { passive: true });
+    window.addEventListener('touchmove', onScroll, { passive: true });
+    return () => {
+      cancelAnimationFrame(rafId);
+      window.removeEventListener('scroll', onScroll);
+      window.removeEventListener('wheel', onScroll);
+      window.removeEventListener('touchmove', onScroll);
+    };
   }, []);
 
   // Au scroll : ellipses moins visibles, mais encore un tout petit peu

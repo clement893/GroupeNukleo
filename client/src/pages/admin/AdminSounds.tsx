@@ -512,7 +512,7 @@ export default function AdminSounds() {
                     <CardTitle className="flex items-center justify-between text-white">
                       {preset.name}
                       {selectedPreset?.name === preset.name && (
-                        <div className="w-3 h-3 bg-purple-400 rounded-full" />
+                        <div className="w-3 h-3 bg-[#523DCB] rounded-full" />
                       )}
                     </CardTitle>
                     <CardDescription className="text-gray-400">{preset.description}</CardDescription>

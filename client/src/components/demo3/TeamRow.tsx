@@ -39,7 +39,7 @@ const TEAM_MEMBERS = [
 
 // Constantes pile — ratio 4:5 (largeur:hauteur), taille réduite x1
 const CARD_W = 390;
-const SITE_PURPLE = '#5636AD';
+const SITE_PURPLE = '#523DCB';
 const CARD_H = 487; // ratio 4:5 (390 * 5/4)
 const STACK_OVERFLOW = 40;
 

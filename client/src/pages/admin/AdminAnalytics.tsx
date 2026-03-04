@@ -149,7 +149,7 @@ export default function AdminAnalytics() {
     return (
       <AdminLayout>
         <div className="p-6 lg:p-8 max-w-4xl mx-auto flex items-center justify-center min-h-[40vh]">
-          <Loader2 className="w-8 h-8 text-violet-500 animate-spin" />
+          <Loader2 className="w-8 h-8 text-[#523DCB] animate-spin" />
         </div>
       </AdminLayout>
     );
@@ -160,7 +160,7 @@ export default function AdminAnalytics() {
       <AdminLayout>
         <div className="p-6 lg:p-8 max-w-4xl mx-auto text-center py-12">
           <p className="text-red-600 mb-4">{error instanceof Error ? error.message : "Erreur"}</p>
-          <Button onClick={() => refetch()} className="bg-violet-600 hover:bg-violet-700 text-white">
+          <Button onClick={() => refetch()} className="bg-[#523DCB] hover:bg-[#4630b0] text-white">
             Réessayer
           </Button>
         </div>
@@ -173,7 +173,7 @@ export default function AdminAnalytics() {
       <div className="p-6 lg:p-8 max-w-4xl mx-auto space-y-8">
         <div>
           <h1 className="text-3xl font-bold text-[var(--admin-foreground)] mb-1 flex items-center gap-2">
-            <TrendingUp className="w-8 h-8 text-violet-500" />
+            <TrendingUp className="w-8 h-8 text-[#523DCB]" />
             Analytics &amp; tracking
           </h1>
           <p className="text-[var(--admin-muted)]">
@@ -249,7 +249,7 @@ export default function AdminAnalytics() {
                     <Button
                       onClick={() => handleSave(provider.id)}
                       disabled={upsertMutation.isPending}
-                      className="bg-violet-600 hover:bg-violet-700 text-white"
+                      className="bg-[#523DCB] hover:bg-[#4630b0] text-white"
                     >
                       {upsertMutation.isPending ? (
                         <Loader2 className="w-4 h-4 animate-spin mr-2" />
@@ -269,7 +269,7 @@ export default function AdminAnalytics() {
           <Button
             onClick={handleSaveAll}
             disabled={upsertMutation.isPending}
-            className="bg-violet-600 hover:bg-violet-700 text-white"
+            className="bg-[#523DCB] hover:bg-[#4630b0] text-white"
             size="lg"
           >
             <Save className="w-4 h-4 mr-2" />

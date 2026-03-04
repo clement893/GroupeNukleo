@@ -21,7 +21,7 @@ const DARK = '#0A0A0A';
 const WORK1 = '/demo/work1.jpg';
 const WORK2 = '/demo/work2.jpg';
 const WORK3 = '/demo/work3.jpg';
-const SITE_MAUVE = '#5D43CD';
+const SITE_MAUVE = '#523DCB';
 const FALLBACK_PROJECTS = [
   { num: '01', name: 'MBAM', category: 'Brand & Digital', tagline: 'Redefining cultural engagement online.', result: '+240% digital reach', img: WORK1, color: SITE_MAUVE },
   { num: '02', name: 'SummitLaw', category: 'Brand & Creative', tagline: 'A law firm that finally looks like its ambition.', result: '+180% qualified leads', img: WORK2, color: PURPLE },
@@ -513,7 +513,7 @@ export default function HomepageDemo5() {
             maxWidth: '100%',
             overflowWrap: 'break-word',
             wordBreak: 'break-word',
-            background: 'linear-gradient(to right, #6B1817, #5636AD)',
+            background: 'linear-gradient(to right, #6B1817, #523DCB)',
             WebkitBackgroundClip: 'text',
             WebkitTextFillColor: 'transparent',
             backgroundClip: 'text',
@@ -539,7 +539,7 @@ export default function HomepageDemo5() {
             <div style={{
               display: 'grid',
               gridTemplateColumns: '1fr 1fr',
-              gridTemplateRows: 'minmax(0, 1.35fr) minmax(0, 1fr) minmax(0, 1fr) minmax(0, 0.55fr)',
+              gridTemplateRows: 'minmax(0, 1.35fr) minmax(0, 0.75fr) minmax(0, 1.25fr) minmax(0, 0.55fr)',
               gap: 'clamp(0.6rem, 1.2vw, 1.1rem)',
               padding: 'clamp(0.75rem, 1.5vw, 1.25rem)',
               borderRadius: 28,
@@ -571,7 +571,7 @@ export default function HomepageDemo5() {
                 );
               })()}
 
-              {/* 3. Nous soutenons le monde culturel — pleine largeur, bouton flèche en haut à droite */}
+              {/* 3. Nous soutenons le monde culturel — pleine largeur */}
               <div className="glass-widget-culture" style={{
                 gridColumn: '1 / -1',
                 borderRadius: 14,
@@ -579,44 +579,14 @@ export default function HomepageDemo5() {
                 minHeight: 0,
                 display: 'flex',
                 flexDirection: 'column',
+                justifyContent: 'center',
               }}>
-                <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: 'clamp(0.4rem, 0.8vw, 0.75rem)', marginBottom: 'clamp(0.5rem, 0.8vw, 0.9rem)' }}>
-                  <h3 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 700, fontSize: 'clamp(0.95rem, 1.15vw, 1.35rem)', color: DARK, margin: 0 }}>
-                    Nous soutenons le monde culturel
-                  </h3>
-                  <button
-                    type="button"
-                    aria-label={t('home.moreInfo')}
-                    style={{
-                      width: 36,
-                      height: 36,
-                      borderRadius: 10,
-                      background: 'rgba(255, 255, 255, 0.4)',
-                      backdropFilter: 'blur(12px) saturate(180%)',
-                      WebkitBackdropFilter: 'blur(12px) saturate(180%)',
-                      border: '1px solid rgba(255, 255, 255, 0.6)',
-                      boxShadow: '0 2px 12px rgba(0,0,0,0.06)',
-                      color: SITE_MAUVE,
-                      cursor: 'pointer',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      flexShrink: 0,
-                    }}
-                  >
-                    <ArrowUpRight size={18} strokeWidth={2.5} />
-                  </button>
-                </div>
-                <p style={{ fontSize: 'clamp(0.8rem, 1vw, 1.1rem)', color: '#4b5563', lineHeight: 1.6, margin: '0 0 1.25rem 0' }}>
+                <h3 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 700, fontSize: 'clamp(0.95rem, 1.15vw, 1.35rem)', color: DARK, margin: '0 0 clamp(0.25rem, 0.4vw, 0.45rem) 0' }}>
+                  Nous soutenons le monde culturel
+                </h3>
+                <p style={{ fontSize: 'clamp(0.8rem, 1vw, 1.1rem)', color: '#4b5563', lineHeight: 1.6, margin: 0 }}>
                   Nous donnons 1% de tous nos revenus; nous faisons des dons; nos employés sont membres du Musée.
                 </p>
-                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', paddingTop: 12 }}>
-                  <span style={{ fontSize: 'clamp(0.72rem, 0.85vw, 0.95rem)', color: '#6b7280' }}>Montant donné</span>
-                  <span className="glass-badge-purple" style={{
-                    fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 700, fontSize: 'clamp(0.9rem, 1.05vw, 1.2rem)',
-                    padding: 'clamp(4px, 0.5vw, 8px) clamp(10px, 1.2vw, 14px)',
-                  }}>+456.000$</span>
-                </div>
               </div>
 
               {/* 4. Campagne 481k$ — flèche en haut à droite du bloc, image à gauche, texte à droite */}
@@ -732,7 +702,7 @@ export default function HomepageDemo5() {
             margin: '0 0 1.5rem 0',
             display: 'inline-block',
             width: 'fit-content',
-            background: 'linear-gradient(to right, #6B1817, #5636AD)',
+            background: 'linear-gradient(to right, #6B1817, #523DCB)',
             WebkitBackgroundClip: 'text',
             WebkitTextFillColor: 'transparent',
             backgroundClip: 'text',
@@ -808,7 +778,7 @@ export default function HomepageDemo5() {
                     fontSize: 'clamp(2.2rem, 4.4vw, 3rem)',
                     lineHeight: 1.1,
                     letterSpacing: '-0.02em',
-                    background: 'linear-gradient(to right, #6B1817, #5636AD)',
+                    background: 'linear-gradient(to right, #6B1817, #523DCB)',
                     WebkitBackgroundClip: 'text',
                     WebkitTextFillColor: 'transparent',
                     backgroundClip: 'text',

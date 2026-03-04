@@ -25,7 +25,7 @@ export default function CTAPerformSection() {
             fontSize: 'clamp(1.75rem, 3vw, 2.5rem)',
             lineHeight: 1.25,
             margin: '0 0 1rem 0',
-            background: 'linear-gradient(to right, #6B1817, #5636AD)',
+            background: 'linear-gradient(to right, #6B1817, #523DCB)',
             backgroundClip: 'text',
             WebkitBackgroundClip: 'text',
             color: 'transparent',

@@ -22,7 +22,7 @@ function getWeatherIconAndColor(code: number): { Icon: LucideIcon; color: string
   if (code >= 51 && code <= 57) return { Icon: CloudDrizzle, color: '#0ea5e9' }; // bruine bleu
   if ((code >= 61 && code <= 67) || (code >= 80 && code <= 82)) return { Icon: CloudRain, color: '#0284c7' }; // pluie bleu
   if ((code >= 71 && code <= 77) || (code >= 85 && code <= 86)) return { Icon: Snowflake, color: '#38bdf8' }; // neige bleu clair
-  if (code >= 95 && code <= 99) return { Icon: CloudLightning, color: '#6366f1' }; // orage violet
+  if (code >= 95 && code <= 99) return { Icon: CloudLightning, color: '#523DCB' }; // orage
   return { Icon: Sun, color: '#f59e0b' };
 }
 

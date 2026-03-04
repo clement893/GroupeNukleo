@@ -1,10 +1,10 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 import type { ComponentType } from 'react';
 import { Sparkles, type LucideIcon } from 'lucide-react';
 import CTAPerformSection from '@/components/CTAPerformSection';
 
 const BORDEAUX = '#5A1E29';
-const PURPLE = '#5D43CD';
+const PURPLE = '#523DCB';
 
 export interface ServiceTabContent {
   id: string;
@@ -54,6 +54,8 @@ export interface ServiceDetailLayoutProps {
   teamDescription: string;
   /** Membres de l'équipe du département (photo, nom, rôle). Si fourni, affiche une grille de cartes au lieu du seul texte. */
   teamMembers?: { name: string; role: string; image: string; imageAlt?: string }[];
+  /** 'grid' = grille de cartes, 'slider' = carrousel horizontal avec flèches */
+  teamLayout?: 'grid' | 'slider';
   /** Section « carte visuelle + texte & 4 cartes glass » (affichée après le bloc onglets si fournie) */
   sectionVisualImage?: string;
   sectionVisualAlt?: string;
@@ -96,6 +98,7 @@ export default function ServiceDetailLayout(props: ServiceDetailLayoutProps) {
     teamTitle,
     teamDescription,
     teamMembers,
+    teamLayout = 'grid',
     sectionVisualImage,
     sectionVisualAlt = '',
     sectionVisualVideo,
@@ -113,9 +116,67 @@ export default function ServiceDetailLayout(props: ServiceDetailLayoutProps) {
   const leftVisualRef = useRef<HTMLDivElement | null>(null);
   const rightVisualRef = useRef<HTMLDivElement | null>(null);
   const [rightHeight, setRightHeight] = useState<number | null>(null);
+  const teamScrollRef = useRef<HTMLDivElement | null>(null);
+  const [activeTeamIndex, setActiveTeamIndex] = useState(0);
+  const [teamAutoScrollPaused, setTeamAutoScrollPaused] = useState(false);
+  const teamAutoScrollTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const teamCardWidthPx = 260; // w-56/w-64 + gap-6 approx
+
+  const checkTeamScroll = useCallback(() => {
+    const el = teamScrollRef.current;
+    if (!el || !teamMembers?.length) return;
+    const { scrollLeft } = el;
+    const index = Math.min(teamMembers.length - 1, Math.round(scrollLeft / teamCardWidthPx));
+    setActiveTeamIndex(index);
+  }, [teamMembers?.length]);
+
+  const scrollTeamToIndex = useCallback((index: number) => {
+    teamScrollRef.current?.scrollTo({ left: index * teamCardWidthPx, behavior: 'smooth' });
+    setActiveTeamIndex(index);
+  }, []);
 
   useEffect(() => {
     window.scrollTo(0, 0);
+  }, []);
+
+  useEffect(() => {
+    if (teamLayout !== 'slider' || !teamMembers?.length) return;
+    checkTeamScroll();
+    const el = teamScrollRef.current;
+    if (!el) return;
+    el.addEventListener('scroll', checkTeamScroll);
+    const ro = new ResizeObserver(checkTeamScroll);
+    ro.observe(el);
+    return () => {
+      el.removeEventListener('scroll', checkTeamScroll);
+      ro.disconnect();
+    };
+  }, [teamLayout, teamMembers?.length, checkTeamScroll]);
+
+  // Défilement automatique du slider équipe (Lab technologique)
+  useEffect(() => {
+    if (teamLayout !== 'slider' || !teamMembers?.length || teamAutoScrollPaused) return;
+    const n = teamMembers.length;
+    const interval = setInterval(() => {
+      setActiveTeamIndex((prev) => {
+        const next = (prev + 1) % n;
+        teamScrollRef.current?.scrollTo({ left: next * teamCardWidthPx, behavior: 'smooth' });
+        return next;
+      });
+    }, 4000);
+    return () => clearInterval(interval);
+  }, [teamLayout, teamMembers?.length, teamAutoScrollPaused, teamCardWidthPx]);
+
+  const pauseTeamAutoScroll = useCallback(() => {
+    setTeamAutoScrollPaused(true);
+    if (teamAutoScrollTimeoutRef.current) clearTimeout(teamAutoScrollTimeoutRef.current);
+    teamAutoScrollTimeoutRef.current = setTimeout(() => setTeamAutoScrollPaused(false), 5000);
+  }, []);
+
+  useEffect(() => {
+    return () => {
+      if (teamAutoScrollTimeoutRef.current) clearTimeout(teamAutoScrollTimeoutRef.current);
+    };
   }, []);
 
   useEffect(() => {
@@ -139,7 +200,7 @@ export default function ServiceDetailLayout(props: ServiceDetailLayoutProps) {
     return;
   }, [showVisualSection, sectionVisualSubtitle, sectionVisualTitle, sectionVisualDescription, sectionHighlights]);
 
-  const heroTitleGradient = 'linear-gradient(to right, #6B1817, #5636AD)';
+  const heroTitleGradient = 'linear-gradient(to right, #6B1817, #523DCB)';
 
   return (
     <main
@@ -450,7 +511,7 @@ export default function ServiceDetailLayout(props: ServiceDetailLayoutProps) {
                             <div key={i} className="w-10 h-10 rounded-full opacity-70" style={{ background: 'radial-gradient(circle, rgba(191, 219, 254, 0.95) 0%, rgba(129, 140, 248, 0.6) 100%)' }} />
                           ))}
                         </div>
-                        <Sparkles className="w-10 h-10 text-indigo-400/80" strokeWidth={1.5} />
+                        <Sparkles className="w-10 h-10 text-[#523DCB]" strokeWidth={1.5} />
                       </div>
                     </div>
                   )}
@@ -567,7 +628,7 @@ export default function ServiceDetailLayout(props: ServiceDetailLayoutProps) {
                     ) : expertiseIcons?.[index] ? (
                       <span
                         className="w-24 h-24 rounded-lg flex items-center justify-center"
-                        style={{ background: 'rgba(93, 67, 205, 0.12)', color: PURPLE }}
+                        style={{ background: 'rgba(82, 61, 203, 0.12)', color: PURPLE }}
                       >
                         {(() => {
                           const Icon = expertiseIcons[index]!;
@@ -629,31 +690,98 @@ export default function ServiceDetailLayout(props: ServiceDetailLayoutProps) {
             <p className="text-gray-600 leading-relaxed mb-8" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>{teamDescription}</p>
           </div>
           {teamMembers && teamMembers.length > 0 ? (
-            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6 mb-14">
-              {teamMembers.map((member, index) => (
-                <article
-                  key={index}
-                  className="rounded-lg overflow-hidden relative aspect-[3/4]"
+            teamLayout === 'slider' ? (
+              <div className="relative mb-14">
+                <div
+                  ref={teamScrollRef}
+                  onScroll={pauseTeamAutoScroll}
+                  onTouchStart={pauseTeamAutoScroll}
+                  className="flex gap-6 overflow-x-auto scrollbar-hide pb-2"
+                  style={{ scrollbarWidth: 'none', msOverflowStyle: 'none', scrollSnapType: 'x proximity' }}
                 >
-                  <img
-                    src={member.image}
-                    alt={member.imageAlt ?? `${member.name} - ${member.role}`}
-                    className="absolute inset-0 w-full h-full object-cover"
-                  />
-                  <div
-                    className="absolute inset-x-0 bottom-0 pt-16 pb-4 px-4"
-                    style={{
-                      background: 'linear-gradient(to top, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.4) 50%, transparent 100%)',
-                    }}
+                  {teamMembers.map((member, index) => (
+                    <article
+                      key={index}
+                      className="flex-shrink-0 w-56 sm:w-64 rounded-lg overflow-hidden relative aspect-[3/4]"
+                      style={{ scrollSnapAlign: 'start' }}
+                    >
+                      <img
+                        src={member.image}
+                        alt={member.imageAlt ?? `${member.name} - ${member.role}`}
+                        className="absolute inset-0 w-full h-full object-cover"
+                      />
+                      <div
+                        className="absolute inset-x-0 bottom-0 pt-16 pb-4 px-4"
+                        style={{
+                          background: 'linear-gradient(to top, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.4) 50%, transparent 100%)',
+                        }}
+                      >
+                        <h3 className="font-bold text-white text-lg" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
+                          {member.name}
+                        </h3>
+                        <p className="text-sm text-white/90 mt-0.5" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>{member.role}</p>
+                      </div>
+                    </article>
+                  ))}
+                </div>
+                {/* Boutons slider (dots) — style Rencontrez l'équipe / TeamRow */}
+                <div style={{
+                  display: 'flex',
+                  justifyContent: 'center',
+                  gap: 8,
+                  marginTop: 24,
+                }}>
+                  {teamMembers.map((_, i) => (
+                    <button
+                      key={i}
+                      type="button"
+                      onClick={() => {
+                        pauseTeamAutoScroll();
+                        scrollTeamToIndex(i);
+                      }}
+                      aria-label={`Voir le membre ${i + 1}`}
+                      style={{
+                        width: i === activeTeamIndex ? 24 : 8,
+                        height: 8,
+                        borderRadius: 999,
+                        padding: 0,
+                        border: 'none',
+                        cursor: 'pointer',
+                        background: i === activeTeamIndex ? '#523DCB' : '#d1d5db',
+                        transition: 'all 0.35s ease',
+                      }}
+                    />
+                  ))}
+                </div>
+                <style>{`.scrollbar-hide::-webkit-scrollbar { display: none; }`}</style>
+              </div>
+            ) : (
+              <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6 mb-14">
+                {teamMembers.map((member, index) => (
+                  <article
+                    key={index}
+                    className="rounded-lg overflow-hidden relative aspect-[3/4]"
                   >
-                    <h3 className="font-bold text-white text-lg" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
-                      {member.name}
-                    </h3>
-                    <p className="text-sm text-white/90 mt-0.5" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>{member.role}</p>
-                  </div>
-                </article>
-              ))}
-            </div>
+                    <img
+                      src={member.image}
+                      alt={member.imageAlt ?? `${member.name} - ${member.role}`}
+                      className="absolute inset-0 w-full h-full object-cover"
+                    />
+                    <div
+                      className="absolute inset-x-0 bottom-0 pt-16 pb-4 px-4"
+                      style={{
+                        background: 'linear-gradient(to top, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.4) 50%, transparent 100%)',
+                      }}
+                    >
+                      <h3 className="font-bold text-white text-lg" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
+                        {member.name}
+                      </h3>
+                      <p className="text-sm text-white/90 mt-0.5" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>{member.role}</p>
+                    </div>
+                  </article>
+                ))}
+              </div>
+            )
           ) : null}
         </div>
       </section>

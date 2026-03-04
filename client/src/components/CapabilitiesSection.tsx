@@ -55,7 +55,7 @@ export default function CapabilitiesSection() {
                 key={index}
                 onClick={playClick}
                 onMouseEnter={playHover}
-                className="group p-6 sm:p-6 lg:p-8 glass transition-all duration-500 cursor-pointer h-full rounded-2xl overflow-hidden hover:scale-[1.009] hover:shadow-xl hover:shadow-purple-500/10"
+                className="group p-6 sm:p-6 lg:p-8 glass transition-all duration-500 cursor-pointer h-full rounded-2xl overflow-hidden hover:scale-[1.009] hover:shadow-xl hover:shadow-[#523DCB]/10"
               >
                 {/* Glassmorphism overlay on hover */}
                 <div className="absolute inset-0 bg-gradient-to-br from-white/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />

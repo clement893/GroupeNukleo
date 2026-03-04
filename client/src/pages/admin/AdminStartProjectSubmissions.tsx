@@ -167,7 +167,7 @@ export default function AdminStartProjectSubmissions() {
                   <div className="flex items-start justify-between">
                     <div className="flex-1">
                       <CardTitle className="flex items-center gap-2 mb-2 text-white">
-                        <User className="w-5 h-5 text-purple-400" />
+                        <User className="w-5 h-5 text-[#523DCB]" />
                         {submission.name}
                       </CardTitle>
                       <CardDescription className="flex items-center gap-4 flex-wrap text-gray-400">
@@ -186,7 +186,7 @@ export default function AdminStartProjectSubmissions() {
                       </CardDescription>
                     </div>
                     <div className="flex flex-col gap-2 items-end">
-                      <span className="px-3 py-1 bg-purple-500/20 text-purple-300 text-xs font-semibold rounded-full">
+                      <span className="px-3 py-1 bg-[#523DCB]/20 text-[#523DCB]/90 text-xs font-semibold rounded-full">
                         {formatProjectType(submission.projectType)}
                       </span>
                       <span className="px-3 py-1 bg-green-500/20 text-green-400 text-xs font-semibold rounded-full flex items-center gap-1">

@@ -105,9 +105,16 @@ export default function ProjectDetail() {
           description={description}
         />
         <main className="min-h-screen pt-20">
-          {/* ═══ En-tête : Retour discret, Titre, Client, Image (mise en page type fiche projet) ═══ */}
-          <section style={{ padding: 'clamp(3rem, 8vh, 5rem) 3% 0' }}>
-            <div className="w-full max-w-5xl mx-auto">
+          {/* Wrapper unique : marges = bords gauche/droite de l'image hero (référence page) */}
+          <div className="container" style={{ maxWidth: '100%' }}>
+          {/* ═══ Hero ═══ */}
+          <section
+            style={{
+              padding: 'clamp(3rem, 8vh, 5rem) 0 clamp(4rem, 8vh, 6rem)',
+              background: 'transparent',
+              overflow: 'visible',
+            }}
+          >
               <Link
                 href={getLocalizedPath('/projects')}
                 style={{
@@ -143,31 +150,49 @@ export default function ProjectDetail() {
               }}>
                 {projectData.client}
               </p>
-              <div style={{ borderRadius: 14, overflow: 'hidden', width: '100%' }}>
-                <div style={{ aspectRatio: '21/9', minHeight: 240, background: '#e5e7eb' }}>
-                  <OptimizedImage
-                    src={heroImageUrl}
-                    alt={projectData.title}
-                    width={1200}
-                    height={514}
-                    className="w-full h-full object-cover"
-                    loading="eager"
-                    fetchPriority="high"
-                  />
-                </div>
+              <div
+                className="rounded-md overflow-hidden bg-gray-100 w-full"
+                style={{
+                  marginTop: '1.5rem',
+                  height: 'clamp(480px, 75vh, 780px)',
+                  boxShadow: '0 4px 24px rgba(93, 67, 205, 0.08), 0 1px 0 rgba(93, 67, 205, 0.06) inset',
+                }}
+              >
+                <OptimizedImage
+                  src={heroImageUrl}
+                  alt={projectData.title}
+                  width={1200}
+                  height={514}
+                  className="w-full h-full object-cover"
+                  loading="eager"
+                  fetchPriority="high"
+                />
               </div>
-            </div>
           </section>
 
-          {/* ═══ Métadonnées + description ═══ */}
-          <section style={{ padding: '0 3% 5rem' }}>
-            <div className="grid grid-cols-1 lg:grid-cols-[minmax(140px,200px)_1fr] gap-8 lg:gap-12 w-full items-start">
+          {/* ═══ Métadonnées + description — alignées aux marges du hero ═══ */}
+          <section style={{ padding: '0 0 5rem' }}>
+            <div className="grid grid-cols-1 lg:grid-cols-[minmax(180px,260px)_1fr] gap-8 lg:gap-12 w-full items-start">
               <div style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: '0.8rem', color: '#6b7280', lineHeight: 1.8 }}>
-                <p style={{ margin: '0 0 0.5rem 0' }}><strong>Client :</strong></p>
+                <p style={{ margin: '0 0 0.35rem 0' }}><strong>Client :</strong></p>
                 <p style={{ margin: '0 0 1.25rem 0' }}>{projectData.client}</p>
                 <p style={{ margin: '0 0 0.5rem 0' }}><strong>Services :</strong></p>
-                <p style={{ margin: '0 0 1.25rem 0' }}>{projectData.services}</p>
-                <p style={{ margin: '0 0 0.5rem 0' }}><strong>Année :</strong></p>
+                <div className="flex flex-wrap gap-2" style={{ margin: '0.5rem 0 1.25rem 0' }}>
+                  {(projectData.services || '')
+                    .split(',')
+                    .map((s) => s.trim())
+                    .filter(Boolean)
+                    .map((tag) => (
+                      <span
+                        key={tag}
+                        className="px-3 py-1.5 rounded border border-gray-200 text-gray-700 text-sm font-medium"
+                        style={{ background: 'rgba(255,255,255,0.8)', fontFamily: "'Plus Jakarta Sans', sans-serif" }}
+                      >
+                        {tag}
+                      </span>
+                    ))}
+                </div>
+                <p style={{ margin: '0 0 0.35rem 0' }}><strong>Année :</strong></p>
                 <p style={{ margin: 0 }}>{projectData.year}</p>
               </div>
               <div>
@@ -206,22 +231,21 @@ export default function ProjectDetail() {
             </div>
           </section>
 
-          {/* ═══ Galerie ═══ */}
+          {/* ═══ Galerie — alignée aux marges du hero ═══ */}
           {galleryImages.length > 1 && (
-            <section style={{ background: 'transparent', padding: '3rem 3% 4rem' }}>
+            <section style={{ background: 'transparent', padding: '3rem 0 4rem' }}>
               <div className="w-full">
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
                   {galleryImages.map((name, idx) => {
                     const src = `/projects/${name}`;
-                    const isPortrait = idx % 3 === 1;
+                    const isPortrait = idx % 2 === 1;
                     return (
                       <div
                         key={name}
+                        className="rounded-md overflow-hidden"
                         style={{
                           aspectRatio: isPortrait ? '3/4' : '4/3',
                           background: '#2d2d2d',
-                          borderRadius: 8,
-                          overflow: 'hidden',
                         }}
                       >
                         <OptimizedImage
@@ -240,6 +264,7 @@ export default function ProjectDetail() {
             </section>
           )}
 
+          </div>
         </main>
       </PageLayout>
     );
@@ -254,7 +279,7 @@ export default function ProjectDetail() {
         <div className="min-h-screen flex items-center justify-center">
           <div className="text-center" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
             <p className="text-gray-600 mb-4">{t('projects.notFound')}</p>
-            <Link href={getLocalizedPath('/projects')} className="text-purple-600 hover:underline font-medium">
+            <Link href={getLocalizedPath('/projects')} className="text-[#523DCB] hover:underline font-medium">
               {t('projects.backToList')}
             </Link>
           </div>
@@ -293,8 +318,14 @@ export default function ProjectDetail() {
         description={meta.description}
       />
       <main className="min-h-screen pt-20">
-        <section style={{ padding: 'clamp(3rem, 8vh, 5rem) 3% 0' }}>
-          <div className="w-full max-w-5xl mx-auto">
+        <div className="container" style={{ maxWidth: '100%' }}>
+        <section
+          style={{
+            padding: 'clamp(3rem, 8vh, 5rem) 0 clamp(4rem, 8vh, 6rem)',
+            background: 'transparent',
+            overflow: 'visible',
+          }}
+        >
             <Link
               href={getLocalizedPath('/projects')}
               style={{
@@ -330,30 +361,48 @@ export default function ProjectDetail() {
             }}>
               {meta.client}
             </p>
-            <div style={{ borderRadius: 14, overflow: 'hidden', width: '100%' }}>
-              <div style={{ aspectRatio: '21/9', minHeight: 240, background: '#e5e7eb' }}>
-                <OptimizedImage
-                  src={heroImageUrl}
-                  alt={meta.title}
-                  width={1200}
-                  height={514}
-                  className="w-full h-full object-cover"
-                  loading="eager"
-                  fetchPriority="high"
-                />
-              </div>
+            <div
+              className="rounded-md overflow-hidden bg-gray-100 w-full"
+              style={{
+                marginTop: '1.5rem',
+                height: 'clamp(480px, 75vh, 780px)',
+                boxShadow: '0 4px 24px rgba(93, 67, 205, 0.08), 0 1px 0 rgba(93, 67, 205, 0.06) inset',
+              }}
+            >
+              <OptimizedImage
+                src={heroImageUrl}
+                alt={meta.title}
+                width={1200}
+                height={514}
+                className="w-full h-full object-cover"
+                loading="eager"
+                fetchPriority="high"
+              />
             </div>
-          </div>
         </section>
 
-        <section style={{ padding: '0 3% 5rem' }}>
-          <div className="grid grid-cols-1 lg:grid-cols-[minmax(140px,200px)_1fr] gap-8 lg:gap-12 w-full items-start">
+        <section style={{ padding: '0 0 5rem' }}>
+          <div className="grid grid-cols-1 lg:grid-cols-[minmax(180px,260px)_1fr] gap-8 lg:gap-12 w-full items-start">
             <div style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: '0.8rem', color: '#6b7280', lineHeight: 1.8 }}>
-              <p style={{ margin: '0 0 0.5rem 0' }}><strong>Client :</strong></p>
+              <p style={{ margin: '0 0 0.35rem 0' }}><strong>Client :</strong></p>
               <p style={{ margin: '0 0 1.25rem 0' }}>{meta.client}</p>
               <p style={{ margin: '0 0 0.5rem 0' }}><strong>Services :</strong></p>
-              <p style={{ margin: '0 0 1.25rem 0' }}>{meta.services}</p>
-              <p style={{ margin: '0 0 0.5rem 0' }}><strong>Année :</strong></p>
+              <div className="flex flex-wrap gap-2" style={{ margin: '0.5rem 0 1.25rem 0' }}>
+                {(meta.services || '')
+                  .split(',')
+                  .map((s) => s.trim())
+                  .filter(Boolean)
+                  .map((tag) => (
+                    <span
+                      key={tag}
+                      className="px-3 py-1.5 rounded border border-gray-200 text-gray-700 text-sm font-medium"
+                      style={{ background: 'rgba(255,255,255,0.8)', fontFamily: "'Plus Jakarta Sans', sans-serif" }}
+                    >
+                      {tag}
+                    </span>
+                  ))}
+              </div>
+              <p style={{ margin: '0 0 0.35rem 0' }}><strong>Année :</strong></p>
               <p style={{ margin: 0 }}>{meta.year}</p>
             </div>
             <div>
@@ -385,15 +434,15 @@ export default function ProjectDetail() {
           </div>
         </section>
 
-        <section style={{ background: 'transparent', padding: '3rem 3% 4rem' }}>
+        <section style={{ background: 'transparent', padding: '3rem 0 4rem' }}>
           <div className="w-full">
             {projectImages.length > 0 ? (
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
                 {projectImages.map((name, idx) => {
                   const src = `/projects/${name}`;
-                  const isPortrait = idx % 3 === 1;
+                  const isPortrait = idx % 2 === 1;
                   return (
-                    <div key={name} style={{ aspectRatio: isPortrait ? '3/4' : '4/3', background: '#2d2d2d', borderRadius: 8, overflow: 'hidden' }}>
+                    <div key={name} className="rounded-md overflow-hidden" style={{ aspectRatio: isPortrait ? '3/4' : '4/3', background: '#2d2d2d' }}>
                       <OptimizedImage src={src} alt={meta.title} width={isPortrait ? 400 : 600} height={isPortrait ? 533 : 450} className="w-full h-full object-cover" loading="lazy" />
                     </div>
                   );
@@ -401,7 +450,7 @@ export default function ProjectDetail() {
               </div>
             ) : (
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div style={{ aspectRatio: '4/3', background: '#2d2d2d', borderRadius: 8, overflow: 'hidden' }}>
+                <div className="rounded-md overflow-hidden" style={{ aspectRatio: '4/3', background: '#2d2d2d' }}>
                   <OptimizedImage src={heroImageUrl} alt="" width={600} height={450} className="w-full h-full object-cover" loading="lazy" />
                 </div>
               </div>
@@ -409,6 +458,7 @@ export default function ProjectDetail() {
           </div>
         </section>
 
+        </div>
       </main>
     </PageLayout>
   );

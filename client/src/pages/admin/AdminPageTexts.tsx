@@ -188,7 +188,7 @@ export default function AdminPageTexts() {
                           isActive
                             ? {
                                 background:
-                                  "linear-gradient(to right, #6B1817, #5636AD)",
+                                  "linear-gradient(to right, #6B1817, #523DCB)",
                               }
                             : undefined
                         }

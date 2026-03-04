@@ -58,7 +58,7 @@ export function Icon3DDataIA() {
       <defs>
         <linearGradient id={`${prefix}-node`} x1="0%" y1="0%" x2="100%" y2="100%">
           <stop offset="0%" stopColor="#6C5CE7" />
-          <stop offset="100%" stopColor="#5D43CD" />
+          <stop offset="100%" stopColor="#523DCB" />
         </linearGradient>
         <linearGradient id={`${prefix}-node2`} x1="0%" y1="0%" x2="100%" y2="100%">
           <stop offset="0%" stopColor="#00B894" />
@@ -129,7 +129,7 @@ export function Icon3DAIApps() {
         <linearGradient id={`${prefix}-brain`} x1="0%" y1="0%" x2="100%" y2="100%">
           <stop offset="0%" stopColor="#A29BFE" />
           <stop offset="50%" stopColor="#6C5CE7" />
-          <stop offset="100%" stopColor="#5D43CD" />
+          <stop offset="100%" stopColor="#523DCB" />
         </linearGradient>
         <linearGradient id={`${prefix}-spark`} x1="0%" y1="0%" x2="100%" y2="100%">
           <stop offset="0%" stopColor="#FFEAA7" />

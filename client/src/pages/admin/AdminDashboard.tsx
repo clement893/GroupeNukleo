@@ -32,14 +32,14 @@ export default function AdminDashboard() {
       value: stats?.leoSessions || 0,
       icon: MessageSquare,
       description: "Total chat sessions with LEO",
-      color: "from-blue-500 to-purple-500",
+      color: "from-[#523DCB] to-[#523DCB]",
     },
     {
       title: "AI Assessments",
       value: stats?.aiAssessments || 0,
       icon: FileText,
       description: "Completed AI readiness assessments",
-      color: "from-purple-500 to-pink-500",
+      color: "from-[#523DCB] to-pink-500",
     },
     {
       title: "LEO Contacts",
@@ -215,7 +215,7 @@ export default function AdminDashboard() {
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
-                  <div className="h-2 w-2 rounded-full bg-purple-500 mt-2" />
+                  <div className="h-2 w-2 rounded-full bg-[#523DCB] mt-2" />
                   <div>
                     <div className="text-gray-900 text-sm" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>LEO AI active</div>
                     <div className="text-gray-500 text-xs" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>Chatbot responding to queries</div>

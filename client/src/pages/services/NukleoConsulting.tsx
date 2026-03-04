@@ -24,10 +24,10 @@ export default function NukleoConsulting() {
   }));
 
   const teamMembers = [
-    { name: 'Consultant·e 1', role: 'Consultant·e stratégie', image: '/demo/team-1.jpg', imageAlt: 'Consultant·e stratégie chez Nukleo Digital' },
-    { name: 'Consultant·e 2', role: 'Chef de projet transformation', image: '/demo/team-2.jpg', imageAlt: 'Chef de projet transformation chez Nukleo Digital' },
-    { name: 'Consultant·e 3', role: 'Expert IA & data', image: '/demo/team-3.jpg', imageAlt: 'Expert IA & data chez Nukleo Digital' },
-    { name: 'Consultant·e 4', role: 'Conduite du changement', image: '/demo/team-4.jpg', imageAlt: 'Conduite du changement chez Nukleo Digital' },
+    { name: 'Omar', role: 'Chargé de projets spéciaux', image: '/team/Omar.webp', imageAlt: 'Omar — Chargé de projets spéciaux chez Nukleo Digital' },
+    { name: 'Nathan', role: 'Conseiller en transformation numérique', image: '/team/Nathan.png', imageAlt: 'Nathan — Conseiller en transformation numérique chez Nukleo Digital' },
+    { name: 'Clément', role: 'Conseiller en transformation numérique', image: '/team/Clement.webp', imageAlt: 'Clément — Conseiller en transformation numérique chez Nukleo Digital' },
+    { name: 'Lionel', role: 'Conseiller en transformation numérique', image: '/team/Lionel.png', imageAlt: 'Lionel — Conseiller en transformation numérique chez Nukleo Digital' },
   ];
 
   return (

@@ -11,6 +11,7 @@ import { logger } from '@/lib/logger';
 
 const BORDEAUX = '#5A1E29';
 const OFF_WHITE = '#EFE8E8';
+const SITE_BLACK = '#0A0A0A';
 
 // Carte : embed Google Maps (adresse Montréal) — pas de clé API requise pour l’embed classique
 type OfficeId = 'montreal' | 'halifax';
@@ -123,7 +124,7 @@ export default function Contact() {
                   paddingBottom: '0.18em',
                   display: 'inline-block',
                   overflow: 'visible',
-                  background: 'linear-gradient(to right, #6B1817, #5636AD)',
+                  background: 'linear-gradient(to right, #6B1817, #523DCB)',
                   backgroundClip: 'text',
                   WebkitBackgroundClip: 'text',
                   color: 'transparent',
@@ -160,18 +161,18 @@ export default function Contact() {
               >
                 {/* Montréal */}
                 <div className="flex gap-3">
-                  <MapPin className="w-5 h-5 flex-shrink-0 mt-0.5" style={{ color: '#5D43CD' }} aria-hidden />
+                  <MapPin className="w-5 h-5 flex-shrink-0 mt-0.5" style={{ color: '#523DCB' }} aria-hidden />
                   <div>
-                    <p style={{ fontWeight: 700, color: BORDEAUX, margin: '0 0 0.25rem 0', fontSize: '1rem' }}>{t('contact.montreal')}</p>
+                    <p style={{ fontWeight: 700, color: SITE_BLACK, margin: '0 0 0.25rem 0', fontSize: '1rem' }}>{t('contact.montreal')}</p>
                     <p style={{ margin: 0, fontSize: '0.9rem', lineHeight: 1.5 }}>7236 Rue Waverly</p>
                     <p style={{ margin: 0, fontSize: '0.9rem', lineHeight: 1.5 }}>Montréal, QC H2R 0C2</p>
                   </div>
                 </div>
                 {/* Halifax */}
                 <div className="flex gap-3">
-                  <MapPin className="w-5 h-5 flex-shrink-0 mt-0.5" style={{ color: '#5D43CD' }} aria-hidden />
+                  <MapPin className="w-5 h-5 flex-shrink-0 mt-0.5" style={{ color: '#523DCB' }} aria-hidden />
                   <div>
-                    <p style={{ fontWeight: 700, color: BORDEAUX, margin: '0 0 0.25rem 0', fontSize: '1rem' }}>{t('contact.halifax')}</p>
+                    <p style={{ fontWeight: 700, color: SITE_BLACK, margin: '0 0 0.25rem 0', fontSize: '1rem' }}>{t('contact.halifax')}</p>
                     <p style={{ margin: 0, fontSize: '0.9rem', lineHeight: 1.5 }}>1800 Argyle St Unit 801</p>
                     <p style={{ margin: 0, fontSize: '0.9rem', lineHeight: 1.5 }}>Halifax, NS B3J 3N8</p>
                   </div>
@@ -189,17 +190,17 @@ export default function Contact() {
               </div>
 
               {/* Droite : formulaire (hauteur réduite, largeur augmentée) */}
-              <div className="glass-panel w-full rounded-xl p-6 lg:p-8">
+              <div className="glass-panel w-full rounded-md p-6 lg:p-8">
                 <h2 className="text-2xl lg:text-3xl font-bold mb-4" style={{ color: BORDEAUX, fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
                   {t('contact.sendMessage')}
                 </h2>
                 {isSubmitted && (
-                  <div className="mb-4 p-3 bg-green-50 border border-green-200 rounded-xl">
+                  <div className="mb-4 p-3 bg-green-50 border border-green-200 rounded-md">
                     <p className="text-green-800 font-medium text-sm">{t('contact.successMessage')}</p>
                   </div>
                 )}
                 {(sendMessage.error || Object.keys(validationErrors).length > 0) && (
-                  <div className="mb-4 p-3 bg-red-50 border border-red-200 rounded-xl">
+                  <div className="mb-4 p-3 bg-red-50 border border-red-200 rounded-md">
                     <p className="text-red-700 font-medium text-sm mb-2">
                       {Object.keys(validationErrors).length > 0 ? t('contact.errorFix') : t('contact.errorMessage')}
                     </p>
@@ -225,7 +226,7 @@ export default function Contact() {
                 )}
                 <form onSubmit={handleSubmit} className="space-y-3">
                   {errorMessage && (
-                    <div className="flex items-center gap-3 p-3 rounded-xl bg-red-50 border border-red-200 text-red-700">
+                    <div className="flex items-center gap-3 p-3 rounded-md bg-red-50 border border-red-200 text-red-700">
                       <AlertCircle className="w-5 h-5 flex-shrink-0" />
                       <p className="text-sm">{errorMessage}</p>
                     </div>
@@ -243,7 +244,7 @@ export default function Contact() {
                         onChange={handleChange}
                         required
                         aria-required="true"
-className="w-full px-4 py-2 rounded-xl border border-gray-200 bg-white text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500/30 focus:border-purple-500"
+className="w-full px-4 py-2 rounded-md border border-gray-200 bg-white text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-[#523DCB]/30 focus:border-[#523DCB]"
                     placeholder={t('contact.firstNamePlaceholder')}
                       />
                     </div>
@@ -259,7 +260,7 @@ className="w-full px-4 py-2 rounded-xl border border-gray-200 bg-white text-gray
                         onChange={handleChange}
                         required
                         aria-required="true"
-className="w-full px-4 py-2 rounded-xl border border-gray-200 bg-white text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500/30 focus:border-purple-500"
+className="w-full px-4 py-2 rounded-md border border-gray-200 bg-white text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-[#523DCB]/30 focus:border-[#523DCB]"
                     placeholder={t('contact.lastNamePlaceholder')}
                       />
                     </div>
@@ -276,7 +277,7 @@ className="w-full px-4 py-2 rounded-xl border border-gray-200 bg-white text-gray
                       onChange={handleChange}
                       required
                       aria-required="true"
-className="w-full px-4 py-2 rounded-xl border border-gray-200 bg-white text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500/30 focus:border-purple-500"
+className="w-full px-4 py-2 rounded-md border border-gray-200 bg-white text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-[#523DCB]/30 focus:border-[#523DCB]"
                     placeholder={t('contact.emailPlaceholder')}
                     />
                   </div>
@@ -292,7 +293,7 @@ className="w-full px-4 py-2 rounded-xl border border-gray-200 bg-white text-gray
                       onChange={handleChange}
                       required
                       aria-required="true"
-className="w-full px-4 py-2 rounded-xl border border-gray-200 bg-white text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500/30 focus:border-purple-500"
+className="w-full px-4 py-2 rounded-md border border-gray-200 bg-white text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-[#523DCB]/30 focus:border-[#523DCB]"
                     placeholder={t('contact.companyPlaceholder')}
                     />
                   </div>
@@ -308,7 +309,7 @@ className="w-full px-4 py-2 rounded-xl border border-gray-200 bg-white text-gray
                       required
                       minLength={10}
                       rows={3}
-                      className={`w-full px-4 py-2 rounded-xl border bg-white text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500/30 focus:border-purple-500 resize-none ${
+                      className={`w-full px-4 py-2 rounded-md border bg-white text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-[#523DCB]/30 focus:border-[#523DCB] resize-none ${
                         validationErrors.message ? 'border-red-300' : 'border-gray-200'
                       }`}
                       placeholder={t('contact.messagePlaceholder')}
@@ -320,7 +321,7 @@ className="w-full px-4 py-2 rounded-xl border border-gray-200 bg-white text-gray
                   <Button
                     type="submit"
                     disabled={isSubmitting || sendMessage.isPending}
-                    className="w-full py-4 rounded-xl font-semibold bg-[#6B4BEA] hover:bg-[#5a3dd9] text-white"
+                    className="w-full py-4 rounded-md font-semibold bg-[#523DCB] hover:bg-[#4630b0] text-white"
                   >
                     {isSubmitting || sendMessage.isPending ? (t('common.loading') || 'Envoi...') : t('contact.send')}
                   </Button>
@@ -336,10 +337,10 @@ className="w-full px-4 py-2 rounded-xl border border-gray-200 bg-white text-gray
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8">
                 {/* Carte Montréal */}
                 <div>
-                  <p className="font-semibold text-gray-800 mb-3" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>{t('contact.montreal')}</p>
+                  <p className="font-semibold mb-3" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", color: SITE_BLACK }}>{t('contact.montreal')}</p>
                   <div
-                    className="rounded-xl overflow-hidden bg-gray-100 shadow-sm border border-gray-200/60"
-                    style={{ borderRadius: 14, minHeight: 420 }}
+                    className="rounded-md overflow-hidden bg-gray-100 shadow-sm border border-gray-200/60"
+                    style={{ borderRadius: 7, minHeight: 420 }}
                   >
                     <iframe
                       title={`${t('contact.whereToFindUs')} — ${t('contact.montreal')}`}
@@ -356,10 +357,10 @@ className="w-full px-4 py-2 rounded-xl border border-gray-200 bg-white text-gray
                 </div>
                 {/* Carte Halifax */}
                 <div>
-                  <p className="font-semibold text-gray-800 mb-3" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>{t('contact.halifax')}</p>
+                  <p className="font-semibold mb-3" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", color: SITE_BLACK }}>{t('contact.halifax')}</p>
                   <div
-                    className="rounded-xl overflow-hidden bg-gray-100 shadow-sm border border-gray-200/60"
-                    style={{ borderRadius: 14, minHeight: 420 }}
+                    className="rounded-md overflow-hidden bg-gray-100 shadow-sm border border-gray-200/60"
+                    style={{ borderRadius: 7, minHeight: 420 }}
                   >
                     <iframe
                       title={`${t('contact.whereToFindUs')} — ${t('contact.halifax')}`}

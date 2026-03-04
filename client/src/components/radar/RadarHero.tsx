@@ -3,14 +3,14 @@ export function RadarHero() {
     <section className="relative pt-32 pb-20 overflow-hidden">
       <div className="container text-center">
         {/* Badge */}
-        <div className="inline-flex items-center gap-2 px-4 py-2 mb-8 rounded-full bg-purple-900/30 backdrop-blur-sm border border-white/10">
+        <div className="inline-flex items-center gap-2 px-4 py-2 mb-8 rounded-full bg-[#523DCB]/30 backdrop-blur-sm border border-white/10">
           <span className="text-sm font-medium text-white">Global AI Technology Radar 2024</span>
         </div>
 
         {/* Titre principal */}
         <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-6 leading-tight">
           AI Technologies That Actually Matter for{" "}
-          <span className="bg-gradient-to-r from-purple-400 via-blue-400 to-cyan-400 bg-clip-text text-transparent">
+          <span className="bg-gradient-to-r from-[#523DCB] via-[#523DCB] to-cyan-400 bg-clip-text text-transparent">
             Organizations of All Sizes
           </span>
         </h1>
@@ -21,7 +21,7 @@ export function RadarHero() {
         </p>
 
         {/* Bouton Latest AI News */}
-        <button className="inline-flex items-center gap-2 px-6 py-3 mb-12 bg-white text-purple-900 font-semibold rounded-full hover:bg-white/95 transition-all duration-300 hover:scale-[1.022] shadow-lg">
+        <button className="inline-flex items-center gap-2 px-6 py-3 mb-12 bg-white text-[#523DCB] font-semibold rounded-full hover:bg-white/95 transition-all duration-300 hover:scale-[1.022] shadow-lg">
           📰 Latest AI News & Trends
         </button>
 

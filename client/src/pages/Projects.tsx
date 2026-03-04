@@ -229,7 +229,7 @@ export default function Projects() {
               paddingBottom: '0.18em',
               display: 'inline-block',
               overflow: 'visible',
-              background: 'linear-gradient(to right, #6B1817, #5636AD)',
+              background: 'linear-gradient(to right, #6B1817, #523DCB)',
               backgroundClip: 'text',
               WebkitBackgroundClip: 'text',
               color: 'transparent',

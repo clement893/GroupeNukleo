@@ -12,7 +12,7 @@ import { logger } from '@/lib/logger';
 import enTranslations from '../locales/en.json';
 import frTranslations from '../locales/fr.json';
 
-const HERO_GRADIENT = 'linear-gradient(to right, #6B1817, #5636AD)';
+const HERO_GRADIENT = 'linear-gradient(to right, #6B1817, #523DCB)';
 
 export default function Resources() {
   const { t, language } = useLanguage();

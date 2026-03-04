@@ -61,7 +61,7 @@ export default function HomeServicesSection() {
                     bg-white/40 backdrop-blur-[12px] border border-white/60 shadow-sm
                     transition-all duration-300 group-hover:!bg-white/75 group-hover:!border-white/90"
                   style={{
-                    color: '#5D43CD',
+                    color: '#523DCB',
                     WebkitBackdropFilter: 'blur(12px) saturate(180%)',
                   }}
                   aria-hidden
