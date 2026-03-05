@@ -68,7 +68,7 @@ export default function ProjectsHeroTriptych({
             }}
             style={{
               flex: isActive ? '1 1 0' : '0 0 6.8%',
-              minWidth: isActive ? 0 : undefined,
+              minWidth: isActive ? 0 : 44,
               transition: 'flex 0.6s cubic-bezier(0.77,0,0.175,1)',
               position: 'relative',
               cursor: isActive ? 'default' : 'pointer',

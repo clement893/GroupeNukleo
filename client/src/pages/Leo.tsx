@@ -582,7 +582,7 @@ export default function Leo() {
                         className="w-12 h-12 object-contain bg-transparent avatar-happy"
                       />
                   </div>
-                  <div className="flex flex-col items-start max-w-[70%]">
+                  <div className="flex flex-col items-start max-w-full sm:max-w-[70%]">
                     <span className="text-xs text-gray-500 uppercase tracking-wider mb-2 font-medium">{t('leo.leoLabel')}</span>
                     <div className="px-6 py-4 rounded-2xl bg-white border border-gray-200 shadow-sm">
                       <p className="text-base leading-relaxed mb-4 text-gray-800">{message.content}</p>
@@ -653,7 +653,7 @@ export default function Leo() {
                     </div>
                   )}
 
-                  <div className={`flex flex-col ${message.role === 'user' ? 'items-end' : 'items-start'} max-w-[70%]`}>
+                  <div className={`flex flex-col ${message.role === 'user' ? 'items-end' : 'items-start'} max-w-full sm:max-w-[70%]`}>
                     <span className="text-xs text-gray-500 uppercase tracking-wider mb-2 font-medium">
                       {message.role === 'assistant' ? t('leo.leoLabel') : t('leo.youLabel')}
                     </span>
@@ -728,7 +728,7 @@ export default function Leo() {
                   className={`w-12 h-12 object-contain bg-transparent transition-all duration-300 avatar-${currentEmotion}`}
                 />
               </div>
-              <div className="flex flex-col items-start max-w-[70%]">
+              <div className="flex flex-col items-start max-w-full sm:max-w-[70%]">
                 <span className="text-xs text-gray-500 uppercase tracking-wider mb-2 font-medium">LEO</span>
                 <div className="px-6 py-4 rounded-2xl bg-white border border-gray-200 shadow-sm text-gray-900">
                   <p className="text-base leading-relaxed whitespace-pre-wrap" style={{ fontFamily: "'Google Sans Flex', sans-serif" }}>

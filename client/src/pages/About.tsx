@@ -43,7 +43,7 @@ export default function About() {
       />
       <StructuredData data={personSchema} />
 
-      <div style={{ minHeight: '100vh', color: '#374151', paddingTop: 128, background: OFF_WHITE }}>
+      <div style={{ minHeight: '100vh', color: '#374151', paddingTop: 'clamp(5rem, 15vw, 8rem)', background: OFF_WHITE }}>
         {/* Hero — même disposition que page d'accueil */}
         <section style={{ padding: 'clamp(6rem, 12vh, 8rem) 3% 0', overflow: 'visible' }}>
           {/* Titre + sous-titre en haut, alignés à gauche */}

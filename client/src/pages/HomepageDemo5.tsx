@@ -482,7 +482,7 @@ export default function HomepageDemo5() {
         }}
       >
         {/* ── Contenu principal ─────────────────────────────────────────────── */}
-        <div style={{ position: 'relative', zIndex: 10, paddingTop: 128 }}>
+        <div style={{ position: 'relative', zIndex: 10, paddingTop: 'clamp(5rem, 15vw, 8rem)' }}>
 
         {/* ════════════════════════════════════════════════════════════════════
             SECTION HERO — L'agence numérique des PME et des OBNL
@@ -801,9 +801,9 @@ export default function HomepageDemo5() {
             SECTION 5 — TRIPTYQUE PROJETS
         ════════════════════════════════════════════════════════════════════ */}
         <div style={{
-          marginBottom: 5 * 16,
-          paddingTop: 4 * 16,
-          paddingBottom: 5 * 16,
+          marginBottom: 'clamp(2.5rem, 6vw, 5rem)',
+          paddingTop: 'clamp(2rem, 5vw, 4rem)',
+          paddingBottom: 'clamp(2.5rem, 6vw, 5rem)',
           paddingLeft: '3%',
           paddingRight: '3%',
           background: 'transparent',

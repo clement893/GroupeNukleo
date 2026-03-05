@@ -73,7 +73,7 @@ export function TeamScrollCards() {
           {/* Images — scroll équipe uniquement quand survol */}
           <div
             ref={imagesRef}
-            className="relative w-full max-w-[270px] h-[520px] shrink-0 cursor-n-resize"
+            className="relative w-full max-w-[270px] h-[520px] max-h-[85vh] shrink-0 cursor-n-resize"
           >
         {TEAM_MEMBERS.map((member, i) => {
           const offset = i - activeIndex;

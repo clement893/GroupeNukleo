@@ -206,7 +206,7 @@ export default function Projects() {
       />
 
       {/* Fond unifié avec le reste du site (PageLayout) — même structure hero que About/Accueil */}
-      <div className="min-h-screen" style={{ paddingTop: 128 }}>
+      <div className="min-h-screen" style={{ paddingTop: 'clamp(5rem, 15vw, 8rem)' }}>
         <ProjectsHero
           headline={t('projects.heroHeadline')}
           description={t('projects.description')}
