@@ -117,27 +117,44 @@ export default function ServiceDetailLayout(props: ServiceDetailLayoutProps) {
   const rightVisualRef = useRef<HTMLDivElement | null>(null);
   const [rightHeight, setRightHeight] = useState<number | null>(null);
   const teamScrollRef = useRef<HTMLDivElement | null>(null);
+  const teamFirstCardRef = useRef<HTMLElement | null>(null);
+  const [teamCardStepPx, setTeamCardStepPx] = useState(260); // card width + gap, updated by ResizeObserver
   const [activeTeamIndex, setActiveTeamIndex] = useState(0);
   const [teamAutoScrollPaused, setTeamAutoScrollPaused] = useState(false);
   const teamAutoScrollTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
-  const teamCardWidthPx = 260; // w-56/w-64 + gap-6 approx
+  const TEAM_GAP_PX = 24; // gap-6
 
   const checkTeamScroll = useCallback(() => {
     const el = teamScrollRef.current;
     if (!el || !teamMembers?.length) return;
     const { scrollLeft } = el;
-    const index = Math.min(teamMembers.length - 1, Math.round(scrollLeft / teamCardWidthPx));
+    const index = Math.min(teamMembers.length - 1, Math.round(scrollLeft / teamCardStepPx));
     setActiveTeamIndex(index);
-  }, [teamMembers?.length]);
+  }, [teamMembers?.length, teamCardStepPx]);
 
   const scrollTeamToIndex = useCallback((index: number) => {
-    teamScrollRef.current?.scrollTo({ left: index * teamCardWidthPx, behavior: 'smooth' });
+    teamScrollRef.current?.scrollTo({ left: index * teamCardStepPx, behavior: 'smooth' });
     setActiveTeamIndex(index);
-  }, []);
+  }, [teamCardStepPx]);
 
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+
+  // Measure team card width + gap for accurate scroll index (responsive)
+  useEffect(() => {
+    if (teamLayout !== 'slider' || !teamMembers?.length) return;
+    const card = teamFirstCardRef.current;
+    if (!card) return;
+    const updateStep = () => {
+      const w = card.offsetWidth;
+      setTeamCardStepPx(w + TEAM_GAP_PX);
+    };
+    updateStep();
+    const ro = new ResizeObserver(updateStep);
+    ro.observe(card);
+    return () => ro.disconnect();
+  }, [teamLayout, teamMembers?.length]);
 
   useEffect(() => {
     if (teamLayout !== 'slider' || !teamMembers?.length) return;
@@ -160,12 +177,12 @@ export default function ServiceDetailLayout(props: ServiceDetailLayoutProps) {
     const interval = setInterval(() => {
       setActiveTeamIndex((prev) => {
         const next = (prev + 1) % n;
-        teamScrollRef.current?.scrollTo({ left: next * teamCardWidthPx, behavior: 'smooth' });
+        teamScrollRef.current?.scrollTo({ left: next * teamCardStepPx, behavior: 'smooth' });
         return next;
       });
     }, 4000);
     return () => clearInterval(interval);
-  }, [teamLayout, teamMembers?.length, teamAutoScrollPaused, teamCardWidthPx]);
+  }, [teamLayout, teamMembers?.length, teamAutoScrollPaused, teamCardStepPx]);
 
   const pauseTeamAutoScroll = useCallback(() => {
     setTeamAutoScrollPaused(true);
@@ -211,7 +228,7 @@ export default function ServiceDetailLayout(props: ServiceDetailLayoutProps) {
       <section
         className="relative"
         style={{
-          padding: 'clamp(14rem, calc(8rem + 12vh), 16rem) 0 clamp(3rem, 6vw, 6rem)',
+          padding: 'clamp(8rem, calc(8rem + 12vh), 16rem) 0 clamp(3rem, 6vw, 6rem)',
           background: 'transparent',
           overflow: 'visible',
         }}
@@ -702,6 +719,7 @@ export default function ServiceDetailLayout(props: ServiceDetailLayoutProps) {
                   {teamMembers.map((member, index) => (
                     <article
                       key={index}
+                      ref={index === 0 ? teamFirstCardRef : undefined}
                       className="flex-shrink-0 w-56 sm:w-64 rounded-lg overflow-hidden relative aspect-[3/4]"
                       style={{ scrollSnapAlign: 'start' }}
                     >

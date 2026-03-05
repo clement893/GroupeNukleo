@@ -29,7 +29,7 @@ export function LaptopVisual() {
       />
       {/* Laptop screen */}
       <div
-        className="relative w-[380px] rounded-t-xl overflow-hidden border-[3px] border-[#a8a8a8] border-b-0"
+        className="relative w-[380px] max-w-full rounded-t-xl overflow-hidden border-[3px] border-[#a8a8a8] border-b-0"
         style={{
           background: '#fff',
           boxShadow: '0 -4px 24px rgba(0,0,0,0.12)',

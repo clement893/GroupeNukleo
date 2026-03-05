@@ -219,7 +219,7 @@ export default function LeoChatWidget() {
 
       {/* Fenêtre de chat */}
       {isOpen && (
-        <div className="fixed bottom-6 right-6 z-50 w-[400px] h-[600px] bg-white/10 backdrop-blur-xl rounded-2xl shadow-2xl border border-white/20 flex flex-col overflow-hidden animate-in slide-in-from-bottom-4 duration-300">
+        <div className="fixed inset-x-4 bottom-4 sm:inset-x-auto sm:right-6 sm:bottom-6 sm:w-[400px] z-50 w-auto max-w-[400px] h-[min(600px,90vh)] max-h-[90vh] bg-white/10 backdrop-blur-xl rounded-2xl shadow-2xl border border-white/20 flex flex-col overflow-hidden animate-in slide-in-from-bottom-4 duration-300">
           {/* Header */}
           <div className="bg-gradient-to-r from-[#523DCB]/20 via-pink-500/20 to-cyan-400/20 p-4 flex items-center justify-between border-b border-white/10">
             <div className="flex items-center gap-3">

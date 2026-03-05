@@ -133,7 +133,7 @@ function Header() {
                 label={t('nav.contact') || 'Contactez-nous'}
                 ariaLabel={t('nav.contact') || 'Contactez-nous'}
                 size="header"
-                className="hidden xs:inline-flex touch-manipulation"
+                className="hidden sm:inline-flex touch-manipulation"
                 onClick={playClick}
                 onMouseEnter={playHover}
               />

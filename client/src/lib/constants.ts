@@ -4,25 +4,30 @@
  */
 
 /**
- * Breakpoints pour les media queries et la détection de taille d'écran
- * Utilisés pour le responsive design
+ * Breakpoints pour les media queries et la détection de taille d'écran (alignés Tailwind).
+ * Utilisés pour le responsive design.
+ *
+ * Usage recommandé :
+ * - MOBILE_BREAKPOINT (768px) : menu burger, header CTA visibility, préfetch — "mobile" = < 768px.
+ * - BREAKPOINTS.sm (640px) : uniquement quand un comportement spécifique "sm" est voulu (ex. HeroSection
+ *   animation frame rate, ou affichage à partir de 640px). Préférer 768px pour la détection "mobile" générale.
  */
 export const BREAKPOINTS = {
-  /** Mobile: < 640px */
+  /** Tailwind sm: min-width 640px */
   sm: 640,
-  /** Tablet: >= 640px et < 768px */
+  /** Tailwind md: min-width 768px — seuil "mobile" par défaut (menu, CTA) */
   md: 768,
-  /** Desktop: >= 768px et < 1024px */
+  /** Tailwind lg: min-width 1024px */
   lg: 1024,
-  /** Large Desktop: >= 1024px et < 1280px */
+  /** Tailwind xl: min-width 1280px */
   xl: 1280,
-  /** Extra Large Desktop: >= 1280px */
+  /** Tailwind 2xl: min-width 1280px */
   '2xl': 1280,
 } as const;
 
 /**
- * Valeur par défaut pour la détection mobile
- * Utilisée dans useIsMobile et autres hooks
+ * Valeur par défaut pour la détection mobile (header, menu, préfetch).
+ * Utilisée dans useIsMobile et autres hooks. Préférer cette constante pour "est-ce mobile ?".
  */
 export const MOBILE_BREAKPOINT = BREAKPOINTS.md; // 768px
 

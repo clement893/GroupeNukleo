@@ -11,7 +11,7 @@ function HeroSection() {
   const { playHover, playClick } = useSound();
   const { language, t } = useLanguage();
   const getLocalizedPath = useLocalizedPath();
-  const isMobile = useIsMobile(640);
+  const isMobile = useIsMobile(640); // 640px (sm) for animation frame rate only; see MOBILE_BREAKPOINT for general mobile
   const [scrollPosition, setScrollPosition] = useState(0);
   const scrollRef = useRef<HTMLDivElement>(null);
   const [services, setServices] = useState<string[]>([]);

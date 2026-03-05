@@ -190,31 +190,14 @@
         -moz-osx-font-smoothing: grayscale;
         text-rendering: optimizeLegibility;
       }
-      /* Optimize rendering on mobile */
+      /* Optimize rendering on mobile - no global animation/transition overrides to preserve header, modals, drawers */
       @media (max-width: 767px) {
         * {
           -webkit-tap-highlight-color: transparent;
-          /* Improve touch responsiveness */
           touch-action: manipulation;
         }
         img {
           content-visibility: auto;
-        }
-        /* Reduce animations on mobile for better performance */
-        /* Disable heavy animations but keep smooth transitions */
-        * {
-          animation-duration: 50ms !important;
-          animation-delay: 0ms !important;
-          transition-duration: 100ms !important;
-          transition-delay: 0ms !important;
-        }
-        /* Keep essential transitions smooth */
-        button, a, input, textarea, select {
-          transition-duration: 150ms !important;
-        }
-        /* Keep hover effects but faster */
-        *:hover {
-          transition-duration: 100ms !important;
         }
       }
       /* Critical layout styles to prevent CLS */

@@ -76,7 +76,7 @@ function Footer() {
       style={{
         background: '#EFE8E8',
         paddingTop: 'clamp(0.75rem, 2vw, 1.25rem)',
-        paddingBottom: 48,
+        paddingBottom: 'clamp(2rem, 4vw, 3rem)',
         fontFamily: "'Google Sans Flex', sans-serif",
         fontWeight: 400,
       }}

@@ -107,7 +107,7 @@ export default function Contact() {
       <StructuredData data={montrealOfficeSchema} />
       <StructuredData data={halifaxOfficeSchema} />
 
-      <div className="min-h-screen" style={{ background: 'transparent', fontFamily: "'Google Sans Flex', sans-serif", paddingTop: 128 }}>
+      <div className="min-h-screen" style={{ background: 'transparent', fontFamily: "'Google Sans Flex', sans-serif", paddingTop: 'clamp(5rem, 15vw, 8rem)' }}>
         {/* Hero — même disposition que page d'accueil et À propos */}
         <section style={{ padding: 'clamp(6rem, 12vh, 8rem) 3% clamp(2rem, 4vw, 4rem)', overflow: 'visible' }}>
           <div className="w-full">
