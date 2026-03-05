@@ -37,7 +37,14 @@ export default function HomeServicesSection() {
               className="group-hover:shadow-lg"
             >
               {/* Zone image / vidéo + icône ↗ */}
-              <div style={{ position: 'relative', paddingTop: '60%', background: service.imageBg, overflow: 'hidden' }}>
+              <div
+                style={{
+                  position: 'relative',
+                  paddingTop: service.path === '/services/tech' ? '75%' : '60%',
+                  background: service.imageBg,
+                  overflow: 'hidden',
+                }}
+              >
                 {service.heroVideo ? (
                   <video
                     src={service.heroVideo}
@@ -53,7 +60,13 @@ export default function HomeServicesSection() {
                     src={service.heroImage}
                     alt=""
                     className="absolute inset-0 w-full h-full object-cover"
-                    style={service.path === '/services/consulting' ? { objectPosition: '50% 35%' } : undefined}
+                    style={
+                      service.path === '/services/consulting'
+                        ? { objectPosition: '50% 0%', transform: 'scale(1.05)' }
+                        : service.path === '/services/tech'
+                          ? { objectPosition: '50% 50%', transform: 'scale(1.2)' }
+                          : undefined
+                    }
                     aria-hidden
                   />
                 ) : null}

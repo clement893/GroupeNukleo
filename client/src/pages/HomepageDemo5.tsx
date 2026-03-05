@@ -750,7 +750,7 @@ export default function HomepageDemo5() {
               pointerEvents: 'none',
             }}
           />
-          <div className="grid grid-cols-1 lg:grid-cols-[9fr_11fr] gap-8 lg:gap-12 items-center" style={{ isolation: 'isolate', position: 'relative', zIndex: 1 }}>
+          <div className="grid grid-cols-1 lg:grid-cols-[9fr_11fr] gap-4 lg:gap-6 items-center" style={{ isolation: 'isolate', position: 'relative', zIndex: 1 }}>
             {/* Gauche (~45%) : vidéo On maîtrise l'IA */}
             <div style={{
               borderRadius: 28,
@@ -768,9 +768,33 @@ export default function HomepageDemo5() {
                 aria-label="On maîtrise l'IA"
               />
             </div>
-            {/* Droite (~55%) : "On [verbe]" dans pill glass + "l'IA" en charcoal */}
-            <div style={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap', gap: 0, justifyContent: 'center', minHeight: 200 }}>
-              <div className="glass-heading-panel">
+            {/* Droite (~55%) : phrase + "On [verbe] l'IA" — centrés */}
+            <div
+              style={{
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                justifyContent: 'center',
+                gap: '1.25rem',
+                minHeight: 200,
+                maxWidth: 520,
+                margin: '0 auto',
+                textAlign: 'center',
+              }}
+            >
+              <p
+                style={{
+                  fontSize: 'clamp(1.1875rem, 1.875vw, 1.375rem)',
+                  color: '#374151',
+                  lineHeight: 1.5,
+                  margin: 0,
+                  fontFamily: "'Google Sans Flex', sans-serif",
+                  fontWeight: 400,
+                }}
+              >
+                Dompter l&apos;algorithme pour libérer votre vision.
+              </p>
+              <div className="glass-heading-panel" style={{ textAlign: 'center' }}>
                 <span
                   style={{
                     fontFamily: "'Google Sans Flex', sans-serif",
@@ -784,10 +808,9 @@ export default function HomepageDemo5() {
                     backgroundClip: 'text',
                   }}
                 >
-                  On {ON_IA_VERBS[onIaIndex]}
+                  On {ON_IA_VERBS[onIaIndex]} l'IA
                 </span>
               </div>
-              <span className="dark-charcoal-text">l'IA</span>
             </div>
           </div>
         </section>

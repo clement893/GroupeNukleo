@@ -40,9 +40,9 @@ export default function NukleoConsulting() {
       <ServiceDetailLayout
         pageTitle={t(`${NS}.pageTitle`)}
         tagline={t(`${NS}.tagline`)}
-        heroVideo="/demo/consulting-hero.mov"
-        heroImage="/demo/dept-consulting.jpg"
+        heroImage="/demo/consulting-hero-cover.png"
         heroImageAlt={t(`${NS}.heroImageAlt`)}
+        heroImagePosition="50% 70%"
         navItems={navItems.map((label, id) => ({ id: String(id), label }))}
         mainTitle={t(`${NS}.mainTitle`)}
         mainDescription={t(`${NS}.mainDescription`)}
@@ -59,7 +59,7 @@ export default function NukleoConsulting() {
         teamDescription={t(`${NS}.teamDescription`)}
         teamMembers={teamMembers}
         sectionVisualVideo="/demo/consulting-visual.mp4"
-        sectionVisualImage="/demo/dept-consulting.jpg"
+        sectionVisualImage="/demo/consulting-hero-cover.png"
         sectionVisualTitle={t(`${NS}.sectionVisualTitle`)}
         sectionVisualSubtitle={t(`${NS}.sectionVisualSubtitle`)}
         sectionVisualDescription={t(`${NS}.sectionVisualDescription`)}

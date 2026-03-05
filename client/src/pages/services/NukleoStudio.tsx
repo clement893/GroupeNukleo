@@ -72,6 +72,7 @@ export default function NukleoStudio() {
         heroDescription={t(`${NS}.heroDescription`)}
         heroVideo="/demo/studio-creatif-hero.mp4"
         heroImageAlt={t(`${NS}.heroImageAlt`)}
+        heroHeight="clamp(480px, 75vh, 720px)"
         tabs={tabs}
         navItems={navItems.map((label, id) => ({ id: String(id), label }))}
         mainTitle={t(`${NS}.mainTitle`)}

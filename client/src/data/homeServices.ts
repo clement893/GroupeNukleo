@@ -22,7 +22,7 @@ export const HOME_SERVICES: HomeServiceCard[] = [
     tags: ['Application', 'Plateforme', 'Site web', 'Maintenance', 'Refonte'],
     imageBg: 'linear-gradient(135deg, rgba(230,228,245,0.9) 0%, rgba(210,205,230,0.95) 100%)',
     path: '/services/tech',
-    heroImage: '/demo/lab-tech-cover.png',
+    heroImage: '/demo/lab-tech-cover.png?v=2',
   },
   {
     title: 'Studio créatif',
@@ -46,6 +46,6 @@ export const HOME_SERVICES: HomeServiceCard[] = [
     tags: ['Développement IA', 'Formation', 'Accompagnement', 'Stratégie IA'],
     imageBg: 'linear-gradient(135deg, rgba(200,180,220,0.4) 0%, rgba(120,100,180,0.5) 100%)',
     path: '/services/consulting',
-    heroImage: '/demo/transition-numerique-cover.png',
+    heroImage: '/demo/transition-numerique-cover-2.png',
   },
 ];

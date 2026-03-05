@@ -23,7 +23,7 @@ function Header() {
   const lastScrollY = useRef(0);
   const headerRef = useRef<HTMLElement>(null);
   const { playHover, playClick } = useSound();
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const getLocalizedPath = useLocalizedPath();
   const isMobile = useIsMobile(MOBILE_BREAKPOINT);
   
@@ -116,11 +116,15 @@ function Header() {
           }}
         >
           <div className="flex items-center justify-between gap-2 sm:gap-4">
-            {/* Logo Nukleo RVB (nukleo,→) */}
-            <Link href={getLocalizedPath('/')} className="inline-flex items-center cursor-pointer touch-manipulation" aria-label={t('alt.logo') || 'Nukleo Digital - Accueil'}>
+            {/* Logo Nukleo — version FR ou EN (même rendu : image avec fond transparent) */}
+            <Link
+              href={getLocalizedPath('/')}
+              className="inline-flex items-center cursor-pointer touch-manipulation"
+              aria-label={t('alt.logo') || 'Nukleo Digital - Accueil'}
+            >
               <img
-                src="/demo/nukleo-logo-tagline.png"
-                alt="Logo Nukleo Digital — Choisissez l'intelligence"
+                src={language === 'en' ? '/demo/nukleo-logo-tagline-en.png' : '/demo/nukleo-logo-tagline.png'}
+                alt={language === 'en' ? 'Nukleo Digital — Choose intelligence' : "Logo Nukleo Digital — Choisissez l'intelligence"}
                 className="w-auto object-contain"
                 style={{ height: 'clamp(2.25rem, 6vw, 3.75rem)' }}
               />

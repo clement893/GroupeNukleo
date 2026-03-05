@@ -28,6 +28,10 @@ export interface ServiceDetailLayoutProps {
   heroVideo?: string;
   /** Hauteur du bloc hero (ex. "clamp(384px, 60vh, 624px)"). Par défaut clamp(320px, 50vh, 520px). */
   heroHeight?: string;
+  /** 'contain' = image entière visible et centrée dans le bloc ; 'cover' = remplir le bloc (défaut). */
+  heroImageFit?: 'cover' | 'contain';
+  /** Position du cadrage (ex. "50% 65%" pour centrer le sujet quand il est en bas de l'image). Défaut "50% 50%". */
+  heroImagePosition?: string;
   /** Si fourni, affiche la section à onglets (gauche: onglets, droite: contenu dynamique). Sinon, affiche nav + bloc mainTitle/mainDescription. */
   tabs?: ServiceTabContent[];
   navItems: { id: string; label: string }[];
@@ -78,6 +82,8 @@ export default function ServiceDetailLayout(props: ServiceDetailLayoutProps) {
     heroImageAlt = '',
     heroVideo,
     heroHeight,
+    heroImageFit = 'cover',
+    heroImagePosition = '50% 50%',
     tabs,
     navItems,
     mainTitle,
@@ -295,7 +301,7 @@ export default function ServiceDetailLayout(props: ServiceDetailLayoutProps) {
           </div>
           {(heroVideo || heroImage) && (
             <div
-              className="rounded-xl overflow-hidden bg-gray-100 w-full"
+              className={`rounded-xl overflow-hidden bg-gray-100 w-full ${heroImageFit === 'contain' ? 'flex items-center justify-center' : ''}`}
               style={{
                 height: heroHeight ?? 'clamp(320px, 50vh, 520px)',
                 boxShadow: '0 4px 24px rgba(93, 67, 205, 0.08), 0 1px 0 rgba(93, 67, 205, 0.06) inset',
@@ -308,14 +314,16 @@ export default function ServiceDetailLayout(props: ServiceDetailLayoutProps) {
                   loop
                   muted
                   playsInline
-                  className="w-full h-full object-cover"
+                  className={heroImageFit === 'contain' ? 'max-w-full max-h-full w-auto h-auto object-contain object-center' : 'w-full h-full object-cover object-center'}
+                  style={{ objectPosition: heroImagePosition }}
                   aria-label={heroImageAlt || 'Vidéo du studio créatif'}
                 />
               ) : (
                 <img
                   src={heroImage}
                   alt={heroImageAlt}
-                  className="w-full h-full object-cover"
+                  className={heroImageFit === 'contain' ? 'max-w-full max-h-full w-auto h-auto object-contain object-center' : 'w-full h-full object-cover object-center'}
+                  style={{ objectPosition: heroImagePosition }}
                 />
               )}
             </div>

@@ -42,9 +42,9 @@ export default function NukleoTech() {
       <ServiceDetailLayout
         pageTitle={t(`${NS}.pageTitle`)}
         tagline={t(`${NS}.tagline`)}
-        heroVideo="/demo/tech-hero.mov"
-        heroImage="/demo/dept-tech.jpg"
+        heroImage="/demo/lab-tech-cover.png?v=2"
         heroImageAlt={t(`${NS}.heroImageAlt`)}
+        heroImagePosition="50% 50%"
         heroHeight="clamp(384px, 60vh, 624px)"
         navItems={navItems.map((label, id) => ({ id: String(id), label }))}
         mainTitle={t(`${NS}.mainTitle`)}
@@ -62,7 +62,7 @@ export default function NukleoTech() {
         teamDescription={t(`${NS}.teamDescription`)}
         teamMembers={teamMembers}
         teamLayout="slider"
-        sectionVisualImage="/demo/dept-tech.jpg"
+        sectionVisualImage="/demo/tech-infrastructure-visual.png"
         sectionVisualTitle={t(`${NS}.sectionVisualTitle`)}
         sectionVisualSubtitle={t(`${NS}.sectionVisualSubtitle`)}
         sectionVisualDescription={t(`${NS}.sectionVisualDescription`)}

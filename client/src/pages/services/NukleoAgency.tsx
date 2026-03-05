@@ -40,7 +40,7 @@ export default function NukleoAgency() {
       <ServiceDetailLayout
         pageTitle={t(`${NS}.pageTitle`)}
         tagline={t(`${NS}.tagline`)}
-        heroImage="/demo/dept-agency.jpg"
+        heroImage="/demo/agency-hero-cover.png"
         heroImageAlt={t(`${NS}.heroImageAlt`)}
         navItems={navItems.map((label, id) => ({ id: String(id), label }))}
         mainTitle={t(`${NS}.mainTitle`)}
@@ -57,7 +57,7 @@ export default function NukleoAgency() {
         teamTitle={t(`${NS}.teamTitle`)}
         teamDescription={t(`${NS}.teamDescription`)}
         teamMembers={teamMembers}
-        sectionVisualImage="/demo/dept-agency.jpg"
+        sectionVisualImage="/demo/agency-strategy-execution-cover.png"
         sectionVisualTitle={t(`${NS}.sectionVisualTitle`)}
         sectionVisualSubtitle={t(`${NS}.sectionVisualSubtitle`)}
         sectionVisualDescription={t(`${NS}.sectionVisualDescription`)}
