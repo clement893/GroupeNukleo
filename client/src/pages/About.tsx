@@ -15,7 +15,7 @@ const BTN_PURPLE = '#5B21B6';
 const featuredMember = {
   name: 'Clément Roy',
   roleKey: 'Président et fondateur de Nukleo',
-  image: '/team/Clement.webp',
+  image: '/team/Clement.jpg',
   linkedin: 'https://www.linkedin.com/in/clement-roy/',
   bio: "Clément pilote la vision et la stratégie de Nukleo. Passionné par la transformation numérique des PME et des OBNL, il s'assure que chaque client bénéficie d'un partenaire à l'écoute, exigeant et orienté résultats.",
 };

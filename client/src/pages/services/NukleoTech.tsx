@@ -24,11 +24,11 @@ export default function NukleoTech() {
   }));
 
   const teamMembers = [
-    { name: 'Alexei', role: 'VP des services web', image: '/team/Alexei.webp', imageAlt: 'Alexei — VP des services web chez Nukleo Digital' },
+    { name: 'Alexei', role: 'VP des services web', image: '/team/Alexei.png', imageAlt: 'Alexei — VP des services web chez Nukleo Digital' },
     { name: 'Benoît', role: 'Directeur des services web', image: '/team/Benoit.png', imageAlt: 'Benoît — Directeur des services web chez Nukleo Digital' },
-    { name: 'Sarah', role: 'Développeuse Full Stack', image: '/team/Sarah.webp', imageAlt: 'Sarah — Développeuse Full Stack chez Nukleo Digital' },
+    { name: 'Sarah', role: 'Développeuse Full Stack', image: '/team/Sarah.jpg', imageAlt: 'Sarah — Développeuse Full Stack chez Nukleo Digital' },
     { name: 'Tim', role: 'Développeur Full Stack', image: '/team/Tim.png', imageAlt: 'Tim — Développeur Full Stack chez Nukleo Digital' },
-    { name: 'Hind', role: 'Développeuse IA', image: '/team/Hind.webp', imageAlt: 'Hind — Développeuse IA chez Nukleo Digital' },
+    { name: 'Hind', role: 'Développeuse IA', image: '/team/Hind.jpg', imageAlt: 'Hind — Développeuse IA chez Nukleo Digital' },
     { name: 'Jean-François', role: 'Développeur Full Stack', image: '/team/Jean-Francois.png', imageAlt: 'Jean-François — Développeur Full Stack chez Nukleo Digital' },
   ];
 

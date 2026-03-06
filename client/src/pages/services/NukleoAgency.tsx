@@ -24,9 +24,9 @@ export default function NukleoAgency() {
   }));
 
   const teamMembers = [
-    { name: 'Omar', role: 'Chargé de projets spéciaux', image: '/team/Omar.webp', imageAlt: 'Omar — Chargé de projets spéciaux chez Nukleo Digital' },
-    { name: 'Maxime', role: 'Responsable marketing & communication', image: '/team/Maxime.webp', imageAlt: 'Maxime — Responsable marketing & communication chez Nukleo Digital' },
-    { name: 'Meriem', role: 'Coordinatrice marketing & communication', image: '/team/Meriem.webp', imageAlt: 'Meriem — Coordinatrice marketing & communication chez Nukleo Digital' },
+    { name: 'Omar', role: 'Chargé de projets spéciaux', image: '/team/Omar.png', imageAlt: 'Omar — Chargé de projets spéciaux chez Nukleo Digital' },
+    { name: 'Maxime', role: 'Responsable marketing & communication', image: '/team/Maxime.png', imageAlt: 'Maxime — Responsable marketing & communication chez Nukleo Digital' },
+    { name: 'Meriem', role: 'Coordinatrice marketing & communication', image: '/team/Meriem.jpg', imageAlt: 'Meriem — Coordinatrice marketing & communication chez Nukleo Digital' },
     { name: 'Audrey', role: 'Chargée de projets numériques', image: '/team/Audrey.png', imageAlt: 'Audrey — Chargée de projets numériques chez Nukleo Digital' },
   ];
 
