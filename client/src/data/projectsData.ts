@@ -675,7 +675,7 @@ export const PROJECTS_DATA: ProjectData[] = [
       fr: "Direction artistique et création de contenu pour les réseaux sociaux de Psy etc.",
       en: "Artistic direction and content creation for Psy etc.'s social media.",
     },
-    images: ['PsyEtc_1.jpg'],
+    images: ['PsyEtc_1.webp'],
   },
   // ─── Nouveaux projets issus des offres de services ───────────────────────────
   {
@@ -710,10 +710,10 @@ export const PROJECTS_DATA: ProjectData[] = [
       en: "The Conseil de développement économique des Nouvelles-Écosse (CDÉNÉ) is a Francophone organization that supports economic development and the attraction of new residents to Nova Scotia. Nukleo was mandated by CDÉNÉ to design and produce several communication campaigns, including a series of videos aimed at attracting Université Sainte-Anne alumni to return and settle in the province. The agency handled the artistic direction, supervised on-site shoots in Halifax, and delivered authentic and inspiring content to reach Francophone communities across Canada and internationally.",
     },
     images: [
-      'CDENE_1.png',
-      'CDENE_2.png',
-      'CDENE_3.png',
-      'CDENE_4.png',
+      'CDENE_1.webp',
+      'CDENE_2.webp',
+      'CDENE_3.webp',
+      'CDENE_4.webp',
     ],
   },
   {
