@@ -37,8 +37,8 @@ export const PROJECTS_DATA: ProjectData[] = [
       en: "Succès Scolaire is a Quebec-based company specializing in online tutoring. With Nukleo, we handled the complete redesign of the site. The goal was to create a lively and playful website that stimulates curiosity and makes learning appealing. We rethought the architecture of the multi-page site while ensuring intuitive navigation and preserving essential content.",
     },
     images: [
-    '/projects/SuccesScolaire_2.jpg',
-    '/projects/SuccesScolaire_3.jpg',
+    '/projects/SuccesScolaire_2.webp',
+    '/projects/SuccesScolaire_3.webp',
   ],
   },
   {
@@ -54,11 +54,11 @@ export const PROJECTS_DATA: ProjectData[] = [
       en: "HumanKind is a recruitment company based in the UK and Nova Scotia. With Nukleo, we worked on designing a website aimed at businesses, with a decidedly B2B approach. We translated the brand's visual identity into high-fidelity mockups, ensuring consistency between branding and digital interface. The goal was to create a professional and welcoming platform that inspires trust and highlights HumanKind's expertise in international recruitment.",
     },
     images: [
-    '/projects/Humankind_1.png',
-    '/projects/Humankind_2.png',
-    '/projects/Humankind_3.jpg',
-    '/projects/Humankind_4.png',
-    '/projects/Humankind_5.jpg',
+    '/projects/Humankind_1.webp',
+    '/projects/Humankind_2.webp',
+    '/projects/Humankind_3.webp',
+    '/projects/Humankind_4.webp',
+    '/projects/Humankind_5.webp',
   ],
   },
   {
@@ -74,8 +74,8 @@ export const PROJECTS_DATA: ProjectData[] = [
       en: "The Jean Lapointe Foundation raises public awareness about the dangers of alcohol addiction. Through the 28-Day No-Alcohol Challenge, it mobilizes the population while raising funds to support its prevention and support actions. Nukleo accompanied the Foundation in the ideation and design of the campaign, handling the artistic direction and complete visual rollout. The agency also adapted the website to support the campaign and directed the shoots to ensure visual and narrative consistency across all channels. The result: massive mobilization and over $749,000 raised for the cause.",
     },
     images: [
-    '/projects/Defi28_1.png',
-    '/projects/Defi28_2.png',
+    '/projects/Defi28_1.webp',
+    '/projects/Defi28_2.webp',
   ],
   },
   {
@@ -92,9 +92,9 @@ export const PROJECTS_DATA: ProjectData[] = [
       en: "The Jean Lapointe Foundation is an organization that fights addiction problems. They called on Nukleo to develop a more current and aesthetic version of their website. The process took place in several stages, starting with the production of wireframes, high-quality UI mockup proposals, and ending with the development of the website.",
     },
     images: [
-    '/projects/FJL_1.png',
-    '/projects/FJL_2.png',
-    '/projects/FJL_3.png',
+    '/projects/FJL_1.webp',
+    '/projects/FJL_2.webp',
+    '/projects/FJL_3.webp',
   ],
   },
   {
@@ -111,9 +111,9 @@ export const PROJECTS_DATA: ProjectData[] = [
       en: "Arsenal Media is the largest broadcaster in Quebec, an integrated and independent media group reaching millions of Quebecers. It's not one, two, or three, but 18 radio stations for which Nukleo handled the redesign. With an integrated player, the ability to listen live, replay a show, find a song, or check the station's schedule, we delivered comprehensive work combining UX design, UI design, and technical development.",
     },
     images: [
-    '/projects/Arsenal_1.jpg',
-    '/projects/Arsenal_2.png',
-    '/projects/Arsenal_3.png',
+    '/projects/Arsenal_1.webp',
+    '/projects/Arsenal_2.webp',
+    '/projects/Arsenal_3.webp',
   ],
   },
   {
@@ -130,12 +130,12 @@ export const PROJECTS_DATA: ProjectData[] = [
       en: "Attitude Fraîche, a leader in the production of mesclun, lettuces, and other field vegetables, launched a redesigned website with us to improve the user experience and highlight their commitment to eco-responsible farming practices. Nukleo handled the complete design of the website, from UX mockups to development, including UI design.",
     },
     images: [
-    '/projects/AttitudeFraiche_1.jpg',
-    '/projects/AttitudeFraiche_2.png',
-    '/projects/AttitudeFraiche_3.png',
-    '/projects/AttitudeFraiche_4.png',
-    '/projects/AttitudeFraiche_5.png',
-    '/projects/AttitudeFraiche_6.png',
+    '/projects/AttitudeFraiche_1.webp',
+    '/projects/AttitudeFraiche_2.webp',
+    '/projects/AttitudeFraiche_3.webp',
+    '/projects/AttitudeFraiche_4.webp',
+    '/projects/AttitudeFraiche_5.webp',
+    '/projects/AttitudeFraiche_6.webp',
   ],
   },
   {
@@ -151,15 +151,15 @@ export const PROJECTS_DATA: ProjectData[] = [
       en: "Le Bazar Verdunois is a craft market held several times a year in Verdun — Book Market, Autumn Market, Winter Market, Christmas Market. Nukleo accompanied the Bazar in designing its visual identity: logo creation, development of the graphic universe, and visual rollout for each of their events. The agency also created UI mockups in preparation for the future website. The challenge was to highlight the six artistic facets of the Bazar — pottery, sewing, painting, tattoos, writing, and jewelry.",
     },
     images: [
-    '/projects/BazarVerdunois_1.jpg',
-    '/projects/BazarVerdunois_2.png',
-    '/projects/BazarVerdunois_3.png',
-    '/projects/BazarVerdunois_4.jpg',
-    '/projects/BazarVerdunois_5.jpg',
-    '/projects/BazarVerdunois_6.jpg',
-    '/projects/BazarVerdunois_7.jpg',
-    '/projects/BazarVerdunois_8.jpg',
-    '/projects/BazarVerdunois_9.jpg',
+    '/projects/BazarVerdunois_1.webp',
+    '/projects/BazarVerdunois_2.webp',
+    '/projects/BazarVerdunois_3.webp',
+    '/projects/BazarVerdunois_4.webp',
+    '/projects/BazarVerdunois_5.webp',
+    '/projects/BazarVerdunois_6.webp',
+    '/projects/BazarVerdunois_7.webp',
+    '/projects/BazarVerdunois_8.webp',
+    '/projects/BazarVerdunois_9.webp',
   ],
   },
   {
@@ -175,10 +175,10 @@ export const PROJECTS_DATA: ProjectData[] = [
       en: "Toit à moi Canada is inspired by Toit à moi France. The concept aims to provide shelter for homeless people and restore their dignity. For its launch, Nukleo was mandated to design the visual identity and website. We worked on adapting the logo, staying true to the spirit of the original, while creating a graphic universe specific to the Canadian market. The identity is meant to be rounded, colorful, and inspiring, reflecting the warmth and welcome of a true 'home'.",
     },
     images: [
-    '/projects/ToitAMoi_1.jpg',
-    '/projects/ToitAMoi_2.jpg',
-    '/projects/ToitAMoi_3.png',
-    '/projects/ToitAMoi_4.png',
+    '/projects/ToitAMoi_1.webp',
+    '/projects/ToitAMoi_2.webp',
+    '/projects/ToitAMoi_3.webp',
+    '/projects/ToitAMoi_4.webp',
   ],
   },
   {
@@ -194,16 +194,16 @@ export const PROJECTS_DATA: ProjectData[] = [
       en: "To animate the flagship evenings of the Montreal Museum of Fine Arts Foundation, Nukleo designed the visual identity for each of the three events: In Situ (Cercle des Anges), Contre-Jour (Cercle des Jeunes Philanthropes), and Perspectives (Cercle des Anges). The agency handled logo design and artistic direction for all three universes to create visually consistent yet differentiated experiences.",
     },
     images: [
-    '/projects/MBAM_1.jpg',
-    '/projects/MBAM_10.png',
-    '/projects/MBAM_2.png',
-    '/projects/MBAM_3.png',
-    '/projects/MBAM_4.png',
-    '/projects/MBAM_5.png',
-    '/projects/MBAM_6.png',
-    '/projects/MBAM_7.png',
-    '/projects/MBAM_8.png',
-    '/projects/MBAM_9.png',
+    '/projects/MBAM_1.webp',
+    '/projects/MBAM_10.webp',
+    '/projects/MBAM_2.webp',
+    '/projects/MBAM_3.webp',
+    '/projects/MBAM_4.webp',
+    '/projects/MBAM_5.webp',
+    '/projects/MBAM_6.webp',
+    '/projects/MBAM_7.webp',
+    '/projects/MBAM_8.webp',
+    '/projects/MBAM_9.webp',
   ],
   },
   {
@@ -219,18 +219,18 @@ export const PROJECTS_DATA: ProjectData[] = [
       en: "Formerly Bos Law, this Ottawa-based law firm entrusted Nukleo with the complete redesign of their identity, now known as Summit Law. Summit Law is an elegant, accessible, and client-focused firm. Nukleo designed a modern and luminous visual identity, combining deep green and yellow-green, and developed a coherent brand universe across all materials.",
     },
     images: [
-    '/projects/SummitLaw_1.jpg',
-    '/projects/SummitLaw_10.jpg',
-    '/projects/SummitLaw_11.jpg',
-    '/projects/SummitLaw_12.jpg',
-    '/projects/SummitLaw_2.jpg',
-    '/projects/SummitLaw_3.png',
-    '/projects/SummitLaw_4.jpg',
-    '/projects/SummitLaw_5.jpg',
-    '/projects/SummitLaw_6.jpg',
-    '/projects/SummitLaw_7.jpg',
-    '/projects/SummitLaw_8.jpg',
-    '/projects/SummitLaw_9.jpg',
+    '/projects/SummitLaw_1.webp',
+    '/projects/SummitLaw_10.webp',
+    '/projects/SummitLaw_11.webp',
+    '/projects/SummitLaw_12.webp',
+    '/projects/SummitLaw_2.webp',
+    '/projects/SummitLaw_3.webp',
+    '/projects/SummitLaw_4.webp',
+    '/projects/SummitLaw_5.webp',
+    '/projects/SummitLaw_6.webp',
+    '/projects/SummitLaw_7.webp',
+    '/projects/SummitLaw_8.webp',
+    '/projects/SummitLaw_9.webp',
   ],
   },
   {
@@ -247,15 +247,14 @@ export const PROJECTS_DATA: ProjectData[] = [
       en: "Formerly known as CMKZ, Affilia is a Montreal-based law firm. To reflect the evolution of their team and strategic vision, the firm wanted to reposition itself and modernize its image. With Nukleo, we led this transformation process from end to end: creating the new name, designing the logo and graphic universe, rolling out visual materials, and building the complete website.",
     },
     images: [
-    '/projects/Affilia_1.jpg',
-    '/projects/Affilia_2.jpg',
-    '/projects/Affilia_3.jpg',
-    '/projects/Affilia_4.jpg',
-    '/projects/Affilia_5.jpg',
-    '/projects/Affilia_6.jpg',
-    '/projects/Affilia_7.png',
-    '/projects/Affilia_8.png',
-    '/projects/Affilia_9.jpg',
+    '/projects/Affilia_1.webp',
+    '/projects/Affilia_2.webp',
+    '/projects/Affilia_3.webp',
+    '/projects/Affilia_4.webp',
+    '/projects/Affilia_5.webp',
+    '/projects/Affilia_6.webp',
+    '/projects/Affilia_7.webp',
+    '/projects/Affilia_8.webp',
   ],
   },
   {
@@ -271,8 +270,8 @@ export const PROJECTS_DATA: ProjectData[] = [
       en: "Adèle Blais is a painter who wanted to present her works in augmented reality. Nukleo built and deployed the mobile application that allows you to view the works directly in augmented reality on your phone. An immersive experience that pushes the boundaries between art and technology.",
     },
     images: [
-    '/projects/AdeleBlais_1.jpg',
-    '/projects/AdeleBlais_2.png',
+    '/projects/AdeleBlais_1.webp',
+    '/projects/AdeleBlais_2.webp',
   ],
   },
   {
@@ -289,10 +288,10 @@ export const PROJECTS_DATA: ProjectData[] = [
       en: "Sycle is a company that recycles sodium sulfate in Quebec. Nukleo handled the logo design, wireframes, UI design, and website development. The logo uses the concept of circular arrows, evoking recycling — a key issue in the industry in which Sycle operates.",
     },
     images: [
-    '/projects/Sycle_1.jpg',
-    '/projects/Sycle_2.png',
-    '/projects/Sycle_3.png',
-    '/projects/Sycle_4.png',
+    '/projects/Sycle_1.webp',
+    '/projects/Sycle_2.webp',
+    '/projects/Sycle_3.webp',
+    '/projects/Sycle_4.webp',
   ],
   },
   {
@@ -309,7 +308,7 @@ export const PROJECTS_DATA: ProjectData[] = [
       en: "Recrute Action is a recruitment firm located in Montreal and Dover (USA). The challenge? Having a more current website where the user journey is simple and intuitive. Nukleo handled the site redesign, including wireframes, UI mockups, and development.",
     },
     images: [
-    '/projects/RecruteAction_1.jpg',
+    '/projects/RecruteAction_1.webp',
   ],
   },
   {
@@ -326,8 +325,8 @@ export const PROJECTS_DATA: ProjectData[] = [
       en: "Matchstick is a Canadian theatre company based in Nova Scotia. Its work centers on collaboration with local communities, amplifying underrepresented voices, and creating works that offer audiences shared moments of truth. By working with Nukleo, the company was able to give itself a new image through a complete website redesign.",
     },
     images: [
-    '/projects/Matchstick_1.jpg',
-    '/projects/Matchstick_2.jpg',
+    '/projects/Matchstick_1.webp',
+    '/projects/Matchstick_2.webp',
   ],
   },
   {
@@ -343,13 +342,13 @@ export const PROJECTS_DATA: ProjectData[] = [
       en: "The Maison Jean Lapointe and the Jean Lapointe Foundation called on Nukleo's services for the design of their 2024 and 2025 annual reports. A colorful, accessible, and attractive report that reflects the organization's commitment to its beneficiaries and donors.",
     },
     images: [
-    '/projects/MJL_1.png',
-    '/projects/MJL_2.png',
-    '/projects/MJL_3.png',
-    '/projects/MJL_4.png',
-    '/projects/MJL_5.png',
-    '/projects/MJL_6.png',
-    '/projects/MJL_7.png',
+    '/projects/MJL_1.webp',
+    '/projects/MJL_2.webp',
+    '/projects/MJL_3.webp',
+    '/projects/MJL_4.webp',
+    '/projects/MJL_5.webp',
+    '/projects/MJL_6.webp',
+    '/projects/MJL_7.webp',
   ],
   },
   {
@@ -365,10 +364,10 @@ export const PROJECTS_DATA: ProjectData[] = [
       en: "The CQDE is a Quebec organization working to protect the environment through legal, educational, and awareness-raising actions. Nukleo orchestrated an integrated campaign for the CQDE combining newsletters, organic social media posts, and targeted paid advertising. The set goal of $35,000 in donations was achieved through a content strategy aligned with the CQDE's recent actions.",
     },
     images: [
-    '/projects/CQDE_1.jpg',
-    '/projects/CQDE_2.png',
-    '/projects/CQDE_3.png',
-    '/projects/CQDE_4.png',
+    '/projects/CQDE_1.webp',
+    '/projects/CQDE_2.webp',
+    '/projects/CQDE_3.webp',
+    '/projects/CQDE_4.webp',
   ],
   },
   {
@@ -384,10 +383,10 @@ export const PROJECTS_DATA: ProjectData[] = [
       en: "The CDÉNÉ mandated Nukleo to design a digital campaign aimed at attracting French speakers from around the world to settle in Nova Scotia, and more specifically in the municipality of Clare. Structured in two parts — 'Living in Clare' in yellow and 'Settling as a family in Clare' in blue — the campaign delivers targeted messages tailored to two distinct audiences. The results far exceeded expectations.",
     },
     images: [
-    '/projects/CDENE_1.png',
-    '/projects/CDENE_2.png',
-    '/projects/CDENE_3.png',
-    '/projects/CDENE_4.png',
+    '/projects/CDENE_1.webp',
+    '/projects/CDENE_2.webp',
+    '/projects/CDENE_3.webp',
+    '/projects/CDENE_4.webp',
   ],
   },
   {
@@ -403,9 +402,9 @@ export const PROJECTS_DATA: ProjectData[] = [
       en: "Réseau Santé Nouvelle-Écosse is the province's main healthcare provider. In order to advance medicine, the organization seeks simulated patients to enrich the training of its doctors. To support this initiative, Nukleo was mandated to design a communication campaign that is both impactful and visual.",
     },
     images: [
-    '/projects/ReseauSante_1.jpg',
-    '/projects/ReseauSante_2.jpg',
-    '/projects/ReseauSante_3.png',
+    '/projects/ReseauSante_1.webp',
+    '/projects/ReseauSante_2.webp',
+    '/projects/ReseauSante_3.webp',
   ],
   },
   {
@@ -421,8 +420,8 @@ export const PROJECTS_DATA: ProjectData[] = [
       en: "Les Voix Ferrées is a vocal ensemble based in Montreal that primarily performs a cappella. For their benefit events (Spag Show and État de veille), they entrusted Nukleo with the creation of the graphic programs. We handled the main illustration, layout, and visual direction of the booklets.",
     },
     images: [
-    '/projects/VoixFerrees_1.jpg',
-    '/projects/VoixFerrees_2.png',
+    '/projects/VoixFerrees_1.webp',
+    '/projects/VoixFerrees_2.webp',
   ],
   },
   {
@@ -438,10 +437,10 @@ export const PROJECTS_DATA: ProjectData[] = [
       en: "Zú is a Montreal organization that propels entrepreneurs and startups in the creative and technology industries. For Zú, Nukleo designs and executes a complete digital communication strategy that supports its flagship events (Sommets Influence and Émergence). It includes the creation of regular content, management of advertising campaigns (Google Grant, Meta), and continuous website optimization.",
     },
     images: [
-    '/projects/Zu_1.jpg',
-    '/projects/Zu_2.png',
-    '/projects/Zu_3.png',
-    '/projects/Zu_4.jpg',
+    '/projects/Zu_1.webp',
+    '/projects/Zu_2.webp',
+    '/projects/Zu_3.webp',
+    '/projects/Zu_4.webp',
   ],
   },
   {
@@ -457,9 +456,9 @@ export const PROJECTS_DATA: ProjectData[] = [
       en: "DocTocToc is a non-profit organization that facilitates access to healthcare for children aged 0 to 5 and their families. For DocTocToc, Nukleo designed and deployed an integrated communication strategy to support the official launch of the organization, including all promotional content and the complete production of the inaugural event.",
     },
     images: [
-    '/projects/DocTocToc_1.jpg',
-    '/projects/DocTocToc_2.jpg',
-    '/projects/DocTocToc_3.jpg',
+    '/projects/DocTocToc_1.webp',
+    '/projects/DocTocToc_2.webp',
+    '/projects/DocTocToc_3.webp',
   ],
   },
   {
@@ -476,9 +475,9 @@ export const PROJECTS_DATA: ProjectData[] = [
       en: "Dîner en Blanc, the iconic gastronomic experience on a global scale, refreshed its brand image with a redesigned website, combining elegance and accessibility for an international audience.",
     },
     images: [
-    '/projects/DinerEnBlanc_1.png',
-    '/projects/DinerEnBlanc_2.jpg',
-    '/projects/DinerEnBlanc_3.png',
+    '/projects/DinerEnBlanc_1.webp',
+    '/projects/DinerEnBlanc_2.webp',
+    '/projects/DinerEnBlanc_3.webp',
   ],
   },
   {
@@ -495,8 +494,8 @@ export const PROJECTS_DATA: ProjectData[] = [
       en: "AJEFNÉ is a non-profit organization that facilitates access to legal services in French for the Acadian and Francophone communities. AJEFNE worked with Nukleo for the redesign of its website. We worked to develop a platform representative of the services offered, in order to properly guide the user towards the information they are looking for.",
     },
     images: [
-    '/projects/AJEFNE_1.jpg',
-    '/projects/AJEFNE_2.png',
+    '/projects/AJEFNE_1.webp',
+    '/projects/AJEFNE_2.webp',
   ],
   },
   // ─── Projets sans description textuelle complète ───────────────────────────
@@ -514,7 +513,7 @@ export const PROJECTS_DATA: ProjectData[] = [
       en: "The Association Marketing Québec (AMQ) has been bringing together marketing, communications, and digital professionals in Quebec since 1987. Its mission: inspire, share, and network. Nukleo carried out the complete redesign of the AMQ website, modernizing the user experience while preserving the identity of this cornerstone institution of Quebec marketing. The new site reflects AMQ's vision: to be the marketing reference in Quebec, by uniting talent and propelling ideas.",
     },
     images: [
-    '/projects/AMQ_1.jpg',
+    '/projects/AMQ_1.webp',
   ],
   },
   {
@@ -531,10 +530,10 @@ export const PROJECTS_DATA: ProjectData[] = [
       en: "The Elizabeth Greenshields Foundation exists to support young representational artists from around the world in the fields of painting, sculpture, printmaking, and drawing. Nukleo carried out the complete redesign of the Foundation's website, creating a digital experience worthy of the institution's prestige. The new site showcases grantees from around the world and facilitates access to resources for emerging artists, while reflecting the Foundation's commitment to artistic excellence.",
     },
     images: [
-    '/projects/EGF_1.jpg',
-    '/projects/EGF_2.png',
-    '/projects/EGF_3.png',
-    '/projects/EGF_4.png',
+    '/projects/EGF_1.webp',
+    '/projects/EGF_2.webp',
+    '/projects/EGF_3.webp',
+    '/projects/EGF_4.webp',
   ],
   },
   {
@@ -550,8 +549,8 @@ export const PROJECTS_DATA: ProjectData[] = [
       en: "Artistic direction and visual design for CFM.",
     },
     images: [
-    '/projects/CFM_1.png',
-    '/projects/CFM_2.png',
+    '/projects/CFM_1.webp',
+    '/projects/CFM_2.webp',
   ],
   },
   {
@@ -568,8 +567,8 @@ export const PROJECTS_DATA: ProjectData[] = [
       en: "Globe Car & Truck Rental is the Montreal reference for affordable vehicle rentals: cars, trucks, vans, and electric vehicles, with included benefits like roadside assistance and liability coverage. Nukleo handles the management, ongoing maintenance, and continuous improvements of Globecar's website, ensuring a smooth and high-performing booking experience for the thousands of customers who use the platform every month.",
     },
     images: [
-    '/projects/Globecar_1.png',
-    '/projects/Globecar_2.jpeg',
+    '/projects/Globecar_1.webp',
+    '/projects/Globecar_2.webp',
     '/projects/Globecar_2.webp',
   ],
   },
@@ -586,8 +585,8 @@ export const PROJECTS_DATA: ProjectData[] = [
       en: "GoCoupons is the reference platform in Canada for cash coupons and rebate offers. It allows consumers to save on their daily purchases through printable coupons and cashback offers. Nukleo handles the ongoing maintenance and evolution of the platform, ensuring its stability, performance, and the integration of new features. The agency is also working on artificial intelligence projects to enrich the user experience and optimize offer personalization.",
     },
     images: [
-    '/projects/GoCoupon_1.png',
-    '/projects/GoCoupon_2.jpeg',
+    '/projects/GoCoupon_1.webp',
+    '/projects/GoCoupon_2.webp',
     '/projects/GoCoupon_2.webp',
   ],
   },
@@ -605,8 +604,8 @@ export const PROJECTS_DATA: ProjectData[] = [
       en: "PMP Strategy is a leading strategy consulting firm present in eleven cities around the world — Paris, London, Montreal, New York, Seattle, Luxembourg, Dubai, Casablanca, Toronto, Brussels, and Madrid. Specialized in telecommunications, media, technology, energy, transport, and financial services, PMP Strategy supports its clients through digital transformations, ESG challenges, and value creation. Nukleo carried out the complete redesign of PMP Strategy's website, modernizing the user experience and rethinking the information architecture to reflect the firm's international scope.",
     },
     images: [
-    '/projects/PMP_1.png',
-    '/projects/PMP_2.png',
+    '/projects/PMP_1.webp',
+    '/projects/PMP_2.webp',
     '/projects/PMP_2.webp',
   ],
   },
@@ -624,8 +623,8 @@ export const PROJECTS_DATA: ProjectData[] = [
       en: "QueerTech is a Canadian organization that empowers 2SLGBTQIA+ people to break into the tech industry, advance their careers, and launch innovative businesses. Nukleo accompanied QueerTech in the redesign of its website, creating an inclusive and dynamic digital experience that reflects the organization's mission. Beyond the site, Nukleo also handles QueerTech's annual communications and marketing, supporting community growth and the visibility of its flagship programs: QT Access, QT Leaders, and QT Founders.",
     },
     images: [
-    '/projects/Queertech_1.jpg',
-    '/projects/Queertech_2.png',
+    '/projects/Queertech_1.webp',
+    '/projects/Queertech_2.webp',
   ],
   },
   {
@@ -642,7 +641,7 @@ export const PROJECTS_DATA: ProjectData[] = [
       en: "Nouvelle Île is a digital cultural mediation platform designed by Verticale, an artist-run centre in Laval. It takes the form of an interactive map accessible online, where each icon represents an ephemeral artwork created specifically for a particular location in the city. Nukleo developed this original platform that reveals the existence of over thirty works presented by Verticale over the past fifteen years, inviting the public to renew their perspective on the spaces around us and to cultivate the spirit of places.",
     },
     images: [
-    '/projects/NouvelleIle_1.jpg',
+    '/projects/NouvelleIle_1.webp',
   ],
   },
 
@@ -660,7 +659,7 @@ export const PROJECTS_DATA: ProjectData[] = [
       en: "O Salon is a high-end hair salon located in the heart of Montreal's Plateau Mont-Royal neighbourhood. Warm and welcoming, it offers gender-neutral hairdressing, colouring, and makeup services, delivered by a diverse team that regularly trains in the latest trends. Nukleo carried out the complete redesign of O Salon's website, creating an online experience that reflects the salon's unique identity and welcoming atmosphere.",
     },
     images: [
-    '/projects/OSalon_1.jpg',
+    '/projects/OSalon_1.webp',
   ],
   },
   {
@@ -692,7 +691,7 @@ export const PROJECTS_DATA: ProjectData[] = [
       en: "Theatre Nova Scotia is the provincial organization dedicated to the development of professional and community theatre in Nova Scotia. It oversees a digital ecosystem of four websites: theatrens.ca, performns.ca, dramafest.ca, and the Merritt Awards site. Nukleo designed and developed these platforms, ensuring a consistent, accessible, and WCAG/ADA-compliant user experience. The agency also provides annual maintenance for the entire digital ecosystem, ensuring the stability, security, and continuous evolution of all four sites.",
     },
     images: [
-    '/projects/TheaterNS_1.jpeg',
+    '/projects/TheaterNS_1.webp',
     '/projects/TheaterNS_1.webp',
   ],
   },
@@ -729,8 +728,6 @@ export const PROJECTS_DATA: ProjectData[] = [
       en: "Arsenal is an independent media group operating several news and radio websites in Quebec. Nukleo handles the monthly maintenance of Arsenal's entire digital ecosystem, including news sites and radio station websites (Viva, Hit Country, O). The agency manages server monitoring, security updates, performance optimization, and hour banks for ongoing evolutions and improvements.",
     },
     images: [
-    '/projects/ArsenalNouvelles_1.png',
-    '/projects/ArsenalNouvelles_1.webp',
   ],
   },
   {
@@ -775,7 +772,7 @@ export const PROJECTS_DATA: ProjectData[] = [
       en: "The Centre des femmes de Montréal is a feminist community organization whose mission is to help women help themselves, by offering popular education, support, and mutual aid services. Nukleo took charge of the Centre's digital communications for a period of six months, including social media management (Facebook, LinkedIn, Instagram), newsletter creation and distribution, management of targeted advertising campaigns to reach the women who most need the services, website updates, and coordination of a professional photo shoot to renew the organization's image bank.",
     },
     images: [
-    '/projects/CentreFemmes_1.jpg',
+    '/projects/CentreFemmes_1.webp',
   ],
   },
   {
@@ -819,20 +816,20 @@ export const PROJECTS_DATA: ProjectData[] = [
       en: "The Jean Lapointe Foundation raises public awareness about the dangers of alcohol addiction. For the 2024 edition of the 28-Day No-Alcohol Challenge, Nukleo orchestrated the campaign around the tagline \"Change de Tempo\", handling the ideation, artistic direction, and complete visual rollout across all channels. The strategy combined digital media, social networks, television advertising, radio messages, and press articles. The result: massive mobilization and over $749,000 raised for the cause.",
     },
     images: [
-    '/projects/D28_24_1.jpg',
-    '/projects/D28_24_10.jpg',
-    '/projects/D28_24_11.jpg',
-    '/projects/D28_24_12.png',
-    '/projects/D28_24_13.jpg',
-    '/projects/D28_24_14.jpg',
-    '/projects/D28_24_2.jpg',
-    '/projects/D28_24_3.jpg',
-    '/projects/D28_24_4.jpg',
-    '/projects/D28_24_5.jpg',
-    '/projects/D28_24_6.jpg',
-    '/projects/D28_24_7.jpg',
-    '/projects/D28_24_8.jpg',
-    '/projects/D28_24_9.jpg',
+    '/projects/D28_24_1.webp',
+    '/projects/D28_24_10.webp',
+    '/projects/D28_24_11.webp',
+    '/projects/D28_24_12.webp',
+    '/projects/D28_24_13.webp',
+    '/projects/D28_24_14.webp',
+    '/projects/D28_24_2.webp',
+    '/projects/D28_24_3.webp',
+    '/projects/D28_24_4.webp',
+    '/projects/D28_24_5.webp',
+    '/projects/D28_24_6.webp',
+    '/projects/D28_24_7.webp',
+    '/projects/D28_24_8.webp',
+    '/projects/D28_24_9.webp',
   ],
   },
   {
@@ -848,20 +845,20 @@ export const PROJECTS_DATA: ProjectData[] = [
       en: "For 5 years, Nukleo has been supporting the Jean Lapointe Foundation in the 28-Day No-Alcohol Challenge, a campaign that encourages Quebecers to change their pace and reduce their alcohol consumption for 28 days. For the 2025 edition, Nukleo handled the ideation, artistic direction, and complete visual rollout. Each edition relies on a colorful and animated visual identity, designed to reflect the energy and spirit of transformation that the campaign seeks to inspire.",
     },
     images: [
-    '/projects/D28_25_1.png',
-    '/projects/D28_25_11.png',
-    '/projects/D28_25_12.png',
-    '/projects/D28_25_13.png',
-    '/projects/D28_25_14.png',
-    '/projects/D28_25_15.png',
-    '/projects/D28_25_16.png',
-    '/projects/D28_25_17.png',
-    '/projects/D28_25_2.png',
-    '/projects/D28_25_3.png',
-    '/projects/D28_25_4.png',
-    '/projects/D28_25_5.jpg',
-    '/projects/D28_25_6.png',
-    '/projects/D28_25_7.png',
+    '/projects/D28_25_1.webp',
+    '/projects/D28_25_11.webp',
+    '/projects/D28_25_12.webp',
+    '/projects/D28_25_13.webp',
+    '/projects/D28_25_14.webp',
+    '/projects/D28_25_15.webp',
+    '/projects/D28_25_16.webp',
+    '/projects/D28_25_17.webp',
+    '/projects/D28_25_2.webp',
+    '/projects/D28_25_3.webp',
+    '/projects/D28_25_4.webp',
+    '/projects/D28_25_5.webp',
+    '/projects/D28_25_6.webp',
+    '/projects/D28_25_7.webp',
   ],
   },
   {
@@ -877,11 +874,11 @@ export const PROJECTS_DATA: ProjectData[] = [
       en: "Maison Jean Lapointe is a recognized addiction treatment center in Quebec. Nukleo handled the artistic direction and visual design of the 2025 annual report, translating the organization's identity into a document that is both rigorous and human, reflecting the impact of the organization on the people it supports.",
     },
     images: [
-    '/projects/MJL_2025_1.png',
-    '/projects/MJL_2025_2.jpg',
-    '/projects/MJL_2025_3.png',
-    '/projects/MJL_2025_4.png',
-    '/projects/MJL_2025_5.png',
+    '/projects/MJL_2025_1.webp',
+    '/projects/MJL_2025_2.webp',
+    '/projects/MJL_2025_3.webp',
+    '/projects/MJL_2025_4.webp',
+    '/projects/MJL_2025_5.webp',
   ],
   },
   {
@@ -897,7 +894,7 @@ export const PROJECTS_DATA: ProjectData[] = [
       en: "Rideau Vineyard is a California winery renowned for its exceptional wines. Nukleo took charge of the winery's social media management, handling visual content creation and artistic direction for publications. The goal was to showcase Rideau Vineyard's refined universe and strengthen its online presence among a wine-loving clientele.",
     },
     images: [
-    '/projects/Rideau_1.jpg',
+    '/projects/Rideau_1.webp',
   ],
   },
   {
@@ -914,7 +911,7 @@ export const PROJECTS_DATA: ProjectData[] = [
       en: "The Conseil économique et coopératif de la Saskatchewan (CÉCS) has been, since 1947, the organization responsible for the economic development of the province's francophone communities. Nukleo produced a motion video for the CÉCS, handling the artistic direction and animation design. The goal was to present the organization's mission and programs in a dynamic and engaging way, targeting the francophone communities of Saskatchewan.",
     },
     images: [
-    '/projects/CECS_1.jpg',
+    '/projects/CECS_1.webp',
   ],
   },
   {
@@ -930,7 +927,7 @@ export const PROJECTS_DATA: ProjectData[] = [
       en: "Cargo is a Quebec-based platform for booking outdoor experiences and activities. Nukleo worked on the user interface design, translating the brand's visual identity into high-fidelity mockups. The goal was to create an intuitive and engaging browsing experience that highlights the richness of the experiences offered and makes discovery and booking easy for users.",
     },
     images: [
-      '/projects/Cargo_1.jpg',
+      '/projects/Cargo_1.webp',
     ],
   },
   {
@@ -946,9 +943,9 @@ export const PROJECTS_DATA: ProjectData[] = [
       en: "The Conseil de développement économique des Nouvelles-Écosse (CDÉNÉ) supports the development of Acadian and francophone communities in Nova Scotia. As part of this mandate, Nukleo designed and developed the Vivre en Clare website, a platform aimed at promoting the Clare region as a destination for francophone settlement and living. The goal was to create an attractive digital tool that reflects the cultural and economic richness of this Acadian community.",
     },
     images: [
-      '/projects/VivreEnClare_1.jpg',
-      '/projects/VivreEnClare_2.png',
-      '/projects/VivreEnClare_3.png',
+      '/projects/VivreEnClare_1.webp',
+      '/projects/VivreEnClare_2.webp',
+      '/projects/VivreEnClare_3.webp',
     ],
   },
   {
@@ -964,7 +961,7 @@ export const PROJECTS_DATA: ProjectData[] = [
       en: "Shifting Ice is an organization dedicated to empowering people living with chronic illnesses, offering them resources, support, and community. Nukleo designed and developed the organization's website, creating a warm and accessible interface that reflects the brand's values of empathy and inclusion. The platform also integrates an online shop for the sale of Inuit artworks, supporting artists from northern communities.",
     },
     images: [
-      '/projects/ShiftingIce_1.jpg',
+      '/projects/ShiftingIce_1.webp',
     ],
   },
 ];

@@ -253,22 +253,26 @@ export default function ProjectDetail() {
                   {rows.map((row, rowIdx) => (
                     <div
                       key={rowIdx}
-                      className={row.names.length === 1 ? 'grid grid-cols-1' : 'grid grid-cols-1 sm:grid-cols-2 gap-8'}
+                      className={row.names.length === 2 ? 'grid grid-cols-1 sm:grid-cols-2 gap-8' : 'w-full'}
                     >
                       {row.names.map((name) => (
                         <div
                           key={name}
-                          className="rounded-md overflow-hidden"
+                          className="rounded-md overflow-hidden w-full"
                           style={{
-                            aspectRatio: row.portrait ? '3/4' : '4/3',
+                            aspectRatio: row.names.length === 1
+                              ? (row.portrait ? '3/4' : '16/9')
+                              : (row.portrait ? '3/4' : '4/3'),
                             background: '#2d2d2d',
+                            maxWidth: row.names.length === 1 && row.portrait ? '600px' : undefined,
+                            margin: row.names.length === 1 && row.portrait ? '0 auto' : undefined,
                           }}
                         >
                           <OptimizedImage
                             src={`/projects/${name}`}
                             alt={projectData.title}
-                            width={row.portrait ? 400 : 600}
-                            height={row.portrait ? 533 : 450}
+                            width={row.portrait ? 400 : 1200}
+                            height={row.portrait ? 533 : 675}
                             className="w-full h-full object-cover"
                             loading="lazy"
                           />
