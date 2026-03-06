@@ -20,7 +20,6 @@ const teamMembers: { name: string; translationKey: string; image: string; linked
   { name: "Camille", translationKey: "camille", image: "/team/Camille.png", linkedin: "https://www.linkedin.com/in/camillegauthier226/" },
   { name: "Timothé", translationKey: "timothe", image: "/team/Timothe.jpg", linkedin: "https://www.linkedin.com/in/timothe-lac/", objectPosition: "center 20%" },
   { name: "Sarah", translationKey: "sarah", image: "/team/Sarah.jpg", linkedin: "https://www.linkedin.com/in/sarah-katerji/" },
-  { name: "Séverine", translationKey: "severine", image: "/team/Severine.webp", linkedin: "https://www.linkedin.com/in/s%C3%A9verine-dimambro/" },
   { name: "Maxime", translationKey: "maxime", image: "/team/Maxime.png", linkedin: "https://www.linkedin.com/in/maxime-besnier/" },
   { name: "Meriem", translationKey: "meriem", image: "/team/Meriem.jpg", linkedin: "https://www.linkedin.com/in/meriem-kouidri16/" },
   { name: "Jean-François", translationKey: "jeanFrancois", image: "/team/Jean-Francois.png", linkedin: "https://www.linkedin.com/in/jeffldev/" },
