@@ -6,7 +6,7 @@
   "_comment": "trigger lockfile regeneration - workflow fixed",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "vite build && node scripts/write-static-server-entry.cjs",
     "start": "npx serve dist -s",
     "check": "tsc --noEmit",
     "format": "prettier --write .",
