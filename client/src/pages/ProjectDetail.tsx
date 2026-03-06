@@ -232,58 +232,39 @@ export default function ProjectDetail() {
             </div>
           </section>
 
-          {/* ═══ Galerie — regroupement par orientation réelle ═══ */}
-          {galleryImages.length > 1 && (() => {
-            // Grouper les images consécutives de même orientation (max 2 par ligne)
-            type GalleryRow = { names: string[]; portrait: boolean };
-            const rows: GalleryRow[] = [];
-            let current: GalleryRow | null = null;
-            for (const name of galleryImages.slice(1)) {
-              const portrait = isPortraitImage(name);
-              if (!current || current.portrait !== portrait || current.names.length >= 2) {
-                current = { names: [name], portrait };
-                rows.push(current);
-              } else {
-                current.names.push(name);
-              }
-            }
-            return (
-              <section style={{ background: 'transparent', padding: '3rem 0 4rem' }}>
-                <div className="w-full flex flex-col gap-8">
-                  {rows.map((row, rowIdx) => (
-                    <div
-                      key={rowIdx}
-                      className={row.names.length === 2 ? 'grid grid-cols-1 sm:grid-cols-2 gap-8' : 'w-full'}
-                    >
-                      {row.names.map((name) => (
-                        <div
-                          key={name}
-                          className="rounded-md overflow-hidden w-full"
-                          style={{
-                            aspectRatio: row.names.length === 1
-                              ? (row.portrait ? '3/4' : '16/9')
-                              : (row.portrait ? '3/4' : '4/3'),
-                            background: '#2d2d2d',
-                            maxWidth: row.names.length === 1 && row.portrait ? '600px' : undefined,
-                            margin: row.names.length === 1 && row.portrait ? '0 auto' : undefined,
-                          }}
-                        >
-                          <OptimizedImage
-                            src={`/projects/${name}`}
-                            alt={projectData.title}
-                            width={row.portrait ? 400 : 1200}
-                            height={row.portrait ? 533 : 675}
-                            className="w-full h-full object-cover"
-                            loading="lazy"
-                          />
-                        </div>
-                      ))}
-                    </div>
-                  ))}
-                </div>
-              </section>
-            );
-          })()}
+          {/* ═══ Galerie Masonry ═══ */}
+          {galleryImages.length > 1 && (
+            <section style={{ background: 'transparent', padding: '3rem 0 4rem' }}>
+              <div
+                style={{
+                  columnCount: 2,
+                  columnGap: '2rem',
+                }}
+                className="w-full masonry-gallery"
+              >
+                {galleryImages.slice(1).map((name) => (
+                  <div
+                    key={name}
+                    className="rounded-md overflow-hidden w-full"
+                    style={{
+                      breakInside: 'avoid',
+                      marginBottom: '2rem',
+                      display: 'block',
+                    }}
+                  >
+                    <OptimizedImage
+                      src={`/projects/${name}`}
+                      alt={projectData.title}
+                      width={isPortraitImage(name) ? 400 : 1200}
+                      height={isPortraitImage(name) ? 533 : 675}
+                      className="w-full h-auto block"
+                      loading="lazy"
+                    />
+                  </div>
+                ))}
+              </div>
+            </section>
+          )}
 
           </div>
         </main>
