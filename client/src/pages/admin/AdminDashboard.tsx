@@ -179,13 +179,6 @@ export default function AdminDashboard() {
                   <div className="text-gray-900 font-medium" style={{ fontFamily: "'Google Sans Flex', sans-serif" }}>Page Visibility</div>
                   <div className="text-gray-500 text-sm" style={{ fontFamily: "'Google Sans Flex', sans-serif" }}>Manage page visibility settings</div>
                 </a>
-                <a
-                  href="/admin/sounds"
-                  className="block p-3 rounded-lg bg-gray-50 hover:bg-gray-100 transition-colors text-gray-700 hover:text-gray-900"
-                >
-                  <div className="text-gray-900 font-medium" style={{ fontFamily: "'Google Sans Flex', sans-serif" }}>Sounds</div>
-                  <div className="text-gray-500 text-sm" style={{ fontFamily: "'Google Sans Flex', sans-serif" }}>Manage interface sounds</div>
-                </a>
               </CardContent>
             </Card>
           </div>

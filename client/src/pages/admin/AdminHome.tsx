@@ -7,7 +7,6 @@ import {
   MessageSquare,
   Settings,
   ArrowRight,
-  Volume2,
   Globe,
   Database,
   TrendingUp,
@@ -76,7 +75,6 @@ const ADMIN_CATEGORIES = [
     description: "Paramètres du site",
     sections: [
       { title: "Visibilité des Pages", description: "Contrôler l'accès aux pages du site", icon: <Globe className="h-5 w-5" />, href: "/admin/page-visibility" },
-      { title: "Gestion des Sons", description: "Sons interactifs de l'interface", icon: <Volume2 className="h-5 w-5" />, href: "/admin/sounds" },
       { title: "Projets", description: "Gérer les projets, images, descriptions et liens", icon: <ImageIcon className="h-5 w-5" />, href: "/admin/projects-images" },
       { title: "Logos carousel", description: "Gérer les logos du carrousel d'accueil", icon: <LayoutGrid className="h-5 w-5" />, href: "/admin/carousel-logos" },
     ],

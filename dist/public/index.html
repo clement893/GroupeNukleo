@@ -71,7 +71,7 @@
     <link rel="manifest" href="/manifest.json" />
     <meta name="theme-color" content="#7c3aed" />
     
-    <!-- Plus Jakarta Sans chargé via Google Fonts (preload du CSS ci-dessous) -->
+    <!-- Google Sans Flex chargé via Google Fonts (test typo) -->
     
     <!-- Preload critical LCP image - arrow SVG is the LCP element -->
     <link rel="preload" href="/nukleo-arrow.svg" as="image" type="image/svg+xml" fetchpriority="high" />
@@ -95,14 +95,13 @@
     <link rel="prefetch" href="/radar" />
     <link rel="prefetch" href="/fr/radar" />
     
-    <!-- Plus Jakarta Sans chargé via Google Fonts (stylesheet ci-dessous) -->
+    <!-- Google Sans Flex + JetBrains Mono -->
     
     <!-- Defer Google Fonts - load after critical content -->
-    <!-- Load asynchronously using external script to avoid CSP violation -->
-    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500;600;700&display=swap" as="style" />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500;600;700&display=swap" media="print" id="google-fonts-stylesheet" />
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:wght@100;200;300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" as="style" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:wght@100;200;300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" media="print" id="google-fonts-stylesheet" />
     <script src="/load-google-fonts.js" defer></script>
-    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500;600;700&display=swap" /></noscript>
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:wght@100;200;300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" /></noscript>
     
     <!-- Structured Data JSON-LD -->
     <script type="application/ld+json">
@@ -155,20 +154,17 @@
       }
     }
     </script>
-    <script type="module" crossorigin src="/assets/js/index-DKSkvkBw.js"></script>
-    <link rel="modulepreload" crossorigin href="/assets/js/react-core-Cg5OBqo3.js">
-    <link rel="modulepreload" crossorigin href="/assets/js/vendor-BnermbGU.js">
-    <link rel="modulepreload" crossorigin href="/assets/js/react-query-vendor-_j8cmIjB.js">
+    <script type="module" crossorigin src="/assets/js/index-BJEJo157.js"></script>
+    <link rel="modulepreload" crossorigin href="/assets/js/react-core-DGtJfnc9.js">
+    <link rel="modulepreload" crossorigin href="/assets/js/vendor-CEcHKfzj.js">
+    <link rel="modulepreload" crossorigin href="/assets/js/react-query-vendor-CeteAeTR.js">
+    <link rel="modulepreload" crossorigin href="/assets/js/trpc-vendor-iSAgRDmq.js">
+    <link rel="modulepreload" crossorigin href="/assets/js/radix-vendor-BcxbYqwV.js">
     <link rel="modulepreload" crossorigin href="/assets/js/react-scheduler-7OC5HNn7.js">
-    <link rel="modulepreload" crossorigin href="/assets/js/radix-vendor-gvc3U35E.js">
-    <link rel="modulepreload" crossorigin href="/assets/js/react-dom-BDJmMPLc.js">
-    <link rel="modulepreload" crossorigin href="/assets/js/trpc-vendor-DtqzH6FH.js">
-    <link rel="modulepreload" crossorigin href="/assets/js/admin-D-gbT2Xv.js">
-    <link rel="modulepreload" crossorigin href="/assets/js/leo-DCDIGq-K.js">
-    <link rel="modulepreload" crossorigin href="/assets/js/react-dom-client-DUbMnkFs.js">
-    <link rel="modulepreload" crossorigin href="/assets/js/services-CU5COtky.js">
-    <link rel="stylesheet" crossorigin href="/assets/css/admin-DhYPQXTX.css">
-    <link rel="stylesheet" crossorigin href="/assets/css/index-DwAIlsUa.css">
+    <link rel="modulepreload" crossorigin href="/assets/js/react-dom-BHuCX__d.js">
+        <link rel="modulepreload" crossorigin href="/assets/js/react-dom-client-BXV-ajzI.js">
+            <link rel="stylesheet" crossorigin href="/assets/css/admin-BlwuBToA.css">
+    <link rel="stylesheet" crossorigin href="/assets/css/index-C90crRf6.css">
   </head>
 
   <body>
@@ -205,31 +201,14 @@
         -moz-osx-font-smoothing: grayscale;
         text-rendering: optimizeLegibility;
       }
-      /* Optimize rendering on mobile */
+      /* Optimize rendering on mobile - no global animation/transition overrides to preserve header, modals, drawers */
       @media (max-width: 767px) {
         * {
           -webkit-tap-highlight-color: transparent;
-          /* Improve touch responsiveness */
           touch-action: manipulation;
         }
         img {
           content-visibility: auto;
-        }
-        /* Reduce animations on mobile for better performance */
-        /* Disable heavy animations but keep smooth transitions */
-        * {
-          animation-duration: 50ms !important;
-          animation-delay: 0ms !important;
-          transition-duration: 100ms !important;
-          transition-delay: 0ms !important;
-        }
-        /* Keep essential transitions smooth */
-        button, a, input, textarea, select {
-          transition-duration: 150ms !important;
-        }
-        /* Keep hover effects but faster */
-        *:hover {
-          transition-duration: 100ms !important;
         }
       }
       /* Critical layout styles to prevent CLS */
@@ -261,6 +240,6 @@
       <polygon class="st0" points="667.82 352.09 667.18 351.32 339.5 351.32 795.15 892.73 342.38 1427.85 339.35 1431.42 667.14 1431.42 1099.24 923.39 1099.76 922.78 1099.76 862.84 911.51 640.24 667.82 352.09"/>
     </svg>
     <div id="root"></div>
-    <!-- Load script immediately - Vite handles optimization -->
+    <!-- Load script immediately - Vite handles optimization -->
   </body>
 </html>

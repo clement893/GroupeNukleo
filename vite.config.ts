@@ -1,24 +1,37 @@
 import { jsxLocPlugin } from "@builder.io/vite-plugin-jsx-loc";
 import tailwindcss from "@tailwindcss/vite";
 import react from "@vitejs/plugin-react";
-import fs from "node:fs";
 import path from "path";
 import { defineConfig } from "vite";
 import { visualizer } from "rollup-plugin-visualizer";
 
+/** Remove modulepreload for admin, leo and services chunks so they load on demand (faster LCP on homepage). */
+function noPreloadHeavyChunksPlugin() {
+  return {
+    name: "no-preload-heavy-chunks",
+    transformIndexHtml(html: string) {
+      return html.replace(
+        /<link[^>]*rel="modulepreload"[^>]*href="[^"]*\/(admin|leo|services)-[^"]+\.js"[^>]*>\n?/gi,
+        ""
+      );
+    },
+  };
+}
 
 const plugins = [
-  react(), 
-  tailwindcss(), 
+  react(),
+  tailwindcss(),
   jsxLocPlugin(),
+  noPreloadHeavyChunksPlugin(),
   // Bundle analyzer - only in production builds
-  process.env.ANALYZE === 'true' && visualizer({
-    open: true,
-    filename: 'dist/stats.html',
-    gzipSize: true,
-    brotliSize: true,
-    template: 'treemap', // 'sunburst' | 'treemap' | 'network'
-  }),
+  process.env.ANALYZE === "true" &&
+    visualizer({
+      open: true,
+      filename: "dist/stats.html",
+      gzipSize: true,
+      brotliSize: true,
+      template: "treemap",
+    }),
 ].filter(Boolean);
 
 export default defineConfig({
@@ -133,15 +146,16 @@ export default defineConfig({
             return 'vendor';
           }
           
-          // useLocalizedPath is already handled above
+          // Keep admin guard in main chunk to avoid circular chunk (leo <-> admin) and to avoid
+          // loading full admin bundle on first paint. Only the guard is needed for route rendering.
+          if (id.includes('/components/ProtectedAdminRoute') || id.includes('/hooks/useAdminAuth')) {
+            return; // main chunk
+          }
           // Split by page for better lazy loading - admin should NEVER be in initial bundle
-          // Use more efficient string matching - CRITICAL: admin must be completely separate
-          if (id.includes('/pages/admin/') || 
-              id.includes('/components/Admin') || 
-              id.includes('/components/ProtectedAdminRoute') || 
-              id.includes('/components/DashboardLayout') || 
+          if (id.includes('/pages/admin/') ||
+              id.includes('/components/Admin') ||
+              id.includes('/components/DashboardLayout') ||
               id.includes('/styles/admin.css') ||
-              id.includes('/hooks/useAdminAuth') ||
               id.includes('admin.css')) {
             return 'admin';
           }

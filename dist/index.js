@@ -8374,10 +8374,22 @@ import react from "@vitejs/plugin-react";
 import path4 from "path";
 import { defineConfig } from "vite";
 import { visualizer } from "rollup-plugin-visualizer";
+function noPreloadHeavyChunksPlugin() {
+  return {
+    name: "no-preload-heavy-chunks",
+    transformIndexHtml(html) {
+      return html.replace(
+        /<link[^>]*rel="modulepreload"[^>]*href="[^"]*\/(admin|leo|services)-[^"]+\.js"[^>]*>\n?/gi,
+        ""
+      );
+    }
+  };
+}
 var plugins = [
   react(),
   tailwindcss(),
   jsxLocPlugin(),
+  noPreloadHeavyChunksPlugin(),
   // Bundle analyzer - only in production builds
   process.env.ANALYZE === "true" && visualizer({
     open: true,
@@ -8385,7 +8397,6 @@ var plugins = [
     gzipSize: true,
     brotliSize: true,
     template: "treemap"
-    // 'sunburst' | 'treemap' | 'network'
   })
 ].filter(Boolean);
 var vite_config_default = defineConfig({
@@ -8481,7 +8492,10 @@ var vite_config_default = defineConfig({
             }
             return "vendor";
           }
-          if (id.includes("/pages/admin/") || id.includes("/components/Admin") || id.includes("/components/ProtectedAdminRoute") || id.includes("/components/DashboardLayout") || id.includes("/styles/admin.css") || id.includes("/hooks/useAdminAuth") || id.includes("admin.css")) {
+          if (id.includes("/components/ProtectedAdminRoute") || id.includes("/hooks/useAdminAuth")) {
+            return;
+          }
+          if (id.includes("/pages/admin/") || id.includes("/components/Admin") || id.includes("/components/DashboardLayout") || id.includes("/styles/admin.css") || id.includes("admin.css")) {
             return "admin";
           }
           if (id.includes("/pages/services/")) {
