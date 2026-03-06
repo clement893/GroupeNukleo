@@ -916,6 +916,56 @@ export const PROJECTS_DATA: ProjectData[] = [
     '/projects/CECS_1.jpg',
   ],
   },
+  {
+    slug: 'cargo',
+    key: 'Cargo',
+    title: 'Cargo',
+    client: 'Cargo',
+    year: '2025',
+    category: 'Site web',
+    services: 'Direction artistique, Maquettes UI/UX, Stratégie digitale',
+    description: {
+      fr: "Cargo est une plateforme québécoise de réservation d'expériences et d'activités de plein air. Nukleo a travaillé sur la conception de l'interface utilisateur, en traduisant l'identité visuelle de la marque en maquettes haute-fidélité. L'objectif était de créer une expérience de navigation intuitive et engageante, qui met en valeur la richesse des expériences proposées et facilite la découverte et la réservation pour les utilisateurs.",
+      en: "Cargo is a Quebec-based platform for booking outdoor experiences and activities. Nukleo worked on the user interface design, translating the brand's visual identity into high-fidelity mockups. The goal was to create an intuitive and engaging browsing experience that highlights the richness of the experiences offered and makes discovery and booking easy for users.",
+    },
+    images: [
+      '/projects/Cargo_1.jpg',
+    ],
+  },
+  {
+    slug: 'vivre-en-clare',
+    key: 'VivreEnClare',
+    title: 'Vivre en Clare',
+    client: 'CDÉNÉ',
+    year: '2025',
+    category: 'Site web',
+    services: 'Direction artistique, Maquettes UI/UX, Développement',
+    description: {
+      fr: "Le Conseil de développement économique des Nouvelles-Écosse (CDÉNÉ) accompagne le développement des communautés acadiennes et francophones de la Nouvelle-Écosse. Dans le cadre de ce mandat, Nukleo a conçu et développé le site web Vivre en Clare, une plateforme destinée à promouvoir la région de Clare comme destination de vie et d'établissement pour les francophones. L'objectif était de créer un outil numérique attrayant, reflétant la richesse culturelle et économique de cette communauté acadienne.",
+      en: "The Conseil de développement économique des Nouvelles-Écosse (CDÉNÉ) supports the development of Acadian and francophone communities in Nova Scotia. As part of this mandate, Nukleo designed and developed the Vivre en Clare website, a platform aimed at promoting the Clare region as a destination for francophone settlement and living. The goal was to create an attractive digital tool that reflects the cultural and economic richness of this Acadian community.",
+    },
+    images: [
+      '/projects/VivreEnClare_1.jpg',
+      '/projects/VivreEnClare_2.png',
+      '/projects/VivreEnClare_3.png',
+    ],
+  },
+  {
+    slug: 'shifting-ice',
+    key: 'ShiftingIce',
+    title: 'Shifting Ice',
+    client: 'Shifting Ice',
+    year: '2025',
+    category: 'Site web',
+    services: 'Direction artistique, Maquettes UI/UX, Développement',
+    description: {
+      fr: "Shifting Ice est une organisation dédiée à l'autonomisation des personnes vivant avec des maladies chroniques, en leur offrant des ressources, du soutien et une communauté. Nukleo a conçu et développé le site web de l'organisation, en créant une interface chaleureuse et accessible qui reflète les valeurs d'empathie et d'inclusion de la marque. La plateforme intègre également une boutique en ligne permettant la vente d'œuvres d'art inuit, soutenant ainsi les artistes des communautés nordiques.",
+      en: "Shifting Ice is an organization dedicated to empowering people living with chronic illnesses, offering them resources, support, and community. Nukleo designed and developed the organization's website, creating a warm and accessible interface that reflects the brand's values of empathy and inclusion. The platform also integrates an online shop for the sale of Inuit artworks, supporting artists from northern communities.",
+    },
+    images: [
+      '/projects/ShiftingIce_1.jpg',
+    ],
+  },
 ];
 
 
