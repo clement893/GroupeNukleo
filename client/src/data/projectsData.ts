@@ -130,11 +130,12 @@ export const PROJECTS_DATA: ProjectData[] = [
       en: "Attitude Fraîche, a leader in the production of mesclun, lettuces, and other field vegetables, launched a redesigned website with us to improve the user experience and highlight their commitment to eco-responsible farming practices. Nukleo handled the complete design of the website, from UX mockups to development, including UI design.",
     },
     images: [
-    '/projects/AttitudeFraiche_1.png',
+    '/projects/AttitudeFraiche_1.jpg',
     '/projects/AttitudeFraiche_2.png',
     '/projects/AttitudeFraiche_3.png',
     '/projects/AttitudeFraiche_4.png',
-    '/projects/AttitudeFraiche_5.jpg',
+    '/projects/AttitudeFraiche_5.png',
+    '/projects/AttitudeFraiche_6.png',
   ],
   },
   {
