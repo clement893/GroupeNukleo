@@ -776,6 +776,94 @@ export const PROJECTS_DATA: ProjectData[] = [
     },
     images: [],
   },
+  {
+    slug: 'defi-28-jours-2024',
+    key: 'D28_24',
+    title: 'Défi 28 jours sans alcool — Édition 2024',
+    client: 'Fondation Jean Lapointe',
+    year: '2024',
+    category: 'Campagnes',
+    services: 'Idéation de campagne, Direction artistique, Direction de tournage, Déclinaisons visuelles',
+    description: {
+      fr: "La Fondation Jean Lapointe sensibilise le public aux dangers de la dépendance à l'alcool. Pour l'édition 2024 du Défi 28 jours sans alcool, Nukleo a orchestré la campagne autour de la tagline \"Change de Tempo\", en assurant l'idéation, la direction artistique et la déclinaison complète des visuels sur l'ensemble des canaux. La stratégie combinait médias numériques, réseaux sociaux, publicité télévisée, messages radio et articles de presse. Résultat : une mobilisation massive et plus de 749 000 $ amassés pour la cause.",
+      en: "The Jean Lapointe Foundation raises public awareness about the dangers of alcohol addiction. For the 2024 edition of the 28-Day No-Alcohol Challenge, Nukleo orchestrated the campaign around the tagline \"Change de Tempo\", handling the ideation, artistic direction, and complete visual rollout across all channels. The strategy combined digital media, social networks, television advertising, radio messages, and press articles. The result: massive mobilization and over $749,000 raised for the cause.",
+    },
+    images: [
+      'D28_24_5.jpg',
+      'D28_24_14.jpg',
+      'D28_24_17.jpg',
+      'D28_24_19.jpg',
+    ],
+  },
+  {
+    slug: 'defi-28-jours-2025',
+    key: 'D28_25',
+    title: 'Défi 28 jours sans alcool — Édition 2025',
+    client: 'Fondation Jean Lapointe',
+    year: '2025',
+    category: 'Campagnes',
+    services: 'Idéation de campagne, Direction artistique, Direction de tournage, Déclinaisons visuelles',
+    description: {
+      fr: "Depuis 5 ans, Nukleo accompagne la Fondation Jean Lapointe dans le Défi 28 jours sans alcool, une campagne qui incite les Québécois à changer de rythme et à réduire leur consommation d'alcool pendant 28 jours. Pour l'édition 2025, Nukleo a assuré l'idéation, la direction artistique et la déclinaison complète des visuels. Chaque édition s'appuie sur une identité visuelle colorée et animée, pensée pour refléter l'énergie et l'esprit de transformation que la campagne cherche à insuffler.",
+      en: "For 5 years, Nukleo has been supporting the Jean Lapointe Foundation in the 28-Day No-Alcohol Challenge, a campaign that encourages Quebecers to change their pace and reduce their alcohol consumption for 28 days. For the 2025 edition, Nukleo handled the ideation, artistic direction, and complete visual rollout. Each edition relies on a colorful and animated visual identity, designed to reflect the energy and spirit of transformation that the campaign seeks to inspire.",
+    },
+    images: [
+      'D28_25_4.jpg',
+      'D28_25_5.jpg',
+      'D28_25_6.jpg',
+      'D28_25_9.jpg',
+    ],
+  },
+  {
+    slug: 'maison-jean-lapointe-2025',
+    key: 'MJL_2025',
+    title: 'Maison Jean Lapointe — Rapport annuel 2025',
+    client: 'Maison Jean Lapointe',
+    year: '2025',
+    category: 'Campagnes',
+    services: 'Direction artistique, Conception visuelle',
+    description: {
+      fr: "La Maison Jean Lapointe est un centre de traitement des dépendances reconnu au Québec. Nukleo a assuré la direction artistique et la conception visuelle du rapport annuel 2025, en déclinant l'identité de la Maison dans un document à la fois rigoureux et humain, reflétant l'impact de l'organisation sur les personnes qu'elle accompagne.",
+      en: "Maison Jean Lapointe is a recognized addiction treatment center in Quebec. Nukleo handled the artistic direction and visual design of the 2025 annual report, translating the organization's identity into a document that is both rigorous and human, reflecting the impact of the organization on the people it supports.",
+    },
+    images: [
+      'MJL_2025_1.jpg',
+      'MJL_2025_4.jpg',
+    ],
+  },
+  {
+    slug: 'rideau-vineyard',
+    key: 'Rideau',
+    title: 'Rideau Vineyard',
+    client: 'Rideau Vineyard',
+    year: '2024',
+    category: 'Marketing numérique',
+    services: 'Gestion des réseaux sociaux, Création de contenu, Direction artistique',
+    description: {
+      fr: "Rideau Vineyard est un vignoble californien reconnu pour ses vins d'exception. Nukleo a pris en charge la gestion des réseaux sociaux du vignoble, en assurant la création de contenu visuel et la direction artistique des publications. L'objectif était de mettre en valeur l'univers raffiné de Rideau Vineyard et de renforcer sa présence en ligne auprès d'une clientèle passionnée de vin.",
+      en: "Rideau Vineyard is a California winery renowned for its exceptional wines. Nukleo took charge of the winery's social media management, handling visual content creation and artistic direction for publications. The goal was to showcase Rideau Vineyard's refined universe and strengthen its online presence among a wine-loving clientele.",
+    },
+    images: [
+      'Rideau_4.jpg',
+    ],
+  },
+  {
+    slug: 'cecs',
+    key: 'CECS',
+    title: 'CÉCS — Conseil économique et coopératif de la Saskatchewan',
+    client: 'CÉCS',
+    year: '2024',
+    category: 'Marketing numérique',
+    services: 'Vidéo motion, Direction artistique',
+    websiteUrl: 'https://cecs-sk.ca/fr/',
+    description: {
+      fr: "Le Conseil économique et coopératif de la Saskatchewan (CÉCS) est, depuis 1947, l'organisme responsable du développement économique des communautés francophones de la province. Nukleo a réalisé une vidéo motion pour le CÉCS, en assurant la direction artistique et la conception des animations. L'objectif était de présenter la mission et les programmes de l'organisation de manière dynamique et engageante, à destination des communautés francophones de la Saskatchewan.",
+      en: "The Conseil économique et coopératif de la Saskatchewan (CÉCS) has been, since 1947, the organization responsible for the economic development of the province's francophone communities. Nukleo produced a motion video for the CÉCS, handling the artistic direction and animation design. The goal was to present the organization's mission and programs in a dynamic and engaging way, targeting the francophone communities of Saskatchewan.",
+    },
+    images: [
+      'CECS_2.jpg',
+    ],
+  },
 ];
 
 
