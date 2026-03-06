@@ -29,7 +29,7 @@ export default function NukleoTech() {
     { name: 'Sarah', role: 'Développeuse Full Stack', image: '/team/Sarah.jpg', imageAlt: 'Sarah — Développeuse Full Stack chez Nukleo Digital' },
     { name: 'Tim', role: 'Développeur Full Stack', image: '/team/Tim.png', imageAlt: 'Tim — Développeur Full Stack chez Nukleo Digital' },
     { name: 'Hind', role: 'Développeuse IA', image: '/team/Hind.jpg', imageAlt: 'Hind — Développeuse IA chez Nukleo Digital' },
-    { name: 'Jean-François', role: 'Développeur Full Stack', image: '/team/Jean-Francois.png', imageAlt: 'Jean-François — Développeur Full Stack chez Nukleo Digital' },
+    { name: 'Jean-François', role: 'Développeur Full Stack', image: '/team/Jean-Francois_v2.png', imageAlt: 'Jean-François — Développeur Full Stack chez Nukleo Digital' },
   ];
 
   return (
