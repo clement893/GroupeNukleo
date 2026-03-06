@@ -1,20 +1,15 @@
 import { useState, useEffect } from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
-import { Link } from 'wouter';
 import { useLanguage } from '@/contexts/LanguageContext';
-import { useLocalizedPath } from '@/hooks/useLocalizedPath';
-import { trpc } from '@/lib/trpc';
+import { testimonials } from '@/data/testimonials';
 
 export default function TestimonialsCarousel() {
   const { t, language } = useLanguage();
-  const getLocalizedPath = useLocalizedPath();
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isAutoPlaying, setIsAutoPlaying] = useState(true);
-  const { data: testimonials = [], isLoading } = trpc.testimonials.getAll.useQuery({ language });
 
-  // Sélectionner 6 témoignages pour le carrousel
-  const safeTestimonials = Array.isArray(testimonials) ? testimonials : [];
-  const carouselTestimonials = safeTestimonials.slice(0, 6);
+  // Sélectionner 6 témoignages pour le carrousel (données statiques)
+  const carouselTestimonials = testimonials.slice(0, 6);
 
   // Auto-play
   useEffect(() => {
@@ -51,14 +46,14 @@ export default function TestimonialsCarousel() {
     }
   }, [carouselTestimonials.length, currentIndex]);
 
-  if (isLoading || carouselTestimonials.length === 0) {
-    return null; // Don't show carousel if loading or no testimonials
+  if (carouselTestimonials.length === 0) {
+    return null;
   }
 
   const currentTestimonial = carouselTestimonials[currentIndex];
 
   return (
-    <section className="py-32 relative overflow-hidden">
+    <section id="testimonials" className="py-32 relative overflow-hidden scroll-mt-24">
       {/* Background */}
       <div className="absolute inset-0 bg-gradient-to-br from-[#523DCB]/30 via-[#523DCB]/20 to-[#523DCB]/30" />
       
@@ -180,23 +175,6 @@ export default function TestimonialsCarousel() {
             </div>
           </div>
 
-          {/* CTA Link */}
-          <div className="text-center mt-12">
-            <Link href={getLocalizedPath('/testimonials')}>
-              <a className="
-                inline-flex items-center gap-2
-                text-white/70 hover:text-white
-                font-mono text-sm
-                transition-all duration-300
-                group
-              ">
-                {t('testimonials.seeAll')}
-                <svg className="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
-                </svg>
-              </a>
-            </Link>
-          </div>
         </div>
       </div>
     </section>

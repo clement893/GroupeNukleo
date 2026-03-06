@@ -1,43 +1,8 @@
 /**
  * Double carousel de logos clients - deux rangées qui défilent en sens opposés.
- * Données depuis l'API (admin) ou fallback statique.
+ * Données statiques (site one-page sans backend).
  */
-import { trpc } from '@/lib/trpc';
-
-const FALLBACK_ROW1 = [
-  { src: '/demo/logos/MBAM.png', alt: 'MBAM', url: '' },
-  { src: '/demo/logos/SummitLaw.png', alt: 'Summit Law', url: '' },
-  { src: '/demo/logos/Queertech.png', alt: 'QueerTech', url: '' },
-  { src: '/demo/logos/OSM.png', alt: 'OSM', url: '' },
-  { src: '/demo/logos/FJL.png', alt: 'FJL', url: '' },
-  { src: '/demo/logos/AMQ.png', alt: 'AMQ', url: '' },
-  { src: '/demo/logos/CINARS.png', alt: 'CINARS', url: '' },
-  { src: '/demo/logos/Novisto.png', alt: 'Novisto', url: '' },
-  { src: '/demo/logos/Amerispa.png', alt: 'Amerispa', url: '' },
-  { src: '/demo/logos/RoyalLePage.svg', alt: 'Royal LePage', url: '' },
-  { src: '/demo/logos/CQDE.png', alt: 'CQDE', url: '' },
-  { src: '/demo/logos/Zu.png', alt: 'Zu', url: '' },
-  { src: '/demo/logos/Securiglobe.png', alt: 'Securiglobe', url: '' },
-  { src: '/demo/logos/EMH.png', alt: 'EMH', url: '' },
-];
-
-const FALLBACK_ROW2 = [
-  { src: '/demo/logos/Educart.png', alt: 'Educart', url: '' },
-  { src: '/demo/logos/CECS.png', alt: 'CECS', url: '' },
-  { src: '/demo/logos/EHR.png', alt: 'EHR', url: '' },
-  { src: '/demo/logos/Diverso.png', alt: 'Diverso', url: '' },
-  { src: '/demo/logos/MP.png', alt: 'MP', url: '' },
-  { src: '/demo/logos/TNS.png', alt: 'TNS', url: '' },
-  { src: '/demo/logos/PsyEtc.png', alt: 'Psy etc.', url: '' },
-  { src: '/demo/logos/LF.png', alt: 'LF', url: '' },
-  { src: '/demo/logos/Medicom.svg', alt: 'Medicom', url: '' },
-  { src: '/demo/logos/Ecoverdure.png', alt: 'Écoverdure', url: '' },
-  { src: '/demo/logos/Techsplo.png', alt: 'Techsplo', url: '' },
-  { src: '/demo/logos/GoCoupons.png', alt: 'GoCoupons', url: '' },
-  { src: '/demo/logos/AdeleBlais.webp', alt: 'Adèle Blais', url: '' },
-  { src: '/demo/logos/Zenya.png', alt: 'Zenya', url: '' },
-  { src: '/demo/logos/Spruce.png', alt: 'Spruce', url: '' },
-];
+import { CAROUSEL_LOGOS_ROW1, CAROUSEL_LOGOS_ROW2 } from '@/data/carouselLogos';
 
 type LogoItem = { src: string; alt: string; url?: string };
 
@@ -75,22 +40,8 @@ interface DoubleLogoCarouselProps {
 }
 
 export function DoubleLogoCarousel({ title = 'Trusted by ambitious organizations', className = '' }: DoubleLogoCarouselProps) {
-  const { data: apiLogos, isLoading, isError } = trpc.carouselLogos.getAll.useQuery(undefined, {
-    staleTime: 60 * 1000,
-    refetchOnWindowFocus: false,
-  });
-
-  let row1: LogoItem[];
-  let row2: LogoItem[];
-
-  if (apiLogos && apiLogos.length > 0 && !isLoading && !isError) {
-    const half = Math.ceil(apiLogos.length / 2);
-    row1 = apiLogos.slice(0, half).map((l) => ({ src: l.src, alt: l.alt, url: l.url || undefined }));
-    row2 = apiLogos.slice(half).map((l) => ({ src: l.src, alt: l.alt, url: l.url || undefined }));
-  } else {
-    row1 = FALLBACK_ROW1;
-    row2 = FALLBACK_ROW2;
-  }
+  const row1: LogoItem[] = CAROUSEL_LOGOS_ROW1;
+  const row2: LogoItem[] = CAROUSEL_LOGOS_ROW2;
 
   return (
     <div className={`rounded-2xl overflow-hidden py-[3.75rem] ${className}`}>

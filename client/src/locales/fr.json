@@ -338,8 +338,10 @@
     "seoTitle": "Témoignages clients | Nukleo Digital",
     "seoDescription": "Témoignages clients transformation IA. Leaders industrie partagent leur succès transformation digitale avec Nukleo Digital. Expertise reconnue.",
     "seoKeywords": "témoignages clients IA, avis Nukleo Digital, études de cas IA, succès clients transformation numérique",
+    "sectionLabel": "Témoignages clients",
     "title": "Ce que nos<br /><span class=\"text-white/70\">clients disent</span>",
-    "description": "Nous sommes fiers de nous associer à des organisations visionnaires pour repousser les limites de ce qui est possible avec l'IA."
+    "description": "Nous sommes fiers de nous associer à des organisations visionnaires pour repousser les limites de ce qui est possible avec l'IA.",
+    "seeAll": "Voir tous les témoignages"
   },
   "whoWeServe": {
     "sectionLabel": "Partenaire des organisations ambitieuses",

@@ -1,25 +1,21 @@
-import { Link } from 'wouter';
 import { ArrowUpRight } from 'lucide-react';
-import { useLocalizedPath } from '@/hooks/useLocalizedPath';
 import { HOME_SERVICES } from '@/data/homeServices';
 
 const DARK = '#0A0A0A';
 
 /**
  * Section des 4 cartes services (Lab technologique, Studio créatif, Agence Comm & Marketing, Transition numérique).
- * Utilisée sur la page d'accueil et la page À propos pour garantir une présentation identique.
+ * One-page : liens vers ancres #services.
  */
 export default function HomeServicesSection() {
-  const getLocalizedPath = useLocalizedPath();
-
   return (
     <section style={{ padding: '5rem 3% 6rem', marginBottom: 5 * 16 }}>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8 items-stretch">
         {HOME_SERVICES.map((service) => (
-          <Link
+          <a
             key={service.title}
-            href={getLocalizedPath(service.path)}
-            aria-label={`Voir ${service.title}`}
+            href="#services"
+            aria-label={`${service.title}`}
             style={{ textDecoration: 'none', color: 'inherit' }}
             className="group block h-full"
           >
@@ -135,7 +131,7 @@ export default function HomeServicesSection() {
                 </div>
               </div>
             </article>
-          </Link>
+          </a>
         ))}
       </div>
     </section>

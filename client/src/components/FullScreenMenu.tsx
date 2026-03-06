@@ -15,16 +15,16 @@ interface FullScreenMenuProps {
 
 const MAIN_LINKS = [
   { labelKey: 'nav.home', labelFr: 'Accueil', path: '/' },
-  { labelKey: 'nav.about', labelFr: 'À propos de nous', path: '/about' },
-  { labelKey: 'nav.projects', labelFr: 'Nos projets', path: '/projects' },
-  { labelKey: 'nav.contact', labelFr: 'Contactez-nous', path: '/contact' },
+  { labelKey: 'nav.about', labelFr: 'À propos de nous', path: '#about' },
+  { labelKey: 'nav.projects', labelFr: 'Nos projets', path: '#projects' },
+  { labelKey: 'nav.contact', labelFr: 'Contactez-nous', path: '#contact' },
 ] as const;
 
 const SERVICE_LINKS = [
-  { labelKey: 'menu.serviceTech', path: '/services/tech' },
-  { labelKey: 'menu.serviceStudio', path: '/services/studio' },
-  { labelKey: 'menu.serviceAgency', path: '/services/agency' },
-  { labelKey: 'menu.serviceConsulting', path: '/services/consulting' },
+  { labelKey: 'menu.serviceTech', path: '#services' },
+  { labelKey: 'menu.serviceStudio', path: '#services' },
+  { labelKey: 'menu.serviceAgency', path: '#services' },
+  { labelKey: 'menu.serviceConsulting', path: '#services' },
 ] as const;
 
 export default function FullScreenMenu({ isOpen, onClose }: FullScreenMenuProps) {
@@ -97,7 +97,7 @@ export default function FullScreenMenu({ isOpen, onClose }: FullScreenMenuProps)
         <ul className="space-y-4 sm:space-y-6 md:space-y-8">
           {MAIN_LINKS.map(({ labelKey, labelFr, path }) => (
             <li key={path}>
-              <Link href={getLocalizedPath(path)} onClick={handleLinkClick} className="group block">
+              <a href={path.startsWith('#') ? path : getLocalizedPath(path)} onClick={handleLinkClick} className="group block">
                 <span
                   onMouseEnter={playHover}
                   className="block py-1.5 text-white transition-all duration-300 ease-out touch-manipulation
@@ -111,7 +111,7 @@ export default function FullScreenMenu({ isOpen, onClose }: FullScreenMenuProps)
                 >
                   {tLabel(labelKey, labelFr)}
                 </span>
-              </Link>
+              </a>
             </li>
           ))}
         </ul>
@@ -124,7 +124,7 @@ export default function FullScreenMenu({ isOpen, onClose }: FullScreenMenuProps)
       <div className="px-8 sm:px-12 md:px-16 lg:px-20 py-6 sm:py-8 flex-shrink-0">
         <div className="flex flex-wrap justify-between gap-x-8 gap-y-4 text-white/80 text-base sm:text-lg" style={{ fontFamily: "'Google Sans Flex', sans-serif", fontWeight: 700 }}>
           {SERVICE_LINKS.map(({ labelKey, path }) => (
-            <Link key={labelKey} href={getLocalizedPath(path)} onClick={handleLinkClick} className="group inline-block">
+            <a key={labelKey} href={path} onClick={handleLinkClick} className="group inline-block">
               <span
                 onMouseEnter={playHover}
                 className="transition-all duration-300 ease-out touch-manipulation
@@ -132,7 +132,7 @@ export default function FullScreenMenu({ isOpen, onClose }: FullScreenMenuProps)
               >
                 {tLabel(labelKey, labelKey)}
               </span>
-            </Link>
+            </a>
           ))}
         </div>
       </div>

@@ -1,94 +1,19 @@
-import { trpc } from "@/lib/trpc";
-import { UNAUTHED_ERR_MSG, NOT_ADMIN_ERR_MSG } from '@shared/const';
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { httpBatchLink, TRPCClientError } from "@trpc/client";
 import { createRoot } from "react-dom/client";
-import superjson from "superjson";
 import App from "./App";
 
-import { getLoginUrl } from "./const";
 import { ThemeProvider } from "./contexts/ThemeContext";
-// CRITICAL: Pre-import LanguageContext and useLocalizedPath to ensure they're in main chunk
-// These imports force the modules to be included in the main bundle
 import "./contexts/LanguageContext";
 import "./hooks/useLocalizedPath";
 import { initSentry } from "./lib/sentry";
 import { initWebVitals } from "./lib/webVitals";
-import { logger } from "./lib/logger";
 
-// Initialize Sentry for client-side error monitoring
 initSentry();
 
-// Désactiver la restauration du scroll par le navigateur le plus tôt possible (évite de rester en milieu de page à l'ouverture d'un projet)
 if (typeof window !== 'undefined' && 'scrollRestoration' in history) {
   history.scrollRestoration = 'manual';
 }
 
-// CSS is loaded normally - Vite handles optimization and code splitting
-// Critical CSS is inlined in index.html to prevent render blocking
-// Non-critical CSS (admin) is split into separate chunks
-// Note: Vite will extract CSS into separate files and optimize loading
 import "./index.css";
-
-const queryClient = new QueryClient();
-
-const redirectToLoginIfUnauthorized = (error: unknown) => {
-  if (!(error instanceof TRPCClientError)) return;
-  if (typeof window === "undefined") return;
-
-  const msg = error.message;
-  if (msg === UNAUTHED_ERR_MSG) {
-    window.location.href = getLoginUrl();
-    return;
-  }
-  if (msg === NOT_ADMIN_ERR_MSG) {
-    if (window.location.pathname.startsWith('/admin') && !window.location.pathname.startsWith('/admin/login')) {
-      const from = encodeURIComponent(window.location.pathname);
-      window.location.href = `/admin/login?from=${from}`;
-    }
-    return;
-  }
-};
-
-// Optimize error handling - only log in development
-const isDev = process.env.NODE_ENV === 'development';
-
-queryClient.getQueryCache().subscribe(event => {
-  if (event.type === "updated" && event.action.type === "error") {
-    const error = event.query.state.error;
-    // Ne pas rediriger ici sur 403 admin : les guards (ProtectedAdminRoute / AdminRoute) gèrent l'auth.
-    // Une redirection globale provoquait un clignotement infini (analytics, etc.) en boucle avec /admin/login.
-    if (isDev && error instanceof TRPCClientError && error.message !== NOT_ADMIN_ERR_MSG) {
-      logger.tagged('API').error("Query Error", error);
-    }
-  }
-});
-
-queryClient.getMutationCache().subscribe(event => {
-  if (event.type === "updated" && event.action.type === "error") {
-    const error = event.mutation.state.error;
-    // Ne pas rediriger sur erreur de mutation (403 admin) : l'utilisateur reste sur la page
-    // et voit le toast d'erreur ; évite que "supprimer un logo" ramène à l'accueil admin.
-    if (isDev && error instanceof TRPCClientError && error.message !== NOT_ADMIN_ERR_MSG) {
-      logger.tagged('API').error("Mutation Error", error);
-    }
-  }
-});
-
-const trpcClient = trpc.createClient({
-  links: [
-    httpBatchLink({
-      url: "/api/trpc",
-      transformer: superjson,
-      fetch(input, init) {
-        return globalThis.fetch(input, {
-          ...(init ?? {}),
-          credentials: "include",
-        });
-      },
-    }),
-  ],
-});
 
 const rootElement = document.getElementById("root");
 if (!rootElement) {
@@ -112,13 +37,9 @@ if (!document.body.classList.contains('loaded')) {
 // Render with automatic yielding - React 18+ handles this automatically
 // The concurrent root allows React to yield to browser during rendering
 root.render(
-  <trpc.Provider client={trpcClient} queryClient={queryClient}>
-    <QueryClientProvider client={queryClient}>
-      <ThemeProvider defaultTheme="dark" switchable={true}>
-        <App />
-      </ThemeProvider>
-    </QueryClientProvider>
-  </trpc.Provider>
+  <ThemeProvider defaultTheme="dark" switchable={true}>
+    <App />
+  </ThemeProvider>
 );
 
 // Global error handler for chunk loading failures

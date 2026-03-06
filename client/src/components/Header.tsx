@@ -129,7 +129,7 @@ function Header() {
             {/* Right: CTA split + Menu */}
             <div className="flex items-center gap-2 sm:gap-3">
               <SplitCTAButton
-                href="/contact"
+                href="#contact"
                 label={t('nav.contact') || 'Contactez-nous'}
                 ariaLabel={t('nav.contact') || 'Contactez-nous'}
                 size="header"

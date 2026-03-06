@@ -3,31 +3,29 @@ import BackToTop from '@/components/BackToTop';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { useLocalizedPath } from '@/hooks/useLocalizedPath';
 import { useMemo, memo } from 'react';
-import { trpc } from '@/lib/trpc';
 
 const FOOTER_BG = '#1E202B';
 const FOOTER_TEXT_WHITE = '#ffffff';
 const FOOTER_LINE = 'rgba(255, 255, 255, 0.5)';
 
-// Liens principaux (colonne gauche du bloc gauche)
+// Liens principaux (one-page : ancres)
 const MAIN_LINKS = [
   { key: 'home' as const, href: '/' },
-  { key: 'about' as const, href: '/about' },
-  { key: 'projects' as const, href: '/projects' },
-  { key: 'contact' as const, href: '/contact' },
-  { key: 'faq' as const, href: '/faq' },
+  { key: 'about' as const, href: '#about' },
+  { key: 'projects' as const, href: '#projects' },
+  { key: 'contact' as const, href: '#contact' },
+  { key: 'faq' as const, href: '#about' },
 ];
 
-// Services (colonne droite du bloc gauche) — libellés via t()
 const SERVICE_LINKS = [
-  { labelKey: 'menu.serviceTech' as const, href: '/services/tech' },
-  { labelKey: 'menu.serviceStudio' as const, href: '/services/studio' },
-  { labelKey: 'menu.serviceAgency' as const, href: '/services/agency' },
-  { labelKey: 'menu.serviceConsulting' as const, href: '/services/consulting' },
+  { labelKey: 'menu.serviceTech' as const, href: '#services' },
+  { labelKey: 'menu.serviceStudio' as const, href: '#services' },
+  { labelKey: 'menu.serviceAgency' as const, href: '#services' },
+  { labelKey: 'menu.serviceConsulting' as const, href: '#services' },
 ];
 
 function Footer() {
-  const { t, language } = useLanguage();
+  const { t } = useLanguage();
   const getLocalizedPath = useLocalizedPath();
 
   const mainNavLabels: Record<string, string> = useMemo(() => ({
@@ -37,38 +35,6 @@ function Footer() {
     contact: t('nav.contact'),
     faq: t('nav.faq'),
   }), [t]);
-
-  const { data: allVisibilities } = trpc.pageVisibility.getAll.useQuery(undefined, {
-    retry: false,
-    refetchOnWindowFocus: false,
-    staleTime: 60000,
-  });
-
-  const visibilityMap = useMemo(() => {
-    const map = new Map<string, boolean>();
-    if (allVisibilities && Array.isArray(allVisibilities)) {
-      allVisibilities.forEach((page: { path: string; isVisible: boolean }) => {
-        map.set(page.path, page.isVisible);
-      });
-    }
-    return map;
-  }, [allVisibilities]);
-
-  const visibleMainLinks = useMemo(() => {
-    return MAIN_LINKS.filter((item) => {
-      const path = language === 'fr' ? `/fr${item.href}` : item.href === '/' ? '/' : item.href;
-      const isVisible = visibilityMap.get(path);
-      return isVisible !== false;
-    });
-  }, [visibilityMap, language]);
-
-  const visibleServiceLinks = useMemo(() => {
-    return SERVICE_LINKS.filter((item) => {
-      const path = language === 'fr' ? `/fr${item.href}` : item.href;
-      const isVisible = visibilityMap.get(path);
-      return isVisible !== false;
-    });
-  }, [visibilityMap, language]);
 
   return (
     <footer
@@ -112,28 +78,28 @@ function Footer() {
           </Link>
           <div className="grid grid-cols-2 gap-x-12 sm:gap-x-16 gap-y-1">
             <ul className="space-y-3">
-              {visibleMainLinks.map((item) => (
+              {MAIN_LINKS.map((item) => (
                 <li key={item.href}>
-                  <Link
-                    href={getLocalizedPath(item.href)}
+                  <a
+                    href={item.href.startsWith('#') ? item.href : getLocalizedPath(item.href)}
                     className="text-base sm:text-lg hover:opacity-85 transition-opacity touch-manipulation block"
                     style={{ color: FOOTER_TEXT_WHITE }}
                   >
                     {mainNavLabels[item.key]}
-                  </Link>
+                  </a>
                 </li>
               ))}
             </ul>
             <ul className="space-y-3">
-              {visibleServiceLinks.map((item) => (
-                <li key={item.href}>
-                  <Link
-                    href={getLocalizedPath(item.href)}
+              {SERVICE_LINKS.map((item) => (
+                <li key={item.labelKey}>
+                  <a
+                    href={item.href}
                     className="text-base sm:text-lg hover:opacity-85 transition-opacity touch-manipulation block"
                     style={{ color: FOOTER_TEXT_WHITE }}
                   >
                     {t(item.labelKey)}
-                  </Link>
+                  </a>
                 </li>
               ))}
             </ul>
@@ -189,13 +155,7 @@ function Footer() {
       >
         <div className="mb-2">{t('footer.copyright', { year: new Date().getFullYear() })}</div>
         <div className="flex flex-wrap justify-center gap-x-4 gap-y-1">
-          <a href="/sitemap.xml" target="_blank" rel="noopener noreferrer" className="hover:underline">
-            {t('footer.sitemap') || 'Sitemap'}
-          </a>
-          <Link href={getLocalizedPath('/privacy-policy')} className="hover:underline">{t('footer.links.privacy')}</Link>
-          <Link href={getLocalizedPath('/nukleo-time-privacy')} className="hover:underline">{t('footer.links.nukleoTimePrivacy') || 'Nukleo.TIME Privacy'}</Link>
-          <Link href={getLocalizedPath('/terms-of-service')} className="hover:underline">{t('footer.links.terms')}</Link>
-          <Link href={getLocalizedPath('/cookie-policy')} className="hover:underline">{t('footer.links.cookies')}</Link>
+          <a href="mailto:hello@nukleo.com" className="hover:underline">Contact</a>
         </div>
       </div>
 

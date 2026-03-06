@@ -1,16 +1,13 @@
-import { useState, useEffect, useRef, useCallback, useMemo } from 'react';
-import { Link } from 'wouter';
-import { useLocalizedPath } from '@/hooks/useLocalizedPath';
+import { useState, useEffect, useRef, useCallback } from 'react';
 import { useLanguage } from '@/contexts/LanguageContext';
-import { TeamScrollCards, DoubleLogoCarousel } from '@/components/demo3';
+import { DoubleLogoCarousel } from '@/components/demo3';
 import { ArrowUpRight, ArrowRight } from 'lucide-react';
 import { SplitCTAButton } from '@/components/SplitCTAButton';
-import { WeatherWidget } from '@/components/WeatherWidget';
 import PageLayout from '@/components/PageLayout';
 import HomeServicesSection from '@/components/HomeServicesSection';
 import CTAPerformSection from '@/components/CTAPerformSection';
 import ProjectsHeroTriptych from '@/components/ProjectsHeroTriptych';
-import { trpc } from '@/lib/trpc';
+import { PROJECTS_DATA } from '@/data/projectsData';
 
 // ─── Constantes ──────────────────────────────────────────────────────────────
 const PURPLE = '#7c3aed';
@@ -31,17 +28,15 @@ const FALLBACK_PROJECTS = [
 type HomeProjectItem = { num: string; name: string; category: string; tagline: string; result: string; img: string; color: string };
 const CAROUSEL_COLORS = [SITE_MAUVE, PURPLE, '#059669', '#dc2626', '#7c2d12'];
 
-function mapApiProjectsToHome(
-  apiProjects: Array<{ title: string; category: string; description: { fr: string; en: string }; images: string[]; slug?: string; homeCarouselImage?: string; homeTriptychImage?: string }>,
+function mapProjectsDataToHome(
+  projects: Array<{ title: string; category: string; description: { fr: string; en: string }; images: string[]; slug?: string }>,
   max: number,
-  startIndex: number,
-  imageField?: 'homeCarouselImage' | 'homeTriptychImage'
+  startIndex: number
 ): HomeProjectItem[] {
-  if (!apiProjects?.length) return [];
-  return apiProjects.slice(0, max).map((p, i) => {
+  if (!projects?.length) return [];
+  return projects.slice(0, max).map((p, i) => {
     const tagline = (p.description?.fr || p.description?.en || '').slice(0, 70);
-    const pAny = p as { homeCarouselImage?: string; homeTriptychImage?: string };
-    const imgFilename = (imageField && pAny[imageField]) || p.images?.[0];
+    const imgFilename = p.images?.[0];
     const img = imgFilename ? `/projects/${imgFilename}` : WORK1;
     const num = String(startIndex + i + 1).padStart(2, '0');
     return {
@@ -61,7 +56,6 @@ function NewsCarousel({ projects: projectsProp }: { projects?: HomeProjectItem[]
   const PROJECTS = projectsProp && projectsProp.length > 0 ? projectsProp : FALLBACK_PROJECTS;
   const SLIDES = PROJECTS.slice(0, 5);
   const { t } = useLanguage();
-  const getLocalizedPath = useLocalizedPath();
   const [active, setActive] = useState(0);
   const [isHovered, setIsHovered] = useState(false);
   const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
@@ -119,8 +113,8 @@ function NewsCarousel({ projects: projectsProp }: { projects?: HomeProjectItem[]
                 fontSize: 'clamp(1.5rem, 2.5vw, 2.5rem)', lineHeight: 1.1,
                 letterSpacing: '-0.02em', color: '#fff', marginBottom: '1rem',
               }}>{p.name}</h3>
-              <Link
-                href={getLocalizedPath('/projects')}
+              <a
+                href="#projects"
                 style={{
                   display: 'inline-flex', alignItems: 'center', gap: 8,
                   color: '#fff', fontSize: '0.8rem', fontWeight: 600, textDecoration: 'none',
@@ -128,7 +122,7 @@ function NewsCarousel({ projects: projectsProp }: { projects?: HomeProjectItem[]
                 }}
               >
                 {t('home.caseStudy')} <ArrowRight size={16} />
-              </Link>
+              </a>
             </div>
           </div>
         );
@@ -163,7 +157,6 @@ function HeroProjectsCarousel() {
   const [active, setActive] = useState(0);
   const [isHovered, setIsHovered] = useState(false);
   const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
-  const getLocalizedPath = useLocalizedPath();
 
   const next = useCallback(() => setActive(a => (a + 1) % PROJECTS.length), []);
 
@@ -267,10 +260,10 @@ function HeroProjectsCarousel() {
                       fontSize: '0.65rem', fontWeight: 700,
                       padding: '0.35rem 0.9rem', borderRadius: 999,
                     }}>{p.result}</span>
-                    <Link
-                      href={getLocalizedPath('/projects')}
+                    <a
+                      href="#projects"
                       style={{ color: 'rgba(255,255,255,0.4)', fontSize: '0.65rem', fontWeight: 600, textDecoration: 'none', borderBottom: '1px solid rgba(255,255,255,0.2)', paddingBottom: 1 }}
-                    >View case →</Link>
+                    >View case →</a>
                   </div>
                 </div>
               )}
@@ -303,7 +296,6 @@ function HeroProjectsCarousel() {
 function ProjectsCarousel() {
   const PROJECTS = FALLBACK_PROJECTS;
   const [active, setActive] = useState(0);
-  const getLocalizedPath = useLocalizedPath();
 
   const getWidth = (i: number) => {
     if (PROJECTS.length === 1) return '100%';
@@ -367,12 +359,12 @@ function ProjectsCarousel() {
                       <span style={{ fontSize: '0.7rem', fontWeight: 700, padding: '0.4rem 1rem', borderRadius: 999, color: '#fff', background: project.color }}>
                         {project.result}
                       </span>
-                      <Link
-                        href={getLocalizedPath('/projects')}
+                      <a
+                        href="#projects"
                         style={{ color: 'rgba(255,255,255,0.5)', fontSize: '0.75rem', fontWeight: 700, borderBottom: '1px solid rgba(255,255,255,0.25)', paddingBottom: 2, textDecoration: 'none' }}
                       >
                         View case study →
-                      </Link>
+                      </a>
                     </div>
                   </div>
                 </div>
@@ -410,7 +402,6 @@ function ProjectsCarousel() {
 function Triptych({ projects: projectsProp }: { projects?: HomeProjectItem[] }) {
   const PROJECTS = projectsProp && projectsProp.length > 0 ? projectsProp : FALLBACK_PROJECTS;
   const { t } = useLanguage();
-  const getLocalizedPath = useLocalizedPath();
 
   const items = PROJECTS.slice(0, 3).map((p) => ({
     img: p.img,
@@ -421,7 +412,7 @@ function Triptych({ projects: projectsProp }: { projects?: HomeProjectItem[] }) 
   return (
     <ProjectsHeroTriptych
       items={items}
-      projectUrl={getLocalizedPath('/projects')}
+      projectUrl="#projects"
       viewProjectLabel={t('home.caseStudy')}
     />
   );
@@ -431,7 +422,6 @@ function Triptych({ projects: projectsProp }: { projects?: HomeProjectItem[] }) 
 const ON_IA_VERBS = ['maîtrise', 'optimise', 'entraîne', 'personnalise', 'humanise'];
 
 export default function HomepageDemo5() {
-  const getLocalizedPath = useLocalizedPath();
   const { t } = useLanguage();
   const [onIaIndex, setOnIaIndex] = useState(0);
 
@@ -441,35 +431,15 @@ export default function HomepageDemo5() {
   }, []);
 
   const NAV_LINKS = [
-    { label: t('nav.services'), href: '/services' },
-    { label: t('nav.projects'), href: '/projects' },
-    { label: t('nav.about'), href: '/about' },
-    { label: t('nav.contact'), href: '/contact' },
+    { label: t('nav.services'), href: '#services' },
+    { label: t('nav.projects'), href: '#projects' },
+    { label: t('nav.about'), href: '#about' },
+    { label: t('nav.contact'), href: '#contact' },
   ];
 
-  const { data: apiProjects } = trpc.projects.list.useQuery(undefined, {
-    staleTime: 5 * 1000,
-    refetchOnWindowFocus: true,
-    refetchOnMount: true,
-  });
-  const homeCarouselProjects = useMemo(() => {
-    const featured = (apiProjects || []).filter((p: { featuredOnHomeCarousel?: boolean }) => p.featuredOnHomeCarousel);
-    const sorted = [...featured].sort((a, b) => {
-      const orderA = (a as { homeCarouselOrder?: number }).homeCarouselOrder ?? 999;
-      const orderB = (b as { homeCarouselOrder?: number }).homeCarouselOrder ?? 999;
-      return orderA - orderB;
-    });
-    return mapApiProjectsToHome(sorted, 6, 0, 'homeCarouselImage');
-  }, [apiProjects]);
-  const homeTriptychProjects = useMemo(() => {
-    const featured = (apiProjects || []).filter((p: { featuredOnHomeTriptych?: boolean }) => p.featuredOnHomeTriptych);
-    const sorted = [...featured].sort((a, b) => {
-      const orderA = (a as { homeTriptychOrder?: number }).homeTriptychOrder ?? 999;
-      const orderB = (b as { homeTriptychOrder?: number }).homeTriptychOrder ?? 999;
-      return orderA - orderB;
-    });
-    return mapApiProjectsToHome(sorted, 3, 0, 'homeTriptychImage');
-  }, [apiProjects]);
+  // Données statiques des projets (site one-page sans backend)
+  const homeCarouselProjects = mapProjectsDataToHome(PROJECTS_DATA, 6, 0);
+  const homeTriptychProjects = mapProjectsDataToHome(PROJECTS_DATA, 3, 0);
 
   return (
     <PageLayout>
@@ -547,8 +517,18 @@ export default function HomepageDemo5() {
               alignSelf: 'stretch',
               overflow: 'hidden',
             }}>
-              {/* 1. Météo — même hauteur que date, coins arrondis */}
-              <WeatherWidget className="glass-widget-weather-date" />
+              {/* 1. Bloc statique (remplace météo — pas d'API en mode statique) */}
+              <div className="glass-widget-weather-date" style={{
+                minHeight: 0,
+                borderRadius: 14,
+                padding: 'clamp(1.5rem, 2.2vw, 2.5rem) clamp(1.5rem, 2.4vw, 2.75rem)',
+                display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
+                gap: 'clamp(0.35rem, 0.5vw, 0.6rem)', textAlign: 'center', height: '100%',
+              }}>
+                <div style={{ fontSize: 'clamp(1rem, 1.2vw, 1.3rem)', fontWeight: 700, color: '#6b7280' }}>Montréal</div>
+                <div style={{ fontFamily: "'Google Sans Flex', sans-serif", fontWeight: 700, fontSize: 'clamp(2rem, 2.5vw, 3rem)', lineHeight: 1, color: DARK }}>Nukleo</div>
+                <div style={{ fontSize: 'clamp(0.65rem, 0.8vw, 0.85rem)', color: '#6b7280' }}>Agence numérique</div>
+              </div>
 
               {/* 2. Date — même style et proportions que météo */}
               {(() => {
@@ -677,7 +657,7 @@ export default function HomepageDemo5() {
         {/* ════════════════════════════════════════════════════════════════════
             SECTION 2 — SOYONS AUDACIEUX + CTA
         ════════════════════════════════════════════════════════════════════ */}
-        <section style={{
+        <section id="about" className="scroll-mt-24" style={{
           padding: '5rem 3% 6rem',
           marginBottom: 0,
           textAlign: 'center',
@@ -722,7 +702,7 @@ export default function HomepageDemo5() {
           }}>
             {t('home.audaciousParagraph')}
           </p>
-          <SplitCTAButton href="/contact" label={t('home.performNow')} ariaLabel={t('home.performNow')} />
+          <SplitCTAButton href="#contact" label={t('home.performNow')} ariaLabel={t('home.performNow')} />
         </section>
 
         {/* ════════════════════════════════════════════════════════════════════
@@ -795,12 +775,14 @@ export default function HomepageDemo5() {
         {/* ════════════════════════════════════════════════════════════════════
             SECTION 4 — SERVICES (4 cartes : Lab tech, Studio, Agence, Transition)
         ════════════════════════════════════════════════════════════════════ */}
-        <HomeServicesSection />
+        <section id="services" className="scroll-mt-24">
+          <HomeServicesSection />
+        </section>
 
         {/* ════════════════════════════════════════════════════════════════════
             SECTION 5 — TRIPTYQUE PROJETS
         ════════════════════════════════════════════════════════════════════ */}
-        <div style={{
+        <div id="projects" className="scroll-mt-24" style={{
           marginBottom: 'clamp(2.5rem, 6vw, 5rem)',
           paddingTop: 'clamp(2rem, 5vw, 4rem)',
           paddingBottom: 'clamp(2.5rem, 6vw, 5rem)',

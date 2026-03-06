@@ -10,7 +10,8 @@ export default function CTAPerformSection() {
 
   return (
     <section
-      className="cta-perform-section"
+      id="contact"
+      className="cta-perform-section scroll-mt-24"
       style={{
         padding: '4rem 3% 8rem',
         background: 'transparent',
@@ -46,7 +47,7 @@ export default function CTAPerformSection() {
           {t('about.ctaSubtitle')}
         </p>
         <SplitCTAButton
-          href="/contact"
+          href="#contact"
           label={t('home.ctaPerform.button')}
           ariaLabel={t('home.ctaPerform.button')}
         />
