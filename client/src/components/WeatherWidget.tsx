@@ -68,7 +68,7 @@ export function WeatherWidget({ className }: { className?: string }) {
           alignItems: 'center',
           justifyContent: 'center',
           gap: 'clamp(0.35rem, 0.5vw, 0.6rem)',
-          fontFamily: "'Google Sans Flex', sans-serif",
+          fontFamily: "'Neue Haas Unica Pro', sans-serif",
           height: '100%',
         }}
       >
@@ -79,7 +79,7 @@ export function WeatherWidget({ className }: { className?: string }) {
           </div>
           <div
             className={loading ? 'weather-placeholder' : undefined}
-            style={{ fontFamily: "'Google Sans Flex', sans-serif", fontWeight: 700, fontSize: 'clamp(3.5rem, 4.4vw, 5.5rem)', lineHeight: 1, color: DARK, textAlign: 'center' }}
+            style={{ fontFamily: "'Neue Haas Unica Pro', sans-serif", fontWeight: 700, fontSize: 'clamp(3.5rem, 4.4vw, 5.5rem)', lineHeight: 1, color: DARK, textAlign: 'center' }}
           >
             {tempDisplay} <span style={{ fontSize: 'clamp(1.7rem, 2vw, 2.3rem)', verticalAlign: 'super' }}>°C</span>
           </div>

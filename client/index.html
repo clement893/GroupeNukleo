@@ -71,18 +71,15 @@
     <link rel="manifest" href="/manifest.json" />
     <meta name="theme-color" content="#7c3aed" />
     
-    <!-- Google Sans Flex chargé via Google Fonts (test typo) -->
-    
+    <!-- Typo principale : Neue Haas Unica Pro (charger via Adobe Fonts ou fichiers locaux dans /fonts) -->
     <!-- Preload critical LCP image - arrow SVG is the LCP element -->
     <link rel="preload" href="/nukleo-arrow.svg" as="image" type="image/svg+xml" fetchpriority="high" />
     
-    <!-- Google Sans Flex + JetBrains Mono -->
-    
-    <!-- Defer Google Fonts - load after critical content -->
-    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:wght@100;200;300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" as="style" />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:wght@100;200;300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" media="print" id="google-fonts-stylesheet" />
+    <!-- Google Fonts : JetBrains Mono uniquement (Neue Haas Unica Pro = Adobe Fonts ou self-hosted) -->
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap" as="style" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap" media="print" id="google-fonts-stylesheet" />
     <script src="/load-google-fonts.js" defer></script>
-    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:wght@100;200;300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" /></noscript>
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap" /></noscript>
     
     <!-- Structured Data JSON-LD -->
     <script type="application/ld+json">

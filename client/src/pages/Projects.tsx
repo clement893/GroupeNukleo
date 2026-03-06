@@ -220,7 +220,7 @@ export default function Projects() {
         <section className="container pt-12 pb-6 lg:pb-8" style={{ overflow: 'visible' }}>
           <h2
             style={{
-              fontFamily: "'Google Sans Flex', sans-serif",
+              fontFamily: "'Neue Haas Unica Pro', sans-serif",
               fontWeight: 700,
               fontSize: 'clamp(0.75rem, 4vw, 4.5rem)',
               lineHeight: 1.05,
@@ -252,7 +252,7 @@ export default function Projects() {
                 className={`projects-filter-tag px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 ${
                   filter === label ? 'projects-filter-tag--selected' : 'projects-filter-tag--default'
                 }`}
-                style={{ fontFamily: "'Google Sans Flex', sans-serif" }}
+                style={{ fontFamily: "'Neue Haas Unica Pro', sans-serif" }}
               >
                 {label}
               </button>
@@ -266,20 +266,20 @@ export default function Projects() {
             {isLoadingImages ? (
               <div className="flex items-center justify-center py-24">
                 <Loader2 className="w-8 h-8 animate-spin text-[#5A1E29]" />
-                <span className="ml-3 text-gray-600" style={{ fontFamily: "'Google Sans Flex', sans-serif" }}>{t('projects.loadingImages')}</span>
+                <span className="ml-3 text-gray-600" style={{ fontFamily: "'Neue Haas Unica Pro', sans-serif" }}>{t('projects.loadingImages')}</span>
               </div>
             ) : imagesError ? (
-              <div className="flex flex-col items-center justify-center py-24 text-gray-600" style={{ fontFamily: "'Google Sans Flex', sans-serif" }}>
+              <div className="flex flex-col items-center justify-center py-24 text-gray-600" style={{ fontFamily: "'Neue Haas Unica Pro', sans-serif" }}>
                 <p className="mb-2">{t('projects.errorLoading')}</p>
                 <p className="text-sm text-gray-500">{t('projects.errorRefresh')}</p>
               </div>
             ) : images.length === 0 ? (
-              <div className="flex flex-col items-center justify-center py-24 text-gray-600" style={{ fontFamily: "'Google Sans Flex', sans-serif" }}>
+              <div className="flex flex-col items-center justify-center py-24 text-gray-600" style={{ fontFamily: "'Neue Haas Unica Pro', sans-serif" }}>
                 <p className="mb-2">{t('projects.noImages')}</p>
                 <p className="text-sm text-gray-500">{t('projects.noImagesAdmin')}</p>
               </div>
             ) : filteredImages.length === 0 ? (
-              <p className="text-center py-12 text-gray-500" style={{ fontFamily: "'Google Sans Flex', sans-serif" }}>
+              <p className="text-center py-12 text-gray-500" style={{ fontFamily: "'Neue Haas Unica Pro', sans-serif" }}>
                 {t('projects.noProjectsInCategory')}
               </p>
             ) : (
@@ -330,7 +330,7 @@ export default function Projects() {
                               <span
                                 className="text-white font-bold text-left"
                                 style={{
-                                  fontFamily: "'Google Sans Flex', sans-serif",
+                                  fontFamily: "'Neue Haas Unica Pro', sans-serif",
                                   fontSize: 'clamp(1rem, 2.5vw, 1.5rem)',
                                   lineHeight: 1.2,
                                   textShadow: '0 2px 12px rgba(0,0,0,0.4)',
@@ -352,7 +352,7 @@ export default function Projects() {
                     type="button"
                     onClick={() => setVisibleCount((c) => c + 9)}
                     className="projects-filter-tag px-6 py-3 rounded-lg text-base font-medium transition-all duration-200 projects-filter-tag--default"
-                    style={{ fontFamily: "'Google Sans Flex', sans-serif" }}
+                    style={{ fontFamily: "'Neue Haas Unica Pro', sans-serif" }}
                   >
                     {t('projects.voirPlus')}
                   </button>

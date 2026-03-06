@@ -118,7 +118,7 @@ export default function ProjectDetail() {
               <Link
                 href={getLocalizedPath('/projects')}
                 style={{
-                  fontFamily: "'Google Sans Flex', sans-serif",
+                  fontFamily: "'Neue Haas Unica Pro', sans-serif",
                   fontSize: '0.9rem',
                   color: '#374151',
                   fontWeight: 500,
@@ -132,7 +132,7 @@ export default function ProjectDetail() {
                 ← {t('projects.backToList')}
               </Link>
               <h1 style={{
-                fontFamily: "'Google Sans Flex', sans-serif",
+                fontFamily: "'Neue Haas Unica Pro', sans-serif",
                 fontWeight: 700,
                 fontSize: 'clamp(1.75rem, 4vw, 3.25rem)',
                 lineHeight: 1.2,
@@ -143,7 +143,7 @@ export default function ProjectDetail() {
                 {projectData.title}
               </h1>
               <p style={{
-                fontFamily: "'Google Sans Flex', sans-serif",
+                fontFamily: "'Neue Haas Unica Pro', sans-serif",
                 fontSize: '1rem',
                 color: '#111',
                 margin: '0 0 2rem 0',
@@ -173,7 +173,7 @@ export default function ProjectDetail() {
           {/* ═══ Métadonnées + description — alignées aux marges du hero ═══ */}
           <section style={{ padding: '0 0 5rem' }}>
             <div className="grid grid-cols-1 lg:grid-cols-[minmax(180px,260px)_1fr] gap-8 lg:gap-12 w-full items-start">
-              <div style={{ fontFamily: "'Google Sans Flex', sans-serif", fontSize: '0.8rem', color: '#6b7280', lineHeight: 1.8 }}>
+              <div style={{ fontFamily: "'Neue Haas Unica Pro', sans-serif", fontSize: '0.8rem', color: '#6b7280', lineHeight: 1.8 }}>
                 <p style={{ margin: '0 0 0.35rem 0' }}><strong>Client :</strong></p>
                 <p style={{ margin: '0 0 1.25rem 0' }}>{projectData.client}</p>
                 <p style={{ margin: '0 0 0.5rem 0' }}><strong>Services :</strong></p>
@@ -186,7 +186,7 @@ export default function ProjectDetail() {
                       <span
                         key={tag}
                         className="px-3 py-1.5 rounded border border-gray-200 text-gray-700 text-sm font-medium"
-                        style={{ background: 'rgba(255,255,255,0.8)', fontFamily: "'Google Sans Flex', sans-serif" }}
+                        style={{ background: 'rgba(255,255,255,0.8)', fontFamily: "'Neue Haas Unica Pro', sans-serif" }}
                       >
                         {tag}
                       </span>
@@ -197,7 +197,7 @@ export default function ProjectDetail() {
               </div>
               <div>
                 <p style={{
-                  fontFamily: "'Google Sans Flex', sans-serif",
+                  fontFamily: "'Neue Haas Unica Pro', sans-serif",
                   fontSize: '1rem',
                   lineHeight: 1.8,
                   color: '#374151',
@@ -212,7 +212,7 @@ export default function ProjectDetail() {
                     target="_blank"
                     rel="noopener noreferrer"
                     style={{
-                      fontFamily: "'Google Sans Flex', sans-serif",
+                      fontFamily: "'Neue Haas Unica Pro', sans-serif",
                       fontSize: '0.95rem',
                       fontWeight: 600,
                       color: BORDEAUX,
@@ -277,7 +277,7 @@ export default function ProjectDetail() {
     return (
       <PageLayout>
         <div className="min-h-screen flex items-center justify-center">
-          <div className="text-center" style={{ fontFamily: "'Google Sans Flex', sans-serif" }}>
+          <div className="text-center" style={{ fontFamily: "'Neue Haas Unica Pro', sans-serif" }}>
             <p className="text-gray-600 mb-4">{t('projects.notFound')}</p>
             <Link href={getLocalizedPath('/projects')} className="text-[#523DCB] hover:underline font-medium">
               {t('projects.backToList')}
@@ -329,7 +329,7 @@ export default function ProjectDetail() {
             <Link
               href={getLocalizedPath('/projects')}
               style={{
-                fontFamily: "'Google Sans Flex', sans-serif",
+                fontFamily: "'Neue Haas Unica Pro', sans-serif",
                 fontSize: '0.9rem',
                 color: '#374151',
                 fontWeight: 500,
@@ -343,7 +343,7 @@ export default function ProjectDetail() {
               ← {t('projects.backToList')}
             </Link>
             <h1 style={{
-              fontFamily: "'Google Sans Flex', sans-serif",
+              fontFamily: "'Neue Haas Unica Pro', sans-serif",
               fontWeight: 700,
               fontSize: 'clamp(1.75rem, 4vw, 3.25rem)',
               lineHeight: 1.2,
@@ -354,7 +354,7 @@ export default function ProjectDetail() {
               {meta.title}
             </h1>
             <p style={{
-              fontFamily: "'Google Sans Flex', sans-serif",
+              fontFamily: "'Neue Haas Unica Pro', sans-serif",
               fontSize: '1rem',
               color: '#111',
               margin: '0 0 2rem 0',
@@ -383,7 +383,7 @@ export default function ProjectDetail() {
 
         <section style={{ padding: '0 0 5rem' }}>
           <div className="grid grid-cols-1 lg:grid-cols-[minmax(180px,260px)_1fr] gap-8 lg:gap-12 w-full items-start">
-            <div style={{ fontFamily: "'Google Sans Flex', sans-serif", fontSize: '0.8rem', color: '#6b7280', lineHeight: 1.8 }}>
+            <div style={{ fontFamily: "'Neue Haas Unica Pro', sans-serif", fontSize: '0.8rem', color: '#6b7280', lineHeight: 1.8 }}>
               <p style={{ margin: '0 0 0.35rem 0' }}><strong>Client :</strong></p>
               <p style={{ margin: '0 0 1.25rem 0' }}>{meta.client}</p>
               <p style={{ margin: '0 0 0.5rem 0' }}><strong>Services :</strong></p>
@@ -396,7 +396,7 @@ export default function ProjectDetail() {
                     <span
                       key={tag}
                       className="px-3 py-1.5 rounded border border-gray-200 text-gray-700 text-sm font-medium"
-                      style={{ background: 'rgba(255,255,255,0.8)', fontFamily: "'Google Sans Flex', sans-serif" }}
+                      style={{ background: 'rgba(255,255,255,0.8)', fontFamily: "'Neue Haas Unica Pro', sans-serif" }}
                     >
                       {tag}
                     </span>
@@ -406,7 +406,7 @@ export default function ProjectDetail() {
               <p style={{ margin: 0 }}>{meta.year}</p>
             </div>
             <div>
-              <p style={{ fontFamily: "'Google Sans Flex', sans-serif", fontSize: '1rem', lineHeight: 1.8, color: '#374151', margin: 0, textAlign: 'justify' }}>
+              <p style={{ fontFamily: "'Neue Haas Unica Pro', sans-serif", fontSize: '1rem', lineHeight: 1.8, color: '#374151', margin: 0, textAlign: 'justify' }}>
                 {meta.description}
               </p>
               {meta.websiteUrl && (
@@ -415,7 +415,7 @@ export default function ProjectDetail() {
                   target="_blank"
                   rel="noopener noreferrer"
                   style={{
-                    fontFamily: "'Google Sans Flex', sans-serif",
+                    fontFamily: "'Neue Haas Unica Pro', sans-serif",
                     fontSize: '0.95rem',
                     fontWeight: 600,
                     color: BORDEAUX,

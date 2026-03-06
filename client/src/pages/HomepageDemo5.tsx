@@ -4,7 +4,6 @@ import { useLocalizedPath } from '@/hooks/useLocalizedPath';
 import { MapPin } from 'lucide-react';
 import { SplitCTAButton } from '@/components/SplitCTAButton';
 import PageLayout from '@/components/PageLayout';
-import HomeServicesSection from '@/components/HomeServicesSection';
 import CTAPerformSection from '@/components/CTAPerformSection';
 // ─── Constantes ──────────────────────────────────────────────────────────────
 const BORDEAUX = '#7B1D3A';
@@ -83,7 +82,7 @@ export default function HomepageDemo5() {
                 <div>
                   <div
                     style={{
-                      fontFamily: "'Google Sans Flex', sans-serif",
+                      fontFamily: "'Neue Haas Unica Pro', sans-serif",
                       fontWeight: 600,
                       fontSize: 'clamp(1.25rem, 3vw, 2.25rem)',
                       lineHeight: 1.2,
@@ -96,7 +95,7 @@ export default function HomepageDemo5() {
                   </div>
                   <h1
                     style={{
-                      fontFamily: "'Google Sans Flex', sans-serif",
+                      fontFamily: "'Neue Haas Unica Pro', sans-serif",
                       fontWeight: 700,
                       fontSize: 'clamp(2.5rem, 10vw, 6.5rem)',
                       lineHeight: 1.05,
@@ -177,13 +176,13 @@ export default function HomepageDemo5() {
             textTransform: 'uppercase',
             color: '#374151',
             marginBottom: '1.25rem',
-            fontFamily: "'Google Sans Flex', sans-serif",
+            fontFamily: "'Neue Haas Unica Pro', sans-serif",
             textAlign: 'center',
           }}>
             {t('home.quiSommesNous.sectionLabel')}
           </p>
           <h2 style={{
-            fontFamily: "'Google Sans Flex', sans-serif",
+            fontFamily: "'Neue Haas Unica Pro', sans-serif",
             fontWeight: 600,
             fontSize: 'clamp(1.75rem, 4vw, 3.25rem)',
             lineHeight: 1.2,
@@ -225,7 +224,7 @@ export default function HomepageDemo5() {
             </div>
             <div>
               <h3 style={{
-                fontFamily: "'Google Sans Flex', sans-serif",
+                fontFamily: "'Neue Haas Unica Pro', sans-serif",
                 fontWeight: 700,
                 fontSize: 'clamp(1.1rem, 1.4vw, 1.35rem)',
                 color: BORDEAUX,
@@ -234,7 +233,7 @@ export default function HomepageDemo5() {
                 {t('home.quiSommesNous.subtitle1')}
               </h3>
               <h4 style={{
-                fontFamily: "'Google Sans Flex', sans-serif",
+                fontFamily: "'Neue Haas Unica Pro', sans-serif",
                 fontWeight: 600,
                 fontSize: 'clamp(1rem, 1.2vw, 1.15rem)',
                 color: SITE_MAUVE,
@@ -275,7 +274,9 @@ export default function HomepageDemo5() {
           {/* Cartes Nukleo et Rouge on Blue */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 md:gap-8 max-w-[700px] mx-auto">
             <a
-              href="#"
+              href="https://nukleo.ca"
+              target="_blank"
+              rel="noopener noreferrer"
               aria-label={t('home.quiSommesNous.visitSite') + ' Nukleo'}
               style={{
                 display: 'flex',
@@ -291,13 +292,39 @@ export default function HomepageDemo5() {
                 minHeight: 140,
               }}
             >
-              <span style={{
-                fontFamily: "'Google Sans Flex', sans-serif",
-                fontWeight: 700,
-                fontSize: 'clamp(1.35rem, 1.8vw, 1.6rem)',
-                color: DARK,
-              }}>
-                {t('home.quiSommesNous.cardNukleo')}
+              <span
+                className="inline-flex flex-col leading-none items-center"
+                style={{
+                  fontFamily: "'Neue Haas Unica Pro', sans-serif",
+                  fontWeight: 700,
+                  letterSpacing: '-0.02em',
+                }}
+              >
+                <span
+                  style={{
+                    fontSize: 'clamp(0.5rem, 1.2vw, 0.65rem)',
+                    letterSpacing: '0.08em',
+                    textTransform: 'uppercase',
+                    background: 'linear-gradient(to right, #6B1817, #523DCB)',
+                    WebkitBackgroundClip: 'text',
+                    WebkitTextFillColor: 'transparent',
+                    backgroundClip: 'text',
+                  }}
+                >
+                  GROUPE
+                </span>
+                <span
+                  style={{
+                    fontSize: 'clamp(1.25rem, 2.2vw, 1.5rem)',
+                    lineHeight: 1.05,
+                    background: 'linear-gradient(to right, #6B1817, #523DCB)',
+                    WebkitBackgroundClip: 'text',
+                    WebkitTextFillColor: 'transparent',
+                    backgroundClip: 'text',
+                  }}
+                >
+                  nukleo&gt;
+                </span>
               </span>
               <span style={{ fontSize: 'clamp(0.8rem, 0.95vw, 0.9rem)', color: SITE_MAUVE, fontWeight: 600 }}>
                 {t('home.quiSommesNous.visitSite')} &gt;
@@ -322,8 +349,13 @@ export default function HomepageDemo5() {
                 minHeight: 140,
               }}
             >
+              <img
+                src="/demo/rob-logo.png"
+                alt="Rouge on Blue"
+                style={{ height: 40, width: 'auto', objectFit: 'contain', marginBottom: '0.75rem' }}
+              />
               <span style={{
-                fontFamily: "'Google Sans Flex', sans-serif",
+                fontFamily: "'Neue Haas Unica Pro', sans-serif",
                 fontWeight: 700,
                 fontSize: 'clamp(1.35rem, 1.8vw, 1.6rem)',
                 color: DARK,
@@ -343,7 +375,7 @@ export default function HomepageDemo5() {
         <section style={{ padding: '5rem 3%', marginBottom: 0, background: CREAM }}>
           {/* Intro */}
           <p style={{
-            fontFamily: "'Google Sans Flex', sans-serif",
+            fontFamily: "'Neue Haas Unica Pro', sans-serif",
             fontWeight: 600,
             fontSize: 'clamp(1rem, 1.25vw, 1.15rem)',
             color: SITE_MAUVE,
@@ -352,7 +384,7 @@ export default function HomepageDemo5() {
             {t('home.leadersSection.introLine1')}
           </p>
           <p style={{
-            fontFamily: "'Google Sans Flex', sans-serif",
+            fontFamily: "'Neue Haas Unica Pro', sans-serif",
             fontWeight: 700,
             fontSize: 'clamp(1.05rem, 1.35vw, 1.25rem)',
             color: DARK,
@@ -395,7 +427,7 @@ export default function HomepageDemo5() {
               </div>
               <div style={{ minWidth: 0 }}>
                 <div style={{
-                  fontFamily: "'Google Sans Flex', sans-serif",
+                  fontFamily: "'Neue Haas Unica Pro', sans-serif",
                   fontWeight: 700,
                   fontSize: 'clamp(0.9rem, 1.1vw, 1rem)',
                   letterSpacing: '0.04em',
@@ -405,7 +437,7 @@ export default function HomepageDemo5() {
                   {t('home.leadersSection.clementName')}
                 </div>
                 <div style={{
-                  fontFamily: "'Google Sans Flex', sans-serif",
+                  fontFamily: "'Neue Haas Unica Pro', sans-serif",
                   fontWeight: 600,
                   fontSize: 'clamp(0.75rem, 0.9vw, 0.85rem)',
                   letterSpacing: '0.02em',
@@ -454,7 +486,7 @@ export default function HomepageDemo5() {
               </div>
               <div style={{ minWidth: 0 }}>
                 <div style={{
-                  fontFamily: "'Google Sans Flex', sans-serif",
+                  fontFamily: "'Neue Haas Unica Pro', sans-serif",
                   fontWeight: 700,
                   fontSize: 'clamp(0.9rem, 1.1vw, 1rem)',
                   letterSpacing: '0.04em',
@@ -464,7 +496,7 @@ export default function HomepageDemo5() {
                   {t('home.leadersSection.lionelName')}
                 </div>
                 <div style={{
-                  fontFamily: "'Google Sans Flex', sans-serif",
+                  fontFamily: "'Neue Haas Unica Pro', sans-serif",
                   fontWeight: 600,
                   fontSize: 'clamp(0.75rem, 0.9vw, 0.85rem)',
                   letterSpacing: '0.02em',
@@ -487,7 +519,7 @@ export default function HomepageDemo5() {
 
           {/* Titre bureaux */}
           <h3 style={{
-            fontFamily: "'Google Sans Flex', sans-serif",
+            fontFamily: "'Neue Haas Unica Pro', sans-serif",
             fontWeight: 600,
             fontSize: 'clamp(1.1rem, 1.4vw, 1.3rem)',
             color: SITE_MAUVE,
@@ -572,13 +604,6 @@ export default function HomepageDemo5() {
               </div>
             </div>
           </div>
-        </section>
-
-        {/* ════════════════════════════════════════════════════════════════════
-            SECTION 4 — SERVICES (4 cartes : Lab tech, Studio, Agence, Transition)
-        ════════════════════════════════════════════════════════════════════ */}
-        <section id="services" className="scroll-mt-24">
-          <HomeServicesSection />
         </section>
 
         {/* ════════════════════════════════════════════════════════════════════

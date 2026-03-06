@@ -43,7 +43,7 @@ function Footer() {
         background: '#EFE8E8',
         paddingTop: 'clamp(0.75rem, 2vw, 1.25rem)',
         paddingBottom: 'clamp(2rem, 4vw, 3rem)',
-        fontFamily: "'Google Sans Flex', sans-serif",
+        fontFamily: "'Neue Haas Unica Pro', sans-serif",
         fontWeight: 400,
       }}
       aria-label={t('footer.ariaLabel') || 'Pied de page Nukleo Digital'}
@@ -61,20 +61,34 @@ function Footer() {
             minHeight: 300,
           }}
         >
-          <Link href={getLocalizedPath('/')} className="block mb-8 lg:mb-10 touch-manipulation w-full" style={{ textAlign: 'left' }}>
-            <img
-              src="/nukleo-logo-footer.png"
-              alt={t('alt.logo') || 'Nukleo Digital - Accueil'}
-              className="object-contain object-left"
+          <Link href={getLocalizedPath('/')} className="block mb-8 lg:mb-10 touch-manipulation w-full" style={{ textAlign: 'left' }} aria-label={t('alt.logo') || 'Groupe Nukleo - Accueil'}>
+            <span
+              className="inline-flex flex-col leading-none"
               style={{
-                height: 'clamp(7rem, 16vw, 11rem)',
-                width: 'auto',
-                display: 'block',
-                background: 'transparent',
-                mixBlendMode: 'lighten',
-                marginRight: 'auto',
+                fontFamily: "'Neue Haas Unica Pro', sans-serif",
+                fontWeight: 700,
+                letterSpacing: '-0.02em',
+                color: FOOTER_TEXT_WHITE,
               }}
-            />
+            >
+              <span
+                style={{
+                  fontSize: 'clamp(0.6rem, 2.2vw, 0.85rem)',
+                  letterSpacing: '0.08em',
+                  textTransform: 'uppercase',
+                }}
+              >
+                GROUPE
+              </span>
+              <span
+                style={{
+                  fontSize: 'clamp(1.75rem, 5.5vw, 3rem)',
+                  lineHeight: 1.05,
+                }}
+              >
+                nukleo&gt;
+              </span>
+            </span>
           </Link>
           <div className="grid grid-cols-2 gap-x-12 sm:gap-x-16 gap-y-1">
             <ul className="space-y-3">

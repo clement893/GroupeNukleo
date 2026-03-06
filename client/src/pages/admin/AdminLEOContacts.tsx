@@ -114,10 +114,10 @@ export default function AdminLEOContacts() {
         <div className="p-6 lg:p-8 max-w-7xl mx-auto">
           <div className="flex items-center justify-between mb-8">
             <div>
-              <h1 className="text-4xl font-bold text-gray-900 mb-2" style={{ fontFamily: "'Google Sans Flex', sans-serif" }}>
+              <h1 className="text-4xl font-bold text-gray-900 mb-2" style={{ fontFamily: "'Neue Haas Unica Pro', sans-serif" }}>
                 Discussions avec Léo
               </h1>
-              <p className="text-gray-600" style={{ fontFamily: "'Google Sans Flex', sans-serif" }}>
+              <p className="text-gray-600" style={{ fontFamily: "'Neue Haas Unica Pro', sans-serif" }}>
                 Contacts (emails capturés) et sessions de discussion avec le chatbot LEO
               </p>
             </div>
@@ -180,11 +180,11 @@ export default function AdminLEOContacts() {
           {/* Sessions / Discussions */}
           <Card className="bg-white border border-gray-200 shadow-sm mb-8">
             <CardHeader>
-              <CardTitle className="text-gray-900 flex items-center gap-2" style={{ fontFamily: "'Google Sans Flex', sans-serif" }}>
+              <CardTitle className="text-gray-900 flex items-center gap-2" style={{ fontFamily: "'Neue Haas Unica Pro', sans-serif" }}>
                 <MessageCircle className="w-5 h-5" />
                 Sessions de discussion (Léo)
               </CardTitle>
-              <CardDescription className="text-gray-500" style={{ fontFamily: "'Google Sans Flex', sans-serif" }}>
+              <CardDescription className="text-gray-500" style={{ fontFamily: "'Neue Haas Unica Pro', sans-serif" }}>
                 Dernières sessions avec le chatbot, par page et avec email capturé si applicable
               </CardDescription>
             </CardHeader>
@@ -244,10 +244,10 @@ export default function AdminLEOContacts() {
           {/* Contacts (emails capturés) */}
           <Card className="bg-white border border-gray-200 shadow-sm">
             <CardHeader>
-              <CardTitle className="text-gray-900" style={{ fontFamily: "'Google Sans Flex', sans-serif" }}>
+              <CardTitle className="text-gray-900" style={{ fontFamily: "'Neue Haas Unica Pro', sans-serif" }}>
                 Contacts (emails laissés à Léo)
               </CardTitle>
-              <CardDescription className="text-gray-500" style={{ fontFamily: "'Google Sans Flex', sans-serif" }}>
+              <CardDescription className="text-gray-500" style={{ fontFamily: "'Neue Haas Unica Pro', sans-serif" }}>
                 Liste des personnes ayant partagé leur email lors d’une discussion avec Léo
               </CardDescription>
             </CardHeader>

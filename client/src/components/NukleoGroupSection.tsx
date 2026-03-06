@@ -45,7 +45,7 @@ export default function NukleoGroupSection() {
             <div>
               <div className="flex items-center justify-between mb-6">
                 <div className="flex items-center gap-3">
-                  <div className="w-2 h-2 rounded-full bg-red-400" />
+                  <img src="/demo/rob-logo.png" alt="Rouge on Blue" className="h-8 w-auto object-contain opacity-90 group-hover:opacity-100" />
                   <span className="text-red-400 text-sm font-medium tracking-widest uppercase">Creative Agency</span>
                 </div>
                 <ArrowUpRight className="w-5 h-5 text-white/20 group-hover:text-red-400 group-hover:translate-x-1 group-hover:-translate-y-1 transition-all duration-200" />

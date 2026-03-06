@@ -101,12 +101,12 @@ export default function TermsOfService() {
         description={c.seoDescription}
         keywords="terms of service, terms and conditions, legal agreement, conditions d'utilisation"
       />
-      <div style={{ minHeight: '100vh', background: OFF_WHITE, fontFamily: "'Google Sans Flex', sans-serif" }}>
+      <div style={{ minHeight: '100vh', background: OFF_WHITE, fontFamily: "'Neue Haas Unica Pro', sans-serif" }}>
         {/* Hero */}
         <section style={{ padding: 'clamp(5rem, 10vh, 7rem) 0 0' }}>
           <div className="container">
             <p style={{
-              fontFamily: "'Google Sans Flex', sans-serif",
+              fontFamily: "'Neue Haas Unica Pro', sans-serif",
               fontWeight: 700,
               fontSize: '0.75rem',
               letterSpacing: '0.2em',
@@ -118,7 +118,7 @@ export default function TermsOfService() {
             </p>
             <h1
               style={{
-                fontFamily: "'Google Sans Flex', sans-serif",
+                fontFamily: "'Neue Haas Unica Pro', sans-serif",
                 fontWeight: 700,
                 fontSize: 'clamp(2rem, 4.5vw, 3.5rem)',
                 lineHeight: 1.15,
