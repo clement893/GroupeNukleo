@@ -5,5 +5,5 @@ cmds = ["corepack enable", "corepack prepare pnpm@10.4.1 --activate", "pnpm inst
 cmds = ["pnpm run build"]
 
 [start]
-cmd = "npx serve dist -s"
+cmd = "npx serve dist -s -l ${PORT:-3000}"
 
