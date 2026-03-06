@@ -8,6 +8,7 @@ import { slugToImageName, getProjectKey, getImagesForProject } from '@/lib/proje
 import { useEffect, useLayoutEffect, useState } from 'react';
 import { useLocalizedPath } from '@/hooks/useLocalizedPath';
 import { PROJECTS_DATA, getProjectByKey } from '@/data/projectsData';
+import { isPortraitImage } from '@/data/imageDimensions';
 
 // Liste de toutes les images connues depuis la source de données centralisée
 const ALL_KNOWN_IMAGES: string[] = PROJECTS_DATA.flatMap((p) => p.images);
@@ -231,38 +232,54 @@ export default function ProjectDetail() {
             </div>
           </section>
 
-          {/* ═══ Galerie — alignée aux marges du hero ═══ */}
-          {galleryImages.length > 1 && (
-            <section style={{ background: 'transparent', padding: '3rem 0 4rem' }}>
-              <div className="w-full">
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
-                  {galleryImages.map((name, idx) => {
-                    const src = `/projects/${name}`;
-                    const isPortrait = idx % 2 === 1;
-                    return (
-                      <div
-                        key={name}
-                        className="rounded-md overflow-hidden"
-                        style={{
-                          aspectRatio: isPortrait ? '3/4' : '4/3',
-                          background: '#2d2d2d',
-                        }}
-                      >
-                        <OptimizedImage
-                          src={src}
-                          alt={projectData.title}
-                          width={isPortrait ? 400 : 600}
-                          height={isPortrait ? 533 : 450}
-                          className="w-full h-full object-cover"
-                          loading="lazy"
-                        />
-                      </div>
-                    );
-                  })}
+          {/* ═══ Galerie — regroupement par orientation réelle ═══ */}
+          {galleryImages.length > 1 && (() => {
+            // Grouper les images consécutives de même orientation (max 2 par ligne)
+            type GalleryRow = { names: string[]; portrait: boolean };
+            const rows: GalleryRow[] = [];
+            let current: GalleryRow | null = null;
+            for (const name of galleryImages.slice(1)) {
+              const portrait = isPortraitImage(name);
+              if (!current || current.portrait !== portrait || current.names.length >= 2) {
+                current = { names: [name], portrait };
+                rows.push(current);
+              } else {
+                current.names.push(name);
+              }
+            }
+            return (
+              <section style={{ background: 'transparent', padding: '3rem 0 4rem' }}>
+                <div className="w-full flex flex-col gap-8">
+                  {rows.map((row, rowIdx) => (
+                    <div
+                      key={rowIdx}
+                      className={row.names.length === 1 ? 'grid grid-cols-1' : 'grid grid-cols-1 sm:grid-cols-2 gap-8'}
+                    >
+                      {row.names.map((name) => (
+                        <div
+                          key={name}
+                          className="rounded-md overflow-hidden"
+                          style={{
+                            aspectRatio: row.portrait ? '3/4' : '4/3',
+                            background: '#2d2d2d',
+                          }}
+                        >
+                          <OptimizedImage
+                            src={`/projects/${name}`}
+                            alt={projectData.title}
+                            width={row.portrait ? 400 : 600}
+                            height={row.portrait ? 533 : 450}
+                            className="w-full h-full object-cover"
+                            loading="lazy"
+                          />
+                        </div>
+                      ))}
+                    </div>
+                  ))}
                 </div>
-              </div>
-            </section>
-          )}
+              </section>
+            );
+          })()}
 
           </div>
         </main>
