@@ -2,6 +2,10 @@
   "$schema": "https://schema.railpack.com",
   "steps": {
     "install": {
+      "inputs": [
+        { "step": "packages:mise" },
+        { "local": true, "include": ["."] }
+      ],
       "commands": [
         "npm i -g corepack@latest && corepack enable && corepack prepare --activate",
         "pnpm install --no-frozen-lockfile --prefer-offline"
