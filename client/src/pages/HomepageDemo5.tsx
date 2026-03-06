@@ -428,15 +428,16 @@ function Triptych({ projects: projectsProp }: { projects?: HomeProjectItem[] }) 
 }
 
 // ─── Composant principal ─────────────────────────────────────────────────────
-const ON_IA_VERBS = ['maîtrise', 'optimise', 'entraîne', 'personnalise', 'humanise'];
+// Les verbes IA sont chargés depuis les fichiers de traduction (home.iaVerbs)
 
 export default function HomepageDemo5() {
   const getLocalizedPath = useLocalizedPath();
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
+  const iaVerbs: string[] = (t('home.iaVerbs', { returnObjects: true }) as string[]) || [];
   const [onIaIndex, setOnIaIndex] = useState(0);
 
   useEffect(() => {
-    const id = setInterval(() => setOnIaIndex(i => (i + 1) % ON_IA_VERBS.length), 3200);
+    const id = setInterval(() => setOnIaIndex(i => (i + 1) % (iaVerbs.length || 5)), 3200);
     return () => clearInterval(id);
   }, []);
 
@@ -518,8 +519,8 @@ export default function HomepageDemo5() {
             WebkitTextFillColor: 'transparent',
             backgroundClip: 'text',
           }}>
-            <span style={{ display: 'block' }}>L'agence numérique</span>
-            <span style={{ display: 'block' }}>des PME et des OBNL</span>
+            <span style={{ display: 'block' }}>{t('home.heroLine1')}</span>
+            <span style={{ display: 'block' }}>{t('home.heroLine2')}</span>
           </h1>
         </section>
 
@@ -553,9 +554,10 @@ export default function HomepageDemo5() {
               {/* 2. Date — même style et proportions que météo */}
               {(() => {
                 const d = new Date();
-                const dayName = d.toLocaleDateString('fr-FR', { weekday: 'long' });
+                const locale = language === 'en' ? 'en-CA' : 'fr-FR';
+                const dayName = d.toLocaleDateString(locale, { weekday: 'long' });
                 const dayNum = d.getDate();
-                const monthYear = d.toLocaleDateString('fr-FR', { month: 'long', year: 'numeric' });
+                const monthYear = d.toLocaleDateString(locale, { month: 'long', year: 'numeric' });
                 return (
                   <div className="glass-widget-weather-date" style={{
                     minHeight: 0,
@@ -564,7 +566,7 @@ export default function HomepageDemo5() {
                     display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
                     gap: 'clamp(0.35rem, 0.5vw, 0.6rem)', textAlign: 'center', height: '100%',
                   }}>
-                    <div style={{ fontSize: 'clamp(1rem, 1.2vw, 1.3rem)', fontWeight: 700, color: '#6b7280' }}>Bon {dayName} <span style={{ color: PURPLE }}>♥</span></div>
+                    <div style={{ fontSize: 'clamp(1rem, 1.2vw, 1.3rem)', fontWeight: 700, color: '#6b7280' }}>{t('home.widgetDateGreeting')} {dayName} <span style={{ color: PURPLE }}>♥</span></div>
                     <div style={{ fontFamily: "'Google Sans Flex', sans-serif", fontWeight: 700, fontSize: 'clamp(3.5rem, 4.4vw, 5.5rem)', lineHeight: 1, color: DARK }}>{dayNum}</div>
                     <div style={{ fontSize: 'clamp(0.65rem, 0.8vw, 0.85rem)', color: '#6b7280' }}>{monthYear}</div>
                   </div>
@@ -582,10 +584,10 @@ export default function HomepageDemo5() {
                 justifyContent: 'center',
               }}>
                 <h3 style={{ fontFamily: "'Google Sans Flex', sans-serif", fontWeight: 700, fontSize: 'clamp(0.95rem, 1.15vw, 1.35rem)', color: DARK, margin: '0 0 clamp(0.25rem, 0.4vw, 0.45rem) 0' }}>
-                  Nous soutenons le monde culturel
+                  {t('home.widgetStatsCultural')}
                 </h3>
                 <p style={{ fontSize: 'clamp(0.8rem, 1vw, 1.1rem)', color: '#4b5563', lineHeight: 1.6, margin: 0 }}>
-                  Nous donnons 1% de tous nos revenus; nous faisons des dons; nos employés sont membres du Musée.
+                  {t('home.widgetStatsCulturalDesc')}
                 </p>
               </div>
 
@@ -651,7 +653,7 @@ export default function HomepageDemo5() {
                 <div>
                   <div style={{ fontFamily: "'Google Sans Flex', sans-serif", fontWeight: 700, fontSize: 'clamp(1.75rem, 2.5vw, 3rem)', lineHeight: 1, color: DARK, marginBottom: 8 }}>481k$</div>
                   <p style={{ fontSize: 'clamp(0.8rem, 1vw, 1.1rem)', color: '#4b5563', lineHeight: 1.5, margin: 0 }}>
-                    amassés lors de notre dernière campagne pour le Défi 28 jours sans alcool
+                    {t('home.widgetStats481k')}
                   </p>
                 </div>
               </div>
@@ -668,7 +670,7 @@ export default function HomepageDemo5() {
                 gap: '1rem',
               }}>
                 <div style={{ fontFamily: "'Google Sans Flex', sans-serif", fontWeight: 700, fontSize: 'clamp(1.75rem, 2.2vw, 2.75rem)', lineHeight: 1, color: DARK }}>2022</div>
-                <p style={{ fontSize: 'clamp(0.75rem, 0.9vw, 1rem)', color: '#4b5563', lineHeight: 1.4, margin: 0, textAlign: 'right' }}>L'agence fête ses 4 ans</p>
+                <p style={{ fontSize: 'clamp(0.75rem, 0.9vw, 1rem)', color: '#4b5563', lineHeight: 1.4, margin: 0, textAlign: 'right' }}>{t('home.widgetAnniv')}</p>
               </div>
             </div>
           </div>
@@ -765,7 +767,7 @@ export default function HomepageDemo5() {
                 muted
                 playsInline
                 style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-                aria-label="On maîtrise l'IA"
+                aria-label={t('home.iaAriaLabel')}
               />
             </div>
             {/* Droite (~55%) : phrase + "On [verbe] l'IA" — centrés */}
@@ -792,7 +794,7 @@ export default function HomepageDemo5() {
                   fontWeight: 400,
                 }}
               >
-                Dompter l&apos;algorithme pour libérer votre vision.
+                {t('home.iaTagline')}
               </p>
               <div className="glass-heading-panel" style={{ textAlign: 'center' }}>
                 <span
@@ -808,7 +810,9 @@ export default function HomepageDemo5() {
                     backgroundClip: 'text',
                   }}
                 >
-                  On {ON_IA_VERBS[onIaIndex]} l'IA
+                  {language === 'en'
+                    ? `${t('home.iaVerbPrefix')} ${iaVerbs[onIaIndex] || ''} ${t('home.iaVerbSuffix')}`
+                    : `${t('home.iaVerbPrefix')} ${iaVerbs[onIaIndex] || ''} ${t('home.iaVerbSuffix')}`}
                 </span>
               </div>
             </div>

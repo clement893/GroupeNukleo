@@ -230,7 +230,25 @@
       "title": "Rencontrez notre équipe",
       "description": "Des experts passionnés qui transforment votre vision en réalité.",
       "cta": "Voir toute l'équipe"
-    }
+    },
+    "heroLine1": "L'agence numérique",
+    "heroLine2": "des PME et des OBNL",
+    "widgetDateGreeting": "Bon",
+    "widgetStatsCultural": "Nous soutenons le monde culturel",
+    "widgetStatsCulturalDesc": "Nous donnons 1% de tous nos revenus; nous faisons des dons; nos employés sont membres du Musée.",
+    "widgetStats481k": "amassés lors de notre dernière campagne pour le Défi 28 jours sans alcool",
+    "widgetAnniv": "L'agence fête ses 4 ans",
+    "iaTagline": "Dompter l'algorithme pour libérer votre vision.",
+    "iaAriaLabel": "On maîtrise l'IA",
+    "iaVerbPrefix": "On",
+    "iaVerbSuffix": "l'IA",
+    "iaVerbs": [
+      "maîtrise",
+      "optimise",
+      "entraîne",
+      "personnalise",
+      "humanise"
+    ]
   },
   "capabilities": {
     "sectionLabel": "Capacités",
@@ -1586,6 +1604,48 @@
       "description": "Discutons de votre projet. Nous vous orienterons vers le bon département — ou la bonne combinaison.",
       "buttonPrimary": "Parler à un expert",
       "buttonSecondary": "Voir nos réalisations"
+    },
+    "cards": {
+      "tech": {
+        "title": "Lab technologique",
+        "description": "Du code, des résultats. Développement & technologie.",
+        "tags": [
+          "Application",
+          "Plateforme",
+          "Site web",
+          "Maintenance",
+          "Refonte"
+        ]
+      },
+      "studio": {
+        "title": "Studio créatif",
+        "description": "Propulsez votre marque avec une identité visuelle forte et des expériences numériques sur mesure qui captivent et boostent votre croissance.",
+        "tags": [
+          "Image de marque",
+          "Idéation",
+          "UX/UI",
+          "Production"
+        ]
+      },
+      "agency": {
+        "title": "Agence Comm & Marketing",
+        "description": "De la vision à l'action sans aucune friction : des stratégies de communication limpides pour une exécution qui marque les esprits.",
+        "tags": [
+          "Campagnes digitales",
+          "Gestion des réseaux sociaux",
+          "Stratégie"
+        ]
+      },
+      "consulting": {
+        "title": "Transition numérique",
+        "description": "Anticipez demain en toute sérénité : nous convertissons la complexité numérique en une feuille de route concrète pour propulser votre entreprise.",
+        "tags": [
+          "Développement IA",
+          "Formation",
+          "Accompagnement",
+          "Stratégie IA"
+        ]
+      }
     }
   },
   "projects": {
@@ -2927,6 +2987,13 @@
       "button": "Installer",
       "dismiss": "Plus tard",
       "close": "Fermer"
+    }
+  },
+  "project": {
+    "labels": {
+      "client": "Client :",
+      "services": "Services :",
+      "year": "Année :"
     }
   }
 }

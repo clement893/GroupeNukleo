@@ -230,7 +230,25 @@
       "title": "Meet Our Team",
       "description": "Passionate experts who transform your vision into reality.",
       "cta": "See Full Team"
-    }
+    },
+    "heroLine1": "The digital agency",
+    "heroLine2": "for SMBs and non-profits",
+    "widgetDateGreeting": "Good",
+    "widgetStatsCultural": "We support the cultural world",
+    "widgetStatsCulturalDesc": "We give 1% of all our revenue; we donate; our employees are museum members.",
+    "widgetStats481k": "raised during our last campaign for the 28-Day No-Alcohol Challenge",
+    "widgetAnniv": "The agency turns 4",
+    "iaTagline": "Taming the algorithm to unleash your vision.",
+    "iaAriaLabel": "We optimize AI",
+    "iaVerbPrefix": "We",
+    "iaVerbSuffix": "AI",
+    "iaVerbs": [
+      "masters",
+      "optimizes",
+      "trains",
+      "personalizes",
+      "humanizes"
+    ]
   },
   "capabilities": {
     "sectionLabel": "Capabilities",
@@ -852,7 +870,18 @@
         "process3Title": "Deployment",
         "process3Description": "Production rollout, training and continuous evolution.",
         "ctaTitle": "Ready to perform?",
-        "ctaButtonText": "Contact us"
+        "ctaButtonText": "Contact us",
+        "sectionVisualTitle": "Solid infrastructure, high-performance experiences",
+        "sectionVisualSubtitle": "Every feature rests on a mastered architecture.",
+        "sectionVisualDescription": "Our Tech Lab builds robust technical foundations: data architecture, reliable APIs, security and performance. The goal: stable, scalable products that are easy to evolve, so your teams can focus on business value.",
+        "sectionHighlight0Title": "Maintainable code",
+        "sectionHighlight0Description": "Modern standards, code reviews and automated tests.",
+        "sectionHighlight1Title": "Performance & scalability",
+        "sectionHighlight1Description": "Stack optimized to handle load without sacrificing speed.",
+        "sectionHighlight2Title": "Security & compliance",
+        "sectionHighlight2Description": "Access management, data protection and security best practices.",
+        "sectionHighlight3Title": "Monitoring & reliability",
+        "sectionHighlight3Description": "Logs, alerts and observability to detect and fix issues fast."
       },
       "agency": {
         "pageTitle": "Comm & Marketing Agency",
@@ -907,7 +936,18 @@
         "process3Title": "Execute",
         "process3Description": "Deploy campaigns and drive results.",
         "ctaTitle": "Ready to perform?",
-        "ctaButtonText": "Contact us"
+        "ctaButtonText": "Contact us",
+        "sectionVisualTitle": "Strategy and execution, hand in hand",
+        "sectionVisualSubtitle": "Every goal deserves a clear plan and frictionless execution.",
+        "sectionVisualDescription": "Our agency combines strategic vision and operational execution: positioning, channels, content and campaigns. We structure your presence to generate qualified leads and measurable results, with a data-driven approach and proven processes.",
+        "sectionHighlight0Title": "Growth strategy",
+        "sectionHighlight0Description": "Positioning, channels and measurable growth objectives.",
+        "sectionHighlight1Title": "SEO & organic content",
+        "sectionHighlight1Description": "Content strategy and optimization for lasting organic presence.",
+        "sectionHighlight2Title": "Performance marketing",
+        "sectionHighlight2Description": "ROI-optimized paid campaigns on Google, Meta, LinkedIn.",
+        "sectionHighlight3Title": "Marketing automation & CRM",
+        "sectionHighlight3Description": "Automated sequences, lead nurturing, sales cycle optimization."
       },
       "consulting": {
         "pageTitle": "Digital Transformation",
@@ -962,7 +1002,18 @@
         "process3Title": "Accompany",
         "process3Description": "Deploy the plan, train teams and measure results.",
         "ctaTitle": "Ready to perform?",
-        "ctaButtonText": "Contact us"
+        "ctaButtonText": "Contact us",
+        "sectionVisualTitle": "Clarity and roadmap",
+        "sectionVisualSubtitle": "Every transformation starts with a shared diagnosis.",
+        "sectionVisualDescription": "Our consulting practice assesses your digital and AI maturity, identifies high-impact opportunities and risks to address. We define with you an actionable roadmap, from audit to change management, to anchor transformation over time.",
+        "sectionHighlight0Title": "Digital audit & diagnosis",
+        "sectionHighlight0Description": "Assessment of digital and AI maturity, identification of levers.",
+        "sectionHighlight1Title": "Strategy & roadmap",
+        "sectionHighlight1Description": "Digital vision and sequenced action plan over 12–24 months.",
+        "sectionHighlight2Title": "Organizational transformation",
+        "sectionHighlight2Description": "Change management, training and new practices.",
+        "sectionHighlight3Title": "AI governance & ethics",
+        "sectionHighlight3Description": "Responsible AI governance framework, compliance and risk management."
       }
     },
     "strategicBureau": {
@@ -1443,6 +1494,48 @@
       "description": "Let's talk about your project. We'll guide you to the right department — or the right combination.",
       "buttonPrimary": "Talk to an expert",
       "buttonSecondary": "View our work"
+    },
+    "cards": {
+      "tech": {
+        "title": "Tech Lab",
+        "description": "Code that delivers. Development & technology.",
+        "tags": [
+          "App",
+          "Platform",
+          "Website",
+          "Maintenance",
+          "Redesign"
+        ]
+      },
+      "studio": {
+        "title": "Creative Studio",
+        "description": "Propel your brand with a strong visual identity and bespoke digital experiences that captivate and boost your growth.",
+        "tags": [
+          "Branding",
+          "Ideation",
+          "UX/UI",
+          "Production"
+        ]
+      },
+      "agency": {
+        "title": "Comm & Marketing Agency",
+        "description": "From vision to action with zero friction: clear communication strategies for execution that makes an impact.",
+        "tags": [
+          "Digital Campaigns",
+          "Social Media Management",
+          "Strategy"
+        ]
+      },
+      "consulting": {
+        "title": "Digital Transformation",
+        "description": "Anticipate tomorrow with peace of mind: we turn digital complexity into a concrete roadmap to propel your business.",
+        "tags": [
+          "AI Development",
+          "Training",
+          "Support",
+          "AI Strategy"
+        ]
+      }
     }
   },
   "contact": {
@@ -3046,5 +3139,12 @@
     "seoKeywords": "AI FAQ, AI transformation questions, AI agency process, AI pricing",
     "seoTitle": "FAQ | Frequently Asked Questions about AI Transformation",
     "title": "Frequently<br /><span class=\"text-white/70\">Asked Questions</span>"
+  },
+  "project": {
+    "labels": {
+      "client": "Client:",
+      "services": "Services:",
+      "year": "Year:"
+    }
   }
 }
