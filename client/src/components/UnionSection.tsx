@@ -62,7 +62,7 @@ export default function UnionSection() {
       }}
     >
       <div
-        className="grid grid-cols-1 md:grid-cols-[1.2fr_1fr] gap-0 md:gap-10 items-stretch union-section-inner"
+        className="grid grid-cols-1 lg:grid-cols-[1.2fr_1fr] gap-0 lg:gap-10 items-stretch union-section-inner"
         style={{
           maxWidth: 'min(1200px, 92vw)',
           width: '100%',
@@ -76,8 +76,9 @@ export default function UnionSection() {
             borderRadius: 12,
             background: '#e5e7eb',
             aspectRatio: '4/3',
+            minWidth: 0,
           }}
-          className="md:aspect-auto"
+          className="lg:aspect-auto lg:min-h-0"
         >
           {videoPath ? (
             <video
@@ -119,6 +120,8 @@ export default function UnionSection() {
             display: 'flex',
             flexDirection: 'column',
             justifyContent: 'center',
+            overflowWrap: 'break-word',
+            wordBreak: 'break-word',
           }}
         >
           <h2

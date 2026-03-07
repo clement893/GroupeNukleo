@@ -675,6 +675,13 @@ header.header-scroll-transform,
     }
   }
 
+  /* Union section — responsive : colonnes qui peuvent rétrécir pour éviter chevauchement */
+  @media (min-width: 1024px) {
+    .union-section-inner {
+      grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr) !important;
+    }
+  }
+
   /* Union section — grands écrans : largeur alignée sur hero */
   @media (min-width: 1400px) {
     .union-section-inner {
@@ -727,6 +734,13 @@ header.header-scroll-transform,
     }
     .two-cities-inner {
       max-width: min(2200px, 96%) !important;
+    }
+  }
+
+  /* Union section tablet (stacked) — padding texte */
+  @media (min-width: 641px) and (max-width: 1023px) {
+    .union-section-text {
+      padding: clamp(2rem, 5vw, 3rem) !important;
     }
   }
 
