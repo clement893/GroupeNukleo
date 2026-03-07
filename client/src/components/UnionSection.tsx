@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useLanguage } from '@/contexts/LanguageContext';
+import { useLocalizedPath } from '@/hooks/useLocalizedPath';
 import { Download } from 'lucide-react';
 
 const HEADLINE_PURPLE = '#8B2C8C';
@@ -31,6 +32,7 @@ const pressReleaseBtnStyle: React.CSSProperties = {
  */
 export default function UnionSection() {
   const { t } = useLanguage();
+  const getLocalizedPath = useLocalizedPath();
   const [videoPath, setVideoPath] = useState<string | null>(null);
   const [pdfPath, setPdfPath] = useState<string | null>(null);
 
@@ -78,11 +80,13 @@ export default function UnionSection() {
         >
           {videoPath ? (
             <video
+              key={videoPath}
               src={videoPath}
               autoPlay
               muted
               loop
               playsInline
+              preload="auto"
               style={{
                 width: '100%',
                 height: '100%',
@@ -160,20 +164,18 @@ export default function UnionSection() {
           >
             {t('home.union.paragraph2')}
           </p>
-          {pdfPath && (
-            <a
-              href={pdfPath}
-              download="communique-presse-nukleo.pdf"
-              target="_blank"
-              rel="noopener noreferrer"
-              style={pressReleaseBtnStyle}
-              className="hover:opacity-90 hover:shadow-lg"
-              aria-label={t('home.union.cta')}
-            >
-              {t('home.union.cta')}
-              <Download size={20} strokeWidth={2.5} />
-            </a>
-          )}
+          <a
+            href={pdfPath || getLocalizedPath('/media')}
+            {...(pdfPath && { download: 'communique-presse-nukleo.pdf' })}
+            target="_blank"
+            rel="noopener noreferrer"
+            style={pressReleaseBtnStyle}
+            className="hover:opacity-90 hover:shadow-lg"
+            aria-label={t('home.union.cta')}
+          >
+            {t('home.union.cta')}
+            <Download size={20} strokeWidth={2.5} />
+          </a>
         </div>
       </div>
     </section>

@@ -3,9 +3,16 @@ import path from "path";
 
 const VIDEO_BASENAME = "union-video";
 
-/** Get the path where the union video is stored on disk */
+/** Get the path where the union video is stored on disk.
+ * In production, use dist/public/demo so uploaded files are served by express.static.
+ * In development, use client/public/demo (Vite serves from client/public).
+ */
 export function getUnionVideoDir(): string {
-  return path.resolve(process.cwd(), "client", "public", "demo");
+  const isProd = process.env.NODE_ENV === "production";
+  const baseDir = isProd
+    ? path.resolve(process.cwd(), "dist", "public", "demo")
+    : path.resolve(process.cwd(), "client", "public", "demo");
+  return baseDir;
 }
 
 /** Get the full path to the video file (checks mp4 first, then webm) */

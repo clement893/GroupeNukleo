@@ -22,11 +22,18 @@ export default function TwoCitiesSection() {
       <h2
         style={{
           fontFamily: "'Neue Haas Unica Pro', sans-serif",
-          fontWeight: 700,
-          fontSize: 'clamp(1.5rem, 3vw, 2.25rem)',
-          color: '#0A0A0A',
+          fontWeight: 400,
+          fontSize: 'clamp(2rem, 4vw, 2.75rem)',
+          lineHeight: 1.1,
+          letterSpacing: '-0.03em',
           textAlign: 'center',
-          margin: '0 0 clamp(2rem, 4vw, 3rem) 0',
+          margin: '0 auto clamp(2rem, 4vw, 3rem) auto',
+          display: 'block',
+          maxWidth: '90%',
+          background: 'linear-gradient(to right, #6B1817, #523DCB)',
+          WebkitBackgroundClip: 'text',
+          WebkitTextFillColor: 'transparent',
+          backgroundClip: 'text',
         }}
       >
         {t('home.twoCities.title')}
