@@ -9,6 +9,7 @@ import {
   TrendingUp,
   LayoutGrid,
   Video,
+  FileText,
 } from "lucide-react";
 import "@/styles/admin.css";
 
@@ -62,6 +63,7 @@ const ADMIN_CATEGORIES = [
     sections: [
       { title: "Logos carousel", description: "Gérer les logos du carrousel d'accueil", icon: <LayoutGrid className="h-5 w-5" />, href: "/admin/carousel-logos" },
       { title: "Vidéo Union", description: "Vidéo de la section L'union de deux forces", icon: <Video className="h-5 w-5" />, href: "/admin/union-video" },
+      { title: "Communiqué de presse", description: "PDF du bouton Notre communiqué de presse", icon: <FileText className="h-5 w-5" />, href: "/admin/press-release" },
     ],
   },
 ];

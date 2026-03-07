@@ -111,17 +111,17 @@ header.header-scroll-transform,
   }
   @media (min-width: 1400px) {
     :root {
-      --site-margin: 2.5%;
+      --site-margin: 2%;
     }
   }
   @media (min-width: 1920px) {
     :root {
-      --site-margin: 2%;
+      --site-margin: 1.5%;
     }
   }
   @media (min-width: 2560px) {
     :root {
-      --site-margin: 1.25%;
+      --site-margin: 1%;
     }
   }
 
@@ -292,7 +292,7 @@ header.header-scroll-transform,
 
   /* Conteneur centré pour grands écrans — limite la largeur du contenu */
   .content-max-width {
-    max-width: min(1800px, 96%);
+    max-width: min(1800px, 97%);
     margin-left: auto;
     margin-right: auto;
   }
@@ -303,12 +303,12 @@ header.header-scroll-transform,
   }
   @media (min-width: 1920px) {
     .content-max-width {
-      max-width: min(2000px, 96%);
+      max-width: min(2000px, 97%);
     }
   }
   @media (min-width: 2560px) {
     .content-max-width {
-      max-width: min(2600px, 97%);
+      max-width: min(2800px, 98%);
     }
   }
 
@@ -672,6 +672,61 @@ header.header-scroll-transform,
     }
     .hero-section-grid .hero-title-mobile-wrap {
       white-space: normal !important;
+    }
+  }
+
+  /* Union section — grands écrans : largeur alignée sur hero */
+  @media (min-width: 1400px) {
+    .union-section-inner {
+      max-width: min(1400px, 94%) !important;
+    }
+  }
+  @media (min-width: 1920px) {
+    .union-section-inner {
+      max-width: min(1800px, 95%) !important;
+    }
+  }
+  @media (min-width: 2560px) {
+    .union-section-inner {
+      max-width: min(2200px, 96%) !important;
+    }
+  }
+
+  /* Company blocks, Leaders, Two cities — grands écrans */
+  @media (min-width: 1400px) {
+    .company-blocks-inner {
+      max-width: min(1400px, 94%) !important;
+    }
+    .leaders-intro,
+    .leaders-grid {
+      max-width: min(1400px, 94%) !important;
+    }
+    .two-cities-inner {
+      max-width: min(1400px, 94%) !important;
+    }
+  }
+  @media (min-width: 1920px) {
+    .company-blocks-inner {
+      max-width: min(1800px, 95%) !important;
+    }
+    .leaders-intro,
+    .leaders-grid {
+      max-width: min(1800px, 95%) !important;
+    }
+    .two-cities-inner {
+      max-width: min(1800px, 95%) !important;
+    }
+  }
+  @media (min-width: 2560px) {
+    .company-blocks-inner {
+      max-width: min(2200px, 96%) !important;
+    }
+    .leaders-intro,
+    .leaders-grid {
+      max-width: min(2200px, 96%) !important;
+    }
+    .two-cities-inner {
+      max-width: min(2200px, 96%) !important;
     }
   }
 

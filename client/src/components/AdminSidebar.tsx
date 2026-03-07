@@ -5,6 +5,7 @@ import {
   TrendingUp,
   ChevronRight,
   LayoutGrid,
+  FileText,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -21,6 +22,7 @@ const NAV_GROUPS = [
     label: "Configuration",
     items: [
       { label: "Logos carousel", href: "/admin/carousel-logos", icon: LayoutGrid },
+      { label: "Communiqué de presse", href: "/admin/press-release", icon: FileText },
     ],
   },
 ];

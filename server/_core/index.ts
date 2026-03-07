@@ -24,6 +24,7 @@ import { configureGoogleAuth, requireAdminAuth } from "./googleAuth";
 import { getDb, getAllAgencyLeads, getLeoAnalytics, getLeoContacts, getAdminStats } from "../db";
 import { addLogo, updateLogo, removeLogo, reorderLogos } from "../carouselLogosApi";
 import { getUnionVideoPath, getUnionVideoDir } from "../unionVideoApi";
+import { getPressReleasePath, getPressReleaseDir } from "../pressReleaseApi";
 import { analytics } from "../../drizzle/schema";
 import { eq } from "drizzle-orm";
 import postgres from "postgres";
@@ -508,6 +509,39 @@ async function startServer() {
     res.json({ path: `/demo/${req.file.filename}` });
   });
 
+  // Press release PDF (public + admin upload)
+  app.get("/api/press-release", async (_req, res) => {
+    try {
+      const path = await getPressReleasePath();
+      res.json({ path });
+    } catch (e) {
+      console.error("[PressRelease] GET error", e);
+      res.json({ path: null });
+    }
+  });
+
+  const PRESS_RELEASE_DIR = getPressReleaseDir();
+  const pressReleaseUpload = multer({
+    storage: multer.diskStorage({
+      destination: (_req, _file, cb) => {
+        if (!existsSync(PRESS_RELEASE_DIR)) mkdirSync(PRESS_RELEASE_DIR, { recursive: true });
+        cb(null, PRESS_RELEASE_DIR);
+      },
+      filename: (_req, _file, cb) => {
+        cb(null, "press-release.pdf");
+      },
+    }),
+    limits: { fileSize: 20 * 1024 * 1024 },
+    fileFilter: (_req, file, cb) => {
+      const ok = file.mimetype === "application/pdf";
+      cb(ok ? null : new Error("Format non supporté. Utilisez un fichier PDF."), ok);
+    },
+  });
+  app.post("/api/admin/press-release/upload", requireAdminAuth, pressReleaseUpload.single("pdf"), (req, res) => {
+    if (!req.file) return res.status(400).json({ error: "Aucun fichier PDF" });
+    res.json({ path: `/demo/${req.file.filename}` });
+  });
+
   // Admin: analytics config (REST, same auth)
   app.get("/api/admin/analytics-config", requireAdminAuth, async (req, res) => {
     try {
@@ -817,6 +851,7 @@ async function startServer() {
         let msg = 'File too large. Maximum size is 10MB';
         if (req.path === '/api/admin/carousel-logos/upload') msg = 'Fichier trop volumineux (2 Mo max)';
         else if (req.path === '/api/admin/union-video/upload') msg = 'Vidéo trop volumineuse (100 Mo max)';
+        else if (req.path === '/api/admin/press-release/upload') msg = 'PDF trop volumineux (20 Mo max)';
         return res.status(400).json({ error: msg });
       }
       return res.status(400).json({ error: `Upload error: ${err.message}` });
@@ -829,6 +864,9 @@ async function startServer() {
       return res.status(400).json({ error: err.message || 'Upload failed' });
     }
     if (err && req.path === '/api/admin/union-video/upload') {
+      return res.status(400).json({ error: err.message || 'Upload failed' });
+    }
+    if (err && req.path === '/api/admin/press-release/upload') {
       return res.status(400).json({ error: err.message || 'Upload failed' });
     }
     next(err);

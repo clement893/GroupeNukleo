@@ -1,24 +1,50 @@
 import { useState, useEffect } from 'react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { ExternalLink } from 'lucide-react';
-import { useLocalizedPath } from '@/hooks/useLocalizedPath';
 
 const HEADLINE_PURPLE = '#8B2C8C';
 const FALLBACK_IMAGE = '/demo/consulting-hero-cover.png';
+
+const pressReleaseBtnStyle: React.CSSProperties = {
+  display: 'inline-flex',
+  alignItems: 'center',
+  gap: 8,
+  fontFamily: "'Neue Haas Unica Pro', sans-serif",
+  fontWeight: 600,
+  fontSize: '0.95rem',
+  padding: '0.6rem 1.25rem',
+  borderRadius: 16,
+  background: 'rgba(255, 255, 255, 0.35)',
+  backdropFilter: 'blur(16px) saturate(180%)',
+  WebkitBackdropFilter: 'blur(16px) saturate(180%)',
+  border: '1px solid rgba(255, 255, 255, 0.7)',
+  boxShadow: '0 4px 24px rgba(0, 0, 0, 0.06), inset 0 1px 0 rgba(255, 255, 255, 0.85)',
+  color: HEADLINE_PURPLE,
+  textDecoration: 'none',
+  transition: 'opacity 0.2s ease, box-shadow 0.2s ease',
+  width: 'fit-content',
+};
 
 /**
  * Section « L'union de deux forces » — vidéo ou image gauche (B&W), bloc texte droite.
  */
 export default function UnionSection() {
   const { t } = useLanguage();
-  const getLocalizedPath = useLocalizedPath();
   const [videoPath, setVideoPath] = useState<string | null>(null);
+  const [pdfPath, setPdfPath] = useState<string | null>(null);
 
   useEffect(() => {
     fetch('/api/union-video')
       .then((r) => r.json())
       .then((data) => setVideoPath(data?.path ?? null))
       .catch(() => setVideoPath(null));
+  }, []);
+
+  useEffect(() => {
+    fetch('/api/press-release')
+      .then((r) => r.json())
+      .then((data) => setPdfPath(data?.path ?? null))
+      .catch(() => setPdfPath(null));
   }, []);
 
   return (
@@ -34,7 +60,8 @@ export default function UnionSection() {
       <div
         className="grid grid-cols-1 md:grid-cols-[1.2fr_1fr] gap-0 md:gap-10 items-stretch union-section-inner"
         style={{
-          maxWidth: 'min(1200px, 90vw)',
+          maxWidth: 'min(1200px, 92vw)',
+          width: '100%',
           margin: '0 auto',
         }}
       >
@@ -132,25 +159,19 @@ export default function UnionSection() {
           >
             {t('home.union.paragraph2')}
           </p>
-          <a
-            href={getLocalizedPath('/media')}
-            style={{
-              display: 'inline-flex',
-              alignItems: 'center',
-              gap: 8,
-              fontFamily: "'Neue Haas Unica Pro', sans-serif",
-              fontWeight: 600,
-              fontSize: '0.95rem',
-              color: HEADLINE_PURPLE,
-              textDecoration: 'none',
-              transition: 'opacity 0.2s ease',
-              width: 'fit-content',
-            }}
-            className="hover:opacity-80"
-          >
-            {t('home.union.cta')}
-            <ExternalLink size={18} strokeWidth={2.5} />
-          </a>
+          {pdfPath && (
+            <a
+              href={pdfPath}
+              target="_blank"
+              rel="noopener noreferrer"
+              style={pressReleaseBtnStyle}
+              className="hover:opacity-90 hover:shadow-lg"
+              aria-label={t('home.union.cta')}
+            >
+              {t('home.union.cta')}
+              <ExternalLink size={18} strokeWidth={2.5} />
+            </a>
+          )}
         </div>
       </div>
     </section>
