@@ -29,14 +29,13 @@ export default function About() {
       />
       <StructuredData data={personSchema} />
 
-      <div style={{ background: CREAM, color: DARK }}>
+      <div style={{ color: DARK }}>
 
         {/* ══════════════════════════════════════════════════════════════════════
             SECTION 1 — HERO
             Maquette: fond beige, titre dégradé gauche, tagline droite, photo équipe pleine largeur
         ══════════════════════════════════════════════════════════════════════ */}
         <section style={{
-          background: CREAM,
           paddingTop: 'clamp(7rem, 14vh, 10rem)',
           paddingLeft: '3%',
           paddingRight: '3%',
@@ -137,7 +136,6 @@ export default function About() {
             2 colonnes (photo gauche / texte droite), 2 cartes logos en bas
         ══════════════════════════════════════════════════════════════════════ */}
         <section style={{
-          background: WHITE,
           padding: 'clamp(5rem, 10vh, 8rem) 3%',
         }}>
           {/* Label */}
@@ -274,7 +272,6 @@ export default function About() {
           }}>
             {/* Carte Nukleo */}
             <div style={{
-              background: WHITE,
               border: '1px solid rgba(0,0,0,0.08)',
               borderRadius: '1rem',
               padding: 'clamp(2rem, 4vw, 3rem) clamp(1.5rem, 3vw, 2.5rem)',
@@ -317,7 +314,6 @@ export default function About() {
 
             {/* Carte Rouge On Blue */}
             <div style={{
-              background: WHITE,
               border: '1px solid rgba(0,0,0,0.08)',
               borderRadius: '1rem',
               padding: 'clamp(2rem, 4vw, 3rem) clamp(1.5rem, 3vw, 2.5rem)',
@@ -365,7 +361,6 @@ export default function About() {
             Maquette: fond beige, texte intro (1ère phrase dégradé), 2 cartes dirigeants
         ══════════════════════════════════════════════════════════════════════ */}
         <section style={{
-          background: CREAM,
           padding: 'clamp(5rem, 10vh, 8rem) 3%',
         }}>
           {/* Texte intro */}
@@ -398,7 +393,6 @@ export default function About() {
           }}>
             {/* Clément Roy */}
             <div style={{
-              background: WHITE,
               borderRadius: '1rem',
               padding: 'clamp(1.5rem, 2.5vw, 2rem)',
               display: 'flex',
@@ -464,7 +458,6 @@ export default function About() {
 
             {/* Lionel Pardin */}
             <div style={{
-              background: WHITE,
               borderRadius: '1rem',
               padding: 'clamp(1.5rem, 2.5vw, 2rem)',
               display: 'flex',
@@ -535,7 +528,6 @@ export default function About() {
             Maquette: fond blanc, titre centré violet, 2 cartes avec carte + adresse + icône pin
         ══════════════════════════════════════════════════════════════════════ */}
         <section style={{
-          background: WHITE,
           padding: 'clamp(4rem, 8vh, 6rem) 3% clamp(6rem, 12vh, 9rem)',
         }}>
           {/* Titre centré */}
@@ -560,7 +552,7 @@ export default function About() {
           }}>
             {/* Montréal */}
             <div style={{
-              background: '#F8F8F8',
+              background: 'rgba(0,0,0,0.03)',
               borderRadius: '1rem',
               overflow: 'hidden',
               boxShadow: '0 2px 20px rgba(0,0,0,0.05)',
@@ -608,7 +600,7 @@ export default function About() {
 
             {/* Halifax */}
             <div style={{
-              background: '#F8F8F8',
+              background: 'rgba(0,0,0,0.03)',
               borderRadius: '1rem',
               overflow: 'hidden',
               boxShadow: '0 2px 20px rgba(0,0,0,0.05)',
