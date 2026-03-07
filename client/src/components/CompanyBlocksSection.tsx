@@ -56,6 +56,7 @@ export default function CompanyBlocksSection() {
                     maxHeight: 'clamp(3rem, 8vw, 5rem)',
                     width: 'auto',
                     objectFit: 'contain',
+                    mixBlendMode: 'lighten',
                   }}
                 />
               ) : (
