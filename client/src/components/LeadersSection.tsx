@@ -60,6 +60,9 @@ export default function LeadersSection() {
                 aspectRatio: '1',
                 minHeight: 0,
                 background: '#e5e7eb',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
               }}
             >
               <img
@@ -69,6 +72,7 @@ export default function LeadersSection() {
                   width: '100%',
                   height: '100%',
                   objectFit: 'cover',
+                  borderRadius: '50%',
                 }}
               />
             </div>
