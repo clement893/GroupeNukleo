@@ -97,7 +97,7 @@ function Footer() {
         </div>
       </div>
 
-      {/* Barre basse — copyright + liens légaux */}
+      {/* Barre basse — copyright uniquement (pages légales retirées) */}
       <div
         className="text-center text-sm mt-10 w-full px-4"
         style={{ color: '#6b7280' }}
@@ -107,10 +107,6 @@ function Footer() {
           <a href="/sitemap.xml" target="_blank" rel="noopener noreferrer" className="hover:underline">
             {t('footer.sitemap') || 'Sitemap'}
           </a>
-          <Link href={getLocalizedPath('/privacy-policy')} className="hover:underline">{t('footer.links.privacy')}</Link>
-          <Link href={getLocalizedPath('/nukleo-time-privacy')} className="hover:underline">{t('footer.links.nukleoTimePrivacy') || 'Nukleo.TIME Privacy'}</Link>
-          <Link href={getLocalizedPath('/terms-of-service')} className="hover:underline">{t('footer.links.terms')}</Link>
-          <Link href={getLocalizedPath('/cookie-policy')} className="hover:underline">{t('footer.links.cookies')}</Link>
         </div>
       </div>
 

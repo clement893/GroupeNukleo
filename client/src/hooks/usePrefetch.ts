@@ -8,15 +8,9 @@ import { useIsMobile } from './useIsMobile';
 import { MOBILE_BREAKPOINT } from '@/lib/constants';
 
 /**
- * Routes fréquemment visitées à précharger
- * Ordre de priorité : plus fréquent = plus prioritaire
+ * Routes à précharger (site réduit à la page d'accueil uniquement)
  */
-const FREQUENT_ROUTES = [
-  '/services',
-  '/contact',
-  '/about',
-  '/projects',
-] as const;
+const FREQUENT_ROUTES: string[] = [];
 
 /**
  * Hook pour précharger les routes fréquemment visitées

@@ -15,7 +15,7 @@ export default function CTASection() {
             {t('cta.description')}
           </p>
 
-          <SplitCTAButton href="/contact" label={ctaLabel || 'Contactez-nous'} ariaLabel={ctaLabel || 'Contactez-nous'} />
+          <SplitCTAButton href="#" label={ctaLabel || 'Contactez-nous'} ariaLabel={ctaLabel || 'Contactez-nous'} />
         </div>
       </div>
     </section>

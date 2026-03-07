@@ -9,40 +9,10 @@ import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
 import { toast } from 'sonner';
 
-// Liste de toutes les pages du site avec leurs chemins (alignée sur App.tsx + Footer)
+// Site réduit à la page d'accueil uniquement
 const ALL_PAGES = [
   { path: '/', label: 'Accueil', description: 'Page d\'accueil principale' },
   { path: '/fr', label: 'Accueil (FR)', description: 'Page d\'accueil en français' },
-  { path: '/projects', label: 'Projets', description: 'Page des projets' },
-  { path: '/fr/projects', label: 'Projets (FR)', description: 'Page des projets en français' },
-  { path: '/about', label: 'À propos', description: 'Page à propos' },
-  { path: '/fr/about', label: 'À propos (FR)', description: 'Page à propos en français' },
-  { path: '/resources', label: 'Ressources', description: 'Page ressources' },
-  { path: '/fr/resources', label: 'Ressources (FR)', description: 'Page ressources en français' },
-  { path: '/contact', label: 'Contact', description: 'Page de contact' },
-  { path: '/fr/contact', label: 'Contact (FR)', description: 'Page de contact en français' },
-  { path: '/leo', label: 'LEO', description: 'Page LEO' },
-  { path: '/fr/leo', label: 'LEO (FR)', description: 'Page LEO en français' },
-  { path: '/services', label: 'Services', description: 'Page services' },
-  { path: '/fr/services', label: 'Services (FR)', description: 'Page services en français' },
-  { path: '/services/tech', label: 'Services Tech', description: 'Page Nukleo Tech' },
-  { path: '/fr/services/tech', label: 'Services Tech (FR)', description: 'Page Nukleo Tech en français' },
-  { path: '/services/consulting', label: 'Services Consulting', description: 'Page Nukleo Consulting' },
-  { path: '/fr/services/consulting', label: 'Services Consulting (FR)', description: 'Page Nukleo Consulting en français' },
-  { path: '/services/studio', label: 'Services Studio', description: 'Page Nukleo Studio' },
-  { path: '/fr/services/studio', label: 'Services Studio (FR)', description: 'Page Nukleo Studio en français' },
-  { path: '/services/agency', label: 'Services Agency', description: 'Page Nukleo Agency' },
-  { path: '/fr/services/agency', label: 'Services Agency (FR)', description: 'Page Nukleo Agency en français' },
-  { path: '/privacy-policy', label: 'Confidentialité', description: 'Page politique de confidentialité' },
-  { path: '/fr/privacy-policy', label: 'Confidentialité (FR)', description: 'Page confidentialité en français' },
-  { path: '/nukleo-time-privacy', label: 'Nukleo.TIME Confidentialité', description: 'Page confidentialité Nukleo.TIME' },
-  { path: '/fr/nukleo-time-privacy', label: 'Nukleo.TIME Confidentialité (FR)', description: 'Page Nukleo.TIME confidentialité en français' },
-  { path: '/terms-of-service', label: 'Conditions d\'utilisation', description: 'Page conditions d\'utilisation' },
-  { path: '/fr/terms-of-service', label: 'Conditions (FR)', description: 'Page conditions en français' },
-  { path: '/cookie-policy', label: 'Cookies', description: 'Page politique des cookies' },
-  { path: '/fr/cookie-policy', label: 'Cookies (FR)', description: 'Page politique des cookies en français' },
-  { path: '/faq', label: 'FAQ', description: 'Page FAQ' },
-  { path: '/fr/faq', label: 'FAQ (FR)', description: 'Page FAQ en français' },
 ];
 
 export default function AdminPageVisibility() {

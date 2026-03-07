@@ -1,5 +1,5 @@
 import { Link } from 'wouter';
-import { Home, Compass, Briefcase, Mail, ArrowLeft } from 'lucide-react';
+import { Home, ArrowLeft } from 'lucide-react';
 import PageLayout from '@/components/PageLayout';
 import { useLocalizedPath } from '@/hooks/useLocalizedPath';
 import { useLanguage } from '@/contexts/LanguageContext';
@@ -9,9 +9,6 @@ export default function NotFound404() {
   const { t } = useLanguage();
   const quickLinks = [
     { icon: Home, labelKey: 'notFound.quickLinks.home', descKey: 'notFound.quickLinks.homeDesc', path: getLocalizedPath('/') },
-    { icon: Compass, labelKey: 'notFound.quickLinks.expertise', descKey: 'notFound.quickLinks.expertiseDesc', path: getLocalizedPath('/expertise') },
-    { icon: Briefcase, labelKey: 'notFound.quickLinks.services', descKey: 'notFound.quickLinks.servicesDesc', path: getLocalizedPath('/services') },
-    { icon: Mail, labelKey: 'notFound.quickLinks.contact', descKey: 'notFound.quickLinks.contactDesc', path: getLocalizedPath('/contact') },
   ];
 
   return (
@@ -57,8 +54,8 @@ export default function NotFound404() {
             </Link>
           </div>
 
-          {/* Quick Links */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
+          {/* Quick Links — accueil uniquement */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 max-w-md mx-auto">
             {quickLinks.map((link) => (
               <Link key={link.path} href={link.path}>
                 <div className="group relative bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-6 hover:bg-white/10 hover:border-white/20 transition-all duration-500 cursor-pointer hover:scale-[1.045]">

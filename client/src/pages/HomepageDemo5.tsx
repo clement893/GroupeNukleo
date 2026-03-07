@@ -120,7 +120,7 @@ function NewsCarousel({ projects: projectsProp }: { projects?: HomeProjectItem[]
                 letterSpacing: '-0.02em', color: '#fff', marginBottom: '1rem',
               }}>{p.name}</h3>
               <Link
-                href={getLocalizedPath('/projects')}
+                href={getLocalizedPath('/')}
                 style={{
                   display: 'inline-flex', alignItems: 'center', gap: 8,
                   color: '#fff', fontSize: '0.8rem', fontWeight: 600, textDecoration: 'none',
@@ -268,7 +268,7 @@ function HeroProjectsCarousel() {
                       padding: '0.35rem 0.9rem', borderRadius: 999,
                     }}>{p.result}</span>
                     <Link
-                      href={getLocalizedPath('/projects')}
+                      href={getLocalizedPath('/')}
                       style={{ color: 'rgba(255,255,255,0.4)', fontSize: '0.65rem', fontWeight: 600, textDecoration: 'none', borderBottom: '1px solid rgba(255,255,255,0.2)', paddingBottom: 1 }}
                     >View case →</Link>
                   </div>
@@ -368,7 +368,7 @@ function ProjectsCarousel() {
                         {project.result}
                       </span>
                       <Link
-                        href={getLocalizedPath('/projects')}
+                        href={getLocalizedPath('/')}
                         style={{ color: 'rgba(255,255,255,0.5)', fontSize: '0.75rem', fontWeight: 700, borderBottom: '1px solid rgba(255,255,255,0.25)', paddingBottom: 2, textDecoration: 'none' }}
                       >
                         View case study →
@@ -421,7 +421,7 @@ function Triptych({ projects: projectsProp }: { projects?: HomeProjectItem[] }) 
   return (
     <ProjectsHeroTriptych
       items={items}
-      projectUrl={getLocalizedPath('/projects')}
+      projectUrl={getLocalizedPath('/')}
       viewProjectLabel={t('home.caseStudy')}
     />
   );
@@ -442,10 +442,10 @@ export default function HomepageDemo5() {
   }, []);
 
   const NAV_LINKS = [
-    { label: t('nav.services'), href: '/services' },
-    { label: t('nav.projects'), href: '/projects' },
-    { label: t('nav.about'), href: '/about' },
-    { label: t('nav.contact'), href: '/contact' },
+    { label: t('nav.services'), href: getLocalizedPath('/') },
+    { label: t('nav.projects'), href: getLocalizedPath('/') },
+    { label: t('nav.about'), href: getLocalizedPath('/') },
+    { label: t('nav.contact'), href: getLocalizedPath('/') },
   ];
 
   const { data: apiProjects } = trpc.projects.list.useQuery(undefined, {
@@ -724,7 +724,7 @@ export default function HomepageDemo5() {
           }}>
             {t('home.audaciousParagraph')}
           </p>
-          <SplitCTAButton href="/contact" label={t('home.performNow')} ariaLabel={t('home.performNow')} />
+          <SplitCTAButton href="#" label={t('home.performNow')} ariaLabel={t('home.performNow')} />
         </section>
 
         {/* ════════════════════════════════════════════════════════════════════

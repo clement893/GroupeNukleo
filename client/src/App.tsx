@@ -22,20 +22,11 @@ import { lazyWithRetry } from "./lib/lazyWithRetry";
 // Lazy load UniversalLEO
 const UniversalLEO = lazy(() => import("./components/UniversalLEO"));
 
-// Helper function to determine page context from URL
-function getPageContext(pathname: string): 'home' | 'agencies' | 'services' | 'contact' | 'projects' | 'about' | 'default' {
-  // Remove language prefix if present
+// Helper function to determine page context from URL (only home remains for public site)
+function getPageContext(pathname: string): 'home' | 'default' {
   const path = pathname.replace(/^\/(fr|en)/, '') || '/';
-  
-  // Skip admin routes
   if (path.startsWith('/admin')) return 'default';
-  
   if (path === '/' || path === '') return 'home';
-  if (path.includes('/services')) return 'services';
-  if (path.includes('/contact')) return 'contact';
-  if (path.includes('/projects')) return 'projects';
-  if (path.includes('/about')) return 'about';
-  
   return 'default';
 }
 
@@ -57,31 +48,9 @@ function GlobalLEO() {
   );
 }
 
-// Eager load only critical pages
-import About from "./pages/About";
 import NotFound404 from "@/pages/NotFound404";
 
-// Lazy load all other pages with retry logic for chunk loading errors
-const Projects = lazyWithRetry(() => import("./pages/Projects"));
-const ProjectDetail = lazyWithRetry(() => import("./pages/ProjectDetail"));
-const Resources = lazyWithRetry(() => import("./pages/Resources"));
-const ResourceArticle = lazyWithRetry(() => import("./pages/resources/ResourceArticle"));
-const Contact = lazyWithRetry(() => import("./pages/Contact"));
-const Leo = lazyWithRetry(() => import("./pages/Leo"));
-const Services = lazyWithRetry(() => import("./pages/Services"));
-const PrivacyPolicy = lazyWithRetry(() => import("./pages/PrivacyPolicy"));
-const PrivacyPolicyNukleoTime = lazyWithRetry(() => import("./pages/PrivacyPolicyNukleoTime"));
-const TermsOfService = lazyWithRetry(() => import("./pages/TermsOfService"));
-const CookiePolicy = lazyWithRetry(() => import("./pages/CookiePolicy"));
-const FAQ = lazyWithRetry(() => import("./pages/FAQ"));
-
 const HomepageDemo5 = lazyWithRetry(() => import('./pages/HomepageDemo5'));
-
-// New department pages
-const NukleoTech = lazyWithRetry(() => import("./pages/services/NukleoTech"));
-const NukleoConsulting = lazyWithRetry(() => import("./pages/services/NukleoConsulting"));
-const NukleoStudio = lazyWithRetry(() => import("./pages/services/NukleoStudio"));
-const NukleoAgency = lazyWithRetry(() => import("./pages/services/NukleoAgency"));
 
 // Admin pages
 const AdminLEOAnalytics = lazy(() => import("./pages/admin/AdminLEOAnalytics"));
@@ -102,7 +71,6 @@ const AdminCarouselLogos = lazy(() => import("./pages/admin/AdminCarouselLogos")
 const AdminPageTexts = lazy(() => import("./pages/admin/AdminPageTexts"));
 
 import { ProtectedAdminRoute } from "./components/ProtectedAdminRoute";
-import { withPageVisibility } from "./components/ProtectedRoute";
 
 function App() {
   // Trigger animations on route change
@@ -126,47 +94,11 @@ function App() {
           <CookieConsent />
           <Suspense fallback={null}>
             <Switch>
-              {/* ===== ROUTES FRANÇAISES ===== */}
+              {/* ===== PAGE PRINCIPALE (accueil) ===== */}
               <Route path="/fr" component={HomepageDemo5} />
-              <Route path="/fr/projects" component={withPageVisibility(Projects, "/fr/projects")} />
-              <Route path="/fr/projects/:slug" component={withPageVisibility(ProjectDetail, "/fr/projects")} />
-              <Route path="/fr/about" component={withPageVisibility(About, "/fr/about")} />
-              <Route path="/fr/resources" component={withPageVisibility(Resources, "/fr/resources")} />
-              <Route path="/fr/resources/:id" component={withPageVisibility(ResourceArticle, "/fr/resources")} />
-              <Route path="/fr/contact" component={withPageVisibility(Contact, "/fr/contact")} />
-              <Route path="/fr/leo" component={withPageVisibility(Leo, "/fr/leo")} />
-              <Route path="/fr/services" component={withPageVisibility(Services, "/fr/services")} />
-              <Route path="/fr/services/tech" component={withPageVisibility(NukleoTech, "/fr/services/tech")} />
-              <Route path="/fr/services/consulting" component={withPageVisibility(NukleoConsulting, "/fr/services/consulting")} />
-              <Route path="/fr/services/studio" component={withPageVisibility(NukleoStudio, "/fr/services/studio")} />
-              <Route path="/fr/services/agency" component={withPageVisibility(NukleoAgency, "/fr/services/agency")} />
-              <Route path="/fr/start-project"><Redirect to="/fr/contact" /></Route>
-              <Route path="/fr/privacy-policy" component={withPageVisibility(PrivacyPolicy, "/fr/privacy-policy")} />
-              <Route path="/fr/nukleo-time-privacy" component={withPageVisibility(PrivacyPolicyNukleoTime, "/fr/nukleo-time-privacy")} />
-              <Route path="/fr/terms-of-service" component={withPageVisibility(TermsOfService, "/fr/terms-of-service")} />
-              <Route path="/fr/cookie-policy" component={withPageVisibility(CookiePolicy, "/fr/cookie-policy")} />
-              <Route path="/fr/faq" component={withPageVisibility(FAQ, "/fr/faq")} />
-
-              {/* ===== ROUTES ANGLAISES (défaut) ===== */}
               <Route path="/" component={HomepageDemo5} />
-              <Route path="/projects" component={withPageVisibility(Projects, "/projects")} />
-              <Route path="/projects/:slug" component={withPageVisibility(ProjectDetail, "/projects")} />
-              <Route path="/about" component={withPageVisibility(About, "/about")} />
-              <Route path="/resources" component={withPageVisibility(Resources, "/resources")} />
-              <Route path="/resources/:id" component={withPageVisibility(ResourceArticle, "/resources")} />
-              <Route path="/contact" component={withPageVisibility(Contact, "/contact")} />
-              <Route path="/leo" component={withPageVisibility(Leo, "/leo")} />
-              <Route path="/services" component={withPageVisibility(Services, "/services")} />
-              <Route path="/services/tech" component={withPageVisibility(NukleoTech, "/services/tech")} />
-              <Route path="/services/consulting" component={withPageVisibility(NukleoConsulting, "/services/consulting")} />
-              <Route path="/services/studio" component={withPageVisibility(NukleoStudio, "/services/studio")} />
-              <Route path="/services/agency" component={withPageVisibility(NukleoAgency, "/services/agency")} />
-              <Route path="/start-project"><Redirect to="/contact" /></Route>
-              <Route path="/privacy-policy" component={withPageVisibility(PrivacyPolicy, "/privacy-policy")} />
-              <Route path="/nukleo-time-privacy" component={withPageVisibility(PrivacyPolicyNukleoTime, "/nukleo-time-privacy")} />
-              <Route path="/terms-of-service" component={withPageVisibility(TermsOfService, "/terms-of-service")} />
-              <Route path="/cookie-policy" component={withPageVisibility(CookiePolicy, "/cookie-policy")} />
-              <Route path="/faq" component={withPageVisibility(FAQ, "/faq")} />
+              <Route path="/fr/start-project"><Redirect to="/fr" /></Route>
+              <Route path="/start-project"><Redirect to="/" /></Route>
 
               {/* ===== ROUTES ADMIN ===== */}
               <Route path="/admin/login" component={AdminLogin} />

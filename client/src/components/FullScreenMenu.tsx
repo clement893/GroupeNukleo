@@ -13,18 +13,9 @@ interface FullScreenMenuProps {
   onClose: () => void;
 }
 
+// Only home page: single link to accueil
 const MAIN_LINKS = [
   { labelKey: 'nav.home', labelFr: 'Accueil', path: '/' },
-  { labelKey: 'nav.about', labelFr: 'À propos de nous', path: '/about' },
-  { labelKey: 'nav.projects', labelFr: 'Nos projets', path: '/projects' },
-  { labelKey: 'nav.contact', labelFr: 'Contactez-nous', path: '/contact' },
-] as const;
-
-const SERVICE_LINKS = [
-  { labelKey: 'menu.serviceTech', path: '/services/tech' },
-  { labelKey: 'menu.serviceStudio', path: '/services/studio' },
-  { labelKey: 'menu.serviceAgency', path: '/services/agency' },
-  { labelKey: 'menu.serviceConsulting', path: '/services/consulting' },
 ] as const;
 
 export default function FullScreenMenu({ isOpen, onClose }: FullScreenMenuProps) {
@@ -92,7 +83,7 @@ export default function FullScreenMenu({ isOpen, onClose }: FullScreenMenuProps)
         </Link>
       </div>
 
-      {/* Navigation principale — texte très grand, plein écran comme sur l'image */}
+      {/* Navigation — uniquement accueil */}
       <nav className="flex-1 flex flex-col justify-center px-8 sm:px-12 md:px-16 lg:px-20 pt-4 pb-8">
         <ul className="space-y-4 sm:space-y-6 md:space-y-8">
           {MAIN_LINKS.map(({ labelKey, labelFr, path }) => (
@@ -116,26 +107,6 @@ export default function FullScreenMenu({ isOpen, onClose }: FullScreenMenuProps)
           ))}
         </ul>
       </nav>
-
-      {/* Séparateur */}
-      <hr className="border-t border-white/25 mx-8 sm:mx-12 md:mx-16 lg:mx-20 flex-shrink-0" />
-
-      {/* Liens services — plus petits, en bas */}
-      <div className="px-8 sm:px-12 md:px-16 lg:px-20 py-6 sm:py-8 flex-shrink-0">
-        <div className="flex flex-wrap justify-between gap-x-8 gap-y-4 text-white/80 text-base sm:text-lg" style={{ fontFamily: "'Google Sans Flex', sans-serif", fontWeight: 700 }}>
-          {SERVICE_LINKS.map(({ labelKey, path }) => (
-            <Link key={labelKey} href={getLocalizedPath(path)} onClick={handleLinkClick} className="group inline-block">
-              <span
-                onMouseEnter={playHover}
-                className="transition-all duration-300 ease-out touch-manipulation
-                  group-hover:text-white group-hover:underline group-hover:underline-offset-4 group-hover:scale-105"
-              >
-                {tLabel(labelKey, labelKey)}
-              </span>
-            </Link>
-          ))}
-        </div>
-      </div>
     </div>
   );
 }

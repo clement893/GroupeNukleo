@@ -1,7 +1,6 @@
 import { useState, useEffect, useCallback, useRef, memo } from 'react';
 import { Menu, X } from 'lucide-react';
 import { Link } from 'wouter';
-import { SplitCTAButton } from '@/components/SplitCTAButton';
 import FullScreenMenu from './FullScreenMenu';
 import { useSound } from '@/hooks/useSound';
 import { useLanguage } from '@/contexts/LanguageContext';
@@ -130,18 +129,8 @@ function Header() {
               />
             </Link>
 
-            {/* Right: CTA split + Menu */}
+            {/* Right: Menu (CTA retiré — seule page accueil) */}
             <div className="flex items-center gap-2 sm:gap-3">
-              <SplitCTAButton
-                href="/contact"
-                label={t('nav.contact') || 'Contactez-nous'}
-                ariaLabel={t('nav.contact') || 'Contactez-nous'}
-                size="header"
-                className="hidden sm:inline-flex touch-manipulation"
-                onClick={playClick}
-                onMouseEnter={playHover}
-              />
-
               {/* Bouton Menu — glassmorphisme + icône burger à droite */}
               <button
                 onClick={isMenuOpen ? handleMenuClose : handleMenuOpen}
