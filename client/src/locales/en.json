@@ -225,6 +225,19 @@
       "visitSite": "Visit the site",
       "paragraph": "A shared vision, a complementary direction. The Nukleo Group is driven by a synergy of passionate leaders, combining technological vision and strategic depth."
     },
+    "leaders": {
+      "ariaLabel": "Leaders of the Nukleo Group",
+      "clement": {
+        "name": "Clément Roy",
+        "title": "President of the Nukleo Group",
+        "description": "Our goal is to structure sustainable growth and build a group capable of supporting our clients in their boldest ambitions, regardless of their market. By joining forces, we expand our strategic depth while preserving the agility and unique DNA of our teams."
+      },
+      "lionel": {
+        "name": "Lionel Pardin",
+        "title": "Partner – Strategy",
+        "description": "We have always approached business challenges holistically, at the intersection of narrative, technology and human experience. Within the Nukleo Group, we give this vision broader scope to turn every digital challenge into a concrete performance lever."
+      }
+    },
     "moreInfo": "More info",
     "audaciousLine1": "One partner.",
     "audaciousLine2": "Integrated intelligence.",

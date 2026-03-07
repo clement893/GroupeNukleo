@@ -225,6 +225,19 @@
       "visitSite": "Visitez le site",
       "paragraph": "Une vision partagée, une direction complémentaire. Le Groupe Nukleo est porté par une synergie de leaders passionnés, alliant vision technologique et profondeur stratégique."
     },
+    "leaders": {
+      "ariaLabel": "Les leaders du Groupe Nukleo",
+      "clement": {
+        "name": "Clément Roy",
+        "title": "Président du Groupe Nukleo",
+        "description": "Notre objectif est de structurer une croissance durable et de bâtir un groupe capable d'accompagner nos clients dans leurs ambitions les plus folles, peu importe leur marché. En unissant nos forces, nous élargissons notre profondeur stratégique tout en préservant l'agilité et l'ADN unique de nos équipes."
+      },
+      "lionel": {
+        "name": "Lionel Pardin",
+        "title": "Associé – Stratégie",
+        "description": "Nous avons toujours abordé les enjeux d'affaires de manière holistique, au croisement du récit, de la technologie et de l'expérience humaine. Au sein du Groupe Nukleo, nous donnons à cette vision une portée élargie pour transformer chaque défi numérique en un levier de performance concret."
+      }
+    },
     "moreInfo": "Plus d'infos",
     "audaciousLine1": "Un seul partenaire.",
     "audaciousLine2": "Une intelligence intégrée.",

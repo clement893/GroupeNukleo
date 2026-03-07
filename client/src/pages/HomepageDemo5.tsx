@@ -8,6 +8,7 @@ import { SplitCTAButton } from '@/components/SplitCTAButton';
 import { WeatherWidget } from '@/components/WeatherWidget';
 import PageLayout from '@/components/PageLayout';
 import CompanyBlocksSection from '@/components/CompanyBlocksSection';
+import LeadersSection from '@/components/LeadersSection';
 import { trpc } from '@/lib/trpc';
 
 // ─── Constantes ──────────────────────────────────────────────────────────────
@@ -713,6 +714,11 @@ export default function HomepageDemo5() {
             SECTION 4 — DEUX BLOCS ENTREPRISES (Nukleo, Rouge On Blue)
         ════════════════════════════════════════════════════════════════════ */}
         <CompanyBlocksSection />
+
+        {/* ════════════════════════════════════════════════════════════════════
+            SECTION 5 — CARTES LEADERS (Clément Roy, Lionel Pardin)
+        ════════════════════════════════════════════════════════════════════ */}
+        <LeadersSection />
 
         </div>
       </div>
