@@ -181,22 +181,23 @@ export default function About() {
             alignItems: 'center',
             marginBottom: 'clamp(4rem, 8vh, 6rem)',
           }}>
-            {/* Photo ambiance */}
+            {/* Photo ambiance N&B */}
             <div style={{
               borderRadius: '1.25rem',
               overflow: 'hidden',
               aspectRatio: '4/3',
-              background: '#e5e5e5',
+              background: '#1a1a1a',
             }}>
               <img
-                src="/demo/dept-agency.jpg"
-                alt="Équipe Groupe Nukleo"
+                src="/about-ambiance.jpg"
+                alt="Espace de travail Groupe Nukleo"
                 style={{
                   width: '100%',
                   height: '100%',
                   objectFit: 'cover',
-                  objectPosition: 'center',
+                  objectPosition: 'center top',
                   display: 'block',
+                  filter: 'grayscale(100%) contrast(1.05)',
                 }}
               />
             </div>
