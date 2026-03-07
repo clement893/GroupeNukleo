@@ -1,8 +1,8 @@
 import { useLanguage } from '@/contexts/LanguageContext';
 
 const COMPANIES = [
-  { name: 'nukleo,', url: 'https://nukleo.com', ariaLabel: 'Nukleo — visiter le site', logo: '/demo/nukleo-logo-block.png' },
-  { name: 'Rouge On Blue', url: 'https://rougeonblue.com', ariaLabel: 'Rouge On Blue — visiter le site', logo: '/demo/rob-logo-block.png' },
+  { name: 'nukleo,', url: 'https://nukleo.com', ariaLabel: 'Nukleo — visiter le site', logo: '/demo/NukleoLogo.svg' },
+  { name: 'Rouge On Blue', url: 'https://rougeonblue.com', ariaLabel: 'Rouge On Blue — visiter le site', logo: '/demo/RobLogo.svg' },
 ] as const;
 
 /**
