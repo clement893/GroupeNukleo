@@ -225,7 +225,7 @@
       "subheadline": "The birth of the Nukleo Group",
       "paragraph1": "Nukleo and Rouge On Blue combine their complementary expertise: digital strategy, creation and technology on one side; audiovisual production, content and immersive experiences on the other.",
       "paragraph2": "Together, we offer an integrated offering to support organizations in their digital transformation. Montreal and Halifax: two cities, one shared ambition.",
-      "cta": "Discover more"
+      "cta": "Discover the company"
     },
     "twoCities": {
       "title": "2 cities to be closer to you.",
@@ -234,7 +234,7 @@
     },
     "companyBlocks": {
       "ariaLabel": "Our companies",
-      "visitSite": "Visit the site",
+      "visitSite": "Visit the site >",
       "paragraph": "A shared vision, a complementary direction. The Nukleo Group is driven by a synergy of passionate leaders, combining technological vision and strategic depth."
     },
     "leaders": {
@@ -251,9 +251,7 @@
       }
     },
     "moreInfo": "More info",
-    "audaciousLine1": "One partner.",
-    "audaciousLine2": "Integrated intelligence.",
-    "audaciousLine3": "Measurable results.",
+    "audaciousTagline": "Rouge on Blue & Nukleo, digital transformation at your fingertips.",
     "audaciousParagraph": "Digital excellence shouldn't be reserved for large enterprises.",
     "team": {
       "sectionLabel": "OUR TEAM",

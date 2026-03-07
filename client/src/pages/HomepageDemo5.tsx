@@ -381,6 +381,28 @@ export default function HomepageDemo5() {
           }}>
             {t('home.heroDescription')}
           </p>
+          <div
+            style={{
+              width: '100%',
+              marginTop: 'clamp(2rem, 4vw, 3rem)',
+              borderRadius: 0,
+              overflow: 'hidden',
+              aspectRatio: '21/9',
+              minHeight: 280,
+              background: 'linear-gradient(135deg, #6B1817 0%, #523DCB 100%)',
+            }}
+          >
+            <img
+              src="/demo/agency-hero-cover.png"
+              alt=""
+              style={{
+                width: '100%',
+                height: '100%',
+                objectFit: 'cover',
+                objectPosition: 'center',
+              }}
+            />
+          </div>
         </section>
 
         {/* ════════════════════════════════════════════════════════════════════
@@ -408,29 +430,17 @@ export default function HomepageDemo5() {
             fontSize: 'clamp(2.25rem, 5vw, 3.75rem)',
             lineHeight: 1.1,
             letterSpacing: '-0.03em',
-            margin: '0 0 1.5rem 0',
+            margin: '0 0 2.5rem 0',
             display: 'inline-block',
             width: 'fit-content',
+            maxWidth: '90%',
             background: 'linear-gradient(to right, #6B1817, #523DCB)',
             WebkitBackgroundClip: 'text',
             WebkitTextFillColor: 'transparent',
             backgroundClip: 'text',
           }}>
-            {t('home.audaciousLine1')}<br />
-            {t('home.audaciousLine2')}<br />
-            {t('home.audaciousLine3')}
+            {t('home.audaciousTagline')}
           </h2>
-          <p style={{
-            fontSize: 'clamp(1.1875rem, 1.875vw, 1.375rem)',
-            color: '#374151',
-            lineHeight: 1.5,
-            maxWidth: 520,
-            margin: '0 auto 2.5rem',
-            fontFamily: "'Neue Haas Unica Pro', sans-serif",
-            fontWeight: 400,
-          }}>
-            {t('home.audaciousParagraph')}
-          </p>
           <SplitCTAButton href="#" label={t('home.performNow')} ariaLabel={t('home.performNow')} />
         </section>
 

@@ -18,7 +18,7 @@ export default function UnionSection() {
       style={{
         padding: 'clamp(4rem, 8vw, 6rem) 3%',
         marginBottom: 5 * 16,
-        background: '#F5F3EF',
+        background: 'transparent',
       }}
     >
       <div
@@ -50,7 +50,7 @@ export default function UnionSection() {
         </div>
 
         {/* Texte droite */}
-        <div style={{ minWidth: 0 }}>
+        <div style={{ minWidth: 0, background: '#fff', padding: 'clamp(2rem, 4vw, 3rem)', borderRadius: 16 }}>
           <h2
             style={{
               fontFamily: "'Neue Haas Unica Pro', sans-serif",

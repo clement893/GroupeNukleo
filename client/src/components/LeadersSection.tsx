@@ -83,7 +83,7 @@ export default function LeadersSection() {
           >
             <div
               style={{
-                borderRadius: 12,
+                borderRadius: '50%',
                 overflow: 'hidden',
                 aspectRatio: '1',
                 minHeight: 0,

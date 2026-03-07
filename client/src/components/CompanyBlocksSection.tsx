@@ -1,4 +1,3 @@
-import { ArrowUpRight } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
 
 const COMPANIES = [
@@ -12,7 +11,7 @@ const COMPANIES = [
  */
 export default function CompanyBlocksSection() {
   const { t } = useLanguage();
-  const visitLabel = t('home.companyBlocks.visitSite') || 'Visitez le site';
+  const visitLabel = t('home.companyBlocks.visitSite') || 'Visiter le site >';
 
   return (
     <section
@@ -91,7 +90,6 @@ export default function CompanyBlocksSection() {
                 className="group-hover:opacity-95"
               >
                 {visitLabel}
-                <ArrowUpRight className="w-4 h-4" strokeWidth={2.5} />
               </span>
             </article>
           </a>
