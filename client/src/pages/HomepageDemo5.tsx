@@ -459,7 +459,7 @@ export default function HomepageDemo5() {
           flexWrap: 'wrap',
           alignItems: 'flex-start',
           justifyContent: 'flex-start',
-          gap: 'clamp(2rem, 6vw, 5rem)',
+          gap: 'clamp(2rem, 8vw, 7rem)',
           background: 'transparent',
           boxSizing: 'border-box',
         }}>
@@ -492,8 +492,8 @@ export default function HomepageDemo5() {
             margin: 0,
             marginLeft: 'auto',
             maxWidth: 'clamp(280px, 32ch, 420px)',
-            alignSelf: 'center',
-            textAlign: 'right',
+            alignSelf: 'flex-start',
+            textAlign: 'left',
           }}>
             {t('home.heroDescription')}
           </p>
