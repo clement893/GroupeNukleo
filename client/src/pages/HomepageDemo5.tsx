@@ -522,8 +522,10 @@ export default function HomepageDemo5() {
             lineHeight: 1.6,
             color: '#374151',
             margin: 0,
+            marginLeft: 'auto',
             maxWidth: 'clamp(280px, 32ch, 420px)',
             alignSelf: 'center',
+            textAlign: 'right',
           }}>
             {t('home.heroDescription')}
           </p>
