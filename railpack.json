@@ -1,0 +1,14 @@
+{
+  "$schema": "https://schema.railpack.com",
+  "caches": {
+    "pnpm-store": {
+      "directory": "/root/.local/share/pnpm/store",
+      "type": "shared"
+    }
+  },
+  "steps": {
+    "install": {
+      "caches": ["pnpm-store"]
+    }
+  }
+}
