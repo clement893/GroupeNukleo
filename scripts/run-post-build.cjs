@@ -30,7 +30,6 @@ async function main() {
   await Promise.all([
     run("node", ["scripts/copy-locales-to-dist.cjs"], { name: "copy-locales" }),
     run("node", ["scripts/generate-locale-sections.cjs"], { name: "generate-locale-sections" }),
-    run("pnpm", ["exec", "tsx", "scripts/generate-fallback-projects.ts"], { name: "generate-fallback-projects" }),
   ]);
   await run("pnpm", ["verify:build"], { name: "verify:build" });
   console.log(`\n[run-post-build] All steps done in ${((Date.now() - start) / 1000).toFixed(1)}s`);

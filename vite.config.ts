@@ -61,6 +61,7 @@ export default defineConfig({
     // Optimize chunk size for mobile
     chunkSizeWarningLimit: 400, // Further reduced
     rollupOptions: {
+      maxParallelFileOps: 20,
       output: {
         // Optimize chunk names for better caching
         chunkFileNames: 'assets/js/[name]-[hash].js',
