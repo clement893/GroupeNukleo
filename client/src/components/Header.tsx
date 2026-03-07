@@ -108,25 +108,20 @@ function Header() {
           }}
         >
           <div className="flex items-center justify-between gap-2 sm:gap-4">
-            {/* Logo Groupe nukleo — coin haut gauche, texte sur deux lignes */}
+            {/* Logo Groupe nukleo — coin haut gauche (PNG fond transparent) */}
             <Link
               href={getLocalizedPath('/')}
-              className="inline-flex flex-col cursor-pointer touch-manipulation leading-tight"
+              className="inline-flex items-center cursor-pointer touch-manipulation"
               aria-label={t('alt.logo') || 'Groupe Nukleo - Accueil'}
-              style={{ fontFamily: "'Neue Haas Unica Pro', sans-serif" }}
             >
-              <span className="text-gray-800 font-medium" style={{ fontSize: 'clamp(0.75rem, 2vw, 0.95rem)' }}>
-                Le groupe
-              </span>
-              <span
-                className="font-semibold bg-clip-text text-transparent"
+              <img
+                src="/demo/logo-groupe-nukleo-header.png"
+                alt="Groupe Nukleo"
+                className="w-auto object-contain object-left"
                 style={{
-                  fontSize: 'clamp(1rem, 3vw, 1.5rem)',
-                  backgroundImage: 'linear-gradient(90deg, #c41e3a 0%, #6b2d5c 100%)',
+                  height: 'clamp(2.25rem, 6vw, 3.75rem)',
                 }}
-              >
-                Nukleo
-              </span>
+              />
             </Link>
 
             {/* Boutons Nukleo et Rouge on Blue — liens externes */}
