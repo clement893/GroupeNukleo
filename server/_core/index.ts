@@ -559,7 +559,7 @@ async function startServer() {
   });
 
   const pressReleaseFileFilter = (_req: express.Request, file: Express.Multer.File, cb: multer.FileFilterCallback) => {
-    const ok = file.mimetype === "application/pdf";
+    const ok = /^application\/(pdf|x-pdf)$/i.test(file.mimetype) || /\.pdf$/i.test(file.originalname);
     cb(ok ? null : new Error("Format non supporté. Utilisez un fichier PDF."), ok);
   };
   const pressReleaseLimits = { fileSize: 20 * 1024 * 1024 };

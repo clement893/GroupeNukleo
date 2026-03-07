@@ -6,7 +6,7 @@ import { Upload, FileText, Loader2, ExternalLink } from "lucide-react";
 import { toast } from "sonner";
 import "@/styles/admin.css";
 
-const ACCEPT_PDF = "application/pdf";
+const ACCEPT_PDF = "application/pdf,application/x-pdf,.pdf";
 
 export default function AdminPressRelease() {
   const [pdfPath, setPdfPath] = useState<string | null>(null);
@@ -36,7 +36,8 @@ export default function AdminPressRelease() {
     e.preventDefault();
     setDragOver(false);
     const file = e.dataTransfer.files[0];
-    if (file && file.type === "application/pdf") {
+    const isPdf = file && (file.type === "application/pdf" || file.type === "application/x-pdf" || /\.pdf$/i.test(file.name));
+    if (isPdf) {
       setSelectedFile(file);
     } else {
       toast.error("Déposez un fichier PDF");
