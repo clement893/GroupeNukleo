@@ -91,6 +91,9 @@ export function configureGoogleAuth(): boolean {
 
 // Middleware to check if user is authenticated admin
 export function requireAdminAuth(req: any, res: any, next: any) {
+  const authHeader = req.headers?.authorization;
+  const hasCookie = !!req.cookies?.["admin_session"];
+
   // Check Passport session (Google OAuth)
   if (req.isAuthenticated && req.isAuthenticated()) {
     return next();
@@ -98,22 +101,27 @@ export function requireAdminAuth(req: any, res: any, next: any) {
 
   const ADMIN_JWT_SECRET = (process.env.JWT_SECRET ?? "") + "-admin";
   if (!ADMIN_JWT_SECRET || ADMIN_JWT_SECRET === "-admin") {
-    console.log(`[AdminAuth] Unauthorized access attempt to ${req.path}`);
+    console.log(`[AdminAuth] Unauthorized ${req.path}: JWT_SECRET not configured`);
     return res.status(401).json({ error: "Unauthorized - Admin login required" });
   }
 
   // Check Authorization: Bearer <upload-token> (bypasses cookie issues on some proxies)
-  const authHeader = req.headers?.authorization;
   if (authHeader?.startsWith("Bearer ")) {
     const token = authHeader.slice(7);
     try {
       const jwt = require("jsonwebtoken");
       const decoded = jwt.verify(token, ADMIN_JWT_SECRET) as { type?: string; id?: number };
       if (decoded?.id && (decoded.type === "upload" || !decoded.type)) {
+        console.log(`[AdminAuth] OK ${req.path}: Bearer token (id=${decoded.id})`);
         return next();
       }
-    } catch {
-      // Invalid token, continue to cookie check
+      console.log(`[AdminAuth] Reject ${req.path}: Bearer decoded but invalid (id=${decoded?.id}, type=${decoded?.type})`);
+    } catch (err) {
+      console.log(`[AdminAuth] Reject ${req.path}: Bearer verify failed`, (err as Error)?.message);
+    }
+  } else {
+    if (req.path?.includes("upload")) {
+      console.log(`[AdminAuth] Reject ${req.path}: no Bearer header (hasAuthHeader=${!!authHeader}, hasCookie=${hasCookie})`);
     }
   }
 
@@ -133,6 +141,6 @@ export function requireAdminAuth(req: any, res: any, next: any) {
     }
   }
 
-  console.log(`[AdminAuth] Unauthorized access attempt to ${req.path}`);
+  console.log(`[AdminAuth] Unauthorized ${req.path}: all checks failed (hasAuthHeader=${!!authHeader}, hasCookie=${!!adminToken})`);
   res.status(401).json({ error: "Unauthorized - Admin login required" });
 }
