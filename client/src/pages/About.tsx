@@ -42,45 +42,66 @@ export default function About() {
           paddingRight: '3%',
           paddingBottom: 0,
         }}>
+          {/* Media query inline pour le flex row */}
+          <style>{`
+            .about-hero-row {
+              display: flex;
+              flex-direction: column;
+              gap: 1.5rem;
+              margin-bottom: clamp(2rem, 4vw, 3rem);
+            }
+            @media (min-width: 768px) {
+              .about-hero-row {
+                flex-direction: row;
+                align-items: flex-end;
+                justify-content: space-between;
+                gap: 2rem;
+              }
+              .about-hero-tagline {
+                text-align: right !important;
+                max-width: 38ch;
+                padding-bottom: 0.75rem;
+              }
+            }
+            .about-hero-title {
+              font-family: 'Neue Haas Unica Pro', sans-serif !important;
+              font-weight: 700 !important;
+              font-size: clamp(3.5rem, 9vw, 8rem) !important;
+              line-height: 1.0 !important;
+              letter-spacing: -0.04em !important;
+              margin: 0 !important;
+              flex-shrink: 0;
+              background: linear-gradient(90deg, #6B1817 0%, #7B1D3A 35%, #523DCB 100%) !important;
+              -webkit-background-clip: text !important;
+              background-clip: text !important;
+              color: transparent !important;
+              -webkit-text-fill-color: transparent !important;
+            }
+            .about-hero-title-sub {
+              display: block;
+              font-weight: 600 !important;
+              font-size: 0.38em !important;
+              letter-spacing: -0.01em !important;
+              line-height: 1.3 !important;
+            }
+          `}</style>
+
           {/* Titre + tagline */}
-          <div style={{
-            display: 'flex',
-            flexDirection: 'row',
-            alignItems: 'flex-end',
-            justifyContent: 'space-between',
-            gap: '2rem',
-            marginBottom: 'clamp(2rem, 4vw, 3rem)',
-          }}>
+          <div className="about-hero-row">
             {/* Titre dégradé */}
-            <h1 style={{
-              fontFamily: "'Neue Haas Unica Pro', sans-serif",
-              fontWeight: 700,
-              fontSize: 'clamp(3rem, 8vw, 7.5rem)',
-              lineHeight: 1.0,
-              letterSpacing: '-0.04em',
-              margin: 0,
-              flexShrink: 0,
-              background: GRAD,
-              WebkitBackgroundClip: 'text',
-              backgroundClip: 'text',
-              color: 'transparent',
-              WebkitTextFillColor: 'transparent',
-            }}>
-              <span style={{ display: 'block', fontWeight: 600, fontSize: '0.42em', letterSpacing: '-0.02em' }}>Le Groupe</span>
+            <h1 className="about-hero-title">
+              <span className="about-hero-title-sub">Le Groupe</span>
               Nukleo
             </h1>
 
             {/* Tagline droite */}
-            <p style={{
+            <p className="about-hero-tagline" style={{
               fontFamily: "'Neue Haas Unica Pro', sans-serif",
               fontWeight: 400,
-              fontSize: 'clamp(0.85rem, 1.15vw, 1rem)',
-              lineHeight: 1.6,
+              fontSize: 'clamp(0.85rem, 1.1vw, 1rem)',
+              lineHeight: 1.65,
               color: DARK,
               margin: 0,
-              maxWidth: '38ch',
-              textAlign: 'right',
-              paddingBottom: '0.5rem',
             }}>
               Partenaire de votre évolution numérique, Nukleo intègre l'innovation au cœur de vos supports pour anticiper le futur.
             </p>
@@ -91,7 +112,7 @@ export default function About() {
             width: '100%',
             borderRadius: '1.5rem 1.5rem 0 0',
             overflow: 'hidden',
-            background: 'linear-gradient(to right, #8B1538, #523DCB)',
+            background: 'linear-gradient(135deg, #8B1538 0%, #6B1D5A 40%, #523DCB 100%)',
             aspectRatio: '16/7',
             position: 'relative',
           }}>
@@ -103,7 +124,7 @@ export default function About() {
                 width: '100%',
                 height: '100%',
                 objectFit: 'cover',
-                objectPosition: 'center 30%',
+                objectPosition: 'center 25%',
                 display: 'block',
               }}
             />
