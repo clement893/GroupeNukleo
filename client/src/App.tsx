@@ -1,5 +1,5 @@
 import { lazy, Suspense } from "react";
-import { Route, Switch, useLocation, Redirect } from "wouter";
+import { Route, Switch, Redirect } from "wouter";
 import EnhancedErrorBoundary from "./components/EnhancedErrorBoundary";
 import PageLoader from "./components/PageLoader";
 
@@ -18,35 +18,6 @@ import { usePageTransition } from "./hooks/usePageTransition";
 import { usePageBackground } from "./hooks/usePageBackground";
 import { usePrefetch } from "./hooks/usePrefetch";
 import { lazyWithRetry } from "./lib/lazyWithRetry";
-
-// Lazy load UniversalLEO
-const UniversalLEO = lazy(() => import("./components/UniversalLEO"));
-
-// Helper function to determine page context from URL (only home remains for public site)
-function getPageContext(pathname: string): 'home' | 'default' {
-  const path = pathname.replace(/^\/(fr|en)/, '') || '/';
-  if (path.startsWith('/admin')) return 'default';
-  if (path === '/' || path === '') return 'home';
-  return 'default';
-}
-
-// Global LEO component that detects page context - disabled on mobile for performance
-import { useIsMobile } from './hooks/useIsMobile';
-
-function GlobalLEO() {
-  const [location] = useLocation();
-  const isMobile = useIsMobile(768);
-  
-  if (isMobile) return null;
-  
-  const pageContext = getPageContext(location);
-  
-  return (
-    <Suspense fallback={null}>
-      <UniversalLEO pageContext={pageContext} />
-    </Suspense>
-  );
-}
 
 import NotFound404 from "@/pages/NotFound404";
 
@@ -81,7 +52,6 @@ function App() {
           <GoogleAnalytics />
           <AnalyticsLoader />
           <FloatingLanguageToggle />
-          <GlobalLEO />
           <CookieConsent />
           <Suspense fallback={null}>
             <Switch>
