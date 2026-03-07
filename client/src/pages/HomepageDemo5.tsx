@@ -428,18 +428,10 @@ function Triptych({ projects: projectsProp }: { projects?: HomeProjectItem[] }) 
 }
 
 // ─── Composant principal ─────────────────────────────────────────────────────
-// Les verbes IA sont chargés depuis les fichiers de traduction (home.iaVerbs)
 
 export default function HomepageDemo5() {
   const getLocalizedPath = useLocalizedPath();
   const { t, language } = useLanguage();
-  const iaVerbs: string[] = (t('home.iaVerbs', { returnObjects: true }) as string[]) || [];
-  const [onIaIndex, setOnIaIndex] = useState(0);
-
-  useEffect(() => {
-    const id = setInterval(() => setOnIaIndex(i => (i + 1) % (iaVerbs.length || 5)), 3200);
-    return () => clearInterval(id);
-  }, []);
 
   const NAV_LINKS = [
     { label: t('nav.services'), href: getLocalizedPath('/') },
@@ -746,91 +738,6 @@ export default function HomepageDemo5() {
         <div style={{ marginTop: 0, marginBottom: 5 * 16 }}>
           <DoubleLogoCarousel title={t('home.trustedBy')} />
         </div>
-
-        {/* ════════════════════════════════════════════════════════════════════
-            SECTION 3 — ON … L'IA (fond #EFE8E8, glass pill + dégradé texte)
-            Ratio : visuel 45% | texte 55%
-        ════════════════════════════════════════════════════════════════════ */}
-        <section style={{ padding: '5rem 3%', marginBottom: 5 * 16, background: '#EFE8E8', position: 'relative' }}>
-          {/* Fond léger derrière le texte pour que le backdrop-filter du pill soit visible */}
-          <div
-            aria-hidden
-            style={{
-              position: 'absolute',
-              top: 0,
-              right: 0,
-              width: '55%',
-              height: '100%',
-              background: 'radial-gradient(ellipse 80% 70% at 70% 50%, rgba(200,190,220,0.32) 0%, transparent 60%)',
-              pointerEvents: 'none',
-            }}
-          />
-          <div className="grid grid-cols-1 lg:grid-cols-[9fr_11fr] gap-4 lg:gap-6 items-center" style={{ isolation: 'isolate', position: 'relative', zIndex: 1 }}>
-            {/* Gauche (~45%) : vidéo On maîtrise l'IA */}
-            <div style={{
-              borderRadius: 28,
-              overflow: 'hidden',
-              aspectRatio: '4/3',
-              position: 'relative',
-            }}>
-              <video
-                src="/demo/vido-balles.mp4"
-                autoPlay
-                loop
-                muted
-                playsInline
-                style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-                aria-label={t('home.iaAriaLabel')}
-              />
-            </div>
-            {/* Droite (~55%) : phrase + "On [verbe] l'IA" — centrés */}
-            <div
-              style={{
-                display: 'flex',
-                flexDirection: 'column',
-                alignItems: 'center',
-                justifyContent: 'center',
-                gap: '1.25rem',
-                minHeight: 200,
-                maxWidth: 520,
-                margin: '0 auto',
-                textAlign: 'center',
-              }}
-            >
-              <p
-                style={{
-                  fontSize: 'clamp(1.1875rem, 1.875vw, 1.375rem)',
-                  color: '#374151',
-                  lineHeight: 1.5,
-                  margin: 0,
-                  fontFamily: "'Neue Haas Unica Pro', sans-serif",
-                  fontWeight: 400,
-                }}
-              >
-                {t('home.iaTagline')}
-              </p>
-              <div className="glass-heading-panel" style={{ textAlign: 'center' }}>
-                <span
-                  style={{
-                    fontFamily: "'Neue Haas Unica Pro', sans-serif",
-                    fontWeight: 700,
-                    fontSize: 'clamp(2.2rem, 4.4vw, 3rem)',
-                    lineHeight: 1.1,
-                    letterSpacing: '-0.02em',
-                    background: 'linear-gradient(to right, #6B1817, #523DCB)',
-                    WebkitBackgroundClip: 'text',
-                    WebkitTextFillColor: 'transparent',
-                    backgroundClip: 'text',
-                  }}
-                >
-                  {language === 'en'
-                    ? `${t('home.iaVerbPrefix')} ${iaVerbs[onIaIndex] || ''} ${t('home.iaVerbSuffix')}`
-                    : `${t('home.iaVerbPrefix')} ${iaVerbs[onIaIndex] || ''} ${t('home.iaVerbSuffix')}`}
-                </span>
-              </div>
-            </div>
-          </div>
-        </section>
 
         {/* ════════════════════════════════════════════════════════════════════
             SECTION 4 — SERVICES (4 cartes : Lab tech, Studio, Agence, Transition)
