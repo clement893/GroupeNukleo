@@ -1,16 +1,19 @@
 /**
- * Cloudflare R2 storage - S3-compatible object storage.
- * Used for union video, press release PDF, and other media uploads.
+ * Cloudflare R2 storage - S3-compatible object storage (private bucket).
+ * Uses presigned URLs for temporary access — no R2_PUBLIC_URL required.
  *
  * Required env vars when R2 is enabled:
  * - R2_ACCOUNT_ID
  * - R2_ACCESS_KEY_ID
  * - R2_SECRET_ACCESS_KEY
  * - R2_BUCKET_NAME
- * - R2_PUBLIC_URL (base URL for public access, e.g. https://pub-xxx.r2.dev or custom domain)
+ *
+ * CORS: Configure CORS on the R2 bucket to allow your site origin (e.g. https://nukleo.digital)
+ * so the browser can fetch images/videos from presigned URLs.
  */
 
-import { S3Client, PutObjectCommand, HeadObjectCommand } from "@aws-sdk/client-s3";
+import { S3Client, PutObjectCommand, HeadObjectCommand, GetObjectCommand } from "@aws-sdk/client-s3";
+import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
 
 export const R2_KEYS = {
   UNION_VIDEO: "media/union-video",
@@ -22,9 +25,8 @@ function getR2Config() {
   const accessKeyId = process.env.R2_ACCESS_KEY_ID;
   const secretAccessKey = process.env.R2_SECRET_ACCESS_KEY;
   const bucketName = process.env.R2_BUCKET_NAME;
-  const publicUrl = process.env.R2_PUBLIC_URL?.replace(/\/$/, ""); // trim trailing slash
 
-  if (!accountId || !accessKeyId || !secretAccessKey || !bucketName || !publicUrl) {
+  if (!accountId || !accessKeyId || !secretAccessKey || !bucketName) {
     return null;
   }
 
@@ -33,7 +35,6 @@ function getR2Config() {
     accessKeyId,
     secretAccessKey,
     bucketName,
-    publicUrl,
   };
 }
 
@@ -62,7 +63,7 @@ export function isR2Configured(): boolean {
   return getR2Config() !== null;
 }
 
-/** Upload a buffer to R2 and return the public URL */
+/** Upload a buffer to R2 and return the object key (store in DB, use getPresignedUrl to serve) */
 export async function uploadToR2(
   key: string,
   buffer: Buffer,
@@ -72,7 +73,7 @@ export async function uploadToR2(
   const client = getR2Client();
 
   if (!config || !client) {
-    throw new Error("R2 is not configured. Set R2_ACCOUNT_ID, R2_ACCESS_KEY_ID, R2_SECRET_ACCESS_KEY, R2_BUCKET_NAME, R2_PUBLIC_URL.");
+    throw new Error("R2 is not configured. Set R2_ACCOUNT_ID, R2_ACCESS_KEY_ID, R2_SECRET_ACCESS_KEY, R2_BUCKET_NAME.");
   }
 
   await client.send(
@@ -84,7 +85,23 @@ export async function uploadToR2(
     })
   );
 
-  return `${config.publicUrl}/${key}`;
+  return key;
+}
+
+/** Generate a presigned URL for private R2 objects (expires in 1 hour by default) */
+export async function getPresignedUrl(key: string, expiresIn = 3600): Promise<string> {
+  const config = getR2Config();
+  const client = getR2Client();
+
+  if (!config || !client) {
+    throw new Error("R2 is not configured.");
+  }
+
+  return getSignedUrl(
+    client,
+    new GetObjectCommand({ Bucket: config.bucketName, Key: key }),
+    { expiresIn }
+  );
 }
 
 /** Check if an object exists in R2 */
@@ -107,9 +124,3 @@ export async function existsInR2(key: string): Promise<boolean> {
   }
 }
 
-/** Get the public URL for an R2 object (does not check existence) */
-export function getR2PublicUrl(key: string): string {
-  const config = getR2Config();
-  if (!config) throw new Error("R2 is not configured");
-  return `${config.publicUrl}/${key}`;
-}

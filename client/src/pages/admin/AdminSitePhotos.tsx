@@ -137,7 +137,7 @@ export default function AdminSitePhotos() {
           <div className="flex items-center gap-3 p-4 rounded-lg bg-amber-900/30 border border-amber-700/50 text-amber-200">
             <AlertCircle className="w-5 h-5 shrink-0" />
             <p className="text-sm">
-              R2 n&apos;est pas configuré. Les photos par défaut (fichiers statiques) sont affichées. Définissez R2_BUCKET, R2_ACCESS_KEY_ID, R2_SECRET_ACCESS_KEY et R2_PUBLIC_URL pour activer l&apos;upload.
+              R2 n&apos;est pas configuré. Les photos par défaut (fichiers statiques) sont affichées. Définissez R2_ACCOUNT_ID, R2_ACCESS_KEY_ID, R2_SECRET_ACCESS_KEY et R2_BUCKET_NAME pour activer l&apos;upload.
             </p>
           </div>
         )}

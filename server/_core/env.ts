@@ -19,7 +19,6 @@ export const ENV = {
   r2AccessKeyId: process.env.R2_ACCESS_KEY_ID ?? "",
   r2SecretAccessKey: process.env.R2_SECRET_ACCESS_KEY ?? "",
   r2BucketName: process.env.R2_BUCKET_NAME ?? "",
-  r2PublicUrl: process.env.R2_PUBLIC_URL ?? "",
   internalPlatformUrl: process.env.INTERNAL_PLATFORM_URL ?? "", // URL de la plateforme interne pour récupérer les témoignages
   internalPlatformApiKey: process.env.INTERNAL_PLATFORM_API_KEY ?? "", // Clé API optionnelle pour l'authentification
 };

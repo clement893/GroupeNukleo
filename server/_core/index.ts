@@ -163,6 +163,7 @@ async function startServer() {
         ],
         styleSrc: ["'self'", "'unsafe-inline'", "https://fonts.googleapis.com"],
         imgSrc: ["'self'", "data:", "https:", "blob:"],
+        mediaSrc: ["'self'", "https:", "blob:"],
         fontSrc: ["'self'", "https://fonts.gstatic.com", "data:"],
         connectSrc: [
           "'self'", 
@@ -684,7 +685,7 @@ async function startServer() {
         return res.status(400).json({ error: "Aucun fichier image" });
       }
       if (!isR2Configured()) {
-        return res.status(400).json({ error: "R2 non configuré. Définissez les variables R2_* pour activer les photos." });
+        return res.status(400).json({ error: "R2 non configuré. Définissez R2_ACCOUNT_ID, R2_ACCESS_KEY_ID, R2_SECRET_ACCESS_KEY, R2_BUCKET_NAME." });
       }
       try {
         const ext = /\.(jpg|jpeg|png|gif|webp|svg)$/i.test(req.file.originalname)

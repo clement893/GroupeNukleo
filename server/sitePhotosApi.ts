@@ -7,7 +7,7 @@
 import { getDb } from "./db";
 import { siteMedia } from "../drizzle/schema";
 import { eq, inArray } from "drizzle-orm";
-import { isR2Configured, uploadToR2 } from "./r2Storage";
+import { isR2Configured, uploadToR2, getPresignedUrl } from "./r2Storage";
 
 export const SITE_PHOTO_KEYS = {
   HERO_COVER: "hero_cover",
@@ -47,7 +47,7 @@ export const SITE_PHOTO_LABELS: Record<string, string> = {
 
 const ALL_KEYS = Object.values(SITE_PHOTO_KEYS);
 
-/** Get URL for a single photo key */
+/** Get URL for a single photo key (presigned if R2 private) */
 export async function getSitePhotoUrl(key: string): Promise<string> {
   if (!isR2Configured()) {
     return SITE_PHOTO_FALLBACKS[key] ?? "";
@@ -56,14 +56,17 @@ export async function getSitePhotoUrl(key: string): Promise<string> {
   if (!db) return SITE_PHOTO_FALLBACKS[key] ?? "";
 
   const row = await db.select().from(siteMedia).where(eq(siteMedia.key, key)).limit(1);
-  return row[0]?.url ?? SITE_PHOTO_FALLBACKS[key] ?? "";
+  const stored = row[0]?.url;
+  if (!stored) return SITE_PHOTO_FALLBACKS[key] ?? "";
+  if (stored.startsWith("http")) return stored;
+  return getPresignedUrl(stored);
 }
 
-/** Get all site photo URLs (for admin preview + client) */
+/** Get all site photo URLs (for admin preview + client, presigned if R2 private) */
 export async function getAllSitePhotoUrls(): Promise<Record<string, string>> {
   const result: Record<string, string> = {};
-  for (const key of ALL_KEYS) {
-    result[key] = SITE_PHOTO_FALLBACKS[key] ?? "";
+  for (const k of ALL_KEYS) {
+    result[k] = SITE_PHOTO_FALLBACKS[k] ?? "";
   }
 
   if (!isR2Configured()) return result;
@@ -73,7 +76,8 @@ export async function getAllSitePhotoUrls(): Promise<Record<string, string>> {
 
   const rows = await db.select().from(siteMedia).where(inArray(siteMedia.key, ALL_KEYS));
   for (const row of rows) {
-    result[row.key] = row.url;
+    const stored = row.url;
+    result[row.key] = stored.startsWith("http") ? stored : await getPresignedUrl(stored);
   }
   return result;
 }
@@ -89,18 +93,18 @@ export async function uploadSitePhotoToR2(
 
   const safeKey = key.replace(/[^a-z0-9_]/gi, "_");
   const r2Key = `media/site-photos/${safeKey}${ext}`;
-  const url = await uploadToR2(r2Key, buffer, contentType);
+  await uploadToR2(r2Key, buffer, contentType);
 
   const db = await getDb();
   if (!db) throw new Error("Database not available");
 
   await db
     .insert(siteMedia)
-    .values({ key, url })
+    .values({ key, url: r2Key })
     .onConflictDoUpdate({
       target: siteMedia.key,
-      set: { url, updatedAt: new Date() },
+      set: { url: r2Key, updatedAt: new Date() },
     });
 
-  return url;
+  return getPresignedUrl(r2Key);
 }
