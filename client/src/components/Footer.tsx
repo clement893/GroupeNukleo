@@ -17,16 +17,15 @@ function Footer() {
       className="relative w-full"
       style={{
         background: '#EFE8E8',
-        paddingTop: 'clamp(1.5rem, 4vw, 3rem)',
-        paddingBottom: 'clamp(2rem, 4vw, 3rem)',
+        padding: 'clamp(1.5rem, 4vw, 3rem) 3% clamp(2rem, 4vw, 3rem)',
         fontFamily: "'Neue Haas Unica Pro', sans-serif",
         fontWeight: 400,
       }}
       aria-label={t('footer.ariaLabel') || 'Pied de page Nukleo Digital'}
     >
-      {/* Boîte noire unique — logo gauche, contact droite */}
+      {/* Boîte noire unique — logo gauche, contact droite (coins arrondis, centré) */}
       <div
-        className="rounded-none w-full grid grid-cols-1 md:grid-cols-[1fr_auto] gap-8 md:gap-12 items-start"
+        className="rounded-2xl w-full max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-[1fr_auto] gap-8 md:gap-12 items-start"
         style={{
           background: FOOTER_BG,
           padding: 'clamp(2rem, 5vw, 3.5rem) clamp(2rem, 4vw, 3rem)',
@@ -80,7 +79,8 @@ function Footer() {
               href="https://www.linkedin.com/company/nukleo-group"
               target="_blank"
               rel="noopener noreferrer"
-              className="mt-4 md:mt-0 inline-flex items-center justify-center w-10 h-10 rounded bg-white text-black flex-shrink-0 hover:opacity-90 transition-opacity"
+              className="mt-4 md:mt-0 inline-flex items-center justify-center w-10 h-10 rounded-lg border border-white/40 text-white flex-shrink-0 hover:opacity-90 transition-opacity"
+              style={{ color: FOOTER_TEXT }}
               aria-label="LinkedIn - Nukleo"
             >
               <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">

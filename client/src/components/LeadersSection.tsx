@@ -39,12 +39,18 @@ export default function LeadersSection() {
         <p
           style={{
             fontFamily: "'Neue Haas Unica Pro', sans-serif",
-            fontWeight: 700,
-            fontSize: 'clamp(1.25rem, 2.8vw, 1.75rem)',
-            lineHeight: 1.45,
-            color: 'rgb(139, 69, 79)',
-            textAlign: 'left',
+            fontWeight: 400,
+            fontSize: 'clamp(2.25rem, 5vw, 3.75rem)',
+            lineHeight: 1.1,
+            letterSpacing: '-0.03em',
             margin: 0,
+            display: 'inline-block',
+            width: 'fit-content',
+            maxWidth: '100%',
+            background: 'linear-gradient(to right, #6B1817, #523DCB)',
+            WebkitBackgroundClip: 'text',
+            WebkitTextFillColor: 'transparent',
+            backgroundClip: 'text',
           }}
         >
           {t('home.companyBlocks.paragraph')}
