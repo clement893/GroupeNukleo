@@ -61,34 +61,16 @@ function Footer() {
             minHeight: 300,
           }}
         >
-          <Link href={getLocalizedPath('/')} className="block mb-8 lg:mb-10 touch-manipulation w-full" style={{ textAlign: 'left' }} aria-label={t('alt.logo') || 'Groupe Nukleo - Accueil'}>
-            <span
-              className="inline-flex flex-col leading-none"
+          <Link href={getLocalizedPath('/')} className="block mb-8 lg:mb-10 touch-manipulation" style={{ textAlign: 'left' }} aria-label={t('alt.logo') || 'Groupe Nukleo - Accueil'}>
+            <img
+              src="/LogoGroupeNukleoWhite.png"
+              alt="Groupe Nukleo"
               style={{
-                fontFamily: "'Neue Haas Unica Pro', sans-serif",
-                fontWeight: 700,
-                letterSpacing: '-0.02em',
-                color: FOOTER_TEXT_WHITE,
+                height: 'clamp(2.5rem, 6vw, 4rem)',
+                width: 'auto',
+                display: 'block',
               }}
-            >
-              <span
-                style={{
-                  fontSize: 'clamp(0.6rem, 2.2vw, 0.85rem)',
-                  letterSpacing: '0.08em',
-                  textTransform: 'uppercase',
-                }}
-              >
-                GROUPE
-              </span>
-              <span
-                style={{
-                  fontSize: 'clamp(1.75rem, 5.5vw, 3rem)',
-                  lineHeight: 1.05,
-                }}
-              >
-                nukleo&gt;
-              </span>
-            </span>
+            />
           </Link>
           <div className="grid grid-cols-2 gap-x-12 sm:gap-x-16 gap-y-1">
             <ul className="space-y-3">
