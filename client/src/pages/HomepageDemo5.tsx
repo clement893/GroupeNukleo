@@ -40,9 +40,9 @@ export default function HomepageDemo5() {
           paddingLeft: 0,
           paddingRight: 0,
           display: 'grid',
-          gridTemplateColumns: 'minmax(0, 1fr) minmax(280px, 420px)',
-          gridTemplateRows: 'auto auto',
-          gap: 'clamp(2rem, 8vw, 7rem)',
+          gridTemplateColumns: '1fr',
+          gridTemplateRows: 'auto auto auto',
+          gap: 'clamp(1rem, 3vw, 2rem)',
           background: 'transparent',
           boxSizing: 'border-box',
           margin: '0 auto',
@@ -71,14 +71,14 @@ export default function HomepageDemo5() {
           </h1>
           <p style={{
             fontFamily: "'Neue Haas Unica Pro', sans-serif",
-            fontSize: 'clamp(0.9rem, 1.1vw, 1.15rem)',
-            lineHeight: 1.6,
+            fontSize: 'clamp(1.1rem, 2.2vw, 1.6rem)',
+            lineHeight: 1.5,
             color: '#374151',
             margin: 0,
-            gridColumn: 2,
-            gridRow: 1,
-            alignSelf: 'flex-start',
+            gridColumn: 1,
+            gridRow: 2,
             textAlign: 'left',
+            whiteSpace: 'pre-line',
           }}>
             {t('home.heroDescription')}
           </p>
@@ -86,7 +86,7 @@ export default function HomepageDemo5() {
             style={{
               width: '100%',
               gridColumn: '1 / -1',
-              gridRow: 2,
+              gridRow: 3,
               marginTop: 0,
               marginLeft: 'auto',
               marginRight: 'auto',
