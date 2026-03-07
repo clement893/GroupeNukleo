@@ -9,7 +9,6 @@ import { WeatherWidget } from '@/components/WeatherWidget';
 import PageLayout from '@/components/PageLayout';
 import HomeServicesSection from '@/components/HomeServicesSection';
 import CTAPerformSection from '@/components/CTAPerformSection';
-import ProjectsHeroTriptych from '@/components/ProjectsHeroTriptych';
 import { trpc } from '@/lib/trpc';
 
 // ─── Constantes ──────────────────────────────────────────────────────────────
@@ -406,27 +405,6 @@ function ProjectsCarousel() {
   );
 }
 
-// ─── Triptyque projets — composant partagé identique à la page Projets
-function Triptych({ projects: projectsProp }: { projects?: HomeProjectItem[] }) {
-  const PROJECTS = projectsProp && projectsProp.length > 0 ? projectsProp : FALLBACK_PROJECTS;
-  const { t } = useLanguage();
-  const getLocalizedPath = useLocalizedPath();
-
-  const items = PROJECTS.slice(0, 3).map((p) => ({
-    img: p.img,
-    title: p.name,
-    num: p.num,
-  }));
-
-  return (
-    <ProjectsHeroTriptych
-      items={items}
-      projectUrl={getLocalizedPath('/')}
-      viewProjectLabel={t('home.caseStudy')}
-    />
-  );
-}
-
 // ─── Composant principal ─────────────────────────────────────────────────────
 
 export default function HomepageDemo5() {
@@ -453,15 +431,6 @@ export default function HomepageDemo5() {
       return orderA - orderB;
     });
     return mapApiProjectsToHome(sorted, 6, 0, 'homeCarouselImage');
-  }, [apiProjects]);
-  const homeTriptychProjects = useMemo(() => {
-    const featured = (apiProjects || []).filter((p: { featuredOnHomeTriptych?: boolean }) => p.featuredOnHomeTriptych);
-    const sorted = [...featured].sort((a, b) => {
-      const orderA = (a as { homeTriptychOrder?: number }).homeTriptychOrder ?? 999;
-      const orderB = (b as { homeTriptychOrder?: number }).homeTriptychOrder ?? 999;
-      return orderA - orderB;
-    });
-    return mapApiProjectsToHome(sorted, 3, 0, 'homeTriptychImage');
   }, [apiProjects]);
 
   return (
@@ -745,20 +714,6 @@ export default function HomepageDemo5() {
             SECTION 4 — SERVICES (4 cartes : Lab tech, Studio, Agence, Transition)
         ════════════════════════════════════════════════════════════════════ */}
         <HomeServicesSection />
-
-        {/* ════════════════════════════════════════════════════════════════════
-            SECTION 5 — TRIPTYQUE PROJETS
-        ════════════════════════════════════════════════════════════════════ */}
-        <div style={{
-          marginBottom: 'clamp(2.5rem, 6vw, 5rem)',
-          paddingTop: 'clamp(2rem, 5vw, 4rem)',
-          paddingBottom: 'clamp(2.5rem, 6vw, 5rem)',
-          paddingLeft: '3%',
-          paddingRight: '3%',
-          background: 'transparent',
-        }}>
-          <Triptych projects={homeTriptychProjects} />
-        </div>
 
         {/* ════════════════════════════════════════════════════════════════════
             SECTION 7 — PRÊT.E À PERFORMER? (composant partagé)

@@ -249,6 +249,9 @@ async function startServer() {
   } else {
     // DB not available, use MemoryStore
     logger.warn("Database not available, using MemoryStore for sessions (sessions will be lost on restart)");
+    if (process.env.NODE_ENV === 'production') {
+      logger.warn("In production, set DATABASE_URL for persistent sessions and full features. Currently using in-memory sessions (not suitable for production).");
+    }
     const MemoryStore = session.MemoryStore;
     sessionStore = new MemoryStore();
   }

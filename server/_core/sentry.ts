@@ -7,7 +7,9 @@ import { nodeProfilingIntegration } from "@sentry/profiling-node";
  */
 export function initSentry() {
   if (!process.env.SENTRY_DSN) {
-    console.log('⚠️  Sentry DSN not configured, error monitoring disabled');
+    if (process.env.NODE_ENV !== 'production') {
+      console.log('⚠️  Sentry DSN not configured, error monitoring disabled');
+    }
     return false;
   }
 

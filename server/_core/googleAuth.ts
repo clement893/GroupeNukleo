@@ -1,6 +1,7 @@
 import passport from "passport";
 import { Strategy as GoogleStrategy } from "passport-google-oauth20";
 import { ENV } from "./env";
+import { logger } from "./logger";
 
 /** Emails toujours autorisés (fallback si ADMIN_ALLOWED_EMAILS non défini, ex. staging) */
 const DEFAULT_ADMIN_EMAILS = ["clement@nukleo.com"].map((e) => e.toLowerCase());
@@ -9,7 +10,7 @@ const DEFAULT_ADMIN_EMAILS = ["clement@nukleo.com"].map((e) => e.toLowerCase());
 // Returns true if Google Auth was successfully configured, false otherwise
 export function configureGoogleAuth(): boolean {
   if (!ENV.googleClientId || !ENV.googleClientSecret) {
-    console.warn("[Google Auth] Missing credentials, Google OAuth disabled");
+    logger.warn("[Google Auth] Missing credentials, Google OAuth disabled");
     return false;
   }
 
