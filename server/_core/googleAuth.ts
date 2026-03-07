@@ -111,7 +111,7 @@ export function requireAdminAuth(req: any, res: any, next: any) {
     const token = authHeader.slice(7);
     try {
       const decoded = jwt.verify(token, ADMIN_JWT_SECRET) as { type?: string; id?: number };
-      if (decoded?.id && (decoded.type === "upload" || !decoded.type)) {
+      if (decoded && typeof decoded.id === "number" && (decoded.type === "upload" || !decoded.type)) {
         console.log(`[AdminAuth] OK ${req.path}: Bearer token (id=${decoded.id})`);
         return next();
       }
@@ -131,8 +131,8 @@ export function requireAdminAuth(req: any, res: any, next: any) {
 
   if (adminToken) {
     try {
-      const decoded = jwt.verify(adminToken, ADMIN_JWT_SECRET);
-      if (decoded && decoded.id) {
+      const decoded = jwt.verify(adminToken, ADMIN_JWT_SECRET) as { id?: number };
+      if (decoded && typeof decoded.id === "number") {
         return next();
       }
     } catch {
