@@ -1,177 +1,92 @@
-import { Link } from 'wouter';
 import BackToTop from '@/components/BackToTop';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { useLocalizedPath } from '@/hooks/useLocalizedPath';
-import { useMemo, memo } from 'react';
-import { trpc } from '@/lib/trpc';
+import { memo } from 'react';
+import { Link } from 'wouter';
 
-const FOOTER_BG = '#1E202B';
-const FOOTER_TEXT_WHITE = '#ffffff';
-const FOOTER_LINE = 'rgba(255, 255, 255, 0.5)';
-
-// Liens principaux (colonne gauche du bloc gauche)
-const MAIN_LINKS = [
-  { key: 'home' as const, href: '/' },
-  { key: 'about' as const, href: '/about' },
-  { key: 'projects' as const, href: '/projects' },
-  { key: 'contact' as const, href: '/contact' },
-  { key: 'faq' as const, href: '/faq' },
-];
-
-// Services (colonne droite du bloc gauche) — libellés via t()
-const SERVICE_LINKS = [
-  { labelKey: 'menu.serviceTech' as const, href: '/services/tech' },
-  { labelKey: 'menu.serviceStudio' as const, href: '/services/studio' },
-  { labelKey: 'menu.serviceAgency' as const, href: '/services/agency' },
-  { labelKey: 'menu.serviceConsulting' as const, href: '/services/consulting' },
-];
+const FOOTER_BG = '#000000';
+const FOOTER_TEXT = '#EFE8E8';
+const FOOTER_LINE = 'rgba(239, 232, 232, 0.5)';
 
 function Footer() {
-  const { t, language } = useLanguage();
+  const { t } = useLanguage();
   const getLocalizedPath = useLocalizedPath();
-
-  const mainNavLabels: Record<string, string> = useMemo(() => ({
-    home: t('nav.home'),
-    about: t('nav.about'),
-    projects: t('nav.projects'),
-    contact: t('nav.contact'),
-    faq: t('nav.faq'),
-  }), [t]);
-
-  const { data: allVisibilities } = trpc.pageVisibility.getAll.useQuery(undefined, {
-    retry: false,
-    refetchOnWindowFocus: false,
-    staleTime: 60000,
-  });
-
-  const visibilityMap = useMemo(() => {
-    const map = new Map<string, boolean>();
-    if (allVisibilities && Array.isArray(allVisibilities)) {
-      allVisibilities.forEach((page: { path: string; isVisible: boolean }) => {
-        map.set(page.path, page.isVisible);
-      });
-    }
-    return map;
-  }, [allVisibilities]);
-
-  const visibleMainLinks = useMemo(() => {
-    return MAIN_LINKS.filter((item) => {
-      const path = language === 'fr' ? `/fr${item.href}` : item.href === '/' ? '/' : item.href;
-      const isVisible = visibilityMap.get(path);
-      return isVisible !== false;
-    });
-  }, [visibilityMap, language]);
-
-  const visibleServiceLinks = useMemo(() => {
-    return SERVICE_LINKS.filter((item) => {
-      const path = language === 'fr' ? `/fr${item.href}` : item.href;
-      const isVisible = visibilityMap.get(path);
-      return isVisible !== false;
-    });
-  }, [visibilityMap, language]);
 
   return (
     <footer
       className="relative w-full site-margin-x"
       style={{
         background: '#EFE8E8',
-        paddingTop: 'clamp(0.75rem, 2vw, 1.25rem)',
+        paddingTop: 'clamp(1.5rem, 4vw, 3rem)',
         paddingBottom: 'clamp(2rem, 4vw, 3rem)',
         fontFamily: "'Google Sans Flex', sans-serif",
         fontWeight: 400,
       }}
       aria-label={t('footer.ariaLabel') || 'Pied de page Nukleo Digital'}
     >
+      {/* Boîte noire unique — logo gauche, contact droite */}
       <div
-        className="grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-5 w-full"
-        style={{ margin: 0, minHeight: 300 }}
+        className="rounded-2xl w-full max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-[1fr_auto] gap-8 md:gap-12 items-start"
+        style={{
+          background: FOOTER_BG,
+          padding: 'clamp(2rem, 5vw, 3.5rem) clamp(2rem, 4vw, 3rem)',
+        }}
       >
-        {/* Bloc gauche — deux panneaux arrondis distincts, marges latérales */}
-        <div
-          className="rounded-[1.25rem] flex flex-col justify-center"
-          style={{
-            background: FOOTER_BG,
-            padding: 'clamp(2.25rem, 5vw, 3.5rem) clamp(2rem, 4vw, 3rem)',
-            minHeight: 300,
-          }}
-        >
-          <Link href={getLocalizedPath('/')} className="block mb-8 lg:mb-10 touch-manipulation w-full" style={{ textAlign: 'left' }}>
-            <img
-              src="/nukleo-logo-footer.png"
-              alt={t('alt.logo') || 'Nukleo Digital - Accueil'}
-              className="object-contain object-left"
-              style={{
-                height: 'clamp(7rem, 16vw, 11rem)',
-                width: 'auto',
-                display: 'block',
-                background: 'transparent',
-                mixBlendMode: 'lighten',
-                marginRight: 'auto',
-              }}
-            />
+        {/* Gauche : GROUPE / nukleo, */}
+        <div className="flex flex-col">
+          <Link href={getLocalizedPath('/')} className="touch-manipulation block text-left">
+            <div
+              className="text-sm uppercase tracking-wide"
+              style={{ color: FOOTER_TEXT }}
+            >
+              GROUPE
+            </div>
+            <div
+              className="text-3xl md:text-4xl lg:text-5xl font-bold lowercase mt-0.5"
+              style={{ color: FOOTER_TEXT }}
+            >
+              nukleo,
+            </div>
           </Link>
-          <div className="grid grid-cols-2 gap-x-12 sm:gap-x-16 gap-y-1">
-            <ul className="space-y-3">
-              {visibleMainLinks.map((item) => (
-                <li key={item.href}>
-                  <Link
-                    href={getLocalizedPath(item.href)}
-                    className="text-base sm:text-lg hover:opacity-85 transition-opacity touch-manipulation block"
-                    style={{ color: FOOTER_TEXT_WHITE }}
-                  >
-                    {mainNavLabels[item.key]}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-            <ul className="space-y-3">
-              {visibleServiceLinks.map((item) => (
-                <li key={item.href}>
-                  <Link
-                    href={getLocalizedPath(item.href)}
-                    className="text-base sm:text-lg hover:opacity-85 transition-opacity touch-manipulation block"
-                    style={{ color: FOOTER_TEXT_WHITE }}
-                  >
-                    {t(item.labelKey)}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
         </div>
 
-        {/* Bloc droit — email, filets blancs, adresses, LinkedIn */}
-        <div
-          className="rounded-[1.25rem] flex flex-col"
-          style={{
-            background: FOOTER_BG,
-            padding: 'clamp(2.25rem, 5vw, 3.5rem) clamp(2rem, 4vw, 3rem)',
-            minHeight: 300,
-          }}
-        >
+        {/* Droite : email, filets, adresses, LinkedIn */}
+        <div className="flex flex-col md:items-end w-full md:w-auto">
           <a
             href="mailto:hello@nukleo.com"
-            className="font-medium text-base sm:text-lg hover:opacity-85 transition-opacity block"
-            style={{ color: FOOTER_TEXT_WHITE }}
+            className="text-sm md:text-base hover:opacity-85 transition-opacity block"
+            style={{ color: FOOTER_TEXT }}
           >
             hello@nukleo.com
           </a>
-          <hr className="border-0 mt-5 mb-5 h-px w-full flex-shrink-0" style={{ background: FOOTER_LINE }} />
-          <div className="text-base leading-relaxed space-y-1" style={{ color: FOOTER_TEXT_WHITE }}>
+          <hr
+            className="border-0 mt-4 mb-4 w-full md:w-auto md:min-w-[200px] h-px flex-shrink-0"
+            style={{ background: FOOTER_LINE }}
+          />
+          <div
+            className="text-sm md:text-base leading-relaxed space-y-0.5"
+            style={{ color: FOOTER_TEXT }}
+          >
             <div>7236 Rue Waverly</div>
             <div>Montréal, QC H2R 0C2</div>
           </div>
-          <hr className="border-0 mt-5 mb-5 h-px w-full flex-shrink-0" style={{ background: FOOTER_LINE }} />
-          <div className="text-base leading-relaxed space-y-1" style={{ color: FOOTER_TEXT_WHITE }}>
-            <div>1800 Argyle St Unit 801</div>
-            <div>Halifax, NS B3J 3N8</div>
-          </div>
-          <div className="mt-auto pt-8 flex justify-end">
+          <hr
+            className="border-0 mt-4 mb-4 w-full md:w-auto md:min-w-[200px] h-px flex-shrink-0"
+            style={{ background: FOOTER_LINE }}
+          />
+          <div className="flex flex-col md:flex-row md:items-center md:justify-end md:gap-4">
+            <div
+              className="text-sm md:text-base leading-relaxed space-y-0.5"
+              style={{ color: FOOTER_TEXT }}
+            >
+              <div>1800 Argyle St Unit 801</div>
+              <div>Halifax, NS B3J 3N8</div>
+            </div>
             <a
               href="https://www.linkedin.com/company/nukleo-group"
               target="_blank"
               rel="noopener noreferrer"
-              className="hover:opacity-90 transition-opacity inline-flex items-center justify-center w-12 h-12 rounded-lg bg-white text-black flex-shrink-0"
+              className="mt-4 md:mt-0 inline-flex items-center justify-center w-10 h-10 rounded bg-white text-black flex-shrink-0 hover:opacity-90 transition-opacity"
               aria-label="LinkedIn - Nukleo"
             >
               <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">

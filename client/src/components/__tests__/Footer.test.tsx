@@ -52,20 +52,19 @@ describe('Footer', () => {
     vi.clearAllMocks();
   });
 
-  it('should render footer with navigation links', () => {
+  it('should render footer with main content', () => {
     renderFooter();
-    
-    // Check if footer is rendered
     const footer = screen.getByRole('contentinfo');
     expect(footer).toBeTruthy();
+    expect(screen.getByText(/GROUPE/)).toBeTruthy();
+    expect(screen.getByText(/nukleo/)).toBeTruthy();
   });
 
-  it('should render newsletter subscription form', () => {
+  it('should render contact email and addresses', () => {
     renderFooter();
-    
-    // Check if email input exists
-    const emailInput = screen.getByPlaceholderText(/email/i);
-    expect(emailInput).toBeTruthy();
+    expect(screen.getByText('hello@nukleo.com')).toBeTruthy();
+    expect(screen.getByText(/7236 Rue Waverly/)).toBeTruthy();
+    expect(screen.getByText(/Montréal, QC H2R 0C2/)).toBeTruthy();
   });
 
   it('should render social media links', () => {
