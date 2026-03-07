@@ -111,17 +111,17 @@ header.header-scroll-transform,
   }
   @media (min-width: 1400px) {
     :root {
-      --site-margin: 2%;
+      --site-margin: 2.6%;
     }
   }
   @media (min-width: 1920px) {
     :root {
-      --site-margin: 1.5%;
+      --site-margin: 2%;
     }
   }
   @media (min-width: 2560px) {
     :root {
-      --site-margin: 1%;
+      --site-margin: 1.3%;
     }
   }
 

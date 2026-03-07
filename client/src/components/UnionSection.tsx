@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useLanguage } from '@/contexts/LanguageContext';
-import { ExternalLink } from 'lucide-react';
+import { Download } from 'lucide-react';
 
 const HEADLINE_PURPLE = '#8B2C8C';
 const FALLBACK_IMAGE = '/demo/consulting-hero-cover.png';
@@ -8,13 +8,13 @@ const FALLBACK_IMAGE = '/demo/consulting-hero-cover.png';
 const pressReleaseBtnStyle: React.CSSProperties = {
   display: 'inline-flex',
   alignItems: 'center',
-  gap: 8,
+  gap: 10,
   fontFamily: "'Neue Haas Unica Pro', sans-serif",
   fontWeight: 600,
   fontSize: '0.95rem',
-  padding: '0.6rem 1.25rem',
+  padding: '0.75rem 1.5rem',
   borderRadius: 16,
-  background: 'rgba(255, 255, 255, 0.35)',
+  background: 'rgba(255, 255, 255, 0.4)',
   backdropFilter: 'blur(16px) saturate(180%)',
   WebkitBackdropFilter: 'blur(16px) saturate(180%)',
   border: '1px solid rgba(255, 255, 255, 0.7)',
@@ -23,6 +23,7 @@ const pressReleaseBtnStyle: React.CSSProperties = {
   textDecoration: 'none',
   transition: 'opacity 0.2s ease, box-shadow 0.2s ease',
   width: 'fit-content',
+  marginTop: '1.5rem',
 };
 
 /**
@@ -162,6 +163,7 @@ export default function UnionSection() {
           {pdfPath && (
             <a
               href={pdfPath}
+              download="communique-presse-nukleo.pdf"
               target="_blank"
               rel="noopener noreferrer"
               style={pressReleaseBtnStyle}
@@ -169,7 +171,7 @@ export default function UnionSection() {
               aria-label={t('home.union.cta')}
             >
               {t('home.union.cta')}
-              <ExternalLink size={18} strokeWidth={2.5} />
+              <Download size={20} strokeWidth={2.5} />
             </a>
           )}
         </div>
