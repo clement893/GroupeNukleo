@@ -32,6 +32,12 @@ import {
   uploadPressReleaseToR2,
 } from "../mediaStorageApi";
 import { isR2Configured } from "../r2Storage";
+import {
+  getAllSitePhotoUrls,
+  uploadSitePhotoToR2,
+  SITE_PHOTO_KEYS,
+  SITE_PHOTO_LABELS,
+} from "../sitePhotosApi";
 import { analytics } from "../../drizzle/schema";
 import { eq } from "drizzle-orm";
 import postgres from "postgres";
@@ -639,6 +645,55 @@ async function startServer() {
         res.json({ path: publicPath });
       } catch (e) {
         logger.error("[PressRelease] Upload error", e);
+        res.status(500).json({ error: e instanceof Error ? e.message : "Erreur upload" });
+      }
+    }
+  );
+
+  // Site photos (public list + admin upload) — R2 only
+  app.get("/api/site-photos", async (_req, res) => {
+    try {
+      const photos = await getAllSitePhotoUrls();
+      res.json({ photos, isR2: isR2Configured() });
+    } catch (e) {
+      console.error("[SitePhotos] GET error", e);
+      res.json({ photos: {}, isR2: false });
+    }
+  });
+
+  const sitePhotoFileFilter = (_req: express.Request, file: Express.Multer.File, cb: multer.FileFilterCallback) => {
+    const ok = /^image\/(jpeg|png|gif|webp|svg\+xml)$/i.test(file.mimetype) || /\.(jpg|jpeg|png|gif|webp|svg)$/i.test(file.originalname);
+    cb(ok ? null : new Error("Format non supporté. Utilisez JPG, PNG, WebP ou SVG."), ok);
+  };
+  const sitePhotoUpload = multer({
+    storage: multer.memoryStorage(),
+    limits: { fileSize: 5 * 1024 * 1024 },
+    fileFilter: sitePhotoFileFilter,
+  });
+
+  app.post(
+    "/api/admin/site-photos/upload",
+    requireAdminAuth,
+    sitePhotoUpload.single("image"),
+    async (req, res) => {
+      const key = req.body?.key as string;
+      if (!key || !Object.values(SITE_PHOTO_KEYS).includes(key)) {
+        return res.status(400).json({ error: "Clé photo invalide" });
+      }
+      if (!req.file || !req.file.buffer) {
+        return res.status(400).json({ error: "Aucun fichier image" });
+      }
+      if (!isR2Configured()) {
+        return res.status(400).json({ error: "R2 non configuré. Définissez les variables R2_* pour activer les photos." });
+      }
+      try {
+        const ext = /\.(jpg|jpeg|png|gif|webp|svg)$/i.test(req.file.originalname)
+          ? path.extname(req.file.originalname).toLowerCase()
+          : req.file.mimetype.includes("svg") ? ".svg" : ".jpg";
+        const url = await uploadSitePhotoToR2(key, req.file.buffer, req.file.mimetype, ext);
+        return res.json({ url, key });
+      } catch (e) {
+        console.error("[SitePhotos] Upload error", e);
         res.status(500).json({ error: e instanceof Error ? e.message : "Erreur upload" });
       }
     }

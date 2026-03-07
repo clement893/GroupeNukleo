@@ -1,10 +1,10 @@
 import { useState, useEffect } from 'react';
 import { useLanguage } from '@/contexts/LanguageContext';
+import { useSitePhotos, SITE_PHOTO_KEYS } from '@/contexts/SitePhotosContext';
 import { useLocalizedPath } from '@/hooks/useLocalizedPath';
 import { Download } from 'lucide-react';
 
 const HEADLINE_PURPLE = '#8B2C8C';
-const FALLBACK_IMAGE = '/demo/consulting-hero-cover.png';
 
 const pressReleaseBtnStyle: React.CSSProperties = {
   display: 'inline-flex',
@@ -33,6 +33,7 @@ const pressReleaseBtnStyle: React.CSSProperties = {
 export default function UnionSection() {
   const { t } = useLanguage();
   const getLocalizedPath = useLocalizedPath();
+  const { getPhoto } = useSitePhotos();
   const [videoPath, setVideoPath] = useState<string | null>(null);
   const [pdfPath, setPdfPath] = useState<string | null>(null);
 
@@ -96,7 +97,7 @@ export default function UnionSection() {
             />
           ) : (
             <img
-              src={FALLBACK_IMAGE}
+              src={getPhoto(SITE_PHOTO_KEYS.UNION_FALLBACK)}
               alt=""
               style={{
                 width: '100%',

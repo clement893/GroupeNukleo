@@ -3,6 +3,7 @@ import { Link } from 'wouter';
 import { useEffect } from 'react';
 import { useSound } from '@/hooks/useSound';
 import { useLanguage } from '@/contexts/LanguageContext';
+import { useSitePhotos, SITE_PHOTO_KEYS } from '@/contexts/SitePhotosContext';
 import { useLocalizedPath } from '@/hooks/useLocalizedPath';
 
 // Fond violet semi-transparent + blur
@@ -21,6 +22,7 @@ const MAIN_LINKS = [
 export default function FullScreenMenu({ isOpen, onClose }: FullScreenMenuProps) {
   const { playHover, playClick } = useSound();
   const { t: tLang } = useLanguage();
+  const { getPhoto } = useSitePhotos();
   const getLocalizedPath = useLocalizedPath();
 
   const tLabel = (key: string, fallback: string) => (tLang(key) || fallback).trim() || fallback;
@@ -75,7 +77,7 @@ export default function FullScreenMenu({ isOpen, onClose }: FullScreenMenuProps)
       <div className="flex-shrink-0 px-8 sm:px-12 md:px-16 lg:px-20 pt-8 pb-4">
         <Link href={getLocalizedPath('/')} onClick={handleLinkClick} onMouseEnter={playHover} className="group inline-flex items-center touch-manipulation transition-opacity hover:opacity-90 duration-300" aria-label="Groupe Nukleo - Accueil">
           <img
-            src="/demo/logo-groupe-nukleo.png"
+            src={getPhoto(SITE_PHOTO_KEYS.MENU_LOGO)}
             alt="Groupe Nukleo"
             className="w-auto object-contain object-left"
             style={{ maxHeight: 'clamp(2.5rem, 7vw, 4rem)', height: 'auto' }}

@@ -1,5 +1,6 @@
 import BackToTop from '@/components/BackToTop';
 import { useLanguage } from '@/contexts/LanguageContext';
+import { useSitePhotos, SITE_PHOTO_KEYS } from '@/contexts/SitePhotosContext';
 import { useLocalizedPath } from '@/hooks/useLocalizedPath';
 import { memo } from 'react';
 import { Link } from 'wouter';
@@ -10,6 +11,7 @@ const FOOTER_LINE = 'rgba(239, 232, 232, 0.5)';
 
 function Footer() {
   const { t } = useLanguage();
+  const { getPhoto } = useSitePhotos();
   const getLocalizedPath = useLocalizedPath();
 
   return (
@@ -35,7 +37,7 @@ function Footer() {
         <div className="flex flex-col">
           <Link href={getLocalizedPath('/')} className="touch-manipulation block text-left">
             <img
-              src="/demo/logo-groupe-nukleo-white.png"
+              src={getPhoto(SITE_PHOTO_KEYS.FOOTER_LOGO)}
               alt="Groupe Nukleo"
               className="w-auto object-contain object-left"
               style={{ maxHeight: 'clamp(2.5rem, 8vw, 4.5rem)', height: 'auto' }}

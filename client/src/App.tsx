@@ -5,6 +5,7 @@ import PageLoader from "./components/PageLoader";
 
 import { ThemeProvider } from "./contexts/ThemeContext";
 import { LanguageProvider } from "./contexts/LanguageContext";
+import { SitePhotosProvider } from "./contexts/SitePhotosContext";
 // CRITICAL: Pre-import useLocalizedPath to ensure it's in the main chunk
 // This import forces the module to be included in the main bundle
 import "./hooks/useLocalizedPath";
@@ -32,6 +33,7 @@ const AdminHome = lazy(() => import("./pages/admin/AdminHome"));
 const AdminCarouselLogos = lazy(() => import("./pages/admin/AdminCarouselLogos"));
 const AdminUnionVideo = lazy(() => import("./pages/admin/AdminUnionVideo"));
 const AdminPressRelease = lazy(() => import("./pages/admin/AdminPressRelease"));
+const AdminSitePhotos = lazy(() => import("./pages/admin/AdminSitePhotos"));
 
 import { ProtectedAdminRoute } from "./components/ProtectedAdminRoute";
 
@@ -47,6 +49,7 @@ function App() {
     <EnhancedErrorBoundary enableRecovery={true} maxRecoveryAttempts={3}>
       <ThemeProvider defaultTheme="dark">
         <LanguageProvider>
+          <SitePhotosProvider>
           <PageLoader />
           <ArrowBackground variant="default" />
           <ScrollToTop />
@@ -79,6 +82,9 @@ function App() {
               <Route path="/admin/press-release">
                 <ProtectedAdminRoute><AdminPressRelease /></ProtectedAdminRoute>
               </Route>
+              <Route path="/admin/site-photos">
+                <ProtectedAdminRoute><AdminSitePhotos /></ProtectedAdminRoute>
+              </Route>
               <Route path="/admin">
                 <ProtectedAdminRoute><AdminHome /></ProtectedAdminRoute>
               </Route>
@@ -86,6 +92,7 @@ function App() {
               <Route component={NotFound404} />
             </Switch>
           </Suspense>
+          </SitePhotosProvider>
         </LanguageProvider>
       </ThemeProvider>
     </EnhancedErrorBoundary>

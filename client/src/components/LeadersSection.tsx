@@ -1,16 +1,9 @@
 import { useLanguage } from '@/contexts/LanguageContext';
+import { useSitePhotos, SITE_PHOTO_KEYS } from '@/contexts/SitePhotosContext';
 
 const LEADERS = [
-  {
-    id: 'clement',
-    image: '/team/Clement.jpg',
-    imageAltKey: 'home.leaders.clement.name',
-  },
-  {
-    id: 'lionel',
-    image: '/team/LionelPardin.jpg',
-    imageAltKey: 'home.leaders.lionel.name',
-  },
+  { id: 'clement', imageKey: SITE_PHOTO_KEYS.LEADER_CLEMENT, imageAltKey: 'home.leaders.clement.name' },
+  { id: 'lionel', imageKey: SITE_PHOTO_KEYS.LEADER_LIONEL, imageAltKey: 'home.leaders.lionel.name' },
 ] as const;
 
 /**
@@ -18,6 +11,7 @@ const LEADERS = [
  */
 export default function LeadersSection() {
   const { t } = useLanguage();
+  const { getPhoto } = useSitePhotos();
 
   return (
     <section
@@ -94,7 +88,7 @@ export default function LeadersSection() {
               }}
             >
               <img
-                src={leader.image}
+                src={getPhoto(leader.imageKey)}
                 alt={t(leader.imageAltKey)}
                 style={{
                   width: '100%',

@@ -2,6 +2,7 @@ import { useState, useEffect, useRef, memo } from 'react';
 import { Link } from 'wouter';
 import { ExternalLink } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
+import { useSitePhotos, SITE_PHOTO_KEYS } from '@/contexts/SitePhotosContext';
 import { useLocalizedPath } from '@/hooks/useLocalizedPath';
 import { useIsMobile } from '@/hooks/useIsMobile';
 import { MOBILE_BREAKPOINT, ANIMATIONS } from '@/lib/constants';
@@ -33,6 +34,7 @@ function Header() {
   const lastScrollY = useRef(0);
   const headerRef = useRef<HTMLElement>(null);
   const { t, language } = useLanguage();
+  const { getPhoto } = useSitePhotos();
   const getLocalizedPath = useLocalizedPath();
   const isMobile = useIsMobile(MOBILE_BREAKPOINT);
 
@@ -116,7 +118,7 @@ function Header() {
               aria-label={t('alt.logo') || 'Groupe Nukleo - Accueil'}
             >
               <img
-                src="/demo/LogoGroupeNukleo.svg"
+                src={getPhoto(SITE_PHOTO_KEYS.HEADER_LOGO)}
                 alt="Groupe Nukleo"
                 className="w-auto object-contain object-left"
                 style={{

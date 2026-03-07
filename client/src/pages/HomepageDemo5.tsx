@@ -1,4 +1,5 @@
 import { useLanguage } from '@/contexts/LanguageContext';
+import { useSitePhotos, SITE_PHOTO_KEYS } from '@/contexts/SitePhotosContext';
 import PageLayout from '@/components/PageLayout';
 import CompanyBlocksSection from '@/components/CompanyBlocksSection';
 import LeadersSection from '@/components/LeadersSection';
@@ -11,6 +12,7 @@ const DARK = '#0A0A0A';
 
 export default function HomepageDemo5() {
   const { t } = useLanguage();
+  const { getPhoto } = useSitePhotos();
 
   return (
     <PageLayout>
@@ -96,7 +98,7 @@ export default function HomepageDemo5() {
             }}
           >
             <img
-              src="/demo/agency-hero-cover.png"
+              src={getPhoto(SITE_PHOTO_KEYS.HERO_COVER)}
               alt=""
               style={{
                 width: '100%',
