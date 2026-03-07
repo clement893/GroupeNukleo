@@ -33,7 +33,7 @@ export default function TwoCitiesSection() {
       <div
         className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-10"
         style={{
-          maxWidth: 960,
+          maxWidth: 'min(1200px, 85vw)',
           margin: '0 auto',
         }}
       >

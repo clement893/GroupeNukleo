@@ -98,6 +98,11 @@ header.header-scroll-transform,
   :root {
     --site-margin: 3%;
   }
+  @media (min-width: 1920px) {
+    :root {
+      --site-margin: 80px;
+    }
+  }
 
   * {
     @apply border-border;
@@ -137,6 +142,9 @@ header.header-scroll-transform,
     html { font-size: 20px; }
   }
   @media (min-width: 2200px) {
+    html { font-size: 22px; }
+  }
+  @media (min-width: 2560px) {
     html { font-size: 22px; }
   }
   html::-webkit-scrollbar {
@@ -259,6 +267,13 @@ header.header-scroll-transform,
   .site-margin-x {
     padding-left: var(--site-margin, 3%);
     padding-right: var(--site-margin, 3%);
+  }
+
+  /* Conteneur centré pour grands écrans — limite la largeur du contenu */
+  .content-max-width {
+    max-width: min(1600px, 100%);
+    margin-left: auto;
+    margin-right: auto;
   }
 
   .flex {

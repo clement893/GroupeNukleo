@@ -328,6 +328,7 @@ export default function HomepageDemo5() {
       >
         {/* ── Contenu principal ─────────────────────────────────────────────── */}
         <div style={{ position: 'relative', zIndex: 10, paddingTop: 'clamp(5rem, 15vw, 8rem)' }}>
+        <div className="content-max-width" style={{ paddingLeft: 'var(--site-margin, 3%)', paddingRight: 'var(--site-margin, 3%)', width: '100%' }}>
 
         {/* ════════════════════════════════════════════════════════════════════
             SECTION HERO — Le Groupe Nukleo + paragraphe à droite
@@ -336,8 +337,8 @@ export default function HomepageDemo5() {
           minHeight: '27.5vh',
           paddingTop: 'clamp(3.5rem, 8.75vh, 7rem)',
           paddingBottom: 'clamp(2rem, 5vh, 4rem)',
-          paddingLeft: '3%',
-          paddingRight: '3%',
+          paddingLeft: 0,
+          paddingRight: 0,
           display: 'flex',
           flexDirection: 'row',
           flexWrap: 'wrap',
@@ -346,6 +347,8 @@ export default function HomepageDemo5() {
           gap: 'clamp(2rem, 8vw, 7rem)',
           background: 'transparent',
           boxSizing: 'border-box',
+          maxWidth: 1400,
+          margin: '0 auto',
         }}>
           <h1 style={{
             fontFamily: "'Neue Haas Unica Pro', sans-serif",
@@ -384,7 +387,10 @@ export default function HomepageDemo5() {
           <div
             style={{
               width: '100%',
+              maxWidth: 1600,
               marginTop: 'clamp(2rem, 4vw, 3rem)',
+              marginLeft: 'auto',
+              marginRight: 'auto',
               borderRadius: 0,
               overflow: 'hidden',
               aspectRatio: '21/9',
@@ -409,7 +415,7 @@ export default function HomepageDemo5() {
             SECTION 2 — QUI SOMMES-NOUS + CTA
         ════════════════════════════════════════════════════════════════════ */}
         <section style={{
-          padding: '5rem 3% 6rem',
+          padding: '5rem 0 6rem',
           marginBottom: 0,
           textAlign: 'center',
         }}>

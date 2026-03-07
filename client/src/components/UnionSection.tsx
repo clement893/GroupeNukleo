@@ -24,7 +24,7 @@ export default function UnionSection() {
       <div
         className="grid grid-cols-1 md:grid-cols-[1fr_1.2fr] gap-8 md:gap-14 items-center"
         style={{
-          maxWidth: 960,
+          maxWidth: 'min(1200px, 85vw)',
           margin: '0 auto',
         }}
       >

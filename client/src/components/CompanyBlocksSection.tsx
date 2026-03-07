@@ -18,7 +18,10 @@ export default function CompanyBlocksSection() {
       aria-label={t('home.companyBlocks.ariaLabel') || 'Nos entreprises'}
       style={{ padding: '5rem 3% 6rem', marginBottom: 5 * 16 }}
     >
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 lg:gap-8 max-w-4xl mx-auto">
+      <div
+        className="grid grid-cols-1 sm:grid-cols-2 gap-6 lg:gap-8 mx-auto"
+        style={{ maxWidth: 'min(1200px, 85vw)' }}
+      >
         {COMPANIES.map((company) => (
           <a
             key={company.url}

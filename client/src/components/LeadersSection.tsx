@@ -31,7 +31,7 @@ export default function LeadersSection() {
     >
       <div
         style={{
-          maxWidth: 960,
+          maxWidth: 'min(1200px, 85vw)',
           margin: '0 auto',
           marginBottom: 'clamp(2.5rem, 5vw, 4rem)',
         }}
@@ -60,7 +60,7 @@ export default function LeadersSection() {
         style={{
           display: 'grid',
           gap: 'clamp(2rem, 5vw, 3.5rem)',
-          maxWidth: 960,
+          maxWidth: 'min(1200px, 85vw)',
           margin: '0 auto',
         }}
         className="grid grid-cols-1 md:grid-cols-2 leaders-grid"
