@@ -2,8 +2,6 @@ import { useState, useEffect, useRef, useCallback } from 'react';
 import { Link } from 'wouter';
 import { useLocalizedPath } from '@/hooks/useLocalizedPath';
 import { useLanguage } from '@/contexts/LanguageContext';
-import { TeamScrollCards, DoubleLogoCarousel } from '@/components/demo3';
-import { SplitCTAButton } from '@/components/SplitCTAButton';
 import PageLayout from '@/components/PageLayout';
 import CompanyBlocksSection from '@/components/CompanyBlocksSection';
 import LeadersSection from '@/components/LeadersSection';
@@ -447,15 +445,7 @@ export default function HomepageDemo5() {
           }}>
             {t('home.audaciousTagline')}
           </h2>
-          <SplitCTAButton href="#" label={t('home.performNow')} ariaLabel={t('home.performNow')} />
         </section>
-
-        {/* ════════════════════════════════════════════════════════════════════
-            SECTION 2b — CARROUSEL LOGOS (sous SOYONS AUDACIEUX)
-        ════════════════════════════════════════════════════════════════════ */}
-        <div style={{ marginTop: 0, marginBottom: 5 * 16 }}>
-          <DoubleLogoCarousel title={t('home.trustedBy')} />
-        </div>
 
         {/* ════════════════════════════════════════════════════════════════════
             SECTION 3 — L'UNION DE DEUX FORCES (image + texte + CTA)
