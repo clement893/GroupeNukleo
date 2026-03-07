@@ -1,15 +1,25 @@
+import { useState, useEffect } from 'react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { ExternalLink } from 'lucide-react';
 import { useLocalizedPath } from '@/hooks/useLocalizedPath';
 
 const HEADLINE_PURPLE = '#8B2C8C';
+const FALLBACK_IMAGE = '/demo/consulting-hero-cover.png';
 
 /**
- * Section « L'union de deux forces » — image gauche (B&W), bloc texte droite (fond #f7f5f9).
+ * Section « L'union de deux forces » — vidéo ou image gauche (B&W), bloc texte droite.
  */
 export default function UnionSection() {
   const { t } = useLanguage();
   const getLocalizedPath = useLocalizedPath();
+  const [videoPath, setVideoPath] = useState<string | null>(null);
+
+  useEffect(() => {
+    fetch('/api/union-video')
+      .then((r) => r.json())
+      .then((data) => setVideoPath(data?.path ?? null))
+      .catch(() => setVideoPath(null));
+  }, []);
 
   return (
     <section
@@ -21,38 +31,55 @@ export default function UnionSection() {
       }}
     >
       <div
-        className="grid grid-cols-1 md:grid-cols-[1.2fr_1fr] gap-0 md:gap-0 items-stretch"
+        className="grid grid-cols-1 md:grid-cols-[1.2fr_1fr] gap-0 md:gap-10 items-stretch"
         style={{
           maxWidth: 'min(1200px, 90vw)',
           margin: '0 auto',
         }}
       >
-        {/* Image gauche — noir et blanc */}
+        {/* Vidéo ou image gauche — noir et blanc, coins arrondis */}
         <div
           style={{
             overflow: 'hidden',
+            borderRadius: 12,
             background: '#e5e7eb',
             aspectRatio: '4/3',
           }}
           className="md:aspect-auto"
         >
-          <img
-            src="/demo/consulting-hero-cover.png"
-            alt=""
-            style={{
-              width: '100%',
-              height: '100%',
-              objectFit: 'cover',
-              filter: 'grayscale(1)',
-            }}
-          />
+          {videoPath ? (
+            <video
+              src={videoPath}
+              autoPlay
+              muted
+              loop
+              playsInline
+              style={{
+                width: '100%',
+                height: '100%',
+                objectFit: 'cover',
+                filter: 'grayscale(1)',
+              }}
+            />
+          ) : (
+            <img
+              src={FALLBACK_IMAGE}
+              alt=""
+              style={{
+                width: '100%',
+                height: '100%',
+                objectFit: 'cover',
+                filter: 'grayscale(1)',
+              }}
+            />
+          )}
         </div>
 
-        {/* Bloc texte droite — fond gris clair */}
+        {/* Bloc texte droite — sans fond */}
         <div
           style={{
             minWidth: 0,
-            background: '#f7f5f9',
+            background: 'transparent',
             padding: 'clamp(2rem, 4vw, 3rem)',
             display: 'flex',
             flexDirection: 'column',

@@ -40,7 +40,7 @@ export default function LeadersSection() {
           style={{
             fontFamily: "'Neue Haas Unica Pro', sans-serif",
             fontWeight: 400,
-            fontSize: 'clamp(2.25rem, 5vw, 3.75rem)',
+            fontSize: 'clamp(1.8rem, 4vw, 2.5rem)',
             lineHeight: 1.1,
             letterSpacing: '-0.03em',
             margin: 0,

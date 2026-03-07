@@ -365,8 +365,8 @@ export default function HomepageDemo5() {
             WebkitTextFillColor: 'transparent',
             backgroundClip: 'text',
           }}>
-            <span style={{ display: 'block' }}>{t('home.heroLine1')}</span>
-            <span style={{ display: 'block' }}>{t('home.heroLine2')}</span>
+            <span style={{ display: 'block', whiteSpace: 'nowrap' }}>{t('home.heroLine1')}</span>
+            <span style={{ display: 'block', whiteSpace: 'nowrap' }}>{t('home.heroLine2')}</span>
           </h1>
           <p style={{
             fontFamily: "'Neue Haas Unica Pro', sans-serif",

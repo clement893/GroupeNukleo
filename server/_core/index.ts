@@ -23,6 +23,7 @@ import passport from "passport";
 import { configureGoogleAuth, requireAdminAuth } from "./googleAuth";
 import { getDb, getAllAgencyLeads, getLeoAnalytics, getLeoContacts, getAdminStats } from "../db";
 import { addLogo, updateLogo, removeLogo, reorderLogos } from "../carouselLogosApi";
+import { getUnionVideoPath, getUnionVideoDir } from "../unionVideoApi";
 import { analytics } from "../../drizzle/schema";
 import { eq } from "drizzle-orm";
 import postgres from "postgres";
@@ -473,6 +474,40 @@ async function startServer() {
     res.json({ path: publicPath });
   });
 
+  // Union section video (public + admin upload)
+  app.get("/api/union-video", async (_req, res) => {
+    try {
+      const path = await getUnionVideoPath();
+      res.json({ path });
+    } catch (e) {
+      console.error("[UnionVideo] GET error", e);
+      res.json({ path: null });
+    }
+  });
+
+  const UNION_VIDEO_DIR = getUnionVideoDir();
+  const unionVideoUpload = multer({
+    storage: multer.diskStorage({
+      destination: (_req, _file, cb) => {
+        if (!existsSync(UNION_VIDEO_DIR)) mkdirSync(UNION_VIDEO_DIR, { recursive: true });
+        cb(null, UNION_VIDEO_DIR);
+      },
+      filename: (_req, file, cb) => {
+        const ext = /\.(mp4|webm)$/i.test(file.originalname) ? path.extname(file.originalname).toLowerCase() : ".mp4";
+        cb(null, `union-video${ext}`);
+      },
+    }),
+    limits: { fileSize: 100 * 1024 * 1024 },
+    fileFilter: (_req, file, cb) => {
+      const ok = /^video\/(mp4|webm)$/i.test(file.mimetype);
+      cb(ok ? null : new Error("Format non supporté. Utilisez MP4 ou WebM."), ok);
+    },
+  });
+  app.post("/api/admin/union-video/upload", requireAdminAuth, unionVideoUpload.single("video"), (req, res) => {
+    if (!req.file) return res.status(400).json({ error: "Aucun fichier vidéo" });
+    res.json({ path: `/demo/${req.file.filename}` });
+  });
+
   // Admin: analytics config (REST, same auth)
   app.get("/api/admin/analytics-config", requireAdminAuth, async (req, res) => {
     try {
@@ -779,7 +814,9 @@ async function startServer() {
     if (err instanceof multer.MulterError) {
       console.error("[Multer] error:", err.code, req.path);
       if (err.code === 'LIMIT_FILE_SIZE') {
-        const msg = req.path === '/api/admin/carousel-logos/upload' ? 'Fichier trop volumineux (2 Mo max)' : 'File too large. Maximum size is 10MB';
+        let msg = 'File too large. Maximum size is 10MB';
+        if (req.path === '/api/admin/carousel-logos/upload') msg = 'Fichier trop volumineux (2 Mo max)';
+        else if (req.path === '/api/admin/union-video/upload') msg = 'Vidéo trop volumineuse (100 Mo max)';
         return res.status(400).json({ error: msg });
       }
       return res.status(400).json({ error: `Upload error: ${err.message}` });
@@ -789,6 +826,9 @@ async function startServer() {
       return res.status(400).json({ error: err.message || 'Upload failed' });
     }
     if (err && req.path === '/api/admin/carousel-logos/upload') {
+      return res.status(400).json({ error: err.message || 'Upload failed' });
+    }
+    if (err && req.path === '/api/admin/union-video/upload') {
       return res.status(400).json({ error: err.message || 'Upload failed' });
     }
     next(err);
