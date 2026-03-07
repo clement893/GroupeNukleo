@@ -25,7 +25,7 @@ export async function getUnionVideoPath(): Promise<string | null> {
   const dir = getUnionVideoDir();
   try {
     const files = await fs.readdir(dir);
-    const videoFile = files.find((f) => f.startsWith(VIDEO_BASENAME) && /\.(mp4|webm)$/i.test(f));
+    const videoFile = files.find((f) => f.startsWith(VIDEO_BASENAME) && /\.(mp4|webm|mov)$/i.test(f));
     return videoFile ? `/demo/${videoFile}` : null;
   } catch {
     return null;

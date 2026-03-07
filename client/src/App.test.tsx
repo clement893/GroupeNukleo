@@ -68,10 +68,6 @@ vi.mock('./components/FloatingLanguageToggle', () => ({
   FloatingLanguageToggle: () => null,
 }));
 
-vi.mock('./components/UniversalLEO', () => ({
-  default: () => null,
-}));
-
 describe('App', () => {
   it('should render without crashing', () => {
     render(<App />);

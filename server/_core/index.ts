@@ -484,6 +484,20 @@ async function startServer() {
     res.json({ path: publicPath });
   });
 
+  // Ensure upload directories exist in production (Railway disk storage)
+  if (process.env.NODE_ENV === "production" && !isR2Configured()) {
+    const demoDir = getUnionVideoDir();
+    if (!existsSync(demoDir)) {
+      try {
+        mkdirSync(demoDir, { recursive: true });
+        logger.info("[Upload] Created demo dir for disk storage", { path: demoDir });
+      } catch (e) {
+        logger.error("[Upload] Failed to create demo dir", { path: demoDir, error: e });
+      }
+    }
+    logger.warn("[Upload] R2 non configuré — les fichiers seront stockés sur disque (éphémère sur Railway, perte au redéploiement)");
+  }
+
   // Union section video (public + admin upload) — R2 or filesystem
   app.get("/api/union-video", async (_req, res) => {
     try {
@@ -527,11 +541,21 @@ async function startServer() {
     requireAdminAuth,
     (req, res, next) => {
       const mw = isR2Configured() ? unionVideoMemoryUpload : unionVideoDiskUpload;
-      mw.single("video")(req, res, next);
+      mw.single("video")(req, res, (err: any) => {
+        if (err) {
+          logger.warn("[UnionVideo] Multer error", { code: err?.code, message: err?.message });
+          return next(err);
+        }
+        next();
+      });
     },
     async (req, res) => {
-      if (!req.file) return res.status(400).json({ error: "Aucun fichier vidéo" });
+      if (!req.file) {
+        logger.warn("[UnionVideo] No file in request");
+        return res.status(400).json({ error: "Aucun fichier vidéo. Vérifiez que le champ s'appelle « video »." });
+      }
       try {
+        logger.info("[UnionVideo] Upload received", { originalname: req.file.originalname, size: req.file.size, hasBuffer: !!req.file.buffer });
         if (isR2Configured() && req.file.buffer) {
           let ext = /\.(mp4|webm|mov)$/i.test(req.file.originalname) ? path.extname(req.file.originalname).toLowerCase() : "";
           if (!ext && /quicktime/i.test(req.file.mimetype)) ext = ".mov";
@@ -539,9 +563,11 @@ async function startServer() {
           const url = await uploadUnionVideoToR2(req.file.buffer, req.file.mimetype, ext);
           return res.json({ path: url });
         }
-        res.json({ path: `/demo/${req.file.filename}` });
+        const publicPath = `/demo/${req.file.filename}`;
+        logger.info("[UnionVideo] Disk upload OK", { path: publicPath });
+        res.json({ path: publicPath });
       } catch (e) {
-        console.error("[UnionVideo] Upload error", e);
+        logger.error("[UnionVideo] Upload error", e);
         res.status(500).json({ error: e instanceof Error ? e.message : "Erreur upload" });
       }
     }
@@ -589,18 +615,30 @@ async function startServer() {
     requireAdminAuth,
     (req, res, next) => {
       const mw = isR2Configured() ? pressReleaseMemoryUpload : pressReleaseDiskUpload;
-      mw.single("pdf")(req, res, next);
+      mw.single("pdf")(req, res, (err: any) => {
+        if (err) {
+          logger.warn("[PressRelease] Multer error", { code: err?.code, message: err?.message });
+          return next(err);
+        }
+        next();
+      });
     },
     async (req, res) => {
-      if (!req.file) return res.status(400).json({ error: "Aucun fichier PDF" });
+      if (!req.file) {
+        logger.warn("[PressRelease] No file in request");
+        return res.status(400).json({ error: "Aucun fichier PDF. Vérifiez que le champ s'appelle « pdf »." });
+      }
       try {
+        logger.info("[PressRelease] Upload received", { originalname: req.file.originalname, size: req.file.size, hasBuffer: !!req.file.buffer });
         if (isR2Configured() && req.file.buffer) {
           const url = await uploadPressReleaseToR2(req.file.buffer);
           return res.json({ path: url });
         }
-        res.json({ path: `/demo/${req.file.filename}` });
+        const publicPath = `/demo/${req.file.filename}`;
+        logger.info("[PressRelease] Disk upload OK", { path: publicPath });
+        res.json({ path: publicPath });
       } catch (e) {
-        console.error("[PressRelease] Upload error", e);
+        logger.error("[PressRelease] Upload error", e);
         res.status(500).json({ error: e instanceof Error ? e.message : "Erreur upload" });
       }
     }
@@ -735,178 +773,6 @@ async function startServer() {
     }
   });
 
-  // Projects images upload endpoint (admin only)
-  const PROJECTS_IMAGES_DIR = path.resolve(process.cwd(), "client", "public", "projects");
-  const USE_BUCKET = !!(process.env.BUILT_IN_FORGE_API_URL && process.env.BUILT_IN_FORGE_API_KEY);
-  
-  // Configure multer - use memory storage for bucket uploads, disk storage for local
-  const multerStorage = USE_BUCKET 
-    ? multer.memoryStorage()
-    : multer.diskStorage({
-        destination: (req, file, cb) => {
-          if (!existsSync(PROJECTS_IMAGES_DIR)) {
-            mkdirSync(PROJECTS_IMAGES_DIR, { recursive: true });
-          }
-          cb(null, PROJECTS_IMAGES_DIR);
-        },
-        filename: (req, file, cb) => {
-          // Keep original filename, sanitize it
-          const sanitized = file.originalname.replace(/[^a-zA-Z0-9._-]/g, '_');
-          cb(null, sanitized);
-        },
-      });
-  
-  // File filter for image validation - checks both extension and MIME type
-  const imageFileFilter = (req: any, file: Express.Multer.File, cb: multer.FileFilterCallback) => {
-    // Allowed MIME types
-    const allowedMimes = [
-      'image/jpeg',
-      'image/jpg',
-      'image/png',
-      'image/gif',
-      'image/webp',
-    ];
-    
-    // Allowed file extensions
-    const allowedExtensions = /\.(jpg|jpeg|png|gif|webp)$/i;
-    
-    // Check both MIME type and extension for security
-    const isValidMime = allowedMimes.includes(file.mimetype);
-    const isValidExtension = allowedExtensions.test(file.originalname);
-    
-    if (isValidMime && isValidExtension) {
-      cb(null, true);
-    } else {
-      cb(new Error('Invalid file type. Only JPEG, PNG, GIF, and WebP images are allowed.'));
-    }
-  };
-  
-  const upload = multer({
-    storage: multerStorage,
-    limits: {
-      fileSize: 10 * 1024 * 1024, // 10MB max file size
-    },
-    fileFilter: imageFileFilter,
-  });
-  
-  app.post("/api/admin/projects-images/upload", 
-    requireAdminAuth, 
-    (req, res, next) => {
-      console.log("[ProjectsImages] Auth check passed, processing upload...");
-      next();
-    },
-    upload.single('image'), 
-    async (req, res, next) => {
-      try {
-        console.log("[ProjectsImages] Upload request received", {
-          hasFile: !!req.file,
-          fileField: req.file?.fieldname,
-          fileName: req.file?.originalname,
-          fileSize: req.file?.size,
-        });
-
-      if (!req.file) {
-        console.error("[ProjectsImages] No file in request");
-        return res.status(400).json({ error: 'No file uploaded. Please select an image file.' });
-      }
-      
-      const sanitized = req.file.originalname.replace(/[^a-zA-Z0-9._-]/g, '_');
-      const filename = USE_BUCKET ? sanitized : req.file.filename;
-      
-      // Get file buffer for bucket upload (if needed)
-      let fileBuffer: Buffer | undefined;
-      if (USE_BUCKET) {
-        fileBuffer = req.file.buffer;
-      } else {
-        // Read file from disk if using local storage
-        try {
-          fileBuffer = await fs.readFile(req.file.path);
-        } catch (readError) {
-          console.error("[ProjectsImages] Failed to read uploaded file:", readError);
-        }
-      }
-      
-      // Always save to local public folder for immediate access
-      try {
-        if (!existsSync(PROJECTS_IMAGES_DIR)) {
-          mkdirSync(PROJECTS_IMAGES_DIR, { recursive: true });
-        }
-        
-        if (USE_BUCKET && fileBuffer) {
-          // Write buffer to local folder
-          await fs.writeFile(
-            path.join(PROJECTS_IMAGES_DIR, sanitized),
-            fileBuffer
-          );
-        } else if (!USE_BUCKET) {
-          // Move file from temp location to public folder
-          const destPath = path.join(PROJECTS_IMAGES_DIR, filename);
-          await fs.rename(req.file.path, destPath);
-        }
-      } catch (localError) {
-        console.error("[ProjectsImages] Failed to save locally:", localError);
-        // Clean up temp file if using local storage
-        if (!USE_BUCKET && req.file.path) {
-          try {
-            await fs.unlink(req.file.path);
-          } catch (cleanupError) {
-            // Ignore cleanup errors
-          }
-        }
-        return res.status(500).json({ error: 'Failed to save image locally' });
-      }
-      
-      // Also upload to bucket as backup if available
-      if (USE_BUCKET && fileBuffer) {
-        try {
-          const { storagePut } = await import("../storage");
-          const storageKey = `projects/${sanitized}`;
-          const contentType = req.file.mimetype || 'image/jpeg';
-          
-          await storagePut(
-            storageKey,
-            fileBuffer,
-            contentType
-          );
-          console.log(`[ProjectsImages] Image also saved to bucket: ${storageKey}`);
-        } catch (bucketError) {
-          console.warn("[ProjectsImages] Failed to save to bucket (non-critical):", bucketError);
-          // Non-critical error, continue
-        }
-      }
-      
-      console.log("[ProjectsImages] Upload successful", {
-        filename,
-        url: `/projects/${filename}`,
-        size: req.file.size,
-      });
-
-      res.json({ 
-        success: true, 
-        filename: filename,
-        originalName: req.file.originalname,
-        size: req.file.size,
-        url: `/projects/${filename}`,
-        message: USE_BUCKET 
-          ? 'Image uploaded successfully (local + bucket backup)' 
-          : 'Image uploaded successfully' 
-      });
-    } catch (error: any) {
-      console.error("[ProjectsImages] Upload error:", error);
-      console.error("[ProjectsImages] Error stack:", error.stack);
-      
-      // Handle multer errors specifically
-      if (error instanceof multer.MulterError) {
-        if (error.code === 'LIMIT_FILE_SIZE') {
-          return res.status(400).json({ error: 'File too large. Maximum size is 10MB' });
-        }
-        return res.status(400).json({ error: `Upload error: ${error.message}` });
-      }
-      
-      res.status(500).json({ error: error.message || 'Failed to upload image' });
-    }
-  });
-  
   // Error handler for multer (catches errors from upload middleware)
   app.use((err: any, req: express.Request, res: express.Response, next: express.NextFunction) => {
     if (err instanceof multer.MulterError) {
@@ -919,10 +785,6 @@ async function startServer() {
         return res.status(400).json({ error: msg });
       }
       return res.status(400).json({ error: `Upload error: ${err.message}` });
-    }
-    if (err && req.path === '/api/admin/projects-images/upload') {
-      console.error("[ProjectsImages] Upload middleware error:", err);
-      return res.status(400).json({ error: err.message || 'Upload failed' });
     }
     if (err && req.path === '/api/admin/carousel-logos/upload') {
       return res.status(400).json({ error: err.message || 'Upload failed' });
@@ -1130,45 +992,6 @@ async function startServer() {
       });
     });
     
-    // Debug endpoint to list files in projects directory (development only)
-    app.get('/api/debug/projects-images', async (req, res) => {
-      try {
-        const files = existsSync(projectsImagesPath) ? await fs.readdir(projectsImagesPath) : [];
-        const imageFiles = files.filter(
-          (file) => /\.(jpg|jpeg|png|gif|webp)$/i.test(file)
-        );
-        res.json({
-          path: projectsImagesPath,
-          exists: existsSync(projectsImagesPath),
-          files: imageFiles,
-          total: imageFiles.length,
-          cwd: process.cwd(),
-          nodeEnv: process.env.NODE_ENV,
-        });
-      } catch (error: any) {
-        res.status(500).json({ error: error.message });
-      }
-    });
-    
-    // Test endpoint to directly call the listImages function (development only)
-    app.get('/api/debug/projects-images-trpc', async (req, res) => {
-      try {
-        // Import and call the listImages function directly
-        const { listImages } = await import("../routers/projectsImages");
-        const result = await listImages();
-        res.json({
-          success: true,
-          count: result.length,
-          images: result,
-        });
-      } catch (error: any) {
-        console.error("[Debug] Error calling listImages:", error);
-        res.status(500).json({ 
-          error: error.message,
-          stack: error.stack 
-        });
-      }
-    });
   }
   
   // development mode uses Vite, production mode uses static files

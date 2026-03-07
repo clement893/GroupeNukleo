@@ -65,7 +65,8 @@ export default function AdminUnionVideo() {
       });
       if (!res.ok) {
         const data = await res.json().catch(() => ({}));
-        throw new Error(data?.error || "Erreur upload");
+        const msg = data?.error || data?.message || (res.status === 401 ? "Session expirée. Reconnectez-vous." : "Erreur upload");
+        throw new Error(msg);
       }
       const { path } = await res.json();
       setVideoPath(path);

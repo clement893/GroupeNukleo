@@ -19,8 +19,6 @@ import { radarRouter } from "./routers/radar";
 import { analyticsRouter } from "./routers/analytics";
 import { migrateRouter } from "./routers/migrate";
 import { pageTextsRouter } from "./routers/pageTexts";
-import { projectsImagesRouter } from "./routers/projectsImages";
-import { projectsRouter } from "./routers/projects";
 import { carouselLogosRouter } from "./routers/carouselLogos";
 import { saveLeoContact, createLeoSession, updateLeoSession } from "./db";
 export const appRouter = router({
@@ -40,8 +38,6 @@ export const appRouter = router({
   analytics: analyticsRouter,
   migrate: migrateRouter,
   pageTexts: pageTextsRouter,
-  projectsImages: projectsImagesRouter,
-  projects: projectsRouter,
   carouselLogos: carouselLogosRouter,
   auth: router({
     me: publicProcedure.query(opts => opts.ctx.user),

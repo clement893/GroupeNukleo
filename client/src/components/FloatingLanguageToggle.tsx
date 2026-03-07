@@ -15,10 +15,6 @@ export function FloatingLanguageToggle() {
     '/fr/resources',
     '/about',
     '/fr/about',
-    '/glossary',
-    '/fr/glossary',
-    '/assessment',
-    '/fr/assessment',
   ];
 
   useEffect(() => {

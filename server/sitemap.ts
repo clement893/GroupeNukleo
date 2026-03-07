@@ -7,7 +7,6 @@ const STATIC_PATHS: { path: string; priority: string; changefreq: string }[] = [
   { path: '', priority: '1.0', changefreq: 'weekly' },
   { path: '/about', priority: '0.9', changefreq: 'monthly' },
   { path: '/approche', priority: '0.8', changefreq: 'monthly' },
-  { path: '/projects', priority: '0.8', changefreq: 'weekly' },
   { path: '/resources', priority: '0.9', changefreq: 'weekly' },
   { path: '/contact', priority: '0.7', changefreq: 'monthly' },
   { path: '/leo', priority: '0.7', changefreq: 'monthly' },
@@ -100,39 +99,6 @@ router.get('/sitemap.xml', (req, res) => {
     <xhtml:link rel="alternate" hreflang="fr" href="${locFr}"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="${locEn}"/>
   </url>`);
-  }
-
-  // Project detail pages (slugs from projectsData)
-  try {
-    const { PROJECTS_DATA } = require('../client/src/data/projectsData') as { PROJECTS_DATA: { slug: string }[] };
-    for (const project of PROJECTS_DATA) {
-      const enPath = `/projects/${project.slug}`;
-      const frPath = `/fr/projects/${project.slug}`;
-      const locEn = `${baseUrl}${enPath}`;
-      const locFr = `${baseUrl}${frPath}`;
-
-      urls.push(`  <url>
-    <loc>${locEn}</loc>
-    <lastmod>${currentDate}</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-    <xhtml:link rel="alternate" hreflang="en" href="${locEn}"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="${locFr}"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="${locEn}"/>
-  </url>`);
-
-      urls.push(`  <url>
-    <loc>${locFr}</loc>
-    <lastmod>${currentDate}</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-    <xhtml:link rel="alternate" hreflang="en" href="${locEn}"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="${locFr}"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="${locEn}"/>
-  </url>`);
-    }
-  } catch {
-    // Skip project detail URLs if data not available (e.g. build without client)
   }
 
   const sitemap = `<?xml version="1.0" encoding="UTF-8"?>

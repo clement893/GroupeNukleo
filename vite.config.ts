@@ -169,9 +169,6 @@ export default defineConfig({
           if (id.includes('/components/glossary/')) {
             return 'glossary';
           }
-          if (id.includes('/components/UniversalLEO') || id.includes('/components/Leo') || id.includes('/pages/Leo')) {
-            return 'leo';
-          }
           // Split large components
           if (id.includes('/components/TestimonialsCarousel') || id.includes('/components/ClientLogos')) {
             return 'carousels';
