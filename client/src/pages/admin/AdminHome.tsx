@@ -3,7 +3,6 @@ import { Card, CardDescription, CardHeader, CardTitle } from "@/components/ui/ca
 import { AdminLayout } from "@/components/AdminLayout";
 import {
   LayoutDashboard,
-  BarChart3,
   Settings,
   ArrowRight,
   TrendingUp,
@@ -54,7 +53,6 @@ const ADMIN_CATEGORIES = [
     sections: [
       { title: "Dashboard", description: "Vue d'ensemble des statistiques et métriques principales", icon: <LayoutDashboard className="h-5 w-5" />, href: "/admin/dashboard" },
       { title: "Analytics & Tracking", description: "Google Analytics, Facebook Pixel, LinkedIn Insight Tag", icon: <TrendingUp className="h-5 w-5" />, href: "/admin/analytics" },
-      { title: "LEO Analytics", description: "Statistiques des interactions avec LEO", icon: <BarChart3 className="h-5 w-5" />, href: "/admin/leo-analytics" },
     ],
   },
   {

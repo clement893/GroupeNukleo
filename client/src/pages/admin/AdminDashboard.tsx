@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Users, MessageSquare, FileText, TrendingUp, Activity, Database, BarChart3, Settings } from "lucide-react";
+import { Users, MessageSquare, FileText, TrendingUp, Activity, Database, BarChart3, Video } from "lucide-react";
 import { AdminLayout } from "@/components/AdminLayout";
 
 async function fetchAdminStats() {
@@ -121,12 +121,27 @@ export default function AdminDashboard() {
                   <div className="text-gray-900 font-medium" style={{ fontFamily: "'Neue Haas Unica Pro', sans-serif" }}>Analytics & Tracking</div>
                   <div className="text-gray-500 text-sm" style={{ fontFamily: "'Neue Haas Unica Pro', sans-serif" }}>Google Analytics, Facebook Pixel, LinkedIn</div>
                 </a>
+              </CardContent>
+            </Card>
+
+            {/* Vidéo page d'accueil */}
+            <Card className="bg-white border border-gray-200 shadow-sm">
+              <CardHeader>
+                <CardTitle className="text-gray-900 flex items-center gap-2" style={{ fontFamily: "'Neue Haas Unica Pro', sans-serif" }}>
+                  <Video className="w-5 h-5" />
+                  Vidéo page d&apos;accueil
+                </CardTitle>
+                <CardDescription className="text-gray-500" style={{ fontFamily: "'Neue Haas Unica Pro', sans-serif" }}>
+                  Section « L&apos;union de deux forces »
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
                 <a
-                  href="/admin/leo-analytics"
+                  href="/admin/union-video"
                   className="block p-3 rounded-lg bg-gray-50 hover:bg-gray-100 transition-colors text-gray-700 hover:text-gray-900"
                 >
-                  <div className="text-gray-900 font-medium" style={{ fontFamily: "'Neue Haas Unica Pro', sans-serif" }}>LEO Analytics</div>
-                  <div className="text-gray-500 text-sm" style={{ fontFamily: "'Neue Haas Unica Pro', sans-serif" }}>View detailed LEO session data</div>
+                  <div className="text-gray-900 font-medium" style={{ fontFamily: "'Neue Haas Unica Pro', sans-serif" }}>Changer la vidéo</div>
+                  <div className="text-gray-500 text-sm" style={{ fontFamily: "'Neue Haas Unica Pro', sans-serif" }}>Uploader ou remplacer la vidéo de la section Union</div>
                 </a>
               </CardContent>
             </Card>

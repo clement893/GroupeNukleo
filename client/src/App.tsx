@@ -24,7 +24,6 @@ import NotFound404 from "@/pages/NotFound404";
 const HomepageDemo5 = lazyWithRetry(() => import('./pages/HomepageDemo5'));
 
 // Admin pages (pages supprimées : leo-contacts, contact-messages, start-project, testimonials, page-visibility, page-texts, projects-images, run-migration)
-const AdminLEOAnalytics = lazy(() => import("./pages/admin/AdminLEOAnalytics"));
 const AdminLogin = lazy(() => import("./pages/admin/AdminLogin"));
 const CreateFirstAdmin = lazy(() => import("./pages/CreateFirstAdmin"));
 const AdminDashboard = lazy(() => import("./pages/admin/AdminDashboard"));
@@ -65,9 +64,6 @@ function App() {
 
               {/* ===== ROUTES ADMIN ===== */}
               <Route path="/admin/login" component={AdminLogin} />
-              <Route path="/admin/leo-analytics">
-                <ProtectedAdminRoute><AdminLEOAnalytics /></ProtectedAdminRoute>
-              </Route>
               <Route path="/admin/dashboard">
                 <ProtectedAdminRoute><AdminDashboard /></ProtectedAdminRoute>
               </Route>

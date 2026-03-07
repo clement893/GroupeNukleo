@@ -1,7 +1,6 @@
 import { Link, useLocation } from "wouter";
 import {
   LayoutDashboard,
-  BarChart3,
   TrendingUp,
   ChevronRight,
   LayoutGrid,
@@ -15,7 +14,6 @@ const NAV_GROUPS = [
     items: [
       { label: "Dashboard", href: "/admin/dashboard", icon: LayoutDashboard },
       { label: "Analytics", href: "/admin/analytics", icon: TrendingUp },
-      { label: "LEO Analytics", href: "/admin/leo-analytics", icon: BarChart3 },
     ],
   },
   {
