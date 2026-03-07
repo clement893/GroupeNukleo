@@ -49,12 +49,11 @@ export default function PageLoader() {
   const [isFirstLoad, setIsFirstLoad] = useState(true);
   const prevLocationRef = useRef(location);
 
-  // Don't show loader in admin area, contact page, or manifesto page - memoized
+  // Don't show loader in admin area or manifesto page - memoized
   const shouldSkipLoader = useMemo(() => {
     const isAdminArea = location.startsWith("/admin");
-    const isContactPage = location === "/contact" || location === "/fr/contact" || location.startsWith("/contact/") || location.startsWith("/fr/contact/");
     const isManifestoPage = location === "/manifesto" || location === "/fr/manifesto" || location.startsWith("/manifesto/") || location.startsWith("/fr/manifesto/");
-    return isAdminArea || isContactPage || isManifestoPage;
+    return isAdminArea || isManifestoPage;
   }, [location]);
 
   // Body is now visible by default in index.html, so we don't need to show it here
@@ -66,7 +65,7 @@ export default function PageLoader() {
     }
   }, []);
 
-  // If in admin area, contact page, or manifesto page, show body immediately and don't fetch loaders
+  // If in admin area or manifesto page, show body immediately and don't fetch loaders
   useEffect(() => {
     if (shouldSkipLoader) {
       setIsLoading(false);

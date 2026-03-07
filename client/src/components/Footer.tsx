@@ -8,25 +8,27 @@ const FOOTER_BG = '#1E202B';
 const FOOTER_TEXT_WHITE = '#ffffff';
 const FOOTER_LINE = 'rgba(255, 255, 255, 0.5)';
 
-// Liens principaux (one-page : ancres)
+// Liens principaux — ancres sur la home (single-page)
 const MAIN_LINKS = [
-  { key: 'home' as const, href: '/' },
-  { key: 'about' as const, href: '#about' },
-  { key: 'projects' as const, href: '#projects' },
-  { key: 'contact' as const, href: '#contact' },
-  { key: 'faq' as const, href: '#about' },
+  { key: 'home' as const, anchor: '' },
+  { key: 'about' as const, anchor: '#about' },
+  { key: 'projects' as const, anchor: '#projects' },
+  { key: 'contact' as const, anchor: '#contact' },
+  { key: 'faq' as const, anchor: '#faq' },
 ];
 
 const SERVICE_LINKS = [
-  { labelKey: 'menu.serviceTech' as const, href: '#services' },
-  { labelKey: 'menu.serviceStudio' as const, href: '#services' },
-  { labelKey: 'menu.serviceAgency' as const, href: '#services' },
-  { labelKey: 'menu.serviceConsulting' as const, href: '#services' },
+  { labelKey: 'menu.serviceTech' as const, anchor: '#services' },
+  { labelKey: 'menu.serviceStudio' as const, anchor: '#services' },
+  { labelKey: 'menu.serviceAgency' as const, anchor: '#services' },
+  { labelKey: 'menu.serviceConsulting' as const, anchor: '#services' },
 ];
 
 function Footer() {
   const { t } = useLanguage();
   const getLocalizedPath = useLocalizedPath();
+  const visibleMainLinks = MAIN_LINKS;
+  const visibleServiceLinks = SERVICE_LINKS;
 
   const mainNavLabels: Record<string, string> = useMemo(() => ({
     home: t('nav.home'),
@@ -74,28 +76,28 @@ function Footer() {
           </Link>
           <div className="grid grid-cols-2 gap-x-12 sm:gap-x-16 gap-y-1">
             <ul className="space-y-3">
-              {MAIN_LINKS.map((item) => (
-                <li key={item.href}>
-                  <a
-                    href={item.href.startsWith('#') ? item.href : getLocalizedPath(item.href)}
+              {visibleMainLinks.map((item) => (
+                <li key={item.anchor || 'home'}>
+                  <Link
+                    href={getLocalizedPath('/') + (item.anchor || '')}
                     className="text-base sm:text-lg hover:opacity-85 transition-opacity touch-manipulation block"
                     style={{ color: FOOTER_TEXT_WHITE }}
                   >
                     {mainNavLabels[item.key]}
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>
             <ul className="space-y-3">
-              {SERVICE_LINKS.map((item) => (
-                <li key={item.labelKey}>
-                  <a
-                    href={item.href}
+              {visibleServiceLinks.map((item, i) => (
+                <li key={item.labelKey + i}>
+                  <Link
+                    href={getLocalizedPath('/') + item.anchor}
                     className="text-base sm:text-lg hover:opacity-85 transition-opacity touch-manipulation block"
                     style={{ color: FOOTER_TEXT_WHITE }}
                   >
                     {t(item.labelKey)}
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>

@@ -25,7 +25,7 @@ export default function SchemaOrg({ type, data }: SchemaOrgProps) {
           "contactPoint": {
             "@type": "ContactPoint",
             "contactType": "Business Inquiries",
-            "url": "https://nukleodigital-production.up.railway.app/contact"
+            "url": "https://nukleodigital-production.up.railway.app"
           },
           "sameAs": [
             "https://github.com/clement893/nukleo.digital"
