@@ -6,7 +6,7 @@ import { Upload, Video, Loader2 } from "lucide-react";
 import { toast } from "sonner";
 import "@/styles/admin.css";
 
-const ACCEPT_VIDEO = "video/mp4,video/webm";
+const ACCEPT_VIDEO = "video/mp4,video/webm,video/quicktime";
 
 export default function AdminUnionVideo() {
   const [videoPath, setVideoPath] = useState<string | null>(null);
@@ -39,7 +39,7 @@ export default function AdminUnionVideo() {
     if (file && file.type.startsWith("video/")) {
       setSelectedFile(file);
     } else {
-      toast.error("Déposez une vidéo (MP4 ou WebM)");
+      toast.error("Déposez une vidéo (MP4, WebM ou MOV)");
     }
   }, []);
 
@@ -87,7 +87,7 @@ export default function AdminUnionVideo() {
             Vidéo section Union
           </h1>
           <p className="text-gray-300">
-            Vidéo affichée dans la section « L&apos;union de deux forces » sur la page d&apos;accueil. Formats acceptés : MP4, WebM (max 100 Mo).
+            Vidéo affichée dans la section « L&apos;union de deux forces » sur la page d&apos;accueil. Formats acceptés : MP4, WebM, MOV (max 100 Mo).
           </p>
         </div>
 
@@ -142,7 +142,7 @@ export default function AdminUnionVideo() {
                 <p className="text-gray-400 mb-1">
                   Glissez une vidéo ici ou cliquez pour sélectionner
                 </p>
-                <p className="text-sm text-gray-500">MP4 ou WebM, max 100 Mo</p>
+                <p className="text-sm text-gray-500">MP4, WebM ou MOV, max 100 Mo</p>
               </label>
               {selectedFile && (
                 <div className="mt-4 p-3 rounded bg-gray-700/50">

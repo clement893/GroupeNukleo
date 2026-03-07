@@ -496,8 +496,8 @@ async function startServer() {
   });
 
   const unionVideoFileFilter = (_req: express.Request, file: Express.Multer.File, cb: multer.FileFilterCallback) => {
-    const ok = /^video\/(mp4|webm)$/i.test(file.mimetype);
-    cb(ok ? null : new Error("Format non supporté. Utilisez MP4 ou WebM."), ok);
+    const ok = /^video\/(mp4|webm|quicktime)$/i.test(file.mimetype);
+    cb(ok ? null : new Error("Format non supporté. Utilisez MP4, WebM ou MOV."), ok);
   };
   const unionVideoLimits = { fileSize: 100 * 1024 * 1024 };
 
@@ -514,7 +514,7 @@ async function startServer() {
         cb(null, UNION_VIDEO_DIR);
       },
       filename: (_req, file, cb) => {
-        const ext = /\.(mp4|webm)$/i.test(file.originalname) ? path.extname(file.originalname).toLowerCase() : ".mp4";
+        const ext = /\.(mp4|webm|mov)$/i.test(file.originalname) ? path.extname(file.originalname).toLowerCase() : ".mp4";
         cb(null, `union-video${ext}`);
       },
     }),
@@ -533,7 +533,9 @@ async function startServer() {
       if (!req.file) return res.status(400).json({ error: "Aucun fichier vidéo" });
       try {
         if (isR2Configured() && req.file.buffer) {
-          const ext = /\.(mp4|webm)$/i.test(req.file.originalname) ? path.extname(req.file.originalname).toLowerCase() : ".mp4";
+          let ext = /\.(mp4|webm|mov)$/i.test(req.file.originalname) ? path.extname(req.file.originalname).toLowerCase() : "";
+          if (!ext && /quicktime/i.test(req.file.mimetype)) ext = ".mov";
+          if (!ext) ext = ".mp4";
           const url = await uploadUnionVideoToR2(req.file.buffer, req.file.mimetype, ext);
           return res.json({ path: url });
         }
