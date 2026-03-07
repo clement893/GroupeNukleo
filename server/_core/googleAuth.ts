@@ -1,5 +1,6 @@
 import passport from "passport";
 import { Strategy as GoogleStrategy } from "passport-google-oauth20";
+import jwt from "jsonwebtoken";
 import { ENV } from "./env";
 import { logger } from "./logger";
 
@@ -109,7 +110,6 @@ export function requireAdminAuth(req: any, res: any, next: any) {
   if (authHeader?.startsWith("Bearer ")) {
     const token = authHeader.slice(7);
     try {
-      const jwt = require("jsonwebtoken");
       const decoded = jwt.verify(token, ADMIN_JWT_SECRET) as { type?: string; id?: number };
       if (decoded?.id && (decoded.type === "upload" || !decoded.type)) {
         console.log(`[AdminAuth] OK ${req.path}: Bearer token (id=${decoded.id})`);
@@ -131,7 +131,6 @@ export function requireAdminAuth(req: any, res: any, next: any) {
 
   if (adminToken) {
     try {
-      const jwt = require("jsonwebtoken");
       const decoded = jwt.verify(adminToken, ADMIN_JWT_SECRET);
       if (decoded && decoded.id) {
         return next();
