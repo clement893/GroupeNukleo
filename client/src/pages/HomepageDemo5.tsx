@@ -328,7 +328,7 @@ export default function HomepageDemo5() {
       >
         {/* ── Contenu principal ─────────────────────────────────────────────── */}
         <div style={{ position: 'relative', zIndex: 10, paddingTop: 'clamp(5rem, 15vw, 8rem)' }}>
-        <div className="content-max-width" style={{ paddingLeft: 'var(--site-margin, 3%)', paddingRight: 'var(--site-margin, 3%)', width: '100%' }}>
+          <div className="content-max-width" style={{ paddingLeft: 'var(--site-margin, 3%)', paddingRight: 'var(--site-margin, 3%)', width: '100%' }}>
 
         {/* ════════════════════════════════════════════════════════════════════
             SECTION HERO — Le Groupe Nukleo + paragraphe à droite
@@ -477,6 +477,7 @@ export default function HomepageDemo5() {
         ════════════════════════════════════════════════════════════════════ */}
         <TwoCitiesSection />
 
+          </div>
         </div>
       </div>
     </PageLayout>
