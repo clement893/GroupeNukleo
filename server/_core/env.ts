@@ -14,6 +14,12 @@ export const ENV = {
   adminUsername: process.env.ADMIN_USERNAME ?? "Nukleo",
   adminPassword: process.env.ADMIN_PASSWORD ?? "NukleoGroup",
   baseUrl: process.env.BASE_URL ?? "http://localhost:3000",
+  /** Cloudflare R2 (S3-compatible) for media uploads */
+  r2AccountId: process.env.R2_ACCOUNT_ID ?? "",
+  r2AccessKeyId: process.env.R2_ACCESS_KEY_ID ?? "",
+  r2SecretAccessKey: process.env.R2_SECRET_ACCESS_KEY ?? "",
+  r2BucketName: process.env.R2_BUCKET_NAME ?? "",
+  r2PublicUrl: process.env.R2_PUBLIC_URL ?? "",
   internalPlatformUrl: process.env.INTERNAL_PLATFORM_URL ?? "", // URL de la plateforme interne pour récupérer les témoignages
   internalPlatformApiKey: process.env.INTERNAL_PLATFORM_API_KEY ?? "", // Clé API optionnelle pour l'authentification
 };

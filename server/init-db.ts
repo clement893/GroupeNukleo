@@ -324,6 +324,16 @@ export async function initDatabase(req: Request, res: Response) {
       );
     `);
 
+    // Create site_media table (union video, press release URLs when using R2)
+    await db.execute(sql`
+      CREATE TABLE IF NOT EXISTS site_media (
+        id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+        key VARCHAR(64) NOT NULL UNIQUE,
+        url VARCHAR(1024) NOT NULL,
+        "updatedAt" TIMESTAMP DEFAULT NOW() NOT NULL
+      );
+    `);
+
     res.json({ 
       message: "Database initialized successfully! All tables created.",
       tables: [
@@ -345,7 +355,8 @@ export async function initDatabase(req: Request, res: Response) {
         "analytics",
         "page_texts",
         "carousel_logos",
-        "projects_store"
+        "projects_store",
+        "site_media"
       ]
     });
   } catch (error) {

@@ -318,3 +318,14 @@ export const carouselLogos = pgTable("carousel_logos", {
 
 export type CarouselLogo = typeof carouselLogos.$inferSelect;
 export type InsertCarouselLogo = typeof carouselLogos.$inferInsert;
+
+// Site media (union video, press release) - URLs stored when using R2
+export const siteMedia = pgTable("site_media", {
+  id: integer("id").primaryKey().generatedAlwaysAsIdentity(),
+  key: varchar("key", { length: 64 }).notNull().unique(), // 'union_video' | 'press_release'
+  url: varchar("url", { length: 1024 }).notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().notNull(),
+});
+
+export type SiteMedia = typeof siteMedia.$inferSelect;
+export type InsertSiteMedia = typeof siteMedia.$inferInsert;

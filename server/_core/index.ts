@@ -25,6 +25,13 @@ import { getDb, getAllAgencyLeads, getLeoAnalytics, getLeoContacts, getAdminStat
 import { addLogo, updateLogo, removeLogo, reorderLogos } from "../carouselLogosApi";
 import { getUnionVideoPath, getUnionVideoDir } from "../unionVideoApi";
 import { getPressReleasePath, getPressReleaseDir } from "../pressReleaseApi";
+import {
+  getUnionVideoUrl,
+  getPressReleaseUrl,
+  uploadUnionVideoToR2,
+  uploadPressReleaseToR2,
+} from "../mediaStorageApi";
+import { isR2Configured } from "../r2Storage";
 import { analytics } from "../../drizzle/schema";
 import { eq } from "drizzle-orm";
 import postgres from "postgres";
@@ -163,7 +170,9 @@ async function startServer() {
           "https://*.googletagmanager.com", 
           "https://www.google-analytics.com", 
           "https://*.google-analytics.com",
-          "https://google-analytics.com"
+          "https://google-analytics.com",
+          "https://*.r2.dev",
+          "https://*.cloudflarestorage.com"
         ],
         frameSrc: ["'self'", "https://www.google.com", "https://maps.google.com", "https://maps.googleapis.com", "https://www.openstreetmap.org"],
         objectSrc: ["'none'"],
@@ -475,19 +484,30 @@ async function startServer() {
     res.json({ path: publicPath });
   });
 
-  // Union section video (public + admin upload)
+  // Union section video (public + admin upload) — R2 or filesystem
   app.get("/api/union-video", async (_req, res) => {
     try {
-      const path = await getUnionVideoPath();
-      res.json({ path });
+      const url = isR2Configured() ? await getUnionVideoUrl() : await getUnionVideoPath();
+      res.json({ path: url });
     } catch (e) {
       console.error("[UnionVideo] GET error", e);
       res.json({ path: null });
     }
   });
 
+  const unionVideoFileFilter = (_req: express.Request, file: Express.Multer.File, cb: multer.FileFilterCallback) => {
+    const ok = /^video\/(mp4|webm)$/i.test(file.mimetype);
+    cb(ok ? null : new Error("Format non supporté. Utilisez MP4 ou WebM."), ok);
+  };
+  const unionVideoLimits = { fileSize: 100 * 1024 * 1024 };
+
+  const unionVideoMemoryUpload = multer({
+    storage: multer.memoryStorage(),
+    limits: unionVideoLimits,
+    fileFilter: unionVideoFileFilter,
+  });
   const UNION_VIDEO_DIR = getUnionVideoDir();
-  const unionVideoUpload = multer({
+  const unionVideoDiskUpload = multer({
     storage: multer.diskStorage({
       destination: (_req, _file, cb) => {
         if (!existsSync(UNION_VIDEO_DIR)) mkdirSync(UNION_VIDEO_DIR, { recursive: true });
@@ -498,30 +518,57 @@ async function startServer() {
         cb(null, `union-video${ext}`);
       },
     }),
-    limits: { fileSize: 100 * 1024 * 1024 },
-    fileFilter: (_req, file, cb) => {
-      const ok = /^video\/(mp4|webm)$/i.test(file.mimetype);
-      cb(ok ? null : new Error("Format non supporté. Utilisez MP4 ou WebM."), ok);
-    },
-  });
-  app.post("/api/admin/union-video/upload", requireAdminAuth, unionVideoUpload.single("video"), (req, res) => {
-    if (!req.file) return res.status(400).json({ error: "Aucun fichier vidéo" });
-    res.json({ path: `/demo/${req.file.filename}` });
+    limits: unionVideoLimits,
+    fileFilter: unionVideoFileFilter,
   });
 
-  // Press release PDF (public + admin upload)
+  app.post(
+    "/api/admin/union-video/upload",
+    requireAdminAuth,
+    (req, res, next) => {
+      const mw = isR2Configured() ? unionVideoMemoryUpload : unionVideoDiskUpload;
+      mw.single("video")(req, res, next);
+    },
+    async (req, res) => {
+      if (!req.file) return res.status(400).json({ error: "Aucun fichier vidéo" });
+      try {
+        if (isR2Configured() && req.file.buffer) {
+          const ext = /\.(mp4|webm)$/i.test(req.file.originalname) ? path.extname(req.file.originalname).toLowerCase() : ".mp4";
+          const url = await uploadUnionVideoToR2(req.file.buffer, req.file.mimetype, ext);
+          return res.json({ path: url });
+        }
+        res.json({ path: `/demo/${req.file.filename}` });
+      } catch (e) {
+        console.error("[UnionVideo] Upload error", e);
+        res.status(500).json({ error: e instanceof Error ? e.message : "Erreur upload" });
+      }
+    }
+  );
+
+  // Press release PDF (public + admin upload) — R2 or filesystem
   app.get("/api/press-release", async (_req, res) => {
     try {
-      const path = await getPressReleasePath();
-      res.json({ path });
+      const url = isR2Configured() ? await getPressReleaseUrl() : await getPressReleasePath();
+      res.json({ path: url });
     } catch (e) {
       console.error("[PressRelease] GET error", e);
       res.json({ path: null });
     }
   });
 
+  const pressReleaseFileFilter = (_req: express.Request, file: Express.Multer.File, cb: multer.FileFilterCallback) => {
+    const ok = file.mimetype === "application/pdf";
+    cb(ok ? null : new Error("Format non supporté. Utilisez un fichier PDF."), ok);
+  };
+  const pressReleaseLimits = { fileSize: 20 * 1024 * 1024 };
+
+  const pressReleaseMemoryUpload = multer({
+    storage: multer.memoryStorage(),
+    limits: pressReleaseLimits,
+    fileFilter: pressReleaseFileFilter,
+  });
   const PRESS_RELEASE_DIR = getPressReleaseDir();
-  const pressReleaseUpload = multer({
+  const pressReleaseDiskUpload = multer({
     storage: multer.diskStorage({
       destination: (_req, _file, cb) => {
         if (!existsSync(PRESS_RELEASE_DIR)) mkdirSync(PRESS_RELEASE_DIR, { recursive: true });
@@ -531,16 +578,31 @@ async function startServer() {
         cb(null, "press-release.pdf");
       },
     }),
-    limits: { fileSize: 20 * 1024 * 1024 },
-    fileFilter: (_req, file, cb) => {
-      const ok = file.mimetype === "application/pdf";
-      cb(ok ? null : new Error("Format non supporté. Utilisez un fichier PDF."), ok);
+    limits: pressReleaseLimits,
+    fileFilter: pressReleaseFileFilter,
+  });
+
+  app.post(
+    "/api/admin/press-release/upload",
+    requireAdminAuth,
+    (req, res, next) => {
+      const mw = isR2Configured() ? pressReleaseMemoryUpload : pressReleaseDiskUpload;
+      mw.single("pdf")(req, res, next);
     },
-  });
-  app.post("/api/admin/press-release/upload", requireAdminAuth, pressReleaseUpload.single("pdf"), (req, res) => {
-    if (!req.file) return res.status(400).json({ error: "Aucun fichier PDF" });
-    res.json({ path: `/demo/${req.file.filename}` });
-  });
+    async (req, res) => {
+      if (!req.file) return res.status(400).json({ error: "Aucun fichier PDF" });
+      try {
+        if (isR2Configured() && req.file.buffer) {
+          const url = await uploadPressReleaseToR2(req.file.buffer);
+          return res.json({ path: url });
+        }
+        res.json({ path: `/demo/${req.file.filename}` });
+      } catch (e) {
+        console.error("[PressRelease] Upload error", e);
+        res.status(500).json({ error: e instanceof Error ? e.message : "Erreur upload" });
+      }
+    }
+  );
 
   // Admin: analytics config (REST, same auth)
   app.get("/api/admin/analytics-config", requireAdminAuth, async (req, res) => {
