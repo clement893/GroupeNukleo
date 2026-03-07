@@ -40,7 +40,7 @@ export default function PreFooter() {
       <span
         className="pre-footer-gradient-text"
         style={{
-          fontFamily: "'Google Sans Flex', sans-serif",
+          fontFamily: "'Neue Haas Unica Pro', sans-serif",
           fontWeight: 700,
           fontSize: 'clamp(3.5rem, 12vw, 11rem)',
           lineHeight: 1.25,

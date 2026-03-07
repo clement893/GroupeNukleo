@@ -41,7 +41,7 @@ export default function ProjectsHero({ headline, description, heroImages, heroTi
         <div style={{ marginBottom: 'clamp(2rem, 4vw, 3.5rem)', overflow: 'visible' }}>
           <h1
             style={{
-              fontFamily: "'Google Sans Flex', sans-serif",
+              fontFamily: "'Neue Haas Unica Pro', sans-serif",
               fontWeight: 700,
               fontSize: 'clamp(1.5rem, 8vw, 9rem)',
               lineHeight: 1.05,
@@ -60,7 +60,7 @@ export default function ProjectsHero({ headline, description, heroImages, heroTi
           </h1>
           <p
             style={{
-              fontFamily: "'Google Sans Flex', sans-serif",
+              fontFamily: "'Neue Haas Unica Pro', sans-serif",
               fontWeight: 400,
               fontSize: 'clamp(1rem, 1.5vw, 1.25rem)',
               color: '#6b7280',

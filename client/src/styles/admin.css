@@ -1,4 +1,4 @@
-/* Admin Panel - Thème aligné site Nukleo : fond clair, Google Sans Flex, bordeaux/violet */
+/* Admin Panel - Thème aligné site Nukleo : fond clair, Neue Haas Unica Pro, bordeaux/violet */
 
 .admin-app {
   --admin-sidebar-bg: #ffffff;
@@ -40,11 +40,11 @@
   color: #374151 !important;
 }
 
-/* Typo admin = Google Sans Flex comme le site */
+/* Typo admin = Neue Haas Unica Pro comme le site */
 @layer base {
   [data-admin-panel],
   [data-admin-panel] * {
-    font-family: 'Google Sans Flex', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-family: 'Neue Haas Unica Pro', -apple-system, BlinkMacSystemFont, sans-serif;
   }
 
   [data-admin-panel] h1,
@@ -59,6 +59,6 @@
   }
 
   [data-admin-panel] .font-heading {
-    font-family: 'Google Sans Flex', sans-serif;
+    font-family: 'Neue Haas Unica Pro', sans-serif;
   }
 }

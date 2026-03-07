@@ -1,8 +1,40 @@
 @tailwind base;
-/* Google Fonts loaded async in index.html to avoid render blocking */
-/* @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap'); */
-
-/* Google Sans Flex chargé via Google Fonts (index.html) */
+/* Neue Haas Unica Pro - auto-hébergée */
+@font-face {
+  font-family: "Neue Haas Unica Pro";
+  src: url("/fonts/NeueHaasUnicaPro-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Neue Haas Unica Pro";
+  src: url("/fonts/NeueHaasUnicaPro-Italic.ttf") format("truetype");
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Neue Haas Unica Pro";
+  src: url("/fonts/NeueHaasUnicaPro-Medium.ttf") format("truetype");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Neue Haas Unica Pro";
+  src: url("/fonts/NeueHaasUnicaPro-Bold.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Neue Haas Unica Pro";
+  src: url("/fonts/NeueHaasUnicaPro-BoldItalic.ttf") format("truetype");
+  font-weight: 700;
+  font-style: italic;
+  font-display: swap;
+}
 
 /* Hide scrollbar while allowing scroll */
 .scrollbar-hide {
@@ -38,9 +70,9 @@ header.header-scroll-transform,
   /* Site margins - marges latérales uniformes sur tout le site */
   --site-margin: 3%;
 
-  /* Typography - Font Families - Google Sans Flex (test) */
-  --font-sans: "Google Sans Flex", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  --font-heading: "Google Sans Flex", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  /* Typography - Font Families - Neue Haas Unica Pro */
+  --font-sans: "Neue Haas Unica Pro", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-heading: "Neue Haas Unica Pro", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   --font-mono: "JetBrains Mono", "Courier New", monospace;
 
   /* OKLCH Color System - Nukleo Design */
@@ -363,7 +395,7 @@ header.header-scroll-transform,
     box-shadow:
       0 4px 24px rgba(0, 0, 0, 0.06),
       inset 0 1px 0 rgba(255, 255, 255, 0.85);
-    font-family: 'Google Sans Flex', sans-serif;
+    font-family: 'Neue Haas Unica Pro', sans-serif;
   }
 
   /* Carte "Nous soutenons le monde culturel" */
@@ -378,7 +410,7 @@ header.header-scroll-transform,
     box-shadow:
       0 8px 32px rgba(0, 0, 0, 0.08),
       inset 0 1px 0 rgba(255, 255, 255, 0.9);
-    font-family: 'Google Sans Flex', sans-serif;
+    font-family: 'Neue Haas Unica Pro', sans-serif;
   }
 
   /* Badge violet "+456.000$" */
@@ -404,7 +436,7 @@ header.header-scroll-transform,
     box-shadow:
       0 8px 32px rgba(0, 0, 0, 0.08),
       inset 0 1px 0 rgba(255, 255, 255, 0.9);
-    font-family: 'Google Sans Flex', sans-serif;
+    font-family: 'Neue Haas Unica Pro', sans-serif;
   }
 
   /* Cartes stats "2022" et "+20" */
@@ -419,7 +451,7 @@ header.header-scroll-transform,
     box-shadow:
       0 4px 24px rgba(0, 0, 0, 0.06),
       inset 0 1px 0 rgba(255, 255, 255, 0.8);
-    font-family: 'Google Sans Flex', sans-serif;
+    font-family: 'Neue Haas Unica Pro', sans-serif;
   }
 
   /* ─── Section "On [verbe] l'IA" — glass pill + couleurs image ─── */
@@ -447,7 +479,7 @@ header.header-scroll-transform,
     background-clip: text;
     -webkit-text-fill-color: transparent;
     color: transparent;
-    font-family: 'Google Sans Flex', sans-serif;
+    font-family: 'Neue Haas Unica Pro', sans-serif;
     font-weight: 700;
     font-size: clamp(2.2rem, 4.4vw, 3rem);
     line-height: 1.1;

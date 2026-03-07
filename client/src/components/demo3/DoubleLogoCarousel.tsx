@@ -94,7 +94,7 @@ export function DoubleLogoCarousel({ title = 'Trusted by ambitious organizations
 
   return (
     <div className={`rounded-2xl overflow-hidden py-[3.75rem] ${className}`}>
-      <p className="text-center text-xs font-medium tracking-[0.35em] uppercase mb-10 text-gray-500" style={{ fontFamily: "'Google Sans Flex', sans-serif", fontWeight: 700 }}>
+      <p className="text-center text-xs font-medium tracking-[0.35em] uppercase mb-10 text-gray-500" style={{ fontFamily: "'Neue Haas Unica Pro', sans-serif", fontWeight: 700 }}>
         {title}
       </p>
       <div className="overflow-hidden mb-5">

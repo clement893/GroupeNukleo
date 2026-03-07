@@ -19,7 +19,7 @@ function Footer() {
         background: '#EFE8E8',
         paddingTop: 'clamp(1.5rem, 4vw, 3rem)',
         paddingBottom: 'clamp(2rem, 4vw, 3rem)',
-        fontFamily: "'Google Sans Flex', sans-serif",
+        fontFamily: "'Neue Haas Unica Pro', sans-serif",
         fontWeight: 400,
       }}
       aria-label={t('footer.ariaLabel') || 'Pied de page Nukleo Digital'}

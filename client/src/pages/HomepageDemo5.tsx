@@ -112,10 +112,10 @@ function NewsCarousel({ projects: projectsProp }: { projects?: HomeProjectItem[]
               zIndex: 2,
             }}>
               <div style={{ marginBottom: '0.6rem' }}>
-                <span style={{ fontFamily: "'Google Sans Flex', sans-serif", fontWeight: 900, fontSize: 'clamp(2rem, 4vw, 4rem)', lineHeight: 1, color: 'rgba(255,255,255,0.15)', letterSpacing: '-0.04em' }}>{p.num}</span>
+                <span style={{ fontFamily: "'Neue Haas Unica Pro', sans-serif", fontWeight: 900, fontSize: 'clamp(2rem, 4vw, 4rem)', lineHeight: 1, color: 'rgba(255,255,255,0.15)', letterSpacing: '-0.04em' }}>{p.num}</span>
               </div>
               <h3 style={{
-                fontFamily: "'Google Sans Flex', sans-serif", fontWeight: 700,
+                fontFamily: "'Neue Haas Unica Pro', sans-serif", fontWeight: 700,
                 fontSize: 'clamp(1.5rem, 2.5vw, 2.5rem)', lineHeight: 1.1,
                 letterSpacing: '-0.02em', color: '#fff', marginBottom: '1rem',
               }}>{p.name}</h3>
@@ -502,7 +502,7 @@ export default function HomepageDemo5() {
           boxSizing: 'border-box',
         }}>
           <h1 style={{
-            fontFamily: "'Google Sans Flex', sans-serif",
+            fontFamily: "'Neue Haas Unica Pro', sans-serif",
             fontWeight: 700,
             fontSize: 'clamp(1.5rem, 8vw, 9rem)',
             lineHeight: 1.05,
@@ -567,7 +567,7 @@ export default function HomepageDemo5() {
                     gap: 'clamp(0.35rem, 0.5vw, 0.6rem)', textAlign: 'center', height: '100%',
                   }}>
                     <div style={{ fontSize: 'clamp(1rem, 1.2vw, 1.3rem)', fontWeight: 700, color: '#6b7280' }}>{t('home.widgetDateGreeting')} {dayName} <span style={{ color: PURPLE }}>♥</span></div>
-                    <div style={{ fontFamily: "'Google Sans Flex', sans-serif", fontWeight: 700, fontSize: 'clamp(3.5rem, 4.4vw, 5.5rem)', lineHeight: 1, color: DARK }}>{dayNum}</div>
+                    <div style={{ fontFamily: "'Neue Haas Unica Pro', sans-serif", fontWeight: 700, fontSize: 'clamp(3.5rem, 4.4vw, 5.5rem)', lineHeight: 1, color: DARK }}>{dayNum}</div>
                     <div style={{ fontSize: 'clamp(0.65rem, 0.8vw, 0.85rem)', color: '#6b7280' }}>{monthYear}</div>
                   </div>
                 );
@@ -583,7 +583,7 @@ export default function HomepageDemo5() {
                 flexDirection: 'column',
                 justifyContent: 'center',
               }}>
-                <h3 style={{ fontFamily: "'Google Sans Flex', sans-serif", fontWeight: 700, fontSize: 'clamp(0.95rem, 1.15vw, 1.35rem)', color: DARK, margin: '0 0 clamp(0.25rem, 0.4vw, 0.45rem) 0' }}>
+                <h3 style={{ fontFamily: "'Neue Haas Unica Pro', sans-serif", fontWeight: 700, fontSize: 'clamp(0.95rem, 1.15vw, 1.35rem)', color: DARK, margin: '0 0 clamp(0.25rem, 0.4vw, 0.45rem) 0' }}>
                   {t('home.widgetStatsCultural')}
                 </h3>
                 <p style={{ fontSize: 'clamp(0.8rem, 1vw, 1.1rem)', color: '#4b5563', lineHeight: 1.6, margin: 0 }}>
@@ -651,7 +651,7 @@ export default function HomepageDemo5() {
                   />
                 </div>
                 <div>
-                  <div style={{ fontFamily: "'Google Sans Flex', sans-serif", fontWeight: 700, fontSize: 'clamp(1.75rem, 2.5vw, 3rem)', lineHeight: 1, color: DARK, marginBottom: 8 }}>481k$</div>
+                  <div style={{ fontFamily: "'Neue Haas Unica Pro', sans-serif", fontWeight: 700, fontSize: 'clamp(1.75rem, 2.5vw, 3rem)', lineHeight: 1, color: DARK, marginBottom: 8 }}>481k$</div>
                   <p style={{ fontSize: 'clamp(0.8rem, 1vw, 1.1rem)', color: '#4b5563', lineHeight: 1.5, margin: 0 }}>
                     {t('home.widgetStats481k')}
                   </p>
@@ -669,7 +669,7 @@ export default function HomepageDemo5() {
                 justifyContent: 'space-between',
                 gap: '1rem',
               }}>
-                <div style={{ fontFamily: "'Google Sans Flex', sans-serif", fontWeight: 700, fontSize: 'clamp(1.75rem, 2.2vw, 2.75rem)', lineHeight: 1, color: DARK }}>2022</div>
+                <div style={{ fontFamily: "'Neue Haas Unica Pro', sans-serif", fontWeight: 700, fontSize: 'clamp(1.75rem, 2.2vw, 2.75rem)', lineHeight: 1, color: DARK }}>2022</div>
                 <p style={{ fontSize: 'clamp(0.75rem, 0.9vw, 1rem)', color: '#4b5563', lineHeight: 1.4, margin: 0, textAlign: 'right' }}>{t('home.widgetAnniv')}</p>
               </div>
             </div>
@@ -691,12 +691,12 @@ export default function HomepageDemo5() {
             textTransform: 'uppercase',
             color: '#374151',
             marginBottom: 28,
-            fontFamily: "'Google Sans Flex', sans-serif",
+            fontFamily: "'Neue Haas Unica Pro', sans-serif",
           }}>
             {t('home.audacious')}
           </p>
           <h2 style={{
-            fontFamily: "'Google Sans Flex', sans-serif",
+            fontFamily: "'Neue Haas Unica Pro', sans-serif",
             fontWeight: 400,
             fontSize: 'clamp(2.25rem, 5vw, 3.75rem)',
             lineHeight: 1.1,
@@ -719,7 +719,7 @@ export default function HomepageDemo5() {
             lineHeight: 1.5,
             maxWidth: 520,
             margin: '0 auto 2.5rem',
-            fontFamily: "'Google Sans Flex', sans-serif",
+            fontFamily: "'Neue Haas Unica Pro', sans-serif",
             fontWeight: 400,
           }}>
             {t('home.audaciousParagraph')}
@@ -790,7 +790,7 @@ export default function HomepageDemo5() {
                   color: '#374151',
                   lineHeight: 1.5,
                   margin: 0,
-                  fontFamily: "'Google Sans Flex', sans-serif",
+                  fontFamily: "'Neue Haas Unica Pro', sans-serif",
                   fontWeight: 400,
                 }}
               >
@@ -799,7 +799,7 @@ export default function HomepageDemo5() {
               <div className="glass-heading-panel" style={{ textAlign: 'center' }}>
                 <span
                   style={{
-                    fontFamily: "'Google Sans Flex', sans-serif",
+                    fontFamily: "'Neue Haas Unica Pro', sans-serif",
                     fontWeight: 700,
                     fontSize: 'clamp(2.2rem, 4.4vw, 3rem)',
                     lineHeight: 1.1,

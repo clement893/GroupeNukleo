@@ -21,19 +21,34 @@ function preloadResources() {
     document.head.appendChild(link);
   });
 
-  // Preload critical fonts if not already loaded
-  const fonts = [
+  // Preload critical fonts if not already loaded (Neue Haas Unica Pro = police principale)
+  const fontsWoff2 = [
     '/fonts/AktivGrotesk-Regular.woff2',
     '/fonts/AktivGrotesk-Medium.woff2',
     '/fonts/AktivGrotesk-Bold.woff2',
   ];
-  
-  fonts.forEach(font => {
+  const fontsTtf = [
+    '/fonts/NeueHaasUnicaPro-Regular.ttf',
+    '/fonts/NeueHaasUnicaPro-Medium.ttf',
+    '/fonts/NeueHaasUnicaPro-Bold.ttf',
+  ];
+  fontsWoff2.forEach(font => {
     if (!document.querySelector(`link[href="${font}"]`)) {
       const link = document.createElement('link');
       link.rel = 'preload';
       link.as = 'font';
       link.type = 'font/woff2';
+      link.crossOrigin = 'anonymous';
+      link.href = font;
+      document.head.appendChild(link);
+    }
+  });
+  fontsTtf.forEach(font => {
+    if (!document.querySelector(`link[href="${font}"]`)) {
+      const link = document.createElement('link');
+      link.rel = 'preload';
+      link.as = 'font';
+      link.type = 'font/ttf';
       link.crossOrigin = 'anonymous';
       link.href = font;
       document.head.appendChild(link);

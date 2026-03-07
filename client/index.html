@@ -71,7 +71,8 @@
     <link rel="manifest" href="/manifest.json" />
     <meta name="theme-color" content="#7c3aed" />
     
-    <!-- Google Sans Flex chargé via Google Fonts (test typo) -->
+    <!-- Neue Haas Unica Pro : polices auto-hébergées (voir index.css @font-face) -->
+    <link rel="preload" href="/fonts/NeueHaasUnicaPro-Regular.ttf" as="font" type="font/ttf" crossorigin />
     
     <!-- Preload critical LCP image - arrow SVG is the LCP element -->
     <link rel="preload" href="/nukleo-arrow.svg" as="image" type="image/svg+xml" fetchpriority="high" />
@@ -95,13 +96,11 @@
     <link rel="prefetch" href="/radar" />
     <link rel="prefetch" href="/fr/radar" />
     
-    <!-- Google Sans Flex + JetBrains Mono -->
-    
-    <!-- Defer Google Fonts - load after critical content -->
-    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:wght@100;200;300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" as="style" />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:wght@100;200;300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" media="print" id="google-fonts-stylesheet" />
+    <!-- JetBrains Mono (optionnel, pour --font-mono) -->
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap" as="style" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap" media="print" id="google-fonts-stylesheet" />
     <script src="/load-google-fonts.js" defer></script>
-    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:wght@100;200;300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" /></noscript>
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap" /></noscript>
     
     <!-- Structured Data JSON-LD -->
     <script type="application/ld+json">

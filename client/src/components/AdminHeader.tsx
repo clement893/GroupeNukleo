@@ -14,9 +14,9 @@ export function AdminHeader() {
         <div className="flex items-center gap-6">
           <Link href="/admin" className="flex items-center gap-3 hover:opacity-90 transition-opacity">
             <img src="/nukleo-logo.svg" alt="Nukleo" width="100" height="28" className="h-7" />
-            <span className="text-sm font-medium text-gray-600 hidden sm:inline" style={{ fontFamily: "'Google Sans Flex', sans-serif" }}>Administration</span>
+            <span className="text-sm font-medium text-gray-600 hidden sm:inline" style={{ fontFamily: "'Neue Haas Unica Pro', sans-serif" }}>Administration</span>
           </Link>
-          <Link href="/admin" className="hidden sm:flex items-center gap-2 text-sm text-gray-600 hover:text-gray-900 transition-colors" style={{ fontFamily: "'Google Sans Flex', sans-serif" }}>
+          <Link href="/admin" className="hidden sm:flex items-center gap-2 text-sm text-gray-600 hover:text-gray-900 transition-colors" style={{ fontFamily: "'Neue Haas Unica Pro', sans-serif" }}>
             <LayoutDashboard className="h-4 w-4" />
             Accueil
           </Link>
@@ -31,11 +31,11 @@ export function AdminHeader() {
               </div>
             )}
             <div className="hidden sm:block min-w-0">
-              <p className="text-sm font-medium text-gray-900 truncate" style={{ fontFamily: "'Google Sans Flex', sans-serif" }}>{user.name}</p>
-              <p className="text-xs text-gray-500 truncate" style={{ fontFamily: "'Google Sans Flex', sans-serif" }}>{user.email}</p>
+              <p className="text-sm font-medium text-gray-900 truncate" style={{ fontFamily: "'Neue Haas Unica Pro', sans-serif" }}>{user.name}</p>
+              <p className="text-xs text-gray-500 truncate" style={{ fontFamily: "'Neue Haas Unica Pro', sans-serif" }}>{user.email}</p>
             </div>
           </div>
-          <Button onClick={logout} variant="ghost" size="sm" className="text-gray-600 hover:text-gray-900 hover:bg-gray-100" style={{ fontFamily: "'Google Sans Flex', sans-serif" }}>
+          <Button onClick={logout} variant="ghost" size="sm" className="text-gray-600 hover:text-gray-900 hover:bg-gray-100" style={{ fontFamily: "'Neue Haas Unica Pro', sans-serif" }}>
             <LogOut className="w-4 h-4 sm:mr-2" />
             <span className="hidden sm:inline">Déconnexion</span>
           </Button>

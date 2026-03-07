@@ -94,7 +94,7 @@ export default function FullScreenMenu({ isOpen, onClose }: FullScreenMenuProps)
                   className="block py-1.5 text-white transition-all duration-300 ease-out touch-manipulation
                     group-hover:opacity-95 group-hover:translate-x-2 group-hover:scale-[1.02]"
                   style={{
-                    fontFamily: "'Google Sans Flex', sans-serif",
+                    fontFamily: "'Neue Haas Unica Pro', sans-serif",
                     fontWeight: 700,
                     fontSize: 'clamp(2rem, 8vw, 4rem)',
                     lineHeight: 1.1,

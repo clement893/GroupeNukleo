@@ -1,46 +1,39 @@
-import { useState, useEffect, useCallback, useRef, memo } from 'react';
-import { Menu, X } from 'lucide-react';
+import { useState, useEffect, useRef, memo } from 'react';
 import { Link } from 'wouter';
-import FullScreenMenu from './FullScreenMenu';
-import { useSound } from '@/hooks/useSound';
+import { ExternalLink } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { useLocalizedPath } from '@/hooks/useLocalizedPath';
 import { useIsMobile } from '@/hooks/useIsMobile';
 import { MOBILE_BREAKPOINT, ANIMATIONS } from '@/lib/constants';
 
+const headerBtnClass =
+  "inline-flex items-center justify-center gap-1.5 rounded-full text-gray-800 active:scale-95 transition-all duration-300 touch-manipulation flex-shrink-0 px-4 sm:px-5 font-semibold";
+const headerBtnStyle: React.CSSProperties = {
+  height: 'clamp(2.75rem, 4vw, 3.5rem)',
+  fontFamily: "'Neue Haas Unica Pro', sans-serif",
+  fontSize: 'clamp(0.9rem, 1vw, 1.05rem)',
+  background: 'rgba(255, 255, 255, 0.35)',
+  backdropFilter: 'blur(16px) saturate(180%)',
+  WebkitBackdropFilter: 'blur(16px) saturate(180%)',
+  border: '1px solid rgba(255, 255, 255, 0.7)',
+  boxShadow: '0 4px 24px rgba(0, 0, 0, 0.06), inset 0 1px 0 rgba(255, 255, 255, 0.85)',
+};
+
 /**
  * Composant Header principal de l'application.
  *
- * Affiche le logo, le tagline, le bouton CTA et le menu burger.
+ * Affiche le logo et le tagline.
  * S'adapte au scroll : cache le header en scrollant vers le bas, le réaffiche en scrollant vers le haut.
  * En haut de page, le header reste visible avec effet glass et tagline masqué après 50px.
  */
 function Header() {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [isHeaderVisible, setIsHeaderVisible] = useState(true);
   const lastScrollY = useRef(0);
   const headerRef = useRef<HTMLElement>(null);
-  const { playHover, playClick } = useSound();
   const { t, language } = useLanguage();
   const getLocalizedPath = useLocalizedPath();
   const isMobile = useIsMobile(MOBILE_BREAKPOINT);
-  
-  // Memoize handlers to prevent re-renders
-  /**
-   * Ouvre le menu plein écran et joue le son de clic.
-   */
-  const handleMenuOpen = useCallback(() => {
-    playClick();
-    setIsMenuOpen(true);
-  }, [playClick]);
-  
-  /**
-   * Ferme le menu plein écran.
-   */
-  const handleMenuClose = useCallback(() => {
-    setIsMenuOpen(false);
-  }, []);
 
   useEffect(() => {
     lastScrollY.current = typeof window !== 'undefined' ? window.scrollY : 0;
@@ -115,57 +108,48 @@ function Header() {
           }}
         >
           <div className="flex items-center justify-between gap-2 sm:gap-4">
-            {/* Logo Nukleo — version FR ou EN (même rendu : image avec fond transparent) */}
+            {/* Logo Groupe nukleo — coin haut gauche */}
             <Link
               href={getLocalizedPath('/')}
               className="inline-flex items-center cursor-pointer touch-manipulation"
-              aria-label={t('alt.logo') || 'Nukleo Digital - Accueil'}
+              aria-label={t('alt.logo') || 'Groupe Nukleo - Accueil'}
             >
               <img
-                src={language === 'en' ? '/demo/nukleo-logo-tagline-en.png' : '/demo/nukleo-logo-tagline.png'}
-                alt={language === 'en' ? 'Nukleo Digital — Choose intelligence' : "Logo Nukleo Digital — Choisissez l'intelligence"}
-                className="w-auto object-contain"
+                src="/demo/logo-groupe-nukleo-header.png"
+                alt="Groupe Nukleo"
+                className="w-auto object-contain object-left"
                 style={{ height: 'clamp(2.25rem, 6vw, 3.75rem)' }}
               />
             </Link>
 
-            {/* Right: Menu (CTA retiré — seule page accueil) */}
+            {/* Boutons Nukleo et Rouge on Blue — liens externes */}
             <div className="flex items-center gap-2 sm:gap-3">
-              {/* Bouton Menu — glassmorphisme + icône burger à droite */}
-              <button
-                onClick={isMenuOpen ? handleMenuClose : handleMenuOpen}
-                onMouseEnter={playHover}
-                className="header-menu-btn flex items-center justify-center gap-2 rounded-full text-gray-800 active:scale-95 transition-all duration-300 touch-manipulation flex-shrink-0 px-4 sm:px-5"
-                style={{
-                  height: 'clamp(2.75rem, 4vw, 3.5rem)',
-                  fontFamily: "'Google Sans Flex', sans-serif",
-                  fontWeight: 600,
-                  fontSize: 'clamp(0.9rem, 1vw, 1.05rem)',
-                  background: 'rgba(255, 255, 255, 0.35)',
-                  backdropFilter: 'blur(16px) saturate(180%)',
-                  WebkitBackdropFilter: 'blur(16px) saturate(180%)',
-                  border: '1px solid rgba(255, 255, 255, 0.7)',
-                  boxShadow: '0 4px 24px rgba(0, 0, 0, 0.06), inset 0 1px 0 rgba(255, 255, 255, 0.85)',
-                  transition: 'background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease',
-                }}
-                aria-label={isMenuOpen ? t('header.closeMenu') : t('header.openMenu')}
+              <a
+                href="https://nukleo.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className={headerBtnClass}
+                style={headerBtnStyle}
+                aria-label="Nukleo — ouvrir dans un nouvel onglet"
               >
-                {isMenuOpen ? (
-                  <X className="w-5 h-5" strokeWidth={2} />
-                ) : (
-                  <>
-                    {t('header.menu')}
-                    <Menu className="w-4 h-4 sm:w-[1.1em] sm:h-[1.1em]" strokeWidth={2} />
-                  </>
-                )}
-              </button>
+                Nukleo
+                <ExternalLink className="w-4 h-4 sm:w-[1.1em] sm:h-[1.1em]" strokeWidth={2} />
+              </a>
+              <a
+                href="https://rougeonblue.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className={headerBtnClass}
+                style={headerBtnStyle}
+                aria-label="Rouge on Blue — ouvrir dans un nouvel onglet"
+              >
+                Rouge on Blue
+                <ExternalLink className="w-4 h-4 sm:w-[1.1em] sm:h-[1.1em]" strokeWidth={2} />
+              </a>
             </div>
           </div>
         </div>
       </header>
-
-      {/* Full Screen Menu */}
-      <FullScreenMenu isOpen={isMenuOpen} onClose={handleMenuClose} />
     </>
   );
 }

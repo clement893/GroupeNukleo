@@ -20,7 +20,7 @@ export default function CTAPerformSection() {
       <div style={{ maxWidth: '42rem', margin: '0 auto' }}>
         <h2
           style={{
-            fontFamily: "'Google Sans Flex', sans-serif",
+            fontFamily: "'Neue Haas Unica Pro', sans-serif",
             fontWeight: 700,
             fontSize: 'clamp(1.75rem, 3vw, 2.5rem)',
             lineHeight: 1.25,
@@ -35,7 +35,7 @@ export default function CTAPerformSection() {
         </h2>
         <p
           style={{
-            fontFamily: "'Google Sans Flex', sans-serif",
+            fontFamily: "'Neue Haas Unica Pro', sans-serif",
             fontWeight: 400,
             fontSize: '1rem',
             lineHeight: 1.7,

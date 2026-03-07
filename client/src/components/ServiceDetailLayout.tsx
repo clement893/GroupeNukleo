@@ -244,14 +244,14 @@ export default function ServiceDetailLayout(props: ServiceDetailLayoutProps) {
             {heroBadge && (
               <p
                 className="text-xs font-medium tracking-[0.35em] uppercase mb-4 text-gray-500"
-                style={{ fontFamily: "'Google Sans Flex', sans-serif", fontWeight: 700 }}
+                style={{ fontFamily: "'Neue Haas Unica Pro', sans-serif", fontWeight: 700 }}
               >
                 {heroBadge}
               </p>
             )}
             <h1
               style={{
-                fontFamily: "'Google Sans Flex', sans-serif",
+                fontFamily: "'Neue Haas Unica Pro', sans-serif",
                 fontWeight: 700,
                 fontSize: 'clamp(1.5rem, 8vw, 9rem)',
                 lineHeight: 1.05,
@@ -272,7 +272,7 @@ export default function ServiceDetailLayout(props: ServiceDetailLayoutProps) {
             {tagline ? (
               <p
                 style={{
-                  fontFamily: "'Google Sans Flex', sans-serif",
+                  fontFamily: "'Neue Haas Unica Pro', sans-serif",
                   fontWeight: 400,
                   fontSize: 'clamp(1rem, 1.5vw, 1.25rem)',
                   color: '#6b7280',
@@ -286,7 +286,7 @@ export default function ServiceDetailLayout(props: ServiceDetailLayoutProps) {
             {heroDescription ? (
               <p
                 style={{
-                  fontFamily: "'Google Sans Flex', sans-serif",
+                  fontFamily: "'Neue Haas Unica Pro', sans-serif",
                   fontWeight: 400,
                   fontSize: 'clamp(0.95rem, 1.4vw, 1.15rem)',
                   color: '#4b5563',
@@ -363,7 +363,7 @@ export default function ServiceDetailLayout(props: ServiceDetailLayoutProps) {
                         borderRadius: 12,
                         padding: '0.35rem 0.75rem',
                         boxShadow: '0 4px 24px rgba(0,0,0,0.06), inset 0 1px 0 rgba(255,255,255,0.85)',
-                        fontFamily: "'Google Sans Flex', sans-serif",
+                        fontFamily: "'Neue Haas Unica Pro', sans-serif",
                         fontWeight: 400,
                         fontSize: '0.6rem',
                         color: activeTabIndex === index ? '#111827' : '#374151',
@@ -393,7 +393,7 @@ export default function ServiceDetailLayout(props: ServiceDetailLayoutProps) {
                             borderRadius: 12,
                             padding: '0.35rem 0.75rem',
                             boxShadow: '0 4px 24px rgba(0,0,0,0.06), inset 0 1px 0 rgba(255,255,255,0.85)',
-                            fontFamily: "'Google Sans Flex', sans-serif",
+                            fontFamily: "'Neue Haas Unica Pro', sans-serif",
                             fontWeight: 400,
                             fontSize: '0.6rem',
                             color: activeTabIndex === index ? '#111827' : '#374151',
@@ -418,20 +418,20 @@ export default function ServiceDetailLayout(props: ServiceDetailLayoutProps) {
               {hasTabs && activeTab ? (
                 <div>
                   {activeTab.subtitle && (
-                    <p style={{ fontFamily: "'Google Sans Flex', sans-serif", fontWeight: 700, fontSize: '0.75rem', letterSpacing: '0.2em', textTransform: 'uppercase', color: '#6b7280', marginBottom: 24, textAlign: 'left' }}>
+                    <p style={{ fontFamily: "'Neue Haas Unica Pro', sans-serif", fontWeight: 700, fontSize: '0.75rem', letterSpacing: '0.2em', textTransform: 'uppercase', color: '#6b7280', marginBottom: 24, textAlign: 'left' }}>
                       {activeTab.subtitle}
                     </p>
                   )}
-                  <h2 className="text-3xl lg:text-4xl font-bold mb-4" style={{ fontFamily: "'Google Sans Flex', sans-serif", fontSize: 'clamp(1.75rem, 4vw, 2.5rem)', display: 'inline-block', background: heroTitleGradient, WebkitBackgroundClip: 'text', backgroundClip: 'text', color: 'transparent' }}>
+                  <h2 className="text-3xl lg:text-4xl font-bold mb-4" style={{ fontFamily: "'Neue Haas Unica Pro', sans-serif", fontSize: 'clamp(1.75rem, 4vw, 2.5rem)', display: 'inline-block', background: heroTitleGradient, WebkitBackgroundClip: 'text', backgroundClip: 'text', color: 'transparent' }}>
                     {activeTab.title}
                   </h2>
-                  <p className="text-lg text-gray-600 leading-relaxed mb-10 max-w-3xl" style={{ color: '#555555', fontFamily: "'Google Sans Flex', sans-serif" }}>
+                  <p className="text-lg text-gray-600 leading-relaxed mb-10 max-w-3xl" style={{ color: '#555555', fontFamily: "'Neue Haas Unica Pro', sans-serif" }}>
                     {activeTab.description}
                   </p>
                   <div className="mb-10">
                     {activeTab.benefits.map((benefit, i) => (
                       <div key={i}>
-                        <p className="text-base leading-relaxed text-gray-600 py-3" style={{ fontFamily: "'Google Sans Flex', sans-serif", margin: 0 }}>
+                        <p className="text-base leading-relaxed text-gray-600 py-3" style={{ fontFamily: "'Neue Haas Unica Pro', sans-serif", margin: 0 }}>
                           {benefit}
                         </p>
                         <div style={{ height: 1, background: 'rgba(33, 36, 46, 0.2)', margin: 0 }} />
@@ -442,16 +442,16 @@ export default function ServiceDetailLayout(props: ServiceDetailLayoutProps) {
               ) : (
                 <div className="space-y-10">
                   <div>
-                    <h2 className="text-2xl lg:text-3xl font-bold mb-4" style={{ fontFamily: "'Google Sans Flex', sans-serif", display: 'inline-block', background: heroTitleGradient, WebkitBackgroundClip: 'text', backgroundClip: 'text', color: 'transparent' }}>
+                    <h2 className="text-2xl lg:text-3xl font-bold mb-4" style={{ fontFamily: "'Neue Haas Unica Pro', sans-serif", display: 'inline-block', background: heroTitleGradient, WebkitBackgroundClip: 'text', backgroundClip: 'text', color: 'transparent' }}>
                       {mainTitle}
                     </h2>
-                    <p className="text-gray-700 leading-relaxed mb-6" style={{ fontFamily: "'Google Sans Flex', sans-serif" }}>{mainDescription}</p>
+                    <p className="text-gray-700 leading-relaxed mb-6" style={{ fontFamily: "'Neue Haas Unica Pro', sans-serif" }}>{mainDescription}</p>
                     <div className="flex flex-wrap gap-2 mb-8">
                       {mainTags.map((tag) => (
                         <span
                           key={tag}
                           className="px-3 py-1.5 rounded-lg border border-gray-200 text-gray-700 text-sm font-medium"
-                          style={{ background: 'rgba(255,255,255,0.8)', fontFamily: "'Google Sans Flex', sans-serif" }}
+                          style={{ background: 'rgba(255,255,255,0.8)', fontFamily: "'Neue Haas Unica Pro', sans-serif" }}
                         >
                           {tag}
                         </span>
@@ -459,12 +459,12 @@ export default function ServiceDetailLayout(props: ServiceDetailLayoutProps) {
                     </div>
                     <div className="flex flex-col md:flex-row gap-8 mb-8">
                       <div className="flex-1 flex flex-col justify-center">
-                        <p className="text-gray-700 leading-relaxed mb-6" style={{ fontFamily: "'Google Sans Flex', sans-serif" }}>{extensionsDescription}</p>
+                        <p className="text-gray-700 leading-relaxed mb-6" style={{ fontFamily: "'Neue Haas Unica Pro', sans-serif" }}>{extensionsDescription}</p>
                         {extensionsHighlightListStyle ? (
                           <div className="mb-10">
                             {highlightItems.map((item, index) => (
                               <div key={index}>
-                                <p className="text-base leading-relaxed text-gray-600 py-3" style={{ fontFamily: "'Google Sans Flex', sans-serif", margin: 0 }}>
+                                <p className="text-base leading-relaxed text-gray-600 py-3" style={{ fontFamily: "'Neue Haas Unica Pro', sans-serif", margin: 0 }}>
                                   <span className="font-semibold text-gray-900">{item.title}</span>
                                   {' — '}
                                   {item.description}
@@ -479,7 +479,7 @@ export default function ServiceDetailLayout(props: ServiceDetailLayoutProps) {
                               <div
                                 key={index}
                                 className="p-4 rounded-xl border border-gray-200 shadow-sm"
-                                style={{ background: 'rgba(255,255,255,0.95)', fontFamily: "'Google Sans Flex', sans-serif" }}
+                                style={{ background: 'rgba(255,255,255,0.95)', fontFamily: "'Neue Haas Unica Pro', sans-serif" }}
                               >
                                 <h3 className="font-bold mb-1 text-gray-900 text-sm">{item.title}</h3>
                                 <p className="text-gray-600 text-xs leading-relaxed line-clamp-2">{item.description}</p>
@@ -550,7 +550,7 @@ export default function ServiceDetailLayout(props: ServiceDetailLayoutProps) {
                 {sectionVisualSubtitle && (
                   <p
                     style={{
-                      fontFamily: "'Google Sans Flex', sans-serif",
+                      fontFamily: "'Neue Haas Unica Pro', sans-serif",
                       fontWeight: 700,
                       fontSize: '0.7rem',
                       letterSpacing: '0.22em',
@@ -564,12 +564,12 @@ export default function ServiceDetailLayout(props: ServiceDetailLayoutProps) {
                   </p>
                 )}
                 {sectionVisualTitle && (
-                  <h2 className="text-2xl lg:text-3xl xl:text-4xl font-bold text-gray-900 mb-4" style={{ fontFamily: "'Google Sans Flex', sans-serif" }}>
+                  <h2 className="text-2xl lg:text-3xl xl:text-4xl font-bold text-gray-900 mb-4" style={{ fontFamily: "'Neue Haas Unica Pro', sans-serif" }}>
                     {sectionVisualTitle}
                   </h2>
                 )}
                 {sectionVisualDescription && (
-                  <p className="text-base text-gray-600 leading-relaxed mb-16" style={{ fontFamily: "'Google Sans Flex', sans-serif", lineHeight: 1.7 }}>
+                  <p className="text-base text-gray-600 leading-relaxed mb-16" style={{ fontFamily: "'Neue Haas Unica Pro', sans-serif", lineHeight: 1.7 }}>
                     {sectionVisualDescription}
                   </p>
                 )}
@@ -587,8 +587,8 @@ export default function ServiceDetailLayout(props: ServiceDetailLayoutProps) {
                         isolation: 'isolate',
                       }}
                     >
-                      <h3 className="text-sm lg:text-base font-bold text-gray-900 mb-2" style={{ fontFamily: "'Google Sans Flex', sans-serif" }}>{item.title}</h3>
-                      <p className="text-gray-600 text-sm leading-relaxed" style={{ fontFamily: "'Google Sans Flex', sans-serif" }}>{item.description}</p>
+                      <h3 className="text-sm lg:text-base font-bold text-gray-900 mb-2" style={{ fontFamily: "'Neue Haas Unica Pro', sans-serif" }}>{item.title}</h3>
+                      <p className="text-gray-600 text-sm leading-relaxed" style={{ fontFamily: "'Neue Haas Unica Pro', sans-serif" }}>{item.description}</p>
                     </div>
                   ))}
                 </div>
@@ -604,7 +604,7 @@ export default function ServiceDetailLayout(props: ServiceDetailLayoutProps) {
           <div className="text-center max-w-2xl mx-auto mb-8">
             <p
               style={{
-                fontFamily: "'Google Sans Flex', sans-serif",
+                fontFamily: "'Neue Haas Unica Pro', sans-serif",
                 fontWeight: 700,
                 fontSize: '0.75rem',
                 letterSpacing: '0.2em',
@@ -616,7 +616,7 @@ export default function ServiceDetailLayout(props: ServiceDetailLayoutProps) {
               {expertiseSectionTitle}
             </p>
             {expertiseSectionDescription && (
-              <p className="text-gray-600 leading-relaxed" style={{ fontFamily: "'Google Sans Flex', sans-serif" }}>{expertiseSectionDescription}</p>
+              <p className="text-gray-600 leading-relaxed" style={{ fontFamily: "'Neue Haas Unica Pro', sans-serif" }}>{expertiseSectionDescription}</p>
             )}
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-4xl mx-auto">
@@ -666,13 +666,13 @@ export default function ServiceDetailLayout(props: ServiceDetailLayoutProps) {
                   <div className="flex-1 flex flex-col justify-end w-full">
                     <h3
                       className="text-lg font-bold mb-2 text-gray-900"
-                      style={{ fontFamily: "'Google Sans Flex', sans-serif" }}
+                      style={{ fontFamily: "'Neue Haas Unica Pro', sans-serif" }}
                     >
                       {item.title}
                     </h3>
                     <p
                       className="text-gray-600 text-sm leading-relaxed mb-3"
-                      style={{ fontFamily: "'Google Sans Flex', sans-serif" }}
+                      style={{ fontFamily: "'Neue Haas Unica Pro', sans-serif" }}
                     >
                       {item.description}
                     </p>
@@ -680,7 +680,7 @@ export default function ServiceDetailLayout(props: ServiceDetailLayoutProps) {
                       <div className="pt-3 border-t border-gray-200/60">
                         <p
                           className="text-xs text-gray-500 leading-relaxed"
-                          style={{ fontFamily: "'Google Sans Flex', sans-serif" }}
+                          style={{ fontFamily: "'Neue Haas Unica Pro', sans-serif" }}
                         >
                           <span className="font-medium">{expertiseDeliverablesLabel ?? 'Livrables : '}</span>
                           {deliverablesText}
@@ -701,7 +701,7 @@ export default function ServiceDetailLayout(props: ServiceDetailLayoutProps) {
           <div className="text-center max-w-2xl mx-auto mb-10">
             <p
               style={{
-                fontFamily: "'Google Sans Flex', sans-serif",
+                fontFamily: "'Neue Haas Unica Pro', sans-serif",
                 fontWeight: 700,
                 fontSize: '0.75rem',
                 letterSpacing: '0.2em',
@@ -712,7 +712,7 @@ export default function ServiceDetailLayout(props: ServiceDetailLayoutProps) {
             >
               {teamTitle}
             </p>
-            <p className="text-gray-600 leading-relaxed mb-8" style={{ fontFamily: "'Google Sans Flex', sans-serif" }}>{teamDescription}</p>
+            <p className="text-gray-600 leading-relaxed mb-8" style={{ fontFamily: "'Neue Haas Unica Pro', sans-serif" }}>{teamDescription}</p>
           </div>
           {teamMembers && teamMembers.length > 0 ? (
             teamLayout === 'slider' ? (
@@ -742,10 +742,10 @@ export default function ServiceDetailLayout(props: ServiceDetailLayoutProps) {
                           background: 'linear-gradient(to top, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.4) 50%, transparent 100%)',
                         }}
                       >
-                        <h3 className="font-bold text-white text-lg" style={{ fontFamily: "'Google Sans Flex', sans-serif" }}>
+                        <h3 className="font-bold text-white text-lg" style={{ fontFamily: "'Neue Haas Unica Pro', sans-serif" }}>
                           {member.name}
                         </h3>
-                        <p className="text-sm text-white/90 mt-0.5" style={{ fontFamily: "'Google Sans Flex', sans-serif" }}>{member.role}</p>
+                        <p className="text-sm text-white/90 mt-0.5" style={{ fontFamily: "'Neue Haas Unica Pro', sans-serif" }}>{member.role}</p>
                       </div>
                     </article>
                   ))}
@@ -799,10 +799,10 @@ export default function ServiceDetailLayout(props: ServiceDetailLayoutProps) {
                         background: 'linear-gradient(to top, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.4) 50%, transparent 100%)',
                       }}
                     >
-                      <h3 className="font-bold text-white text-lg" style={{ fontFamily: "'Google Sans Flex', sans-serif" }}>
+                      <h3 className="font-bold text-white text-lg" style={{ fontFamily: "'Neue Haas Unica Pro', sans-serif" }}>
                         {member.name}
                       </h3>
-                      <p className="text-sm text-white/90 mt-0.5" style={{ fontFamily: "'Google Sans Flex', sans-serif" }}>{member.role}</p>
+                      <p className="text-sm text-white/90 mt-0.5" style={{ fontFamily: "'Neue Haas Unica Pro', sans-serif" }}>{member.role}</p>
                     </div>
                   </article>
                 ))}
