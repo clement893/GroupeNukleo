@@ -486,7 +486,7 @@ export default function HomepageDemo5() {
         <div style={{ position: 'relative', zIndex: 10, paddingTop: 'clamp(5rem, 15vw, 8rem)' }}>
 
         {/* ════════════════════════════════════════════════════════════════════
-            SECTION HERO — Le Groupe Nukleo
+            SECTION HERO — Le Groupe Nukleo + paragraphe à droite
         ════════════════════════════════════════════════════════════════════ */}
         <section style={{
           minHeight: '27.5vh',
@@ -495,9 +495,11 @@ export default function HomepageDemo5() {
           paddingLeft: '3%',
           paddingRight: '3%',
           display: 'flex',
-          flexDirection: 'column',
+          flexDirection: 'row',
+          flexWrap: 'wrap',
           alignItems: 'flex-start',
-          justifyContent: 'center',
+          justifyContent: 'flex-start',
+          gap: 'clamp(2rem, 6vw, 5rem)',
           background: 'transparent',
           boxSizing: 'border-box',
         }}>
@@ -522,6 +524,17 @@ export default function HomepageDemo5() {
             <span style={{ display: 'block' }}>{t('home.heroLine1')}</span>
             <span style={{ display: 'block' }}>{t('home.heroLine2')}</span>
           </h1>
+          <p style={{
+            fontFamily: "'Neue Haas Unica Pro', sans-serif",
+            fontSize: 'clamp(0.9rem, 1.1vw, 1.15rem)',
+            lineHeight: 1.6,
+            color: '#374151',
+            margin: 0,
+            maxWidth: 'clamp(280px, 32ch, 420px)',
+            alignSelf: 'center',
+          }}>
+            {t('home.heroDescription')}
+          </p>
         </section>
 
         {/* ════════════════════════════════════════════════════════════════════
