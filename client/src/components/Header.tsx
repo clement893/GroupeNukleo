@@ -94,40 +94,15 @@ function Header() {
       >
         <div className="flex items-center justify-between gap-2 sm:gap-4">
           <Link href={getLocalizedPath('/')} className="inline-flex items-center cursor-pointer touch-manipulation" aria-label={t('alt.logo') || 'Groupe Nukleo - Accueil'}>
-            <span
-              className="inline-flex flex-col leading-none"
+            <img
+              src="/LogoGroupeNukleo.png"
+              alt="Groupe Nukleo"
               style={{
-                fontFamily: "'Neue Haas Unica Pro', sans-serif",
-                fontWeight: 700,
-                letterSpacing: '-0.02em',
+                height: 'clamp(1.75rem, 4vw, 2.5rem)',
+                width: 'auto',
+                display: 'block',
               }}
-            >
-              <span
-                style={{
-                  fontSize: 'clamp(0.5rem, 1.8vw, 0.7rem)',
-                  letterSpacing: '0.08em',
-                  textTransform: 'uppercase',
-                  background: 'linear-gradient(to right, #6B1817, #523DCB)',
-                  WebkitBackgroundClip: 'text',
-                  WebkitTextFillColor: 'transparent',
-                  backgroundClip: 'text',
-                }}
-              >
-                GROUPE
-              </span>
-              <span
-                style={{
-                  fontSize: 'clamp(1.25rem, 4.5vw, 2.25rem)',
-                  lineHeight: 1.05,
-                  background: 'linear-gradient(to right, #6B1817, #523DCB)',
-                  WebkitBackgroundClip: 'text',
-                  WebkitTextFillColor: 'transparent',
-                  backgroundClip: 'text',
-                }}
-              >
-                nukleo&gt;
-              </span>
-            </span>
+            />
           </Link>
 
           <SplitCTAButton
