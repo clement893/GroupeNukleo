@@ -95,25 +95,44 @@ export function requireAdminAuth(req: any, res: any, next: any) {
   if (req.isAuthenticated && req.isAuthenticated()) {
     return next();
   }
-  
+
+  const ADMIN_JWT_SECRET = (process.env.JWT_SECRET ?? "") + "-admin";
+  if (!ADMIN_JWT_SECRET || ADMIN_JWT_SECRET === "-admin") {
+    console.log(`[AdminAuth] Unauthorized access attempt to ${req.path}`);
+    return res.status(401).json({ error: "Unauthorized - Admin login required" });
+  }
+
+  // Check Authorization: Bearer <upload-token> (bypasses cookie issues on some proxies)
+  const authHeader = req.headers?.authorization;
+  if (authHeader?.startsWith("Bearer ")) {
+    const token = authHeader.slice(7);
+    try {
+      const jwt = require("jsonwebtoken");
+      const decoded = jwt.verify(token, ADMIN_JWT_SECRET) as { type?: string; id?: number };
+      if (decoded?.id && (decoded.type === "upload" || !decoded.type)) {
+        return next();
+      }
+    } catch {
+      // Invalid token, continue to cookie check
+    }
+  }
+
   // Check admin JWT cookie (admin login form)
   const ADMIN_COOKIE_NAME = "admin_session";
-  const ADMIN_JWT_SECRET = process.env.JWT_SECRET + "-admin";
   const adminToken = req.cookies?.[ADMIN_COOKIE_NAME];
-  
-  if (adminToken && ADMIN_JWT_SECRET && ADMIN_JWT_SECRET !== "-admin") {
+
+  if (adminToken) {
     try {
       const jwt = require("jsonwebtoken");
       const decoded = jwt.verify(adminToken, ADMIN_JWT_SECRET);
       if (decoded && decoded.id) {
-        // Admin authenticated via JWT cookie
         return next();
       }
-    } catch (error) {
-      // Invalid token, continue to check other methods
+    } catch {
+      // Invalid token
     }
   }
-  
+
   console.log(`[AdminAuth] Unauthorized access attempt to ${req.path}`);
   res.status(401).json({ error: "Unauthorized - Admin login required" });
 }

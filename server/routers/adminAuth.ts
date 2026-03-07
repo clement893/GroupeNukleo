@@ -1,4 +1,4 @@
-import { publicProcedure, router } from "../_core/trpc";
+import { publicProcedure, adminProcedure, router } from "../_core/trpc";
 import { z } from "zod";
 import { verifyAdminPassword, createAdminUser } from "../db";
 import jwt from "jsonwebtoken";
@@ -51,6 +51,15 @@ export const adminAuthRouter = router({
   logout: publicProcedure.mutation(({ ctx }) => {
     ctx.res.clearCookie(ADMIN_COOKIE_NAME, { path: "/" });
     return { success: true };
+  }),
+
+  /** Short-lived token for upload requests (bypasses cookie issues on some proxies) */
+  getUploadToken: adminProcedure.query(({ ctx }) => {
+    const uploadToken = jwt.sign(
+      { type: "upload", id: ctx.user!.id, exp: Math.floor(Date.now() / 1000) + 120 },
+      ADMIN_JWT_SECRET
+    );
+    return { token: uploadToken };
   }),
 
   checkAuth: publicProcedure.query(({ ctx }) => {

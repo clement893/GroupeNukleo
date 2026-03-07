@@ -4,6 +4,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Button } from "@/components/ui/button";
 import { Upload, Video, Loader2 } from "lucide-react";
 import { toast } from "sonner";
+import { trpc } from "@/lib/trpc";
 import "@/styles/admin.css";
 
 const ACCEPT_VIDEO = "video/mp4,video/webm,video/quicktime";
@@ -49,6 +50,8 @@ export default function AdminUnionVideo() {
     e.target.value = "";
   }, []);
 
+  const getUploadTokenQuery = trpc.adminAuth.getUploadToken.useQuery(undefined, { enabled: false });
+
   async function handleUpload() {
     if (!selectedFile) {
       toast.error("Sélectionnez une vidéo");
@@ -56,11 +59,15 @@ export default function AdminUnionVideo() {
     }
     setUploadPending(true);
     try {
+      const result = await getUploadTokenQuery.refetch();
+      const token = result.data?.token;
+      if (!token) throw new Error("Session expirée. Reconnectez-vous.");
       const form = new FormData();
       form.append("video", selectedFile);
       const res = await fetch("/api/admin/union-video/upload", {
         method: "POST",
         credentials: "include",
+        headers: { Authorization: `Bearer ${token}` },
         body: form,
       });
       if (!res.ok) {

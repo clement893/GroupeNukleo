@@ -1,5 +1,6 @@
 import { useState, useEffect, useCallback } from "react";
 import { AdminLayout } from "@/components/AdminLayout";
+import { trpc } from "@/lib/trpc";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Upload, FileText, Loader2, ExternalLink } from "lucide-react";
@@ -50,6 +51,8 @@ export default function AdminPressRelease() {
     e.target.value = "";
   }, []);
 
+  const getUploadTokenQuery = trpc.adminAuth.getUploadToken.useQuery(undefined, { enabled: false });
+
   async function handleUpload() {
     if (!selectedFile) {
       toast.error("Sélectionnez un PDF");
@@ -57,11 +60,15 @@ export default function AdminPressRelease() {
     }
     setUploadPending(true);
     try {
+      const result = await getUploadTokenQuery.refetch();
+      const token = result.data?.token;
+      if (!token) throw new Error("Session expirée. Reconnectez-vous.");
       const form = new FormData();
       form.append("pdf", selectedFile);
       const res = await fetch("/api/admin/press-release/upload", {
         method: "POST",
         credentials: "include",
+        headers: { Authorization: `Bearer ${token}` },
         body: form,
       });
       if (!res.ok) {

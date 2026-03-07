@@ -43,14 +43,24 @@ export default function AdminCarouselLogos() {
     refetchOnWindowFocus: false,
   });
   const [removePendingId, setRemovePendingId] = useState<string | null>(null);
+  const getUploadTokenQuery = trpc.adminAuth.getUploadToken.useQuery(undefined, { enabled: false });
+
+  async function getAuthToken() {
+    const result = await getUploadTokenQuery.refetch();
+    const token = result.data?.token;
+    if (!token) throw new Error("Session expirée. Reconnectez-vous.");
+    return token;
+  }
 
   async function deleteLogo(id: string, alt: string) {
     if (!confirm(`Supprimer le logo « ${alt} » ?`)) return;
     setRemovePendingId(id);
     try {
+      const token = await getAuthToken();
       const res = await fetch(`/api/admin/carousel-logos/${encodeURIComponent(id)}`, {
         method: "DELETE",
         credentials: "include",
+        headers: { Authorization: `Bearer ${token}` },
       });
       if (!res.ok) {
         const data = await res.json().catch(() => ({}));
@@ -69,10 +79,11 @@ export default function AdminCarouselLogos() {
   async function updateLogoRest(id: string) {
     setUpdatePendingId(id);
     try {
+      const token = await getAuthToken();
       const res = await fetch("/api/admin/carousel-logos", {
         method: "PATCH",
         credentials: "include",
-        headers: { "Content-Type": "application/json" },
+        headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
         body: JSON.stringify({ id, url: editUrl.trim() }),
       });
       if (!res.ok) {
@@ -96,10 +107,11 @@ export default function AdminCarouselLogos() {
     const order = newOrder.map((l, i) => ({ id: l.id, displayOrder: i }));
     setReorderPending(true);
     try {
+      const token = await getAuthToken();
       const res = await fetch("/api/admin/carousel-logos/reorder", {
         method: "POST",
         credentials: "include",
-        headers: { "Content-Type": "application/json" },
+        headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
         body: JSON.stringify(order),
       });
       if (!res.ok) {
@@ -172,11 +184,13 @@ export default function AdminCarouselLogos() {
     if (addModalFile) {
       setAddModalPending(true);
       try {
+        const token = await getAuthToken();
         const form = new FormData();
         form.append("file", addModalFile);
         const upRes = await fetch("/api/admin/carousel-logos/upload", {
           method: "POST",
           credentials: "include",
+          headers: { Authorization: `Bearer ${token}` },
           body: form,
         });
         if (!upRes.ok) {
@@ -199,10 +213,11 @@ export default function AdminCarouselLogos() {
     }
     setAddModalPending(true);
     try {
+      const token = await getAuthToken();
       const res = await fetch("/api/admin/carousel-logos", {
         method: "POST",
         credentials: "include",
-        headers: { "Content-Type": "application/json" },
+        headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
         body: JSON.stringify({
           src,
           alt: addModalAlt.trim(),

@@ -1,5 +1,6 @@
 import { useState, useEffect, useCallback } from "react";
 import { AdminLayout } from "@/components/AdminLayout";
+import { trpc } from "@/lib/trpc";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Upload, ImageIcon, Loader2, AlertCircle } from "lucide-react";
@@ -88,6 +89,8 @@ export default function AdminSitePhotos() {
     e.target.value = "";
   }, []);
 
+  const getUploadTokenQuery = trpc.adminAuth.getUploadToken.useQuery(undefined, { enabled: false });
+
   async function handleUpload() {
     if (!selectedKey || !selectedFile) return;
     if (!isR2) {
@@ -96,12 +99,16 @@ export default function AdminSitePhotos() {
     }
     setUploadingKey(selectedKey);
     try {
+      const result = await getUploadTokenQuery.refetch();
+      const token = result.data?.token;
+      if (!token) throw new Error("Session expirée. Reconnectez-vous.");
       const form = new FormData();
       form.append("key", selectedKey);
       form.append("image", selectedFile);
       const res = await fetch("/api/admin/site-photos/upload", {
         method: "POST",
         credentials: "include",
+        headers: { Authorization: `Bearer ${token}` },
         body: form,
       });
       const data = await res.json().catch(() => ({}));
