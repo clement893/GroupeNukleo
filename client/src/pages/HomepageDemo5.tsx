@@ -109,7 +109,7 @@ export default function HomepageDemo5() {
           </div>
         </section>
 
-        {/* Bloc 2 — Photo d'équipe (dégradé rouge/magenta → bleu/violet), coins arrondis + ombre */}
+        {/* Bloc 2 — Photo d'équipe (dégradé rouge/magenta → bleu/violet) */}
         <div
           style={{
             position: 'relative',
@@ -117,9 +117,6 @@ export default function HomepageDemo5() {
             minHeight: 'min(50vh, 480px)',
             overflow: 'hidden',
             background: 'linear-gradient(to right, #8B1538, #523DCB)',
-            borderBottomLeftRadius: 16,
-            borderBottomRightRadius: 16,
-            boxShadow: '0 8px 32px rgba(0,0,0,0.12)',
           }}
         >
           <img
@@ -174,10 +171,9 @@ export default function HomepageDemo5() {
             textAlign: 'center',
             maxWidth: 'min(36ch, 100%)',
           }}>
-            <span style={{ color: BORDEAUX }}>{t('home.quiSommesNous.titlePart1Red')}</span>
-            <span style={{ color: SITE_MAUVE }}>{t('home.quiSommesNous.titlePart1Purple')}</span>
+            <span style={{ color: BORDEAUX }}>{t('home.quiSommesNous.titlePart1')}</span>
             <br />
-            <span style={{ color: '#5a4d61' }}>{t('home.quiSommesNous.titlePart2')}</span>
+            <span style={{ color: SITE_MAUVE }}>{t('home.quiSommesNous.titlePart2')}</span>
           </h2>
 
           {/* Carte unique : image gauche (pleine hauteur) + texte droite */}
@@ -217,7 +213,7 @@ export default function HomepageDemo5() {
                 fontFamily: "'Neue Haas Unica Pro', sans-serif",
                 fontWeight: 700,
                 fontSize: 'clamp(1.1rem, 1.4vw, 1.35rem)',
-                color: BORDEAUX,
+                color: DARK,
                 margin: '0 0 0.35rem 0',
               }}>
                 {t('home.quiSommesNous.subtitle1')}
@@ -226,7 +222,7 @@ export default function HomepageDemo5() {
                 fontFamily: "'Neue Haas Unica Pro', sans-serif",
                 fontWeight: 600,
                 fontSize: 'clamp(1rem, 1.2vw, 1.15rem)',
-                color: SITE_MAUVE,
+                color: DARK,
                 margin: '0 0 1.25rem 0',
               }}>
                 {t('home.quiSommesNous.subtitle2')}

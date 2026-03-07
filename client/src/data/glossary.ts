@@ -62,7 +62,7 @@ export const glossaryTerms: GlossaryTerm[] = [
       {
         type: 'blog',
         title: 'Getting Started with AI for Business',
-        url: '/'
+        url: '/resources/ai-for-business'
       },
       {
         type: 'external',
@@ -110,7 +110,7 @@ export const glossaryTerms: GlossaryTerm[] = [
       {
         type: 'blog',
         title: 'Machine Learning for SMBs: A Practical Guide',
-        url: '/'
+        url: '/resources/ml-for-smbs'
       },
       {
         type: 'external',
@@ -158,7 +158,7 @@ export const glossaryTerms: GlossaryTerm[] = [
       {
         type: 'blog',
         title: 'Deep Learning Applications in Business',
-        url: '/'
+        url: '/resources/deep-learning-business'
       },
       {
         type: 'external',
@@ -206,7 +206,7 @@ export const glossaryTerms: GlossaryTerm[] = [
       {
         type: 'blog',
         title: 'NLP Use Cases for Business',
-        url: '/'
+        url: '/resources/nlp-use-cases'
       },
       {
         type: 'external',
@@ -254,7 +254,7 @@ export const glossaryTerms: GlossaryTerm[] = [
       {
         type: 'blog',
         title: 'LLM Applications for Business',
-        url: '/'
+        url: '/resources/llm-applications'
       },
       {
         type: 'external',
@@ -302,7 +302,7 @@ export const glossaryTerms: GlossaryTerm[] = [
       {
         type: 'blog',
         title: 'Getting Started with GPT-4',
-        url: '/'
+        url: '/resources/gpt4-guide'
       },
       {
         type: 'external',
@@ -350,7 +350,7 @@ export const glossaryTerms: GlossaryTerm[] = [
       {
         type: 'blog',
         title: 'Prompt Engineering Best Practices',
-        url: '/'
+        url: '/resources/prompt-engineering'
       },
       {
         type: 'external',
@@ -398,7 +398,7 @@ export const glossaryTerms: GlossaryTerm[] = [
       {
         type: 'blog',
         title: 'Fine-tuning Guide for Business',
-        url: '/'
+        url: '/resources/fine-tuning-guide'
       },
       {
         type: 'external',
@@ -446,7 +446,7 @@ export const glossaryTerms: GlossaryTerm[] = [
       {
         type: 'blog',
         title: 'Building RAG Systems',
-        url: '/'
+        url: '/resources/rag-systems'
       },
       {
         type: 'external',
@@ -494,7 +494,7 @@ export const glossaryTerms: GlossaryTerm[] = [
       {
         type: 'blog',
         title: 'The Agentic AI Playbook',
-        url: '/'
+        url: '/resources/agentic-ai-playbook'
       },
       {
         type: 'external',
@@ -542,7 +542,7 @@ export const glossaryTerms: GlossaryTerm[] = [
       {
         type: 'blog',
         title: 'Neural Networks Explained',
-        url: '/'
+        url: '/resources/neural-networks'
       },
       {
         type: 'external',
@@ -590,7 +590,7 @@ export const additionalTerms: GlossaryTerm[] = [
       {
         type: 'blog',
         title: 'Computer Vision Applications',
-        url: '/'
+        url: '/resources/computer-vision'
       }
     ]
   },
@@ -896,7 +896,7 @@ export const additionalTerms: GlossaryTerm[] = [
       {
         type: 'blog',
         title: 'Understanding AI Hallucinations',
-        url: '/'
+        url: '/resources/ai-hallucinations'
       }
     ]
   },
@@ -930,7 +930,7 @@ export const additionalTerms: GlossaryTerm[] = [
       {
         type: 'blog',
         title: 'Addressing AI Bias',
-        url: '/'
+        url: '/resources/ai-bias'
       }
     ]
   },
