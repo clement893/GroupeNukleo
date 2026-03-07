@@ -7,6 +7,8 @@ import { SplitCTAButton } from '@/components/SplitCTAButton';
 import PageLayout from '@/components/PageLayout';
 import CompanyBlocksSection from '@/components/CompanyBlocksSection';
 import LeadersSection from '@/components/LeadersSection';
+import UnionSection from '@/components/UnionSection';
+import TwoCitiesSection from '@/components/TwoCitiesSection';
 // ─── Constantes ──────────────────────────────────────────────────────────────
 const PURPLE = '#7c3aed';
 const BORDEAUX = '#7B1D3A';
@@ -440,6 +442,11 @@ export default function HomepageDemo5() {
         </div>
 
         {/* ════════════════════════════════════════════════════════════════════
+            SECTION 3 — L'UNION DE DEUX FORCES (image + texte + CTA)
+        ════════════════════════════════════════════════════════════════════ */}
+        <UnionSection />
+
+        {/* ════════════════════════════════════════════════════════════════════
             SECTION 4 — DEUX BLOCS ENTREPRISES (Nukleo, Rouge On Blue)
         ════════════════════════════════════════════════════════════════════ */}
         <CompanyBlocksSection />
@@ -448,6 +455,11 @@ export default function HomepageDemo5() {
             SECTION 5 — CARTES LEADERS (Clément Roy, Lionel Pardin)
         ════════════════════════════════════════════════════════════════════ */}
         <LeadersSection />
+
+        {/* ════════════════════════════════════════════════════════════════════
+            SECTION 6 — 2 VILLES (Montréal, Halifax)
+        ════════════════════════════════════════════════════════════════════ */}
+        <TwoCitiesSection />
 
         </div>
       </div>

@@ -220,6 +220,18 @@
     "audaciousSub": "Strategy. Creativity. Technology. One team to take the lead.",
     "performNow": "Perform now",
     "trustedBy": "Trusted by ambitious organizations",
+    "union": {
+      "headline": "The union of two forces",
+      "subheadline": "The birth of the Nukleo Group",
+      "paragraph1": "Nukleo and Rouge On Blue combine their complementary expertise: digital strategy, creation and technology on one side; audiovisual production, content and immersive experiences on the other.",
+      "paragraph2": "Together, we offer an integrated offering to support organizations in their digital transformation. Montreal and Halifax: two cities, one shared ambition.",
+      "cta": "Discover more"
+    },
+    "twoCities": {
+      "title": "2 cities to be closer to you.",
+      "montrealAddress": "7236 Rue Waverly Montréal, QC H2R 0C2",
+      "halifaxAddress": "1800 Argyle St Unit 801 Halifax, NS B3J 3N8"
+    },
     "companyBlocks": {
       "ariaLabel": "Our companies",
       "visitSite": "Visit the site",
