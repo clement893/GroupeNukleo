@@ -71,14 +71,14 @@ export default function FullScreenMenu({ isOpen, onClose }: FullScreenMenuProps)
         </button>
       </div>
 
-      {/* Logo en couleur — lien vers accueil */}
+      {/* Logo Groupe nukleo — lien vers accueil */}
       <div className="flex-shrink-0 px-8 sm:px-12 md:px-16 lg:px-20 pt-8 pb-4">
-        <Link href={getLocalizedPath('/')} onClick={handleLinkClick} onMouseEnter={playHover} className="group inline-flex items-center touch-manipulation transition-opacity hover:opacity-90 duration-300" aria-label="Nukleo - Accueil">
+        <Link href={getLocalizedPath('/')} onClick={handleLinkClick} onMouseEnter={playHover} className="group inline-flex items-center touch-manipulation transition-opacity hover:opacity-90 duration-300" aria-label="Groupe Nukleo - Accueil">
           <img
-            src="/demo/nukleo-logo-rvb.svg"
-            alt="Nukleo"
-            className="w-auto object-contain"
-            style={{ height: 'clamp(2.25rem, 6vw, 3.4rem)' }}
+            src="/demo/logo-groupe-nukleo.png"
+            alt="Groupe Nukleo"
+            className="w-auto object-contain object-left"
+            style={{ maxHeight: 'clamp(2.5rem, 7vw, 4rem)', height: 'auto' }}
           />
         </Link>
       </div>
