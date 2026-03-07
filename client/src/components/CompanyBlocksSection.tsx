@@ -2,8 +2,8 @@ import { ArrowUpRight } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
 
 const COMPANIES = [
-  { name: 'nukleo,', url: 'https://nukleo.com', ariaLabel: 'Nukleo — visiter le site' },
-  { name: 'Rouge On Blue', url: 'https://rougeonblue.com', ariaLabel: 'Rouge On Blue — visiter le site' },
+  { name: 'nukleo,', url: 'https://nukleo.com', ariaLabel: 'Nukleo — visiter le site', logo: '/demo/nukleo-logo-block.png' },
+  { name: 'Rouge On Blue', url: 'https://rougeonblue.com', ariaLabel: 'Rouge On Blue — visiter le site', logo: '/demo/rob-logo-block.png' },
 ] as const;
 
 /**
@@ -43,23 +43,35 @@ export default function CompanyBlocksSection() {
                 flexDirection: 'column',
                 alignItems: 'center',
                 justifyContent: 'space-between',
-                minHeight: 200,
+                minHeight: 320,
                 transition: 'box-shadow 0.2s ease, transform 0.2s ease',
               }}
               className="group-hover:shadow-lg"
             >
-              <h3
-                style={{
-                  fontFamily: "'Neue Haas Unica Pro', sans-serif",
-                  fontWeight: 700,
-                  fontSize: 'clamp(1.75rem, 4vw, 2.25rem)',
-                  color: '#0A0A0A',
-                  margin: 0,
-                  textAlign: 'center',
-                }}
-              >
-                {company.name}
-              </h3>
+              {company.logo ? (
+                <img
+                  src={company.logo}
+                  alt={company.name.replace(/,$/, '')}
+                  style={{
+                    maxHeight: 'clamp(3rem, 8vw, 5rem)',
+                    width: 'auto',
+                    objectFit: 'contain',
+                  }}
+                />
+              ) : (
+                <h3
+                  style={{
+                    fontFamily: "'Neue Haas Unica Pro', sans-serif",
+                    fontWeight: 700,
+                    fontSize: 'clamp(1.75rem, 4vw, 2.25rem)',
+                    color: '#0A0A0A',
+                    margin: 0,
+                    textAlign: 'center',
+                  }}
+                >
+                  {company.name}
+                </h3>
+              )}
               <span
                 style={{
                   display: 'inline-flex',
@@ -84,6 +96,29 @@ export default function CompanyBlocksSection() {
             </article>
           </a>
         ))}
+      </div>
+      <div
+        style={{
+          marginTop: '4rem',
+          maxWidth: '42rem',
+          marginLeft: 'auto',
+          marginRight: 'auto',
+          paddingLeft: 'var(--site-margin, 3%)',
+          paddingRight: 'var(--site-margin, 3%)',
+        }}
+      >
+        <p
+          style={{
+            fontFamily: "'Neue Haas Unica Pro', sans-serif",
+            fontSize: 'clamp(1rem, 2vw, 1.125rem)',
+            color: '#5A1E29',
+            lineHeight: 1.6,
+            textAlign: 'center',
+            margin: 0,
+          }}
+        >
+          {t('home.companyBlocks.paragraph')}
+        </p>
       </div>
     </section>
   );
