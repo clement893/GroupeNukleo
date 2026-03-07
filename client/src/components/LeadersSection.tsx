@@ -31,7 +31,7 @@ export default function LeadersSection() {
     >
       <div
         style={{
-          maxWidth: '50rem',
+          maxWidth: '42rem',
           marginBottom: 'clamp(2rem, 4vw, 3rem)',
         }}
       >
