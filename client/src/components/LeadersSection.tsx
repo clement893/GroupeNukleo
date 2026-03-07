@@ -23,25 +23,26 @@ export default function LeadersSection() {
     <section
       aria-label={t('home.leaders.ariaLabel') || 'Les leaders du Groupe Nukleo'}
       style={{
-        background: '#F8F7F4',
-        padding: '4rem 3% 6rem',
+        background: '#F5F3EF',
+        padding: 'clamp(4rem, 8vw, 6rem) 3% clamp(5rem, 10vw, 7rem)',
         marginTop: 0,
         marginBottom: 5 * 16,
       }}
     >
       <div
         style={{
-          maxWidth: '42rem',
-          marginBottom: 'clamp(2rem, 4vw, 3rem)',
+          maxWidth: 960,
+          margin: '0 auto',
+          marginBottom: 'clamp(2.5rem, 5vw, 4rem)',
         }}
       >
         <p
           style={{
             fontFamily: "'Neue Haas Unica Pro', sans-serif",
             fontWeight: 700,
-            fontSize: 'clamp(1.125rem, 2.5vw, 1.5rem)',
-            lineHeight: 1.5,
-            color: '#7A3E50',
+            fontSize: 'clamp(1.25rem, 2.8vw, 1.75rem)',
+            lineHeight: 1.45,
+            color: 'rgb(139, 69, 79)',
             textAlign: 'left',
             margin: 0,
           }}
@@ -52,7 +53,7 @@ export default function LeadersSection() {
       <div
         style={{
           display: 'grid',
-          gap: 'clamp(1.5rem, 4vw, 3rem)',
+          gap: 'clamp(2rem, 5vw, 3.5rem)',
           maxWidth: 960,
           margin: '0 auto',
         }}
@@ -63,20 +64,20 @@ export default function LeadersSection() {
             key={leader.id}
             style={{
               display: 'grid',
-              gridTemplateColumns: 'minmax(140px, 1fr) 1.5fr',
-              gap: 'clamp(1rem, 2vw, 1.5rem)',
-              alignItems: 'stretch',
-              background: '#F2F0ED',
-              borderRadius: 10,
-              padding: 'clamp(1.25rem, 2vw, 1.75rem)',
-              boxShadow: '0 2px 12px rgba(0,0,0,0.06)',
-              border: '1px solid #E0DED7',
-              minHeight: 220,
+              gridTemplateColumns: 'minmax(160px, 1fr) 1.6fr',
+              gap: 'clamp(1.25rem, 2.5vw, 1.75rem)',
+              alignItems: 'center',
+              background: 'rgb(243, 239, 236)',
+              borderRadius: 14,
+              padding: 'clamp(1.5rem, 2.5vw, 2.25rem)',
+              boxShadow: '0 2px 16px rgba(0,0,0,0.05)',
+              border: '1px solid #E5E2DE',
+              minHeight: 240,
             }}
           >
             <div
               style={{
-                borderRadius: 10,
+                borderRadius: 12,
                 overflow: 'hidden',
                 aspectRatio: '1',
                 minHeight: 0,
@@ -90,6 +91,7 @@ export default function LeadersSection() {
                   width: '100%',
                   height: '100%',
                   objectFit: 'cover',
+                  filter: 'grayscale(1)',
                 }}
               />
             </div>
@@ -105,11 +107,11 @@ export default function LeadersSection() {
                 style={{
                   fontFamily: "'Neue Haas Unica Pro', sans-serif",
                   fontWeight: 700,
-                  fontSize: 'clamp(0.9rem, 1.2vw, 1.1rem)',
-                  letterSpacing: '0.08em',
+                  fontSize: 'clamp(0.95rem, 1.25vw, 1.15rem)',
+                  letterSpacing: '0.06em',
                   textTransform: 'uppercase',
-                  color: '#333333',
-                  margin: '0 0 0.25rem 0',
+                  color: '#0A0A0A',
+                  margin: '0 0 0.35rem 0',
                 }}
               >
                 {t(`home.leaders.${leader.id}.name`)}
@@ -117,12 +119,12 @@ export default function LeadersSection() {
               <p
                 style={{
                   fontFamily: "'Neue Haas Unica Pro', sans-serif",
-                  fontWeight: 600,
-                  fontSize: 'clamp(0.7rem, 0.95vw, 0.85rem)',
-                  letterSpacing: '0.06em',
+                  fontWeight: 400,
+                  fontSize: 'clamp(0.7rem, 0.9vw, 0.85rem)',
+                  letterSpacing: '0.05em',
                   textTransform: 'uppercase',
-                  color: '#555555',
-                  margin: '0 0 0.75rem 0',
+                  color: '#374151',
+                  margin: '0 0 0.85rem 0',
                 }}
               >
                 {t(`home.leaders.${leader.id}.title`)}
@@ -131,9 +133,9 @@ export default function LeadersSection() {
                 style={{
                   fontFamily: "'Neue Haas Unica Pro', sans-serif",
                   fontWeight: 400,
-                  fontSize: 'clamp(0.8rem, 1vw, 0.95rem)',
+                  fontSize: 'clamp(0.8rem, 1.05vw, 0.95rem)',
                   lineHeight: 1.6,
-                  color: '#555555',
+                  color: '#6b7280',
                   margin: 0,
                   flex: 1,
                 }}
