@@ -10,6 +10,9 @@ export const ENV = {
   googleClientId: process.env.GOOGLE_CLIENT_ID ?? "",
   googleClientSecret: process.env.GOOGLE_CLIENT_SECRET ?? "",
   adminAllowedEmails: process.env.ADMIN_ALLOWED_EMAILS ?? "",
+  /** Admin login (when no DB admin user): default Nukleo / NukleoGroup */
+  adminUsername: process.env.ADMIN_USERNAME ?? "Nukleo",
+  adminPassword: process.env.ADMIN_PASSWORD ?? "NukleoGroup",
   baseUrl: process.env.BASE_URL ?? "http://localhost:3000",
   internalPlatformUrl: process.env.INTERNAL_PLATFORM_URL ?? "", // URL de la plateforme interne pour récupérer les témoignages
   internalPlatformApiKey: process.env.INTERNAL_PLATFORM_API_KEY ?? "", // Clé API optionnelle pour l'authentification

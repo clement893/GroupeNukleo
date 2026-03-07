@@ -486,7 +486,7 @@ export default function HomepageDemo5() {
         <div style={{ position: 'relative', zIndex: 10, paddingTop: 'clamp(5rem, 15vw, 8rem)' }}>
 
         {/* ════════════════════════════════════════════════════════════════════
-            SECTION HERO — L'agence numérique des PME et des OBNL
+            SECTION HERO — Le Groupe Nukleo
         ════════════════════════════════════════════════════════════════════ */}
         <section style={{
           minHeight: '27.5vh',

@@ -304,26 +304,34 @@ export async function getAdminByUsername(username: string) {
 
 export async function verifyAdminPassword(username: string, password: string) {
   const db = await getDb();
-  if (!db) {
-    console.warn("[Database] Cannot verify admin: database not available");
-    return null;
+  if (db) {
+    try {
+      const admin = await getAdminByUsername(username);
+      if (admin) {
+        const isValid = await bcrypt.compare(password, admin.passwordHash);
+        if (isValid) {
+          await db.update(adminUsers)
+            .set({ lastLoginAt: new Date() })
+            .where(eq(adminUsers.id, admin.id));
+          return admin;
+        }
+        return null;
+      }
+    } catch (error) {
+      console.error("[Database] Error verifying admin password:", error);
+    }
   }
 
-  try {
-    const admin = await getAdminByUsername(username);
-    if (!admin) return null;
-    
-    const isValid = await bcrypt.compare(password, admin.passwordHash);
-    if (!isValid) return null;
-    
-    // Update last login
-    await db.update(adminUsers)
-      .set({ lastLoginAt: new Date() })
-      .where(eq(adminUsers.id, admin.id));
-    
-    return admin;
-  } catch (error) {
-    console.error("[Database] Error verifying admin password:", error);
-    return null;
+  // Fallback: fixed admin credentials (env or defaults Nukleo / NukleoGroup)
+  if (username === ENV.adminUsername && password === ENV.adminPassword) {
+    return {
+      id: 0,
+      username: ENV.adminUsername,
+      passwordHash: "",
+      email: "admin@nukleo.com",
+      createdAt: new Date(),
+      lastLoginAt: null,
+    };
   }
+  return null;
 }

@@ -1,99 +1,61 @@
-import { useState, useEffect } from "react";
 import { useLocation } from "wouter";
+import { trpc } from "@/lib/trpc";
 
 /**
  * Interface représentant un utilisateur administrateur authentifié.
  */
 interface AdminUser {
-  id: string;
+  id: number;
   email: string;
   name: string;
-  picture?: string;
+  username?: string;
 }
 
 /**
- * Hook personnalisé pour gérer l'authentification administrateur.
- * 
- * Vérifie automatiquement l'état d'authentification au montage du composant
- * et fournit des méthodes pour se connecter et se déconnecter.
- * 
- * @returns Objet contenant :
- * - `user`: L'utilisateur admin authentifié ou `null`
- * - `loading`: État de chargement initial (`true` pendant la vérification)
- * - `isAuthenticated`: Booléen indiquant si l'utilisateur est authentifié
- * - `login`: Fonction pour rediriger vers la page de connexion Google OAuth
- * - `logout`: Fonction pour déconnecter l'utilisateur et rediriger vers `/admin/login`
- * 
- * @example
- * ```tsx
- * const { user, loading, isAuthenticated, login, logout } = useAdminAuth();
- * 
- * if (loading) return <div>Loading...</div>;
- * if (!isAuthenticated) return <button onClick={login}>Login</button>;
- * 
- * return (
- *   <div>
- *     <p>Welcome, {user.name}</p>
- *     <button onClick={logout}>Logout</button>
- *   </div>
- * );
- * ```
+ * Hook pour l'authentification admin (user / mot de passe).
+ * Utilise tRPC adminAuth (checkAuth, login, logout).
  */
 export function useAdminAuth() {
-  const [user, setUser] = useState<AdminUser | null>(null);
-  const [loading, setLoading] = useState(true);
   const [, setLocation] = useLocation();
-
-  useEffect(() => {
-    checkAuth();
-  }, []);
-
-  const checkAuth = async () => {
-    const controller = new AbortController();
-    const timeoutId = setTimeout(() => controller.abort(), 10000); // 10s timeout
-    try {
-      const response = await fetch("/api/auth/me", {
-        credentials: "include",
-        signal: controller.signal,
-      });
-      clearTimeout(timeoutId);
-      if (response.ok) {
-        const data = await response.json();
-        setUser(data.user);
-      } else {
-        setUser(null);
-      }
-    } catch (error) {
-      clearTimeout(timeoutId);
-      console.error("Auth check failed:", error);
-      setUser(null);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const login = () => {
-    window.location.href = "/api/auth/google";
-  };
-
-  const logout = async () => {
-    try {
-      await fetch("/api/auth/logout", {
-        method: "POST",
-        credentials: "include",
-      });
-      setUser(null);
+  const utils = trpc.useUtils();
+  const { data, isLoading } = trpc.adminAuth.checkAuth.useQuery();
+  const loginMutation = trpc.adminAuth.login.useMutation({
+    onSuccess: () => {
+      utils.adminAuth.checkAuth.invalidate();
+    },
+  });
+  const logoutMutation = trpc.adminAuth.logout.useMutation({
+    onSuccess: () => {
+      utils.adminAuth.checkAuth.invalidate();
       setLocation("/admin/login");
-    } catch (error) {
-      console.error("Logout failed:", error);
-    }
+    },
+  });
+
+  const user: AdminUser | null =
+    data?.authenticated && data.admin
+      ? {
+          id: data.admin.id,
+          email: data.admin.email,
+          name: data.admin.username ?? data.admin.email,
+          username: data.admin.username,
+        }
+      : null;
+
+  const login = (credentials: { username: string; password: string }) => {
+    return loginMutation.mutateAsync(credentials);
+  };
+
+  const logout = () => {
+    logoutMutation.mutate();
   };
 
   return {
     user,
-    loading,
-    isAuthenticated: !!user,
+    loading: isLoading,
+    isAuthenticated: !!data?.authenticated && !!data?.admin,
     login,
     logout,
+    loginError: loginMutation.error?.message ?? null,
+    isLoggingIn: loginMutation.isPending,
   };
 }
