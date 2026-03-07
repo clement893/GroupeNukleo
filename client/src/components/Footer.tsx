@@ -14,7 +14,7 @@ function Footer() {
 
   return (
     <footer
-      className="relative w-full site-margin-x"
+      className="relative w-full"
       style={{
         background: '#EFE8E8',
         paddingTop: 'clamp(1.5rem, 4vw, 3rem)',
@@ -26,7 +26,7 @@ function Footer() {
     >
       {/* Boîte noire unique — logo gauche, contact droite */}
       <div
-        className="rounded-2xl w-full max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-[1fr_auto] gap-8 md:gap-12 items-start"
+        className="rounded-none w-full grid grid-cols-1 md:grid-cols-[1fr_auto] gap-8 md:gap-12 items-start"
         style={{
           background: FOOTER_BG,
           padding: 'clamp(2rem, 5vw, 3.5rem) clamp(2rem, 4vw, 3rem)',

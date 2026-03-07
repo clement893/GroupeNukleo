@@ -1,7 +1,6 @@
 import { ReactNode } from 'react';
 import Header from './Header';
 import Footer from './Footer';
-import PreFooter from './PreFooter';
 import SkipToContent from './SkipToContent';
 import HeroGradientCloud from './HeroGradientCloud';
 
@@ -25,7 +24,6 @@ export default function PageLayout({ children }: PageLayoutProps) {
           {children}
         </main>
         <div className="page-footer-zone" style={{ paddingTop: 0 }}>
-          <PreFooter />
           <Footer />
         </div>
       </div>

@@ -7,8 +7,7 @@ import { ArrowUpRight, ArrowRight } from 'lucide-react';
 import { SplitCTAButton } from '@/components/SplitCTAButton';
 import { WeatherWidget } from '@/components/WeatherWidget';
 import PageLayout from '@/components/PageLayout';
-import HomeServicesSection from '@/components/HomeServicesSection';
-import CTAPerformSection from '@/components/CTAPerformSection';
+import CompanyBlocksSection from '@/components/CompanyBlocksSection';
 import { trpc } from '@/lib/trpc';
 
 // ─── Constantes ──────────────────────────────────────────────────────────────
@@ -711,14 +710,9 @@ export default function HomepageDemo5() {
         </div>
 
         {/* ════════════════════════════════════════════════════════════════════
-            SECTION 4 — SERVICES (4 cartes : Lab tech, Studio, Agence, Transition)
+            SECTION 4 — DEUX BLOCS ENTREPRISES (Nukleo, Rouge On Blue)
         ════════════════════════════════════════════════════════════════════ */}
-        <HomeServicesSection />
-
-        {/* ════════════════════════════════════════════════════════════════════
-            SECTION 7 — PRÊT.E À PERFORMER? (composant partagé)
-        ════════════════════════════════════════════════════════════════════ */}
-        <CTAPerformSection />
+        <CompanyBlocksSection />
 
         </div>
       </div>

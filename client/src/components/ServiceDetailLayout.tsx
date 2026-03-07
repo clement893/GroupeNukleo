@@ -1,7 +1,6 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
 import type { ComponentType } from 'react';
 import { Sparkles, type LucideIcon } from 'lucide-react';
-import CTAPerformSection from '@/components/CTAPerformSection';
 
 const BORDEAUX = '#5A1E29';
 const PURPLE = '#523DCB';
@@ -812,8 +811,6 @@ export default function ServiceDetailLayout(props: ServiceDetailLayoutProps) {
         </div>
       </section>
 
-      {/* CTA — composant partagé (identique Homepage, About, Lab, Agence, Studio, etc.) */}
-      <CTAPerformSection />
     </main>
   );
 }

@@ -220,6 +220,10 @@
     "audaciousSub": "Strategy. Creativity. Technology. One team to take the lead.",
     "performNow": "Perform now",
     "trustedBy": "Trusted by ambitious organizations",
+    "companyBlocks": {
+      "ariaLabel": "Our companies",
+      "visitSite": "Visit the site"
+    },
     "moreInfo": "More info",
     "audaciousLine1": "One partner.",
     "audaciousLine2": "Integrated intelligence.",
