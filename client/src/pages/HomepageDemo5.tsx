@@ -1,16 +1,12 @@
-import { useState, useEffect, useRef, useCallback, useMemo } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 import { Link } from 'wouter';
 import { useLocalizedPath } from '@/hooks/useLocalizedPath';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { TeamScrollCards, DoubleLogoCarousel } from '@/components/demo3';
-import { ArrowUpRight, ArrowRight } from 'lucide-react';
 import { SplitCTAButton } from '@/components/SplitCTAButton';
-import { WeatherWidget } from '@/components/WeatherWidget';
 import PageLayout from '@/components/PageLayout';
 import CompanyBlocksSection from '@/components/CompanyBlocksSection';
 import LeadersSection from '@/components/LeadersSection';
-import { trpc } from '@/lib/trpc';
-
 // ─── Constantes ──────────────────────────────────────────────────────────────
 const PURPLE = '#7c3aed';
 const BORDEAUX = '#7B1D3A';
@@ -53,106 +49,6 @@ function mapApiProjectsToHome(
       color: CAROUSEL_COLORS[i % CAROUSEL_COLORS.length],
     };
   });
-}
-
-// ─── Carrousel Projets Hero — slider régulier (une image à la fois)
-function NewsCarousel({ projects: projectsProp }: { projects?: HomeProjectItem[] }) {
-  const PROJECTS = projectsProp && projectsProp.length > 0 ? projectsProp : FALLBACK_PROJECTS;
-  const SLIDES = PROJECTS.slice(0, 5);
-  const { t } = useLanguage();
-  const getLocalizedPath = useLocalizedPath();
-  const [active, setActive] = useState(0);
-  const [isHovered, setIsHovered] = useState(false);
-  const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
-
-  const next = useCallback(() => setActive(a => (a + 1) % SLIDES.length), []);
-
-  useEffect(() => {
-    if (!isHovered && SLIDES.length > 1) {
-      timerRef.current = setInterval(next, 4500);
-    }
-    return () => { if (timerRef.current) clearInterval(timerRef.current); };
-  }, [isHovered, next, SLIDES.length]);
-
-  return (
-    <div
-      style={{ borderRadius: 24, overflow: 'hidden', position: 'relative', height: '100%', minHeight: 0, isolation: 'isolate' }}
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-    >
-      {SLIDES.map((p, i) => {
-        const isA = i === active;
-        return (
-          <div
-            key={p.num}
-            style={{
-              position: 'absolute',
-              inset: 0,
-              opacity: isA ? 1 : 0,
-              transition: 'opacity 0.6s ease',
-              pointerEvents: isA ? 'auto' : 'none',
-            }}
-          >
-            <img
-              src={p.img}
-              alt={p.name}
-              style={{
-                position: 'absolute', inset: 0, width: '100%', height: '100%',
-                objectFit: 'cover',
-              }}
-            />
-            <div style={{
-              position: 'absolute', inset: 0,
-              background: 'linear-gradient(to top, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.2) 50%, transparent 100%)',
-            }} />
-            <div style={{
-              position: 'absolute', bottom: 0, left: 0, right: 0,
-              padding: '2rem 2.2rem',
-              zIndex: 2,
-            }}>
-              <div style={{ marginBottom: '0.6rem' }}>
-                <span style={{ fontFamily: "'Neue Haas Unica Pro', sans-serif", fontWeight: 900, fontSize: 'clamp(2rem, 4vw, 4rem)', lineHeight: 1, color: 'rgba(255,255,255,0.15)', letterSpacing: '-0.04em' }}>{p.num}</span>
-              </div>
-              <h3 style={{
-                fontFamily: "'Neue Haas Unica Pro', sans-serif", fontWeight: 700,
-                fontSize: 'clamp(1.5rem, 2.5vw, 2.5rem)', lineHeight: 1.1,
-                letterSpacing: '-0.02em', color: '#fff', marginBottom: '1rem',
-              }}>{p.name}</h3>
-              <Link
-                href={getLocalizedPath('/')}
-                style={{
-                  display: 'inline-flex', alignItems: 'center', gap: 8,
-                  color: '#fff', fontSize: '0.8rem', fontWeight: 600, textDecoration: 'none',
-                  background: 'rgba(255,255,255,0.2)', padding: '0.5rem 1rem', borderRadius: 999,
-                }}
-              >
-                {t('home.caseStudy')} <ArrowRight size={16} />
-              </Link>
-            </div>
-          </div>
-        );
-      })}
-      {SLIDES.length > 1 && (
-        <div style={{ position: 'absolute', bottom: 20, left: '50%', transform: 'translateX(-50%)', display: 'flex', gap: 8, zIndex: 3 }}>
-          {SLIDES.map((_, i) => (
-            <button
-              key={i}
-              type="button"
-              onClick={() => setActive(i)}
-              aria-label={`Slide ${i + 1}`}
-              style={{
-                border: 'none', cursor: 'pointer', padding: 0,
-                height: 6, borderRadius: 999,
-                width: i === active ? 24 : 6,
-                background: i === active ? '#fff' : 'rgba(255,255,255,0.4)',
-                transition: 'all 0.3s ease',
-              }}
-            />
-          ))}
-        </div>
-      )}
-    </div>
-  );
 }
 
 // ─── Ancien Carrousel Projets Hero ───────────────────────────────────────────
@@ -418,21 +314,6 @@ export default function HomepageDemo5() {
     { label: t('nav.contact'), href: getLocalizedPath('/') },
   ];
 
-  const { data: apiProjects } = trpc.projects.list.useQuery(undefined, {
-    staleTime: 5 * 1000,
-    refetchOnWindowFocus: true,
-    refetchOnMount: true,
-  });
-  const homeCarouselProjects = useMemo(() => {
-    const featured = (apiProjects || []).filter((p: { featuredOnHomeCarousel?: boolean }) => p.featuredOnHomeCarousel);
-    const sorted = [...featured].sort((a, b) => {
-      const orderA = (a as { homeCarouselOrder?: number }).homeCarouselOrder ?? 999;
-      const orderB = (b as { homeCarouselOrder?: number }).homeCarouselOrder ?? 999;
-      return orderA - orderB;
-    });
-    return mapApiProjectsToHome(sorted, 6, 0, 'homeCarouselImage');
-  }, [apiProjects]);
-
   return (
     <PageLayout>
       <div
@@ -501,159 +382,7 @@ export default function HomepageDemo5() {
         </section>
 
         {/* ════════════════════════════════════════════════════════════════════
-            SECTION 1 — LOGO MASSIF + HERO WIDGETS (fond blanc)
-        ════════════════════════════════════════════════════════════════════ */}
-        <div style={{ padding: '0 3%', marginBottom: 5 * 16 }}>
-          {/* Hero grid : photo (gauche) = référence, blocs droite alignés sur sa hauteur */}
-          <div style={{ display: 'grid', gridTemplateColumns: '3fr 2fr', gap: 'clamp(1rem, 1.5vw, 1.5rem)', marginTop: 1.5 * 16, alignItems: 'stretch', height: '62.4vh', minHeight: 768 }}>
-
-            {/* Colonne Our Latest Work — News Carrousel (gauche) */}
-            <div style={{ height: '100%', minHeight: 0 }}>
-              <NewsCarousel projects={homeCarouselProjects} />
-            </div>
-
-            {/* Grille section droite : ligne 1 (météo + date) plus haute, ligne 4 (2022) plus basse */}
-            <div style={{
-              display: 'grid',
-              gridTemplateColumns: '1fr 1fr',
-              gridTemplateRows: 'minmax(0, 1.35fr) minmax(0, 0.75fr) minmax(0, 1.25fr) minmax(0, 0.55fr)',
-              gap: 'clamp(0.6rem, 1.2vw, 1.1rem)',
-              padding: 'clamp(0.75rem, 1.5vw, 1.25rem)',
-              borderRadius: 28,
-              height: '100%',
-              alignSelf: 'stretch',
-              overflow: 'hidden',
-            }}>
-              {/* 1. Météo — même hauteur que date, coins arrondis */}
-              <WeatherWidget className="glass-widget-weather-date" />
-
-              {/* 2. Date — même style et proportions que météo */}
-              {(() => {
-                const d = new Date();
-                const locale = language === 'en' ? 'en-CA' : 'fr-FR';
-                const dayName = d.toLocaleDateString(locale, { weekday: 'long' });
-                const dayNum = d.getDate();
-                const monthYear = d.toLocaleDateString(locale, { month: 'long', year: 'numeric' });
-                return (
-                  <div className="glass-widget-weather-date" style={{
-                    minHeight: 0,
-                    borderRadius: 14,
-                    padding: 'clamp(1.5rem, 2.2vw, 2.5rem) clamp(1.5rem, 2.4vw, 2.75rem)',
-                    display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
-                    gap: 'clamp(0.35rem, 0.5vw, 0.6rem)', textAlign: 'center', height: '100%',
-                  }}>
-                    <div style={{ fontSize: 'clamp(1rem, 1.2vw, 1.3rem)', fontWeight: 700, color: '#6b7280' }}>{t('home.widgetDateGreeting')} {dayName} <span style={{ color: PURPLE }}>♥</span></div>
-                    <div style={{ fontFamily: "'Neue Haas Unica Pro', sans-serif", fontWeight: 700, fontSize: 'clamp(3.5rem, 4.4vw, 5.5rem)', lineHeight: 1, color: DARK }}>{dayNum}</div>
-                    <div style={{ fontSize: 'clamp(0.65rem, 0.8vw, 0.85rem)', color: '#6b7280' }}>{monthYear}</div>
-                  </div>
-                );
-              })()}
-
-              {/* 3. Nous soutenons le monde culturel — pleine largeur */}
-              <div className="glass-widget-culture" style={{
-                gridColumn: '1 / -1',
-                borderRadius: 14,
-                padding: 'clamp(1rem, 1.5vw, 1.75rem) clamp(1rem, 1.5vw, 1.75rem)',
-                minHeight: 0,
-                display: 'flex',
-                flexDirection: 'column',
-                justifyContent: 'center',
-              }}>
-                <h3 style={{ fontFamily: "'Neue Haas Unica Pro', sans-serif", fontWeight: 700, fontSize: 'clamp(0.95rem, 1.15vw, 1.35rem)', color: DARK, margin: '0 0 clamp(0.25rem, 0.4vw, 0.45rem) 0' }}>
-                  {t('home.widgetStatsCultural')}
-                </h3>
-                <p style={{ fontSize: 'clamp(0.8rem, 1vw, 1.1rem)', color: '#4b5563', lineHeight: 1.6, margin: 0 }}>
-                  {t('home.widgetStatsCulturalDesc')}
-                </p>
-              </div>
-
-              {/* 4. Campagne 481k$ — flèche en haut à droite du bloc, image à gauche, texte à droite */}
-              <div className="glass-widget-481k" style={{
-                position: 'relative',
-                gridColumn: '1 / -1',
-                borderRadius: 14,
-                padding: 'clamp(1rem, 1.5vw, 1.75rem) clamp(1rem, 1.5vw, 1.75rem)',
-                display: 'grid',
-                gridTemplateColumns: 'minmax(100px, 1fr) 1.5fr',
-                gap: 'clamp(1rem, 1.5vw, 1.5rem)',
-                alignItems: 'center',
-                alignContent: 'center',
-                minHeight: 0,
-                overflow: 'hidden',
-              }}>
-                <span
-                  style={{
-                    position: 'absolute',
-                    top: 'clamp(1rem, 1.5vw, 1.75rem)',
-                    right: 'clamp(1rem, 1.5vw, 1.75rem)',
-                    width: 36,
-                    height: 36,
-                    borderRadius: 10,
-                    background: 'rgba(255, 255, 255, 0.4)',
-                    backdropFilter: 'blur(12px) saturate(180%)',
-                    WebkitBackdropFilter: 'blur(12px) saturate(180%)',
-                    border: '1px solid rgba(255, 255, 255, 0.6)',
-                    boxShadow: '0 2px 12px rgba(0,0,0,0.06)',
-                    color: SITE_MAUVE,
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    zIndex: 1,
-                  }}
-                  aria-hidden
-                >
-                  <ArrowUpRight size={18} strokeWidth={2.5} />
-                </span>
-                <div style={{
-                  minHeight: 120,
-                  width: '100%',
-                  height: '100%',
-                  minWidth: 0,
-                  borderRadius: 14,
-                  overflow: 'hidden',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                }}>
-                  <img
-                    src="/demo/phone-mockup-481k.png"
-                    alt="Campagne Défi 28 jours sans alcool — Fondation Jean Lapointe"
-                    style={{
-                      width: '100%',
-                      height: '100%',
-                      objectFit: 'cover',
-                      objectPosition: 'center',
-                    }}
-                  />
-                </div>
-                <div>
-                  <div style={{ fontFamily: "'Neue Haas Unica Pro', sans-serif", fontWeight: 700, fontSize: 'clamp(1.75rem, 2.5vw, 3rem)', lineHeight: 1, color: DARK, marginBottom: 8 }}>481k$</div>
-                  <p style={{ fontSize: 'clamp(0.8rem, 1vw, 1.1rem)', color: '#4b5563', lineHeight: 1.5, margin: 0 }}>
-                    {t('home.widgetStats481k')}
-                  </p>
-                </div>
-              </div>
-
-              {/* 5. 2022 — L'agence fête ses 4 ans (pleine largeur : 2022 à gauche, texte à droite) */}
-              <div className="glass-widget-stats" style={{
-                gridColumn: '1 / -1',
-                borderRadius: 14,
-                padding: 'clamp(0.9rem, 1.2vw, 1.4rem)',
-                minHeight: 0,
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'space-between',
-                gap: '1rem',
-              }}>
-                <div style={{ fontFamily: "'Neue Haas Unica Pro', sans-serif", fontWeight: 700, fontSize: 'clamp(1.75rem, 2.2vw, 2.75rem)', lineHeight: 1, color: DARK }}>2022</div>
-                <p style={{ fontSize: 'clamp(0.75rem, 0.9vw, 1rem)', color: '#4b5563', lineHeight: 1.4, margin: 0, textAlign: 'right' }}>{t('home.widgetAnniv')}</p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* ════════════════════════════════════════════════════════════════════
-            SECTION 2 — SOYONS AUDACIEUX + CTA
+            SECTION 2 — QUI SOMMES-NOUS + CTA
         ════════════════════════════════════════════════════════════════════ */}
         <section style={{
           padding: '5rem 3% 6rem',

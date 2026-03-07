@@ -23,11 +23,32 @@ export default function LeadersSection() {
     <section
       aria-label={t('home.leaders.ariaLabel') || 'Les leaders du Groupe Nukleo'}
       style={{
+        background: '#F8F7F4',
         padding: '4rem 3% 6rem',
         marginTop: 0,
         marginBottom: 5 * 16,
       }}
     >
+      <div
+        style={{
+          maxWidth: '50rem',
+          marginBottom: 'clamp(2rem, 4vw, 3rem)',
+        }}
+      >
+        <p
+          style={{
+            fontFamily: "'Neue Haas Unica Pro', sans-serif",
+            fontWeight: 700,
+            fontSize: 'clamp(1.125rem, 2.5vw, 1.5rem)',
+            lineHeight: 1.5,
+            color: '#7A3E50',
+            textAlign: 'left',
+            margin: 0,
+          }}
+        >
+          {t('home.companyBlocks.paragraph')}
+        </p>
+      </div>
       <div
         style={{
           display: 'grid',
@@ -45,24 +66,21 @@ export default function LeadersSection() {
               gridTemplateColumns: 'minmax(140px, 1fr) 1.5fr',
               gap: 'clamp(1rem, 2vw, 1.5rem)',
               alignItems: 'stretch',
-              background: 'rgba(255, 255, 255, 0.7)',
-              borderRadius: 16,
+              background: '#F2F0ED',
+              borderRadius: 10,
               padding: 'clamp(1.25rem, 2vw, 1.75rem)',
-              boxShadow: '0 4px 20px rgba(0,0,0,0.06), inset 0 1px 0 rgba(255,255,255,0.8)',
-              border: '1px solid rgba(255,255,255,0.8)',
+              boxShadow: '0 2px 12px rgba(0,0,0,0.06)',
+              border: '1px solid #E0DED7',
               minHeight: 220,
             }}
           >
             <div
               style={{
-                borderRadius: 12,
+                borderRadius: 10,
                 overflow: 'hidden',
                 aspectRatio: '1',
                 minHeight: 0,
                 background: '#e5e7eb',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
               }}
             >
               <img
@@ -72,7 +90,6 @@ export default function LeadersSection() {
                   width: '100%',
                   height: '100%',
                   objectFit: 'cover',
-                  borderRadius: '50%',
                 }}
               />
             </div>
@@ -91,7 +108,7 @@ export default function LeadersSection() {
                   fontSize: 'clamp(0.9rem, 1.2vw, 1.1rem)',
                   letterSpacing: '0.08em',
                   textTransform: 'uppercase',
-                  color: '#0A0A0A',
+                  color: '#333333',
                   margin: '0 0 0.25rem 0',
                 }}
               >
@@ -104,7 +121,7 @@ export default function LeadersSection() {
                   fontSize: 'clamp(0.7rem, 0.95vw, 0.85rem)',
                   letterSpacing: '0.06em',
                   textTransform: 'uppercase',
-                  color: '#374151',
+                  color: '#555555',
                   margin: '0 0 0.75rem 0',
                 }}
               >
@@ -113,9 +130,10 @@ export default function LeadersSection() {
               <p
                 style={{
                   fontFamily: "'Neue Haas Unica Pro', sans-serif",
+                  fontWeight: 400,
                   fontSize: 'clamp(0.8rem, 1vw, 0.95rem)',
                   lineHeight: 1.6,
-                  color: '#4b5563',
+                  color: '#555555',
                   margin: 0,
                   flex: 1,
                 }}

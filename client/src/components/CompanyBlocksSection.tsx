@@ -98,29 +98,6 @@ export default function CompanyBlocksSection() {
           </a>
         ))}
       </div>
-      <div
-        style={{
-          marginTop: '4rem',
-          maxWidth: '42rem',
-          marginLeft: 'auto',
-          marginRight: 'auto',
-          paddingLeft: 'var(--site-margin, 3%)',
-          paddingRight: 'var(--site-margin, 3%)',
-        }}
-      >
-        <p
-          style={{
-            fontFamily: "'Neue Haas Unica Pro', sans-serif",
-            fontSize: 'clamp(1rem, 2vw, 1.125rem)',
-            color: '#5A1E29',
-            lineHeight: 1.6,
-            textAlign: 'center',
-            margin: 0,
-          }}
-        >
-          {t('home.companyBlocks.paragraph')}
-        </p>
-      </div>
     </section>
   );
 }
