@@ -16,7 +16,6 @@ import { adminRouter } from "./routers/admin";
 import { loadersRouter } from "./loadersRouter";
 import { testimonialsRouter } from "./routers/testimonials";
 import { radarRouter } from "./routers/radar";
-import { pageVisibilityRouter } from "./routers/pageVisibility";
 import { analyticsRouter } from "./routers/analytics";
 import { migrateRouter } from "./routers/migrate";
 import { pageTextsRouter } from "./routers/pageTexts";
@@ -38,7 +37,6 @@ export const appRouter = router({
   loaders: loadersRouter,
   testimonials: testimonialsRouter,
   radar: radarRouter,
-  pageVisibility: pageVisibilityRouter,
   analytics: analyticsRouter,
   migrate: migrateRouter,
   pageTexts: pageTextsRouter,

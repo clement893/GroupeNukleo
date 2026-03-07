@@ -5,25 +5,9 @@ import Footer from '../Footer';
 import { LanguageProvider } from '../../contexts/LanguageContext';
 import { ThemeProvider } from '../../contexts/ThemeContext';
 
-// Mock tRPC
+// Mock tRPC (Footer does not use tRPC; minimal mock for any child that might)
 vi.mock('../../lib/trpc', () => ({
-  trpc: {
-    pageVisibility: {
-      getAll: {
-        useQuery: vi.fn(() => ({
-          data: [],
-        })),
-      },
-    },
-    newsletter: {
-      subscribe: {
-        useMutation: vi.fn(() => ({
-          mutate: vi.fn(),
-          isLoading: false,
-        })),
-      },
-    },
-  },
+  trpc: {},
 }));
 
 // Mock hooks
@@ -56,8 +40,7 @@ describe('Footer', () => {
     renderFooter();
     const footer = screen.getByRole('contentinfo');
     expect(footer).toBeTruthy();
-    expect(screen.getByText(/GROUPE/)).toBeTruthy();
-    expect(screen.getByText(/nukleo/)).toBeTruthy();
+    expect(screen.getByAltText('Groupe Nukleo')).toBeTruthy();
   });
 
   it('should render contact email and addresses', () => {

@@ -52,23 +52,14 @@ import NotFound404 from "@/pages/NotFound404";
 
 const HomepageDemo5 = lazyWithRetry(() => import('./pages/HomepageDemo5'));
 
-// Admin pages
+// Admin pages (pages supprimées : leo-contacts, contact-messages, start-project, testimonials, page-visibility, page-texts, projects-images, run-migration)
 const AdminLEOAnalytics = lazy(() => import("./pages/admin/AdminLEOAnalytics"));
-const AdminLEOContacts = lazy(() => import("./pages/admin/AdminLEOContacts"));
 const AdminLogin = lazy(() => import("./pages/admin/AdminLogin"));
 const CreateFirstAdmin = lazy(() => import("./pages/CreateFirstAdmin"));
 const AdminDashboard = lazy(() => import("./pages/admin/AdminDashboard"));
-const AdminStartProjectSubmissions = lazy(() => import("./pages/admin/AdminStartProjectSubmissions"));
-const AdminContactMessages = lazy(() => import("./pages/admin/AdminContactMessages"));
-const AdminPageVisibility = lazy(() => import("./pages/admin/AdminPageVisibility"));
 const AdminAnalytics = lazy(() => import("./pages/admin/AdminAnalytics"));
-const AdminTestimonials = lazy(() => import("./pages/admin/AdminTestimonials"));
-const RunMigration = lazy(() => import("./pages/admin/RunMigration"));
 const AdminHome = lazy(() => import("./pages/admin/AdminHome"));
-const AdminProjectsImages = lazy(() => import("./pages/admin/AdminProjectsImages"));
-const AdminProjectEdit = lazy(() => import("./pages/admin/AdminProjectEdit"));
 const AdminCarouselLogos = lazy(() => import("./pages/admin/AdminCarouselLogos"));
-const AdminPageTexts = lazy(() => import("./pages/admin/AdminPageTexts"));
 
 import { ProtectedAdminRoute } from "./components/ProtectedAdminRoute";
 
@@ -105,41 +96,14 @@ function App() {
               <Route path="/admin/leo-analytics">
                 <ProtectedAdminRoute><AdminLEOAnalytics /></ProtectedAdminRoute>
               </Route>
-              <Route path="/admin/leo-contacts">
-                <ProtectedAdminRoute><AdminLEOContacts /></ProtectedAdminRoute>
-              </Route>
               <Route path="/admin/dashboard">
                 <ProtectedAdminRoute><AdminDashboard /></ProtectedAdminRoute>
-              </Route>
-              <Route path="/admin/start-project-submissions">
-                <ProtectedAdminRoute><AdminStartProjectSubmissions /></ProtectedAdminRoute>
-              </Route>
-              <Route path="/admin/contact-messages">
-                <ProtectedAdminRoute><AdminContactMessages /></ProtectedAdminRoute>
-              </Route>
-              <Route path="/admin/page-visibility">
-                <ProtectedAdminRoute><AdminPageVisibility /></ProtectedAdminRoute>
               </Route>
               <Route path="/admin/analytics">
                 <ProtectedAdminRoute><AdminAnalytics /></ProtectedAdminRoute>
               </Route>
-              <Route path="/admin/testimonials">
-                <ProtectedAdminRoute><AdminTestimonials /></ProtectedAdminRoute>
-              </Route>
-              <Route path="/admin/run-migration">
-                <ProtectedAdminRoute><RunMigration /></ProtectedAdminRoute>
-              </Route>
-              <Route path="/admin/projects-images/edit/:slug">
-                <ProtectedAdminRoute><AdminProjectEdit /></ProtectedAdminRoute>
-              </Route>
-              <Route path="/admin/projects-images">
-                <ProtectedAdminRoute><AdminProjectsImages /></ProtectedAdminRoute>
-              </Route>
               <Route path="/admin/carousel-logos">
                 <ProtectedAdminRoute><AdminCarouselLogos /></ProtectedAdminRoute>
-              </Route>
-              <Route path="/admin/page-texts">
-                <ProtectedAdminRoute><AdminPageTexts /></ProtectedAdminRoute>
               </Route>
               <Route path="/admin">
                 <ProtectedAdminRoute><AdminHome /></ProtectedAdminRoute>

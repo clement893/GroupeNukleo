@@ -4,14 +4,9 @@ import { AdminLayout } from "@/components/AdminLayout";
 import {
   LayoutDashboard,
   BarChart3,
-  MessageSquare,
   Settings,
   ArrowRight,
-  Globe,
-  Database,
   TrendingUp,
-  FileText,
-  Image as ImageIcon,
   LayoutGrid,
 } from "lucide-react";
 import "@/styles/admin.css";
@@ -61,29 +56,10 @@ const ADMIN_CATEGORIES = [
     ],
   },
   {
-    title: "Gestion des Contacts & Leads",
-    description: "Contacts, leads et messages",
-    sections: [
-      { title: "LEO Contacts", description: "Contacts et conversations LEO", icon: <MessageSquare className="h-5 w-5" />, href: "/admin/leo-contacts" },
-      { title: "Contact Messages", description: "Messages du formulaire de contact", icon: <MessageSquare className="h-5 w-5" />, href: "/admin/contact-messages" },
-      { title: "Start Project Submissions", description: "Demandes de projets Start Project", icon: <FileText className="h-5 w-5" />, href: "/admin/start-project-submissions" },
-      { title: "Témoignages", description: "Synchroniser les témoignages", icon: <MessageSquare className="h-5 w-5" />, href: "/admin/testimonials" },
-    ],
-  },
-  {
     title: "Configuration & Paramètres",
     description: "Paramètres du site",
     sections: [
-      { title: "Visibilité des Pages", description: "Contrôler l'accès aux pages du site", icon: <Globe className="h-5 w-5" />, href: "/admin/page-visibility" },
-      { title: "Projets", description: "Gérer les projets, images, descriptions et liens", icon: <ImageIcon className="h-5 w-5" />, href: "/admin/projects-images" },
       { title: "Logos carousel", description: "Gérer les logos du carrousel d'accueil", icon: <LayoutGrid className="h-5 w-5" />, href: "/admin/carousel-logos" },
-    ],
-  },
-  {
-    title: "Outils de Développement",
-    description: "Migrations et technique",
-    sections: [
-      { title: "Migration DB", description: "Créer les tables (page_visibility, analytics)", icon: <Database className="h-5 w-5" />, href: "/admin/run-migration" },
     ],
   },
 ];

@@ -2,15 +2,9 @@ import { Link, useLocation } from "wouter";
 import {
   LayoutDashboard,
   BarChart3,
-  MessageSquare,
-  FileText,
-  Globe,
-  Image as ImageIcon,
-  Database,
   TrendingUp,
   ChevronRight,
   LayoutGrid,
-  Languages,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -24,27 +18,9 @@ const NAV_GROUPS = [
     ],
   },
   {
-    label: "Contacts & Leads",
-    items: [
-      { label: "LEO Contacts", href: "/admin/leo-contacts", icon: MessageSquare },
-      { label: "Contact Messages", href: "/admin/contact-messages", icon: MessageSquare },
-      { label: "Start Project", href: "/admin/start-project-submissions", icon: FileText },
-      { label: "Témoignages", href: "/admin/testimonials", icon: MessageSquare },
-    ],
-  },
-  {
     label: "Configuration",
     items: [
-      { label: "Visibilité des pages", href: "/admin/page-visibility", icon: Globe },
-      { label: "Textes FR/EN", href: "/admin/page-texts", icon: Languages },
-      { label: "Projets", href: "/admin/projects-images", icon: ImageIcon },
       { label: "Logos carousel", href: "/admin/carousel-logos", icon: LayoutGrid },
-    ],
-  },
-  {
-    label: "Développement",
-    items: [
-      { label: "Migration DB", href: "/admin/run-migration", icon: Database },
     ],
   },
 ];

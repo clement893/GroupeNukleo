@@ -131,56 +131,6 @@ export default function AdminDashboard() {
               </CardContent>
             </Card>
 
-            {/* Contacts & Leads */}
-            <Card className="bg-white border border-gray-200 shadow-sm">
-              <CardHeader>
-                <CardTitle className="text-gray-900 flex items-center gap-2" style={{ fontFamily: "'Neue Haas Unica Pro', sans-serif" }}>
-                  <MessageSquare className="w-5 h-5" />
-                  Contacts & Leads
-                </CardTitle>
-                <CardDescription className="text-gray-500" style={{ fontFamily: "'Neue Haas Unica Pro', sans-serif" }}>
-                  Gestion des contacts
-                </CardDescription>
-              </CardHeader>
-              <CardContent className="space-y-2">
-                <a
-                  href="/admin/leo-contacts"
-                  className="block p-3 rounded-lg bg-gray-50 hover:bg-gray-100 transition-colors text-gray-700 hover:text-gray-900"
-                >
-                  <div className="text-gray-900 font-medium" style={{ fontFamily: "'Neue Haas Unica Pro', sans-serif" }}>LEO Contacts</div>
-                  <div className="text-gray-500 text-sm" style={{ fontFamily: "'Neue Haas Unica Pro', sans-serif" }}>View emails captured by LEO chatbot</div>
-                </a>
-                <a
-                  href="/admin/contact-messages"
-                  className="block p-3 rounded-lg bg-gray-50 hover:bg-gray-100 transition-colors text-gray-700 hover:text-gray-900"
-                >
-                  <div className="text-gray-900 font-medium" style={{ fontFamily: "'Neue Haas Unica Pro', sans-serif" }}>Contact Messages</div>
-                  <div className="text-gray-500 text-sm" style={{ fontFamily: "'Neue Haas Unica Pro', sans-serif" }}>Manage contact form submissions</div>
-                </a>
-              </CardContent>
-            </Card>
-
-            {/* Configuration */}
-            <Card className="bg-white border border-gray-200 shadow-sm">
-              <CardHeader>
-                <CardTitle className="text-gray-900 flex items-center gap-2" style={{ fontFamily: "'Neue Haas Unica Pro', sans-serif" }}>
-                  <Settings className="w-5 h-5" />
-                  Configuration
-                </CardTitle>
-                <CardDescription className="text-gray-500" style={{ fontFamily: "'Neue Haas Unica Pro', sans-serif" }}>
-                  Paramètres du site
-                </CardDescription>
-              </CardHeader>
-              <CardContent className="space-y-2">
-                <a
-                  href="/admin/page-visibility"
-                  className="block p-3 rounded-lg bg-gray-50 hover:bg-gray-100 transition-colors text-gray-700 hover:text-gray-900"
-                >
-                  <div className="text-gray-900 font-medium" style={{ fontFamily: "'Neue Haas Unica Pro', sans-serif" }}>Page Visibility</div>
-                  <div className="text-gray-500 text-sm" style={{ fontFamily: "'Neue Haas Unica Pro', sans-serif" }}>Manage page visibility settings</div>
-                </a>
-              </CardContent>
-            </Card>
           </div>
 
           {/* Recent Activity */}
