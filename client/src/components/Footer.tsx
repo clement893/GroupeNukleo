@@ -32,21 +32,15 @@ function Footer() {
           padding: 'clamp(2rem, 5vw, 3.5rem) clamp(2rem, 4vw, 3rem)',
         }}
       >
-        {/* Gauche : GROUPE / nukleo, */}
+        {/* Gauche : logo Groupe Nukleo (blanc sur fond noir) */}
         <div className="flex flex-col">
           <Link href={getLocalizedPath('/')} className="touch-manipulation block text-left">
-            <div
-              className="text-sm uppercase tracking-wide"
-              style={{ color: FOOTER_TEXT }}
-            >
-              GROUPE
-            </div>
-            <div
-              className="text-3xl md:text-4xl lg:text-5xl font-bold lowercase mt-0.5"
-              style={{ color: FOOTER_TEXT }}
-            >
-              nukleo,
-            </div>
+            <img
+              src="/demo/logo-groupe-nukleo-white.png"
+              alt="Groupe Nukleo"
+              className="w-auto object-contain object-left"
+              style={{ maxHeight: 'clamp(2.5rem, 8vw, 4.5rem)', height: 'auto' }}
+            />
           </Link>
         </div>
 
