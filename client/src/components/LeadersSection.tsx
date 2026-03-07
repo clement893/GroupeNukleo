@@ -22,16 +22,18 @@ export default function LeadersSection() {
   return (
     <section
       aria-label={t('home.leaders.ariaLabel') || 'Les leaders du Groupe Nukleo'}
+      className="leaders-section"
       style={{
         background: 'transparent',
-        padding: 'clamp(4rem, 8vw, 6rem) 3% clamp(5rem, 10vw, 7rem)',
+        padding: 'clamp(4rem, 8vw, 6rem) var(--site-margin, 3%) clamp(5rem, 10vw, 7rem)',
         marginTop: 0,
         marginBottom: 5 * 16,
       }}
     >
       <div
+        className="leaders-intro"
         style={{
-          maxWidth: 'min(1200px, 85vw)',
+          maxWidth: 'min(1200px, 92vw)',
           margin: '0 auto',
           marginBottom: 'clamp(2.5rem, 5vw, 4rem)',
         }}
@@ -60,7 +62,7 @@ export default function LeadersSection() {
         style={{
           display: 'grid',
           gap: 'clamp(2rem, 5vw, 3.5rem)',
-          maxWidth: 'min(1200px, 85vw)',
+          maxWidth: 'min(1200px, 92vw)',
           margin: '0 auto',
         }}
         className="grid grid-cols-1 md:grid-cols-2 leaders-grid"
@@ -68,6 +70,7 @@ export default function LeadersSection() {
         {LEADERS.map((leader) => (
           <article
             key={leader.id}
+            className="leader-card"
             style={{
               display: 'grid',
               gridTemplateColumns: 'minmax(160px, 1fr) 1.6fr',

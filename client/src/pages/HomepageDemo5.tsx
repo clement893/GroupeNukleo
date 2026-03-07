@@ -325,14 +325,14 @@ export default function HomepageDemo5() {
         }}
       >
         {/* ── Contenu principal ─────────────────────────────────────────────── */}
-        <div style={{ position: 'relative', zIndex: 10, paddingTop: 'clamp(5rem, 15vw, 8rem)' }}>
+        <div className="main-content-padding" style={{ position: 'relative', zIndex: 10, paddingTop: 'clamp(5rem, 15vw, 8rem)' }}>
           <div className="content-max-width" style={{ paddingLeft: 'var(--site-margin, 3%)', paddingRight: 'var(--site-margin, 3%)', width: '100%' }}>
 
         {/* ════════════════════════════════════════════════════════════════════
             SECTION HERO — Le Groupe Nukleo + paragraphe à droite
         ════════════════════════════════════════════════════════════════════ */}
         <section
-          className="hero-section-grid"
+          className="hero-section-grid hero-max-width"
           style={{
           minHeight: '27.5vh',
           paddingTop: 'clamp(3.5rem, 8.75vh, 7rem)',
@@ -345,10 +345,11 @@ export default function HomepageDemo5() {
           gap: 'clamp(2rem, 8vw, 7rem)',
           background: 'transparent',
           boxSizing: 'border-box',
-          maxWidth: 1400,
           margin: '0 auto',
         }}>
-          <h1 style={{
+          <h1
+            className="hero-title-mobile-wrap"
+            style={{
             fontFamily: "'Neue Haas Unica Pro', sans-serif",
             fontWeight: 700,
             fontSize: 'clamp(1.5rem, 8vw, 9rem)',
@@ -365,8 +366,8 @@ export default function HomepageDemo5() {
             WebkitTextFillColor: 'transparent',
             backgroundClip: 'text',
           }}>
-            <span style={{ display: 'block', whiteSpace: 'nowrap' }}>{t('home.heroLine1')}</span>
-            <span style={{ display: 'block', whiteSpace: 'nowrap' }}>{t('home.heroLine2')}</span>
+            <span className="hero-title-mobile-wrap" style={{ display: 'block', whiteSpace: 'nowrap' }}>{t('home.heroLine1')}</span>
+            <span className="hero-title-mobile-wrap" style={{ display: 'block', whiteSpace: 'nowrap' }}>{t('home.heroLine2')}</span>
           </h1>
           <p style={{
             fontFamily: "'Neue Haas Unica Pro', sans-serif",
@@ -384,7 +385,6 @@ export default function HomepageDemo5() {
           <div
             style={{
               width: '100%',
-              maxWidth: 1600,
               gridColumn: '1 / -1',
               gridRow: 2,
               marginTop: 0,
@@ -413,7 +413,7 @@ export default function HomepageDemo5() {
         {/* ════════════════════════════════════════════════════════════════════
             SECTION 2 — QUI SOMMES-NOUS + CTA
         ════════════════════════════════════════════════════════════════════ */}
-        <section style={{
+        <section className="section-qui-sommes-nous" style={{
           padding: '5rem 0 6rem',
           marginBottom: 0,
           textAlign: 'center',

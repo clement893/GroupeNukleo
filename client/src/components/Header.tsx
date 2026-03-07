@@ -126,28 +126,29 @@ function Header() {
             </Link>
 
             {/* Boutons Nukleo et Rouge on Blue — liens externes (glassmorphism) */}
-            <div className="flex items-center gap-2 sm:gap-3">
+            <div className="flex items-center gap-1.5 sm:gap-3 flex-shrink-0 min-w-0">
               <a
                 href="https://nukleo.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className={`${headerBtnClass} hover:opacity-90`}
+                className={`${headerBtnClass} hover:opacity-90 text-xs sm:text-base px-3 sm:px-5 py-2 sm:py-0`}
                 style={headerBtnStyle}
                 aria-label="Nukleo — ouvrir dans un nouvel onglet"
               >
                 Nukleo
-                <ExternalLink className="w-4 h-4 sm:w-[1.1em] sm:h-[1.1em]" strokeWidth={2} />
+                <ExternalLink className="w-3.5 h-3.5 sm:w-[1.1em] sm:h-[1.1em] flex-shrink-0" strokeWidth={2} />
               </a>
               <a
                 href="https://rougeonblue.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className={`${headerBtnClass} hover:opacity-90`}
+                className={`${headerBtnClass} hover:opacity-90 text-xs sm:text-base px-3 sm:px-5 py-2 sm:py-0`}
                 style={headerBtnStyle}
                 aria-label="Rouge on Blue — ouvrir dans un nouvel onglet"
               >
-                Rouge on Blue
-                <ExternalLink className="w-4 h-4 sm:w-[1.1em] sm:h-[1.1em]" strokeWidth={2} />
+                <span className="hidden sm:inline">Rouge on Blue</span>
+                <span className="sm:hidden">ROB</span>
+                <ExternalLink className="w-3.5 h-3.5 sm:w-[1.1em] sm:h-[1.1em] flex-shrink-0" strokeWidth={2} />
               </a>
             </div>
           </div>

@@ -24,14 +24,15 @@ export default function UnionSection() {
   return (
     <section
       aria-label={t('home.union.headline')}
+      className="union-section"
       style={{
-        padding: 'clamp(4rem, 8vw, 6rem) 3%',
+        padding: 'clamp(4rem, 8vw, 6rem) var(--site-margin, 3%)',
         marginBottom: 5 * 16,
         background: 'transparent',
       }}
     >
       <div
-        className="grid grid-cols-1 md:grid-cols-[1.2fr_1fr] gap-0 md:gap-10 items-stretch"
+        className="grid grid-cols-1 md:grid-cols-[1.2fr_1fr] gap-0 md:gap-10 items-stretch union-section-inner"
         style={{
           maxWidth: 'min(1200px, 90vw)',
           margin: '0 auto',
@@ -77,6 +78,7 @@ export default function UnionSection() {
 
         {/* Bloc texte droite — sans fond */}
         <div
+          className="union-section-text"
           style={{
             minWidth: 0,
             background: 'transparent',

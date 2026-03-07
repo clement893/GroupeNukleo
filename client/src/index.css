@@ -98,9 +98,30 @@ header.header-scroll-transform,
   :root {
     --site-margin: 3%;
   }
+  /* Mobile : marges un peu plus larges pour lisibilité et touch */
+  @media (max-width: 640px) {
+    :root {
+      --site-margin: 5%;
+    }
+  }
+  @media (min-width: 641px) and (max-width: 1023px) {
+    :root {
+      --site-margin: 4%;
+    }
+  }
+  @media (min-width: 1400px) {
+    :root {
+      --site-margin: 2.5%;
+    }
+  }
   @media (min-width: 1920px) {
     :root {
-      --site-margin: 80px;
+      --site-margin: 2%;
+    }
+  }
+  @media (min-width: 2560px) {
+    :root {
+      --site-margin: 1.25%;
     }
   }
 
@@ -271,9 +292,24 @@ header.header-scroll-transform,
 
   /* Conteneur centré pour grands écrans — limite la largeur du contenu */
   .content-max-width {
-    max-width: min(1600px, 100%);
+    max-width: min(1800px, 96%);
     margin-left: auto;
     margin-right: auto;
+  }
+  @media (max-width: 768px) {
+    .content-max-width {
+      max-width: 100%;
+    }
+  }
+  @media (min-width: 1920px) {
+    .content-max-width {
+      max-width: min(2000px, 96%);
+    }
+  }
+  @media (min-width: 2560px) {
+    .content-max-width {
+      max-width: min(2600px, 97%);
+    }
   }
 
   .flex {
@@ -583,6 +619,21 @@ header.header-scroll-transform,
     }
   }
 
+  /* Hero section: max-width responsive sur grands écrans */
+  .hero-max-width {
+    max-width: 1600px;
+  }
+  @media (min-width: 1920px) {
+    .hero-max-width {
+      max-width: 2000px;
+    }
+  }
+  @media (min-width: 2560px) {
+    .hero-max-width {
+      max-width: 2600px;
+    }
+  }
+
   /* Hero section: stack title + paragraph on small screens */
   @media (max-width: 900px) {
     .hero-section-grid {
@@ -594,6 +645,103 @@ header.header-scroll-transform,
     }
     .hero-section-grid > div:last-child {
       grid-row: 3 !important;
+    }
+  }
+
+  /* Mobile : padding top contenu principal réduit */
+  @media (max-width: 640px) {
+    .main-content-padding {
+      padding-top: clamp(4rem, 12vh, 5rem) !important;
+    }
+    .section-qui-sommes-nous {
+      padding: clamp(3rem, 8vw, 4rem) 0 clamp(4rem, 10vw, 5rem) !important;
+    }
+  }
+
+  /* Hero mobile : espacement réduit, image plus compacte */
+  @media (max-width: 640px) {
+    .hero-section-grid {
+      padding-top: clamp(2rem, 6vh, 3rem) !important;
+      padding-bottom: clamp(1.25rem, 4vh, 2rem) !important;
+      gap: clamp(1rem, 4vw, 1.5rem) !important;
+      min-height: auto !important;
+    }
+    .hero-section-grid > div:last-child {
+      min-height: 180px !important;
+      aspect-ratio: 16/9 !important;
+    }
+    .hero-section-grid .hero-title-mobile-wrap {
+      white-space: normal !important;
+    }
+  }
+
+  /* Union section mobile */
+  @media (max-width: 640px) {
+    .union-section {
+      padding-top: clamp(2.5rem, 6vw, 3.5rem) !important;
+      padding-bottom: clamp(2.5rem, 6vw, 3.5rem) !important;
+    }
+    .union-section-inner {
+      max-width: 100% !important;
+    }
+    .union-section-text {
+      padding: clamp(1.25rem, 4vw, 1.75rem) !important;
+    }
+  }
+
+  /* Company blocks mobile */
+  @media (max-width: 640px) {
+    .company-blocks-section {
+      padding-top: clamp(3rem, 8vw, 4rem) !important;
+      padding-bottom: clamp(4rem, 10vw, 5rem) !important;
+    }
+    .company-blocks-inner {
+      max-width: 100% !important;
+    }
+    .company-block-card {
+      min-height: 260px !important;
+    }
+  }
+
+  /* Leaders section mobile */
+  @media (max-width: 640px) {
+    .leaders-section {
+      padding-top: clamp(2.5rem, 6vw, 3.5rem) !important;
+      padding-bottom: clamp(3.5rem, 8vw, 5rem) !important;
+    }
+    .leader-card {
+      grid-template-columns: 1fr !important;
+      grid-template-rows: auto 1fr !important;
+      min-height: auto !important;
+    }
+    .leader-card > div:first-child {
+      justify-self: center;
+      max-width: 140px;
+    }
+  }
+
+  /* Two cities mobile */
+  @media (max-width: 640px) {
+    .two-cities-section {
+      padding-top: clamp(2.5rem, 6vw, 3.5rem) !important;
+      padding-bottom: clamp(3.5rem, 8vw, 5rem) !important;
+    }
+    .two-cities-inner {
+      max-width: 100% !important;
+    }
+    .two-cities-map {
+      height: 180px !important;
+    }
+  }
+
+  /* Footer mobile */
+  @media (max-width: 640px) {
+    .footer-mobile {
+      padding-top: clamp(1.25rem, 4vw, 2rem) !important;
+      padding-bottom: clamp(1.5rem, 4vw, 2.5rem) !important;
+    }
+    .footer-inner {
+      padding: clamp(1.5rem, 4vw, 2.5rem) clamp(1.25rem, 4vw, 2rem) !important;
     }
   }
 

@@ -12,8 +12,9 @@ export default function TwoCitiesSection() {
   return (
     <section
       aria-label={t('home.twoCities.title')}
+      className="two-cities-section"
       style={{
-        padding: 'clamp(4rem, 8vw, 6rem) 3%',
+        padding: 'clamp(4rem, 8vw, 6rem) var(--site-margin, 3%)',
         marginBottom: 5 * 16,
         background: '#EFE8E8',
       }}
@@ -31,9 +32,9 @@ export default function TwoCitiesSection() {
         {t('home.twoCities.title')}
       </h2>
       <div
-        className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-10"
+        className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-10 two-cities-inner"
         style={{
-          maxWidth: 'min(1200px, 85vw)',
+          maxWidth: 'min(1200px, 92vw)',
           margin: '0 auto',
         }}
       >
@@ -48,6 +49,7 @@ export default function TwoCitiesSection() {
           }}
         >
           <div
+            className="two-cities-map"
             style={{
               height: 220,
               width: '100%',
@@ -89,6 +91,7 @@ export default function TwoCitiesSection() {
           }}
         >
           <div
+            className="two-cities-map"
             style={{
               height: 220,
               width: '100%',
