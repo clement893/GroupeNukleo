@@ -23,7 +23,7 @@ export default function LeadersSection() {
     <section
       aria-label={t('home.leaders.ariaLabel') || 'Les leaders du Groupe Nukleo'}
       style={{
-        background: '#F5F3EF',
+        background: 'transparent',
         padding: 'clamp(4rem, 8vw, 6rem) 3% clamp(5rem, 10vw, 7rem)',
         marginTop: 0,
         marginBottom: 5 * 16,

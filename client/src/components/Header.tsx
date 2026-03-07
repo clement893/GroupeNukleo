@@ -1,13 +1,24 @@
 import { useState, useEffect, useRef, memo } from 'react';
 import { Link } from 'wouter';
-import { ChevronDown } from 'lucide-react';
+import { ExternalLink } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { useLocalizedPath } from '@/hooks/useLocalizedPath';
 import { useIsMobile } from '@/hooks/useIsMobile';
 import { MOBILE_BREAKPOINT, ANIMATIONS } from '@/lib/constants';
 
 const headerBtnClass =
-  "inline-flex items-center justify-center gap-1 text-gray-800 hover:opacity-80 active:scale-95 transition-all duration-200 touch-manipulation flex-shrink-0 px-3 sm:px-4 font-medium";
+  "inline-flex items-center justify-center gap-2 rounded-2xl active:scale-95 transition-all duration-200 touch-manipulation flex-shrink-0 px-4 sm:px-5 font-semibold";
+const headerBtnStyle: React.CSSProperties = {
+  height: 'clamp(2.75rem, 4vw, 3.5rem)',
+  fontFamily: "'Neue Haas Unica Pro', sans-serif",
+  fontSize: 'clamp(0.9rem, 1vw, 1.05rem)',
+  color: '#332C4A',
+  background: 'rgba(255, 255, 255, 0.35)',
+  backdropFilter: 'blur(16px) saturate(180%)',
+  WebkitBackdropFilter: 'blur(16px) saturate(180%)',
+  border: '1px solid rgba(255, 255, 255, 0.7)',
+  boxShadow: '0 4px 24px rgba(0, 0, 0, 0.06), inset 0 1px 0 rgba(255, 255, 255, 0.85)',
+};
 
 /**
  * Composant Header principal de l'application.
@@ -114,27 +125,29 @@ function Header() {
               />
             </Link>
 
-            {/* Boutons Nukleo et Rouge on Blue — liens externes */}
-            <div className="flex items-center gap-4 sm:gap-6" style={{ fontFamily: "'Neue Haas Unica Pro', sans-serif", fontSize: 'clamp(0.9rem, 1vw, 1.05rem)' }}>
+            {/* Boutons Nukleo et Rouge on Blue — liens externes (glassmorphism) */}
+            <div className="flex items-center gap-2 sm:gap-3">
               <a
                 href="https://nukleo.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className={headerBtnClass}
+                className={`${headerBtnClass} hover:opacity-90`}
+                style={headerBtnStyle}
                 aria-label="Nukleo — ouvrir dans un nouvel onglet"
               >
                 Nukleo
-                <ChevronDown className="w-4 h-4 opacity-70" strokeWidth={2} />
+                <ExternalLink className="w-4 h-4 sm:w-[1.1em] sm:h-[1.1em]" strokeWidth={2} />
               </a>
               <a
                 href="https://rougeonblue.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className={headerBtnClass}
+                className={`${headerBtnClass} hover:opacity-90`}
+                style={headerBtnStyle}
                 aria-label="Rouge on Blue — ouvrir dans un nouvel onglet"
               >
                 Rouge on Blue
-                <ChevronDown className="w-4 h-4 opacity-70" strokeWidth={2} />
+                <ExternalLink className="w-4 h-4 sm:w-[1.1em] sm:h-[1.1em]" strokeWidth={2} />
               </a>
             </div>
           </div>

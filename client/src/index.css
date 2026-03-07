@@ -583,6 +583,20 @@ header.header-scroll-transform,
     }
   }
 
+  /* Hero section: stack title + paragraph on small screens */
+  @media (max-width: 900px) {
+    .hero-section-grid {
+      grid-template-columns: 1fr !important;
+    }
+    .hero-section-grid p {
+      grid-column: 1 !important;
+      grid-row: 2 !important;
+    }
+    .hero-section-grid > div:last-child {
+      grid-row: 3 !important;
+    }
+  }
+
   /* Shimmer */
   .shimmer {
     position: relative;

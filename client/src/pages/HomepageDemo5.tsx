@@ -331,17 +331,17 @@ export default function HomepageDemo5() {
         {/* ════════════════════════════════════════════════════════════════════
             SECTION HERO — Le Groupe Nukleo + paragraphe à droite
         ════════════════════════════════════════════════════════════════════ */}
-        <section style={{
+        <section
+          className="hero-section-grid"
+          style={{
           minHeight: '27.5vh',
           paddingTop: 'clamp(3.5rem, 8.75vh, 7rem)',
           paddingBottom: 'clamp(2rem, 5vh, 4rem)',
           paddingLeft: 0,
           paddingRight: 0,
-          display: 'flex',
-          flexDirection: 'row',
-          flexWrap: 'wrap',
-          alignItems: 'flex-start',
-          justifyContent: 'flex-start',
+          display: 'grid',
+          gridTemplateColumns: 'minmax(0, 1fr) minmax(280px, 420px)',
+          gridTemplateRows: 'auto auto',
           gap: 'clamp(2rem, 8vw, 7rem)',
           background: 'transparent',
           boxSizing: 'border-box',
@@ -356,9 +356,8 @@ export default function HomepageDemo5() {
             letterSpacing: '-0.04em',
             wordSpacing: '0.12em',
             margin: 0,
-            display: 'inline-block',
-            width: 'fit-content',
-            maxWidth: '100%',
+            gridColumn: 1,
+            gridRow: 1,
             overflowWrap: 'break-word',
             wordBreak: 'break-word',
             background: 'linear-gradient(to right, #6B1817, #523DCB)',
@@ -375,8 +374,8 @@ export default function HomepageDemo5() {
             lineHeight: 1.6,
             color: '#374151',
             margin: 0,
-            marginLeft: 'auto',
-            maxWidth: 'clamp(280px, 32ch, 420px)',
+            gridColumn: 2,
+            gridRow: 1,
             alignSelf: 'flex-start',
             textAlign: 'left',
           }}>
@@ -386,7 +385,9 @@ export default function HomepageDemo5() {
             style={{
               width: '100%',
               maxWidth: 1600,
-              marginTop: 'clamp(2rem, 4vw, 3rem)',
+              gridColumn: '1 / -1',
+              gridRow: 2,
+              marginTop: 0,
               marginLeft: 'auto',
               marginRight: 'auto',
               borderRadius: 0,

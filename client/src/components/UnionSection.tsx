@@ -1,12 +1,11 @@
 import { useLanguage } from '@/contexts/LanguageContext';
-import { ArrowRight } from 'lucide-react';
-import { Link } from 'wouter';
+import { ExternalLink } from 'lucide-react';
 import { useLocalizedPath } from '@/hooks/useLocalizedPath';
 
-const SITE_MAUVE = '#523DCB';
+const HEADLINE_PURPLE = '#8B2C8C';
 
 /**
- * Section « L'union de deux forces » — image gauche, texte droite, CTA « Découvrir la suite ».
+ * Section « L'union de deux forces » — image gauche (B&W), bloc texte droite (fond #f7f5f9).
  */
 export default function UnionSection() {
   const { t } = useLanguage();
@@ -22,20 +21,20 @@ export default function UnionSection() {
       }}
     >
       <div
-        className="grid grid-cols-1 md:grid-cols-[1fr_1.2fr] gap-8 md:gap-14 items-center"
+        className="grid grid-cols-1 md:grid-cols-[1.2fr_1fr] gap-0 md:gap-0 items-stretch"
         style={{
-          maxWidth: 'min(1200px, 85vw)',
+          maxWidth: 'min(1200px, 90vw)',
           margin: '0 auto',
         }}
       >
-        {/* Image gauche — grayscale */}
+        {/* Image gauche — noir et blanc */}
         <div
           style={{
-            borderRadius: 16,
             overflow: 'hidden',
-            aspectRatio: '4/3',
             background: '#e5e7eb',
+            aspectRatio: '4/3',
           }}
+          className="md:aspect-auto"
         >
           <img
             src="/demo/consulting-hero-cover.png"
@@ -49,14 +48,23 @@ export default function UnionSection() {
           />
         </div>
 
-        {/* Texte droite */}
-        <div style={{ minWidth: 0, background: '#fff', padding: 'clamp(2rem, 4vw, 3rem)', borderRadius: 16 }}>
+        {/* Bloc texte droite — fond gris clair */}
+        <div
+          style={{
+            minWidth: 0,
+            background: '#f7f5f9',
+            padding: 'clamp(2rem, 4vw, 3rem)',
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'center',
+          }}
+        >
           <h2
             style={{
               fontFamily: "'Neue Haas Unica Pro', sans-serif",
               fontWeight: 700,
               fontSize: 'clamp(1.25rem, 2vw, 1.5rem)',
-              color: '#0A0A0A',
+              color: HEADLINE_PURPLE,
               margin: '0 0 0.5rem 0',
             }}
           >
@@ -65,9 +73,9 @@ export default function UnionSection() {
           <h3
             style={{
               fontFamily: "'Neue Haas Unica Pro', sans-serif",
-              fontWeight: 600,
-              fontSize: 'clamp(1rem, 1.5vw, 1.2rem)',
-              color: '#374151',
+              fontWeight: 400,
+              fontSize: 'clamp(1rem, 1.3vw, 1.15rem)',
+              color: '#1f2937',
               margin: '0 0 1.25rem 0',
             }}
           >
@@ -76,9 +84,9 @@ export default function UnionSection() {
           <p
             style={{
               fontFamily: "'Neue Haas Unica Pro', sans-serif",
-              fontSize: 'clamp(0.9rem, 1.1vw, 1rem)',
+              fontSize: 'clamp(0.9rem, 1.05vw, 1rem)',
               lineHeight: 1.6,
-              color: '#4b5563',
+              color: '#6b7280',
               margin: '0 0 1rem 0',
             }}
           >
@@ -87,16 +95,16 @@ export default function UnionSection() {
           <p
             style={{
               fontFamily: "'Neue Haas Unica Pro', sans-serif",
-              fontSize: 'clamp(0.9rem, 1.1vw, 1rem)',
+              fontSize: 'clamp(0.9rem, 1.05vw, 1rem)',
               lineHeight: 1.6,
-              color: '#4b5563',
+              color: '#6b7280',
               margin: '0 0 1.5rem 0',
             }}
           >
             {t('home.union.paragraph2')}
           </p>
-          <Link
-            href={getLocalizedPath('/')}
+          <a
+            href={getLocalizedPath('/media')}
             style={{
               display: 'inline-flex',
               alignItems: 'center',
@@ -104,15 +112,16 @@ export default function UnionSection() {
               fontFamily: "'Neue Haas Unica Pro', sans-serif",
               fontWeight: 600,
               fontSize: '0.95rem',
-              color: SITE_MAUVE,
+              color: HEADLINE_PURPLE,
               textDecoration: 'none',
               transition: 'opacity 0.2s ease',
+              width: 'fit-content',
             }}
             className="hover:opacity-80"
           >
             {t('home.union.cta')}
-            <ArrowRight size={18} strokeWidth={2.5} />
-          </Link>
+            <ExternalLink size={18} strokeWidth={2.5} />
+          </a>
         </div>
       </div>
     </section>
