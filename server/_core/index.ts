@@ -668,7 +668,7 @@ async function startServer() {
   };
   const sitePhotoUpload = multer({
     storage: multer.memoryStorage(),
-    limits: { fileSize: 5 * 1024 * 1024 },
+    limits: { fileSize: 20 * 1024 * 1024 },
     fileFilter: sitePhotoFileFilter,
   });
 
@@ -833,11 +833,12 @@ async function startServer() {
   app.use((err: any, req: express.Request, res: express.Response, next: express.NextFunction) => {
     if (err instanceof multer.MulterError) {
       console.error("[Multer] error:", err.code, req.path);
-      if (err.code === 'LIMIT_FILE_SIZE') {
+        if (err.code === 'LIMIT_FILE_SIZE') {
         let msg = 'File too large. Maximum size is 10MB';
         if (req.path === '/api/admin/carousel-logos/upload') msg = 'Fichier trop volumineux (2 Mo max)';
         else if (req.path === '/api/admin/union-video/upload') msg = 'Vidéo trop volumineuse (100 Mo max)';
         else if (req.path === '/api/admin/press-release/upload') msg = 'PDF trop volumineux (20 Mo max)';
+        else if (req.path === '/api/admin/site-photos/upload') msg = 'Image trop volumineuse (20 Mo max)';
         return res.status(400).json({ error: msg });
       }
       return res.status(400).json({ error: `Upload error: ${err.message}` });
@@ -849,6 +850,9 @@ async function startServer() {
       return res.status(400).json({ error: err.message || 'Upload failed' });
     }
     if (err && req.path === '/api/admin/press-release/upload') {
+      return res.status(400).json({ error: err.message || 'Upload failed' });
+    }
+    if (err && req.path === '/api/admin/site-photos/upload') {
       return res.status(400).json({ error: err.message || 'Upload failed' });
     }
     next(err);

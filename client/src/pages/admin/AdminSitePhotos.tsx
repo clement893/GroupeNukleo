@@ -153,7 +153,7 @@ export default function AdminSitePhotos() {
             Photos de la page principale
           </h1>
           <p className="text-gray-300 mb-3">
-            Gérez toutes les images de la page d&apos;accueil (logos, hero, photos leaders). Stockage R2. Formats : JPG, PNG, WebP, GIF, SVG (max 5 Mo).
+            Gérez toutes les images de la page d&apos;accueil (logos, hero, photos leaders). Stockage R2. Formats : JPG, PNG, WebP, GIF, SVG (max 20 Mo).
           </p>
           <Link href={homepagePath} target="_blank" rel="noopener noreferrer">
             <Button variant="outline" size="sm" className="border-gray-600 text-gray-300 hover:bg-gray-700/50">
