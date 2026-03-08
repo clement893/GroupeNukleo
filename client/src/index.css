@@ -311,6 +311,16 @@ header.header-scroll-transform,
       max-width: min(2800px, 98%);
     }
   }
+  @media (min-width: 3840px) {
+    .content-max-width {
+      max-width: min(3400px, 98%);
+    }
+  }
+  @media (min-width: 5120px) {
+    .content-max-width {
+      max-width: min(4200px, 98%);
+    }
+  }
 
   .flex {
     min-width: 0;
@@ -633,6 +643,16 @@ header.header-scroll-transform,
       max-width: 2600px;
     }
   }
+  @media (min-width: 3840px) {
+    .hero-max-width {
+      max-width: 3200px;
+    }
+  }
+  @media (min-width: 5120px) {
+    .hero-max-width {
+      max-width: 4000px;
+    }
+  }
 
   /* Hero description : 3 lignes, 1 par phrase (nowrap sur desktop pour éviter wrap) */
   @media (min-width: 900px) {
@@ -769,6 +789,38 @@ header.header-scroll-transform,
     }
     .two-cities-inner {
       max-width: min(2634px, 90vw) !important;
+    }
+  }
+
+  /* Très grands écrans (4K, ultra-wide) — cartes plus larges */
+  @media (min-width: 3840px) {
+    .company-blocks-inner {
+      max-width: min(2800px, 98%) !important;
+    }
+    .leaders-intro,
+    .leaders-grid {
+      max-width: min(2800px, 98%) !important;
+    }
+    .two-cities-inner {
+      max-width: min(3400px, 95vw) !important;
+    }
+    .union-section-inner {
+      max-width: min(2800px, 98%) !important;
+    }
+  }
+  @media (min-width: 5120px) {
+    .company-blocks-inner {
+      max-width: min(3600px, 98%) !important;
+    }
+    .leaders-intro,
+    .leaders-grid {
+      max-width: min(3600px, 98%) !important;
+    }
+    .two-cities-inner {
+      max-width: min(4200px, 95vw) !important;
+    }
+    .union-section-inner {
+      max-width: min(3600px, 98%) !important;
     }
   }
 
