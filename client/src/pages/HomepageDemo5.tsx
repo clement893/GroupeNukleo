@@ -40,7 +40,7 @@ export default function HomepageDemo5() {
           paddingLeft: 0,
           paddingRight: 0,
           display: 'grid',
-          gridTemplateColumns: 'minmax(0, 1fr) minmax(260px, 320px)',
+          gridTemplateColumns: 'minmax(0, 1fr) minmax(240px, 280px)',
           gridTemplateRows: 'auto auto',
           gap: 'clamp(2rem, 5vw, 4rem)',
           background: 'transparent',
@@ -72,16 +72,20 @@ export default function HomepageDemo5() {
           <p style={{
             fontFamily: "'Neue Haas Unica Pro', sans-serif",
             fontSize: 'clamp(1.1rem, 2.2vw, 1.6rem)',
-            lineHeight: 1.5,
+            lineHeight: 1.4,
             color: '#374151',
             margin: 0,
             gridColumn: 2,
             gridRow: 1,
             alignSelf: 'flex-start',
             textAlign: 'left',
-            whiteSpace: 'pre-line',
+            display: 'flex',
+            flexDirection: 'column',
+            gap: 0,
           }}>
-            {t('home.heroDescription')}
+            <span style={{ display: 'block' }}>{t('home.heroLineDesc1') || t('home.heroDescription')?.split('\n')[0]}</span>
+            <span style={{ display: 'block' }}>{t('home.heroLineDesc2') || t('home.heroDescription')?.split('\n')[1]}</span>
+            <span style={{ display: 'block' }}>{t('home.heroLineDesc3') || t('home.heroDescription')?.split('\n')[2]}</span>
           </p>
           <div
             style={{
