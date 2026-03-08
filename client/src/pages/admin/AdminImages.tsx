@@ -1,6 +1,6 @@
 import { Link } from "wouter";
 import { AdminLayout } from "@/components/AdminLayout";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { ImageIcon, LayoutGrid, ArrowRight } from "lucide-react";
 import "@/styles/admin.css";
 
