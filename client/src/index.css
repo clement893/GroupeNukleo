@@ -727,6 +727,13 @@ header.header-scroll-transform,
     }
   }
 
+  /* Leaders intro: 3 lignes sur grands écrans (~40 car. par ligne), place pour descendantes (g, p, y) */
+  @media (min-width: 900px) {
+    .leaders-intro-paragraph {
+      max-width: 42ch !important;
+    }
+  }
+
   /* Company blocks, Leaders, Two cities — grands écrans */
   @media (min-width: 1400px) {
     .company-blocks-inner {

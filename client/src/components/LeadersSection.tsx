@@ -30,19 +30,22 @@ export default function LeadersSection() {
           maxWidth: 'min(1200px, 92vw)',
           margin: '0 auto',
           marginBottom: 'clamp(2.5rem, 5vw, 4rem)',
+          paddingBottom: '0.4em',
         }}
       >
         <p
+          className="leaders-intro-paragraph"
           style={{
             fontFamily: "'Neue Haas Unica Pro', sans-serif",
             fontWeight: 400,
             fontSize: 'clamp(1.8rem, 4vw, 2.5rem)',
-            lineHeight: 1.1,
+            lineHeight: 1.35,
             letterSpacing: '-0.03em',
             margin: 0,
             display: 'inline-block',
             width: 'fit-content',
             maxWidth: '100%',
+            paddingBottom: '0.25em',
             background: 'linear-gradient(to right, #6B1817, #523DCB)',
             WebkitBackgroundClip: 'text',
             WebkitTextFillColor: 'transparent',

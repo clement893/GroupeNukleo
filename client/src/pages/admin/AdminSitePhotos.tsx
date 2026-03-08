@@ -306,7 +306,12 @@ export default function AdminSitePhotos() {
                     </CardDescription>
                   </CardHeader>
                   <CardContent className="space-y-3">
-                    <div className="rounded-lg overflow-hidden bg-gray-900/50 aspect-video flex items-center justify-center min-h-[120px] border border-gray-700/50 relative">
+                    <div
+                      className={`rounded-lg overflow-hidden bg-gray-900/50 flex items-center justify-center min-h-[120px] border border-gray-700/50 relative ${
+                        key === "hero_cover" ? "" : "aspect-video"
+                      }`}
+                      style={key === "hero_cover" ? { aspectRatio: "21/9" } : undefined}
+                    >
                       {previewUrl ? (
                         key === "hero_cover" ? (
                           <div
@@ -345,7 +350,7 @@ export default function AdminSitePhotos() {
                               </div>
                             )}
                             <span className="absolute bottom-1 left-1 text-[10px] text-white/80 bg-black/40 px-1.5 py-0.5 rounded">
-                              Glisser pour cadrer
+                              Cadrage final (21:9) — Glisser pour positionner
                             </span>
                           </div>
                         ) : (
