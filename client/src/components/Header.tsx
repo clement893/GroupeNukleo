@@ -122,7 +122,7 @@ function Header() {
                 alt="Groupe Nukleo"
                 className="w-auto object-contain object-left"
                 style={{
-                  height: 'clamp(2.25rem, 6vw, 3.75rem)',
+                  height: 'clamp(1.575rem, 4.2vw, 2.625rem)',
                 }}
               />
             </Link>
