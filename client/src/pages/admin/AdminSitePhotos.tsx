@@ -330,16 +330,16 @@ export default function AdminSitePhotos() {
                               }}
                               draggable={false}
                             />
-                            {/* Focal point indicator */}
+                            {/* Focal point indicator — discret pour ne pas masquer le cadrage */}
                             {(() => {
                               const { x, y } = parseObjectPosition(heroObjectPosition);
                               return (
                                 <div
-                                  className="absolute w-8 h-8 -ml-4 -mt-4 pointer-events-none border-2 border-white shadow-lg rounded-full"
+                                  className="absolute w-3 h-3 -ml-1.5 -mt-1.5 pointer-events-none rounded-full border-2 border-white ring-2 ring-black/30"
                                   style={{
                                     left: `${x}%`,
                                     top: `${y}%`,
-                                    background: "rgba(82, 61, 203, 0.6)",
+                                    background: "rgba(82, 61, 203, 0.5)",
                                   }}
                                 />
                               );
