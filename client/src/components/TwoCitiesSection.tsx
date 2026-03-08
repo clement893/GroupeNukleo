@@ -41,7 +41,7 @@ export default function TwoCitiesSection() {
       <div
         className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-10 two-cities-inner"
         style={{
-          maxWidth: 'min(878px, 67.5vw)',
+          maxWidth: 'min(2634px, 90vw)',
           margin: '0 auto',
         }}
       >
