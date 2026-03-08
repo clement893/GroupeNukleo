@@ -1,10 +1,12 @@
 import { useState, useEffect, useCallback } from "react";
+import { Link } from "wouter";
 import { AdminLayout } from "@/components/AdminLayout";
 import { trpc } from "@/lib/trpc";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Upload, ImageIcon, Loader2, AlertCircle } from "lucide-react";
+import { Upload, ImageIcon, Loader2, AlertCircle, ExternalLink } from "lucide-react";
 import { toast } from "sonner";
+import { useLocalizedPath } from "@/hooks/useLocalizedPath";
 import "@/styles/admin.css";
 
 const ACCEPT_IMAGES = "image/jpeg,image/png,image/webp,image/gif,image/svg+xml,.jpg,.jpeg,.png,.webp,.gif,.svg";
@@ -33,6 +35,19 @@ const PHOTO_LABELS: Record<string, string> = {
   leader_lionel: "Photo Lionel Pardin",
 };
 
+/** Emplacement sur la page principale pour chaque photo */
+const PHOTO_USAGE: Record<string, string> = {
+  hero_cover: "Hero accueil",
+  header_logo: "Header",
+  footer_logo: "Footer",
+  menu_logo: "Menu plein écran",
+  nukleo_logo: "Bloc Nukleo",
+  rob_logo: "Bloc Rouge On Blue",
+  union_fallback: "Section Union",
+  leader_clement: "Section Leaders",
+  leader_lionel: "Section Leaders",
+};
+
 function getPreviewUrl(url: string): string {
   if (!url) return "";
   if (url.startsWith("http")) return url;
@@ -40,6 +55,8 @@ function getPreviewUrl(url: string): string {
 }
 
 export default function AdminSitePhotos() {
+  const getLocalizedPath = useLocalizedPath();
+  const homepagePath = getLocalizedPath("/");
   const [photos, setPhotos] = useState<Record<string, string>>({});
   const [isR2, setIsR2] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
@@ -133,11 +150,17 @@ export default function AdminSitePhotos() {
         <div>
           <h1 className="text-4xl font-bold text-white mb-2 flex items-center gap-3">
             <ImageIcon className="w-8 h-8 text-[#523DCB]" />
-            Photos du site
+            Photos de la page principale
           </h1>
-          <p className="text-gray-300">
-            Gérez toutes les images du site (logos, hero, photos leaders). Stockage R2. Formats : JPG, PNG, WebP, GIF, SVG (max 5 Mo).
+          <p className="text-gray-300 mb-3">
+            Gérez toutes les images de la page d&apos;accueil (logos, hero, photos leaders). Stockage R2. Formats : JPG, PNG, WebP, GIF, SVG (max 5 Mo).
           </p>
+          <Link href={homepagePath} target="_blank" rel="noopener noreferrer">
+            <Button variant="outline" size="sm" className="border-gray-600 text-gray-300 hover:bg-gray-700/50">
+              <ExternalLink className="w-4 h-4 mr-2" />
+              Voir la page principale
+            </Button>
+          </Link>
         </div>
 
         {!isR2 && (
@@ -167,17 +190,19 @@ export default function AdminSitePhotos() {
                     <CardTitle className="text-white text-base" style={{ fontFamily: "'Neue Haas Unica Pro', sans-serif" }}>
                       {PHOTO_LABELS[key] ?? key}
                     </CardTitle>
-                    <CardDescription className="text-gray-400 text-xs">
-                      {key}
+                    <CardDescription className="text-gray-400 text-xs flex items-center gap-2">
+                      <span>{key}</span>
+                      <span className="text-gray-500">•</span>
+                      <span>{PHOTO_USAGE[key] ?? "—"}</span>
                     </CardDescription>
                   </CardHeader>
                   <CardContent className="space-y-3">
-                    <div className="rounded-lg overflow-hidden bg-gray-900/50 aspect-video flex items-center justify-center min-h-[100px]">
+                    <div className="rounded-lg overflow-hidden bg-gray-900/50 aspect-video flex items-center justify-center min-h-[120px] border border-gray-700/50">
                       {previewUrl ? (
                         <img
                           src={previewUrl}
                           alt={PHOTO_LABELS[key]}
-                          className="max-w-full max-h-full object-contain"
+                          className="max-w-full max-h-full object-contain w-full h-full"
                           onError={(e) => {
                             (e.target as HTMLImageElement).style.display = "none";
                           }}

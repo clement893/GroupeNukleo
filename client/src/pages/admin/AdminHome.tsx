@@ -63,7 +63,7 @@ const ADMIN_CATEGORIES = [
       { title: "Logos carousel", description: "Gérer les logos du carrousel d'accueil", icon: <LayoutGrid className="h-5 w-5" />, href: "/admin/carousel-logos" },
       { title: "Vidéo Union", description: "Vidéo de la section L'union de deux forces", icon: <Video className="h-5 w-5" />, href: "/admin/union-video" },
       { title: "Communiqué de presse", description: "PDF du bouton Notre communiqué de presse", icon: <FileText className="h-5 w-5" />, href: "/admin/press-release" },
-      { title: "Photos du site", description: "Logos, hero, photos leaders (R2)", icon: <ImageIcon className="h-5 w-5" />, href: "/admin/site-photos" },
+      { title: "Photos page principale", description: "Logos, hero, photos leaders — aperçu et upload R2", icon: <ImageIcon className="h-5 w-5" />, href: "/admin/site-photos" },
     ],
   },
 ];
