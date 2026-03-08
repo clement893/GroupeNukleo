@@ -634,6 +634,21 @@ header.header-scroll-transform,
     }
   }
 
+  /* Hero description : plus à gauche sur grands écrans, toujours 3 lignes */
+  @media (min-width: 1400px) {
+    .hero-max-width {
+      margin-left: 0 !important;
+      margin-right: auto !important;
+    }
+    .hero-section-grid {
+      grid-template-columns: minmax(0, 1fr) minmax(260px, 300px) !important;
+      gap: clamp(2rem, 4vw, 3.5rem) !important;
+    }
+    .hero-section-grid p {
+      white-space: pre-line !important;
+    }
+  }
+
   /* Hero section: stack title + paragraph on small screens */
   @media (max-width: 900px) {
     .hero-section-grid {
