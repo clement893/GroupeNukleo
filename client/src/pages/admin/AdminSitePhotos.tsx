@@ -1,16 +1,9 @@
-import { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { Link } from "wouter";
 import { AdminLayout } from "@/components/AdminLayout";
 import { trpc } from "@/lib/trpc";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
 import { Upload, ImageIcon, Loader2, AlertCircle, ExternalLink } from "lucide-react";
 import { toast } from "sonner";
 import { useLocalizedPath } from "@/hooks/useLocalizedPath";
@@ -18,19 +11,29 @@ import "@/styles/admin.css";
 
 const ACCEPT_IMAGES = "image/jpeg,image/png,image/webp,image/gif,image/svg+xml,.jpg,.jpeg,.png,.webp,.gif,.svg";
 
-const HERO_CADRAGE_OPTIONS = [
-  { value: "center", label: "Centre" },
-  { value: "top", label: "Haut" },
-  { value: "bottom", label: "Bas" },
-  { value: "left", label: "Gauche" },
-  { value: "right", label: "Droite" },
-  { value: "center top", label: "Centre-haut" },
-  { value: "center bottom", label: "Centre-bas" },
-  { value: "left top", label: "Gauche-haut" },
-  { value: "left bottom", label: "Gauche-bas" },
-  { value: "right top", label: "Droite-haut" },
-  { value: "right bottom", label: "Droite-bas" },
-] as const;
+/** Convert object-position string to { x: 0-100, y: 0-100 } */
+function parseObjectPosition(pos: string): { x: number; y: number } {
+  const m = pos.match(/^(\d+(?:\.\d+)?)%\s+(\d+(?:\.\d+)?)%$/);
+  if (m) return { x: parseFloat(m[1]), y: parseFloat(m[2]) };
+  const keywords: Record<string, { x: number; y: number }> = {
+    center: { x: 50, y: 50 },
+    top: { x: 50, y: 0 },
+    bottom: { x: 50, y: 100 },
+    left: { x: 0, y: 50 },
+    right: { x: 100, y: 50 },
+    "center top": { x: 50, y: 0 },
+    "center bottom": { x: 50, y: 100 },
+    "left top": { x: 0, y: 0 },
+    "left bottom": { x: 0, y: 100 },
+    "right top": { x: 100, y: 0 },
+    "right bottom": { x: 100, y: 100 },
+  };
+  return keywords[pos] ?? { x: 50, y: 50 };
+}
+
+function toObjectPosition(x: number, y: number): string {
+  return `${Math.round(x)}% ${Math.round(y)}%`;
+}
 
 const PHOTO_KEYS = [
   "hero_cover",
@@ -93,8 +96,10 @@ export default function AdminSitePhotos() {
     try {
       const res = await fetch("/api/site-photos");
       const data = await res.json();
+      const pos = data?.heroObjectPosition ?? "center";
       setPhotos(data?.photos ?? {});
-      setHeroObjectPosition(data?.heroObjectPosition ?? "center");
+      setHeroObjectPosition(pos);
+      heroPositionRef.current = pos;
       setIsR2(data?.isR2 ?? false);
     } catch {
       setPhotos({});
@@ -174,31 +179,79 @@ export default function AdminSitePhotos() {
     }
   }
 
-  async function handleHeroCadrageChange(value: string) {
-    setHeroPositionSaving(true);
-    try {
-      const result = await getUploadTokenQuery.refetch();
-      const token = result.data?.token;
-      if (!token) throw new Error("Session expirée. Reconnectez-vous.");
-      const res = await fetch("/api/admin/site-photos/hero-position", {
-        method: "PATCH",
-        credentials: "include",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify({ objectPosition: value }),
-      });
-      const data = await res.json().catch(() => ({}));
-      if (!res.ok) throw new Error(data?.error || "Erreur");
-      setHeroObjectPosition(value);
-      toast.success("Cadrage mis à jour");
-    } catch (e) {
-      toast.error(e instanceof Error ? e.message : "Erreur");
-    } finally {
-      setHeroPositionSaving(false);
-    }
-  }
+  const handleHeroCadrageChange = useCallback(
+    async (value: string) => {
+      setHeroPositionSaving(true);
+      try {
+        const result = await getUploadTokenQuery.refetch();
+        const token = result.data?.token;
+        if (!token) throw new Error("Session expirée. Reconnectez-vous.");
+        const res = await fetch("/api/admin/site-photos/hero-position", {
+          method: "PATCH",
+          credentials: "include",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify({ objectPosition: value }),
+        });
+        const data = await res.json().catch(() => ({}));
+        if (!res.ok) throw new Error(data?.error || "Erreur");
+        setHeroObjectPosition(value);
+        toast.success("Cadrage mis à jour");
+      } catch (e) {
+        toast.error(e instanceof Error ? e.message : "Erreur");
+      } finally {
+        setHeroPositionSaving(false);
+      }
+    },
+    [getUploadTokenQuery]
+  );
+
+  const heroCadrageRef = React.useRef<HTMLDivElement>(null);
+  const heroPositionRef = React.useRef(heroObjectPosition);
+  const [isDraggingCadrage, setIsDraggingCadrage] = useState(false);
+
+  const handleHeroCadrageMouseDown = useCallback(
+    (e: React.MouseEvent<HTMLDivElement>) => {
+      if (!photos.hero_cover || heroPositionSaving) return;
+      e.preventDefault();
+      setIsDraggingCadrage(true);
+      const el = heroCadrageRef.current;
+      if (!el) return;
+      const rect = el.getBoundingClientRect();
+      const x = Math.max(0, Math.min(100, ((e.clientX - rect.left) / rect.width) * 100));
+      const y = Math.max(0, Math.min(100, ((e.clientY - rect.top) / rect.height) * 100));
+      const pos = toObjectPosition(x, y);
+      heroPositionRef.current = pos;
+      setHeroObjectPosition(pos);
+    },
+    [photos.hero_cover, heroPositionSaving]
+  );
+
+  useEffect(() => {
+    if (!isDraggingCadrage) return;
+    const onMove = (e: MouseEvent) => {
+      const el = heroCadrageRef.current;
+      if (!el) return;
+      const rect = el.getBoundingClientRect();
+      const x = Math.max(0, Math.min(100, ((e.clientX - rect.left) / rect.width) * 100));
+      const y = Math.max(0, Math.min(100, ((e.clientY - rect.top) / rect.height) * 100));
+      const pos = toObjectPosition(x, y);
+      heroPositionRef.current = pos;
+      setHeroObjectPosition(pos);
+    };
+    const onUp = () => {
+      setIsDraggingCadrage(false);
+      handleHeroCadrageChange(heroPositionRef.current);
+    };
+    document.addEventListener("mousemove", onMove);
+    document.addEventListener("mouseup", onUp);
+    return () => {
+      document.removeEventListener("mousemove", onMove);
+      document.removeEventListener("mouseup", onUp);
+    };
+  }, [isDraggingCadrage, handleHeroCadrageChange]);
 
   return (
     <AdminLayout>
@@ -253,51 +306,62 @@ export default function AdminSitePhotos() {
                     </CardDescription>
                   </CardHeader>
                   <CardContent className="space-y-3">
-                    <div className="rounded-lg overflow-hidden bg-gray-900/50 aspect-video flex items-center justify-center min-h-[120px] border border-gray-700/50">
+                    <div className="rounded-lg overflow-hidden bg-gray-900/50 aspect-video flex items-center justify-center min-h-[120px] border border-gray-700/50 relative">
                       {previewUrl ? (
-                        <img
-                          src={previewUrl}
-                          alt={PHOTO_LABELS[key]}
-                          className={`max-w-full max-h-full w-full h-full ${
-                            key === "hero_cover" ? "object-cover" : "object-contain"
-                          }`}
-                          style={key === "hero_cover" ? { objectPosition: heroObjectPosition } : undefined}
-                          onError={(e) => {
-                            (e.target as HTMLImageElement).style.display = "none";
-                          }}
-                        />
+                        key === "hero_cover" ? (
+                          <div
+                            ref={heroCadrageRef}
+                            onMouseDown={handleHeroCadrageMouseDown}
+                            className="absolute inset-0 cursor-crosshair select-none"
+                            style={{ background: "#e5e7eb" }}
+                          >
+                            <img
+                              src={previewUrl}
+                              alt={PHOTO_LABELS[key]}
+                              className="w-full h-full object-cover pointer-events-none"
+                              style={{ objectPosition: heroObjectPosition }}
+                              onError={(e) => {
+                                (e.target as HTMLImageElement).style.display = "none";
+                              }}
+                              draggable={false}
+                            />
+                            {/* Focal point indicator */}
+                            {(() => {
+                              const { x, y } = parseObjectPosition(heroObjectPosition);
+                              return (
+                                <div
+                                  className="absolute w-8 h-8 -ml-4 -mt-4 pointer-events-none border-2 border-white shadow-lg rounded-full"
+                                  style={{
+                                    left: `${x}%`,
+                                    top: `${y}%`,
+                                    background: "rgba(82, 61, 203, 0.6)",
+                                  }}
+                                />
+                              );
+                            })()}
+                            {heroPositionSaving && (
+                              <div className="absolute inset-0 flex items-center justify-center bg-black/20">
+                                <Loader2 className="w-8 h-8 animate-spin text-white" />
+                              </div>
+                            )}
+                            <span className="absolute bottom-1 left-1 text-[10px] text-white/80 bg-black/40 px-1.5 py-0.5 rounded">
+                              Glisser pour cadrer
+                            </span>
+                          </div>
+                        ) : (
+                          <img
+                            src={previewUrl}
+                            alt={PHOTO_LABELS[key]}
+                            className="max-w-full max-h-full w-full h-full object-contain"
+                            onError={(e) => {
+                              (e.target as HTMLImageElement).style.display = "none";
+                            }}
+                          />
+                        )
                       ) : (
                         <span className="text-gray-500 text-sm">Aucune image</span>
                       )}
                     </div>
-
-                    {key === "hero_cover" && (
-                      <div className="flex items-center gap-2">
-                        <label className="text-xs text-gray-400 shrink-0">Cadrage :</label>
-                        <Select
-                          value={heroObjectPosition}
-                          onValueChange={handleHeroCadrageChange}
-                          disabled={heroPositionSaving}
-                        >
-                          <SelectTrigger className="h-8 text-xs border-gray-600 bg-gray-800/50 text-gray-200 w-full max-w-[180px]">
-                            <SelectValue />
-                          </SelectTrigger>
-                          <SelectContent>
-                            {HERO_CADRAGE_OPTIONS.map((opt) => (
-                              <SelectItem key={opt.value} value={opt.value} className="text-xs">
-                                {opt.label}
-                              </SelectItem>
-                            ))}
-                            {!HERO_CADRAGE_OPTIONS.some((o) => o.value === heroObjectPosition) && heroObjectPosition && (
-                              <SelectItem value={heroObjectPosition} className="text-xs">
-                                {heroObjectPosition}
-                              </SelectItem>
-                            )}
-                          </SelectContent>
-                        </Select>
-                        {heroPositionSaving && <Loader2 className="w-3 h-3 animate-spin text-[#523DCB]" />}
-                      </div>
-                    )}
 
                     {isR2 && (
                       <div
