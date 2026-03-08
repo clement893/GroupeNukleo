@@ -668,7 +668,7 @@ async function startServer() {
   };
   const sitePhotoUpload = multer({
     storage: multer.memoryStorage(),
-    limits: { fileSize: 20 * 1024 * 1024 },
+    limits: { fileSize: 50 * 1024 * 1024 },
     fileFilter: sitePhotoFileFilter,
   });
 
@@ -838,7 +838,7 @@ async function startServer() {
         if (req.path === '/api/admin/carousel-logos/upload') msg = 'Fichier trop volumineux (2 Mo max)';
         else if (req.path === '/api/admin/union-video/upload') msg = 'Vidéo trop volumineuse (100 Mo max)';
         else if (req.path === '/api/admin/press-release/upload') msg = 'PDF trop volumineux (20 Mo max)';
-        else if (req.path === '/api/admin/site-photos/upload') msg = 'Image trop volumineuse (20 Mo max)';
+        else if (req.path === '/api/admin/site-photos/upload') msg = 'Image trop volumineuse (50 Mo max)';
         return res.status(400).json({ error: msg });
       }
       return res.status(400).json({ error: `Upload error: ${err.message}` });
