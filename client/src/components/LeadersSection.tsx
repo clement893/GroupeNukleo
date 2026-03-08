@@ -70,11 +70,13 @@ export default function LeadersSection() {
               gridTemplateColumns: 'minmax(160px, 1fr) 1.6fr',
               gap: 'clamp(1.25rem, 2.5vw, 1.75rem)',
               alignItems: 'center',
-              background: 'rgb(243, 239, 236)',
-              borderRadius: 14,
+              background: 'rgba(255, 255, 255, 0.4)',
+              backdropFilter: 'blur(24px) saturate(180%)',
+              WebkitBackdropFilter: 'blur(24px) saturate(180%)',
+              borderRadius: 16,
               padding: 'clamp(1.5rem, 2.5vw, 2.25rem)',
-              boxShadow: '0 2px 16px rgba(0,0,0,0.05)',
-              border: '1px solid #E5E2DE',
+              boxShadow: '0 8px 32px rgba(0,0,0,0.08), inset 0 1px 0 rgba(255,255,255,0.9)',
+              border: '1px solid rgba(255,255,255,0.6)',
               minHeight: 240,
             }}
           >
@@ -136,6 +138,7 @@ export default function LeadersSection() {
                 style={{
                   fontFamily: "'Neue Haas Unica Pro', sans-serif",
                   fontWeight: 400,
+                  fontStyle: 'italic',
                   fontSize: 'clamp(0.8rem, 1.05vw, 0.95rem)',
                   lineHeight: 1.6,
                   color: '#6b7280',
