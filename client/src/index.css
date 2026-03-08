@@ -690,8 +690,8 @@ header.header-scroll-transform,
     }
   }
 
-  /* Union section — responsive : colonnes qui peuvent rétrécir pour éviter chevauchement */
-  @media (min-width: 1024px) {
+  /* Union section — responsive : side-by-side à partir de 1280px, stack en dessous pour éviter overlay */
+  @media (min-width: 1280px) {
     .union-section-inner {
       grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr) !important;
     }
@@ -752,8 +752,8 @@ header.header-scroll-transform,
     }
   }
 
-  /* Union section tablet (stacked) — padding texte */
-  @media (min-width: 641px) and (max-width: 1023px) {
+  /* Union section tablet (stacked) — padding texte, 641px–1279px */
+  @media (min-width: 641px) and (max-width: 1279px) {
     .union-section-text {
       padding: clamp(2rem, 5vw, 3rem) !important;
     }
