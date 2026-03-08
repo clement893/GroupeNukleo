@@ -652,7 +652,7 @@ header.header-scroll-transform,
       margin-right: auto !important;
     }
     .hero-section-grid {
-      grid-template-columns: minmax(0, 1fr) minmax(380px, 520px) !important;
+      grid-template-columns: minmax(180px, 30%) 1fr !important;
       gap: clamp(2rem, 4vw, 3.5rem) !important;
     }
   }

@@ -40,7 +40,7 @@ export default function HomepageDemo5() {
           paddingLeft: 0,
           paddingRight: 0,
           display: 'grid',
-          gridTemplateColumns: 'minmax(0, 1fr) minmax(380px, 520px)',
+          gridTemplateColumns: 'minmax(180px, 30%) 1fr',
           gridTemplateRows: 'auto auto',
           gap: 'clamp(2rem, 5vw, 4rem)',
           background: 'transparent',
