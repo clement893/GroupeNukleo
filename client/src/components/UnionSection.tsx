@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { useSitePhotos, SITE_PHOTO_KEYS } from '@/contexts/SitePhotosContext';
 import { useLocalizedPath } from '@/hooks/useLocalizedPath';
@@ -36,6 +36,7 @@ export default function UnionSection() {
   const { getPhoto } = useSitePhotos();
   const [videoPath, setVideoPath] = useState<string | null>(null);
   const [pdfPath, setPdfPath] = useState<string | null>(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
     fetch('/api/union-video')
@@ -43,6 +44,15 @@ export default function UnionSection() {
       .then((data) => setVideoPath(data?.path ?? null))
       .catch(() => setVideoPath(null));
   }, []);
+
+  // Force muted + play (React/browser autoplay quirks)
+  useEffect(() => {
+    const v = videoRef.current;
+    if (!v || !videoPath) return;
+    v.muted = true;
+    v.defaultMuted = true;
+    v.play().catch(() => {});
+  }, [videoPath]);
 
   useEffect(() => {
     fetch('/api/press-release')
@@ -83,6 +93,7 @@ export default function UnionSection() {
         >
           {videoPath ? (
             <video
+              ref={videoRef}
               key={videoPath}
               src={videoPath}
               autoPlay
@@ -90,6 +101,15 @@ export default function UnionSection() {
               loop
               playsInline
               preload="auto"
+              onLoadedData={(e) => {
+                const v = e.currentTarget;
+                v.muted = true;
+                v.defaultMuted = true;
+                v.play().catch(() => {});
+              }}
+              onCanPlay={(e) => {
+                e.currentTarget.play().catch(() => {});
+              }}
               style={{
                 width: '100%',
                 height: '100%',
