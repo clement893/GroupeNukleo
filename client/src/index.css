@@ -815,6 +815,31 @@ header.header-scroll-transform,
     }
   }
 
+  /* Footer grands écrans : rapproché des bords */
+  @media (min-width: 1400px) {
+    .footer-large {
+      padding-left: 2% !important;
+      padding-right: 2% !important;
+    }
+    .footer-inner-large {
+      max-width: min(1400px, 96%) !important;
+    }
+  }
+  @media (min-width: 1920px) {
+    .footer-large {
+      padding-left: 1.5% !important;
+      padding-right: 1.5% !important;
+    }
+    .footer-inner-large {
+      max-width: min(1800px, 97%) !important;
+    }
+  }
+  @media (min-width: 2560px) {
+    .footer-inner-large {
+      max-width: min(2200px, 98%) !important;
+    }
+  }
+
   /* Footer mobile */
   @media (max-width: 640px) {
     .footer-mobile {

@@ -15,8 +15,8 @@ function Footer() {
   const getLocalizedPath = useLocalizedPath();
 
   return (
-    <footer
-      className="relative w-full footer-mobile"
+      <footer
+      className="relative w-full footer-mobile footer-large"
       style={{
         background: '#EFE8E8',
         padding: 'clamp(1.5rem, 4vw, 3rem) var(--site-margin, 3%) clamp(2rem, 4vw, 3rem)',
@@ -27,7 +27,7 @@ function Footer() {
     >
       {/* Boîte noire unique — logo gauche, contact droite (coins arrondis, centré) */}
       <div
-        className="rounded-2xl w-full max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-[1fr_auto] gap-8 md:gap-12 items-start footer-inner"
+        className="rounded-2xl w-full max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-[1fr_auto] gap-8 md:gap-12 items-start footer-inner footer-inner-large"
         style={{
           background: FOOTER_BG,
           padding: 'clamp(2rem, 5vw, 3.5rem) clamp(1.5rem, 4vw, 3rem)',
