@@ -6,6 +6,7 @@ import {
   LayoutGrid,
   FileText,
   Video,
+  ImageIcon,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -20,6 +21,7 @@ const NAV_GROUPS = [
   {
     label: "Configuration",
     items: [
+      { label: "Images", href: "/admin/images", icon: ImageIcon },
       { label: "Vidéo Union", href: "/admin/union-video", icon: Video },
       { label: "Logos carousel", href: "/admin/carousel-logos", icon: LayoutGrid },
       { label: "Communiqué de presse", href: "/admin/press-release", icon: FileText },

@@ -34,6 +34,7 @@ const AdminCarouselLogos = lazy(() => import("./pages/admin/AdminCarouselLogos")
 const AdminUnionVideo = lazy(() => import("./pages/admin/AdminUnionVideo"));
 const AdminPressRelease = lazy(() => import("./pages/admin/AdminPressRelease"));
 const AdminSitePhotos = lazy(() => import("./pages/admin/AdminSitePhotos"));
+const AdminImages = lazy(() => import("./pages/admin/AdminImages"));
 
 import { ProtectedAdminRoute } from "./components/ProtectedAdminRoute";
 
@@ -84,6 +85,9 @@ function App() {
               </Route>
               <Route path="/admin/site-photos">
                 <ProtectedAdminRoute><AdminSitePhotos /></ProtectedAdminRoute>
+              </Route>
+              <Route path="/admin/images">
+                <ProtectedAdminRoute><AdminImages /></ProtectedAdminRoute>
               </Route>
               <Route path="/admin">
                 <ProtectedAdminRoute><AdminHome /></ProtectedAdminRoute>
