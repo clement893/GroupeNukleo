@@ -47,18 +47,20 @@ export default function TwoCitiesSection() {
       >
         {/* Montréal */}
         <div
+          className="aspect-square"
           style={{
             borderRadius: 16,
             overflow: 'hidden',
             background: '#fff',
             boxShadow: '0 2px 16px rgba(0,0,0,0.06)',
             border: '1px solid #E5E2DE',
+            display: 'flex',
+            flexDirection: 'column',
           }}
         >
           <div
-            className="two-cities-map"
+            className="two-cities-map flex-1 min-h-0"
             style={{
-              height: 220,
               width: '100%',
               background: '#e5e7eb',
             }}
@@ -75,6 +77,7 @@ export default function TwoCitiesSection() {
             />
           </div>
           <div
+            className="shrink-0"
             style={{
               padding: '1.25rem 1.5rem',
               fontFamily: "'Neue Haas Unica Pro', sans-serif",
@@ -89,18 +92,20 @@ export default function TwoCitiesSection() {
 
         {/* Halifax */}
         <div
+          className="aspect-square"
           style={{
             borderRadius: 16,
             overflow: 'hidden',
             background: '#fff',
             boxShadow: '0 2px 16px rgba(0,0,0,0.06)',
             border: '1px solid #E5E2DE',
+            display: 'flex',
+            flexDirection: 'column',
           }}
         >
           <div
-            className="two-cities-map"
+            className="two-cities-map flex-1 min-h-0"
             style={{
-              height: 220,
               width: '100%',
               background: '#e5e7eb',
             }}
@@ -117,6 +122,7 @@ export default function TwoCitiesSection() {
             />
           </div>
           <div
+            className="shrink-0"
             style={{
               padding: '1.25rem 1.5rem',
               fontFamily: "'Neue Haas Unica Pro', sans-serif",
