@@ -40,7 +40,7 @@ export default function HomepageDemo5() {
           paddingLeft: 0,
           paddingRight: 0,
           display: 'grid',
-          gridTemplateColumns: 'minmax(0, 1fr) minmax(240px, 280px)',
+          gridTemplateColumns: 'minmax(0, 1fr) minmax(380px, 520px)',
           gridTemplateRows: 'auto auto',
           gap: 'clamp(2rem, 5vw, 4rem)',
           background: 'transparent',
@@ -82,10 +82,13 @@ export default function HomepageDemo5() {
             display: 'flex',
             flexDirection: 'column',
             gap: 0,
-          }}>
-            <span style={{ display: 'block' }}>{t('home.heroLineDesc1') || t('home.heroDescription')?.split('\n')[0]}</span>
-            <span style={{ display: 'block' }}>{t('home.heroLineDesc2') || t('home.heroDescription')?.split('\n')[1]}</span>
-            <span style={{ display: 'block' }}>{t('home.heroLineDesc3') || t('home.heroDescription')?.split('\n')[2]}</span>
+            minWidth: 0,
+          }}
+          className="hero-description-3lines"
+          >
+            <span className="hero-desc-line">{t('home.heroLineDesc1') || t('home.heroDescription')?.split('\n')[0]}</span>
+            <span className="hero-desc-line">{t('home.heroLineDesc2') || t('home.heroDescription')?.split('\n')[1]}</span>
+            <span className="hero-desc-line">{t('home.heroLineDesc3') || t('home.heroDescription')?.split('\n')[2]}</span>
           </p>
           <div
             style={{

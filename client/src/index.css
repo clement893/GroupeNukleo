@@ -634,14 +634,22 @@ header.header-scroll-transform,
     }
   }
 
-  /* Hero description : plus à gauche sur grands écrans, 3 lignes max */
+  /* Hero description : 3 lignes, 1 par phrase (nowrap sur desktop pour éviter wrap) */
+  @media (min-width: 900px) {
+    .hero-desc-line {
+      display: block !important;
+      white-space: nowrap !important;
+    }
+  }
+
+  /* Hero description : plus à gauche sur grands écrans, colonne large */
   @media (min-width: 1400px) {
     .hero-max-width {
       margin-left: 0 !important;
       margin-right: auto !important;
     }
     .hero-section-grid {
-      grid-template-columns: minmax(0, 1fr) minmax(240px, 280px) !important;
+      grid-template-columns: minmax(0, 1fr) minmax(380px, 520px) !important;
       gap: clamp(2rem, 4vw, 3.5rem) !important;
     }
   }
