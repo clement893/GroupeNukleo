@@ -11,26 +11,6 @@ import "@/styles/admin.css";
 
 const ACCEPT_IMAGES = "image/jpeg,image/png,image/webp,image/gif,image/svg+xml,.jpg,.jpeg,.png,.webp,.gif,.svg";
 
-/** Convert object-position string to { x: 0-100, y: 0-100 } */
-function parseObjectPosition(pos: string): { x: number; y: number } {
-  const m = pos.match(/^(\d+(?:\.\d+)?)%\s+(\d+(?:\.\d+)?)%$/);
-  if (m) return { x: parseFloat(m[1]), y: parseFloat(m[2]) };
-  const keywords: Record<string, { x: number; y: number }> = {
-    center: { x: 50, y: 50 },
-    top: { x: 50, y: 0 },
-    bottom: { x: 50, y: 100 },
-    left: { x: 0, y: 50 },
-    right: { x: 100, y: 50 },
-    "center top": { x: 50, y: 0 },
-    "center bottom": { x: 50, y: 100 },
-    "left top": { x: 0, y: 0 },
-    "left bottom": { x: 0, y: 100 },
-    "right top": { x: 100, y: 0 },
-    "right bottom": { x: 100, y: 100 },
-  };
-  return keywords[pos] ?? { x: 50, y: 50 };
-}
-
 function toObjectPosition(x: number, y: number): string {
   return `${Math.round(x)}% ${Math.round(y)}%`;
 }
@@ -330,20 +310,6 @@ export default function AdminSitePhotos() {
                               }}
                               draggable={false}
                             />
-                            {/* Focal point indicator — discret pour ne pas masquer le cadrage */}
-                            {(() => {
-                              const { x, y } = parseObjectPosition(heroObjectPosition);
-                              return (
-                                <div
-                                  className="absolute w-3 h-3 -ml-1.5 -mt-1.5 pointer-events-none rounded-full border-2 border-white ring-2 ring-black/30"
-                                  style={{
-                                    left: `${x}%`,
-                                    top: `${y}%`,
-                                    background: "rgba(82, 61, 203, 0.5)",
-                                  }}
-                                />
-                              );
-                            })()}
                             {heroPositionSaving && (
                               <div className="absolute inset-0 flex items-center justify-center bg-black/20">
                                 <Loader2 className="w-8 h-8 animate-spin text-white" />

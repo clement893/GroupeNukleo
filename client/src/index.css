@@ -744,7 +744,7 @@ header.header-scroll-transform,
       max-width: min(1400px, 94%) !important;
     }
     .two-cities-inner {
-      max-width: min(1400px, 94%) !important;
+      max-width: min(585px, 45vw) !important;
     }
   }
   @media (min-width: 1920px) {
@@ -756,7 +756,7 @@ header.header-scroll-transform,
       max-width: min(1800px, 95%) !important;
     }
     .two-cities-inner {
-      max-width: min(1800px, 95%) !important;
+      max-width: min(585px, 45vw) !important;
     }
   }
   @media (min-width: 2560px) {
@@ -768,7 +768,7 @@ header.header-scroll-transform,
       max-width: min(2200px, 96%) !important;
     }
     .two-cities-inner {
-      max-width: min(2200px, 96%) !important;
+      max-width: min(585px, 45vw) !important;
     }
   }
 
