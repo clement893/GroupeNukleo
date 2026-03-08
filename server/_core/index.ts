@@ -34,6 +34,8 @@ import {
 import { isR2Configured } from "../r2Storage";
 import {
   getAllSitePhotoUrls,
+  getHeroObjectPosition,
+  updateHeroObjectPosition,
   uploadSitePhotoToR2,
   SITE_PHOTO_KEYS,
   SITE_PHOTO_LABELS,
@@ -654,13 +656,35 @@ async function startServer() {
   // Site photos (public list + admin upload) — R2 only
   app.get("/api/site-photos", async (_req, res) => {
     try {
-      const photos = await getAllSitePhotoUrls();
-      res.json({ photos, isR2: isR2Configured() });
+      const [photos, heroObjectPosition] = await Promise.all([
+        getAllSitePhotoUrls(),
+        getHeroObjectPosition(),
+      ]);
+      res.json({ photos, heroObjectPosition, isR2: isR2Configured() });
     } catch (e) {
       console.error("[SitePhotos] GET error", e);
-      res.json({ photos: {}, isR2: false });
+      res.json({ photos: {}, heroObjectPosition: "center", isR2: false });
     }
   });
+
+  app.patch(
+    "/api/admin/site-photos/hero-position",
+    requireAdminAuth,
+    express.json(),
+    async (req, res) => {
+      const { objectPosition } = req.body ?? {};
+      if (typeof objectPosition !== "string") {
+        return res.status(400).json({ error: "objectPosition requis (string)" });
+      }
+      try {
+        await updateHeroObjectPosition(objectPosition);
+        res.json({ success: true, objectPosition });
+      } catch (e) {
+        console.error("[SitePhotos] hero-position PATCH error", e);
+        res.status(400).json({ error: e instanceof Error ? e.message : "Erreur" });
+      }
+    }
+  );
 
   const sitePhotoFileFilter = (_req: express.Request, file: Express.Multer.File, cb: multer.FileFilterCallback) => {
     const ok = /^image\/(jpeg|png|gif|webp|svg\+xml)$/i.test(file.mimetype) || /\.(jpg|jpeg|png|gif|webp|svg)$/i.test(file.originalname);

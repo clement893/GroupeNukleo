@@ -82,6 +82,47 @@ export async function getAllSitePhotoUrls(): Promise<Record<string, string>> {
   return result;
 }
 
+/** Get hero object-position (cadrage) from metadata, default "center" */
+export async function getHeroObjectPosition(): Promise<string> {
+  const db = await getDb();
+  if (!db) return "center";
+
+  const row = await db.select().from(siteMedia).where(eq(siteMedia.key, SITE_PHOTO_KEYS.HERO_COVER)).limit(1);
+  const meta = row[0]?.metadata;
+  if (!meta) return "center";
+  try {
+    const parsed = JSON.parse(meta) as { objectPosition?: string };
+    return parsed?.objectPosition ?? "center";
+  } catch {
+    return "center";
+  }
+}
+
+/** Update hero object-position (cadrage) */
+export async function updateHeroObjectPosition(objectPosition: string): Promise<void> {
+  const normalized = (objectPosition.trim() || "center").slice(0, 64);
+  // Allow CSS object-position values: keywords, percentages, or combinations
+  if (!/^[\w\s%.-]+$/.test(normalized)) {
+    throw new Error("Position invalide. Ex: center, top, center top, 50% 30%");
+  }
+
+  const db = await getDb();
+  if (!db) throw new Error("Database not available");
+
+  const metadata = JSON.stringify({ objectPosition: normalized });
+  const existing = await db.select().from(siteMedia).where(eq(siteMedia.key, SITE_PHOTO_KEYS.HERO_COVER)).limit(1);
+
+  if (existing.length > 0) {
+    await db.update(siteMedia).set({ metadata, updatedAt: new Date() }).where(eq(siteMedia.key, SITE_PHOTO_KEYS.HERO_COVER));
+  } else {
+    await db.insert(siteMedia).values({
+      key: SITE_PHOTO_KEYS.HERO_COVER,
+      url: SITE_PHOTO_FALLBACKS[SITE_PHOTO_KEYS.HERO_COVER] ?? "",
+      metadata,
+    });
+  }
+}
+
 /** Upload photo to R2 and save URL to DB */
 export async function uploadSitePhotoToR2(
   key: string,

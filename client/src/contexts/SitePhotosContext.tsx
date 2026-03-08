@@ -27,6 +27,7 @@ const FALLBACKS: Record<string, string> = {
 interface SitePhotosContextValue {
   photos: Record<string, string>;
   getPhoto: (key: string) => string;
+  heroObjectPosition: string;
   isLoading: boolean;
   isR2: boolean;
 }
@@ -35,6 +36,7 @@ const SitePhotosContext = createContext<SitePhotosContextValue | null>(null);
 
 export function SitePhotosProvider({ children }: { children: React.ReactNode }) {
   const [photos, setPhotos] = useState<Record<string, string>>(FALLBACKS);
+  const [heroObjectPosition, setHeroObjectPosition] = useState("center");
   const [isLoading, setIsLoading] = useState(true);
   const [isR2, setIsR2] = useState(false);
 
@@ -43,6 +45,7 @@ export function SitePhotosProvider({ children }: { children: React.ReactNode }) 
       .then((r) => r.json())
       .then((data) => {
         setPhotos(data?.photos ? { ...FALLBACKS, ...data.photos } : FALLBACKS);
+        setHeroObjectPosition(data?.heroObjectPosition ?? "center");
         setIsR2(data?.isR2 ?? false);
       })
       .catch(() => setPhotos(FALLBACKS))
@@ -55,8 +58,8 @@ export function SitePhotosProvider({ children }: { children: React.ReactNode }) 
   );
 
   const value = useMemo(
-    () => ({ photos, getPhoto, isLoading, isR2 }),
-    [photos, getPhoto, isLoading, isR2]
+    () => ({ photos, getPhoto, heroObjectPosition, isLoading, isR2 }),
+    [photos, getPhoto, heroObjectPosition, isLoading, isR2]
   );
 
   return <SitePhotosContext.Provider value={value}>{children}</SitePhotosContext.Provider>;
@@ -68,6 +71,7 @@ export function useSitePhotos() {
     return {
       photos: FALLBACKS,
       getPhoto: (key: string) => FALLBACKS[key] ?? "",
+      heroObjectPosition: "center",
       isLoading: false,
       isR2: false,
     };

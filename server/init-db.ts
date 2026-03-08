@@ -330,9 +330,12 @@ export async function initDatabase(req: Request, res: Response) {
         id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
         key VARCHAR(64) NOT NULL UNIQUE,
         url VARCHAR(1024) NOT NULL,
+        metadata TEXT,
         "updatedAt" TIMESTAMP DEFAULT NOW() NOT NULL
       );
     `);
+    // Add metadata column if missing (for hero objectPosition)
+    await db.execute(sql`ALTER TABLE site_media ADD COLUMN IF NOT EXISTS metadata TEXT`);
 
     res.json({ 
       message: "Database initialized successfully! All tables created.",

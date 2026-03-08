@@ -4,12 +4,33 @@ import { AdminLayout } from "@/components/AdminLayout";
 import { trpc } from "@/lib/trpc";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { Upload, ImageIcon, Loader2, AlertCircle, ExternalLink } from "lucide-react";
 import { toast } from "sonner";
 import { useLocalizedPath } from "@/hooks/useLocalizedPath";
 import "@/styles/admin.css";
 
 const ACCEPT_IMAGES = "image/jpeg,image/png,image/webp,image/gif,image/svg+xml,.jpg,.jpeg,.png,.webp,.gif,.svg";
+
+const HERO_CADRAGE_OPTIONS = [
+  { value: "center", label: "Centre" },
+  { value: "top", label: "Haut" },
+  { value: "bottom", label: "Bas" },
+  { value: "left", label: "Gauche" },
+  { value: "right", label: "Droite" },
+  { value: "center top", label: "Centre-haut" },
+  { value: "center bottom", label: "Centre-bas" },
+  { value: "left top", label: "Gauche-haut" },
+  { value: "left bottom", label: "Gauche-bas" },
+  { value: "right top", label: "Droite-haut" },
+  { value: "right bottom", label: "Droite-bas" },
+] as const;
 
 const PHOTO_KEYS = [
   "hero_cover",
@@ -58,6 +79,8 @@ export default function AdminSitePhotos() {
   const getLocalizedPath = useLocalizedPath();
   const homepagePath = getLocalizedPath("/");
   const [photos, setPhotos] = useState<Record<string, string>>({});
+  const [heroObjectPosition, setHeroObjectPosition] = useState("center");
+  const [heroPositionSaving, setHeroPositionSaving] = useState(false);
   const [isR2, setIsR2] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [uploadingKey, setUploadingKey] = useState<string | null>(null);
@@ -71,6 +94,7 @@ export default function AdminSitePhotos() {
       const res = await fetch("/api/site-photos");
       const data = await res.json();
       setPhotos(data?.photos ?? {});
+      setHeroObjectPosition(data?.heroObjectPosition ?? "center");
       setIsR2(data?.isR2 ?? false);
     } catch {
       setPhotos({});
@@ -150,6 +174,32 @@ export default function AdminSitePhotos() {
     }
   }
 
+  async function handleHeroCadrageChange(value: string) {
+    setHeroPositionSaving(true);
+    try {
+      const result = await getUploadTokenQuery.refetch();
+      const token = result.data?.token;
+      if (!token) throw new Error("Session expirée. Reconnectez-vous.");
+      const res = await fetch("/api/admin/site-photos/hero-position", {
+        method: "PATCH",
+        credentials: "include",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({ objectPosition: value }),
+      });
+      const data = await res.json().catch(() => ({}));
+      if (!res.ok) throw new Error(data?.error || "Erreur");
+      setHeroObjectPosition(value);
+      toast.success("Cadrage mis à jour");
+    } catch (e) {
+      toast.error(e instanceof Error ? e.message : "Erreur");
+    } finally {
+      setHeroPositionSaving(false);
+    }
+  }
+
   return (
     <AdminLayout>
       <div className="p-6 lg:p-8 max-w-4xl mx-auto space-y-8">
@@ -208,7 +258,10 @@ export default function AdminSitePhotos() {
                         <img
                           src={previewUrl}
                           alt={PHOTO_LABELS[key]}
-                          className="max-w-full max-h-full object-contain w-full h-full"
+                          className={`max-w-full max-h-full w-full h-full ${
+                            key === "hero_cover" ? "object-cover" : "object-contain"
+                          }`}
+                          style={key === "hero_cover" ? { objectPosition: heroObjectPosition } : undefined}
                           onError={(e) => {
                             (e.target as HTMLImageElement).style.display = "none";
                           }}
@@ -217,6 +270,34 @@ export default function AdminSitePhotos() {
                         <span className="text-gray-500 text-sm">Aucune image</span>
                       )}
                     </div>
+
+                    {key === "hero_cover" && (
+                      <div className="flex items-center gap-2">
+                        <label className="text-xs text-gray-400 shrink-0">Cadrage :</label>
+                        <Select
+                          value={heroObjectPosition}
+                          onValueChange={handleHeroCadrageChange}
+                          disabled={heroPositionSaving}
+                        >
+                          <SelectTrigger className="h-8 text-xs border-gray-600 bg-gray-800/50 text-gray-200 w-full max-w-[180px]">
+                            <SelectValue />
+                          </SelectTrigger>
+                          <SelectContent>
+                            {HERO_CADRAGE_OPTIONS.map((opt) => (
+                              <SelectItem key={opt.value} value={opt.value} className="text-xs">
+                                {opt.label}
+                              </SelectItem>
+                            ))}
+                            {!HERO_CADRAGE_OPTIONS.some((o) => o.value === heroObjectPosition) && heroObjectPosition && (
+                              <SelectItem value={heroObjectPosition} className="text-xs">
+                                {heroObjectPosition}
+                              </SelectItem>
+                            )}
+                          </SelectContent>
+                        </Select>
+                        {heroPositionSaving && <Loader2 className="w-3 h-3 animate-spin text-[#523DCB]" />}
+                      </div>
+                    )}
 
                     {isR2 && (
                       <div

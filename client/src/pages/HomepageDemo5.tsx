@@ -12,7 +12,7 @@ const DARK = '#0A0A0A';
 
 export default function HomepageDemo5() {
   const { t } = useLanguage();
-  const { getPhoto } = useSitePhotos();
+  const { getPhoto, heroObjectPosition } = useSitePhotos();
 
   return (
     <PageLayout>
@@ -112,7 +112,7 @@ export default function HomepageDemo5() {
                 width: '100%',
                 height: '100%',
                 objectFit: 'cover',
-                objectPosition: 'center',
+                objectPosition: heroObjectPosition,
               }}
             />
           </div>
