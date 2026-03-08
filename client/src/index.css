@@ -644,6 +644,9 @@ header.header-scroll-transform,
 
   /* Hero description : plus à gauche sur grands écrans, colonne large */
   @media (min-width: 1400px) {
+    .main-content-padding .content-max-width {
+      padding-left: 1.5% !important;
+    }
     .hero-max-width {
       margin-left: 0 !important;
       margin-right: auto !important;
@@ -651,6 +654,11 @@ header.header-scroll-transform,
     .hero-section-grid {
       grid-template-columns: minmax(0, 1fr) minmax(380px, 520px) !important;
       gap: clamp(2rem, 4vw, 3.5rem) !important;
+    }
+  }
+  @media (min-width: 1920px) {
+    .main-content-padding .content-max-width {
+      padding-left: 1% !important;
     }
   }
 
