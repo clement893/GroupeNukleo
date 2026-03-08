@@ -53,15 +53,17 @@ export default function CompanyBlocksSection() {
                 transition: 'box-shadow 0.2s ease, transform 0.2s ease',
               }}
             >
-              <img
-                src={getPhoto(company.logoKey)}
-                alt={company.name.replace(/,$/, '')}
-                style={{
-                  maxHeight: 'clamp(3rem, 8vw, 5rem)',
-                  width: 'auto',
-                  objectFit: 'contain',
-                }}
-              />
+              <div style={{ padding: 'clamp(1.25rem, 3vw, 2rem) 0' }}>
+                <img
+                  src={getPhoto(company.logoKey)}
+                  alt={company.name.replace(/,$/, '')}
+                  style={{
+                    maxHeight: 'clamp(2rem, 5vw, 3rem)',
+                    width: 'auto',
+                    objectFit: 'contain',
+                  }}
+                />
+              </div>
               <span
                 style={{
                   display: 'inline-flex',
@@ -69,17 +71,18 @@ export default function CompanyBlocksSection() {
                   justifyContent: 'center',
                   gap: 8,
                   marginTop: 'auto',
-                  padding: '12px 24px',
-                  background: 'rgba(139, 123, 184, 0.5)',
-                  backdropFilter: 'blur(12px)',
-                  WebkitBackdropFilter: 'blur(12px)',
-                  color: '#fff',
-                  borderRadius: 9999,
+                  width: '100%',
+                  padding: '14px 20px',
+                  background: 'rgba(255, 255, 255, 0.35)',
+                  backdropFilter: 'blur(16px) saturate(180%)',
+                  WebkitBackdropFilter: 'blur(16px) saturate(180%)',
+                  color: '#1f2937',
+                  borderRadius: 12,
                   fontFamily: "'Neue Haas Unica Pro', sans-serif",
                   fontWeight: 600,
                   fontSize: '1rem',
-                  border: '1px solid rgba(255,255,255,0.3)',
-                  boxShadow: 'inset 0 1px 0 rgba(255,255,255,0.2)',
+                  border: '1px solid rgba(255,255,255,0.6)',
+                  boxShadow: '0 4px 24px rgba(0,0,0,0.06), inset 0 1px 0 rgba(255,255,255,0.8)',
                   transition: 'opacity 0.2s ease, background 0.2s ease',
                 }}
                 className="group-hover:opacity-95"
