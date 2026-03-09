@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { useSitePhotos, SITE_PHOTO_KEYS } from '@/contexts/SitePhotosContext';
 import PageLayout from '@/components/PageLayout';
@@ -13,6 +14,9 @@ const DARK = '#0A0A0A';
 export default function HomepageDemo5() {
   const { t } = useLanguage();
   const { getPhoto, heroObjectPosition } = useSitePhotos();
+  const heroSrc = getPhoto(SITE_PHOTO_KEYS.HERO_COVER);
+  const [heroLoaded, setHeroLoaded] = useState(false);
+  // Ne pas réinitialiser quand src change : l'API précharge, l'image est en cache
 
   return (
     <PageLayout>
@@ -107,16 +111,20 @@ export default function HomepageDemo5() {
             }}
           >
             <img
-              src={getPhoto(SITE_PHOTO_KEYS.HERO_COVER)}
+              className="hero-cover-img"
+              src={heroSrc}
               alt=""
               loading="eager"
               fetchPriority="high"
               decoding="async"
+              onLoad={() => setHeroLoaded(true)}
               style={{
                 width: '100%',
                 height: '100%',
                 objectFit: 'cover',
                 objectPosition: heroObjectPosition,
+                opacity: heroLoaded ? 1 : 0,
+                transition: 'opacity 0.2s ease-out',
               }}
             />
           </div>

@@ -197,10 +197,12 @@
           -webkit-tap-highlight-color: transparent;
           touch-action: manipulation;
         }
-        img {
+        img:not(.hero-cover-img) {
           content-visibility: auto;
         }
       }
+      /* Hero cover: always visible to prevent flicker (no content-visibility delay) */
+      .hero-cover-img { content-visibility: visible !important; }
       /* Critical layout styles to prevent CLS */
       img[src="/Nukleo_blanc_RVB.svg"] {
         width: 120px;
