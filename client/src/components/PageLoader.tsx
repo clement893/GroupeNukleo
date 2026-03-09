@@ -58,9 +58,12 @@ function preloadResources() {
   });
 }
 
+const FADEOUT_MS = 120;
+
 export default function PageLoader() {
   const [location] = useLocation();
   const [isLoading, setIsLoading] = useState(true);
+  const [hasExited, setHasExited] = useState(false);
   const [loaderHtml, setLoaderHtml] = useState<string | null>(null);
   const [stylesReady, setStylesReady] = useState(false);
   const [isFirstLoad, setIsFirstLoad] = useState(true);
@@ -119,6 +122,15 @@ export default function PageLoader() {
       preloadResources();
     }
   }, [shouldSkipLoader]);
+
+  // Fade-out: quand loading terminé, attendre la transition puis unmount
+  useEffect(() => {
+    if (!isLoading && !hasExited) {
+      document.body.classList.add('loaded');
+      const id = setTimeout(() => setHasExited(true), FADEOUT_MS);
+      return () => clearTimeout(id);
+    }
+  }, [isLoading, hasExited]);
 
   useEffect(() => {
     // Check if this is a page transition (not first load)
@@ -291,8 +303,7 @@ export default function PageLoader() {
           setIsFirstLoad(false);
           // Show body content immediately - hero should be visible without animations
           document.body.classList.add('loaded');
-          // Clear loader HTML to ensure logo disappears
-          setLoaderHtml(null);
+          // Garder loaderHtml pour le fade-out (sera nettoyé à hasExited)
           // Remove loader styles immediately
           const styleElement = document.getElementById("page-loader-styles");
           if (styleElement) {
@@ -336,9 +347,13 @@ export default function PageLoader() {
     return null;
   }
 
-  // Don't show loader if not loading (e.g., during page transitions)
-  if (!isLoading) {
-    // Ensure body is visible when loader is not showing
+  // Fade-out: après transition, ne plus rendre
+  if (hasExited) {
+    return null;
+  }
+
+  // Don't show loader if not loading (pas de fade si on n'a jamais montré de loader)
+  if (!isLoading && !loaderHtml) {
     if (!document.body.classList.contains('loaded')) {
       document.body.classList.add('loaded');
     }
@@ -400,8 +415,8 @@ export default function PageLoader() {
       style={{
         opacity: isLoading ? 1 : 0,
         pointerEvents: isLoading ? "all" : "none",
-        transition: isLoading ? "opacity 0.3s ease-out" : "opacity 0.1s ease-in",
-        visibility: isLoading ? "visible" : "hidden",
+        transition: `opacity ${FADEOUT_MS}ms ease-out`,
+        visibility: "visible",
       }}
     >
       {/* Logo blanc fixe au centre - seulement visible quand isLoading est true */}
