@@ -43,8 +43,20 @@ export function SitePhotosProvider({ children }: { children: React.ReactNode }) 
   useEffect(() => {
     fetch("/api/site-photos")
       .then((r) => r.json())
-      .then((data) => {
-        setPhotos(data?.photos ? { ...FALLBACKS, ...data.photos } : FALLBACKS);
+      .then(async (data) => {
+        const newPhotos = data?.photos ? { ...FALLBACKS, ...data.photos } : FALLBACKS;
+        const newHeroUrl = newPhotos[SITE_PHOTO_KEYS.HERO_COVER];
+        const fallbackHero = FALLBACKS[SITE_PHOTO_KEYS.HERO_COVER];
+        // Preload hero before updating to prevent flicker when src changes
+        if (newHeroUrl && newHeroUrl !== fallbackHero) {
+          await new Promise<void>((resolve) => {
+            const img = new Image();
+            img.onload = () => resolve();
+            img.onerror = () => resolve();
+            img.src = newHeroUrl;
+          });
+        }
+        setPhotos(newPhotos);
         setHeroObjectPosition(data?.heroObjectPosition ?? "center");
         setIsR2(data?.isR2 ?? false);
       })

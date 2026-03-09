@@ -76,6 +76,8 @@
     
     <!-- Preload critical LCP image - arrow SVG is the LCP element -->
     <link rel="preload" href="/nukleo-arrow.svg" as="image" type="image/svg+xml" fetchpriority="high" />
+    <!-- Preload hero cover to prevent flicker on page load -->
+    <link rel="preload" href="/demo/agency-hero-cover.png" as="image" fetchpriority="high" />
     
     <!-- Preload critical routes for faster navigation -->
     <link rel="prefetch" href="/about" />

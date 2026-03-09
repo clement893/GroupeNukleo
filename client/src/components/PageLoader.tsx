@@ -8,9 +8,11 @@ import SafeHTML from "@/components/SafeHTML";
 // Preload critical resources during loader display
 function preloadResources() {
   // Preload only assets used immediately by the loader UI (avoid "preloaded but not used" warning)
+  // + hero cover fallback to prevent flicker when page appears
   const criticalImages = [
     '/nukleo-arrow.svg',
     '/leo-avatar.webp',
+    '/demo/agency-hero-cover.png',
   ];
   // Nukleo_blanc_RVB.svg not preloaded here - used only after loader or on admin; load on demand to avoid console warning
   criticalImages.forEach(src => {
