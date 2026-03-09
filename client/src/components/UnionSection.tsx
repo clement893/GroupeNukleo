@@ -150,7 +150,7 @@ export default function UnionSection() {
               fontFamily: "'Neue Haas Unica Pro', sans-serif",
               fontWeight: 700,
               fontSize: 'clamp(1.25rem, 2vw, 1.5rem)',
-              color: HEADLINE_PURPLE,
+              color: '#0A0A0A',
               margin: '0 0 0.5rem 0',
             }}
           >
